@@ -1,0 +1,79 @@
+# Entity: assign_agent
+
+main: kit: entity: assign_agent: {
+
+  alias: field: {}
+
+  fields: {
+    agent: {
+      h: "Agent"
+      n: "agent"
+      r: true
+      sh: "Agent information for V6."
+      t: "`$OBJECT`"
+    }
+    assignment: {
+      h: "Assignment"
+      n: "assignment"
+      r: true
+      sh: "Assignment information for V6."
+      t: "`$OBJECT`"
+    }
+    mock_agents: {
+      h: "Mock Agents"
+      n: "mock_agents"
+      r: true
+      t: "`$ARRAY`"
+    }
+    onboarding_data_id: {
+      h: "Onboarding Data Id"
+      n: "onboarding_data_id"
+      r: true
+      sh: "UUID of the OnboardingData record"
+      t: "`$STRING`"
+    }
+  }
+
+  name: "assign_agent"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "onboarding_data_id"
+          ]
+          co: {
+            id: "POST /api/onboarding-v6/assign-agent"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/onboarding-v6/assign-agent"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "onboarding-v6"
+            }
+            {
+              lit: "assign-agent"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

@@ -1,0 +1,32 @@
+{
+  "existing": {
+    "file": {
+      "FILE00": {
+        "file": "sa",
+        "id": "FILE00"
+      },
+      "FILE01": {
+        "file": "s14",
+        "id": "FILE01"
+      },
+      "FILE02": {
+        "file": "s1e",
+        "id": "FILE02"
+      }
+    }
+  },
+  "new": {
+    "file": {
+      "file_ref01": {
+        "file": "s28"
+      }
+    }
+  },
+  "requests": {
+    "POST /api/file-upload": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

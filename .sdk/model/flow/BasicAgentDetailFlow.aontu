@@ -1,0 +1,41 @@
+# BasicAgentDetailFlow
+
+main: kit: flow: BasicAgentDetailFlow:
+{
+  entity: "agent_detail",
+  kind: "basic",
+  name: "BasicAgentDetailFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "agent_detail_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "agent_detail_ref01",
+        srcdatavar: "agent_detail_ref01_data",
+        suffix: "_up0",
+        textfield: "avatar"
+      }
+
+      o: "update",
+      s: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-agent_detail_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicAgentDetailFlow"
+}

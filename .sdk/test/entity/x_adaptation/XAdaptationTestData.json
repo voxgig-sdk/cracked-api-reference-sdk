@@ -1,0 +1,27 @@
+{
+  "existing": {
+    "x_adaptation": {
+      "X_ADAPTATION00": {
+        "id": "X_ADAPTATION00"
+      },
+      "X_ADAPTATION01": {
+        "id": "X_ADAPTATION01"
+      },
+      "X_ADAPTATION02": {
+        "id": "X_ADAPTATION02"
+      }
+    }
+  },
+  "new": {
+    "x_adaptation": {
+      "x_adaptation_ref01": {}
+    }
+  },
+  "requests": {
+    "GET /api/carousel/x-adaptations": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

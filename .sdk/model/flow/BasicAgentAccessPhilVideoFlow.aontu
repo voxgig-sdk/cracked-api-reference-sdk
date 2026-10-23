@@ -1,0 +1,28 @@
+# BasicAgentAccessPhilVideoFlow
+
+main: kit: flow: BasicAgentAccessPhilVideoFlow:
+{
+  entity: "agent_access_phil_video",
+  kind: "basic",
+  name: "BasicAgentAccessPhilVideoFlow",
+  step: [
+    {
+      i: {
+        ref: "agent_access_phil_video_ref01",
+        srcdatavar: "agent_access_phil_video_ref01_data",
+        suffix: "_dt0"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-agent_access_phil_video_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicAgentAccessPhilVideoFlow"
+}

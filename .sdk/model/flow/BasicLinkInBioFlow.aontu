@@ -1,0 +1,32 @@
+# BasicLinkInBioFlow
+
+main: kit: flow: BasicLinkInBioFlow:
+{
+  entity: "link_in_bio",
+  kind: "basic",
+  name: "BasicLinkInBioFlow",
+  step: [
+    {
+      i: {
+        ref: "link_in_bio_ref01",
+        srcdatavar: "link_in_bio_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "link_in_bio01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-link_in_bio_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicLinkInBioFlow"
+}

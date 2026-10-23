@@ -1,0 +1,27 @@
+{
+  "existing": {
+    "site": {
+      "SITE00": {
+        "id": "SITE00"
+      },
+      "SITE01": {
+        "id": "SITE01"
+      },
+      "SITE02": {
+        "id": "SITE02"
+      }
+    }
+  },
+  "new": {
+    "site": {
+      "site_ref01": {}
+    }
+  },
+  "requests": {
+    "GET /api/sites/slugs": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

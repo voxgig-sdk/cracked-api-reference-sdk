@@ -1,0 +1,22 @@
+# BasicAgentAccessUserPhoneFarmFlow
+
+main: kit: flow: BasicAgentAccessUserPhoneFarmFlow:
+{
+  entity: "agent_access_user_phone_farm",
+  kind: "basic",
+  name: "BasicAgentAccessUserPhoneFarmFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "agent_access_user_phone_farm_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicAgentAccessUserPhoneFarmFlow"
+}

@@ -1,0 +1,40 @@
+{
+  "existing": {
+    "agent_access_phil_stats_refresh": {
+      "AGENT_ACCESS_PHIL_STATS_REFRESH00": {
+        "generatedAt": "s1e",
+        "statsRefresh": {},
+        "targetDate": "s20",
+        "id": "AGENT_ACCESS_PHIL_STATS_REFRESH00"
+      },
+      "AGENT_ACCESS_PHIL_STATS_REFRESH01": {
+        "generatedAt": "s3c",
+        "statsRefresh": {},
+        "targetDate": "s3e",
+        "id": "AGENT_ACCESS_PHIL_STATS_REFRESH01"
+      },
+      "AGENT_ACCESS_PHIL_STATS_REFRESH02": {
+        "generatedAt": "s5a",
+        "statsRefresh": {},
+        "targetDate": "s5c",
+        "id": "AGENT_ACCESS_PHIL_STATS_REFRESH02"
+      }
+    }
+  },
+  "new": {
+    "agent_access_phil_stats_refresh": {
+      "agent_access_phil_stats_refresh_ref01": {
+        "generatedAt": "s78",
+        "statsRefresh": {},
+        "targetDate": "s7a"
+      }
+    }
+  },
+  "requests": {
+    "GET /api/agent-access/phil-notifications/stats-refresh": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

@@ -1,0 +1,18 @@
+# BasicCreateVariationFlow
+
+main: kit: flow: BasicCreateVariationFlow:
+{
+  entity: "create_variation",
+  kind: "basic",
+  name: "BasicCreateVariationFlow",
+  step: [
+    {
+      i: {
+        ref: "create_variation_ref01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicCreateVariationFlow"
+}

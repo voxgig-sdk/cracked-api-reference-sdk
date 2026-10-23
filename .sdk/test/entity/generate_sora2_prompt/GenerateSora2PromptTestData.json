@@ -1,0 +1,32 @@
+{
+  "existing": {
+    "generate_sora2_prompt": {
+      "GENERATE_SORA2_PROMPT00": {
+        "prompt": "sa",
+        "id": "GENERATE_SORA2_PROMPT00"
+      },
+      "GENERATE_SORA2_PROMPT01": {
+        "prompt": "s14",
+        "id": "GENERATE_SORA2_PROMPT01"
+      },
+      "GENERATE_SORA2_PROMPT02": {
+        "prompt": "s1e",
+        "id": "GENERATE_SORA2_PROMPT02"
+      }
+    }
+  },
+  "new": {
+    "generate_sora2_prompt": {
+      "generate_sora2_prompt_ref01": {
+        "prompt": "s28"
+      }
+    }
+  },
+  "requests": {
+    "GET /api/core/generate-sora2-prompt": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

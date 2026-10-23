@@ -1,0 +1,22 @@
+# BasicIrisConnectorFlow
+
+main: kit: flow: BasicIrisConnectorFlow:
+{
+  entity: "iris_connector",
+  kind: "basic",
+  name: "BasicIrisConnectorFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "iris_connector_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicIrisConnectorFlow"
+}

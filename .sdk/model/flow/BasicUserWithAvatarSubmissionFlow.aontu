@@ -1,0 +1,22 @@
+# BasicUserWithAvatarSubmissionFlow
+
+main: kit: flow: BasicUserWithAvatarSubmissionFlow:
+{
+  entity: "user_with_avatar_submission",
+  kind: "basic",
+  name: "BasicUserWithAvatarSubmissionFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "user_with_avatar_submission_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicUserWithAvatarSubmissionFlow"
+}

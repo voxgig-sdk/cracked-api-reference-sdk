@@ -1,0 +1,1842 @@
+# Entity: admin
+
+main: kit: entity: admin: {
+
+  alias: field: {}
+
+  fields: {
+    apply: {
+      h: "Apply"
+      n: "apply"
+      r: false
+      sh: "Apply safe canonical or clean-only URL updates"
+      t: "`$BOOLEAN`"
+    }
+    count: {
+      h: "Count"
+      n: "count"
+      r: true
+      t: "`$INTEGER`"
+    }
+    created_at: {
+      fo: "date-time"
+      h: "Created At"
+      n: "created_at"
+      r: true
+      t: "`$STRING`"
+    }
+    date_from: {
+      h: "Date From"
+      n: "date_from"
+      op: {
+        create: {
+          req: true
+          type: "`$STRING`"
+        }
+      }
+      r: false
+      t: "`$ANY`"
+    }
+    date_to: {
+      h: "Date To"
+      n: "date_to"
+      op: {
+        create: {
+          req: true
+          type: "`$STRING`"
+        }
+      }
+      r: false
+      t: "`$ANY`"
+    }
+    email: {
+      fo: "email"
+      h: "Email"
+      n: "email"
+      r: true
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: true
+      t: "`$STRING`"
+    }
+    include_failed: {
+      h: "Include Failed"
+      n: "include_failed"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    include_pending: {
+      h: "Include Pending"
+      n: "include_pending"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    include_records: {
+      h: "Include Records"
+      n: "include_records"
+      r: false
+      sh: "Include full per-field audit records in the response"
+      t: "`$BOOLEAN`"
+    }
+    issue_ids: {
+      h: "Issue Ids"
+      n: "issue_ids"
+      r: false
+      t: "`$ANY`"
+    }
+    only_active: {
+      h: "Only Active"
+      n: "only_active"
+      r: false
+      sh: "Limit the audit to active agents"
+      t: "`$BOOLEAN`"
+    }
+    platform: {
+      h: "Platform"
+      n: "platform"
+      r: false
+      t: "`$ANY`"
+    }
+    posting_method: {
+      h: "Posting Method"
+      n: "posting_method"
+      r: false
+      t: "`$ANY`"
+    }
+    product_id: {
+      fo: "uuid"
+      h: "Product Id"
+      n: "product_id"
+      op: {
+        create: {
+          req: true
+          type: "`$STRING`"
+        }
+      }
+      r: false
+      t: "`$STRING`"
+    }
+    query: {
+      h: "Query"
+      n: "query"
+      r: false
+      t: "`$ANY`"
+    }
+    reason: {
+      h: "Reason"
+      n: "reason"
+      r: false
+      t: "`$ANY`"
+    }
+    regenerate: {
+      h: "Regenerate"
+      n: "regenerate"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: false
+      t: "`$STRING`"
+    }
+    user_membership: {
+      h: "User Membership"
+      n: "user_membership"
+      r: false
+      t: "`$ANY`"
+    }
+    user_name: {
+      h: "User Name"
+      n: "user_name"
+      r: false
+      t: "`$ANY`"
+    }
+    user_onboarding_step: {
+      h: "User Onboarding Step"
+      n: "user_onboarding_step"
+      r: false
+      t: "`$ANY`"
+    }
+    video_type: {
+      h: "Video Type"
+      n: "video_type"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "admin"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /api/admin/users/{user_id}/regenerate-video/{video_id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "user_id"
+                or: "user_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "video_id"
+                or: "video_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/admin/users/{user_id}/regenerate-video/{video_id}"
+          q: {
+            exist: [
+              "user_id"
+              "video_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "users"
+            }
+            {
+              var: "user_id"
+            }
+            {
+              lit: "regenerate-video"
+            }
+            {
+              var: "video_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /api/admin/impersonate/{user_id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "user_id"
+                or: "user_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/admin/impersonate/{user_id}"
+          q: {
+            exist: [
+              "user_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "impersonate"
+            }
+            {
+              var: "user_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /api/admin/users/{user_id}/agents/reconcile"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "user_id"
+                or: "user_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "phone_admin_pc_name"
+                or: "phone_admin_pc_name"
+                r: false
+                t: "`$ANY`"
+              }
+              {
+                k: "query"
+                n: "product_id"
+                or: "product_id"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/admin/users/{user_id}/agents/reconcile"
+          q: {
+            exist: [
+              "user_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "users"
+            }
+            {
+              var: "user_id"
+            }
+            {
+              lit: "agents"
+            }
+            {
+              lit: "reconcile"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "count"
+            "product_id"
+            "video_type"
+          ]
+          co: {
+            id: "POST /api/admin/users/{user_id}/bulk-create-videos"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "user_id"
+                or: "user_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/admin/users/{user_id}/bulk-create-videos"
+          q: {
+            exist: [
+              "user_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "users"
+            }
+            {
+              var: "user_id"
+            }
+            {
+              lit: "bulk-create-videos"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "include_pending"
+            "product_id"
+            "regenerate"
+          ]
+          co: {
+            id: "POST /api/admin/users/{user_id}/clear-failed-videos"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "user_id"
+                or: "user_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/admin/users/{user_id}/clear-failed-videos"
+          q: {
+            exist: [
+              "user_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "users"
+            }
+            {
+              var: "user_id"
+            }
+            {
+              lit: "clear-failed-videos"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /api/admin/users/{user_id}/clear-future-auto-entries"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "user_id"
+                or: "user_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "product_id"
+                or: "product_id"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/admin/users/{user_id}/clear-future-auto-entries"
+          q: {
+            exist: [
+              "user_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "users"
+            }
+            {
+              var: "user_id"
+            }
+            {
+              lit: "clear-future-auto-entries"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /api/admin/users/{user_id}/clear-manual-entries"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "user_id"
+                or: "user_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "product_id"
+                or: "product_id"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/admin/users/{user_id}/clear-manual-entries"
+          q: {
+            exist: [
+              "user_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "users"
+            }
+            {
+              var: "user_id"
+            }
+            {
+              lit: "clear-manual-entries"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /api/admin/users/{user_id}/clear-today-auto-entries"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "user_id"
+                or: "user_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "product_id"
+                or: "product_id"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/admin/users/{user_id}/clear-today-auto-entries"
+          q: {
+            exist: [
+              "user_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "users"
+            }
+            {
+              var: "user_id"
+            }
+            {
+              lit: "clear-today-auto-entries"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "include_failed"
+            "include_pending"
+            "product_id"
+          ]
+          co: {
+            id: "POST /api/admin/users/{user_id}/retry-todays-videos"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "user_id"
+                or: "user_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/admin/users/{user_id}/retry-todays-videos"
+          q: {
+            exist: [
+              "user_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "users"
+            }
+            {
+              var: "user_id"
+            }
+            {
+              lit: "retry-todays-videos"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "include_failed"
+            "include_pending"
+            "product_id"
+          ]
+          co: {
+            id: "POST /api/admin/users/{user_id}/retry-videos"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "user_id"
+                or: "user_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/admin/users/{user_id}/retry-videos"
+          q: {
+            exist: [
+              "user_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "users"
+            }
+            {
+              var: "user_id"
+            }
+            {
+              lit: "retry-videos"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "apply"
+            "include_records"
+            "only_active"
+          ]
+          co: {
+            id: "POST /api/admin/agents/social-profile-audit"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/admin/agents/social-profile-audit"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "agents"
+            }
+            {
+              lit: "social-profile-audit"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "skip_regenerate_prompt"
+            "video_ids"
+          ]
+          co: {
+            id: "POST /api/admin/batch-regenerate-sora2"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/admin/batch-regenerate-sora2"
+          q: {
+            "$action": "batch_regenerate_sora2"
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "batch-regenerate-sora2"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "date_from"
+            "date_to"
+            "issue_ids"
+            "platform"
+            "posting_method"
+            "query"
+            "reason"
+            "status"
+          ]
+          co: {
+            id: "POST /api/admin/customer-health/issues/retry"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/admin/customer-health/issues/retry"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "customer-health"
+            }
+            {
+              lit: "issues"
+            }
+            {
+              lit: "retry"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "date_from"
+            "date_to"
+            "product_id"
+          ]
+          co: {
+            id: "POST /api/admin/products-dashboard/repair-stats"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/admin/products-dashboard/repair-stats"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "products-dashboard"
+            }
+            {
+              lit: "repair-stats"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /api/admin/schedule/clear-all-future-auto-entries"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/admin/schedule/clear-all-future-auto-entries"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "schedule"
+            }
+            {
+              lit: "clear-all-future-auto-entries"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /api/admin/schedule/clear-today-auto-entries-for-all"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/admin/schedule/clear-today-auto-entries-for-all"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "schedule"
+            }
+            {
+              lit: "clear-today-auto-entries-for-all"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /api/admin/stats/refresh-and-send-emails"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/admin/stats/refresh-and-send-emails"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "stats"
+            }
+            {
+              lit: "refresh-and-send-emails"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /api/admin/stats/refresh-last-7-days"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: "both"
+                k: "query"
+                n: "provider"
+                or: "provider"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/admin/stats/refresh-last-7-days"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "stats"
+            }
+            {
+              lit: "refresh-last-7-days"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "source_video_id"
+            "target_user_id"
+          ]
+          co: {
+            id: "POST /api/admin/test-s3-copy"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/admin/test-s3-copy"
+          q: {
+            "$action": "test_s3_copy"
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "test-s3-copy"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "email"
+          ]
+          co: {
+            id: "POST /api/admin/whitelist-testers"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/admin/whitelist-testers"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "whitelist-testers"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/admin/whitelist-testers"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/admin/whitelist-testers"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "whitelist-testers"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/admin/stats/by-date-and-type"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "date"
+                or: "date"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "day"
+                or: "days"
+                r: false
+                t: "`$ANY`"
+              }
+              {
+                k: "query"
+                n: "user_email"
+                or: "user_email"
+                r: false
+                t: "`$ANY`"
+              }
+              {
+                k: "query"
+                n: "user_id"
+                or: "user_id"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/stats/by-date-and-type"
+          q: {
+            exist: [
+              "date"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "stats"
+            }
+            {
+              lit: "by-date-and-type"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/admin/users/{user_id}/failed-videos"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "user_id"
+                or: "user_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/users/{user_id}/failed-videos"
+          q: {
+            exist: [
+              "user_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "users"
+            }
+            {
+              var: "user_id"
+            }
+            {
+              lit: "failed-videos"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/admin/users/{user_id}/pending-videos"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "user_id"
+                or: "user_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/users/{user_id}/pending-videos"
+          q: {
+            exist: [
+              "user_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "users"
+            }
+            {
+              var: "user_id"
+            }
+            {
+              lit: "pending-videos"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/admin/users/{user_id}/schedule-queue"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "user_id"
+                or: "user_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "date_filter"
+                or: "date_filter"
+                r: false
+                t: "`$ANY`"
+              }
+              {
+                k: "query"
+                n: "product_id"
+                or: "product_id"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/users/{user_id}/schedule-queue"
+          q: {
+            exist: [
+              "user_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "users"
+            }
+            {
+              var: "user_id"
+            }
+            {
+              lit: "schedule-queue"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/admin/stats/aggregate"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: 7
+                k: "query"
+                n: "day"
+                or: "days"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "user_email"
+                or: "user_email"
+                r: false
+                t: "`$ANY`"
+              }
+              {
+                k: "query"
+                n: "user_id"
+                or: "user_id"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/stats/aggregate"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "stats"
+            }
+            {
+              lit: "aggregate"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/admin/users/export"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/admin/users/export"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "users"
+            }
+            {
+              lit: "export"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    remove: {
+      name: "remove"
+      points: [
+        {
+          co: {
+            id: "DELETE /api/admin/users/{user_id}/agents/{agent_id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "agent_id"
+                or: "agent_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "user_id"
+                or: "user_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "DELETE"
+          o: "/api/admin/users/{user_id}/agents/{agent_id}"
+          q: {
+            exist: [
+              "agent_id"
+              "user_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "users"
+            }
+            {
+              var: "user_id"
+            }
+            {
+              lit: "agents"
+            }
+            {
+              var: "agent_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "DELETE /api/admin/users/{user_id}/schedule-queue/{queue_id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "queue_id"
+                or: "queue_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "user_id"
+                or: "user_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "DELETE"
+          o: "/api/admin/users/{user_id}/schedule-queue/{queue_id}"
+          q: {
+            exist: [
+              "queue_id"
+              "user_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "users"
+            }
+            {
+              var: "user_id"
+            }
+            {
+              lit: "schedule-queue"
+            }
+            {
+              var: "queue_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "DELETE /api/admin/users/{user_id}/video/{video_id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "user_id"
+                or: "user_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "video_id"
+                or: "video_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "DELETE"
+          o: "/api/admin/users/{user_id}/video/{video_id}"
+          q: {
+            exist: [
+              "user_id"
+              "video_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "users"
+            }
+            {
+              var: "user_id"
+            }
+            {
+              lit: "video"
+            }
+            {
+              var: "video_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "DELETE /api/admin/whitelist-testers/{tester_id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "tester_id"
+                or: "tester_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "DELETE"
+          o: "/api/admin/whitelist-testers/{tester_id}"
+          q: {
+            exist: [
+              "tester_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "whitelist-testers"
+            }
+            {
+              var: "tester_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    update: {
+      name: "update"
+      points: [
+        {
+          co: {
+            id: "PUT /api/admin/agents/{agent_id}/type"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "agent_id"
+                or: "agent_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "agent_type"
+                or: "agent_type"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PUT"
+          o: "/api/admin/agents/{agent_id}/type"
+          q: {
+            exist: [
+              "agent_id"
+              "agent_type"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "agents"
+            }
+            {
+              var: "agent_id"
+            }
+            {
+              lit: "type"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "PUT /api/admin/agents/{agent_id}/active"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "agent_id"
+                or: "agent_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "is_active"
+                or: "is_active"
+                r: true
+                t: "`$BOOLEAN`"
+              }
+            ]
+          }
+          m: "PUT"
+          o: "/api/admin/agents/{agent_id}/active"
+          q: {
+            exist: [
+              "agent_id"
+              "is_active"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "agents"
+            }
+            {
+              var: "agent_id"
+            }
+            {
+              lit: "active"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.user")]
+    [path("$.main.kit.entity.user") path("$.main.kit.entity.agent")]
+    [path("$.main.kit.entity.user")]
+    [path("$.main.kit.entity.user")]
+    [path("$.main.kit.entity.user") path("$.main.kit.entity.video")]
+  ]
+
+}

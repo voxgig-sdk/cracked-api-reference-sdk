@@ -1,0 +1,100 @@
+# Entity: scan_socials_status
+
+main: kit: entity: scan_socials_status: {
+
+  alias: field: {}
+
+  fields: {
+    ads_count: {
+      h: "Ads Count"
+      n: "ads_count"
+      r: false
+      t: "`$INTEGER`"
+    }
+    onboarding_data_id: {
+      h: "Onboarding Data Id"
+      n: "onboarding_data_id"
+      r: true
+      t: "`$STRING`"
+    }
+    product_id: {
+      h: "Product Id"
+      n: "product_id"
+      r: false
+      t: "`$STRING`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: true
+      t: "`$STRING`"
+    }
+    task_id: {
+      h: "Task Id"
+      n: "task_id"
+      r: false
+      t: "`$STRING`"
+    }
+  }
+
+  name: "scan_socials_status"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/video-variation/scan-socials/status"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "onboarding_data_id"
+                or: "onboarding_data_id"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "product_id"
+                or: "product_id"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/video-variation/scan-socials/status"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "video-variation"
+            }
+            {
+              lit: "scan-socials"
+            }
+            {
+              lit: "status"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

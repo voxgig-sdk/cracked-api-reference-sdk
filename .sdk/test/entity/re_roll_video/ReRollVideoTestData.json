@@ -1,0 +1,44 @@
+{
+  "existing": {
+    "re_roll_video": {
+      "RE_ROLL_VIDEO00": {
+        "queue_id": "QUEUE01",
+        "requires_polling": false,
+        "skip_credit_check": true,
+        "video": {},
+        "id": "RE_ROLL_VIDEO00"
+      },
+      "RE_ROLL_VIDEO01": {
+        "queue_id": "QUEUE01",
+        "requires_polling": false,
+        "skip_credit_check": true,
+        "video": {},
+        "id": "RE_ROLL_VIDEO01"
+      },
+      "RE_ROLL_VIDEO02": {
+        "queue_id": "QUEUE01",
+        "requires_polling": false,
+        "skip_credit_check": true,
+        "video": {},
+        "id": "RE_ROLL_VIDEO02"
+      }
+    }
+  },
+  "new": {
+    "re_roll_video": {
+      "re_roll_video_ref01": {
+        "queue_id": "QUEUE01",
+        "requires_polling": false,
+        "skip_credit_check": true,
+        "video": {}
+      }
+    }
+  },
+  "requests": {
+    "POST /api/core/re-roll-video": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

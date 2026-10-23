@@ -1,0 +1,44 @@
+{
+  "existing": {
+    "advance_step": {
+      "ADVANCE_STEP00": {
+        "current_step": "s28",
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "success": true,
+        "to_step": "s2b",
+        "id": "ADVANCE_STEP00"
+      },
+      "ADVANCE_STEP01": {
+        "current_step": "s50",
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "success": true,
+        "to_step": "s53",
+        "id": "ADVANCE_STEP01"
+      },
+      "ADVANCE_STEP02": {
+        "current_step": "s78",
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "success": true,
+        "to_step": "s7b",
+        "id": "ADVANCE_STEP02"
+      }
+    }
+  },
+  "new": {
+    "advance_step": {
+      "advance_step_ref01": {
+        "current_step": "sa0",
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "success": true,
+        "to_step": "sa3"
+      }
+    }
+  },
+  "requests": {
+    "POST /api/onboarding-v6/advance-step": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

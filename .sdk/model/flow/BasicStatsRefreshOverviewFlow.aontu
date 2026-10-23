@@ -1,0 +1,22 @@
+# BasicStatsRefreshOverviewFlow
+
+main: kit: flow: BasicStatsRefreshOverviewFlow:
+{
+  entity: "stats_refresh_overview",
+  kind: "basic",
+  name: "BasicStatsRefreshOverviewFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "stats_refresh_overview_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicStatsRefreshOverviewFlow"
+}

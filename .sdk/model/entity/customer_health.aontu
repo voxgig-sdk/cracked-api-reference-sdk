@@ -1,0 +1,142 @@
+# Entity: customer_health
+
+main: kit: entity: customer_health: {
+
+  alias: field: {}
+
+  fields: {
+    assigned_agents: {
+      h: "Assigned Agents"
+      n: "assigned_agents"
+      r: true
+      t: "`$OBJECT`"
+    }
+    available_dates: {
+      h: "Available Dates"
+      n: "available_dates"
+      r: true
+      t: "`$ARRAY`"
+    }
+    date: {
+      h: "Date"
+      n: "date"
+      r: true
+      t: "`$STRING`"
+    }
+    email: {
+      h: "Email"
+      n: "email"
+      r: true
+      t: "`$STRING`"
+    }
+    entries: {
+      h: "Entries"
+      n: "entries"
+      r: true
+      t: "`$ARRAY`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+    performance_overview: {
+      h: "Performance Overview"
+      n: "performance_overview"
+      r: true
+      t: "`$OBJECT`"
+    }
+    platform_coverage_summary: {
+      h: "Platform Coverage Summary"
+      n: "platform_coverage_summary"
+      r: true
+      t: "`$OBJECT`"
+    }
+    user_id: {
+      fo: "uuid"
+      h: "User Id"
+      n: "user_id"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "customer_health"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/admin/customer-health/{user_id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "user_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "date"
+                or: "date"
+                r: false
+                t: "`$ANY`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/customer-health/{user_id}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              user_id: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "customer-health"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

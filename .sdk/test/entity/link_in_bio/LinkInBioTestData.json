@@ -1,0 +1,40 @@
+{
+  "existing": {
+    "link_in_bio": {
+      "LINK_IN_BIO00": {
+        "linkInBioType": "s1e",
+        "redirectUrl": "s1f",
+        "slug": "s20",
+        "id": "LINK_IN_BIO00"
+      },
+      "LINK_IN_BIO01": {
+        "linkInBioType": "s3c",
+        "redirectUrl": "s3d",
+        "slug": "s3e",
+        "id": "LINK_IN_BIO01"
+      },
+      "LINK_IN_BIO02": {
+        "linkInBioType": "s5a",
+        "redirectUrl": "s5b",
+        "slug": "s5c",
+        "id": "LINK_IN_BIO02"
+      }
+    }
+  },
+  "new": {
+    "link_in_bio": {
+      "link_in_bio_ref01": {
+        "linkInBioType": "s78",
+        "redirectUrl": "s79",
+        "slug": "s7a"
+      }
+    }
+  },
+  "requests": {
+    "GET /api/sites/{slug}/link-in-bio": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

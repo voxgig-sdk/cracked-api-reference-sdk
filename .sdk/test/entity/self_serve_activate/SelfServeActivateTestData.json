@@ -1,0 +1,44 @@
+{
+  "existing": {
+    "self_serve_activate": {
+      "SELF_SERVE_ACTIVATE00": {
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "redirect_to_stripe": false,
+        "stripe_checkout_url": "s2a",
+        "success": false,
+        "id": "SELF_SERVE_ACTIVATE00"
+      },
+      "SELF_SERVE_ACTIVATE01": {
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "redirect_to_stripe": false,
+        "stripe_checkout_url": "s52",
+        "success": false,
+        "id": "SELF_SERVE_ACTIVATE01"
+      },
+      "SELF_SERVE_ACTIVATE02": {
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "redirect_to_stripe": false,
+        "stripe_checkout_url": "s7a",
+        "success": false,
+        "id": "SELF_SERVE_ACTIVATE02"
+      }
+    }
+  },
+  "new": {
+    "self_serve_activate": {
+      "self_serve_activate_ref01": {
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "redirect_to_stripe": false,
+        "stripe_checkout_url": "sa2",
+        "success": false
+      }
+    }
+  },
+  "requests": {
+    "POST /api/onboarding-v6/self-serve-activate": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

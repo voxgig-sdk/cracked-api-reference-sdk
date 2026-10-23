@@ -1,0 +1,18 @@
+# BasicScrapeWebsitePublicFlow
+
+main: kit: flow: BasicScrapeWebsitePublicFlow:
+{
+  entity: "scrape_website_public",
+  kind: "basic",
+  name: "BasicScrapeWebsitePublicFlow",
+  step: [
+    {
+      i: {
+        ref: "scrape_website_public_ref01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicScrapeWebsitePublicFlow"
+}

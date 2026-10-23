@@ -1,0 +1,40 @@
+{
+  "existing": {
+    "admin_landing_task": {
+      "ADMIN_LANDING_TASK00": {
+        "task_id": "TASK01",
+        "user_id": "USER01",
+        "id": "ADMIN_LANDING_TASK00"
+      },
+      "ADMIN_LANDING_TASK01": {
+        "task_id": "TASK01",
+        "user_id": "USER01",
+        "id": "ADMIN_LANDING_TASK01"
+      },
+      "ADMIN_LANDING_TASK02": {
+        "task_id": "TASK01",
+        "user_id": "USER01",
+        "id": "ADMIN_LANDING_TASK02"
+      }
+    }
+  },
+  "new": {
+    "admin_landing_task": {
+      "admin_landing_task_ref01": {
+        "task_id": "TASK01"
+      }
+    }
+  },
+  "requests": {
+    "POST /api/admin/users/{user_id}/regenerate-landing": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/users/{user_id}/regenerate-microhub": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

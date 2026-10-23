@@ -1,0 +1,48 @@
+{
+  "existing": {
+    "agent_access_user_video": {
+      "AGENT_ACCESS_USER_VIDEO00": {
+        "allTime": {},
+        "email": "s33",
+        "today": {},
+        "userId": "s35",
+        "yesterday": {},
+        "id": "AGENT_ACCESS_USER_VIDEO00"
+      },
+      "AGENT_ACCESS_USER_VIDEO01": {
+        "allTime": {},
+        "email": "s65",
+        "today": {},
+        "userId": "s67",
+        "yesterday": {},
+        "id": "AGENT_ACCESS_USER_VIDEO01"
+      },
+      "AGENT_ACCESS_USER_VIDEO02": {
+        "allTime": {},
+        "email": "s97",
+        "today": {},
+        "userId": "s99",
+        "yesterday": {},
+        "id": "AGENT_ACCESS_USER_VIDEO02"
+      }
+    }
+  },
+  "new": {
+    "agent_access_user_video": {
+      "agent_access_user_video_ref01": {
+        "allTime": {},
+        "email": "sc9",
+        "today": {},
+        "userId": "scb",
+        "yesterday": {}
+      }
+    }
+  },
+  "requests": {
+    "GET /api/agent-access/user-videos": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

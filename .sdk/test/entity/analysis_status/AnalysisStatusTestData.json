@@ -1,0 +1,27 @@
+{
+  "existing": {
+    "analysis_status": {
+      "ANALYSIS_STATUS00": {
+        "id": "ANALYSIS_STATUS00"
+      },
+      "ANALYSIS_STATUS01": {
+        "id": "ANALYSIS_STATUS01"
+      },
+      "ANALYSIS_STATUS02": {
+        "id": "ANALYSIS_STATUS02"
+      }
+    }
+  },
+  "new": {
+    "analysis_status": {
+      "analysis_status_ref01": {}
+    }
+  },
+  "requests": {
+    "GET /api/scraper/analysis-status": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

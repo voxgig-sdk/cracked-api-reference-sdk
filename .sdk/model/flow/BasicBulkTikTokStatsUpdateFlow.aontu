@@ -1,0 +1,28 @@
+# BasicBulkTikTokStatsUpdateFlow
+
+main: kit: flow: BasicBulkTikTokStatsUpdateFlow:
+{
+  entity: "bulk_tik_tok_stats_update",
+  kind: "basic",
+  name: "BasicBulkTikTokStatsUpdateFlow",
+  step: [
+    {
+      i: {
+        ref: "bulk_tik_tok_stats_update_ref01",
+        srcdatavar: "bulk_tik_tok_stats_update_ref01_data",
+        suffix: "_up0"
+      }
+
+      o: "update",
+      s: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-bulk_tik_tok_stats_update_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicBulkTikTokStatsUpdateFlow"
+}

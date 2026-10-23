@@ -1,0 +1,56 @@
+{
+  "existing": {
+    "admin_slideshow_diag": {
+      "ADMIN_SLIDESHOW_DIAG00": {
+        "agent_id": "AGENT01",
+        "batch_id": "BATCH01",
+        "caption": "s52",
+        "content_base64": "s53",
+        "day": "s54",
+        "formula_id": "FORMULA01",
+        "id": "ADMIN_SLIDESHOW_DIAG00",
+        "title": "s57"
+      },
+      "ADMIN_SLIDESHOW_DIAG01": {
+        "agent_id": "AGENT01",
+        "batch_id": "BATCH01",
+        "caption": "sa2",
+        "content_base64": "sa3",
+        "day": "sa4",
+        "formula_id": "FORMULA01",
+        "id": "ADMIN_SLIDESHOW_DIAG01",
+        "title": "sa7"
+      },
+      "ADMIN_SLIDESHOW_DIAG02": {
+        "agent_id": "AGENT01",
+        "batch_id": "BATCH01",
+        "caption": "sf2",
+        "content_base64": "sf3",
+        "day": "sf4",
+        "formula_id": "FORMULA01",
+        "id": "ADMIN_SLIDESHOW_DIAG02",
+        "title": "sf7"
+      }
+    }
+  },
+  "new": {
+    "admin_slideshow_diag": {
+      "admin_slideshow_diag_ref01": {
+        "agent_id": "AGENT01",
+        "batch_id": "BATCH01",
+        "caption": "s142",
+        "content_base64": "s143",
+        "day": "s144",
+        "formula_id": "FORMULA01",
+        "title": "s147"
+      }
+    }
+  },
+  "requests": {
+    "POST /api/admin/slideshow-diag/{stage}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

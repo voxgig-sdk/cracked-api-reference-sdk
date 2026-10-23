@@ -1,0 +1,36 @@
+# BasicEnterpriseAgentFlow
+
+main: kit: flow: BasicEnterpriseAgentFlow:
+{
+  entity: "enterprise_agent",
+  kind: "basic",
+  name: "BasicEnterpriseAgentFlow",
+  step: [
+    {
+      i: {
+        ref: "enterprise_agent_ref01"
+      }
+
+      o: "create"
+    }
+
+    {
+      i: {
+        ref: "enterprise_agent_ref01",
+        srcdatavar: "enterprise_agent_ref01_data",
+        suffix: "_dt0"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-enterprise_agent_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicEnterpriseAgentFlow"
+}

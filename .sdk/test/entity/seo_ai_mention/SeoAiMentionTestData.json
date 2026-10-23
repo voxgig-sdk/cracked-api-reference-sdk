@@ -1,0 +1,69 @@
+{
+  "existing": {
+    "seo_ai_mention": {
+      "SEO_AI_MENTION00": {
+        "bucket": "s6e",
+        "domain_type": "s6f",
+        "dominant_domain": "s70",
+        "engine": "s71",
+        "evidence": {},
+        "geo": "s73",
+        "language": "s74",
+        "primary_url": "s75",
+        "prompt_text": "s76",
+        "run_week": "s77",
+        "secondary_urls": []
+      },
+      "SEO_AI_MENTION01": {
+        "bucket": "sdc",
+        "domain_type": "sdd",
+        "dominant_domain": "sde",
+        "engine": "sdf",
+        "evidence": {},
+        "geo": "se1",
+        "language": "se2",
+        "primary_url": "se3",
+        "prompt_text": "se4",
+        "run_week": "se5",
+        "secondary_urls": []
+      },
+      "SEO_AI_MENTION02": {
+        "bucket": "s14a",
+        "domain_type": "s14b",
+        "dominant_domain": "s14c",
+        "engine": "s14d",
+        "evidence": {},
+        "geo": "s14f",
+        "language": "s150",
+        "primary_url": "s151",
+        "prompt_text": "s152",
+        "run_week": "s153",
+        "secondary_urls": []
+      }
+    }
+  },
+  "new": {
+    "seo_ai_mention": {
+      "seo_ai_mention_ref01": {
+        "bucket": "s1b8",
+        "domain_type": "s1b9",
+        "dominant_domain": "s1ba",
+        "engine": "s1bb",
+        "evidence": {},
+        "geo": "s1bd",
+        "language": "s1be",
+        "primary_url": "s1bf",
+        "prompt_text": "s1c0",
+        "run_week": "s1c1",
+        "secondary_urls": []
+      }
+    }
+  },
+  "requests": {
+    "GET /api/seo/ai-mentions": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

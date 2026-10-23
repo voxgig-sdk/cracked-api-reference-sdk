@@ -1,0 +1,101 @@
+{
+  "existing": {
+    "admin_customer_success": {
+      "ADMIN_CUSTOMER_SUCCESS00": {
+        "active_agents": 190,
+        "active_products": 191,
+        "agents_count": 192,
+        "auto_schedule_status": "sc1",
+        "days_until_period_end": "sc2",
+        "email": "sc3",
+        "feature_impact": "sc4",
+        "last_notification_at": "sc5",
+        "membership": "sc6",
+        "name": "sc7",
+        "notification_count": 200,
+        "notification_events": [],
+        "priority": "sca",
+        "severity": "scb",
+        "status_label": "scc",
+        "subscription_current_period_end": "scd",
+        "subscription_status": "sce",
+        "upcoming_posts": 207,
+        "user_id": "USER01"
+      },
+      "ADMIN_CUSTOMER_SUCCESS01": {
+        "active_agents": 380,
+        "active_products": 381,
+        "agents_count": 382,
+        "auto_schedule_status": "s17f",
+        "days_until_period_end": "s180",
+        "email": "s181",
+        "feature_impact": "s182",
+        "last_notification_at": "s183",
+        "membership": "s184",
+        "name": "s185",
+        "notification_count": 390,
+        "notification_events": [],
+        "priority": "s188",
+        "severity": "s189",
+        "status_label": "s18a",
+        "subscription_current_period_end": "s18b",
+        "subscription_status": "s18c",
+        "upcoming_posts": 397,
+        "user_id": "USER01"
+      },
+      "ADMIN_CUSTOMER_SUCCESS02": {
+        "active_agents": 570,
+        "active_products": 571,
+        "agents_count": 572,
+        "auto_schedule_status": "s23d",
+        "days_until_period_end": "s23e",
+        "email": "s23f",
+        "feature_impact": "s240",
+        "last_notification_at": "s241",
+        "membership": "s242",
+        "name": "s243",
+        "notification_count": 580,
+        "notification_events": [],
+        "priority": "s246",
+        "severity": "s247",
+        "status_label": "s248",
+        "subscription_current_period_end": "s249",
+        "subscription_status": "s24a",
+        "upcoming_posts": 587,
+        "user_id": "USER01"
+      }
+    }
+  },
+  "new": {
+    "admin_customer_success": {
+      "admin_customer_success_ref01": {
+        "active_agents": 760,
+        "active_products": 761,
+        "agents_count": 762,
+        "auto_schedule_status": "s2fb",
+        "days_until_period_end": "s2fc",
+        "email": "s2fd",
+        "feature_impact": "s2fe",
+        "last_notification_at": "s2ff",
+        "membership": "s300",
+        "name": "s301",
+        "notification_count": 770,
+        "notification_events": [],
+        "priority": "s304",
+        "severity": "s305",
+        "status_label": "s306",
+        "subscription_current_period_end": "s307",
+        "subscription_status": "s308",
+        "upcoming_posts": 777,
+        "user_id": "USER01"
+      }
+    }
+  },
+  "requests": {
+    "GET /api/admin/insights/customer-success": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

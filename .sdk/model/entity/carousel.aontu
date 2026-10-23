@@ -1,0 +1,397 @@
+# Entity: carousel
+
+main: kit: entity: carousel: {
+
+  alias: field: {}
+
+  fields: {
+    agent_id: {
+      h: "Agent Id"
+      n: "agent_id"
+      r: true
+      t: "`$STRING`"
+    }
+    agent_name: {
+      h: "Agent Name"
+      n: "agent_name"
+      r: true
+      t: "`$STRING`"
+    }
+    audit_created_at: {
+      h: "Audit Created At"
+      n: "audit_created_at"
+      r: false
+      t: "`$ANY`"
+    }
+    audit_snapshot_sha256: {
+      h: "Audit Snapshot Sha256"
+      n: "audit_snapshot_sha256"
+      r: false
+      t: "`$ANY`"
+    }
+    caption: {
+      h: "Caption"
+      n: "caption"
+      r: false
+      t: "`$ANY`"
+    }
+    comments: {
+      h: "Comments"
+      n: "comments"
+      r: false
+      t: "`$ANY`"
+    }
+    fit_score: {
+      h: "Fit Score"
+      n: "fit_score"
+      r: false
+      t: "`$ANY`"
+    }
+    format: {
+      h: "Format"
+      n: "format"
+      r: true
+      t: "`$STRING`"
+    }
+    formula: {
+      h: "Formula"
+      n: "formula"
+      r: false
+      t: "`$OBJECT`"
+    }
+    formula_id: {
+      h: "Formula Id"
+      n: "formula_id"
+      r: false
+      t: "`$STRING`"
+    }
+    formula_name: {
+      h: "Formula Name"
+      n: "formula_name"
+      r: false
+      t: "`$ANY`"
+    }
+    generation: {
+      h: "Generation"
+      n: "generation"
+      r: false
+      t: "`$OBJECT`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+    image_prompt: {
+      h: "Image Prompt"
+      n: "image_prompt"
+      r: false
+      t: "`$ANY`"
+    }
+    likes: {
+      h: "Likes"
+      n: "likes"
+      r: false
+      t: "`$ANY`"
+    }
+    main_prompt: {
+      h: "Main Prompt"
+      n: "main_prompt"
+      r: false
+      t: "`$ANY`"
+    }
+    metrics_updated_at: {
+      h: "Metrics Updated At"
+      n: "metrics_updated_at"
+      r: false
+      t: "`$ANY`"
+    }
+    post_url: {
+      h: "Post Url"
+      n: "post_url"
+      r: false
+      t: "`$ANY`"
+    }
+    profile_url: {
+      h: "Profile Url"
+      n: "profile_url"
+      r: false
+      t: "`$ANY`"
+    }
+    qa: {
+      h: "Qa"
+      n: "qa"
+      r: false
+      t: "`$OBJECT`"
+    }
+    qa_status: {
+      h: "Qa Status"
+      n: "qa_status"
+      r: true
+      t: "`$STRING`"
+    }
+    qa_verdict: {
+      h: "Qa Verdict"
+      n: "qa_verdict"
+      r: false
+      t: "`$ANY`"
+    }
+    quality_score: {
+      h: "Quality Score"
+      n: "quality_score"
+      r: false
+      t: "`$ANY`"
+    }
+    queue_id: {
+      fo: "uuid"
+      h: "Queue Id"
+      n: "queue_id"
+      r: true
+      t: "`$STRING`"
+    }
+    relevance_score: {
+      h: "Relevance Score"
+      n: "relevance_score"
+      r: false
+      t: "`$ANY`"
+    }
+    scheduled_at: {
+      fo: "date-time"
+      h: "Scheduled At"
+      n: "scheduled_at"
+      r: true
+      t: "`$STRING`"
+    }
+    slide_count: {
+      h: "Slide Count"
+      n: "slide_count"
+      r: true
+      t: "`$INTEGER`"
+    }
+    slides: {
+      h: "Slides"
+      n: "slides"
+      r: true
+      t: "`$ARRAY`"
+    }
+    source: {
+      h: "Source"
+      n: "source"
+      r: false
+      t: "`$OBJECT`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: true
+      t: "`$STRING`"
+    }
+    thumbnail_url: {
+      h: "Thumbnail Url"
+      n: "thumbnail_url"
+      r: false
+      t: "`$ANY`"
+    }
+    title: {
+      h: "Title"
+      n: "title"
+      r: true
+      t: "`$STRING`"
+    }
+    video_id: {
+      fo: "uuid"
+      h: "Video Id"
+      n: "video_id"
+      r: true
+      t: "`$STRING`"
+    }
+    views: {
+      h: "Views"
+      n: "views"
+      r: false
+      t: "`$ANY`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "carousel"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /api/carousel/{video_id}/finalize"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "video_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                ex: false
+                k: "query"
+                n: "skip_schedule"
+                or: "skip_schedule"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/carousel/{video_id}/finalize"
+          q: {
+            "$action": "finalize"
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              video_id: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "carousel"
+            }
+            {
+              var: "id"
+            }
+            {
+              lit: "finalize"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/admin/carousels"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "date"
+                or: "date"
+                r: false
+                t: "`$ANY`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/carousels"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "carousels"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.items`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/admin/carousels/{queue_id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "queue_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/carousels/{queue_id}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              queue_id: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "carousels"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

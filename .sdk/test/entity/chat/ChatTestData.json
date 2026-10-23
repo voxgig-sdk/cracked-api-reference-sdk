@@ -1,0 +1,43 @@
+{
+  "existing": {
+    "chat": {
+      "CHAT00": {
+        "idempotencyKey": "s1e",
+        "message": "s1f",
+        "sessionId": "s20",
+        "session_id": "SESSION01",
+        "id": "CHAT00"
+      },
+      "CHAT01": {
+        "idempotencyKey": "s3c",
+        "message": "s3d",
+        "sessionId": "s3e",
+        "session_id": "SESSION01",
+        "id": "CHAT01"
+      },
+      "CHAT02": {
+        "idempotencyKey": "s5a",
+        "message": "s5b",
+        "sessionId": "s5c",
+        "session_id": "SESSION01",
+        "id": "CHAT02"
+      }
+    }
+  },
+  "new": {
+    "chat": {
+      "chat_ref01": {
+        "idempotencyKey": "s78",
+        "message": "s79",
+        "sessionId": "s7a"
+      }
+    }
+  },
+  "requests": {
+    "POST /api/chat/sessions/{session_id}/messages": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

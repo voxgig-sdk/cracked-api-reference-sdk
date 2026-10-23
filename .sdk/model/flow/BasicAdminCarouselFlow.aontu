@@ -1,0 +1,55 @@
+# BasicAdminCarouselFlow
+
+main: kit: flow: BasicAdminCarouselFlow:
+{
+  entity: "admin_carousel",
+  kind: "basic",
+  name: "BasicAdminCarouselFlow",
+  step: [
+    {
+      i: {
+        ref: "admin_carousel_ref01"
+      }
+
+      o: "create"
+    }
+
+    {
+      i: {
+        ref: "admin_carousel_ref01",
+        srcdatavar: "admin_carousel_ref01_data",
+        suffix: "_up0",
+        textfield: "agent_id"
+      }
+
+      o: "update",
+      s: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-admin_carousel_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "admin_carousel_ref01",
+        srcdatavar: "admin_carousel_ref01_data",
+        suffix: "_dt0"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-admin_carousel_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicAdminCarouselFlow"
+}

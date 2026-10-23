@@ -1,0 +1,28 @@
+# BasicAgentAccessOverviewFlow
+
+main: kit: flow: BasicAgentAccessOverviewFlow:
+{
+  entity: "agent_access_overview",
+  kind: "basic",
+  name: "BasicAgentAccessOverviewFlow",
+  step: [
+    {
+      i: {
+        ref: "agent_access_overview_ref01",
+        srcdatavar: "agent_access_overview_ref01_data",
+        suffix: "_dt0"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-agent_access_overview_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicAgentAccessOverviewFlow"
+}

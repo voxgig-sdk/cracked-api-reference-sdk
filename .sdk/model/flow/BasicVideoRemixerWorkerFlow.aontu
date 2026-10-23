@@ -1,0 +1,18 @@
+# BasicVideoRemixerWorkerFlow
+
+main: kit: flow: BasicVideoRemixerWorkerFlow:
+{
+  entity: "video_remixer_worker",
+  kind: "basic",
+  name: "BasicVideoRemixerWorkerFlow",
+  step: [
+    {
+      i: {
+        ref: "video_remixer_worker_ref01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicVideoRemixerWorkerFlow"
+}

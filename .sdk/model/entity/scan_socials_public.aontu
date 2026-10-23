@@ -1,0 +1,93 @@
+# Entity: scan_socials_public
+
+main: kit: entity: scan_socials_public: {
+
+  alias: field: {}
+
+  fields: {
+    instagram_handle: {
+      h: "Instagram Handle"
+      n: "instagram_handle"
+      r: false
+      sh: "Instagram username/handle to scrape"
+      t: "`$ANY`"
+    }
+    message: {
+      h: "Message"
+      n: "message"
+      r: false
+      t: "`$ANY`"
+    }
+    onboarding_data_id: {
+      h: "Onboarding Data Id"
+      n: "onboarding_data_id"
+      r: true
+      sh: "UUID of the OnboardingData record"
+      t: "`$STRING`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: true
+      t: "`$STRING`"
+    }
+    success: {
+      h: "Success"
+      n: "success"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    tiktok_handle: {
+      h: "Tiktok Handle"
+      n: "tiktok_handle"
+      r: false
+      sh: "TikTok username/handle to scrape"
+      t: "`$ANY`"
+    }
+  }
+
+  name: "scan_socials_public"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "instagram_handle"
+            "onboarding_data_id"
+            "tiktok_handle"
+          ]
+          co: {
+            id: "POST /api/onboarding-v6/scan-socials-public"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/onboarding-v6/scan-socials-public"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "onboarding-v6"
+            }
+            {
+              lit: "scan-socials-public"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

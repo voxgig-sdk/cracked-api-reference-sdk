@@ -1,0 +1,872 @@
+{
+  "existing": {
+    "admin_video_remixer": {
+      "ADMIN_VIDEO_REMIXER00": {
+        "activity": "s438",
+        "allowed_platforms": [],
+        "anchor_clip_id": "ANCHOR_CLIP01",
+        "atomicity_class": "s43b",
+        "auto_render": true,
+        "campaign_allowed": false,
+        "channel": "s43e",
+        "channel_default": "s43f",
+        "clip_id": "CLIP01",
+        "clip_ids": [],
+        "collected_at": "s442",
+        "comments": "s443",
+        "completion_rate": "s444",
+        "confirmed_duplicate_of": "s445",
+        "consent_doc_uri": "s446",
+        "contact": "s447",
+        "conversions": "s448",
+        "count": 1097,
+        "creator": "s44a",
+        "creator_id": "CREATOR01",
+        "crop_window": "s44c",
+        "cta_product_id": "CTA_PRODUCT01",
+        "days": 1102,
+        "derivative_edits_allowed": false,
+        "enabled": true,
+        "end_ms": "s451",
+        "enqueue": true,
+        "errors": [],
+        "evidence": "s454",
+        "expected_revision": "s455",
+        "expected_revisions": {},
+        "external_ai_allowed": false,
+        "file": "s458",
+        "followers": "s459",
+        "formula_id": "FORMULA01",
+        "formula_ids": [],
+        "handles": {},
+        "hook_subtype": "s45d",
+        "hour_utc": 1118,
+        "human_role": "s45f",
+        "idempotency_key": "s460",
+        "items": [],
+        "kim_clip_ids": [],
+        "kind": "s463",
+        "levels": {},
+        "likes": "s465",
+        "media_enabled": true,
+        "medical_claim_present": false,
+        "minute_utc": 1128,
+        "music_bed_allowed": false,
+        "music_policy": "s46a",
+        "name": "s46b",
+        "niche": "s46c",
+        "notes": "s46d",
+        "origin": "s46e",
+        "owner_waiver": false,
+        "paid_ads_allowed": true,
+        "patient_identifiable": false,
+        "person_type": "s472",
+        "pipeline": false,
+        "planning_only": true,
+        "platform": "s475",
+        "platform_post_id": "PLATFORM_POST01",
+        "policy": {},
+        "polish": "s478",
+        "post_url": "s479",
+        "posted_at": "s47a",
+        "primary_role": "s47b",
+        "purpose": "s47c",
+        "rate": 1149,
+        "rationale": "s47e",
+        "reason": "s47f",
+        "reference_source_id": "REFERENCE_SOURCE01",
+        "requires_medical_review": false,
+        "review_status": "s482",
+        "revision": 1155,
+        "rights_expires_at": "s484",
+        "rights_status": "s485",
+        "run_id": "RUN01",
+        "sample_links": [],
+        "secondary_roles": "s488",
+        "seconds": 1161,
+        "seed": 1162,
+        "seed_base": 1163,
+        "sensitive_personal_data_present": true,
+        "shares": "s48d",
+        "shoot": "s48e",
+        "slots": [],
+        "soundbite_title": "s490",
+        "source": "s491",
+        "source_id": "SOURCE01",
+        "source_ids": [],
+        "spend_usd": "s494",
+        "spiciness": "s495",
+        "spiciness_notes": "s496",
+        "start_ms": "s497",
+        "status": "s498",
+        "terry_clip_ids": [],
+        "testimonial_strength": "s49a",
+        "testimonial_type": "s49b",
+        "tier": "s49c",
+        "timeline": {},
+        "topic": "s49e",
+        "topic_tags": "s49f",
+        "total_target_ms": 1184,
+        "use_learned_weights": false,
+        "views": "s4a2",
+        "window": "s4a3",
+        "identifier": "IDENTIFIER01",
+        "job_id": "JOB01",
+        "project_id": "PROJECT01",
+        "token": "TOKEN01",
+        "id": "ADMIN_VIDEO_REMIXER00"
+      },
+      "ADMIN_VIDEO_REMIXER01": {
+        "activity": "s870",
+        "allowed_platforms": [],
+        "anchor_clip_id": "ANCHOR_CLIP01",
+        "atomicity_class": "s873",
+        "auto_render": true,
+        "campaign_allowed": false,
+        "channel": "s876",
+        "channel_default": "s877",
+        "clip_id": "CLIP01",
+        "clip_ids": [],
+        "collected_at": "s87a",
+        "comments": "s87b",
+        "completion_rate": "s87c",
+        "confirmed_duplicate_of": "s87d",
+        "consent_doc_uri": "s87e",
+        "contact": "s87f",
+        "conversions": "s880",
+        "count": 2177,
+        "creator": "s882",
+        "creator_id": "CREATOR01",
+        "crop_window": "s884",
+        "cta_product_id": "CTA_PRODUCT01",
+        "days": 2182,
+        "derivative_edits_allowed": false,
+        "enabled": true,
+        "end_ms": "s889",
+        "enqueue": true,
+        "errors": [],
+        "evidence": "s88c",
+        "expected_revision": "s88d",
+        "expected_revisions": {},
+        "external_ai_allowed": false,
+        "file": "s890",
+        "followers": "s891",
+        "formula_id": "FORMULA01",
+        "formula_ids": [],
+        "handles": {},
+        "hook_subtype": "s895",
+        "hour_utc": 2198,
+        "human_role": "s897",
+        "idempotency_key": "s898",
+        "items": [],
+        "kim_clip_ids": [],
+        "kind": "s89b",
+        "levels": {},
+        "likes": "s89d",
+        "media_enabled": true,
+        "medical_claim_present": false,
+        "minute_utc": 2208,
+        "music_bed_allowed": false,
+        "music_policy": "s8a2",
+        "name": "s8a3",
+        "niche": "s8a4",
+        "notes": "s8a5",
+        "origin": "s8a6",
+        "owner_waiver": false,
+        "paid_ads_allowed": true,
+        "patient_identifiable": false,
+        "person_type": "s8aa",
+        "pipeline": false,
+        "planning_only": true,
+        "platform": "s8ad",
+        "platform_post_id": "PLATFORM_POST01",
+        "policy": {},
+        "polish": "s8b0",
+        "post_url": "s8b1",
+        "posted_at": "s8b2",
+        "primary_role": "s8b3",
+        "purpose": "s8b4",
+        "rate": 2229,
+        "rationale": "s8b6",
+        "reason": "s8b7",
+        "reference_source_id": "REFERENCE_SOURCE01",
+        "requires_medical_review": false,
+        "review_status": "s8ba",
+        "revision": 2235,
+        "rights_expires_at": "s8bc",
+        "rights_status": "s8bd",
+        "run_id": "RUN01",
+        "sample_links": [],
+        "secondary_roles": "s8c0",
+        "seconds": 2241,
+        "seed": 2242,
+        "seed_base": 2243,
+        "sensitive_personal_data_present": true,
+        "shares": "s8c5",
+        "shoot": "s8c6",
+        "slots": [],
+        "soundbite_title": "s8c8",
+        "source": "s8c9",
+        "source_id": "SOURCE01",
+        "source_ids": [],
+        "spend_usd": "s8cc",
+        "spiciness": "s8cd",
+        "spiciness_notes": "s8ce",
+        "start_ms": "s8cf",
+        "status": "s8d0",
+        "terry_clip_ids": [],
+        "testimonial_strength": "s8d2",
+        "testimonial_type": "s8d3",
+        "tier": "s8d4",
+        "timeline": {},
+        "topic": "s8d6",
+        "topic_tags": "s8d7",
+        "total_target_ms": 2264,
+        "use_learned_weights": false,
+        "views": "s8da",
+        "window": "s8db",
+        "identifier": "IDENTIFIER01",
+        "job_id": "JOB01",
+        "project_id": "PROJECT01",
+        "token": "TOKEN01",
+        "id": "ADMIN_VIDEO_REMIXER01"
+      },
+      "ADMIN_VIDEO_REMIXER02": {
+        "activity": "sca8",
+        "allowed_platforms": [],
+        "anchor_clip_id": "ANCHOR_CLIP01",
+        "atomicity_class": "scab",
+        "auto_render": true,
+        "campaign_allowed": false,
+        "channel": "scae",
+        "channel_default": "scaf",
+        "clip_id": "CLIP01",
+        "clip_ids": [],
+        "collected_at": "scb2",
+        "comments": "scb3",
+        "completion_rate": "scb4",
+        "confirmed_duplicate_of": "scb5",
+        "consent_doc_uri": "scb6",
+        "contact": "scb7",
+        "conversions": "scb8",
+        "count": 3257,
+        "creator": "scba",
+        "creator_id": "CREATOR01",
+        "crop_window": "scbc",
+        "cta_product_id": "CTA_PRODUCT01",
+        "days": 3262,
+        "derivative_edits_allowed": false,
+        "enabled": true,
+        "end_ms": "scc1",
+        "enqueue": true,
+        "errors": [],
+        "evidence": "scc4",
+        "expected_revision": "scc5",
+        "expected_revisions": {},
+        "external_ai_allowed": false,
+        "file": "scc8",
+        "followers": "scc9",
+        "formula_id": "FORMULA01",
+        "formula_ids": [],
+        "handles": {},
+        "hook_subtype": "sccd",
+        "hour_utc": 3278,
+        "human_role": "sccf",
+        "idempotency_key": "scd0",
+        "items": [],
+        "kim_clip_ids": [],
+        "kind": "scd3",
+        "levels": {},
+        "likes": "scd5",
+        "media_enabled": true,
+        "medical_claim_present": false,
+        "minute_utc": 3288,
+        "music_bed_allowed": false,
+        "music_policy": "scda",
+        "name": "scdb",
+        "niche": "scdc",
+        "notes": "scdd",
+        "origin": "scde",
+        "owner_waiver": false,
+        "paid_ads_allowed": true,
+        "patient_identifiable": false,
+        "person_type": "sce2",
+        "pipeline": false,
+        "planning_only": true,
+        "platform": "sce5",
+        "platform_post_id": "PLATFORM_POST01",
+        "policy": {},
+        "polish": "sce8",
+        "post_url": "sce9",
+        "posted_at": "scea",
+        "primary_role": "sceb",
+        "purpose": "scec",
+        "rate": 3309,
+        "rationale": "scee",
+        "reason": "scef",
+        "reference_source_id": "REFERENCE_SOURCE01",
+        "requires_medical_review": false,
+        "review_status": "scf2",
+        "revision": 3315,
+        "rights_expires_at": "scf4",
+        "rights_status": "scf5",
+        "run_id": "RUN01",
+        "sample_links": [],
+        "secondary_roles": "scf8",
+        "seconds": 3321,
+        "seed": 3322,
+        "seed_base": 3323,
+        "sensitive_personal_data_present": true,
+        "shares": "scfd",
+        "shoot": "scfe",
+        "slots": [],
+        "soundbite_title": "sd00",
+        "source": "sd01",
+        "source_id": "SOURCE01",
+        "source_ids": [],
+        "spend_usd": "sd04",
+        "spiciness": "sd05",
+        "spiciness_notes": "sd06",
+        "start_ms": "sd07",
+        "status": "sd08",
+        "terry_clip_ids": [],
+        "testimonial_strength": "sd0a",
+        "testimonial_type": "sd0b",
+        "tier": "sd0c",
+        "timeline": {},
+        "topic": "sd0e",
+        "topic_tags": "sd0f",
+        "total_target_ms": 3344,
+        "use_learned_weights": false,
+        "views": "sd12",
+        "window": "sd13",
+        "identifier": "IDENTIFIER01",
+        "job_id": "JOB01",
+        "project_id": "PROJECT01",
+        "token": "TOKEN01",
+        "id": "ADMIN_VIDEO_REMIXER02"
+      }
+    }
+  },
+  "new": {
+    "admin_video_remixer": {
+      "admin_video_remixer_ref01": {
+        "activity": "s10e0",
+        "allowed_platforms": [],
+        "anchor_clip_id": "ANCHOR_CLIP01",
+        "atomicity_class": "s10e3",
+        "auto_render": true,
+        "campaign_allowed": false,
+        "channel": "s10e6",
+        "channel_default": "s10e7",
+        "clip_id": "CLIP01",
+        "clip_ids": [],
+        "collected_at": "s10ea",
+        "comments": "s10eb",
+        "completion_rate": "s10ec",
+        "confirmed_duplicate_of": "s10ed",
+        "consent_doc_uri": "s10ee",
+        "contact": "s10ef",
+        "conversions": "s10f0",
+        "count": 4337,
+        "creator": "s10f2",
+        "creator_id": "CREATOR01",
+        "crop_window": "s10f4",
+        "cta_product_id": "CTA_PRODUCT01",
+        "days": 4342,
+        "derivative_edits_allowed": false,
+        "enabled": true,
+        "end_ms": "s10f9",
+        "enqueue": true,
+        "errors": [],
+        "evidence": "s10fc",
+        "expected_revision": "s10fd",
+        "expected_revisions": {},
+        "external_ai_allowed": false,
+        "file": "s1100",
+        "followers": "s1101",
+        "formula_id": "FORMULA01",
+        "formula_ids": [],
+        "handles": {},
+        "hook_subtype": "s1105",
+        "hour_utc": 4358,
+        "human_role": "s1107",
+        "idempotency_key": "s1108",
+        "items": [],
+        "kim_clip_ids": [],
+        "kind": "s110b",
+        "levels": {},
+        "likes": "s110d",
+        "media_enabled": true,
+        "medical_claim_present": false,
+        "minute_utc": 4368,
+        "music_bed_allowed": false,
+        "music_policy": "s1112",
+        "name": "s1113",
+        "niche": "s1114",
+        "notes": "s1115",
+        "origin": "s1116",
+        "owner_waiver": false,
+        "paid_ads_allowed": true,
+        "patient_identifiable": false,
+        "person_type": "s111a",
+        "pipeline": false,
+        "planning_only": true,
+        "platform": "s111d",
+        "platform_post_id": "PLATFORM_POST01",
+        "policy": {},
+        "polish": "s1120",
+        "post_url": "s1121",
+        "posted_at": "s1122",
+        "primary_role": "s1123",
+        "purpose": "s1124",
+        "rate": 4389,
+        "rationale": "s1126",
+        "reason": "s1127",
+        "reference_source_id": "REFERENCE_SOURCE01",
+        "requires_medical_review": false,
+        "review_status": "s112a",
+        "revision": 4395,
+        "rights_expires_at": "s112c",
+        "rights_status": "s112d",
+        "run_id": "RUN01",
+        "sample_links": [],
+        "secondary_roles": "s1130",
+        "seconds": 4401,
+        "seed": 4402,
+        "seed_base": 4403,
+        "sensitive_personal_data_present": true,
+        "shares": "s1135",
+        "shoot": "s1136",
+        "slots": [],
+        "soundbite_title": "s1138",
+        "source": "s1139",
+        "source_id": "SOURCE01",
+        "source_ids": [],
+        "spend_usd": "s113c",
+        "spiciness": "s113d",
+        "spiciness_notes": "s113e",
+        "start_ms": "s113f",
+        "status": "s1140",
+        "terry_clip_ids": [],
+        "testimonial_strength": "s1142",
+        "testimonial_type": "s1143",
+        "tier": "s1144",
+        "timeline": {},
+        "topic": "s1146",
+        "topic_tags": "s1147",
+        "total_target_ms": 4424,
+        "use_learned_weights": false,
+        "views": "s114a",
+        "window": "s114b"
+      }
+    }
+  },
+  "requests": {
+    "POST /api/admin/video-remixer/clips/{clip_id}/media": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/video-remixer/analysis/{identifier}/cancel": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/video-remixer/analysis/{identifier}/retry": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/video-remixer/clipper-access/{identifier}/revoke": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/video-remixer/clippers/{identifier}/access": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/video-remixer/posts/{identifier}/metrics": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/video-remixer/proofs/{identifier}/staff-time": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/video-remixer/reviews/{identifier}/human-check": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/video-remixer/recipes/{identifier}/preflight": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/video-remixer/recipes/{identifier}/render": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/video-remixer/reviews/{identifier}/checks": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/video-remixer/reviews/{identifier}/decision": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/video-remixer/reviews/{identifier}/export": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/video-remixer/reviews/{identifier}/handoff": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/video-remixer/runs/{identifier}/render": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/video-remixer/reviews/{identifier}/repair": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/video-remixer/runs/{identifier}/restore": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/video-remixer/worker-keys/{identifier}/revoke": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/video-remixer/jobs/{job_id}/cancel": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/video-remixer/jobs/{job_id}/media": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/video-remixer/jobs/{job_id}/retry": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/video-remixer/projects/{project_id}/renders": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/video-remixer/sources/{source_id}/reconcile-upload": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/video-remixer/analysis": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/video-remixer/audits": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/video-remixer/clippers/import": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/video-remixer/clippers/import-csv": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/video-remixer/formulas/proposals": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/video-remixer/imports/manifest": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/video-remixer/imports/upload": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/video-remixer/planner-preview": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/video-remixer/projects": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/video-remixer/proofs": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/video-remixer/reports/refresh": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/video-remixer/runs": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/video-remixer/worker-keys": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/video-remixer/clips/{clip_id}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/video-remixer/recipes/{identifier}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/video-remixer/recipes/{identifier}/preflight": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/video-remixer/reviews/{identifier}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/video-remixer/runs/{identifier}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/video-remixer/jobs/{job_id}/captions": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/video-remixer/jobs/{job_id}/manifest": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/video-remixer/media/{token}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/video-remixer/analysis": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/video-remixer/audits": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/video-remixer/batch-schedules": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/video-remixer/clipper-access": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/video-remixer/clipper-rubric": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/video-remixer/clippers": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/video-remixer/clips": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/video-remixer/cost": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/video-remixer/formulas": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/video-remixer/imports": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/video-remixer/jobs": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/video-remixer/label-history": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/video-remixer/library": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/video-remixer/overview": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/video-remixer/posts": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/video-remixer/posts/export": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/video-remixer/products": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/video-remixer/projects": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/video-remixer/proofs": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/video-remixer/reports": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/video-remixer/reports/aggregates": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/video-remixer/reviews": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/video-remixer/runs": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/video-remixer/sources": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/video-remixer/worker-keys": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PATCH /api/admin/video-remixer/clips/{clip_id}/labels": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PATCH /api/admin/video-remixer/cost": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /api/admin/video-remixer/runs/{identifier}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PUT /api/admin/video-remixer/audits/{identifier}/answer": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PUT /api/admin/video-remixer/batch-schedules/{identifier}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PUT /api/admin/video-remixer/clippers/{identifier}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PUT /api/admin/video-remixer/formulas/{identifier}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PUT /api/admin/video-remixer/posts/{identifier}/link": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PUT /api/admin/video-remixer/projects/{project_id}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PUT /api/admin/video-remixer/sources/{source_id}/policy": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PUT /api/admin/video-remixer/clipper-rubric": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PUT /api/admin/video-remixer/source-policies/batch": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

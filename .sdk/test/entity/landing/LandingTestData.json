@@ -1,0 +1,55 @@
+{
+  "existing": {
+    "landing": {
+      "LANDING00": {
+        "file": "sa",
+        "index": "INDEX01",
+        "id": "LANDING00"
+      },
+      "LANDING01": {
+        "file": "s14",
+        "index": "INDEX01",
+        "id": "LANDING01"
+      },
+      "LANDING02": {
+        "file": "s1e",
+        "index": "INDEX01",
+        "id": "LANDING02"
+      }
+    }
+  },
+  "new": {
+    "landing": {
+      "landing_ref01": {
+        "file": "s28"
+      }
+    }
+  },
+  "requests": {
+    "POST /api/landings/microhub/testimonial-image/{index}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/landings/landing/reference-image": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/landings/landing/regenerate": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/landings/microhub/header-image": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/landings/microhub/profile-image": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

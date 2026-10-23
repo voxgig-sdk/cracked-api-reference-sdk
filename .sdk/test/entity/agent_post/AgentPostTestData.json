@@ -1,0 +1,84 @@
+{
+  "existing": {
+    "agent_post": {
+      "AGENT_POST00": {
+        "comments": 150,
+        "error_message": "s97",
+        "id": "AGENT_POST00",
+        "likes": 153,
+        "product_id": "PRODUCT01",
+        "results": "s9b",
+        "scheduled_datetime": "s9c",
+        "source_type": "s9d",
+        "status": "s9e",
+        "user_email": "s9f",
+        "user_id": "USER01",
+        "user_name": "sa1",
+        "video_id": "VIDEO01",
+        "video_url": "sa3",
+        "views": 164
+      },
+      "AGENT_POST01": {
+        "comments": 300,
+        "error_message": "s12d",
+        "id": "AGENT_POST01",
+        "likes": 303,
+        "product_id": "PRODUCT01",
+        "results": "s131",
+        "scheduled_datetime": "s132",
+        "source_type": "s133",
+        "status": "s134",
+        "user_email": "s135",
+        "user_id": "USER01",
+        "user_name": "s137",
+        "video_id": "VIDEO01",
+        "video_url": "s139",
+        "views": 314
+      },
+      "AGENT_POST02": {
+        "comments": 450,
+        "error_message": "s1c3",
+        "id": "AGENT_POST02",
+        "likes": 453,
+        "product_id": "PRODUCT01",
+        "results": "s1c7",
+        "scheduled_datetime": "s1c8",
+        "source_type": "s1c9",
+        "status": "s1ca",
+        "user_email": "s1cb",
+        "user_id": "USER01",
+        "user_name": "s1cd",
+        "video_id": "VIDEO01",
+        "video_url": "s1cf",
+        "views": 464
+      }
+    }
+  },
+  "new": {
+    "agent_post": {
+      "agent_post_ref01": {
+        "comments": 600,
+        "error_message": "s259",
+        "likes": 603,
+        "product_id": "PRODUCT01",
+        "results": "s25d",
+        "scheduled_datetime": "s25e",
+        "source_type": "s25f",
+        "status": "s260",
+        "user_email": "s261",
+        "user_id": "USER01",
+        "user_name": "s263",
+        "video_id": "VIDEO01",
+        "video_url": "s265",
+        "views": 614
+      }
+    }
+  },
+  "requests": {
+    "GET /api/admin/agents/{agent_id}/posts": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

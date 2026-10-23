@@ -1,0 +1,171 @@
+# Entity: agent_health
+
+main: kit: entity: agent_health: {
+
+  alias: field: {}
+
+  fields: {
+    daily: {
+      h: "Daily"
+      n: "daily"
+      r: true
+      t: "`$ARRAY`"
+    }
+    dates: {
+      h: "Dates"
+      n: "dates"
+      r: true
+      t: "`$ARRAY`"
+    }
+    generated_at: {
+      fo: "date-time"
+      h: "Generated At"
+      n: "generated_at"
+      r: true
+      t: "`$STRING`"
+    }
+    groups: {
+      h: "Groups"
+      n: "groups"
+      r: true
+      t: "`$ARRAY`"
+    }
+    latest: {
+      h: "Latest"
+      n: "latest"
+      r: true
+      t: "`$OBJECT`"
+    }
+    live_date: {
+      h: "Live Date"
+      n: "live_date"
+      r: false
+      t: "`$ANY`"
+    }
+    phone_admin_generated_at: {
+      fo: "date-time"
+      h: "Phone Admin Generated At"
+      n: "phone_admin_generated_at"
+      r: true
+      t: "`$STRING`"
+    }
+    platform: {
+      h: "Platform"
+      n: "platform"
+      r: false
+      t: "`$STRING`"
+    }
+    post_target: {
+      h: "Post Target"
+      n: "post_target"
+      r: true
+      t: "`$INTEGER`"
+    }
+    qa_managed_agent_ids: {
+      h: "Qa Managed Agent Ids"
+      n: "qa_managed_agent_ids"
+      r: false
+      t: "`$ARRAY`"
+    }
+    scope_prefixes: {
+      h: "Scope Prefixes"
+      n: "scope_prefixes"
+      r: true
+      t: "`$ARRAY`"
+    }
+    timezone: {
+      h: "Timezone"
+      n: "timezone"
+      r: true
+      t: "`$STRING`"
+    }
+    warmup_target: {
+      h: "Warmup Target"
+      n: "warmup_target"
+      r: true
+      t: "`$INTEGER`"
+    }
+  }
+
+  name: "agent_health"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/admin/agent-health"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "date_to"
+                or: "date_to"
+                r: false
+                t: "`$ANY`"
+              }
+              {
+                ex: 7
+                k: "query"
+                n: "day"
+                or: "days"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                ex: "TIKTOK"
+                k: "query"
+                n: "platform"
+                or: "platform"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: false
+                k: "query"
+                n: "summary"
+                or: "summary"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+              {
+                k: "query"
+                n: "user_id"
+                or: "user_ids"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/agent-health"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "agent-health"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

@@ -1,0 +1,59 @@
+{
+  "existing": {
+    "enterprise_agent": {
+      "ENTERPRISE_AGENT00": {
+        "count": 40,
+        "product_id": "PRODUCT01",
+        "source_product_id": "SOURCE_PRODUCT01",
+        "target_product_id": "TARGET_PRODUCT01",
+        "id": "ENTERPRISE_AGENT00"
+      },
+      "ENTERPRISE_AGENT01": {
+        "count": 80,
+        "product_id": "PRODUCT01",
+        "source_product_id": "SOURCE_PRODUCT01",
+        "target_product_id": "TARGET_PRODUCT01",
+        "id": "ENTERPRISE_AGENT01"
+      },
+      "ENTERPRISE_AGENT02": {
+        "count": 120,
+        "product_id": "PRODUCT01",
+        "source_product_id": "SOURCE_PRODUCT01",
+        "target_product_id": "TARGET_PRODUCT01",
+        "id": "ENTERPRISE_AGENT02"
+      }
+    }
+  },
+  "new": {
+    "enterprise_agent": {
+      "enterprise_agent_ref01": {
+        "count": 160,
+        "product_id": "PRODUCT01",
+        "source_product_id": "SOURCE_PRODUCT01",
+        "target_product_id": "TARGET_PRODUCT01"
+      }
+    }
+  },
+  "requests": {
+    "POST /api/enterprise/agents/assign": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/enterprise/agents/move": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/enterprise/agents/release": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/enterprise/agents/global-pool-status": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

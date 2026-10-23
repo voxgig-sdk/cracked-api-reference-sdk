@@ -1,0 +1,267 @@
+# Entity: create_carousel
+
+main: kit: entity: create_carousel: {
+
+  alias: field: {}
+
+  fields: {
+    copy_mode: {
+      h: "Copy Mode"
+      n: "copy_mode"
+      r: false
+      t: "`$ANY`"
+    }
+    expected_owner_user_id: {
+      h: "Expected Owner User Id"
+      n: "expected_owner_user_id"
+      r: false
+      t: "`$STRING`"
+    }
+    expected_product_id: {
+      h: "Expected Product Id"
+      n: "expected_product_id"
+      r: false
+      t: "`$STRING`"
+    }
+    expected_product_name: {
+      h: "Expected Product Name"
+      n: "expected_product_name"
+      r: false
+      t: "`$ANY`"
+    }
+    image_model: {
+      h: "Image Model"
+      n: "image_model"
+      r: false
+      t: "`$STRING`"
+    }
+    mention_product: {
+      h: "Mention Product"
+      n: "mention_product"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    message: {
+      h: "Message"
+      n: "message"
+      r: true
+      t: "`$STRING`"
+    }
+    num_slides: {
+      h: "Num Slides"
+      n: "num_slides"
+      r: false
+      t: "`$INTEGER`"
+    }
+    owner_user_id: {
+      h: "Owner User Id"
+      n: "owner_user_id"
+      r: false
+      t: "`$STRING`"
+    }
+    product_id: {
+      h: "Product Id"
+      n: "product_id"
+      r: false
+      sh: "Product ID to use."
+      t: "`$STRING`"
+    }
+    product_name: {
+      h: "Product Name"
+      n: "product_name"
+      r: false
+      t: "`$ANY`"
+    }
+    product_placement: {
+      h: "Product Placement"
+      n: "product_placement"
+      r: false
+      t: "`$STRING`"
+    }
+    request_id: {
+      h: "Request Id"
+      n: "request_id"
+      r: false
+      t: "`$STRING`"
+    }
+    script_style_custom: {
+      h: "Script Style Custom"
+      n: "script_style_custom"
+      r: false
+      t: "`$ANY`"
+    }
+    script_style_id: {
+      h: "Script Style Id"
+      n: "script_style_id"
+      r: false
+      t: "`$STRING`"
+    }
+    selected_hook: {
+      h: "Selected Hook"
+      n: "selected_hook"
+      r: false
+      t: "`$ANY`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: true
+      t: "`$STRING`"
+    }
+    success: {
+      h: "Success"
+      n: "success"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    template_id: {
+      h: "Template Id"
+      n: "template_id"
+      r: true
+      t: "`$STRING`"
+    }
+    video_id: {
+      fo: "uuid"
+      h: "Video Id"
+      n: "video_id"
+      r: true
+      t: "`$STRING`"
+    }
+    visual_style_custom: {
+      h: "Visual Style Custom"
+      n: "visual_style_custom"
+      r: false
+      t: "`$ANY`"
+    }
+    visual_style_id: {
+      h: "Visual Style Id"
+      n: "visual_style_id"
+      r: false
+      t: "`$STRING`"
+    }
+  }
+
+  name: "create_carousel"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "copy_mode"
+            "expected_owner_user_id"
+            "expected_product_id"
+            "expected_product_name"
+            "image_model"
+            "product_id"
+            "product_placement"
+            "request_id"
+            "selected_hook"
+            "template_id"
+          ]
+          co: {
+            id: "POST /api/carousel/create-from-exact"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/carousel/create-from-exact"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "carousel"
+            }
+            {
+              lit: "create-from-exact"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "image_model"
+            "mention_product"
+            "num_slides"
+            "product_id"
+            "script_style_custom"
+            "script_style_id"
+            "visual_style_custom"
+            "visual_style_id"
+          ]
+          co: {
+            id: "POST /api/carousel/create-from-styles"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/carousel/create-from-styles"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "carousel"
+            }
+            {
+              lit: "create-from-styles"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "image_model"
+            "mention_product"
+            "product_id"
+            "template_id"
+          ]
+          co: {
+            id: "POST /api/carousel/create-from-template"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/carousel/create-from-template"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "carousel"
+            }
+            {
+              lit: "create-from-template"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

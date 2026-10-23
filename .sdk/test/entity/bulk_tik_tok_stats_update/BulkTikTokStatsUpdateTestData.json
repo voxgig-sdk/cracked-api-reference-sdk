@@ -1,0 +1,40 @@
+{
+  "existing": {
+    "bulk_tik_tok_stats_update": {
+      "BULK_TIK_TOK_STATS_UPDATE00": {
+        "failedIds": [],
+        "updatedCount": 31,
+        "updates": [],
+        "id": "BULK_TIK_TOK_STATS_UPDATE00"
+      },
+      "BULK_TIK_TOK_STATS_UPDATE01": {
+        "failedIds": [],
+        "updatedCount": 61,
+        "updates": [],
+        "id": "BULK_TIK_TOK_STATS_UPDATE01"
+      },
+      "BULK_TIK_TOK_STATS_UPDATE02": {
+        "failedIds": [],
+        "updatedCount": 91,
+        "updates": [],
+        "id": "BULK_TIK_TOK_STATS_UPDATE02"
+      }
+    }
+  },
+  "new": {
+    "bulk_tik_tok_stats_update": {
+      "bulk_tik_tok_stats_update_ref01": {
+        "failedIds": [],
+        "updatedCount": 121,
+        "updates": []
+      }
+    }
+  },
+  "requests": {
+    "PATCH /api/upload-post-agents/bulk/tiktok-stats": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

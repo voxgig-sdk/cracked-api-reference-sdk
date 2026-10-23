@@ -1,0 +1,86 @@
+# Entity: create_blackout_sora2_video
+
+main: kit: entity: create_blackout_sora2_video: {
+
+  alias: field: {}
+
+  fields: {
+    main_prompt: {
+      h: "Main Prompt"
+      n: "main_prompt"
+      r: true
+      t: "`$STRING`"
+    }
+    media_asset_id: {
+      fo: "uuid"
+      h: "Media Asset Id"
+      n: "media_asset_id"
+      r: true
+      t: "`$STRING`"
+    }
+    product_id: {
+      fo: "uuid"
+      h: "Product Id"
+      n: "product_id"
+      r: true
+      t: "`$STRING`"
+    }
+    requires_polling: {
+      h: "Requires Polling"
+      n: "requires_polling"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    video: {
+      h: "Video"
+      n: "video"
+      r: true
+      t: "`$OBJECT`"
+    }
+  }
+
+  name: "create_blackout_sora2_video"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "main_prompt"
+            "media_asset_id"
+            "product_id"
+          ]
+          co: {
+            id: "POST /api/core/create-blackout-sora2-video"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/core/create-blackout-sora2-video"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "core"
+            }
+            {
+              lit: "create-blackout-sora2-video"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

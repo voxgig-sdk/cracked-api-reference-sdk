@@ -1,0 +1,146 @@
+{
+  "existing": {
+    "video": {
+      "VIDEO00": {
+        "agent_id": "AGENT01",
+        "bookmarked": "se7",
+        "captions": "se8",
+        "carousel_data": "se9",
+        "created_at": "sea",
+        "duration": 235,
+        "generation_status": "sec",
+        "id": "VIDEO00",
+        "image_prompt": "see",
+        "is_onboarding": false,
+        "is_template": true,
+        "main_avatar": "sf1",
+        "main_prompt": "sf2",
+        "media_asset_id": "MEDIA_ASSET01",
+        "product_id": "PRODUCT01",
+        "reel_id": "REEL01",
+        "thumbnail_url": "sf6",
+        "title": "sf7",
+        "type": "sf8",
+        "updated_at": "sf9",
+        "url": "sfa",
+        "user_id": "USER01",
+        "video_id": "VIDEO01"
+      },
+      "VIDEO01": {
+        "agent_id": "AGENT01",
+        "bookmarked": "s1cd",
+        "captions": "s1ce",
+        "carousel_data": "s1cf",
+        "created_at": "s1d0",
+        "duration": 465,
+        "generation_status": "s1d2",
+        "id": "VIDEO01",
+        "image_prompt": "s1d4",
+        "is_onboarding": false,
+        "is_template": true,
+        "main_avatar": "s1d7",
+        "main_prompt": "s1d8",
+        "media_asset_id": "MEDIA_ASSET01",
+        "product_id": "PRODUCT01",
+        "reel_id": "REEL01",
+        "thumbnail_url": "s1dc",
+        "title": "s1dd",
+        "type": "s1de",
+        "updated_at": "s1df",
+        "url": "s1e0",
+        "user_id": "USER01",
+        "video_id": "VIDEO01"
+      },
+      "VIDEO02": {
+        "agent_id": "AGENT01",
+        "bookmarked": "s2b3",
+        "captions": "s2b4",
+        "carousel_data": "s2b5",
+        "created_at": "s2b6",
+        "duration": 695,
+        "generation_status": "s2b8",
+        "id": "VIDEO02",
+        "image_prompt": "s2ba",
+        "is_onboarding": false,
+        "is_template": true,
+        "main_avatar": "s2bd",
+        "main_prompt": "s2be",
+        "media_asset_id": "MEDIA_ASSET01",
+        "product_id": "PRODUCT01",
+        "reel_id": "REEL01",
+        "thumbnail_url": "s2c2",
+        "title": "s2c3",
+        "type": "s2c4",
+        "updated_at": "s2c5",
+        "url": "s2c6",
+        "user_id": "USER01",
+        "video_id": "VIDEO01"
+      }
+    }
+  },
+  "new": {
+    "video": {
+      "video_ref01": {
+        "agent_id": "AGENT01",
+        "bookmarked": "s399",
+        "captions": "s39a",
+        "carousel_data": "s39b",
+        "created_at": "s39c",
+        "duration": 925,
+        "generation_status": "s39e",
+        "image_prompt": "s3a0",
+        "is_onboarding": false,
+        "is_template": true,
+        "main_avatar": "s3a3",
+        "main_prompt": "s3a4",
+        "media_asset_id": "MEDIA_ASSET01",
+        "product_id": "PRODUCT01",
+        "reel_id": "REEL01",
+        "thumbnail_url": "s3a8",
+        "title": "s3a9",
+        "type": "s3aa",
+        "updated_at": "s3ab",
+        "url": "s3ac",
+        "user_id": "USER01",
+        "video_id": "VIDEO01"
+      }
+    }
+  },
+  "requests": {
+    "POST /videos/{video_id}/retry-video": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/core/update-video-captions": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /videos/": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /videos/{video_id}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /videos/{video_id}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PATCH /videos/{video_id}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PATCH /videos/{video_id}/template": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

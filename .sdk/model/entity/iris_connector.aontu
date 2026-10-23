@@ -1,0 +1,55 @@
+# Entity: iris_connector
+
+main: kit: entity: iris_connector: {
+
+  alias: field: {}
+
+  fields: {
+    connectors: {
+      h: "Connectors"
+      n: "connectors"
+      r: false
+      t: "`$ARRAY`"
+    }
+  }
+
+  name: "iris_connector"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/iris/connectors"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/iris/connectors"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "iris"
+            }
+            {
+              lit: "connectors"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.connectors`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

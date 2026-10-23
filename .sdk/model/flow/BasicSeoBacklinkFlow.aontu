@@ -1,0 +1,22 @@
+# BasicSeoBacklinkFlow
+
+main: kit: flow: BasicSeoBacklinkFlow:
+{
+  entity: "seo_backlink",
+  kind: "basic",
+  name: "BasicSeoBacklinkFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "seo_backlink_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicSeoBacklinkFlow"
+}

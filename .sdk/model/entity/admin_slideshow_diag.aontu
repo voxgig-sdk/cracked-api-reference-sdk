@@ -1,0 +1,135 @@
+# Entity: admin_slideshow_diag
+
+main: kit: entity: admin_slideshow_diag: {
+
+  alias: field: {}
+
+  fields: {
+    agent_id: {
+      h: "Agent Id"
+      n: "agent_id"
+      r: false
+      t: "`$STRING`"
+    }
+    batch_id: {
+      h: "Batch Id"
+      n: "batch_id"
+      r: false
+      t: "`$STRING`"
+    }
+    caption: {
+      h: "Caption"
+      n: "caption"
+      r: false
+      t: "`$STRING`"
+    }
+    content_base64: {
+      h: "Content Base64"
+      n: "content_base64"
+      r: false
+      t: "`$STRING`"
+    }
+    day: {
+      h: "Day"
+      n: "day"
+      r: false
+      t: "`$ANY`"
+    }
+    formula_id: {
+      h: "Formula Id"
+      n: "formula_id"
+      r: false
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+    title: {
+      h: "Title"
+      n: "title"
+      r: false
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "admin_slideshow_diag"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "agent_id"
+            "batch_id"
+            "caption"
+            "content_base64"
+            "day"
+            "formula_id"
+            "title"
+          ]
+          co: {
+            id: "POST /api/admin/slideshow-diag/{stage}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "stage"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/admin/slideshow-diag/{stage}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              stage: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "slideshow-diag"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

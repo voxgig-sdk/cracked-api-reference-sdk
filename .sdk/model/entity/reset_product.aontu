@@ -1,0 +1,88 @@
+# Entity: reset_product
+
+main: kit: entity: reset_product: {
+
+  alias: field: {}
+
+  name: "reset_product"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /api/reset-product/generate-videos-v6"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/reset-product/generate-videos-v6"
+          q: {
+            "$action": "generate_videos_v6"
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "reset-product"
+            }
+            {
+              lit: "generate-videos-v6"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/reset-product/generate-videos/status"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/reset-product/generate-videos/status"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "reset-product"
+            }
+            {
+              lit: "generate-videos"
+            }
+            {
+              lit: "status"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  fields: {
+  }
+
+
+
+}

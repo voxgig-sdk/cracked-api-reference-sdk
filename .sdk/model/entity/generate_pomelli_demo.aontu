@@ -1,0 +1,83 @@
+# Entity: generate_pomelli_demo
+
+main: kit: entity: generate_pomelli_demo: {
+
+  alias: field: {}
+
+  fields: {
+    current_demo_count: {
+      h: "Current Demo Count"
+      n: "current_demo_count"
+      r: true
+      t: "`$INTEGER`"
+    }
+    max_demos: {
+      h: "Max Demos"
+      n: "max_demos"
+      r: false
+      t: "`$INTEGER`"
+    }
+    message: {
+      h: "Message"
+      n: "message"
+      r: true
+      t: "`$STRING`"
+    }
+    product_id: {
+      h: "Product Id"
+      n: "product_id"
+      r: true
+      sh: "UUID of the Product"
+      t: "`$STRING`"
+    }
+    success: {
+      h: "Success"
+      n: "success"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+  }
+
+  name: "generate_pomelli_demo"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "product_id"
+          ]
+          co: {
+            id: "POST /api/onboarding-v6/generate-pomelli-demo"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/onboarding-v6/generate-pomelli-demo"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "onboarding-v6"
+            }
+            {
+              lit: "generate-pomelli-demo"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

@@ -1,0 +1,171 @@
+# Entity: dedicated_agents_dashboard
+
+main: kit: entity: dedicated_agents_dashboard: {
+
+  alias: field: {}
+
+  fields: {
+    active_connections: {
+      h: "Active Connections"
+      n: "active_connections"
+      r: true
+      t: "`$INTEGER`"
+    }
+    assigned_user_id: {
+      h: "Assigned User Id"
+      n: "assigned_user_id"
+      r: false
+      t: "`$STRING`"
+    }
+    assigned_user_ids: {
+      h: "Assigned User Ids"
+      n: "assigned_user_ids"
+      r: false
+      t: "`$ARRAY`"
+    }
+    bio: {
+      h: "Bio"
+      n: "bio"
+      r: true
+      t: "`$ANY`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: true
+      t: "`$STRING`"
+    }
+    instagram_url: {
+      h: "Instagram Url"
+      n: "instagram_url"
+      r: false
+      t: "`$ANY`"
+    }
+    is_active: {
+      h: "Is Active"
+      n: "is_active"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    last_admin_synced_at: {
+      h: "Last Admin Synced At"
+      n: "last_admin_synced_at"
+      r: false
+      t: "`$ANY`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: true
+      t: "`$STRING`"
+    }
+    role: {
+      h: "Role"
+      n: "role"
+      r: true
+      t: "`$ANY`"
+    }
+    tiktok_stats: {
+      h: "Tiktok Stats"
+      n: "tiktok_stats"
+      r: false
+      t: "`$ANY`"
+    }
+    tiktok_url: {
+      h: "Tiktok Url"
+      n: "tiktok_url"
+      r: false
+      t: "`$ANY`"
+    }
+    today_failed_entries: {
+      h: "Today Failed Entries"
+      n: "today_failed_entries"
+      r: false
+      t: "`$ARRAY`"
+    }
+    today_stats: {
+      h: "Today Stats"
+      n: "today_stats"
+      r: true
+      t: "`$OBJECT`"
+    }
+    upload_post_platforms: {
+      h: "Upload Post Platforms"
+      n: "upload_post_platforms"
+      r: false
+      t: "`$ANY`"
+    }
+    upload_post_profile: {
+      h: "Upload Post Profile"
+      n: "upload_post_profile"
+      r: false
+      t: "`$ANY`"
+    }
+    yesterday_failed_entries: {
+      h: "Yesterday Failed Entries"
+      n: "yesterday_failed_entries"
+      r: false
+      t: "`$ARRAY`"
+    }
+    yesterday_stats: {
+      h: "Yesterday Stats"
+      n: "yesterday_stats"
+      r: true
+      t: "`$OBJECT`"
+    }
+    youtube_url: {
+      h: "Youtube Url"
+      n: "youtube_url"
+      r: false
+      t: "`$ANY`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "dedicated_agents_dashboard"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/admin/agents/dedicated-dashboard"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/admin/agents/dedicated-dashboard"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "agents"
+            }
+            {
+              lit: "dedicated-dashboard"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.agents`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

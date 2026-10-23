@@ -1,0 +1,133 @@
+# Entity: product_dashboard
+
+main: kit: entity: product_dashboard: {
+
+  alias: field: {}
+
+  fields: {
+    agents: {
+      h: "Agents"
+      n: "agents"
+      r: true
+      t: "`$ARRAY`"
+    }
+    date: {
+      fo: "date"
+      h: "Date"
+      n: "date"
+      r: true
+      t: "`$STRING`"
+    }
+    pagination: {
+      h: "Pagination"
+      n: "pagination"
+      r: true
+      t: "`$OBJECT`"
+    }
+    phone_admin_error: {
+      h: "Phone Admin Error"
+      n: "phone_admin_error"
+      r: false
+      t: "`$ANY`"
+    }
+    products: {
+      h: "Products"
+      n: "products"
+      r: true
+      t: "`$ARRAY`"
+    }
+    selected_product: {
+      h: "Selected Product"
+      n: "selected_product"
+      r: true
+      t: "`$ANY`"
+    }
+    summary: {
+      h: "Summary"
+      n: "summary"
+      r: true
+      t: "`$OBJECT`"
+    }
+  }
+
+  name: "product_dashboard"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/admin/products-dashboard"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "date"
+                or: "date"
+                r: false
+                t: "`$ANY`"
+              }
+              {
+                ex: 1
+                k: "query"
+                n: "page"
+                or: "page"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                ex: 50
+                k: "query"
+                n: "page_size"
+                or: "page_size"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "product_id"
+                or: "product_id"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "search"
+                or: "search"
+                r: false
+                t: "`$ANY`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/products-dashboard"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "products-dashboard"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

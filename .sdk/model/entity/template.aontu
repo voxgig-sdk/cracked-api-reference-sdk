@@ -1,0 +1,49 @@
+# Entity: template
+
+main: kit: entity: template: {
+
+  alias: field: {}
+
+  name: "template"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/carousel/templates"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/carousel/templates"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "carousel"
+            }
+            {
+              lit: "templates"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  fields: {
+  }
+
+
+
+}

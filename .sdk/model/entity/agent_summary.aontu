@@ -1,0 +1,76 @@
+# Entity: agent_summary
+
+main: kit: entity: agent_summary: {
+
+  alias: field: {}
+
+  fields: {
+    agent_count: {
+      h: "Agent Count"
+      n: "agent_count"
+      r: true
+      t: "`$INTEGER`"
+    }
+    favicon_url: {
+      h: "Favicon Url"
+      n: "favicon_url"
+      r: false
+      t: "`$ANY`"
+    }
+    product_id: {
+      h: "Product Id"
+      n: "product_id"
+      r: true
+      t: "`$STRING`"
+    }
+    product_name: {
+      h: "Product Name"
+      n: "product_name"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  name: "agent_summary"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/enterprise/agents/summary"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/enterprise/agents/summary"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "enterprise"
+            }
+            {
+              lit: "agents"
+            }
+            {
+              lit: "summary"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.products`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

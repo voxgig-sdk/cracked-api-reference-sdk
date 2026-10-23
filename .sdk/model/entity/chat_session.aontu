@@ -1,0 +1,143 @@
+# Entity: chat_session
+
+main: kit: entity: chat_session: {
+
+  alias: field: {}
+
+  fields: {
+    chatSubVariant: {
+      h: "Chat Sub Variant"
+      n: "chatSubVariant"
+      r: true
+      t: "`$STRING`"
+    }
+    createdAt: {
+      fo: "date-time"
+      h: "Created At"
+      n: "createdAt"
+      r: true
+      t: "`$STRING`"
+    }
+    model: {
+      h: "Model"
+      n: "model"
+      r: false
+      t: "`$ANY`"
+    }
+    plan: {
+      h: "Plan"
+      n: "plan"
+      r: false
+      t: "`$ANY`"
+    }
+    route: {
+      h: "Route"
+      n: "route"
+      r: false
+      t: "`$ANY`"
+    }
+    routeRecommendation: {
+      h: "Route Recommendation"
+      n: "routeRecommendation"
+      r: false
+      t: "`$ANY`"
+    }
+    salesStage: {
+      h: "Sales Stage"
+      n: "salesStage"
+      r: true
+      t: "`$STRING`"
+    }
+    selectedPlan: {
+      h: "Selected Plan"
+      n: "selectedPlan"
+      r: false
+      t: "`$ANY`"
+    }
+    sessionId: {
+      h: "Session Id"
+      n: "sessionId"
+      r: true
+      t: "`$STRING`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: true
+      t: "`$STRING`"
+    }
+    updatedAt: {
+      fo: "date-time"
+      h: "Updated At"
+      n: "updatedAt"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  name: "chat_session"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "plan"
+            "route"
+          ]
+          co: {
+            id: "POST /api/chat/sessions/{session_id}/complete"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "session_id"
+                or: "session_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/chat/sessions/{session_id}/complete"
+          q: {
+            exist: [
+              "session_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "chat"
+            }
+            {
+              lit: "sessions"
+            }
+            {
+              var: "session_id"
+            }
+            {
+              lit: "complete"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

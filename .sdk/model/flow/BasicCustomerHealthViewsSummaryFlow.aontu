@@ -1,0 +1,22 @@
+# BasicCustomerHealthViewsSummaryFlow
+
+main: kit: flow: BasicCustomerHealthViewsSummaryFlow:
+{
+  entity: "customer_health_views_summary",
+  kind: "basic",
+  name: "BasicCustomerHealthViewsSummaryFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "customer_health_views_summary_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicCustomerHealthViewsSummaryFlow"
+}

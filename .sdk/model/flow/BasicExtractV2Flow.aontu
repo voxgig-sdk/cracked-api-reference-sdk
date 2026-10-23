@@ -1,0 +1,18 @@
+# BasicExtractV2Flow
+
+main: kit: flow: BasicExtractV2Flow:
+{
+  entity: "extract_v2",
+  kind: "basic",
+  name: "BasicExtractV2Flow",
+  step: [
+    {
+      i: {
+        ref: "extract_v2_ref01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicExtractV2Flow"
+}

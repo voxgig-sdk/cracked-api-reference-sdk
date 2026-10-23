@@ -1,0 +1,121 @@
+# Entity: top_post
+
+main: kit: entity: top_post: {
+
+  alias: field: {}
+
+  fields: {
+    comments: {
+      h: "Comments"
+      n: "comments"
+      r: true
+      t: "`$INTEGER`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: true
+      t: "`$STRING`"
+    }
+    likes: {
+      h: "Likes"
+      n: "likes"
+      r: true
+      t: "`$INTEGER`"
+    }
+    platforms: {
+      h: "Platforms"
+      n: "platforms"
+      r: true
+      t: "`$ARRAY`"
+    }
+    scheduled_datetime: {
+      h: "Scheduled Datetime"
+      n: "scheduled_datetime"
+      r: true
+      t: "`$STRING`"
+    }
+    user_email: {
+      h: "User Email"
+      n: "user_email"
+      r: true
+      t: "`$STRING`"
+    }
+    user_id: {
+      h: "User Id"
+      n: "user_id"
+      r: true
+      t: "`$STRING`"
+    }
+    views: {
+      h: "Views"
+      n: "views"
+      r: true
+      t: "`$INTEGER`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "top_post"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/admin/stats/top-posts"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "date"
+                or: "date"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/stats/top-posts"
+          q: {
+            exist: [
+              "date"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "stats"
+            }
+            {
+              lit: "top-posts"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.posts`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

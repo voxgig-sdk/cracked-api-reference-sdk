@@ -1,0 +1,138 @@
+# Entity: carousel_status
+
+main: kit: entity: carousel_status: {
+
+  alias: field: {}
+
+  fields: {
+    caption: {
+      h: "Caption"
+      n: "caption"
+      r: true
+      t: "`$ANY`"
+    }
+    error: {
+      h: "Error"
+      n: "error"
+      r: false
+      t: "`$ANY`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+    image_model: {
+      h: "Image Model"
+      n: "image_model"
+      r: false
+      t: "`$ANY`"
+    }
+    image_provider: {
+      h: "Image Provider"
+      n: "image_provider"
+      r: false
+      t: "`$ANY`"
+    }
+    image_task_id: {
+      h: "Image Task Id"
+      n: "image_task_id"
+      r: false
+      t: "`$STRING`"
+    }
+    image_url: {
+      h: "Image Url"
+      n: "image_url"
+      r: true
+      t: "`$ANY`"
+    }
+    index: {
+      h: "Index"
+      n: "index"
+      r: true
+      t: "`$INTEGER`"
+    }
+    prompt: {
+      h: "Prompt"
+      n: "prompt"
+      r: true
+      t: "`$ANY`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "carousel_status"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/carousel/{video_id}/status"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "video_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/carousel/{video_id}/status"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              video_id: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "carousel"
+            }
+            {
+              var: "id"
+            }
+            {
+              lit: "status"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

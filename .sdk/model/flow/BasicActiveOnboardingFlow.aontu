@@ -1,0 +1,28 @@
+# BasicActiveOnboardingFlow
+
+main: kit: flow: BasicActiveOnboardingFlow:
+{
+  entity: "active_onboarding",
+  kind: "basic",
+  name: "BasicActiveOnboardingFlow",
+  step: [
+    {
+      i: {
+        ref: "active_onboarding_ref01",
+        srcdatavar: "active_onboarding_ref01_data",
+        suffix: "_dt0"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-active_onboarding_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicActiveOnboardingFlow"
+}

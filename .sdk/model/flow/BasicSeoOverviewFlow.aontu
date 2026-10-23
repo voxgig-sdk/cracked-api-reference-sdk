@@ -1,0 +1,22 @@
+# BasicSeoOverviewFlow
+
+main: kit: flow: BasicSeoOverviewFlow:
+{
+  entity: "seo_overview",
+  kind: "basic",
+  name: "BasicSeoOverviewFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "seo_overview_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicSeoOverviewFlow"
+}

@@ -1,0 +1,40 @@
+# BasicMediaAssetFlow
+
+main: kit: flow: BasicMediaAssetFlow:
+{
+  entity: "media_asset",
+  kind: "basic",
+  name: "BasicMediaAssetFlow",
+  step: [
+    {
+      i: {
+        ref: "media_asset_ref01"
+      }
+
+      o: "create"
+    }
+
+    {
+      i: {
+        ref: "media_asset_ref01",
+        srcdatavar: "media_asset_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "media_asset01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-media_asset_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicMediaAssetFlow"
+}

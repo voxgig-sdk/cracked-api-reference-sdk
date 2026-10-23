@@ -1,0 +1,71 @@
+# Entity: agent_health_customer_option
+
+main: kit: entity: agent_health_customer_option: {
+
+  alias: field: {}
+
+  fields: {
+    agent_count: {
+      h: "Agent Count"
+      n: "agent_count"
+      r: true
+      t: "`$INTEGER`"
+    }
+    email: {
+      h: "Email"
+      n: "email"
+      r: true
+      t: "`$STRING`"
+    }
+    user_id: {
+      fo: "uuid"
+      h: "User Id"
+      n: "user_id"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  name: "agent_health_customer_option"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/admin/agent-health/customers"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/admin/agent-health/customers"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "agent-health"
+            }
+            {
+              lit: "customers"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.customers`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

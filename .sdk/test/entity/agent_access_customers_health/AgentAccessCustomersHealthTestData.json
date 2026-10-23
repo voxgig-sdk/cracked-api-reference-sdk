@@ -1,0 +1,94 @@
+{
+  "existing": {
+    "agent_access_customers_health": {
+      "AGENT_ACCESS_CUSTOMERS_HEALTH00": {
+        "accountType": "sa0",
+        "agentQuota": 161,
+        "assignedAgentsByType": {},
+        "assignedAgentsTotal": 163,
+        "createdAt": "sa4",
+        "email": "sa5",
+        "isInternalUser": "sa6",
+        "membership": "sa7",
+        "name": "sa8",
+        "performance": {},
+        "productCount": 170,
+        "subscriptionCurrentPeriodEnd": "sab",
+        "subscriptionDetails": "sac",
+        "subscriptionStatus": "sad",
+        "usage": {},
+        "userId": "saf"
+      },
+      "AGENT_ACCESS_CUSTOMERS_HEALTH01": {
+        "accountType": "s140",
+        "agentQuota": 321,
+        "assignedAgentsByType": {},
+        "assignedAgentsTotal": 323,
+        "createdAt": "s144",
+        "email": "s145",
+        "isInternalUser": "s146",
+        "membership": "s147",
+        "name": "s148",
+        "performance": {},
+        "productCount": 330,
+        "subscriptionCurrentPeriodEnd": "s14b",
+        "subscriptionDetails": "s14c",
+        "subscriptionStatus": "s14d",
+        "usage": {},
+        "userId": "s14f"
+      },
+      "AGENT_ACCESS_CUSTOMERS_HEALTH02": {
+        "accountType": "s1e0",
+        "agentQuota": 481,
+        "assignedAgentsByType": {},
+        "assignedAgentsTotal": 483,
+        "createdAt": "s1e4",
+        "email": "s1e5",
+        "isInternalUser": "s1e6",
+        "membership": "s1e7",
+        "name": "s1e8",
+        "performance": {},
+        "productCount": 490,
+        "subscriptionCurrentPeriodEnd": "s1eb",
+        "subscriptionDetails": "s1ec",
+        "subscriptionStatus": "s1ed",
+        "usage": {},
+        "userId": "s1ef"
+      }
+    }
+  },
+  "new": {
+    "agent_access_customers_health": {
+      "agent_access_customers_health_ref01": {
+        "accountType": "s280",
+        "agentQuota": 641,
+        "assignedAgentsByType": {},
+        "assignedAgentsTotal": 643,
+        "createdAt": "s284",
+        "email": "s285",
+        "isInternalUser": "s286",
+        "membership": "s287",
+        "name": "s288",
+        "performance": {},
+        "productCount": 650,
+        "subscriptionCurrentPeriodEnd": "s28b",
+        "subscriptionDetails": "s28c",
+        "subscriptionStatus": "s28d",
+        "usage": {},
+        "userId": "s28f"
+      }
+    }
+  },
+  "requests": {
+    "GET /api/admin/customers-health": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/agent-access/customers-health": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

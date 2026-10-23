@@ -1,0 +1,187 @@
+# Entity: agent_health_detail
+
+main: kit: entity: agent_health_detail: {
+
+  alias: field: {}
+
+  fields: {
+    archived_issue_total: {
+      h: "Archived Issue Total"
+      n: "archived_issue_total"
+      r: false
+      t: "`$INTEGER`"
+    }
+    date: {
+      h: "Date"
+      n: "date"
+      r: true
+      t: "`$STRING`"
+    }
+    generated_at: {
+      fo: "date-time"
+      h: "Generated At"
+      n: "generated_at"
+      r: true
+      t: "`$STRING`"
+    }
+    group_id: {
+      h: "Group Id"
+      n: "group_id"
+      r: true
+      t: "`$STRING`"
+    }
+    has_more: {
+      h: "Has More"
+      n: "has_more"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    issue_total: {
+      h: "Issue Total"
+      n: "issue_total"
+      r: true
+      t: "`$INTEGER`"
+    }
+    issues: {
+      h: "Issues"
+      n: "issues"
+      r: true
+      t: "`$ARRAY`"
+    }
+    limit: {
+      h: "Limit"
+      n: "limit"
+      r: true
+      t: "`$INTEGER`"
+    }
+    metric: {
+      h: "Metric"
+      n: "metric"
+      r: true
+      t: "`$STRING`"
+    }
+    offset: {
+      h: "Offset"
+      n: "offset"
+      r: true
+      t: "`$INTEGER`"
+    }
+    warmup_runs: {
+      h: "Warmup Runs"
+      n: "warmup_runs"
+      r: false
+      t: "`$ARRAY`"
+    }
+    warning_total: {
+      h: "Warning Total"
+      n: "warning_total"
+      r: false
+      t: "`$INTEGER`"
+    }
+    warnings: {
+      h: "Warnings"
+      n: "warnings"
+      r: false
+      t: "`$ARRAY`"
+    }
+  }
+
+  name: "agent_health_detail"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/admin/agent-health/details"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "date"
+                or: "date"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "group_id"
+                or: "group_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                ex: 50
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                ex: "overall"
+                k: "query"
+                n: "metric"
+                or: "metric"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: 0
+                k: "query"
+                n: "offset"
+                or: "offset"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                ex: "TIKTOK"
+                k: "query"
+                n: "platform"
+                or: "platform"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/agent-health/details"
+          q: {
+            exist: [
+              "date"
+              "group_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "agent-health"
+            }
+            {
+              lit: "details"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

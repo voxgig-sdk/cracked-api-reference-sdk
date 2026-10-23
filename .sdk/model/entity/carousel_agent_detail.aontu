@@ -1,0 +1,146 @@
+# Entity: carousel_agent_detail
+
+main: kit: entity: carousel_agent_detail: {
+
+  alias: field: {}
+
+  fields: {
+    agent_id: {
+      h: "Agent Id"
+      n: "agent_id"
+      r: true
+      t: "`$STRING`"
+    }
+    agent_name: {
+      h: "Agent Name"
+      n: "agent_name"
+      r: true
+      t: "`$STRING`"
+    }
+    connection_status: {
+      h: "Connection Status"
+      n: "connection_status"
+      r: false
+      t: "`$ANY`"
+    }
+    followers: {
+      h: "Followers"
+      n: "followers"
+      r: false
+      t: "`$ANY`"
+    }
+    following: {
+      h: "Following"
+      n: "following"
+      r: false
+      t: "`$ANY`"
+    }
+    metrics_updated_at: {
+      h: "Metrics Updated At"
+      n: "metrics_updated_at"
+      r: false
+      t: "`$ANY`"
+    }
+    phone_admin_status: {
+      h: "Phone Admin Status"
+      n: "phone_admin_status"
+      r: true
+      t: "`$STRING`"
+    }
+    profile_likes: {
+      h: "Profile Likes"
+      n: "profile_likes"
+      r: false
+      t: "`$ANY`"
+    }
+    profile_url: {
+      h: "Profile Url"
+      n: "profile_url"
+      r: false
+      t: "`$ANY`"
+    }
+    warmup_days: {
+      h: "Warmup Days"
+      n: "warmup_days"
+      r: false
+      t: "`$ANY`"
+    }
+    warmup_hold_until: {
+      h: "Warmup Hold Until"
+      n: "warmup_hold_until"
+      r: false
+      t: "`$ANY`"
+    }
+    warmup_status: {
+      h: "Warmup Status"
+      n: "warmup_status"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  name: "carousel_agent_detail"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/admin/carousels/agents/{agent_id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "agent_id"
+                or: "agent_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/carousels/agents/{agent_id}"
+          q: {
+            exist: [
+              "agent_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "carousels"
+            }
+            {
+              lit: "agents"
+            }
+            {
+              var: "agent_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.agent")]
+  ]
+
+}

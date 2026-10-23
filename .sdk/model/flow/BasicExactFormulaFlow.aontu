@@ -1,0 +1,28 @@
+# BasicExactFormulaFlow
+
+main: kit: flow: BasicExactFormulaFlow:
+{
+  entity: "exact_formula",
+  kind: "basic",
+  name: "BasicExactFormulaFlow",
+  step: [
+    {
+      i: {
+        ref: "exact_formula_ref01",
+        srcdatavar: "exact_formula_ref01_data",
+        suffix: "_dt0"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-exact_formula_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicExactFormulaFlow"
+}

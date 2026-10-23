@@ -1,0 +1,18 @@
+# BasicLinkUserFlow
+
+main: kit: flow: BasicLinkUserFlow:
+{
+  entity: "link_user",
+  kind: "basic",
+  name: "BasicLinkUserFlow",
+  step: [
+    {
+      i: {
+        ref: "link_user_ref01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicLinkUserFlow"
+}

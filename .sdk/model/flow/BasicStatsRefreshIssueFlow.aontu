@@ -1,0 +1,22 @@
+# BasicStatsRefreshIssueFlow
+
+main: kit: flow: BasicStatsRefreshIssueFlow:
+{
+  entity: "stats_refresh_issue",
+  kind: "basic",
+  name: "BasicStatsRefreshIssueFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "stats_refresh_issue_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicStatsRefreshIssueFlow"
+}

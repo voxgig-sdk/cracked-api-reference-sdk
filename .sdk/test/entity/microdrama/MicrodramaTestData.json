@@ -1,0 +1,159 @@
+{
+  "existing": {
+    "microdrama": {
+      "MICRODRAMA00": {
+        "evidence": {},
+        "expected_revision": 131,
+        "idempotency_key": "s84",
+        "issues": [],
+        "reason": "s86",
+        "role": "s87",
+        "scores": {},
+        "selected_premise_id": "SELECTED_PREMISE01",
+        "stage": "s8a",
+        "status": "s8b",
+        "subject_hash": "s8c",
+        "title": "s8d",
+        "verdict": "s8e",
+        "episode_id": "EPISODE01",
+        "reference_asset_id": "REFERENCE_ASSET01",
+        "run_id": "RUN01",
+        "id": "MICRODRAMA00"
+      },
+      "MICRODRAMA01": {
+        "evidence": {},
+        "expected_revision": 261,
+        "idempotency_key": "s106",
+        "issues": [],
+        "reason": "s108",
+        "role": "s109",
+        "scores": {},
+        "selected_premise_id": "SELECTED_PREMISE01",
+        "stage": "s10c",
+        "status": "s10d",
+        "subject_hash": "s10e",
+        "title": "s10f",
+        "verdict": "s110",
+        "episode_id": "EPISODE01",
+        "reference_asset_id": "REFERENCE_ASSET01",
+        "run_id": "RUN01",
+        "id": "MICRODRAMA01"
+      },
+      "MICRODRAMA02": {
+        "evidence": {},
+        "expected_revision": 391,
+        "idempotency_key": "s188",
+        "issues": [],
+        "reason": "s18a",
+        "role": "s18b",
+        "scores": {},
+        "selected_premise_id": "SELECTED_PREMISE01",
+        "stage": "s18e",
+        "status": "s18f",
+        "subject_hash": "s190",
+        "title": "s191",
+        "verdict": "s192",
+        "episode_id": "EPISODE01",
+        "reference_asset_id": "REFERENCE_ASSET01",
+        "run_id": "RUN01",
+        "id": "MICRODRAMA02"
+      }
+    }
+  },
+  "new": {
+    "microdrama": {
+      "microdrama_ref01": {
+        "evidence": {},
+        "expected_revision": 521,
+        "idempotency_key": "s20a",
+        "issues": [],
+        "reason": "s20c",
+        "role": "s20d",
+        "scores": {},
+        "selected_premise_id": "SELECTED_PREMISE01",
+        "stage": "s210",
+        "status": "s211",
+        "subject_hash": "s212",
+        "title": "s213",
+        "verdict": "s214"
+      }
+    }
+  },
+  "requests": {
+    "POST /api/microdrama/episodes/{episode_id}/approve": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/microdrama/episodes/{episode_id}/exports": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/microdrama/episodes/{episode_id}/reviews": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/microdrama/episodes/{episode_id}/runs": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/microdrama/reference-assets/{reference_id}/review": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/microdrama/episodes": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/microdrama/reference-assets": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/microdrama/series": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/microdrama/episodes/{episode_id}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/microdrama/runs/{run_id}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/microdrama/config": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/microdrama/formulas": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/microdrama/reference-assets": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/microdrama/series": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PATCH /api/microdrama/episodes/{episode_id}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "existing": {
+    "create_variation": {
+      "CREATE_VARIATION00": {
+        "hook_duration": 70,
+        "media_asset_id": "MEDIA_ASSET01",
+        "message": "s48",
+        "product_id": "PRODUCT01",
+        "prompt": "s4a",
+        "task_id": "TASK01",
+        "video_id": "VIDEO01",
+        "id": "CREATE_VARIATION00"
+      },
+      "CREATE_VARIATION01": {
+        "hook_duration": 140,
+        "media_asset_id": "MEDIA_ASSET01",
+        "message": "s8e",
+        "product_id": "PRODUCT01",
+        "prompt": "s90",
+        "task_id": "TASK01",
+        "video_id": "VIDEO01",
+        "id": "CREATE_VARIATION01"
+      },
+      "CREATE_VARIATION02": {
+        "hook_duration": 210,
+        "media_asset_id": "MEDIA_ASSET01",
+        "message": "sd4",
+        "product_id": "PRODUCT01",
+        "prompt": "sd6",
+        "task_id": "TASK01",
+        "video_id": "VIDEO01",
+        "id": "CREATE_VARIATION02"
+      }
+    }
+  },
+  "new": {
+    "create_variation": {
+      "create_variation_ref01": {
+        "hook_duration": 280,
+        "media_asset_id": "MEDIA_ASSET01",
+        "message": "s11a",
+        "product_id": "PRODUCT01",
+        "prompt": "s11c",
+        "task_id": "TASK01",
+        "video_id": "VIDEO01"
+      }
+    }
+  },
+  "requests": {
+    "POST /api/video-variation/create-hook": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/video-variation/create-invisible": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

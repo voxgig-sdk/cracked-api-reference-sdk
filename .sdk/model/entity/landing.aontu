@@ -1,0 +1,306 @@
+# Entity: landing
+
+main: kit: entity: landing: {
+
+  alias: field: {}
+
+  fields: {
+    file: {
+      fo: "binary"
+      h: "File"
+      n: "file"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  name: "landing"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /api/landings/microhub/testimonial-image/{index}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "index"
+                or: "index"
+                r: true
+                t: "`$INTEGER`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "product_id"
+                or: "product_id"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/landings/microhub/testimonial-image/{index}"
+          q: {
+            exist: [
+              "index"
+            ]
+          }
+          rb: {
+            fields: [
+              {
+                binary: true
+                name: "file"
+              }
+            ]
+            kind: "multipart"
+            media: "multipart/form-data"
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "landings"
+            }
+            {
+              lit: "microhub"
+            }
+            {
+              lit: "testimonial-image"
+            }
+            {
+              var: "index"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /api/landings/landing/reference-image"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "product_id"
+                or: "product_id"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/landings/landing/reference-image"
+          q: {
+            "$action": "reference_image"
+          }
+          rb: {
+            fields: [
+              {
+                binary: true
+                name: "file"
+              }
+            ]
+            kind: "multipart"
+            media: "multipart/form-data"
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "landings"
+            }
+            {
+              lit: "landing"
+            }
+            {
+              lit: "reference-image"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "mode"
+            "prompt"
+            "referenceImageUrl"
+          ]
+          co: {
+            id: "POST /api/landings/landing/regenerate"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "product_id"
+                or: "product_id"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/landings/landing/regenerate"
+          q: {
+            "$action": "regenerate"
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "landings"
+            }
+            {
+              lit: "landing"
+            }
+            {
+              lit: "regenerate"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /api/landings/microhub/header-image"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "product_id"
+                or: "product_id"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/landings/microhub/header-image"
+          rb: {
+            fields: [
+              {
+                binary: true
+                name: "file"
+              }
+            ]
+            kind: "multipart"
+            media: "multipart/form-data"
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "landings"
+            }
+            {
+              lit: "microhub"
+            }
+            {
+              lit: "header-image"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /api/landings/microhub/profile-image"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "product_id"
+                or: "product_id"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/landings/microhub/profile-image"
+          rb: {
+            fields: [
+              {
+                binary: true
+                name: "file"
+              }
+            ]
+            kind: "multipart"
+            media: "multipart/form-data"
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "landings"
+            }
+            {
+              lit: "microhub"
+            }
+            {
+              lit: "profile-image"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

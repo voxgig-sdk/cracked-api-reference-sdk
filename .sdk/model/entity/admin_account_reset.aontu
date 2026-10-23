@@ -1,0 +1,133 @@
+# Entity: admin_account_reset
+
+main: kit: entity: admin_account_reset: {
+
+  alias: field: {}
+
+  fields: {
+    agent_ids: {
+      h: "Agent Ids"
+      n: "agent_ids"
+      r: true
+      t: "`$ARRAY`"
+    }
+    agent_ids_sha256: {
+      h: "Agent Ids Sha256"
+      n: "agent_ids_sha256"
+      r: true
+      t: "`$STRING`"
+    }
+    backup_sha256: {
+      h: "Backup Sha256"
+      n: "backup_sha256"
+      r: true
+      t: "`$STRING`"
+    }
+    batch_size: {
+      h: "Batch Size"
+      n: "batch_size"
+      r: false
+      t: "`$INTEGER`"
+    }
+    confirmation: {
+      h: "Confirmation"
+      n: "confirmation"
+      r: true
+      t: "`$STRING`"
+    }
+    customer_email: {
+      h: "Customer Email"
+      n: "customer_email"
+      r: true
+      t: "`$STRING`"
+    }
+    pc_name: {
+      h: "Pc Name"
+      n: "pc_name"
+      r: true
+      t: "`$STRING`"
+    }
+    phase: {
+      h: "Phase"
+      n: "phase"
+      r: false
+      t: "`$STRING`"
+    }
+    product_id: {
+      fo: "uuid"
+      h: "Product Id"
+      n: "product_id"
+      r: true
+      t: "`$STRING`"
+    }
+    video_ids: {
+      h: "Video Ids"
+      n: "video_ids"
+      r: false
+      t: "`$ARRAY`"
+    }
+  }
+
+  name: "admin_account_reset"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "agent_ids"
+            "agent_ids_sha256"
+            "backup_sha256"
+            "batch_size"
+            "confirmation"
+            "customer_email"
+            "pc_name"
+            "phase"
+            "product_id"
+            "video_ids"
+          ]
+          co: {
+            id: "POST /api/admin/agent-account-reset"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/admin/agent-account-reset"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "agent-account-reset"
+            }
+          ]
+          t: {
+            req: {
+              agent_ids: "`reqdata.agent_id`"
+              agent_ids_sha256: "`reqdata.agent_ids_sha256`"
+              backup_sha256: "`reqdata.backup_sha256`"
+              batch_size: "`reqdata.batch_size`"
+              confirmation: "`reqdata.confirmation`"
+              customer_email: "`reqdata.customer_email`"
+              pc_name: "`reqdata.pc_name`"
+              phase: "`reqdata.phase`"
+              product_id: "`reqdata.product_id`"
+              video_ids: "`reqdata.video_id`"
+            }
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

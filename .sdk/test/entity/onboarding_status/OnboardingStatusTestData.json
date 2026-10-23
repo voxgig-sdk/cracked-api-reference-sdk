@@ -1,0 +1,52 @@
+{
+  "existing": {
+    "onboarding_status": {
+      "ONBOARDING_STATUS00": {
+        "comments": 70,
+        "cover_image_url": "s47",
+        "id": "ONBOARDING_STATUS00",
+        "likes": 73,
+        "platform": "s4a",
+        "video_url": "s4b",
+        "views": 76
+      },
+      "ONBOARDING_STATUS01": {
+        "comments": 140,
+        "cover_image_url": "s8d",
+        "id": "ONBOARDING_STATUS01",
+        "likes": 143,
+        "platform": "s90",
+        "video_url": "s91",
+        "views": 146
+      },
+      "ONBOARDING_STATUS02": {
+        "comments": 210,
+        "cover_image_url": "sd3",
+        "id": "ONBOARDING_STATUS02",
+        "likes": 213,
+        "platform": "sd6",
+        "video_url": "sd7",
+        "views": 216
+      }
+    }
+  },
+  "new": {
+    "onboarding_status": {
+      "onboarding_status_ref01": {
+        "comments": 280,
+        "cover_image_url": "s119",
+        "likes": 283,
+        "platform": "s11c",
+        "video_url": "s11d",
+        "views": 286
+      }
+    }
+  },
+  "requests": {
+    "GET /api/onboarding-v6/status": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "existing": {
+    "complete_chat_checkout": {
+      "COMPLETE_CHAT_CHECKOUT00": {
+        "message": "s32",
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "product_id": "PRODUCT01",
+        "ready": false,
+        "success": true,
+        "id": "COMPLETE_CHAT_CHECKOUT00"
+      },
+      "COMPLETE_CHAT_CHECKOUT01": {
+        "message": "s64",
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "product_id": "PRODUCT01",
+        "ready": false,
+        "success": true,
+        "id": "COMPLETE_CHAT_CHECKOUT01"
+      },
+      "COMPLETE_CHAT_CHECKOUT02": {
+        "message": "s96",
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "product_id": "PRODUCT01",
+        "ready": false,
+        "success": true,
+        "id": "COMPLETE_CHAT_CHECKOUT02"
+      }
+    }
+  },
+  "new": {
+    "complete_chat_checkout": {
+      "complete_chat_checkout_ref01": {
+        "message": "sc8",
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "product_id": "PRODUCT01",
+        "ready": false,
+        "success": true
+      }
+    }
+  },
+  "requests": {
+    "POST /api/onboarding-v6/complete-chat-checkout": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

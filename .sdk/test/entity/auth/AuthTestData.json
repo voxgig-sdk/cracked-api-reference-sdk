@@ -1,0 +1,42 @@
+{
+  "existing": {
+    "auth": {
+      "AUTH00": {
+        "id": "AUTH00"
+      },
+      "AUTH01": {
+        "id": "AUTH01"
+      },
+      "AUTH02": {
+        "id": "AUTH02"
+      }
+    }
+  },
+  "new": {
+    "auth": {
+      "auth_ref01": {}
+    }
+  },
+  "requests": {
+    "POST /auth/magic-link": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /auth/verify-google-token": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /auth/verify-magic-link": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /auth/verify-share-access": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

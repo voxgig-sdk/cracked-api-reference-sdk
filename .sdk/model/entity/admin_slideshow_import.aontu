@@ -1,0 +1,225 @@
+# Entity: admin_slideshow_import
+
+main: kit: entity: admin_slideshow_import: {
+
+  alias: field: {}
+
+  fields: {
+    agent_id: {
+      h: "Agent Id"
+      n: "agent_id"
+      r: true
+      t: "`$STRING`"
+    }
+    batch_id: {
+      h: "Batch Id"
+      n: "batch_id"
+      r: true
+      t: "`$STRING`"
+    }
+    caption: {
+      h: "Caption"
+      n: "caption"
+      r: true
+      t: "`$STRING`"
+    }
+    day: {
+      fo: "date"
+      h: "Day"
+      n: "day"
+      r: true
+      t: "`$STRING`"
+    }
+    dry_run: {
+      h: "Dry Run"
+      n: "dry_run"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    engine_run: {
+      h: "Engine Run"
+      n: "engine_run"
+      r: false
+      t: "`$STRING`"
+    }
+    formula_id: {
+      h: "Formula Id"
+      n: "formula_id"
+      r: true
+      t: "`$STRING`"
+    }
+    slides: {
+      h: "Slides"
+      n: "slides"
+      r: true
+      t: "`$ARRAY`"
+    }
+    title: {
+      h: "Title"
+      n: "title"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  name: "admin_slideshow_import"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "action"
+            "dry_run"
+          ]
+          co: {
+            id: "POST /api/admin/slideshow-import2/{batch_id}/state"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "batch_id"
+                or: "batch_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/admin/slideshow-import2/{batch_id}/state"
+          q: {
+            "$action": "state"
+            exist: [
+              "batch_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "slideshow-import2"
+            }
+            {
+              var: "batch_id"
+            }
+            {
+              lit: "state"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "agent_id"
+            "batch_id"
+            "caption"
+            "day"
+            "dry_run"
+            "engine_run"
+            "formula_id"
+            "slides"
+            "title"
+          ]
+          co: {
+            id: "POST /api/admin/slideshow-import2/decks-json"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/admin/slideshow-import2/decks-json"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "slideshow-import2"
+            }
+            {
+              lit: "decks-json"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/admin/slideshow-import2/{batch_id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "batch_id"
+                or: "batch_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/slideshow-import2/{batch_id}"
+          q: {
+            exist: [
+              "batch_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "slideshow-import2"
+            }
+            {
+              var: "batch_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

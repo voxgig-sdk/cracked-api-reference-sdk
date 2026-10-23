@@ -1,0 +1,82 @@
+# BasicAdminUserViewFlow
+
+main: kit: flow: BasicAdminUserViewFlow:
+{
+  entity: "admin_user_view",
+  kind: "basic",
+  name: "BasicAdminUserViewFlow",
+  step: [
+    {
+      i: {
+        ref: "admin_user_view_ref01"
+      }
+
+      m: {
+        user_id: "user01"
+      }
+
+      o: "create"
+    }
+
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "admin_user_view_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "admin_user_view_ref01",
+        srcdatavar: "admin_user_view_ref01_data",
+        suffix: "_up0",
+        textfield: "created_at"
+      }
+
+      o: "update",
+      s: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-admin_user_view_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "admin_user_view_ref01",
+        suffix: "_rm0"
+      }
+
+      m: {
+        id: "admin_user_view01"
+      }
+
+      o: "remove"
+    }
+
+    {
+      i: {
+        suffix: "_rt0"
+      }
+
+      o: "list",
+      v: [
+        {
+          apply: "ItemNotExists",
+          def: {
+            ref: "admin_user_view_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicAdminUserViewFlow"
+}

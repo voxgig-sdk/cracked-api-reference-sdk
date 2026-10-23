@@ -1,0 +1,22 @@
+# BasicAgentHealthCustomerOptionFlow
+
+main: kit: flow: BasicAgentHealthCustomerOptionFlow:
+{
+  entity: "agent_health_customer_option",
+  kind: "basic",
+  name: "BasicAgentHealthCustomerOptionFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "agent_health_customer_option_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicAgentHealthCustomerOptionFlow"
+}

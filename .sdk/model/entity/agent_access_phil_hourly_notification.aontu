@@ -1,0 +1,115 @@
+# Entity: agent_access_phil_hourly_notification
+
+main: kit: entity: agent_access_phil_hourly_notification: {
+
+  alias: field: {}
+
+  fields: {
+    generatedAt: {
+      fo: "date-time"
+      h: "Generated At"
+      n: "generatedAt"
+      r: true
+      t: "`$STRING`"
+    }
+    phoneHealth: {
+      h: "Phone Health"
+      n: "phoneHealth"
+      r: true
+      t: "`$OBJECT`"
+    }
+    scheduledPosts: {
+      h: "Scheduled Posts"
+      n: "scheduledPosts"
+      r: true
+      t: "`$OBJECT`"
+    }
+    targetDate: {
+      h: "Target Date"
+      n: "targetDate"
+      r: true
+      t: "`$STRING`"
+    }
+    uploadPostInstagramHealth: {
+      h: "Upload Post Instagram Health"
+      n: "uploadPostInstagramHealth"
+      r: true
+      t: "`$OBJECT`"
+    }
+    uploadPostTiktokHealth: {
+      h: "Upload Post Tiktok Health"
+      n: "uploadPostTiktokHealth"
+      r: true
+      t: "`$OBJECT`"
+    }
+    uploadPostYoutubeHealth: {
+      h: "Upload Post Youtube Health"
+      n: "uploadPostYoutubeHealth"
+      r: true
+      t: "`$OBJECT`"
+    }
+  }
+
+  name: "agent_access_phil_hourly_notification"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/agent-access/phil-notifications/hourly"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "x_agent_access_key"
+                or: "x-agent-access-key"
+                r: false
+                t: "`$ANY`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "date"
+                or: "date"
+                r: false
+                t: "`$ANY`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/agent-access/phil-notifications/hourly"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "agent-access"
+            }
+            {
+              lit: "phil-notifications"
+            }
+            {
+              lit: "hourly"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

@@ -1,0 +1,27 @@
+{
+  "existing": {
+    "exact_availability": {
+      "EXACT_AVAILABILITY00": {
+        "id": "EXACT_AVAILABILITY00"
+      },
+      "EXACT_AVAILABILITY01": {
+        "id": "EXACT_AVAILABILITY01"
+      },
+      "EXACT_AVAILABILITY02": {
+        "id": "EXACT_AVAILABILITY02"
+      }
+    }
+  },
+  "new": {
+    "exact_availability": {
+      "exact_availability_ref01": {}
+    }
+  },
+  "requests": {
+    "GET /api/carousel/exact-availability": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

@@ -1,0 +1,254 @@
+# Entity: agent_access_customers_health
+
+main: kit: entity: agent_access_customers_health: {
+
+  alias: field: {}
+
+  fields: {
+    accountType: {
+      h: "Account Type"
+      n: "accountType"
+      r: false
+      t: "`$ANY`"
+    }
+    agentQuota: {
+      h: "Agent Quota"
+      n: "agentQuota"
+      r: true
+      t: "`$INTEGER`"
+    }
+    assignedAgentsByType: {
+      h: "Assigned Agents By Type"
+      n: "assignedAgentsByType"
+      r: true
+      t: "`$OBJECT`"
+    }
+    assignedAgentsTotal: {
+      h: "Assigned Agents Total"
+      n: "assignedAgentsTotal"
+      r: true
+      t: "`$INTEGER`"
+    }
+    createdAt: {
+      fo: "date-time"
+      h: "Created At"
+      n: "createdAt"
+      r: true
+      t: "`$STRING`"
+    }
+    email: {
+      h: "Email"
+      n: "email"
+      r: true
+      t: "`$STRING`"
+    }
+    isInternalUser: {
+      h: "Is Internal User"
+      n: "isInternalUser"
+      r: false
+      t: "`$ANY`"
+    }
+    membership: {
+      h: "Membership"
+      n: "membership"
+      r: false
+      t: "`$ANY`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: false
+      t: "`$STRING`"
+    }
+    performance: {
+      h: "Performance"
+      n: "performance"
+      r: true
+      t: "`$OBJECT`"
+    }
+    productCount: {
+      h: "Product Count"
+      n: "productCount"
+      r: true
+      t: "`$INTEGER`"
+    }
+    subscriptionCurrentPeriodEnd: {
+      h: "Subscription Current Period End"
+      n: "subscriptionCurrentPeriodEnd"
+      r: false
+      t: "`$ANY`"
+    }
+    subscriptionDetails: {
+      h: "Subscription Details"
+      n: "subscriptionDetails"
+      r: false
+      t: "`$ANY`"
+    }
+    subscriptionStatus: {
+      h: "Subscription Status"
+      n: "subscriptionStatus"
+      r: false
+      t: "`$ANY`"
+    }
+    usage: {
+      h: "Usage"
+      n: "usage"
+      r: true
+      t: "`$OBJECT`"
+    }
+    userId: {
+      fo: "uuid"
+      h: "User Id"
+      n: "userId"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  name: "agent_access_customers_health"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/admin/customers-health"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: "all_time"
+                k: "query"
+                n: "date_range"
+                or: "date_range"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: false
+                k: "query"
+                n: "include_internal"
+                or: "include_internal"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+              {
+                k: "query"
+                n: "subscription_status"
+                or: "subscription_statuses"
+                r: false
+                t: "`$ANY`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/customers-health"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "customers-health"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/agent-access/customers-health"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "x_agent_access_key"
+                or: "x-agent-access-key"
+                r: false
+                t: "`$ANY`"
+              }
+            ]
+            query: [
+              {
+                ex: 7
+                k: "query"
+                n: "day"
+                or: "days"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                ex: false
+                k: "query"
+                n: "include_internal"
+                or: "include_internal"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+              {
+                ex: 200
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                ex: 0
+                k: "query"
+                n: "offset"
+                or: "offset"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "subscription_status"
+                or: "subscription_statuses"
+                r: false
+                t: "`$ANY`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/agent-access/customers-health"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "agent-access"
+            }
+            {
+              lit: "customers-health"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

@@ -1,0 +1,22 @@
+# BasicMenFlow
+
+main: kit: flow: BasicMenFlow:
+{
+  entity: "men",
+  kind: "basic",
+  name: "BasicMenFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "men_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicMenFlow"
+}

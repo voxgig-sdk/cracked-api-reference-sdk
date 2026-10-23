@@ -1,0 +1,79 @@
+# Entity: advance_step
+
+main: kit: entity: advance_step: {
+
+  alias: field: {}
+
+  fields: {
+    current_step: {
+      h: "Current Step"
+      n: "current_step"
+      r: true
+      t: "`$STRING`"
+    }
+    onboarding_data_id: {
+      h: "Onboarding Data Id"
+      n: "onboarding_data_id"
+      r: true
+      sh: "UUID of the OnboardingData record"
+      t: "`$STRING`"
+    }
+    success: {
+      h: "Success"
+      n: "success"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    to_step: {
+      h: "To Step"
+      n: "to_step"
+      r: true
+      sh: "Target step name"
+      t: "`$STRING`"
+    }
+  }
+
+  name: "advance_step"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "onboarding_data_id"
+            "to_step"
+          ]
+          co: {
+            id: "POST /api/onboarding-v6/advance-step"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/onboarding-v6/advance-step"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "onboarding-v6"
+            }
+            {
+              lit: "advance-step"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

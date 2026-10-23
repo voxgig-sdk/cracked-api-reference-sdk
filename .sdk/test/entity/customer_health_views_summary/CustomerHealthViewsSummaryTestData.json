@@ -1,0 +1,81 @@
+{
+  "existing": {
+    "customer_health_views_summary": {
+      "CUSTOMER_HEALTH_VIEWS_SUMMARY00": {
+        "average_views_per_result": 140,
+        "date": "s8d",
+        "end_date": "s8e",
+        "paid_users_count": 143,
+        "posted_results": 144,
+        "range": "s91",
+        "start_date": "s92",
+        "top_users": [],
+        "total_views": 148,
+        "trend": [],
+        "trend_granularity": "s96",
+        "user_email": "s97",
+        "user_id": "USER01",
+        "users_with_views": 153
+      },
+      "CUSTOMER_HEALTH_VIEWS_SUMMARY01": {
+        "average_views_per_result": 280,
+        "date": "s119",
+        "end_date": "s11a",
+        "paid_users_count": 283,
+        "posted_results": 284,
+        "range": "s11d",
+        "start_date": "s11e",
+        "top_users": [],
+        "total_views": 288,
+        "trend": [],
+        "trend_granularity": "s122",
+        "user_email": "s123",
+        "user_id": "USER01",
+        "users_with_views": 293
+      },
+      "CUSTOMER_HEALTH_VIEWS_SUMMARY02": {
+        "average_views_per_result": 420,
+        "date": "s1a5",
+        "end_date": "s1a6",
+        "paid_users_count": 423,
+        "posted_results": 424,
+        "range": "s1a9",
+        "start_date": "s1aa",
+        "top_users": [],
+        "total_views": 428,
+        "trend": [],
+        "trend_granularity": "s1ae",
+        "user_email": "s1af",
+        "user_id": "USER01",
+        "users_with_views": 433
+      }
+    }
+  },
+  "new": {
+    "customer_health_views_summary": {
+      "customer_health_views_summary_ref01": {
+        "average_views_per_result": 560,
+        "date": "s231",
+        "end_date": "s232",
+        "paid_users_count": 563,
+        "posted_results": 564,
+        "range": "s235",
+        "start_date": "s236",
+        "top_users": [],
+        "total_views": 568,
+        "trend": [],
+        "trend_granularity": "s23a",
+        "user_email": "s23b",
+        "user_id": "USER01",
+        "users_with_views": 573
+      }
+    }
+  },
+  "requests": {
+    "GET /api/admin/customer-health/views": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

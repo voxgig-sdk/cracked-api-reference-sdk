@@ -1,0 +1,43 @@
+{
+  "existing": {
+    "activate_user": {
+      "ACTIVATE_USER00": {
+        "activated_at": "s1e",
+        "message": "s1f",
+        "success": true,
+        "user_id": "USER01",
+        "id": "ACTIVATE_USER00"
+      },
+      "ACTIVATE_USER01": {
+        "activated_at": "s3c",
+        "message": "s3d",
+        "success": true,
+        "user_id": "USER01",
+        "id": "ACTIVATE_USER01"
+      },
+      "ACTIVATE_USER02": {
+        "activated_at": "s5a",
+        "message": "s5b",
+        "success": true,
+        "user_id": "USER01",
+        "id": "ACTIVATE_USER02"
+      }
+    }
+  },
+  "new": {
+    "activate_user": {
+      "activate_user_ref01": {
+        "activated_at": "s78",
+        "message": "s79",
+        "success": true
+      }
+    }
+  },
+  "requests": {
+    "POST /api/admin/users/{user_id}/activate-and-complete-onboarding": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

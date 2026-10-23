@@ -1,0 +1,248 @@
+{
+  "existing": {
+    "healthrx": {
+      "HEALTHRX00": {
+        "account_id": "ACCOUNT01",
+        "action": "s169",
+        "agent_id": "AGENT01",
+        "attempt": 363,
+        "avatar_present": true,
+        "benchmark_set": "s16d",
+        "commercial": true,
+        "commercial_license_evidence": "s16f",
+        "content_id": "CONTENT01",
+        "dimensions": {},
+        "duration_seconds": 370,
+        "evidence": "s173",
+        "evidence_urls": [],
+        "external_key": "s175",
+        "format": "s176",
+        "includes_all_attempt_costs": false,
+        "input_specification": {},
+        "kind": "s179",
+        "level": 378,
+        "measured_at": "s17b",
+        "model_version": "s17c",
+        "paid_campaign_id": "PAID_CAMPAIGN01",
+        "parent_content_id": "PARENT_CONTENT01",
+        "paused": false,
+        "pillar": "s180",
+        "profile": {},
+        "promotion_evidence": "s182",
+        "provider": "s183",
+        "provider_invoice_evidence": "s184",
+        "reason": "s185",
+        "reference_version": "s186",
+        "request_key": "s187",
+        "scope": "s188",
+        "test_variable": "s189",
+        "topic": "s18a",
+        "total_cost_usd": 395,
+        "product_id": "PRODUCT01",
+        "incident_id": "INCIDENT01",
+        "id": "HEALTHRX00"
+      },
+      "HEALTHRX01": {
+        "account_id": "ACCOUNT01",
+        "action": "s2d1",
+        "agent_id": "AGENT01",
+        "attempt": 723,
+        "avatar_present": true,
+        "benchmark_set": "s2d5",
+        "commercial": true,
+        "commercial_license_evidence": "s2d7",
+        "content_id": "CONTENT01",
+        "dimensions": {},
+        "duration_seconds": 730,
+        "evidence": "s2db",
+        "evidence_urls": [],
+        "external_key": "s2dd",
+        "format": "s2de",
+        "includes_all_attempt_costs": false,
+        "input_specification": {},
+        "kind": "s2e1",
+        "level": 738,
+        "measured_at": "s2e3",
+        "model_version": "s2e4",
+        "paid_campaign_id": "PAID_CAMPAIGN01",
+        "parent_content_id": "PARENT_CONTENT01",
+        "paused": false,
+        "pillar": "s2e8",
+        "profile": {},
+        "promotion_evidence": "s2ea",
+        "provider": "s2eb",
+        "provider_invoice_evidence": "s2ec",
+        "reason": "s2ed",
+        "reference_version": "s2ee",
+        "request_key": "s2ef",
+        "scope": "s2f0",
+        "test_variable": "s2f1",
+        "topic": "s2f2",
+        "total_cost_usd": 755,
+        "product_id": "PRODUCT01",
+        "incident_id": "INCIDENT01",
+        "id": "HEALTHRX01"
+      },
+      "HEALTHRX02": {
+        "account_id": "ACCOUNT01",
+        "action": "s439",
+        "agent_id": "AGENT01",
+        "attempt": 1083,
+        "avatar_present": true,
+        "benchmark_set": "s43d",
+        "commercial": true,
+        "commercial_license_evidence": "s43f",
+        "content_id": "CONTENT01",
+        "dimensions": {},
+        "duration_seconds": 1090,
+        "evidence": "s443",
+        "evidence_urls": [],
+        "external_key": "s445",
+        "format": "s446",
+        "includes_all_attempt_costs": false,
+        "input_specification": {},
+        "kind": "s449",
+        "level": 1098,
+        "measured_at": "s44b",
+        "model_version": "s44c",
+        "paid_campaign_id": "PAID_CAMPAIGN01",
+        "parent_content_id": "PARENT_CONTENT01",
+        "paused": false,
+        "pillar": "s450",
+        "profile": {},
+        "promotion_evidence": "s452",
+        "provider": "s453",
+        "provider_invoice_evidence": "s454",
+        "reason": "s455",
+        "reference_version": "s456",
+        "request_key": "s457",
+        "scope": "s458",
+        "test_variable": "s459",
+        "topic": "s45a",
+        "total_cost_usd": 1115,
+        "product_id": "PRODUCT01",
+        "incident_id": "INCIDENT01",
+        "id": "HEALTHRX02"
+      }
+    }
+  },
+  "new": {
+    "healthrx": {
+      "healthrx_ref01": {
+        "account_id": "ACCOUNT01",
+        "action": "s5a1",
+        "agent_id": "AGENT01",
+        "attempt": 1443,
+        "avatar_present": true,
+        "benchmark_set": "s5a5",
+        "commercial": true,
+        "commercial_license_evidence": "s5a7",
+        "content_id": "CONTENT01",
+        "dimensions": {},
+        "duration_seconds": 1450,
+        "evidence": "s5ab",
+        "evidence_urls": [],
+        "external_key": "s5ad",
+        "format": "s5ae",
+        "includes_all_attempt_costs": false,
+        "input_specification": {},
+        "kind": "s5b1",
+        "level": 1458,
+        "measured_at": "s5b3",
+        "model_version": "s5b4",
+        "paid_campaign_id": "PAID_CAMPAIGN01",
+        "parent_content_id": "PARENT_CONTENT01",
+        "paused": false,
+        "pillar": "s5b8",
+        "profile": {},
+        "promotion_evidence": "s5ba",
+        "provider": "s5bb",
+        "provider_invoice_evidence": "s5bc",
+        "reason": "s5bd",
+        "reference_version": "s5be",
+        "request_key": "s5bf",
+        "scope": "s5c0",
+        "test_variable": "s5c1",
+        "topic": "s5c2",
+        "total_cost_usd": 1475
+      }
+    }
+  },
+  "requests": {
+    "POST /api/healthrx/products/{product_id}/accounts/{account_id}/content": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/healthrx/products/{product_id}/accounts/{account_id}/launch": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/healthrx/products/{product_id}/accounts/{account_id}/pause": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/healthrx/products/{product_id}/content/{content_id}/resolve": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/healthrx/products/{product_id}/incidents/{incident_id}/resolve": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/healthrx/products/{product_id}/accounts": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/healthrx/products/{product_id}/attribution": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/healthrx/products/{product_id}/benchmarks": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/healthrx/products/{product_id}/cost-receipts": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/healthrx/products/{product_id}/incidents": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/healthrx/products/{product_id}/run": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/healthrx/products/{product_id}/accounts/{account_id}/contract": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/healthrx/products/{product_id}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/healthrx/products/{product_id}/profile-schema": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/healthrx/products/{product_id}/reports": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

@@ -1,0 +1,22 @@
+# BasicProductDemoFlow
+
+main: kit: flow: BasicProductDemoFlow:
+{
+  entity: "product_demo",
+  kind: "basic",
+  name: "BasicProductDemoFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "product_demo_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicProductDemoFlow"
+}

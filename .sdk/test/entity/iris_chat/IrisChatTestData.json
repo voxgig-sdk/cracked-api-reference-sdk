@@ -1,0 +1,68 @@
+{
+  "existing": {
+    "iris_chat": {
+      "IRIS_CHAT00": {
+        "artifacts": [],
+        "correlationId": "s65",
+        "idempotencyKey": "s66",
+        "message": "s67",
+        "mode": "s68",
+        "ok": false,
+        "pageContext": {},
+        "productId": "s6b",
+        "runtimeStatus": "s6c",
+        "sessionId": "s6d",
+        "id": "IRIS_CHAT00"
+      },
+      "IRIS_CHAT01": {
+        "artifacts": [],
+        "correlationId": "sc9",
+        "idempotencyKey": "sca",
+        "message": "scb",
+        "mode": "scc",
+        "ok": false,
+        "pageContext": {},
+        "productId": "scf",
+        "runtimeStatus": "sd0",
+        "sessionId": "sd1",
+        "id": "IRIS_CHAT01"
+      },
+      "IRIS_CHAT02": {
+        "artifacts": [],
+        "correlationId": "s12d",
+        "idempotencyKey": "s12e",
+        "message": "s12f",
+        "mode": "s130",
+        "ok": false,
+        "pageContext": {},
+        "productId": "s133",
+        "runtimeStatus": "s134",
+        "sessionId": "s135",
+        "id": "IRIS_CHAT02"
+      }
+    }
+  },
+  "new": {
+    "iris_chat": {
+      "iris_chat_ref01": {
+        "artifacts": [],
+        "correlationId": "s191",
+        "idempotencyKey": "s192",
+        "message": "s193",
+        "mode": "s194",
+        "ok": false,
+        "pageContext": {},
+        "productId": "s197",
+        "runtimeStatus": "s198",
+        "sessionId": "s199"
+      }
+    }
+  },
+  "requests": {
+    "POST /api/iris/chat": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

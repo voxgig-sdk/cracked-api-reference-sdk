@@ -1,0 +1,88 @@
+# Entity: customer
+
+main: kit: entity: customer: {
+
+  alias: field: {}
+
+  fields: {
+    account_type: {
+      h: "Account Type"
+      n: "account_type"
+      r: false
+      t: "`$ANY`"
+    }
+    assigned_agents_count: {
+      h: "Assigned Agents Count"
+      n: "assigned_agents_count"
+      r: true
+      t: "`$INTEGER`"
+    }
+    email: {
+      h: "Email"
+      n: "email"
+      r: true
+      t: "`$STRING`"
+    }
+    id: {
+      fo: "uuid"
+      h: "Id"
+      n: "id"
+      r: true
+      t: "`$STRING`"
+    }
+    is_migrated: {
+      h: "Is Migrated"
+      n: "is_migrated"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "customer"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/admin/customer-health/customers"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/admin/customer-health/customers"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "customer-health"
+            }
+            {
+              lit: "customers"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

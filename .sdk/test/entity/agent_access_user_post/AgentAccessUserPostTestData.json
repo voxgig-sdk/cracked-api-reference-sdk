@@ -1,0 +1,49 @@
+{
+  "existing": {
+    "agent_access_user_post": {
+      "AGENT_ACCESS_USER_POST00": {
+        "deltaYesterday": 60,
+        "expectedVideosPerDay": 61,
+        "postedToday": 62,
+        "postedYesterday": 63,
+        "productId": "s40",
+        "productName": "s41"
+      },
+      "AGENT_ACCESS_USER_POST01": {
+        "deltaYesterday": 120,
+        "expectedVideosPerDay": 121,
+        "postedToday": 122,
+        "postedYesterday": 123,
+        "productId": "s7c",
+        "productName": "s7d"
+      },
+      "AGENT_ACCESS_USER_POST02": {
+        "deltaYesterday": 180,
+        "expectedVideosPerDay": 181,
+        "postedToday": 182,
+        "postedYesterday": 183,
+        "productId": "sb8",
+        "productName": "sb9"
+      }
+    }
+  },
+  "new": {
+    "agent_access_user_post": {
+      "agent_access_user_post_ref01": {
+        "deltaYesterday": 240,
+        "expectedVideosPerDay": 241,
+        "postedToday": 242,
+        "postedYesterday": 243,
+        "productId": "sf4",
+        "productName": "sf5"
+      }
+    }
+  },
+  "requests": {
+    "GET /api/agent-access/user-posts": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

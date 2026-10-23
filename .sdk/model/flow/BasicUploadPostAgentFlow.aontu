@@ -1,0 +1,18 @@
+# BasicUploadPostAgentFlow
+
+main: kit: flow: BasicUploadPostAgentFlow:
+{
+  entity: "upload_post_agent",
+  kind: "basic",
+  name: "BasicUploadPostAgentFlow",
+  step: [
+    {
+      i: {
+        ref: "upload_post_agent_ref01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicUploadPostAgentFlow"
+}

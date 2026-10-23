@@ -1,0 +1,62 @@
+{
+  "existing": {
+    "stripe": {
+      "STRIPE00": {
+        "id": "STRIPE00"
+      },
+      "STRIPE01": {
+        "id": "STRIPE01"
+      },
+      "STRIPE02": {
+        "id": "STRIPE02"
+      }
+    }
+  },
+  "new": {
+    "stripe": {
+      "stripe_ref01": {}
+    }
+  },
+  "requests": {
+    "POST /api/stripe/associate-guest-checkout": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/stripe/cancel-trial": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/stripe/create-checkout-session": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/stripe/create-credits-checkout-session": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/stripe/create-guest-checkout-session": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/stripe/create-portal-session": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/stripe/end-trial-early": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/stripe/update-subscription-quantity": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "existing": {
+    "landing_status": {
+      "LANDING_STATUS00": {
+        "errorMessage": "s1e",
+        "landingStatus": "s1f",
+        "microhubStatus": "s20",
+        "id": "LANDING_STATUS00"
+      },
+      "LANDING_STATUS01": {
+        "errorMessage": "s3c",
+        "landingStatus": "s3d",
+        "microhubStatus": "s3e",
+        "id": "LANDING_STATUS01"
+      },
+      "LANDING_STATUS02": {
+        "errorMessage": "s5a",
+        "landingStatus": "s5b",
+        "microhubStatus": "s5c",
+        "id": "LANDING_STATUS02"
+      }
+    }
+  },
+  "new": {
+    "landing_status": {
+      "landing_status_ref01": {
+        "errorMessage": "s78",
+        "landingStatus": "s79",
+        "microhubStatus": "s7a"
+      }
+    }
+  },
+  "requests": {
+    "GET /api/landings/status": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

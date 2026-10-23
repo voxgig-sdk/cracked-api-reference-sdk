@@ -1,0 +1,48 @@
+{
+  "existing": {
+    "stats_refresh_task_trigger": {
+      "STATS_REFRESH_TASK_TRIGGER00": {
+        "message": "s32",
+        "status": "s33",
+        "target_date": "s34",
+        "task_id": "TASK01",
+        "users_count": 54,
+        "id": "STATS_REFRESH_TASK_TRIGGER00"
+      },
+      "STATS_REFRESH_TASK_TRIGGER01": {
+        "message": "s64",
+        "status": "s65",
+        "target_date": "s66",
+        "task_id": "TASK01",
+        "users_count": 104,
+        "id": "STATS_REFRESH_TASK_TRIGGER01"
+      },
+      "STATS_REFRESH_TASK_TRIGGER02": {
+        "message": "s96",
+        "status": "s97",
+        "target_date": "s98",
+        "task_id": "TASK01",
+        "users_count": 154,
+        "id": "STATS_REFRESH_TASK_TRIGGER02"
+      }
+    }
+  },
+  "new": {
+    "stats_refresh_task_trigger": {
+      "stats_refresh_task_trigger_ref01": {
+        "message": "sc8",
+        "status": "sc9",
+        "target_date": "sca",
+        "task_id": "TASK01",
+        "users_count": 204
+      }
+    }
+  },
+  "requests": {
+    "POST /api/admin/customer-health/manual-refresh": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

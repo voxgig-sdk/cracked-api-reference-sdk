@@ -1,0 +1,33 @@
+{
+  "existing": {
+    "phone_admin_available_agent_source": {
+      "PHONE_ADMIN_AVAILABLE_AGENT_SOURCE00": {
+        "available_count": 20,
+        "pc_name": "s15"
+      },
+      "PHONE_ADMIN_AVAILABLE_AGENT_SOURCE01": {
+        "available_count": 40,
+        "pc_name": "s29"
+      },
+      "PHONE_ADMIN_AVAILABLE_AGENT_SOURCE02": {
+        "available_count": 60,
+        "pc_name": "s3d"
+      }
+    }
+  },
+  "new": {
+    "phone_admin_available_agent_source": {
+      "phone_admin_available_agent_source_ref01": {
+        "available_count": 80,
+        "pc_name": "s51"
+      }
+    }
+  },
+  "requests": {
+    "GET /api/admin/phone-admin/available-agent-sources": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

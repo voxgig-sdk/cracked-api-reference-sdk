@@ -1,0 +1,41 @@
+# BasicProductLandingFlow
+
+main: kit: flow: BasicProductLandingFlow:
+{
+  entity: "product_landing",
+  kind: "basic",
+  name: "BasicProductLandingFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "product_landing_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "product_landing_ref01",
+        srcdatavar: "product_landing_ref01_data",
+        suffix: "_up0",
+        textfield: "landingStatus"
+      }
+
+      o: "update",
+      s: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-product_landing_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicProductLandingFlow"
+}

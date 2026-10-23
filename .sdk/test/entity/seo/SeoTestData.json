@@ -1,0 +1,27 @@
+{
+  "existing": {
+    "seo": {
+      "SEO00": {
+        "id": "SEO00"
+      },
+      "SEO01": {
+        "id": "SEO01"
+      },
+      "SEO02": {
+        "id": "SEO02"
+      }
+    }
+  },
+  "new": {
+    "seo": {
+      "seo_ref01": {}
+    }
+  },
+  "requests": {
+    "GET /api/seo/oauth/status": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

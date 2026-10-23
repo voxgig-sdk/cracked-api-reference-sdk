@@ -1,0 +1,39 @@
+{
+  "existing": {
+    "landing_stat": {
+      "LANDING_STAT00": {
+        "landing": {},
+        "microhub": {},
+        "slug": "SLUG01",
+        "id": "LANDING_STAT00"
+      },
+      "LANDING_STAT01": {
+        "landing": {},
+        "microhub": {},
+        "slug": "SLUG01",
+        "id": "LANDING_STAT01"
+      },
+      "LANDING_STAT02": {
+        "landing": {},
+        "microhub": {},
+        "slug": "SLUG01",
+        "id": "LANDING_STAT02"
+      }
+    }
+  },
+  "new": {
+    "landing_stat": {
+      "landing_stat_ref01": {
+        "landing": {},
+        "microhub": {}
+      }
+    }
+  },
+  "requests": {
+    "GET /api/landings/{slug}/stats": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

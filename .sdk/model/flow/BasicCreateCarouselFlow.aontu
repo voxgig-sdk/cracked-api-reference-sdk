@@ -1,0 +1,18 @@
+# BasicCreateCarouselFlow
+
+main: kit: flow: BasicCreateCarouselFlow:
+{
+  entity: "create_carousel",
+  kind: "basic",
+  name: "BasicCreateCarouselFlow",
+  step: [
+    {
+      i: {
+        ref: "create_carousel_ref01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicCreateCarouselFlow"
+}

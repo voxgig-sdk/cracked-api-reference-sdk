@@ -1,0 +1,18 @@
+# BasicInitResetProductV6Flow
+
+main: kit: flow: BasicInitResetProductV6Flow:
+{
+  entity: "init_reset_product_v6",
+  kind: "basic",
+  name: "BasicInitResetProductV6Flow",
+  step: [
+    {
+      i: {
+        ref: "init_reset_product_v6_ref01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicInitResetProductV6Flow"
+}

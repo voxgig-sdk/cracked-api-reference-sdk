@@ -1,0 +1,77 @@
+# Entity: analyze_product
+
+main: kit: entity: analyze_product: {
+
+  alias: field: {}
+
+  fields: {
+    instagram_username: {
+      h: "Instagram Username"
+      n: "instagram_username"
+      r: false
+      t: "`$ANY`"
+    }
+    message: {
+      h: "Message"
+      n: "message"
+      r: true
+      t: "`$STRING`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: true
+      t: "`$STRING`"
+    }
+    url: {
+      h: "Url"
+      n: "url"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  name: "analyze_product"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "instagram_username"
+            "url"
+          ]
+          co: {
+            id: "POST /api/scraper/analyze-product"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/scraper/analyze-product"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "scraper"
+            }
+            {
+              lit: "analyze-product"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

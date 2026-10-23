@@ -1,0 +1,18 @@
+# BasicAssignAgentFlow
+
+main: kit: flow: BasicAssignAgentFlow:
+{
+  entity: "assign_agent",
+  kind: "basic",
+  name: "BasicAssignAgentFlow",
+  step: [
+    {
+      i: {
+        ref: "assign_agent_ref01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicAssignAgentFlow"
+}

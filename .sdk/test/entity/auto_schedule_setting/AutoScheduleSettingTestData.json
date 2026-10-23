@@ -1,0 +1,78 @@
+{
+  "existing": {
+    "auto_schedule_setting": {
+      "AUTO_SCHEDULE_SETTING00": {
+        "can_enable_repost": true,
+        "effective_posted_video_reuse_percent": 101,
+        "enabled_video_types": "s66",
+        "is_enabled": false,
+        "lock_video_regeneration_controls": true,
+        "membership_tier": "s69",
+        "posted_video_reuse_percent": "s6a",
+        "product_id": "PRODUCT01",
+        "repost_source": "s6c",
+        "videos_per_day": 109,
+        "id": "AUTO_SCHEDULE_SETTING00"
+      },
+      "AUTO_SCHEDULE_SETTING01": {
+        "can_enable_repost": true,
+        "effective_posted_video_reuse_percent": 201,
+        "enabled_video_types": "sca",
+        "is_enabled": false,
+        "lock_video_regeneration_controls": true,
+        "membership_tier": "scd",
+        "posted_video_reuse_percent": "sce",
+        "product_id": "PRODUCT01",
+        "repost_source": "sd0",
+        "videos_per_day": 209,
+        "id": "AUTO_SCHEDULE_SETTING01"
+      },
+      "AUTO_SCHEDULE_SETTING02": {
+        "can_enable_repost": true,
+        "effective_posted_video_reuse_percent": 301,
+        "enabled_video_types": "s12e",
+        "is_enabled": false,
+        "lock_video_regeneration_controls": true,
+        "membership_tier": "s131",
+        "posted_video_reuse_percent": "s132",
+        "product_id": "PRODUCT01",
+        "repost_source": "s134",
+        "videos_per_day": 309,
+        "id": "AUTO_SCHEDULE_SETTING02"
+      }
+    }
+  },
+  "new": {
+    "auto_schedule_setting": {
+      "auto_schedule_setting_ref01": {
+        "can_enable_repost": true,
+        "effective_posted_video_reuse_percent": 401,
+        "enabled_video_types": "s192",
+        "is_enabled": false,
+        "lock_video_regeneration_controls": true,
+        "membership_tier": "s195",
+        "posted_video_reuse_percent": "s196",
+        "product_id": "PRODUCT01",
+        "repost_source": "s198",
+        "videos_per_day": 409
+      }
+    }
+  },
+  "requests": {
+    "GET /api/schedule/settings": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PUT /api/schedule/settings": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PUT /api/schedule/settings/video-types": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

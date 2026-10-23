@@ -1,0 +1,22 @@
+# BasicIriFlow
+
+main: kit: flow: BasicIriFlow:
+{
+  entity: "iri",
+  kind: "basic",
+  name: "BasicIriFlow",
+  step: [
+    {
+      i: {
+        ref: "iri_ref01"
+      }
+
+      m: {
+        task_id: "task01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicIriFlow"
+}

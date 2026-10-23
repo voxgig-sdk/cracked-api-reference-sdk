@@ -1,0 +1,77 @@
+{
+  "existing": {
+    "agent_health_detail": {
+      "AGENT_HEALTH_DETAIL00": {
+        "archived_issue_total": 130,
+        "date": "s83",
+        "generated_at": "s84",
+        "group_id": "GROUP01",
+        "has_more": true,
+        "issue_total": 135,
+        "issues": [],
+        "limit": 137,
+        "metric": "s8a",
+        "offset": 139,
+        "warmup_runs": [],
+        "warning_total": 141,
+        "warnings": []
+      },
+      "AGENT_HEALTH_DETAIL01": {
+        "archived_issue_total": 260,
+        "date": "s105",
+        "generated_at": "s106",
+        "group_id": "GROUP01",
+        "has_more": true,
+        "issue_total": 265,
+        "issues": [],
+        "limit": 267,
+        "metric": "s10c",
+        "offset": 269,
+        "warmup_runs": [],
+        "warning_total": 271,
+        "warnings": []
+      },
+      "AGENT_HEALTH_DETAIL02": {
+        "archived_issue_total": 390,
+        "date": "s187",
+        "generated_at": "s188",
+        "group_id": "GROUP01",
+        "has_more": true,
+        "issue_total": 395,
+        "issues": [],
+        "limit": 397,
+        "metric": "s18e",
+        "offset": 399,
+        "warmup_runs": [],
+        "warning_total": 401,
+        "warnings": []
+      }
+    }
+  },
+  "new": {
+    "agent_health_detail": {
+      "agent_health_detail_ref01": {
+        "archived_issue_total": 520,
+        "date": "s209",
+        "generated_at": "s20a",
+        "group_id": "GROUP01",
+        "has_more": true,
+        "issue_total": 525,
+        "issues": [],
+        "limit": 527,
+        "metric": "s210",
+        "offset": 529,
+        "warmup_runs": [],
+        "warning_total": 531,
+        "warnings": []
+      }
+    }
+  },
+  "requests": {
+    "GET /api/admin/agent-health/details": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

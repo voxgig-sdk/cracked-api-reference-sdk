@@ -1,0 +1,18 @@
+# BasicScanSocialsPublicFlow
+
+main: kit: flow: BasicScanSocialsPublicFlow:
+{
+  entity: "scan_socials_public",
+  kind: "basic",
+  name: "BasicScanSocialsPublicFlow",
+  step: [
+    {
+      i: {
+        ref: "scan_socials_public_ref01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicScanSocialsPublicFlow"
+}

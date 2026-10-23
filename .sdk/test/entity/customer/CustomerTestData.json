@@ -1,0 +1,44 @@
+{
+  "existing": {
+    "customer": {
+      "CUSTOMER00": {
+        "account_type": "s32",
+        "assigned_agents_count": 51,
+        "email": "s34",
+        "id": "CUSTOMER00",
+        "is_migrated": true
+      },
+      "CUSTOMER01": {
+        "account_type": "s64",
+        "assigned_agents_count": 101,
+        "email": "s66",
+        "id": "CUSTOMER01",
+        "is_migrated": true
+      },
+      "CUSTOMER02": {
+        "account_type": "s96",
+        "assigned_agents_count": 151,
+        "email": "s98",
+        "id": "CUSTOMER02",
+        "is_migrated": true
+      }
+    }
+  },
+  "new": {
+    "customer": {
+      "customer_ref01": {
+        "account_type": "sc8",
+        "assigned_agents_count": 201,
+        "email": "sca",
+        "is_migrated": true
+      }
+    }
+  },
+  "requests": {
+    "GET /api/admin/customer-health/customers": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

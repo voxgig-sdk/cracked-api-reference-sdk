@@ -1,0 +1,63 @@
+# Entity: file
+
+main: kit: entity: file: {
+
+  alias: field: {}
+
+  fields: {
+    file: {
+      fo: "binary"
+      h: "File"
+      n: "file"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  name: "file"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /api/file-upload"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/file-upload"
+          rb: {
+            fields: [
+              {
+                binary: true
+                name: "file"
+              }
+            ]
+            kind: "multipart"
+            media: "multipart/form-data"
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "file-upload"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

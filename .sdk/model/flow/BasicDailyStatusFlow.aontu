@@ -1,0 +1,32 @@
+# BasicDailyStatusFlow
+
+main: kit: flow: BasicDailyStatusFlow:
+{
+  entity: "daily_status",
+  kind: "basic",
+  name: "BasicDailyStatusFlow",
+  step: [
+    {
+      i: {
+        ref: "daily_status_ref01",
+        srcdatavar: "daily_status_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "daily_status01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-daily_status_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicDailyStatusFlow"
+}

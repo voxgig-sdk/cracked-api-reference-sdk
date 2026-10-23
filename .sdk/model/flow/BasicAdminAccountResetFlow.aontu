@@ -1,0 +1,18 @@
+# BasicAdminAccountResetFlow
+
+main: kit: flow: BasicAdminAccountResetFlow:
+{
+  entity: "admin_account_reset",
+  kind: "basic",
+  name: "BasicAdminAccountResetFlow",
+  step: [
+    {
+      i: {
+        ref: "admin_account_reset_ref01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicAdminAccountResetFlow"
+}

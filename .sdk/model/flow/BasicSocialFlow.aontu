@@ -1,0 +1,77 @@
+# BasicSocialFlow
+
+main: kit: flow: BasicSocialFlow:
+{
+  entity: "social",
+  kind: "basic",
+  name: "BasicSocialFlow",
+  step: [
+    {
+      i: {
+        ref: "social_ref01"
+      }
+
+      o: "create"
+    }
+
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "social_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "social_ref01",
+        srcdatavar: "social_ref01_data",
+        suffix: "_dt0"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-social_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "social_ref01",
+        suffix: "_rm0"
+      }
+
+      m: {
+        id: "social01"
+      }
+
+      o: "remove"
+    }
+
+    {
+      i: {
+        suffix: "_rt0"
+      }
+
+      o: "list",
+      v: [
+        {
+          apply: "ItemNotExists",
+          def: {
+            ref: "social_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicSocialFlow"
+}

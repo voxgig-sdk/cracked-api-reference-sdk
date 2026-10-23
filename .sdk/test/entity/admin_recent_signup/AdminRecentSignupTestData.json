@@ -1,0 +1,112 @@
+{
+  "existing": {
+    "admin_recent_signup": {
+      "ADMIN_RECENT_SIGNUP00": {
+        "created_at": "sdc",
+        "current_step": "sdd",
+        "email": "sde",
+        "email_source": "sdf",
+        "error_message": "se0",
+        "flow_variant": "se1",
+        "id": "ADMIN_RECENT_SIGNUP00",
+        "inactive_minutes": 227,
+        "last_notification_at": "se4",
+        "last_seen_at": "se5",
+        "likely_cause": "se6",
+        "notification_count": 231,
+        "notification_events": [],
+        "product_id": "PRODUCT01",
+        "product_name": "sea",
+        "product_url": "seb",
+        "severity": "sec",
+        "social_scan_status": "sed",
+        "stage_label": "see",
+        "status": "sef",
+        "updated_at": "sf0",
+        "website_scrape_status": "sf1"
+      },
+      "ADMIN_RECENT_SIGNUP01": {
+        "created_at": "s1b8",
+        "current_step": "s1b9",
+        "email": "s1ba",
+        "email_source": "s1bb",
+        "error_message": "s1bc",
+        "flow_variant": "s1bd",
+        "id": "ADMIN_RECENT_SIGNUP01",
+        "inactive_minutes": 447,
+        "last_notification_at": "s1c0",
+        "last_seen_at": "s1c1",
+        "likely_cause": "s1c2",
+        "notification_count": 451,
+        "notification_events": [],
+        "product_id": "PRODUCT01",
+        "product_name": "s1c6",
+        "product_url": "s1c7",
+        "severity": "s1c8",
+        "social_scan_status": "s1c9",
+        "stage_label": "s1ca",
+        "status": "s1cb",
+        "updated_at": "s1cc",
+        "website_scrape_status": "s1cd"
+      },
+      "ADMIN_RECENT_SIGNUP02": {
+        "created_at": "s294",
+        "current_step": "s295",
+        "email": "s296",
+        "email_source": "s297",
+        "error_message": "s298",
+        "flow_variant": "s299",
+        "id": "ADMIN_RECENT_SIGNUP02",
+        "inactive_minutes": 667,
+        "last_notification_at": "s29c",
+        "last_seen_at": "s29d",
+        "likely_cause": "s29e",
+        "notification_count": 671,
+        "notification_events": [],
+        "product_id": "PRODUCT01",
+        "product_name": "s2a2",
+        "product_url": "s2a3",
+        "severity": "s2a4",
+        "social_scan_status": "s2a5",
+        "stage_label": "s2a6",
+        "status": "s2a7",
+        "updated_at": "s2a8",
+        "website_scrape_status": "s2a9"
+      }
+    }
+  },
+  "new": {
+    "admin_recent_signup": {
+      "admin_recent_signup_ref01": {
+        "created_at": "s370",
+        "current_step": "s371",
+        "email": "s372",
+        "email_source": "s373",
+        "error_message": "s374",
+        "flow_variant": "s375",
+        "inactive_minutes": 887,
+        "last_notification_at": "s378",
+        "last_seen_at": "s379",
+        "likely_cause": "s37a",
+        "notification_count": 891,
+        "notification_events": [],
+        "product_id": "PRODUCT01",
+        "product_name": "s37e",
+        "product_url": "s37f",
+        "severity": "s380",
+        "social_scan_status": "s381",
+        "stage_label": "s382",
+        "status": "s383",
+        "updated_at": "s384",
+        "website_scrape_status": "s385"
+      }
+    }
+  },
+  "requests": {
+    "GET /api/admin/insights/recent-signups": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

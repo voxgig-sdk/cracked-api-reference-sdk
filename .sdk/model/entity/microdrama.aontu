@@ -1,0 +1,845 @@
+# Entity: microdrama
+
+main: kit: entity: microdrama: {
+
+  alias: field: {}
+
+  fields: {
+    evidence: {
+      h: "Evidence"
+      n: "evidence"
+      r: true
+      t: "`$OBJECT`"
+    }
+    expected_revision: {
+      h: "Expected Revision"
+      n: "expected_revision"
+      r: true
+      t: "`$INTEGER`"
+    }
+    idempotency_key: {
+      h: "Idempotency Key"
+      n: "idempotency_key"
+      r: true
+      t: "`$STRING`"
+    }
+    issues: {
+      h: "Issues"
+      n: "issues"
+      r: false
+      t: "`$ARRAY`"
+    }
+    reason: {
+      h: "Reason"
+      n: "reason"
+      r: true
+      t: "`$STRING`"
+    }
+    role: {
+      h: "Role"
+      n: "role"
+      r: true
+      t: "`$STRING`"
+    }
+    scores: {
+      h: "Scores"
+      n: "scores"
+      r: true
+      t: "`$OBJECT`"
+    }
+    selected_premise_id: {
+      h: "Selected Premise Id"
+      n: "selected_premise_id"
+      r: false
+      t: "`$STRING`"
+    }
+    stage: {
+      h: "Stage"
+      n: "stage"
+      r: true
+      t: "`$STRING`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: true
+      t: "`$STRING`"
+    }
+    subject_hash: {
+      h: "Subject Hash"
+      n: "subject_hash"
+      r: true
+      t: "`$STRING`"
+    }
+    title: {
+      h: "Title"
+      n: "title"
+      r: false
+      t: "`$STRING`"
+    }
+    verdict: {
+      h: "Verdict"
+      n: "verdict"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  name: "microdrama"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "expected_revision"
+            "manifest_hash"
+          ]
+          co: {
+            id: "POST /api/microdrama/episodes/{episode_id}/approve"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "episode_id"
+                or: "episode_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/microdrama/episodes/{episode_id}/approve"
+          q: {
+            "$action": "approve"
+            exist: [
+              "episode_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "microdrama"
+            }
+            {
+              lit: "episodes"
+            }
+            {
+              var: "episode_id"
+            }
+            {
+              lit: "approve"
+            }
+          ]
+          t: {
+            req: {
+              expected_revision: "`reqdata.expected_revision`"
+              manifest_hash: "`reqdata.manifest_hash`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /api/microdrama/episodes/{episode_id}/exports"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "episode_id"
+                or: "episode_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/microdrama/episodes/{episode_id}/exports"
+          q: {
+            exist: [
+              "episode_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "microdrama"
+            }
+            {
+              lit: "episodes"
+            }
+            {
+              var: "episode_id"
+            }
+            {
+              lit: "exports"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "evidence"
+            "issues"
+            "role"
+            "scores"
+            "subject_hash"
+            "verdict"
+          ]
+          co: {
+            id: "POST /api/microdrama/episodes/{episode_id}/reviews"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "episode_id"
+                or: "episode_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/microdrama/episodes/{episode_id}/reviews"
+          q: {
+            exist: [
+              "episode_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "microdrama"
+            }
+            {
+              lit: "episodes"
+            }
+            {
+              var: "episode_id"
+            }
+            {
+              lit: "reviews"
+            }
+          ]
+          t: {
+            req: {
+              evidence: "`reqdata.evidence`"
+              issues: "`reqdata.issue`"
+              role: "`reqdata.role`"
+              scores: "`reqdata.score`"
+              subject_hash: "`reqdata.subject_hash`"
+              verdict: "`reqdata.verdict`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "idempotency_key"
+            "stage"
+          ]
+          co: {
+            id: "POST /api/microdrama/episodes/{episode_id}/runs"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "episode_id"
+                or: "episode_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/microdrama/episodes/{episode_id}/runs"
+          q: {
+            exist: [
+              "episode_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "microdrama"
+            }
+            {
+              lit: "episodes"
+            }
+            {
+              var: "episode_id"
+            }
+            {
+              lit: "runs"
+            }
+          ]
+          t: {
+            req: {
+              idempotency_key: "`reqdata.idempotency_key`"
+              stage: "`reqdata.stage`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "reason"
+            "status"
+          ]
+          co: {
+            id: "POST /api/microdrama/reference-assets/{reference_id}/review"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "reference_asset_id"
+                or: "reference_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/microdrama/reference-assets/{reference_id}/review"
+          q: {
+            exist: [
+              "reference_asset_id"
+            ]
+          }
+          r: {
+            param: {
+              reference_id: "reference_asset_id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "microdrama"
+            }
+            {
+              lit: "reference-assets"
+            }
+            {
+              var: "reference_asset_id"
+            }
+            {
+              lit: "review"
+            }
+          ]
+          t: {
+            req: {
+              reason: "`reqdata.reason`"
+              status: "`reqdata.status`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "emotional_movement"
+            "exclusions"
+            "experiment_hypothesis"
+            "formula_id"
+            "human_tension"
+            "incident"
+            "product_placement"
+            "reference_version_ids"
+            "series_id"
+            "title"
+          ]
+          co: {
+            id: "POST /api/microdrama/episodes"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/microdrama/episodes"
+          q: {
+            "$action": "episode"
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "microdrama"
+            }
+            {
+              lit: "episodes"
+            }
+          ]
+          t: {
+            req: {
+              emotional_movement: "`reqdata.emotional_movement`"
+              exclusions: "`reqdata.exclusion`"
+              experiment_hypothesis: "`reqdata.experiment_hypothesi`"
+              formula_id: "`reqdata.formula_id`"
+              human_tension: "`reqdata.human_tension`"
+              incident: "`reqdata.incident`"
+              product_placement: "`reqdata.product_placement`"
+              reference_version_ids: "`reqdata.reference_version_id`"
+              series_id: "`reqdata.series_id`"
+              title: "`reqdata.title`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "classification"
+            "compatibility_profile"
+            "editable_layout"
+            "family"
+            "generation_receipt"
+            "height"
+            "origin"
+            "raster_sha256"
+            "raster_url"
+            "rights_status"
+            "s3_object_version"
+            "source"
+            "version"
+            "width"
+          ]
+          co: {
+            id: "POST /api/microdrama/reference-assets"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/microdrama/reference-assets"
+          q: {
+            "$action": "reference_asset"
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "microdrama"
+            }
+            {
+              lit: "reference-assets"
+            }
+          ]
+          t: {
+            req: {
+              classification: "`reqdata.classification`"
+              compatibility_profile: "`reqdata.compatibility_profile`"
+              editable_layout: "`reqdata.editable_layout`"
+              family: "`reqdata.family`"
+              generation_receipt: "`reqdata.generation_receipt`"
+              height: "`reqdata.height`"
+              origin: "`reqdata.origin`"
+              raster_sha256: "`reqdata.raster_sha256`"
+              raster_url: "`reqdata.raster_url`"
+              rights_status: "`reqdata.rights_status`"
+              s3_object_version: "`reqdata.s3_object_version`"
+              source: "`reqdata.source`"
+              version: "`reqdata.version`"
+              width: "`reqdata.width`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "audience"
+            "device_profile"
+            "name"
+            "voice"
+          ]
+          co: {
+            id: "POST /api/microdrama/series"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/microdrama/series"
+          q: {
+            "$action": "series"
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "microdrama"
+            }
+            {
+              lit: "series"
+            }
+          ]
+          t: {
+            req: {
+              audience: "`reqdata.audience`"
+              device_profile: "`reqdata.device_profile`"
+              name: "`reqdata.name`"
+              voice: "`reqdata.voice`"
+            }
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/microdrama/episodes/{episode_id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "episode_id"
+                or: "episode_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/microdrama/episodes/{episode_id}"
+          q: {
+            exist: [
+              "episode_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "microdrama"
+            }
+            {
+              lit: "episodes"
+            }
+            {
+              var: "episode_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/microdrama/runs/{run_id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "run_id"
+                or: "run_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/microdrama/runs/{run_id}"
+          q: {
+            exist: [
+              "run_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "microdrama"
+            }
+            {
+              lit: "runs"
+            }
+            {
+              var: "run_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/microdrama/config"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/microdrama/config"
+          q: {
+            "$action": "config"
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "microdrama"
+            }
+            {
+              lit: "config"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/microdrama/formulas"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/microdrama/formulas"
+          q: {
+            "$action": "formula"
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "microdrama"
+            }
+            {
+              lit: "formulas"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/microdrama/reference-assets"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: false
+                k: "query"
+                n: "include_inactive"
+                or: "include_inactive"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/microdrama/reference-assets"
+          q: {
+            "$action": "reference_asset"
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "microdrama"
+            }
+            {
+              lit: "reference-assets"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/microdrama/series"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/microdrama/series"
+          q: {
+            "$action": "series"
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "microdrama"
+            }
+            {
+              lit: "series"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    update: {
+      name: "update"
+      points: [
+        {
+          bf: [
+            "expected_revision"
+            "selected_premise_id"
+            "title"
+          ]
+          co: {
+            id: "PATCH /api/microdrama/episodes/{episode_id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "episode_id"
+                or: "episode_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PATCH"
+          o: "/api/microdrama/episodes/{episode_id}"
+          q: {
+            exist: [
+              "episode_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "microdrama"
+            }
+            {
+              lit: "episodes"
+            }
+            {
+              var: "episode_id"
+            }
+          ]
+          t: {
+            req: {
+              expected_revision: "`reqdata.expected_revision`"
+              selected_premise_id: "`reqdata.selected_premise_id`"
+              title: "`reqdata.title`"
+            }
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

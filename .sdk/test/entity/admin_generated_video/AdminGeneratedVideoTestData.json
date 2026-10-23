@@ -1,0 +1,75 @@
+{
+  "existing": {
+    "admin_generated_video": {
+      "ADMIN_GENERATED_VIDEO00": {
+        "agent_id": "AGENT01",
+        "agent_name": "s79",
+        "created_at": "s7a",
+        "duration": 123,
+        "generation_status": {},
+        "id": "ADMIN_GENERATED_VIDEO00",
+        "product_id": "PRODUCT01",
+        "thumbnail_url": "s7f",
+        "title": "s80",
+        "type": "s81",
+        "updated_at": "s82",
+        "url": "s83",
+        "user_id": "USER01"
+      },
+      "ADMIN_GENERATED_VIDEO01": {
+        "agent_id": "AGENT01",
+        "agent_name": "sf1",
+        "created_at": "sf2",
+        "duration": 243,
+        "generation_status": {},
+        "id": "ADMIN_GENERATED_VIDEO01",
+        "product_id": "PRODUCT01",
+        "thumbnail_url": "sf7",
+        "title": "sf8",
+        "type": "sf9",
+        "updated_at": "sfa",
+        "url": "sfb",
+        "user_id": "USER01"
+      },
+      "ADMIN_GENERATED_VIDEO02": {
+        "agent_id": "AGENT01",
+        "agent_name": "s169",
+        "created_at": "s16a",
+        "duration": 363,
+        "generation_status": {},
+        "id": "ADMIN_GENERATED_VIDEO02",
+        "product_id": "PRODUCT01",
+        "thumbnail_url": "s16f",
+        "title": "s170",
+        "type": "s171",
+        "updated_at": "s172",
+        "url": "s173",
+        "user_id": "USER01"
+      }
+    }
+  },
+  "new": {
+    "admin_generated_video": {
+      "admin_generated_video_ref01": {
+        "agent_id": "AGENT01",
+        "agent_name": "s1e1",
+        "created_at": "s1e2",
+        "duration": 483,
+        "generation_status": {},
+        "product_id": "PRODUCT01",
+        "thumbnail_url": "s1e7",
+        "title": "s1e8",
+        "type": "s1e9",
+        "updated_at": "s1ea",
+        "url": "s1eb"
+      }
+    }
+  },
+  "requests": {
+    "GET /api/admin/users/{user_id}/generated-videos": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

@@ -1,0 +1,22 @@
+# BasicAgentAccessUserSummaryFlow
+
+main: kit: flow: BasicAgentAccessUserSummaryFlow:
+{
+  entity: "agent_access_user_summary",
+  kind: "basic",
+  name: "BasicAgentAccessUserSummaryFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "agent_access_user_summary_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicAgentAccessUserSummaryFlow"
+}

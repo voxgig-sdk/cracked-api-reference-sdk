@@ -1,0 +1,71 @@
+# Entity: link_user
+
+main: kit: entity: link_user: {
+
+  alias: field: {}
+
+  fields: {
+    already_linked: {
+      h: "Already Linked"
+      n: "already_linked"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    onboarding_data_id: {
+      h: "Onboarding Data Id"
+      n: "onboarding_data_id"
+      r: true
+      sh: "UUID of the OnboardingData record"
+      t: "`$STRING`"
+    }
+    success: {
+      h: "Success"
+      n: "success"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+  }
+
+  name: "link_user"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "onboarding_data_id"
+          ]
+          co: {
+            id: "POST /api/onboarding-v6/link-user"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/onboarding-v6/link-user"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "onboarding-v6"
+            }
+            {
+              lit: "link-user"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

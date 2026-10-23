@@ -1,0 +1,430 @@
+# Entity: user
+
+main: kit: entity: user: {
+
+  alias: field: {}
+
+  fields: {
+    accountType: {
+      h: "Account Type"
+      n: "accountType"
+      r: false
+      t: "`$ANY`"
+    }
+    activatedByAdminAt: {
+      h: "Activated By Admin At"
+      n: "activatedByAdminAt"
+      r: false
+      t: "`$ANY`"
+    }
+    activatedByAdminId: {
+      h: "Activated By Admin Id"
+      n: "activatedByAdminId"
+      r: false
+      t: "`$ANY`"
+    }
+    agents: {
+      h: "Agents"
+      n: "agents"
+      r: true
+      t: "`$ARRAY`"
+    }
+    agentsCount: {
+      h: "Agents Count"
+      n: "agentsCount"
+      r: false
+      t: "`$ANY`"
+    }
+    attribution: {
+      h: "Attribution"
+      n: "attribution"
+      r: false
+      t: "`$ANY`"
+    }
+    avatarImageUrl: {
+      h: "Avatar Image Url"
+      n: "avatarImageUrl"
+      r: false
+      t: "`$ANY`"
+    }
+    avatarVoiceUrl: {
+      h: "Avatar Voice Url"
+      n: "avatarVoiceUrl"
+      r: false
+      t: "`$ANY`"
+    }
+    createdAt: {
+      fo: "date-time"
+      h: "Created At"
+      n: "createdAt"
+      r: true
+      t: "`$STRING`"
+    }
+    credits: {
+      h: "Credits"
+      n: "credits"
+      r: false
+      t: "`$INTEGER`"
+    }
+    email: {
+      fo: "email"
+      h: "Email"
+      n: "email"
+      r: true
+      t: "`$STRING`"
+    }
+    googleId: {
+      h: "Google Id"
+      n: "googleId"
+      r: false
+      t: "`$ANY`"
+    }
+    hasSeenScheduleWelcome: {
+      h: "Has Seen Schedule Welcome"
+      n: "hasSeenScheduleWelcome"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    id: {
+      fo: "uuid"
+      h: "Id"
+      n: "id"
+      r: true
+      t: "`$STRING`"
+    }
+    industry: {
+      h: "Industry"
+      n: "industry"
+      r: false
+      t: "`$ANY`"
+    }
+    instagramId: {
+      h: "Instagram Id"
+      n: "instagramId"
+      r: false
+      t: "`$ANY`"
+    }
+    isActivatedByAdmin: {
+      h: "Is Activated By Admin"
+      n: "isActivatedByAdmin"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    isAdmin: {
+      h: "Is Admin"
+      n: "isAdmin"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    isInternalUser: {
+      h: "Is Internal User"
+      n: "isInternalUser"
+      r: false
+      t: "`$ANY`"
+    }
+    isMigrated: {
+      h: "Is Migrated"
+      n: "isMigrated"
+      r: false
+      t: "`$ANY`"
+    }
+    isResettingProduct: {
+      h: "Is Resetting Product"
+      n: "isResettingProduct"
+      r: false
+      t: "`$ANY`"
+    }
+    membership: {
+      h: "Membership"
+      n: "membership"
+      r: false
+      t: "`$ANY`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: true
+      t: "`$STRING`"
+    }
+    partnerDirectLoginDisabled: {
+      h: "Partner Direct Login Disabled"
+      n: "partnerDirectLoginDisabled"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    partnerExternalUserId: {
+      h: "Partner External User Id"
+      n: "partnerExternalUserId"
+      r: false
+      t: "`$ANY`"
+    }
+    partnerPolicyCode: {
+      h: "Partner Policy Code"
+      n: "partnerPolicyCode"
+      r: false
+      t: "`$ANY`"
+    }
+    partnerSource: {
+      h: "Partner Source"
+      n: "partnerSource"
+      r: false
+      t: "`$ANY`"
+    }
+    picture: {
+      h: "Picture"
+      n: "picture"
+      r: false
+      t: "`$ANY`"
+    }
+    stripeCustomerId: {
+      h: "Stripe Customer Id"
+      n: "stripeCustomerId"
+      r: false
+      t: "`$ANY`"
+    }
+    stripeSubscriptionId: {
+      h: "Stripe Subscription Id"
+      n: "stripeSubscriptionId"
+      r: false
+      t: "`$ANY`"
+    }
+    subscriptionCurrentPeriodEnd: {
+      h: "Subscription Current Period End"
+      n: "subscriptionCurrentPeriodEnd"
+      r: false
+      t: "`$ANY`"
+    }
+    subscriptionStatus: {
+      h: "Subscription Status"
+      n: "subscriptionStatus"
+      r: false
+      t: "`$ANY`"
+    }
+    totalCount: {
+      h: "Total Count"
+      n: "totalCount"
+      r: true
+      t: "`$INTEGER`"
+    }
+    updatedAt: {
+      fo: "date-time"
+      h: "Updated At"
+      n: "updatedAt"
+      r: true
+      t: "`$STRING`"
+    }
+    userId: {
+      h: "User Id"
+      n: "userId"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "user"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/upload-post-agents/user/{user_id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "user_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "product_id"
+                or: "product_id"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/upload-post-agents/user/{user_id}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              user_id: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "upload-post-agents"
+            }
+            {
+              lit: "user"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /auth/me"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/auth/me"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "auth"
+            }
+            {
+              lit: "me"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    update: {
+      name: "update"
+      points: [
+        {
+          bf: [
+            "attribution"
+          ]
+          co: {
+            id: "PATCH /api/users/attribution"
+            source: "openapi3"
+            version: 2
+          }
+          m: "PATCH"
+          o: "/api/users/attribution"
+          q: {
+            "$action": "attribution"
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "users"
+            }
+            {
+              lit: "attribution"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "industry"
+          ]
+          co: {
+            id: "PATCH /api/users/industry"
+            source: "openapi3"
+            version: 2
+          }
+          m: "PATCH"
+          o: "/api/users/industry"
+          q: {
+            "$action": "industry"
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "users"
+            }
+            {
+              lit: "industry"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "PATCH /api/users/mark-schedule-welcome-seen"
+            source: "openapi3"
+            version: 2
+          }
+          m: "PATCH"
+          o: "/api/users/mark-schedule-welcome-seen"
+          q: {
+            "$action": "mark_schedule_welcome_seen"
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "users"
+            }
+            {
+              lit: "mark-schedule-welcome-seen"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

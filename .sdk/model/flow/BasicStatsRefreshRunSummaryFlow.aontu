@@ -1,0 +1,22 @@
+# BasicStatsRefreshRunSummaryFlow
+
+main: kit: flow: BasicStatsRefreshRunSummaryFlow:
+{
+  entity: "stats_refresh_run_summary",
+  kind: "basic",
+  name: "BasicStatsRefreshRunSummaryFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "stats_refresh_run_summary_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicStatsRefreshRunSummaryFlow"
+}

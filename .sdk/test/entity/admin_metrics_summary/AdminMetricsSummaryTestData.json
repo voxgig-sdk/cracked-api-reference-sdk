@@ -1,0 +1,57 @@
+{
+  "existing": {
+    "admin_metrics_summary": {
+      "ADMIN_METRICS_SUMMARY00": {
+        "paid_users_by_level": [],
+        "total_cancellations": 81,
+        "total_previews_generated": 82,
+        "total_signups": 83,
+        "total_videos_generated": 84,
+        "url_attempts": 85,
+        "user_credits": [],
+        "user_gifted_credits": []
+      },
+      "ADMIN_METRICS_SUMMARY01": {
+        "paid_users_by_level": [],
+        "total_cancellations": 161,
+        "total_previews_generated": 162,
+        "total_signups": 163,
+        "total_videos_generated": 164,
+        "url_attempts": 165,
+        "user_credits": [],
+        "user_gifted_credits": []
+      },
+      "ADMIN_METRICS_SUMMARY02": {
+        "paid_users_by_level": [],
+        "total_cancellations": 241,
+        "total_previews_generated": 242,
+        "total_signups": 243,
+        "total_videos_generated": 244,
+        "url_attempts": 245,
+        "user_credits": [],
+        "user_gifted_credits": []
+      }
+    }
+  },
+  "new": {
+    "admin_metrics_summary": {
+      "admin_metrics_summary_ref01": {
+        "paid_users_by_level": [],
+        "total_cancellations": 321,
+        "total_previews_generated": 322,
+        "total_signups": 323,
+        "total_videos_generated": 324,
+        "url_attempts": 325,
+        "user_credits": [],
+        "user_gifted_credits": []
+      }
+    }
+  },
+  "requests": {
+    "GET /api/admin/metrics/summary": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

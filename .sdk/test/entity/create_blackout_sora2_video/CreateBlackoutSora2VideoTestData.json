@@ -1,0 +1,48 @@
+{
+  "existing": {
+    "create_blackout_sora2_video": {
+      "CREATE_BLACKOUT_SORA2_VIDEO00": {
+        "main_prompt": "s32",
+        "media_asset_id": "MEDIA_ASSET01",
+        "product_id": "PRODUCT01",
+        "requires_polling": false,
+        "video": {},
+        "id": "CREATE_BLACKOUT_SORA2_VIDEO00"
+      },
+      "CREATE_BLACKOUT_SORA2_VIDEO01": {
+        "main_prompt": "s64",
+        "media_asset_id": "MEDIA_ASSET01",
+        "product_id": "PRODUCT01",
+        "requires_polling": false,
+        "video": {},
+        "id": "CREATE_BLACKOUT_SORA2_VIDEO01"
+      },
+      "CREATE_BLACKOUT_SORA2_VIDEO02": {
+        "main_prompt": "s96",
+        "media_asset_id": "MEDIA_ASSET01",
+        "product_id": "PRODUCT01",
+        "requires_polling": false,
+        "video": {},
+        "id": "CREATE_BLACKOUT_SORA2_VIDEO02"
+      }
+    }
+  },
+  "new": {
+    "create_blackout_sora2_video": {
+      "create_blackout_sora2_video_ref01": {
+        "main_prompt": "sc8",
+        "media_asset_id": "MEDIA_ASSET01",
+        "product_id": "PRODUCT01",
+        "requires_polling": false,
+        "video": {}
+      }
+    }
+  },
+  "requests": {
+    "POST /api/core/create-blackout-sora2-video": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

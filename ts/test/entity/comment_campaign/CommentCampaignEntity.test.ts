@@ -1,0 +1,193 @@
+
+
+import Path from 'node:path'
+import * as Fs from 'node:fs'
+
+import { test, describe, afterEach } from 'node:test'
+import assert from 'node:assert'
+import { createLiveTransport } from '../../live-runner'
+import { runLiveEntity } from '../../live-entity'
+
+
+import { CrackedApiReferenceSDK, BaseFeature, config, stdutil } from '../../..'
+
+import {
+  envOverride,
+  liveClientOptions,
+  liveDelay,
+  loadEnvLocal,
+  makeCtrl,
+  makeMatch,
+  makeReqdata,
+  makeStepData,
+  makeValid,
+  maybeSkipControl,
+} from '../../utility'
+
+
+loadEnvLocal(__dirname + '/../../../.env.local')
+
+
+describe('CommentCampaignEntity', async () => {
+
+  // Per-test live pacing. Delay is read from sdk-test-control.json's
+  // `test.live.delayMs`; only sleeps when CRACKED_API_REFERENCE_TEST_LIVE=TRUE.
+  afterEach(liveDelay('CRACKED_API_REFERENCE_TEST_LIVE'))
+
+  test('instance', async () => {
+    const testsdk = CrackedApiReferenceSDK.test()
+    const ent = testsdk.CommentCampaign()
+    assert(null != ent)
+  })
+
+
+  test('validate', async (t) => {
+    if (null == (config as any).feature?.validate) {
+      t.skip('feature not present in this SDK: validate')
+      return
+    }
+    const client = CrackedApiReferenceSDK.test(undefined, { feature: { validate: { active: true } } })
+    await assert.rejects(client.CommentCampaign().load({"product_id":1} as any),
+      (err: any) => 'validate_failed' === err.code)
+  })
+
+
+
+  test('basic', async (t) => {
+
+    const live = 'TRUE' === process.env.CRACKED_API_REFERENCE_TEST_LIVE
+    for (const op of ['create', 'update', 'load']) {
+      if (!live && maybeSkipControl(t, 'entityOp', 'comment_campaign.' + op, live)) return
+    }
+
+    
+    const setup = basicSetup()
+    if (setup.live) {
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"account_daily_limit":{"a":true,"h":"Account Daily Limit","n":"account_daily_limit","r":false,"t":"`$INTEGER`","key$":"account_daily_limit","index$":0},"account_weekly_limit":{"a":true,"h":"Account Weekly Limit","n":"account_weekly_limit","r":false,"t":"`$INTEGER`","key$":"account_weekly_limit","index$":1},"action":{"a":true,"h":"Action","n":"action","r":true,"t":"`$STRING`","key$":"action","index$":2},"active_days_per_week":{"a":true,"h":"Active Days Per Week","n":"active_days_per_week","r":false,"t":"`$INTEGER`","key$":"active_days_per_week","index$":3},"agent_id":{"a":true,"h":"Agent Id","n":"agent_id","r":true,"t":"`$STRING`","key$":"agent_id","index$":4},"allowlist":{"a":true,"h":"Allowlist","n":"allowlist","r":false,"t":"`$ARRAY`","key$":"allowlist","index$":5},"analysis_daily_limit":{"a":true,"h":"Analysis Daily Limit","n":"analysis_daily_limit","r":false,"t":"`$INTEGER`","key$":"analysis_daily_limit","index$":6},"analysis_model":{"a":true,"h":"Analysis Model","n":"analysis_model","r":false,"t":"`$STRING`","key$":"analysis_model","index$":7},"analysis_reservation_usd":{"a":true,"h":"Analysis Reservation Usd","n":"analysis_reservation_usd","r":false,"t":"`$NUMBER`","key$":"analysis_reservation_usd","index$":8},"approved_markets":{"a":true,"h":"Approved Markets","n":"approved_markets","r":false,"t":"`$ARRAY`","key$":"approved_markets","index$":9},"brand_forward_enabled":{"a":true,"h":"Brand Forward Enabled","n":"brand_forward_enabled","r":false,"t":"`$BOOLEAN`","key$":"brand_forward_enabled","index$":10},"briefs":{"a":true,"h":"Briefs","n":"briefs","r":false,"t":"`$OBJECT`","key$":"briefs","index$":11},"candidate_only":{"a":true,"h":"Candidate Only","n":"candidate_only","r":false,"t":"`$BOOLEAN`","key$":"candidate_only","index$":12},"claims":{"a":true,"h":"Claims","n":"claims","r":false,"t":"`$ARRAY`","key$":"claims","index$":13},"cohort_removal_threshold":{"a":true,"h":"Cohort Removal Threshold","n":"cohort_removal_threshold","r":false,"t":"`$INTEGER`","key$":"cohort_removal_threshold","index$":14},"daily_cost_ceiling_usd":{"a":true,"h":"Daily Cost Ceiling Usd","n":"daily_cost_ceiling_usd","r":false,"t":"`$NUMBER`","key$":"daily_cost_ceiling_usd","index$":15},"delivery_mode":{"a":true,"h":"Delivery Mode","n":"delivery_mode","r":false,"t":"`$STRING`","key$":"delivery_mode","index$":16},"disclosure_mode":{"a":true,"h":"Disclosure Mode","n":"disclosure_mode","r":false,"t":"`$STRING`","key$":"disclosure_mode","index$":17},"disclosure_template":{"a":true,"h":"Disclosure Template","n":"disclosure_template","r":false,"t":"`$STRING`","key$":"disclosure_template","index$":18},"draft_options_count":{"a":true,"h":"Draft Options Count","n":"draft_options_count","r":false,"t":"`$INTEGER`","key$":"draft_options_count","index$":19},"draft_review_reservation_usd":{"a":true,"h":"Draft Review Reservation Usd","n":"draft_review_reservation_usd","r":false,"t":"`$NUMBER`","key$":"draft_review_reservation_usd","index$":20},"exceptional_daily_cap_approved":{"a":true,"h":"Exceptional Daily Cap Approved","n":"exceptional_daily_cap_approved","r":false,"t":"`$BOOLEAN`","key$":"exceptional_daily_cap_approved","index$":21},"execution_enabled":{"a":true,"h":"Execution Enabled","n":"execution_enabled","r":false,"t":"`$BOOLEAN`","key$":"execution_enabled","index$":22},"experiment_styles":{"a":true,"h":"Experiment Styles","n":"experiment_styles","r":false,"t":"`$ARRAY`","key$":"experiment_styles","index$":23},"inventory_factor":{"a":true,"h":"Inventory Factor","n":"inventory_factor","r":false,"t":"`$NUMBER`","key$":"inventory_factor","index$":24},"keywords":{"a":true,"h":"Keywords","n":"keywords","r":false,"t":"`$ARRAY`","key$":"keywords","index$":25},"max_duration_seconds":{"a":true,"h":"Max Duration Seconds","n":"max_duration_seconds","r":false,"t":"`$ANY`","key$":"max_duration_seconds","index$":26},"metadata_pass_rate":{"a":true,"h":"Metadata Pass Rate","n":"metadata_pass_rate","r":false,"t":"`$NUMBER`","key$":"metadata_pass_rate","index$":27},"min_interval_minutes":{"a":true,"h":"Min Interval Minutes","n":"min_interval_minutes","r":false,"t":"`$INTEGER`","key$":"min_interval_minutes","index$":28},"mode":{"a":true,"h":"Mode","n":"mode","r":false,"t":"`$STRING`","key$":"mode","index$":29},"monitored_creators":{"a":true,"h":"Monitored Creators","n":"monitored_creators","r":false,"t":"`$ARRAY`","key$":"monitored_creators","index$":30},"platform":{"a":true,"h":"Platform","n":"platform","r":false,"t":"`$STRING`","key$":"platform","index$":31},"platform_permission_evidence":{"a":true,"h":"Platform Permission Evidence","n":"platform_permission_evidence","r":false,"t":"`$STRING`","key$":"platform_permission_evidence","index$":32},"policy_approved_by":{"a":true,"h":"Policy Approved By","n":"policy_approved_by","r":false,"t":"`$STRING`","key$":"policy_approved_by","index$":33},"policy_expires_at":{"a":true,"h":"Policy Expires At","n":"policy_expires_at","r":false,"t":"`$ANY`","key$":"policy_expires_at","index$":34},"policy_version":{"a":true,"h":"Policy Version","n":"policy_version","r":false,"t":"`$STRING`","key$":"policy_version","index$":35},"product_daily_limit":{"a":true,"h":"Product Daily Limit","n":"product_daily_limit","r":false,"t":"`$INTEGER`","key$":"product_daily_limit","index$":36},"qualification_rate":{"a":true,"h":"Qualification Rate","n":"qualification_rate","r":false,"t":"`$NUMBER`","key$":"qualification_rate","index$":37},"raw_daily_limit":{"a":true,"h":"Raw Daily Limit","n":"raw_daily_limit","r":false,"t":"`$INTEGER`","key$":"raw_daily_limit","index$":38},"raw_result_reservation_usd":{"a":true,"h":"Raw Result Reservation Usd","n":"raw_result_reservation_usd","r":false,"t":"`$NUMBER`","key$":"raw_result_reservation_usd","index$":39},"reason":{"a":true,"h":"Reason","n":"reason","r":true,"t":"`$STRING`","key$":"reason","index$":40},"replies_enabled":{"a":true,"h":"Replies Enabled","n":"replies_enabled","r":false,"t":"`$BOOLEAN`","key$":"replies_enabled","index$":41},"request_key":{"a":true,"h":"Request Key","n":"request_key","r":true,"t":"`$STRING`","key$":"request_key","index$":42},"reviewer_model":{"a":true,"h":"Reviewer Model","n":"reviewer_model","r":false,"t":"`$STRING`","key$":"reviewer_model","index$":43},"scan_interval_hours":{"a":true,"h":"Scan Interval Hours","n":"scan_interval_hours","r":false,"t":"`$INTEGER`","key$":"scan_interval_hours","index$":44},"search_change_reason":{"a":true,"h":"Search Change Reason","n":"search_change_reason","r":false,"t":"`$STRING`","key$":"search_change_reason","index$":45},"search_effective_at":{"a":true,"h":"Search Effective At","n":"search_effective_at","r":false,"t":"`$ANY`","key$":"search_effective_at","index$":46},"shadow_sample_limit":{"a":true,"h":"Shadow Sample Limit","n":"shadow_sample_limit","r":false,"t":"`$INTEGER`","key$":"shadow_sample_limit","index$":47},"spent_seconds":{"a":true,"h":"Spent Seconds","n":"spent_seconds","r":false,"t":"`$ANY`","key$":"spent_seconds","index$":48},"task_ttl_hours":{"a":true,"h":"Task Ttl Hours","n":"task_ttl_hours","r":false,"t":"`$INTEGER`","key$":"task_ttl_hours","index$":49},"top_comment_analysis_enabled":{"a":true,"h":"Top Comment Analysis Enabled","n":"top_comment_analysis_enabled","r":false,"t":"`$BOOLEAN`","key$":"top_comment_analysis_enabled","index$":50},"writer_model":{"a":true,"h":"Writer Model","n":"writer_model","r":false,"t":"`$STRING`","key$":"writer_model","index$":51}},"name":"comment_campaign","op":{"create":{"input":"data","name":"create","points":[{"a":true,"bf":["action","reason","spent_seconds"],"co":{"id":"POST /api/comments/products/{product_id}/campaign/sources/{source_id}/resolve","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"product_id","or":"product_id","r":true,"t":"`$STRING`","index$":0},{"a":true,"k":"param","n":"source_id","or":"source_id","r":true,"t":"`$STRING`","index$":1}]},"k":"http","m":"POST","o":"/api/comments/products/{product_id}/campaign/sources/{source_id}/resolve","q":{"exist":["product_id","source_id"]},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"api"},{"lit":"comments"},{"lit":"products"},{"var":"product_id"},{"lit":"campaign"},{"lit":"sources"},{"var":"source_id"},{"lit":"resolve"}],"t":{"req":{"action":"`reqdata.action`","reason":"`reqdata.reason`","spent_seconds":"`reqdata.spent_second`"},"res":"`body`"},"index$":0},{"a":true,"bf":["agent_id","candidate_only","request_key"],"co":{"id":"POST /api/comments/products/{product_id}/campaign/pilot","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"product_id","or":"product_id","r":true,"t":"`$STRING`","index$":0}]},"k":"http","m":"POST","o":"/api/comments/products/{product_id}/campaign/pilot","q":{"exist":["product_id"]},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"api"},{"lit":"comments"},{"lit":"products"},{"var":"product_id"},{"lit":"campaign"},{"lit":"pilot"}],"t":{"req":{"agent_id":"`reqdata.agent_id`","candidate_only":"`reqdata.candidate_only`","request_key":"`reqdata.request_key`"},"res":"`body`"},"index$":1},{"a":true,"co":{"id":"POST /api/comments/products/{product_id}/campaign/prepare","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"product_id","or":"product_id","r":true,"t":"`$STRING`","index$":0}]},"k":"http","m":"POST","o":"/api/comments/products/{product_id}/campaign/prepare","q":{"exist":["product_id"]},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"api"},{"lit":"comments"},{"lit":"products"},{"var":"product_id"},{"lit":"campaign"},{"lit":"prepare"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":2},{"a":true,"co":{"id":"POST /api/comments/products/{product_id}/campaign/preview","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"product_id","or":"product_id","r":true,"t":"`$STRING`","index$":0}]},"k":"http","m":"POST","o":"/api/comments/products/{product_id}/campaign/preview","q":{"exist":["product_id"]},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"api"},{"lit":"comments"},{"lit":"products"},{"var":"product_id"},{"lit":"campaign"},{"lit":"preview"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":3}],"key$":"create"},"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /api/comments/products/{product_id}/campaign","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"product_id","or":"product_id","r":true,"t":"`$STRING`","index$":0}]},"k":"http","m":"GET","o":"/api/comments/products/{product_id}/campaign","q":{"exist":["product_id"]},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"api"},{"lit":"comments"},{"lit":"products"},{"var":"product_id"},{"lit":"campaign"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0},{"a":true,"co":{"id":"GET /api/comments/products/{product_id}/campaign/runtime","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"product_id","or":"product_id","r":true,"t":"`$STRING`","index$":0}]},"k":"http","m":"GET","o":"/api/comments/products/{product_id}/campaign/runtime","q":{"exist":["product_id"]},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"api"},{"lit":"comments"},{"lit":"products"},{"var":"product_id"},{"lit":"campaign"},{"lit":"runtime"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":1}],"key$":"load"},"update":{"input":"data","name":"update","points":[{"a":true,"bf":["account_daily_limit","account_weekly_limit","active_days_per_week","allowlist","analysis_daily_limit","analysis_model","analysis_reservation_usd","approved_markets","brand_forward_enabled","briefs","claims","cohort_removal_threshold","daily_cost_ceiling_usd","delivery_mode","disclosure_mode","disclosure_template","draft_options_count","draft_review_reservation_usd","exceptional_daily_cap_approved","execution_enabled","experiment_styles","inventory_factor","keywords","max_duration_seconds","metadata_pass_rate","min_interval_minutes","mode","monitored_creators","platform","platform_permission_evidence","policy_approved_by","policy_expires_at","policy_version","product_daily_limit","qualification_rate","raw_daily_limit","raw_result_reservation_usd","replies_enabled","reviewer_model","scan_interval_hours","search_change_reason","search_effective_at","shadow_sample_limit","task_ttl_hours","top_comment_analysis_enabled","writer_model"],"co":{"id":"PUT /api/comments/products/{product_id}/campaign","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"product_id","or":"product_id","r":true,"t":"`$STRING`","index$":0}]},"k":"http","m":"PUT","o":"/api/comments/products/{product_id}/campaign","q":{"exist":["product_id"]},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"api"},{"lit":"comments"},{"lit":"products"},{"var":"product_id"},{"lit":"campaign"}],"t":{"req":{"account_daily_limit":"`reqdata.account_daily_limit`","account_weekly_limit":"`reqdata.account_weekly_limit`","active_days_per_week":"`reqdata.active_days_per_week`","allowlist":"`reqdata.allowlist`","analysis_daily_limit":"`reqdata.analysis_daily_limit`","analysis_model":"`reqdata.analysis_model`","analysis_reservation_usd":"`reqdata.analysis_reservation_usd`","approved_markets":"`reqdata.approved_market`","brand_forward_enabled":"`reqdata.brand_forward_enabled`","briefs":"`reqdata.brief`","claims":"`reqdata.claim`","cohort_removal_threshold":"`reqdata.cohort_removal_threshold`","daily_cost_ceiling_usd":"`reqdata.daily_cost_ceiling_usd`","delivery_mode":"`reqdata.delivery_mode`","disclosure_mode":"`reqdata.disclosure_mode`","disclosure_template":"`reqdata.disclosure_template`","draft_options_count":"`reqdata.draft_options_count`","draft_review_reservation_usd":"`reqdata.draft_review_reservation_usd`","exceptional_daily_cap_approved":"`reqdata.exceptional_daily_cap_approved`","execution_enabled":"`reqdata.execution_enabled`","experiment_styles":"`reqdata.experiment_style`","inventory_factor":"`reqdata.inventory_factor`","keywords":"`reqdata.keyword`","max_duration_seconds":"`reqdata.max_duration_second`","metadata_pass_rate":"`reqdata.metadata_pass_rate`","min_interval_minutes":"`reqdata.min_interval_minute`","mode":"`reqdata.mode`","monitored_creators":"`reqdata.monitored_creator`","platform":"`reqdata.platform`","platform_permission_evidence":"`reqdata.platform_permission_evidence`","policy_approved_by":"`reqdata.policy_approved_by`","policy_expires_at":"`reqdata.policy_expires_at`","policy_version":"`reqdata.policy_version`","product_daily_limit":"`reqdata.product_daily_limit`","qualification_rate":"`reqdata.qualification_rate`","raw_daily_limit":"`reqdata.raw_daily_limit`","raw_result_reservation_usd":"`reqdata.raw_result_reservation_usd`","replies_enabled":"`reqdata.replies_enabled`","reviewer_model":"`reqdata.reviewer_model`","scan_interval_hours":"`reqdata.scan_interval_hour`","search_change_reason":"`reqdata.search_change_reason`","search_effective_at":"`reqdata.search_effective_at`","shadow_sample_limit":"`reqdata.shadow_sample_limit`","task_ttl_hours":"`reqdata.task_ttl_hour`","top_comment_analysis_enabled":"`reqdata.top_comment_analysis_enabled`","writer_model":"`reqdata.writer_model`"},"res":"`body`"},"index$":0}],"key$":"update"}},"relations":{"ancestors":[["$.main.kit.entity.product"],["$.main.kit.entity.product"]]},"key$":"comment_campaign","name__orig":"comment_campaign","Name":"CommentCampaign","name_":"comment_campaign","name-":"comment-campaign","NAME":"COMMENT_CAMPAIGN","index$":57}, {"active":true,"entity":"comment_campaign","key$":"BasicCommentCampaignFlow","kind":"basic","name":"BasicCommentCampaignFlow","param":{},"step":[{"a":true,"d":{},"i":{"ref":"comment_campaign_ref01"},"m":{"product_id":"product01"},"o":"create","s":[],"v":[],"index$":0},{"a":true,"d":{},"i":{"ref":"comment_campaign_ref01","srcdatavar":"comment_campaign_ref01_data","suffix":"_up0","textfield":"action"},"m":{},"o":"update","s":[{"apply":"TextFieldMark","def":{"mark":"Mark01-comment_campaign_ref01"}}],"v":[],"index$":1},{"a":true,"d":{},"i":{"ref":"comment_campaign_ref01","srcdatavar":"comment_campaign_ref01_data","suffix":"_dt0"},"m":{"id":"comment_campaign01"},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-comment_campaign_ref01"}}],"index$":2}]}, 'CommentCampaign', {"POST /api/comments/products/{product_id}/campaign/sources/{source_id}/resolve":{"protocol":"http","requestBody":{"required":true,"content":{"application/json":{"schema":{"properties":{"spent_seconds":{"anyOf":[{"type":"integer","maximum":86400,"minimum":0},{"type":"null"}],"title":"Spent Seconds","key$":"spent_seconds"},"action":{"type":"string","enum":["dismiss","retry"],"title":"Action","key$":"action"},"reason":{"type":"string","maxLength":2000,"minLength":10,"title":"Reason","key$":"reason"}},"additionalProperties":false,"type":"object","required":["action","reason"],"title":"ExceptionDecision","x-ref":"#/components/schemas/ExceptionDecision","index$":1}}}},"parameters":[{"name":"product_id","in":"path","required":true,"schema":{"type":"string","format":"uuid","title":"Product Id"},"index$":0},{"name":"source_id","in":"path","required":true,"schema":{"type":"string","format":"uuid","title":"Source Id"},"index$":1}]},"POST /api/comments/products/{product_id}/campaign/pilot":{"protocol":"http","requestBody":{"required":true,"content":{"application/json":{"schema":{"properties":{"candidate_only":{"type":"boolean","title":"Candidate Only","default":false,"key$":"candidate_only"},"agent_id":{"type":"string","maxLength":200,"minLength":1,"title":"Agent Id","key$":"agent_id"},"request_key":{"type":"string","maxLength":100,"minLength":8,"title":"Request Key","key$":"request_key"}},"additionalProperties":false,"type":"object","required":["agent_id","request_key"],"title":"PilotRequest","x-ref":"#/components/schemas/PilotRequest","index$":1}}}},"parameters":[{"name":"product_id","in":"path","required":true,"schema":{"type":"string","format":"uuid","title":"Product Id"},"index$":0}]},"POST /api/comments/products/{product_id}/campaign/prepare":{"protocol":"http","parameters":[{"name":"product_id","in":"path","required":true,"schema":{"type":"string","format":"uuid","title":"Product Id"},"index$":0}]},"POST /api/comments/products/{product_id}/campaign/preview":{"protocol":"http","parameters":[{"name":"product_id","in":"path","required":true,"schema":{"type":"string","format":"uuid","title":"Product Id"},"index$":0}]},"GET /api/comments/products/{product_id}/campaign":{"protocol":"http","parameters":[{"name":"product_id","in":"path","required":true,"schema":{"type":"string","format":"uuid","title":"Product Id"},"index$":0}]},"GET /api/comments/products/{product_id}/campaign/runtime":{"protocol":"http","parameters":[{"name":"product_id","in":"path","required":true,"schema":{"type":"string","format":"uuid","title":"Product Id"},"index$":0}]},"PUT /api/comments/products/{product_id}/campaign":{"protocol":"http","requestBody":{"required":true,"content":{"application/json":{"schema":{"properties":{"mode":{"type":"string","enum":["disabled","shadow","active"],"title":"Mode","default":"shadow","key$":"mode"},"replies_enabled":{"type":"boolean","title":"Replies Enabled","default":false,"key$":"replies_enabled"},"top_comment_analysis_enabled":{"type":"boolean","title":"Top Comment Analysis Enabled","default":true,"key$":"top_comment_analysis_enabled"},"execution_enabled":{"type":"boolean","const":false,"title":"Execution Enabled","default":false,"key$":"execution_enabled"},"delivery_mode":{"type":"string","const":"internal_expiring","title":"Delivery Mode","default":"internal_expiring","key$":"delivery_mode"},"daily_cost_ceiling_usd":{"type":"number","maximum":1000,"exclusiveMinimum":0,"title":"Daily Cost Ceiling Usd","default":20,"key$":"daily_cost_ceiling_usd"},"raw_result_reservation_usd":{"type":"number","maximum":10,"minimum":0,"title":"Raw Result Reservation Usd","default":0.02,"key$":"raw_result_reservation_usd"},"analysis_reservation_usd":{"type":"number","maximum":100,"minimum":0,"title":"Analysis Reservation Usd","default":0.2,"key$":"analysis_reservation_usd"},"draft_review_reservation_usd":{"type":"number","maximum":100,"minimum":0,"title":"Draft Review Reservation Usd","default":0.2,"key$":"draft_review_reservation_usd"},"monitored_creators":{"items":{"type":"string"},"type":"array","maxItems":20,"title":"Monitored Creators","key$":"monitored_creators"},"experiment_styles":{"items":{"type":"string","enum":["question","answer","support","clarification","evidence","comparison","humor"]},"type":"array","title":"Experiment Styles","key$":"experiment_styles"},"search_change_reason":{"type":"string","maxLength":2000,"minLength":10,"title":"Search Change Reason","default":"Initial product search configuration","key$":"search_change_reason"},"search_effective_at":{"anyOf":[{"type":"string","format":"date-time"},{"type":"null"}],"title":"Search Effective At","key$":"search_effective_at"},"approved_markets":{"items":{"type":"string"},"type":"array","title":"Approved Markets","key$":"approved_markets"},"cohort_removal_threshold":{"type":"integer","maximum":100,"minimum":1,"title":"Cohort Removal Threshold","default":1,"key$":"cohort_removal_threshold"},"task_ttl_hours":{"type":"integer","maximum":168,"minimum":1,"title":"Task Ttl Hours","default":24,"key$":"task_ttl_hours"},"scan_interval_hours":{"type":"integer","maximum":168,"minimum":24,"title":"Scan Interval Hours","default":24,"key$":"scan_interval_hours"},"account_weekly_limit":{"type":"integer","maximum":25,"minimum":1,"title":"Account Weekly Limit","default":10,"key$":"account_weekly_limit"},"exceptional_daily_cap_approved":{"type":"boolean","title":"Exceptional Daily Cap Approved","default":false,"key$":"exceptional_daily_cap_approved"},"active_days_per_week":{"type":"integer","maximum":5,"minimum":1,"title":"Active Days Per Week","default":5,"key$":"active_days_per_week"},"platform_permission_evidence":{"type":"string","title":"Platform Permission Evidence","default":"","key$":"platform_permission_evidence"},"policy_approved_by":{"type":"string","title":"Policy Approved By","default":"","key$":"policy_approved_by"},"policy_expires_at":{"anyOf":[{"type":"string","format":"date-time"},{"type":"null"}],"title":"Policy Expires At","key$":"policy_expires_at"},"disclosure_template":{"type":"string","title":"Disclosure Template","default":"","key$":"disclosure_template"},"disclosure_mode":{"type":"string","enum":["exact","contextual"],"title":"Disclosure Mode","default":"exact","key$":"disclosure_mode"},"brand_forward_enabled":{"type":"boolean","title":"Brand Forward Enabled","default":false,"key$":"brand_forward_enabled"},"platform":{"type":"string","const":"tiktok","title":"Platform","default":"tiktok","key$":"platform"},"allowlist":{"items":{"type":"string"},"type":"array","maxItems":5000,"title":"Allowlist","key$":"allowlist"},"briefs":{"additionalProperties":{"properties":{"verified_experiences":{"items":{},"type":"array","title":"Verified Experiences"},"handle":{"type":"string","maxLength":100,"minLength":1,"pattern":"^@?[\\w.]+$","title":"Handle"},"voice":{"type":"string","maxLength":2000,"minLength":10,"title":"Voice"},"topics":{"items":{},"type":"array","maxItems":10,"minItems":1,"title":"Topics"},"bio_text":{"type":"string","maxLength":2000,"title":"Bio Text","default":""},"bio_version":{"type":"string","title":"Bio Version","default":"unapproved"},"identity_type":{"type":"string","enum":[],"title":"Identity Type","default":"brand"},"approved_by":{"type":"string","title":"Approved By","default":""},"approved_until":{"anyOf":[],"title":"Approved Until"},"profile_ready":{"type":"boolean","title":"Profile Ready","default":false},"readiness_evidence":{"items":{},"type":"array","title":"Readiness Evidence"},"medical_boundaries":{"type":"string","title":"Medical Boundaries","default":"No personalized medical advice, treatment claims or invented clinical credentials."},"commercial_boundaries":{"type":"string","title":"Commercial Boundaries","default":"Disclose affiliation; no fabricated consumer experiences."},"prohibited_claims":{"items":{},"type":"array","title":"Prohibited Claims"},"identity":{"type":"string","title":"Identity","default":"Brand-associated account; no clinical credentials or personal treatment claims."}},"additionalProperties":false,"type":"object","required":["handle","voice","topics"],"title":"AccountBrief","x-ref":"#/components/schemas/AccountBrief"},"type":"object","title":"Briefs","key$":"briefs"},"keywords":{"items":{"type":"string"},"type":"array","maxItems":20,"minItems":1,"title":"Keywords","key$":"keywords"},"claims":{"items":{"properties":{"id":{"type":"string","minLength":1,"title":"Id"},"text":{"type":"string","minLength":1,"title":"Text"},"source_url":{"type":"string","pattern":"^https://","title":"Source Url"},"applicability":{"type":"string","minLength":10,"title":"Applicability"},"approved_by":{"type":"string","minLength":1,"title":"Approved By"},"expires_at":{"type":"string","format":"date-time","title":"Expires At"},"revoked":{"type":"boolean","title":"Revoked","default":false},"version":{"type":"string","title":"Version","default":"1"},"scope":{"additionalProperties":{},"type":"object","title":"Scope"},"clinical":{"type":"boolean","title":"Clinical","default":false}},"additionalProperties":false,"type":"object","required":["id","text","source_url","applicability","approved_by","expires_at"],"title":"ApprovedClaim","x-ref":"#/components/schemas/ApprovedClaim"},"type":"array","title":"Claims","key$":"claims"},"account_daily_limit":{"type":"integer","maximum":5,"minimum":1,"title":"Account Daily Limit","default":1,"key$":"account_daily_limit"},"product_daily_limit":{"type":"integer","maximum":15000,"minimum":1,"title":"Product Daily Limit","default":3,"key$":"product_daily_limit"},"min_interval_minutes":{"type":"integer","maximum":1440,"minimum":30,"title":"Min Interval Minutes","default":30,"key$":"min_interval_minutes"},"raw_daily_limit":{"type":"integer","maximum":120,"minimum":1,"title":"Raw Daily Limit","default":120,"key$":"raw_daily_limit"},"analysis_daily_limit":{"type":"integer","maximum":60,"minimum":1,"title":"Analysis Daily Limit","default":60,"key$":"analysis_daily_limit"},"shadow_sample_limit":{"type":"integer","maximum":10,"minimum":1,"title":"Shadow Sample Limit","default":10,"key$":"shadow_sample_limit"},"inventory_factor":{"type":"number","maximum":3,"minimum":1,"title":"Inventory Factor","default":1.5,"key$":"inventory_factor"},"qualification_rate":{"type":"number","maximum":1,"exclusiveMinimum":0,"title":"Qualification Rate","default":0.3,"key$":"qualification_rate"},"metadata_pass_rate":{"type":"number","maximum":1,"exclusiveMinimum":0,"title":"Metadata Pass Rate","default":0.5,"key$":"metadata_pass_rate"},"max_duration_seconds":{"anyOf":[{"type":"integer","minimum":1},{"type":"null"}],"title":"Max Duration Seconds","key$":"max_duration_seconds"},"policy_version":{"type":"string","title":"Policy Version","default":"healthrx-comment-v1","key$":"policy_version"},"analysis_model":{"type":"string","title":"Analysis Model","default":"gemini-3.6-flash","key$":"analysis_model"},"draft_options_count":{"type":"integer","maximum":3,"minimum":1,"title":"Draft Options Count","default":1,"key$":"draft_options_count"},"writer_model":{"type":"string","title":"Writer Model","default":"gemini-3.6-flash","key$":"writer_model"},"reviewer_model":{"type":"string","title":"Reviewer Model","default":"gemini-3.6-flash","key$":"reviewer_model"}},"additionalProperties":false,"type":"object","title":"CampaignConfig","x-ref":"#/components/schemas/CampaignConfig","index$":1}}}},"parameters":[{"name":"product_id","in":"path","required":true,"schema":{"type":"string","format":"uuid","title":"Product Id"},"index$":0}]}}, { strict: LIVE_STRICT, t })
+    }
+    const client = setup.client
+    const struct = setup.struct
+
+    const isempty = struct.isempty
+    const select = struct.select
+
+
+    // CREATE
+    const comment_campaign_ref01_ent = client.CommentCampaign()
+    let comment_campaign_ref01_data = setup.data.new.comment_campaign['comment_campaign_ref01']
+    comment_campaign_ref01_data['product_id'] = setup.idmap['product01']
+
+    comment_campaign_ref01_data = (await comment_campaign_ref01_ent.create(comment_campaign_ref01_data)).data()
+    assert(null != comment_campaign_ref01_data)
+
+
+    // UPDATE
+    const comment_campaign_ref01_data_up0: any = {}
+
+    const comment_campaign_ref01_markdef_up0 = { name: 'action', value: 'Mark01-comment_campaign_ref01_' + setup.now }
+    ;(comment_campaign_ref01_data_up0 as any)[comment_campaign_ref01_markdef_up0.name] = comment_campaign_ref01_markdef_up0.value
+
+    const comment_campaign_ref01_resdata_up0 = (await comment_campaign_ref01_ent.update(comment_campaign_ref01_data_up0)).data()
+    assert(null != comment_campaign_ref01_resdata_up0)
+
+    assert((comment_campaign_ref01_resdata_up0 as any)[comment_campaign_ref01_markdef_up0.name] === comment_campaign_ref01_markdef_up0.value)
+
+
+
+  })
+})
+
+
+
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true
+
+function basicSetup(extra?: any) {
+  // TODO: fix test def options
+  const options: any = {} // null
+
+  // TODO: needs test utility to resolve path
+  const entityDataFile =
+    Path.resolve(__dirname, 
+      '../../../../.sdk/test/entity/comment_campaign/CommentCampaignTestData.json')
+
+  // TODO: file ready util needed?
+  const entityDataSource = Fs.readFileSync(entityDataFile).toString('utf8')
+
+  // TODO: need a xlang JSON parse utility in voxgig/struct with better error msgs
+  const entityData = JSON.parse(entityDataSource)
+
+  options.entity = entityData.existing
+
+  let client = CrackedApiReferenceSDK.test(options, extra)
+  const struct = client.utility().struct
+  const merge = struct.merge
+  const transform = struct.transform
+
+  let idmap = transform(
+    ['comment_campaign01','comment_campaign02','comment_campaign03','product01','product02','product03'],
+    {
+      '`$PACK`': ['', {
+        '`$KEY`': '`$COPY`',
+        '`$VAL`': ['`$FORMAT`', 'upper', '`$COPY`']
+      }]
+    })
+
+  const env = envOverride({
+    'CRACKED_API_REFERENCE_TEST_COMMENT_CAMPAIGN_ENTID': idmap,
+    'CRACKED_API_REFERENCE_TEST_LIVE': 'FALSE',
+    'CRACKED_API_REFERENCE_TEST_EXPLAIN': 'FALSE',
+    'CRACKED_API_REFERENCE_APIKEY': '',
+    'CRACKED_API_REFERENCE_SERVER_BASE': "",
+  })
+
+  idmap = env['CRACKED_API_REFERENCE_TEST_COMMENT_CAMPAIGN_ENTID']
+
+  const live = 'TRUE' === env.CRACKED_API_REFERENCE_TEST_LIVE
+
+  const transport = createLiveTransport()
+  if (live) {
+    const rawIds = process.env['CRACKED_API_REFERENCE_TEST_COMMENT_CAMPAIGN_ENTID']
+    idmap = rawIds && rawIds.trim() ? JSON.parse(rawIds) : {}
+    if (!idmap || Array.isArray(idmap) || typeof idmap !== 'object') {
+      throw new Error('Live ENTID must be a JSON object')
+    }
+    client = new CrackedApiReferenceSDK(merge([
+      // FIRST, so the generated fields below win: sdk-test-control.json's
+      // test.client.options adds to the live client, it does not redirect it.
+      liveClientOptions(),
+      {
+        apikey: env.CRACKED_API_REFERENCE_APIKEY,
+        server: {
+          base: env.CRACKED_API_REFERENCE_SERVER_BASE,
+        },
+      },
+      // 'extra || {}', not a bare 'extra': struct.merge returns UNDEFINED when the
+      // last entry is undefined, and basicSetup is normally called with no
+      // argument at all - so a bare 'extra' silently discarded the apikey
+      // and server values above and handed the SDK undefined. Harmless
+      // while there was nothing in that object; not harmless now.
+      extra || {},
+      { system: { fetch: transport.fetch } }
+    ]))
+  }
+
+  const setup = {
+    idmap,
+    env,
+    options,
+    client,
+    struct,
+    data: entityData,
+    explain: 'TRUE' === env.CRACKED_API_REFERENCE_TEST_EXPLAIN,
+    live,
+    transport,
+    now: Date.now(),
+  }
+
+  return setup
+}
+  

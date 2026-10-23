@@ -1,0 +1,96 @@
+{
+  "existing": {
+    "agent_access_overview": {
+      "AGENT_ACCESS_OVERVIEW00": {
+        "activeUsers": 170,
+        "generatedAt": "sab",
+        "newUsersYesterday": 172,
+        "onboardingContextCounts": {},
+        "onboardingCurrentStepCounts": {},
+        "onboardingCurrentStepWindow": {},
+        "onboardingFlowVariantCounts": {},
+        "onboardingLockedUntilActivation": 177,
+        "onboardingRecordsTotal": 178,
+        "onboardingRecordsWindow": 179,
+        "onboardingSocialScanStatusCounts": {},
+        "onboardingWebsiteScrapeStatusCounts": {},
+        "subscriptionStatusCounts": {},
+        "totalInternalUsers": 183,
+        "totalUsers": 184,
+        "trialStartedYesterday": 185,
+        "trialingUsers": 186,
+        "id": "AGENT_ACCESS_OVERVIEW00"
+      },
+      "AGENT_ACCESS_OVERVIEW01": {
+        "activeUsers": 340,
+        "generatedAt": "s155",
+        "newUsersYesterday": 342,
+        "onboardingContextCounts": {},
+        "onboardingCurrentStepCounts": {},
+        "onboardingCurrentStepWindow": {},
+        "onboardingFlowVariantCounts": {},
+        "onboardingLockedUntilActivation": 347,
+        "onboardingRecordsTotal": 348,
+        "onboardingRecordsWindow": 349,
+        "onboardingSocialScanStatusCounts": {},
+        "onboardingWebsiteScrapeStatusCounts": {},
+        "subscriptionStatusCounts": {},
+        "totalInternalUsers": 353,
+        "totalUsers": 354,
+        "trialStartedYesterday": 355,
+        "trialingUsers": 356,
+        "id": "AGENT_ACCESS_OVERVIEW01"
+      },
+      "AGENT_ACCESS_OVERVIEW02": {
+        "activeUsers": 510,
+        "generatedAt": "s1ff",
+        "newUsersYesterday": 512,
+        "onboardingContextCounts": {},
+        "onboardingCurrentStepCounts": {},
+        "onboardingCurrentStepWindow": {},
+        "onboardingFlowVariantCounts": {},
+        "onboardingLockedUntilActivation": 517,
+        "onboardingRecordsTotal": 518,
+        "onboardingRecordsWindow": 519,
+        "onboardingSocialScanStatusCounts": {},
+        "onboardingWebsiteScrapeStatusCounts": {},
+        "subscriptionStatusCounts": {},
+        "totalInternalUsers": 523,
+        "totalUsers": 524,
+        "trialStartedYesterday": 525,
+        "trialingUsers": 526,
+        "id": "AGENT_ACCESS_OVERVIEW02"
+      }
+    }
+  },
+  "new": {
+    "agent_access_overview": {
+      "agent_access_overview_ref01": {
+        "activeUsers": 680,
+        "generatedAt": "s2a9",
+        "newUsersYesterday": 682,
+        "onboardingContextCounts": {},
+        "onboardingCurrentStepCounts": {},
+        "onboardingCurrentStepWindow": {},
+        "onboardingFlowVariantCounts": {},
+        "onboardingLockedUntilActivation": 687,
+        "onboardingRecordsTotal": 688,
+        "onboardingRecordsWindow": 689,
+        "onboardingSocialScanStatusCounts": {},
+        "onboardingWebsiteScrapeStatusCounts": {},
+        "subscriptionStatusCounts": {},
+        "totalInternalUsers": 693,
+        "totalUsers": 694,
+        "trialStartedYesterday": 695,
+        "trialingUsers": 696
+      }
+    }
+  },
+  "requests": {
+    "GET /api/agent-access/overview": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

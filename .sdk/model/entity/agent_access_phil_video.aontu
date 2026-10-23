@@ -1,0 +1,91 @@
+# Entity: agent_access_phil_video
+
+main: kit: entity: agent_access_phil_video: {
+
+  alias: field: {}
+
+  fields: {
+    generatedAt: {
+      fo: "date-time"
+      h: "Generated At"
+      n: "generatedAt"
+      r: true
+      t: "`$STRING`"
+    }
+    targetDate: {
+      h: "Target Date"
+      n: "targetDate"
+      r: true
+      t: "`$STRING`"
+    }
+    videos: {
+      h: "Videos"
+      n: "videos"
+      r: true
+      t: "`$OBJECT`"
+    }
+  }
+
+  name: "agent_access_phil_video"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/agent-access/phil-notifications/videos"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "x_agent_access_key"
+                or: "x-agent-access-key"
+                r: false
+                t: "`$ANY`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "date"
+                or: "date"
+                r: false
+                t: "`$ANY`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/agent-access/phil-notifications/videos"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "agent-access"
+            }
+            {
+              lit: "phil-notifications"
+            }
+            {
+              lit: "videos"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

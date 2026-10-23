@@ -1,0 +1,27 @@
+{
+  "existing": {
+    "exact_formula": {
+      "EXACT_FORMULA00": {
+        "id": "EXACT_FORMULA00"
+      },
+      "EXACT_FORMULA01": {
+        "id": "EXACT_FORMULA01"
+      },
+      "EXACT_FORMULA02": {
+        "id": "EXACT_FORMULA02"
+      }
+    }
+  },
+  "new": {
+    "exact_formula": {
+      "exact_formula_ref01": {}
+    }
+  },
+  "requests": {
+    "GET /api/carousel/exact-formulas": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

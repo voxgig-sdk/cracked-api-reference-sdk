@@ -1,0 +1,78 @@
+# Entity: social_scan_process
+
+main: kit: entity: social_scan_process: {
+
+  alias: field: {}
+
+  fields: {
+    posts: {
+      h: "Posts"
+      n: "posts"
+      r: true
+      t: "`$ARRAY`"
+    }
+    product_id: {
+      fo: "uuid"
+      h: "Product Id"
+      n: "product_id"
+      r: true
+      t: "`$STRING`"
+    }
+    success: {
+      h: "Success"
+      n: "success"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    task_id: {
+      h: "Task Id"
+      n: "task_id"
+      r: false
+      t: "`$STRING`"
+    }
+  }
+
+  name: "social_scan_process"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "posts"
+            "product_id"
+          ]
+          co: {
+            id: "POST /api/social-scan/process"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/social-scan/process"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "social-scan"
+            }
+            {
+              lit: "process"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

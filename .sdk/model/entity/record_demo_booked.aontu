@@ -1,0 +1,99 @@
+# Entity: record_demo_booked
+
+main: kit: entity: record_demo_booked: {
+
+  alias: field: {}
+
+  fields: {
+    calendlyEventUri: {
+      h: "Calendly Event Uri"
+      n: "calendlyEventUri"
+      r: false
+      t: "`$ANY`"
+    }
+    calendlyInviteeUri: {
+      h: "Calendly Invitee Uri"
+      n: "calendlyInviteeUri"
+      r: false
+      t: "`$ANY`"
+    }
+    message: {
+      h: "Message"
+      n: "message"
+      r: true
+      t: "`$OBJECT`"
+    }
+    session: {
+      h: "Session"
+      n: "session"
+      r: true
+      t: "`$OBJECT`"
+    }
+  }
+
+  name: "record_demo_booked"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "calendlyEventUri"
+            "calendlyInviteeUri"
+          ]
+          co: {
+            id: "POST /api/chat/sessions/{session_id}/demo-booked"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "session_id"
+                or: "session_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/chat/sessions/{session_id}/demo-booked"
+          q: {
+            exist: [
+              "session_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "chat"
+            }
+            {
+              lit: "sessions"
+            }
+            {
+              var: "session_id"
+            }
+            {
+              lit: "demo-booked"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

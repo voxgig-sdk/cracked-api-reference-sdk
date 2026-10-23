@@ -1,0 +1,112 @@
+# Entity: admin_metrics_summary
+
+main: kit: entity: admin_metrics_summary: {
+
+  alias: field: {}
+
+  fields: {
+    paid_users_by_level: {
+      h: "Paid Users By Level"
+      n: "paid_users_by_level"
+      r: true
+      t: "`$ARRAY`"
+    }
+    total_cancellations: {
+      h: "Total Cancellations"
+      n: "total_cancellations"
+      r: true
+      t: "`$INTEGER`"
+    }
+    total_previews_generated: {
+      h: "Total Previews Generated"
+      n: "total_previews_generated"
+      r: true
+      t: "`$INTEGER`"
+    }
+    total_signups: {
+      h: "Total Signups"
+      n: "total_signups"
+      r: true
+      t: "`$INTEGER`"
+    }
+    total_videos_generated: {
+      h: "Total Videos Generated"
+      n: "total_videos_generated"
+      r: true
+      t: "`$INTEGER`"
+    }
+    url_attempts: {
+      h: "Url Attempts"
+      n: "url_attempts"
+      r: true
+      t: "`$INTEGER`"
+    }
+    user_credits: {
+      h: "User Credits"
+      n: "user_credits"
+      r: true
+      t: "`$ARRAY`"
+    }
+    user_gifted_credits: {
+      h: "User Gifted Credits"
+      n: "user_gifted_credits"
+      r: true
+      t: "`$ARRAY`"
+    }
+  }
+
+  name: "admin_metrics_summary"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/admin/metrics/summary"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: "all_time"
+                k: "query"
+                n: "date_filter"
+                or: "date_filter"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/metrics/summary"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "metrics"
+            }
+            {
+              lit: "summary"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

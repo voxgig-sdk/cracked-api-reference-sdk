@@ -1,0 +1,100 @@
+{
+  "existing": {
+    "dedicated_agents_dashboard": {
+      "DEDICATED_AGENTS_DASHBOARD00": {
+        "active_connections": 190,
+        "assigned_user_id": "ASSIGNED_USER01",
+        "assigned_user_ids": [],
+        "bio": "sc1",
+        "id": "DEDICATED_AGENTS_DASHBOARD00",
+        "instagram_url": "sc3",
+        "is_active": true,
+        "last_admin_synced_at": "sc5",
+        "name": "sc6",
+        "role": "sc7",
+        "tiktok_stats": "sc8",
+        "tiktok_url": "sc9",
+        "today_failed_entries": [],
+        "today_stats": {},
+        "upload_post_platforms": "scc",
+        "upload_post_profile": "scd",
+        "yesterday_failed_entries": [],
+        "yesterday_stats": {},
+        "youtube_url": "sd0"
+      },
+      "DEDICATED_AGENTS_DASHBOARD01": {
+        "active_connections": 380,
+        "assigned_user_id": "ASSIGNED_USER01",
+        "assigned_user_ids": [],
+        "bio": "s17f",
+        "id": "DEDICATED_AGENTS_DASHBOARD01",
+        "instagram_url": "s181",
+        "is_active": true,
+        "last_admin_synced_at": "s183",
+        "name": "s184",
+        "role": "s185",
+        "tiktok_stats": "s186",
+        "tiktok_url": "s187",
+        "today_failed_entries": [],
+        "today_stats": {},
+        "upload_post_platforms": "s18a",
+        "upload_post_profile": "s18b",
+        "yesterday_failed_entries": [],
+        "yesterday_stats": {},
+        "youtube_url": "s18e"
+      },
+      "DEDICATED_AGENTS_DASHBOARD02": {
+        "active_connections": 570,
+        "assigned_user_id": "ASSIGNED_USER01",
+        "assigned_user_ids": [],
+        "bio": "s23d",
+        "id": "DEDICATED_AGENTS_DASHBOARD02",
+        "instagram_url": "s23f",
+        "is_active": true,
+        "last_admin_synced_at": "s241",
+        "name": "s242",
+        "role": "s243",
+        "tiktok_stats": "s244",
+        "tiktok_url": "s245",
+        "today_failed_entries": [],
+        "today_stats": {},
+        "upload_post_platforms": "s248",
+        "upload_post_profile": "s249",
+        "yesterday_failed_entries": [],
+        "yesterday_stats": {},
+        "youtube_url": "s24c"
+      }
+    }
+  },
+  "new": {
+    "dedicated_agents_dashboard": {
+      "dedicated_agents_dashboard_ref01": {
+        "active_connections": 760,
+        "assigned_user_id": "ASSIGNED_USER01",
+        "assigned_user_ids": [],
+        "bio": "s2fb",
+        "instagram_url": "s2fd",
+        "is_active": true,
+        "last_admin_synced_at": "s2ff",
+        "name": "s300",
+        "role": "s301",
+        "tiktok_stats": "s302",
+        "tiktok_url": "s303",
+        "today_failed_entries": [],
+        "today_stats": {},
+        "upload_post_platforms": "s306",
+        "upload_post_profile": "s307",
+        "yesterday_failed_entries": [],
+        "yesterday_stats": {},
+        "youtube_url": "s30a"
+      }
+    }
+  },
+  "requests": {
+    "GET /api/admin/agents/dedicated-dashboard": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

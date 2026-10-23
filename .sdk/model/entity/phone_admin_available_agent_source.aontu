@@ -1,0 +1,64 @@
+# Entity: phone_admin_available_agent_source
+
+main: kit: entity: phone_admin_available_agent_source: {
+
+  alias: field: {}
+
+  fields: {
+    available_count: {
+      h: "Available Count"
+      n: "available_count"
+      r: true
+      t: "`$INTEGER`"
+    }
+    pc_name: {
+      h: "Pc Name"
+      n: "pc_name"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  name: "phone_admin_available_agent_source"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/admin/phone-admin/available-agent-sources"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/admin/phone-admin/available-agent-sources"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "phone-admin"
+            }
+            {
+              lit: "available-agent-sources"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.sources`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

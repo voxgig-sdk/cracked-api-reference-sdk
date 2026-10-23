@@ -1,0 +1,77 @@
+{
+  "existing": {
+    "admin_customer": {
+      "ADMIN_CUSTOMER00": {
+        "account_type": "s82",
+        "active_vireel_agents": 131,
+        "agents": [],
+        "billing_source": "s85",
+        "contracted_agents": "s86",
+        "email": "s87",
+        "membership": "s88",
+        "name": "s89",
+        "pfa_only_agents": 138,
+        "severity": "s8b",
+        "status": "s8c",
+        "subscription_status": "s8d",
+        "user_id": "USER01"
+      },
+      "ADMIN_CUSTOMER01": {
+        "account_type": "s104",
+        "active_vireel_agents": 261,
+        "agents": [],
+        "billing_source": "s107",
+        "contracted_agents": "s108",
+        "email": "s109",
+        "membership": "s10a",
+        "name": "s10b",
+        "pfa_only_agents": 268,
+        "severity": "s10d",
+        "status": "s10e",
+        "subscription_status": "s10f",
+        "user_id": "USER01"
+      },
+      "ADMIN_CUSTOMER02": {
+        "account_type": "s186",
+        "active_vireel_agents": 391,
+        "agents": [],
+        "billing_source": "s189",
+        "contracted_agents": "s18a",
+        "email": "s18b",
+        "membership": "s18c",
+        "name": "s18d",
+        "pfa_only_agents": 398,
+        "severity": "s18f",
+        "status": "s190",
+        "subscription_status": "s191",
+        "user_id": "USER01"
+      }
+    }
+  },
+  "new": {
+    "admin_customer": {
+      "admin_customer_ref01": {
+        "account_type": "s208",
+        "active_vireel_agents": 521,
+        "agents": [],
+        "billing_source": "s20b",
+        "contracted_agents": "s20c",
+        "email": "s20d",
+        "membership": "s20e",
+        "name": "s20f",
+        "pfa_only_agents": 528,
+        "severity": "s211",
+        "status": "s212",
+        "subscription_status": "s213",
+        "user_id": "USER01"
+      }
+    }
+  },
+  "requests": {
+    "GET /api/admin/insights/customers": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "existing": {
+    "social_scan_preview": {
+      "SOCIAL_SCAN_PREVIEW00": {
+        "instagram_handle": "s28",
+        "posts": [],
+        "success": true,
+        "tiktok_handle": "s2b",
+        "id": "SOCIAL_SCAN_PREVIEW00"
+      },
+      "SOCIAL_SCAN_PREVIEW01": {
+        "instagram_handle": "s50",
+        "posts": [],
+        "success": true,
+        "tiktok_handle": "s53",
+        "id": "SOCIAL_SCAN_PREVIEW01"
+      },
+      "SOCIAL_SCAN_PREVIEW02": {
+        "instagram_handle": "s78",
+        "posts": [],
+        "success": true,
+        "tiktok_handle": "s7b",
+        "id": "SOCIAL_SCAN_PREVIEW02"
+      }
+    }
+  },
+  "new": {
+    "social_scan_preview": {
+      "social_scan_preview_ref01": {
+        "instagram_handle": "sa0",
+        "posts": [],
+        "success": true,
+        "tiktok_handle": "sa3"
+      }
+    }
+  },
+  "requests": {
+    "POST /api/social-scan/preview": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

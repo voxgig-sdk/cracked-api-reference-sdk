@@ -1,0 +1,48 @@
+{
+  "existing": {
+    "scrape": {
+      "SCRAPE00": {
+        "old_product_id": "OLD_PRODUCT01",
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "status": "s34",
+        "success": false,
+        "url": "s36",
+        "id": "SCRAPE00"
+      },
+      "SCRAPE01": {
+        "old_product_id": "OLD_PRODUCT01",
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "status": "s66",
+        "success": false,
+        "url": "s68",
+        "id": "SCRAPE01"
+      },
+      "SCRAPE02": {
+        "old_product_id": "OLD_PRODUCT01",
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "status": "s98",
+        "success": false,
+        "url": "s9a",
+        "id": "SCRAPE02"
+      }
+    }
+  },
+  "new": {
+    "scrape": {
+      "scrape_ref01": {
+        "old_product_id": "OLD_PRODUCT01",
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "status": "sca",
+        "success": false,
+        "url": "scc"
+      }
+    }
+  },
+  "requests": {
+    "POST /api/reset-product/scrape": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

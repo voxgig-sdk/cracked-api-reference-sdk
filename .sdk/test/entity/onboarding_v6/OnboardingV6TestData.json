@@ -1,0 +1,30 @@
+{
+  "existing": {
+    "onboarding_v6": {
+      "ONBOARDING_V600": {
+        "media_asset_id": "MEDIA_ASSET01",
+        "id": "ONBOARDING_V600"
+      },
+      "ONBOARDING_V601": {
+        "media_asset_id": "MEDIA_ASSET01",
+        "id": "ONBOARDING_V601"
+      },
+      "ONBOARDING_V602": {
+        "media_asset_id": "MEDIA_ASSET01",
+        "id": "ONBOARDING_V602"
+      }
+    }
+  },
+  "new": {
+    "onboarding_v6": {
+      "onboarding_v6_ref01": {}
+    }
+  },
+  "requests": {
+    "DELETE /api/onboarding-v6/repost-content/{media_asset_id}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

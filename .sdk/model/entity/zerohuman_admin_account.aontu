@@ -1,0 +1,137 @@
+# Entity: zerohuman_admin_account
+
+main: kit: entity: zerohuman_admin_account: {
+
+  alias: field: {}
+
+  fields: {
+    account_mode: {
+      h: "Account Mode"
+      n: "account_mode"
+      r: true
+      t: "`$STRING`"
+    }
+    active_queue_count: {
+      h: "Active Queue Count"
+      n: "active_queue_count"
+      r: true
+      t: "`$INTEGER`"
+    }
+    assigned_agent: {
+      h: "Assigned Agent"
+      n: "assigned_agent"
+      r: false
+      t: "`$ANY`"
+    }
+    created_at: {
+      h: "Created At"
+      n: "created_at"
+      r: false
+      t: "`$ANY`"
+    }
+    email: {
+      h: "Email"
+      n: "email"
+      r: true
+      t: "`$STRING`"
+    }
+    external_user_id: {
+      h: "External User Id"
+      n: "external_user_id"
+      r: true
+      t: "`$STRING`"
+    }
+    membership: {
+      h: "Membership"
+      n: "membership"
+      r: false
+      t: "`$ANY`"
+    }
+    policy_code: {
+      h: "Policy Code"
+      n: "policy_code"
+      r: false
+      t: "`$ANY`"
+    }
+    product_id: {
+      h: "Product Id"
+      n: "product_id"
+      r: false
+      t: "`$STRING`"
+    }
+    product_name: {
+      h: "Product Name"
+      n: "product_name"
+      r: false
+      t: "`$ANY`"
+    }
+    provisioning_status: {
+      h: "Provisioning Status"
+      n: "provisioning_status"
+      r: true
+      t: "`$STRING`"
+    }
+    subscription_status: {
+      h: "Subscription Status"
+      n: "subscription_status"
+      r: false
+      t: "`$ANY`"
+    }
+    updated_at: {
+      h: "Updated At"
+      n: "updated_at"
+      r: false
+      t: "`$ANY`"
+    }
+    user_id: {
+      fo: "uuid"
+      h: "User Id"
+      n: "user_id"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  name: "zerohuman_admin_account"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/admin/zerohuman/accounts"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/admin/zerohuman/accounts"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "zerohuman"
+            }
+            {
+              lit: "accounts"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

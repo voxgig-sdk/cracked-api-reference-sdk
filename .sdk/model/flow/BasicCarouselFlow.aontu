@@ -1,0 +1,56 @@
+# BasicCarouselFlow
+
+main: kit: flow: BasicCarouselFlow:
+{
+  entity: "carousel",
+  kind: "basic",
+  name: "BasicCarouselFlow",
+  step: [
+    {
+      i: {
+        ref: "carousel_ref01"
+      }
+
+      m: {
+        video_id: "video01"
+      }
+
+      o: "create"
+    }
+
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "carousel_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "carousel_ref01",
+        srcdatavar: "carousel_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "carousel01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-carousel_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicCarouselFlow"
+}

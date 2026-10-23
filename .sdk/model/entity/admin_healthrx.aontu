@@ -1,0 +1,876 @@
+# Entity: admin_healthrx
+
+main: kit: entity: admin_healthrx: {
+
+  alias: field: {}
+
+  fields: {
+    action: {
+      h: "Action"
+      n: "action"
+      r: true
+      t: "`$STRING`"
+    }
+    delivery_enabled: {
+      h: "Delivery Enabled"
+      n: "delivery_enabled"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+    option_id: {
+      h: "Option Id"
+      n: "option_id"
+      r: true
+      t: "`$STRING`"
+    }
+    plan: {
+      h: "Plan"
+      n: "plan"
+      r: true
+      t: "`$OBJECT`"
+    }
+    preparation_enabled: {
+      h: "Preparation Enabled"
+      n: "preparation_enabled"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    product_id: {
+      fo: "uuid"
+      h: "Product Id"
+      n: "product_id"
+      r: true
+      t: "`$STRING`"
+    }
+    reason: {
+      h: "Reason"
+      n: "reason"
+      r: true
+      t: "`$STRING`"
+    }
+    request_key: {
+      h: "Request Key"
+      n: "request_key"
+      r: true
+      t: "`$STRING`"
+    }
+    revision: {
+      h: "Revision"
+      n: "revision"
+      r: true
+      t: "`$INTEGER`"
+    }
+    schedule_enabled: {
+      h: "Schedule Enabled"
+      n: "schedule_enabled"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    version: {
+      h: "Version"
+      n: "version"
+      r: true
+      t: "`$STRING`"
+    }
+    viewed: {
+      h: "Viewed"
+      n: "viewed"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+    parts: [
+      "kind"
+      "item_id"
+    ]
+    sep: "/"
+  }
+
+  name: "admin_healthrx"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "action"
+            "reason"
+            "version"
+          ]
+          co: {
+            id: "POST /api/admin/healthrx/items/{kind}/{item_id}/decision"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "item_id"
+                or: "item_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "kind"
+                or: "kind"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/admin/healthrx/items/{kind}/{item_id}/decision"
+          q: {
+            exist: [
+              "item_id"
+              "kind"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "healthrx"
+            }
+            {
+              lit: "items"
+            }
+            {
+              var: "kind"
+            }
+            {
+              var: "item_id"
+            }
+            {
+              lit: "decision"
+            }
+          ]
+          t: {
+            req: {
+              action: "`reqdata.action`"
+              reason: "`reqdata.reason`"
+              version: "`reqdata.version`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "option_id"
+            "version"
+          ]
+          co: {
+            id: "POST /api/admin/healthrx/items/comments/{item_id}/selection"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "comment_id"
+                or: "item_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/admin/healthrx/items/comments/{item_id}/selection"
+          q: {
+            exist: [
+              "comment_id"
+            ]
+          }
+          r: {
+            param: {
+              item_id: "comment_id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "healthrx"
+            }
+            {
+              lit: "items"
+            }
+            {
+              lit: "comments"
+            }
+            {
+              var: "comment_id"
+            }
+            {
+              lit: "selection"
+            }
+          ]
+          t: {
+            req: {
+              option_id: "`reqdata.option_id`"
+              version: "`reqdata.version`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "product_id"
+            "viewed"
+          ]
+          co: {
+            id: "POST /api/admin/healthrx/videos/{source_id}/viewed"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "video_id"
+                or: "source_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/admin/healthrx/videos/{source_id}/viewed"
+          q: {
+            exist: [
+              "video_id"
+            ]
+          }
+          r: {
+            param: {
+              source_id: "video_id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "healthrx"
+            }
+            {
+              lit: "videos"
+            }
+            {
+              var: "video_id"
+            }
+            {
+              lit: "viewed"
+            }
+          ]
+          t: {
+            req: {
+              product_id: "`reqdata.product_id`"
+              viewed: "`reqdata.viewed`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "plan"
+            "product_id"
+            "request_key"
+          ]
+          co: {
+            id: "POST /api/admin/healthrx/automation/runs"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/admin/healthrx/automation/runs"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "healthrx"
+            }
+            {
+              lit: "automation"
+            }
+            {
+              lit: "runs"
+            }
+          ]
+          t: {
+            req: {
+              plan: "`reqdata.plan`"
+              product_id: "`reqdata.product_id`"
+              request_key: "`reqdata.request_key`"
+            }
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/admin/healthrx/items/{kind}/{item_id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "item_id"
+                or: "item_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "kind"
+                or: "kind"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/healthrx/items/{kind}/{item_id}"
+          q: {
+            exist: [
+              "item_id"
+              "kind"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "healthrx"
+            }
+            {
+              lit: "items"
+            }
+            {
+              var: "kind"
+            }
+            {
+              var: "item_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/admin/healthrx/automation"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "product_id"
+                or: "product_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "run_id"
+                or: "run_id"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/healthrx/automation"
+          q: {
+            exist: [
+              "product_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "healthrx"
+            }
+            {
+              lit: "automation"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/admin/healthrx/automation/config"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "product_id"
+                or: "product_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/healthrx/automation/config"
+          q: {
+            exist: [
+              "product_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "healthrx"
+            }
+            {
+              lit: "automation"
+            }
+            {
+              lit: "config"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/admin/healthrx/videos"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "day"
+                or: "day"
+                r: false
+                t: "`$ANY`"
+              }
+              {
+                ex: 30
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                ex: 0
+                k: "query"
+                n: "offset"
+                or: "offset"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "product_id"
+                or: "product_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                ex: "all"
+                k: "query"
+                n: "view"
+                or: "view"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/healthrx/videos"
+          q: {
+            exist: [
+              "product_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "healthrx"
+            }
+            {
+              lit: "videos"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/admin/healthrx/customers"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/admin/healthrx/customers"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "healthrx"
+            }
+            {
+              lit: "customers"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/admin/healthrx/inbox"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: "comments"
+                k: "query"
+                n: "kind"
+                or: "kind"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: 25
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                ex: 0
+                k: "query"
+                n: "offset"
+                or: "offset"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "product_id"
+                or: "product_id"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "user_id"
+                or: "user_id"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "pending"
+                k: "query"
+                n: "view"
+                or: "view"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/healthrx/inbox"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "healthrx"
+            }
+            {
+              lit: "inbox"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/admin/healthrx/products"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: ""
+                k: "query"
+                n: "search"
+                or: "search"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "user_id"
+                or: "user_id"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/healthrx/products"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "healthrx"
+            }
+            {
+              lit: "products"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/admin/healthrx/summary"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "product_id"
+                or: "product_id"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "user_id"
+                or: "user_id"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/healthrx/summary"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "healthrx"
+            }
+            {
+              lit: "summary"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    update: {
+      name: "update"
+      points: [
+        {
+          bf: [
+            "delivery_enabled"
+            "plan"
+            "preparation_enabled"
+            "product_id"
+            "revision"
+            "schedule_enabled"
+          ]
+          co: {
+            id: "PUT /api/admin/healthrx/automation/config"
+            source: "openapi3"
+            version: 2
+          }
+          m: "PUT"
+          o: "/api/admin/healthrx/automation/config"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "healthrx"
+            }
+            {
+              lit: "automation"
+            }
+            {
+              lit: "config"
+            }
+          ]
+          t: {
+            req: {
+              delivery_enabled: "`reqdata.delivery_enabled`"
+              plan: "`reqdata.plan`"
+              preparation_enabled: "`reqdata.preparation_enabled`"
+              product_id: "`reqdata.product_id`"
+              revision: "`reqdata.revision`"
+              schedule_enabled: "`reqdata.schedule_enabled`"
+            }
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.comment")]
+    [path("$.main.kit.entity.video")]
+  ]
+
+}

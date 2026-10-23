@@ -1,0 +1,118 @@
+# Entity: agent_access_user_agent
+
+main: kit: entity: agent_access_user_agent: {
+
+  alias: field: {}
+
+  fields: {
+    agentQuota: {
+      h: "Agent Quota"
+      n: "agentQuota"
+      r: true
+      t: "`$INTEGER`"
+    }
+    agents: {
+      h: "Agents"
+      n: "agents"
+      r: true
+      t: "`$ARRAY`"
+    }
+    assignedByType: {
+      h: "Assigned By Type"
+      n: "assignedByType"
+      r: true
+      t: "`$OBJECT`"
+    }
+    assignedTotal: {
+      h: "Assigned Total"
+      n: "assignedTotal"
+      r: true
+      t: "`$INTEGER`"
+    }
+    email: {
+      fo: "email"
+      h: "Email"
+      n: "email"
+      r: true
+      t: "`$STRING`"
+    }
+    products: {
+      h: "Products"
+      n: "products"
+      r: true
+      t: "`$ARRAY`"
+    }
+    userId: {
+      fo: "uuid"
+      h: "User Id"
+      n: "userId"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  name: "agent_access_user_agent"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/agent-access/user-agents"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "x_agent_access_key"
+                or: "x-agent-access-key"
+                r: false
+                t: "`$ANY`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "email"
+                or: "email"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/agent-access/user-agents"
+          q: {
+            exist: [
+              "email"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "agent-access"
+            }
+            {
+              lit: "user-agents"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

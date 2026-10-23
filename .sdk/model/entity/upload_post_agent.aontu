@@ -1,0 +1,52 @@
+# Entity: upload_post_agent
+
+main: kit: entity: upload_post_agent: {
+
+  alias: field: {}
+
+  name: "upload_post_agent"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /api/upload-post-agents/sync-platforms"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/upload-post-agents/sync-platforms"
+          q: {
+            "$action": "sync_platform"
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "upload-post-agents"
+            }
+            {
+              lit: "sync-platforms"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  fields: {
+  }
+
+
+
+}

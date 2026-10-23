@@ -1,0 +1,253 @@
+# Entity: stats_refresh_run_summary
+
+main: kit: entity: stats_refresh_run_summary: {
+
+  alias: field: {}
+
+  fields: {
+    celery_task_id: {
+      h: "Celery Task Id"
+      n: "celery_task_id"
+      r: false
+      t: "`$STRING`"
+    }
+    completed_at: {
+      h: "Completed At"
+      n: "completed_at"
+      r: false
+      t: "`$ANY`"
+    }
+    entries_failed: {
+      h: "Entries Failed"
+      n: "entries_failed"
+      r: true
+      t: "`$INTEGER`"
+    }
+    entries_skipped: {
+      h: "Entries Skipped"
+      n: "entries_skipped"
+      r: true
+      t: "`$INTEGER`"
+    }
+    entries_total: {
+      h: "Entries Total"
+      n: "entries_total"
+      r: true
+      t: "`$INTEGER`"
+    }
+    entries_updated: {
+      h: "Entries Updated"
+      n: "entries_updated"
+      r: true
+      t: "`$INTEGER`"
+    }
+    error_summary_json: {
+      h: "Error Summary Json"
+      n: "error_summary_json"
+      r: false
+      t: "`$ANY`"
+    }
+    id: {
+      fo: "uuid"
+      h: "Id"
+      n: "id"
+      r: true
+      t: "`$STRING`"
+    }
+    issues_opened: {
+      h: "Issues Opened"
+      n: "issues_opened"
+      r: true
+      t: "`$INTEGER`"
+    }
+    issues_resolved: {
+      h: "Issues Resolved"
+      n: "issues_resolved"
+      r: true
+      t: "`$INTEGER`"
+    }
+    platform_units_resolved: {
+      h: "Platform Units Resolved"
+      n: "platform_units_resolved"
+      r: true
+      t: "`$INTEGER`"
+    }
+    platform_units_total: {
+      h: "Platform Units Total"
+      n: "platform_units_total"
+      r: true
+      t: "`$INTEGER`"
+    }
+    platform_units_unresolved: {
+      h: "Platform Units Unresolved"
+      n: "platform_units_unresolved"
+      r: true
+      t: "`$INTEGER`"
+    }
+    platform_updates_via_profile: {
+      h: "Platform Updates Via Profile"
+      n: "platform_updates_via_profile"
+      r: true
+      t: "`$INTEGER`"
+    }
+    platform_updates_via_url: {
+      h: "Platform Updates Via Url"
+      n: "platform_updates_via_url"
+      r: true
+      t: "`$INTEGER`"
+    }
+    provider: {
+      h: "Provider"
+      n: "provider"
+      r: false
+      t: "`$ANY`"
+    }
+    refresh_trigger: {
+      h: "Refresh Trigger"
+      n: "refresh_trigger"
+      r: false
+      t: "`$ANY`"
+    }
+    requested_by_email: {
+      h: "Requested By Email"
+      n: "requested_by_email"
+      r: false
+      t: "`$ANY`"
+    }
+    run_type: {
+      h: "Run Type"
+      n: "run_type"
+      r: true
+      t: "`$STRING`"
+    }
+    started_at: {
+      fo: "date-time"
+      h: "Started At"
+      n: "started_at"
+      r: true
+      t: "`$STRING`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: true
+      t: "`$STRING`"
+    }
+    target_date_et: {
+      h: "Target Date Et"
+      n: "target_date_et"
+      r: false
+      t: "`$ANY`"
+    }
+    users_count: {
+      h: "Users Count"
+      n: "users_count"
+      r: true
+      t: "`$INTEGER`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "stats_refresh_run_summary"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/admin/customer-health/runs"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "date_from"
+                or: "date_from"
+                r: false
+                t: "`$ANY`"
+              }
+              {
+                k: "query"
+                n: "date_to"
+                or: "date_to"
+                r: false
+                t: "`$ANY`"
+              }
+              {
+                ex: false
+                k: "query"
+                n: "include_global"
+                or: "include_global"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+              {
+                ex: 50
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                ex: 0
+                k: "query"
+                n: "offset"
+                or: "offset"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "run_type"
+                or: "run_type"
+                r: false
+                t: "`$ANY`"
+              }
+              {
+                k: "query"
+                n: "status"
+                or: "status"
+                r: false
+                t: "`$ANY`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/customer-health/runs"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "customer-health"
+            }
+            {
+              lit: "runs"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.runs`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

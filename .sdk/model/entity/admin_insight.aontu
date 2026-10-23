@@ -1,0 +1,163 @@
+# Entity: admin_insight
+
+main: kit: entity: admin_insight: {
+
+  alias: field: {}
+
+  fields: {
+    customer_success_cases: {
+      h: "Customer Success Cases"
+      n: "customer_success_cases"
+      r: true
+      t: "`$ARRAY`"
+    }
+    customers: {
+      h: "Customers"
+      n: "customers"
+      r: true
+      t: "`$ARRAY`"
+    }
+    generated_at: {
+      fo: "date-time"
+      h: "Generated At"
+      n: "generated_at"
+      r: true
+      t: "`$STRING`"
+    }
+    pfa_database: {
+      h: "Pfa Database"
+      n: "pfa_database"
+      r: true
+      t: "`$OBJECT`"
+    }
+    recent_signups: {
+      h: "Recent Signups"
+      n: "recent_signups"
+      r: true
+      t: "`$ARRAY`"
+    }
+    summary: {
+      h: "Summary"
+      n: "summary"
+      r: true
+      t: "`$OBJECT`"
+    }
+    vireel_database: {
+      h: "Vireel Database"
+      n: "vireel_database"
+      r: true
+      t: "`$OBJECT`"
+    }
+  }
+
+  name: "admin_insight"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/admin/insights"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/admin/insights"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "insights"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/admin/insights/customer-agent-readiness"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "customer_email"
+                or: "customer_emails"
+                r: false
+                t: "`$ANY`"
+              }
+              {
+                ex: true
+                k: "query"
+                n: "include_agent"
+                or: "include_agents"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+              {
+                ex: 500
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                ex: 1
+                k: "query"
+                n: "page"
+                or: "page"
+                r: false
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/insights/customer-agent-readiness"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "insights"
+            }
+            {
+              lit: "customer-agent-readiness"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

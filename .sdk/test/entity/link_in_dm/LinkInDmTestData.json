@@ -1,0 +1,40 @@
+{
+  "existing": {
+    "link_in_dm": {
+      "LINK_IN_DM00": {
+        "linkInDmsType": "s1e",
+        "redirectUrl": "s1f",
+        "slug": "s20",
+        "id": "LINK_IN_DM00"
+      },
+      "LINK_IN_DM01": {
+        "linkInDmsType": "s3c",
+        "redirectUrl": "s3d",
+        "slug": "s3e",
+        "id": "LINK_IN_DM01"
+      },
+      "LINK_IN_DM02": {
+        "linkInDmsType": "s5a",
+        "redirectUrl": "s5b",
+        "slug": "s5c",
+        "id": "LINK_IN_DM02"
+      }
+    }
+  },
+  "new": {
+    "link_in_dm": {
+      "link_in_dm_ref01": {
+        "linkInDmsType": "s78",
+        "redirectUrl": "s79",
+        "slug": "s7a"
+      }
+    }
+  },
+  "requests": {
+    "GET /api/sites/{slug}/link-in-dms": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

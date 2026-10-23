@@ -1,0 +1,106 @@
+# Entity: seo_keyword
+
+main: kit: entity: seo_keyword: {
+
+  alias: field: {}
+
+  fields: {
+    blog_page: {
+      h: "Blog Page"
+      n: "blog_page"
+      r: true
+      t: "`$STRING`"
+    }
+    current_position: {
+      h: "Current Position"
+      n: "current_position"
+      r: true
+      t: "`$NUMBER`"
+    }
+    keyword: {
+      h: "Keyword"
+      n: "keyword"
+      r: true
+      t: "`$STRING`"
+    }
+    keyword_group: {
+      h: "Keyword Group"
+      n: "keyword_group"
+      r: true
+      t: "`$STRING`"
+    }
+    position_change: {
+      h: "Position Change"
+      n: "position_change"
+      r: true
+      t: "`$NUMBER`"
+    }
+  }
+
+  name: "seo_keyword"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/seo/keywords"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: 28
+                k: "query"
+                n: "day"
+                or: "days"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                ex: 200
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "product_id"
+                or: "product_id"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/seo/keywords"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "seo"
+            }
+            {
+              lit: "keywords"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.rows`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

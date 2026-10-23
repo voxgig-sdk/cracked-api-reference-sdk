@@ -1,0 +1,132 @@
+# Entity: refresh_stat
+
+main: kit: entity: refresh_stat: {
+
+  alias: field: {}
+
+  fields: {
+    date_from: {
+      h: "Date From"
+      n: "date_from"
+      r: false
+      sh: "Start date to refresh stats for (defaults to yesterday)"
+      t: "`$ANY`"
+    }
+    date_to: {
+      h: "Date To"
+      n: "date_to"
+      r: false
+      sh: "End date to refresh stats for (defaults to date_from)"
+      t: "`$ANY`"
+    }
+    entries_found: {
+      h: "Entries Found"
+      n: "entries_found"
+      r: true
+      t: "`$INTEGER`"
+    }
+    message: {
+      h: "Message"
+      n: "message"
+      r: true
+      t: "`$STRING`"
+    }
+    provider: {
+      h: "Provider"
+      n: "provider"
+      op: {
+        create: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      r: true
+      sh: "Scraping provider to use"
+      t: "`$STRING`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: true
+      t: "`$STRING`"
+    }
+    summary: {
+      h: "Summary"
+      n: "summary"
+      r: false
+      t: "`$ANY`"
+    }
+  }
+
+  name: "refresh_stat"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "date_from"
+            "date_to"
+            "provider"
+          ]
+          co: {
+            id: "POST /api/analytics/refresh-stats"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "x_agent_access_key"
+                or: "x-agent-access-key"
+                r: false
+                t: "`$ANY`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "email"
+                or: "email"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "user_id"
+                or: "user_id"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/analytics/refresh-stats"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "analytics"
+            }
+            {
+              lit: "refresh-stats"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

@@ -1,0 +1,44 @@
+# BasicHealthrxFlow
+
+main: kit: flow: BasicHealthrxFlow:
+{
+  entity: "healthrx",
+  kind: "basic",
+  name: "BasicHealthrxFlow",
+  step: [
+    {
+      i: {
+        ref: "healthrx_ref01"
+      }
+
+      m: {
+        product_id: "product01"
+      }
+
+      o: "create"
+    }
+
+    {
+      i: {
+        ref: "healthrx_ref01",
+        srcdatavar: "healthrx_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "healthrx01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-healthrx_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicHealthrxFlow"
+}

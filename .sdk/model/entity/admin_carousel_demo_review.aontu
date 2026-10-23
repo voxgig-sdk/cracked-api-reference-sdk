@@ -1,0 +1,321 @@
+# Entity: admin_carousel_demo_review
+
+main: kit: entity: admin_carousel_demo_review: {
+
+  alias: field: {}
+
+  fields: {
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+    items: {
+      h: "Items"
+      n: "items"
+      r: true
+      t: "`$ARRAY`"
+    }
+    reason: {
+      h: "Reason"
+      n: "reason"
+      r: false
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "admin_carousel_demo_review"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "action"
+            "demo_version"
+            "expected_decision_id"
+            "input_sha256"
+            "reason"
+            "slides_sha256"
+          ]
+          co: {
+            id: "POST /api/admin/carousels/demo-reviews/{formula_id}/decision"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "demo_review_id"
+                or: "formula_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/admin/carousels/demo-reviews/{formula_id}/decision"
+          q: {
+            "$action": "decision"
+            exist: [
+              "demo_review_id"
+            ]
+          }
+          r: {
+            param: {
+              formula_id: "demo_review_id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "carousels"
+            }
+            {
+              lit: "demo-reviews"
+            }
+            {
+              var: "demo_review_id"
+            }
+            {
+              lit: "decision"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "items"
+            "reason"
+          ]
+          co: {
+            id: "POST /api/admin/carousels/demo-reviews/bulk-approve"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/admin/carousels/demo-reviews/bulk-approve"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "carousels"
+            }
+            {
+              lit: "demo-reviews"
+            }
+            {
+              lit: "bulk-approve"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/admin/carousels/demo-reviews/{formula_id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "formula_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/carousels/demo-reviews/{formula_id}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              formula_id: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "carousels"
+            }
+            {
+              lit: "demo-reviews"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/admin/carousels/demo-reviews/items"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "formula_id"
+                or: "formula_id"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/carousels/demo-reviews/items"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "carousels"
+            }
+            {
+              lit: "demo-reviews"
+            }
+            {
+              lit: "items"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    update: {
+      name: "update"
+      points: [
+        {
+          bf: [
+            "assignee"
+          ]
+          co: {
+            id: "PUT /api/admin/carousels/demo-reviews/{formula_id}/assignee"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "demo_review_id"
+                or: "formula_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PUT"
+          o: "/api/admin/carousels/demo-reviews/{formula_id}/assignee"
+          q: {
+            "$action": "assignee"
+            exist: [
+              "demo_review_id"
+            ]
+          }
+          r: {
+            param: {
+              formula_id: "demo_review_id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "carousels"
+            }
+            {
+              lit: "demo-reviews"
+            }
+            {
+              var: "demo_review_id"
+            }
+            {
+              lit: "assignee"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

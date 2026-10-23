@@ -1,0 +1,28 @@
+# BasicAgentStatFlow
+
+main: kit: flow: BasicAgentStatFlow:
+{
+  entity: "agent_stat",
+  kind: "basic",
+  name: "BasicAgentStatFlow",
+  step: [
+    {
+      i: {
+        ref: "agent_stat_ref01",
+        srcdatavar: "agent_stat_ref01_data",
+        suffix: "_dt0"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-agent_stat_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicAgentStatFlow"
+}

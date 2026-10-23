@@ -1,0 +1,141 @@
+{
+  "existing": {
+    "admin_carousel": {
+      "ADMIN_CAROUSEL00": {
+        "agent_id": "AGENT01",
+        "batch_id": "BATCH01",
+        "caption": "s84",
+        "content_base64": "s85",
+        "day": "s86",
+        "dry_run": false,
+        "engine_run": "s88",
+        "expected_revision": "s89",
+        "formula": {},
+        "formula_id": "FORMULA01",
+        "prompt": "s8c",
+        "slides": [],
+        "title": "s8e",
+        "stage": "STAGE01",
+        "fmt": "FMT01",
+        "id": "ADMIN_CAROUSEL00"
+      },
+      "ADMIN_CAROUSEL01": {
+        "agent_id": "AGENT01",
+        "batch_id": "BATCH01",
+        "caption": "s106",
+        "content_base64": "s107",
+        "day": "s108",
+        "dry_run": false,
+        "engine_run": "s10a",
+        "expected_revision": "s10b",
+        "formula": {},
+        "formula_id": "FORMULA01",
+        "prompt": "s10e",
+        "slides": [],
+        "title": "s110",
+        "stage": "STAGE01",
+        "fmt": "FMT01",
+        "id": "ADMIN_CAROUSEL01"
+      },
+      "ADMIN_CAROUSEL02": {
+        "agent_id": "AGENT01",
+        "batch_id": "BATCH01",
+        "caption": "s188",
+        "content_base64": "s189",
+        "day": "s18a",
+        "dry_run": false,
+        "engine_run": "s18c",
+        "expected_revision": "s18d",
+        "formula": {},
+        "formula_id": "FORMULA01",
+        "prompt": "s190",
+        "slides": [],
+        "title": "s192",
+        "stage": "STAGE01",
+        "fmt": "FMT01",
+        "id": "ADMIN_CAROUSEL02"
+      }
+    }
+  },
+  "new": {
+    "admin_carousel": {
+      "admin_carousel_ref01": {
+        "agent_id": "AGENT01",
+        "batch_id": "BATCH01",
+        "caption": "s20a",
+        "content_base64": "s20b",
+        "day": "s20c",
+        "dry_run": false,
+        "engine_run": "s20e",
+        "expected_revision": "s20f",
+        "formula": {},
+        "formula_id": "FORMULA01",
+        "prompt": "s212",
+        "slides": [],
+        "title": "s214"
+      }
+    }
+  },
+  "requests": {
+    "POST /api/admin/carousels/slideshow-import/{batch_id}/state": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/carousels/slideshow-import/diag/{stage}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/carousels/slideshow-import/decks": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/carousels/slideshow-import/decks-json": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/carousels/slideshow-import/{batch_id}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/carousels/production-prompts/{fmt}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/carousels/demo-formulas/{formula_id}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/carousels/demo-formulas": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/carousels/freeform-production-prompt": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PUT /api/admin/carousels/production-prompts/{fmt}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PUT /api/admin/carousels/demo-formulas/{formula_id}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PUT /api/admin/carousels/freeform-production-prompt": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

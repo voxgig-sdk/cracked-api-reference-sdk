@@ -1,0 +1,27 @@
+{
+  "existing": {
+    "style": {
+      "STYLE00": {
+        "id": "STYLE00"
+      },
+      "STYLE01": {
+        "id": "STYLE01"
+      },
+      "STYLE02": {
+        "id": "STYLE02"
+      }
+    }
+  },
+  "new": {
+    "style": {
+      "style_ref01": {}
+    }
+  },
+  "requests": {
+    "GET /api/carousel/styles": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

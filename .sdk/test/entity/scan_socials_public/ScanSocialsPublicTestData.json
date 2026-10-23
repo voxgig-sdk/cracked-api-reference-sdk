@@ -1,0 +1,52 @@
+{
+  "existing": {
+    "scan_socials_public": {
+      "SCAN_SOCIALS_PUBLIC00": {
+        "instagram_handle": "s3c",
+        "message": "s3d",
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "status": "s3f",
+        "success": true,
+        "tiktok_handle": "s41",
+        "id": "SCAN_SOCIALS_PUBLIC00"
+      },
+      "SCAN_SOCIALS_PUBLIC01": {
+        "instagram_handle": "s78",
+        "message": "s79",
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "status": "s7b",
+        "success": true,
+        "tiktok_handle": "s7d",
+        "id": "SCAN_SOCIALS_PUBLIC01"
+      },
+      "SCAN_SOCIALS_PUBLIC02": {
+        "instagram_handle": "sb4",
+        "message": "sb5",
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "status": "sb7",
+        "success": true,
+        "tiktok_handle": "sb9",
+        "id": "SCAN_SOCIALS_PUBLIC02"
+      }
+    }
+  },
+  "new": {
+    "scan_socials_public": {
+      "scan_socials_public_ref01": {
+        "instagram_handle": "sf0",
+        "message": "sf1",
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "status": "sf3",
+        "success": true,
+        "tiktok_handle": "sf5"
+      }
+    }
+  },
+  "requests": {
+    "POST /api/onboarding-v6/scan-socials-public": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

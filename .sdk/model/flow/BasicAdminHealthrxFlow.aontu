@@ -1,0 +1,59 @@
+# BasicAdminHealthrxFlow
+
+main: kit: flow: BasicAdminHealthrxFlow:
+{
+  entity: "admin_healthrx",
+  kind: "basic",
+  name: "BasicAdminHealthrxFlow",
+  step: [
+    {
+      i: {
+        ref: "admin_healthrx_ref01"
+      }
+
+      m: {
+        kind: "kind01"
+      }
+
+      o: "create"
+    }
+
+    {
+      i: {
+        ref: "admin_healthrx_ref01",
+        srcdatavar: "admin_healthrx_ref01_data",
+        suffix: "_up0",
+        textfield: "action"
+      }
+
+      o: "update",
+      s: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-admin_healthrx_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "admin_healthrx_ref01",
+        srcdatavar: "admin_healthrx_ref01_data",
+        suffix: "_dt0"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-admin_healthrx_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicAdminHealthrxFlow"
+}

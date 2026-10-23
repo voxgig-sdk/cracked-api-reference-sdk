@@ -1,0 +1,76 @@
+{
+  "existing": {
+    "microhub_public": {
+      "MICROHUB_PUBLIC00": {
+        "bio": "s78",
+        "ctaButtonText": "s79",
+        "ctaDescription": "s7a",
+        "ctaLink": "s7b",
+        "ctaTitle": "s7c",
+        "headerImageUrl": "s7d",
+        "links": [],
+        "name": "s7f",
+        "profileImageUrl": "s80",
+        "slug": "s81",
+        "socialLinks": {},
+        "testimonials": [],
+        "id": "MICROHUB_PUBLIC00"
+      },
+      "MICROHUB_PUBLIC01": {
+        "bio": "sf0",
+        "ctaButtonText": "sf1",
+        "ctaDescription": "sf2",
+        "ctaLink": "sf3",
+        "ctaTitle": "sf4",
+        "headerImageUrl": "sf5",
+        "links": [],
+        "name": "sf7",
+        "profileImageUrl": "sf8",
+        "slug": "sf9",
+        "socialLinks": {},
+        "testimonials": [],
+        "id": "MICROHUB_PUBLIC01"
+      },
+      "MICROHUB_PUBLIC02": {
+        "bio": "s168",
+        "ctaButtonText": "s169",
+        "ctaDescription": "s16a",
+        "ctaLink": "s16b",
+        "ctaTitle": "s16c",
+        "headerImageUrl": "s16d",
+        "links": [],
+        "name": "s16f",
+        "profileImageUrl": "s170",
+        "slug": "s171",
+        "socialLinks": {},
+        "testimonials": [],
+        "id": "MICROHUB_PUBLIC02"
+      }
+    }
+  },
+  "new": {
+    "microhub_public": {
+      "microhub_public_ref01": {
+        "bio": "s1e0",
+        "ctaButtonText": "s1e1",
+        "ctaDescription": "s1e2",
+        "ctaLink": "s1e3",
+        "ctaTitle": "s1e4",
+        "headerImageUrl": "s1e5",
+        "links": [],
+        "name": "s1e7",
+        "profileImageUrl": "s1e8",
+        "slug": "s1e9",
+        "socialLinks": {},
+        "testimonials": []
+      }
+    }
+  },
+  "requests": {
+    "GET /api/sites/{slug}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

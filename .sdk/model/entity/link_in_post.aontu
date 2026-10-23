@@ -1,0 +1,95 @@
+# Entity: link_in_post
+
+main: kit: entity: link_in_post: {
+
+  alias: field: {}
+
+  fields: {
+    linkInPostsType: {
+      h: "Link In Posts Type"
+      n: "linkInPostsType"
+      r: true
+      t: "`$STRING`"
+    }
+    redirectUrl: {
+      h: "Redirect Url"
+      n: "redirectUrl"
+      r: true
+      t: "`$STRING`"
+    }
+    showLinkInFirstComment: {
+      h: "Show Link In First Comment"
+      n: "showLinkInFirstComment"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    slug: {
+      h: "Slug"
+      n: "slug"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  name: "link_in_post"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/sites/{slug}/link-in-posts"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "slug"
+                or: "slug"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/sites/{slug}/link-in-posts"
+          q: {
+            exist: [
+              "slug"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "sites"
+            }
+            {
+              var: "slug"
+            }
+            {
+              lit: "link-in-posts"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.site")]
+  ]
+
+}

@@ -1,0 +1,162 @@
+# Entity: iris_task
+
+main: kit: entity: iris_task: {
+
+  alias: field: {}
+
+  fields: {
+    approvalRequired: {
+      h: "Approval Required"
+      n: "approvalRequired"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    cadence: {
+      h: "Cadence"
+      n: "cadence"
+      r: false
+      t: "`$STRING`"
+    }
+    capability: {
+      h: "Capability"
+      n: "capability"
+      r: false
+      t: "`$ANY`"
+    }
+    completed: {
+      h: "Completed"
+      n: "completed"
+      r: false
+      t: "`$ARRAY`"
+    }
+    description: {
+      h: "Description"
+      n: "description"
+      r: false
+      t: "`$STRING`"
+    }
+    discover: {
+      h: "Discover"
+      n: "discover"
+      r: false
+      t: "`$ARRAY`"
+    }
+    productId: {
+      h: "Product Id"
+      n: "productId"
+      r: false
+      t: "`$ANY`"
+    }
+    recurring: {
+      h: "Recurring"
+      n: "recurring"
+      r: false
+      t: "`$ARRAY`"
+    }
+    requiredConnectors: {
+      h: "Required Connectors"
+      n: "requiredConnectors"
+      r: false
+      t: "`$ARRAY`"
+    }
+    title: {
+      h: "Title"
+      n: "title"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  name: "iris_task"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "approvalRequired"
+            "cadence"
+            "capability"
+            "description"
+            "productId"
+            "requiredConnectors"
+            "title"
+          ]
+          co: {
+            id: "POST /api/iris/tasks"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/iris/tasks"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "iris"
+            }
+            {
+              lit: "tasks"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/iris/tasks"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "product_id"
+                or: "product_id"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/iris/tasks"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "iris"
+            }
+            {
+              lit: "tasks"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

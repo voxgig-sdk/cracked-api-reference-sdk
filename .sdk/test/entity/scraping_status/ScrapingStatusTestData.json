@@ -1,0 +1,27 @@
+{
+  "existing": {
+    "scraping_status": {
+      "SCRAPING_STATUS00": {
+        "id": "SCRAPING_STATUS00"
+      },
+      "SCRAPING_STATUS01": {
+        "id": "SCRAPING_STATUS01"
+      },
+      "SCRAPING_STATUS02": {
+        "id": "SCRAPING_STATUS02"
+      }
+    }
+  },
+  "new": {
+    "scraping_status": {
+      "scraping_status_ref01": {}
+    }
+  },
+  "requests": {
+    "GET /api/scraper/scraping_status": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

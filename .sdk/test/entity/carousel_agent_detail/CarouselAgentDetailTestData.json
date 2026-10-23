@@ -1,0 +1,76 @@
+{
+  "existing": {
+    "carousel_agent_detail": {
+      "CAROUSEL_AGENT_DETAIL00": {
+        "agent_id": "AGENT01",
+        "agent_name": "s79",
+        "connection_status": "s7a",
+        "followers": "s7b",
+        "following": "s7c",
+        "metrics_updated_at": "s7d",
+        "phone_admin_status": "s7e",
+        "profile_likes": "s7f",
+        "profile_url": "s80",
+        "warmup_days": "s81",
+        "warmup_hold_until": "s82",
+        "warmup_status": "s83",
+        "id": "CAROUSEL_AGENT_DETAIL00"
+      },
+      "CAROUSEL_AGENT_DETAIL01": {
+        "agent_id": "AGENT01",
+        "agent_name": "sf1",
+        "connection_status": "sf2",
+        "followers": "sf3",
+        "following": "sf4",
+        "metrics_updated_at": "sf5",
+        "phone_admin_status": "sf6",
+        "profile_likes": "sf7",
+        "profile_url": "sf8",
+        "warmup_days": "sf9",
+        "warmup_hold_until": "sfa",
+        "warmup_status": "sfb",
+        "id": "CAROUSEL_AGENT_DETAIL01"
+      },
+      "CAROUSEL_AGENT_DETAIL02": {
+        "agent_id": "AGENT01",
+        "agent_name": "s169",
+        "connection_status": "s16a",
+        "followers": "s16b",
+        "following": "s16c",
+        "metrics_updated_at": "s16d",
+        "phone_admin_status": "s16e",
+        "profile_likes": "s16f",
+        "profile_url": "s170",
+        "warmup_days": "s171",
+        "warmup_hold_until": "s172",
+        "warmup_status": "s173",
+        "id": "CAROUSEL_AGENT_DETAIL02"
+      }
+    }
+  },
+  "new": {
+    "carousel_agent_detail": {
+      "carousel_agent_detail_ref01": {
+        "agent_id": "AGENT01",
+        "agent_name": "s1e1",
+        "connection_status": "s1e2",
+        "followers": "s1e3",
+        "following": "s1e4",
+        "metrics_updated_at": "s1e5",
+        "phone_admin_status": "s1e6",
+        "profile_likes": "s1e7",
+        "profile_url": "s1e8",
+        "warmup_days": "s1e9",
+        "warmup_hold_until": "s1ea",
+        "warmup_status": "s1eb"
+      }
+    }
+  },
+  "requests": {
+    "GET /api/admin/carousels/agents/{agent_id}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

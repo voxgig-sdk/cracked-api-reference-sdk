@@ -1,0 +1,53 @@
+{
+  "existing": {
+    "user_agent": {
+      "USER_AGENT00": {
+        "agent": {},
+        "assigned_at": "s3d",
+        "assignment_id": "ASSIGNMENT01",
+        "expires_at": "s3f",
+        "id": "USER_AGENT00",
+        "status": "s41"
+      },
+      "USER_AGENT01": {
+        "agent": {},
+        "assigned_at": "s79",
+        "assignment_id": "ASSIGNMENT01",
+        "expires_at": "s7b",
+        "id": "USER_AGENT01",
+        "status": "s7d"
+      },
+      "USER_AGENT02": {
+        "agent": {},
+        "assigned_at": "sb5",
+        "assignment_id": "ASSIGNMENT01",
+        "expires_at": "sb7",
+        "id": "USER_AGENT02",
+        "status": "sb9"
+      }
+    }
+  },
+  "new": {
+    "user_agent": {
+      "user_agent_ref01": {
+        "agent": {},
+        "assigned_at": "sf1",
+        "assignment_id": "ASSIGNMENT01",
+        "expires_at": "sf3",
+        "status": "sf5"
+      }
+    }
+  },
+  "requests": {
+    "POST /api/admin/users/{user_id}/agents": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/users/{user_id}/agents": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+# BasicSora2AvatarStatFlow
+
+main: kit: flow: BasicSora2AvatarStatFlow:
+{
+  entity: "sora2_avatar_stat",
+  kind: "basic",
+  name: "BasicSora2AvatarStatFlow",
+  step: [
+    {
+      i: {
+        ref: "sora2_avatar_stat_ref01",
+        srcdatavar: "sora2_avatar_stat_ref01_data",
+        suffix: "_dt0"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-sora2_avatar_stat_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicSora2AvatarStatFlow"
+}

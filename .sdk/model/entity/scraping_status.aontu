@@ -1,0 +1,49 @@
+# Entity: scraping_status
+
+main: kit: entity: scraping_status: {
+
+  alias: field: {}
+
+  name: "scraping_status"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/scraper/scraping_status"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/scraper/scraping_status"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "scraper"
+            }
+            {
+              lit: "scraping_status"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+      ]
+    }
+  }
+
+  fields: {
+  }
+
+
+
+}

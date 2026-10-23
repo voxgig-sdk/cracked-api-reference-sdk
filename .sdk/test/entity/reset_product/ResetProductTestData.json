@@ -1,0 +1,32 @@
+{
+  "existing": {
+    "reset_product": {
+      "RESET_PRODUCT00": {
+        "id": "RESET_PRODUCT00"
+      },
+      "RESET_PRODUCT01": {
+        "id": "RESET_PRODUCT01"
+      },
+      "RESET_PRODUCT02": {
+        "id": "RESET_PRODUCT02"
+      }
+    }
+  },
+  "new": {
+    "reset_product": {
+      "reset_product_ref01": {}
+    }
+  },
+  "requests": {
+    "POST /api/reset-product/generate-videos-v6": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/reset-product/generate-videos/status": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

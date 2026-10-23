@@ -1,0 +1,22 @@
+# BasicProductDashboardViewFlow
+
+main: kit: flow: BasicProductDashboardViewFlow:
+{
+  entity: "product_dashboard_view",
+  kind: "basic",
+  name: "BasicProductDashboardViewFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "product_dashboard_view_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicProductDashboardViewFlow"
+}

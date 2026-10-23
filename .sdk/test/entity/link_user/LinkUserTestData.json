@@ -1,0 +1,40 @@
+{
+  "existing": {
+    "link_user": {
+      "LINK_USER00": {
+        "already_linked": true,
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "success": true,
+        "id": "LINK_USER00"
+      },
+      "LINK_USER01": {
+        "already_linked": true,
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "success": true,
+        "id": "LINK_USER01"
+      },
+      "LINK_USER02": {
+        "already_linked": true,
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "success": true,
+        "id": "LINK_USER02"
+      }
+    }
+  },
+  "new": {
+    "link_user": {
+      "link_user_ref01": {
+        "already_linked": true,
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "success": true
+      }
+    }
+  },
+  "requests": {
+    "POST /api/onboarding-v6/link-user": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

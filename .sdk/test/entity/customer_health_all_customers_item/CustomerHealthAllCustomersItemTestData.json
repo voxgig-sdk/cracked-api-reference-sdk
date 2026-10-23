@@ -1,0 +1,53 @@
+{
+  "existing": {
+    "customer_health_all_customers_item": {
+      "CUSTOMER_HEALTH_ALL_CUSTOMERS_ITEM00": {
+        "account_type": "s46",
+        "assigned_agents_count": 71,
+        "daily_stats": [],
+        "email": "s49",
+        "is_migrated": true,
+        "total_views": 75,
+        "user_id": "USER01"
+      },
+      "CUSTOMER_HEALTH_ALL_CUSTOMERS_ITEM01": {
+        "account_type": "s8c",
+        "assigned_agents_count": 141,
+        "daily_stats": [],
+        "email": "s8f",
+        "is_migrated": true,
+        "total_views": 145,
+        "user_id": "USER01"
+      },
+      "CUSTOMER_HEALTH_ALL_CUSTOMERS_ITEM02": {
+        "account_type": "sd2",
+        "assigned_agents_count": 211,
+        "daily_stats": [],
+        "email": "sd5",
+        "is_migrated": true,
+        "total_views": 215,
+        "user_id": "USER01"
+      }
+    }
+  },
+  "new": {
+    "customer_health_all_customers_item": {
+      "customer_health_all_customers_item_ref01": {
+        "account_type": "s118",
+        "assigned_agents_count": 281,
+        "daily_stats": [],
+        "email": "s11b",
+        "is_migrated": true,
+        "total_views": 285,
+        "user_id": "USER01"
+      }
+    }
+  },
+  "requests": {
+    "GET /api/admin/customer-health/all-customers": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

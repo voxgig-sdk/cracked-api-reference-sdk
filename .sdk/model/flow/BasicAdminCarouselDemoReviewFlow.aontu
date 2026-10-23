@@ -1,0 +1,55 @@
+# BasicAdminCarouselDemoReviewFlow
+
+main: kit: flow: BasicAdminCarouselDemoReviewFlow:
+{
+  entity: "admin_carousel_demo_review",
+  kind: "basic",
+  name: "BasicAdminCarouselDemoReviewFlow",
+  step: [
+    {
+      i: {
+        ref: "admin_carousel_demo_review_ref01"
+      }
+
+      o: "create"
+    }
+
+    {
+      i: {
+        ref: "admin_carousel_demo_review_ref01",
+        srcdatavar: "admin_carousel_demo_review_ref01_data",
+        suffix: "_up0",
+        textfield: "reason"
+      }
+
+      o: "update",
+      s: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-admin_carousel_demo_review_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "admin_carousel_demo_review_ref01",
+        srcdatavar: "admin_carousel_demo_review_ref01_data",
+        suffix: "_dt0"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-admin_carousel_demo_review_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicAdminCarouselDemoReviewFlow"
+}

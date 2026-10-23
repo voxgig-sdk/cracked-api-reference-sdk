@@ -1,0 +1,68 @@
+{
+  "existing": {
+    "admin_account_reset": {
+      "ADMIN_ACCOUNT_RESET00": {
+        "agent_ids": [],
+        "agent_ids_sha256": "s65",
+        "backup_sha256": "s66",
+        "batch_size": 103,
+        "confirmation": "s68",
+        "customer_email": "s69",
+        "pc_name": "s6a",
+        "phase": "s6b",
+        "product_id": "PRODUCT01",
+        "video_ids": [],
+        "id": "ADMIN_ACCOUNT_RESET00"
+      },
+      "ADMIN_ACCOUNT_RESET01": {
+        "agent_ids": [],
+        "agent_ids_sha256": "sc9",
+        "backup_sha256": "sca",
+        "batch_size": 203,
+        "confirmation": "scc",
+        "customer_email": "scd",
+        "pc_name": "sce",
+        "phase": "scf",
+        "product_id": "PRODUCT01",
+        "video_ids": [],
+        "id": "ADMIN_ACCOUNT_RESET01"
+      },
+      "ADMIN_ACCOUNT_RESET02": {
+        "agent_ids": [],
+        "agent_ids_sha256": "s12d",
+        "backup_sha256": "s12e",
+        "batch_size": 303,
+        "confirmation": "s130",
+        "customer_email": "s131",
+        "pc_name": "s132",
+        "phase": "s133",
+        "product_id": "PRODUCT01",
+        "video_ids": [],
+        "id": "ADMIN_ACCOUNT_RESET02"
+      }
+    }
+  },
+  "new": {
+    "admin_account_reset": {
+      "admin_account_reset_ref01": {
+        "agent_ids": [],
+        "agent_ids_sha256": "s191",
+        "backup_sha256": "s192",
+        "batch_size": 403,
+        "confirmation": "s194",
+        "customer_email": "s195",
+        "pc_name": "s196",
+        "phase": "s197",
+        "product_id": "PRODUCT01",
+        "video_ids": []
+      }
+    }
+  },
+  "requests": {
+    "POST /api/admin/agent-account-reset": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

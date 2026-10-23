@@ -1,0 +1,82 @@
+# Entity: init_reset_product_v6
+
+main: kit: entity: init_reset_product_v6: {
+
+  alias: field: {}
+
+  fields: {
+    auto_schedule_disabled: {
+      h: "Auto Schedule Disabled"
+      n: "auto_schedule_disabled"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    old_product_id: {
+      h: "Old Product Id"
+      n: "old_product_id"
+      r: true
+      t: "`$STRING`"
+    }
+    product_id: {
+      h: "Product Id"
+      n: "product_id"
+      r: false
+      t: "`$STRING`"
+    }
+    queue_entries_cleared: {
+      h: "Queue Entries Cleared"
+      n: "queue_entries_cleared"
+      r: true
+      t: "`$INTEGER`"
+    }
+    success: {
+      h: "Success"
+      n: "success"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+  }
+
+  name: "init_reset_product_v6"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "product_id"
+          ]
+          co: {
+            id: "POST /api/reset-product/init-v6"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/reset-product/init-v6"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "reset-product"
+            }
+            {
+              lit: "init-v6"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

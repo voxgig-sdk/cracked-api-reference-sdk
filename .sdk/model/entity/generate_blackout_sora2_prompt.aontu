@@ -1,0 +1,73 @@
+# Entity: generate_blackout_sora2_prompt
+
+main: kit: entity: generate_blackout_sora2_prompt: {
+
+  alias: field: {}
+
+  fields: {
+    media_asset_id: {
+      fo: "uuid"
+      h: "Media Asset Id"
+      n: "media_asset_id"
+      r: true
+      t: "`$STRING`"
+    }
+    product_id: {
+      fo: "uuid"
+      h: "Product Id"
+      n: "product_id"
+      r: true
+      t: "`$STRING`"
+    }
+    prompt: {
+      h: "Prompt"
+      n: "prompt"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  name: "generate_blackout_sora2_prompt"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "media_asset_id"
+            "product_id"
+          ]
+          co: {
+            id: "POST /api/core/generate-blackout-sora2-prompt"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/core/generate-blackout-sora2-prompt"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "core"
+            }
+            {
+              lit: "generate-blackout-sora2-prompt"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

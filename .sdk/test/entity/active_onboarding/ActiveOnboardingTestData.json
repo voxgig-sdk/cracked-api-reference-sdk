@@ -1,0 +1,40 @@
+{
+  "existing": {
+    "active_onboarding": {
+      "ACTIVE_ONBOARDING00": {
+        "current_step": "s1e",
+        "has_active_onboarding": false,
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "id": "ACTIVE_ONBOARDING00"
+      },
+      "ACTIVE_ONBOARDING01": {
+        "current_step": "s3c",
+        "has_active_onboarding": false,
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "id": "ACTIVE_ONBOARDING01"
+      },
+      "ACTIVE_ONBOARDING02": {
+        "current_step": "s5a",
+        "has_active_onboarding": false,
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "id": "ACTIVE_ONBOARDING02"
+      }
+    }
+  },
+  "new": {
+    "active_onboarding": {
+      "active_onboarding_ref01": {
+        "current_step": "s78",
+        "has_active_onboarding": false,
+        "onboarding_data_id": "ONBOARDING_DATA01"
+      }
+    }
+  },
+  "requests": {
+    "GET /api/onboarding-v6/active-session": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

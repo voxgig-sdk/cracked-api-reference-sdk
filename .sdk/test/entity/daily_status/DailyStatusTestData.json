@@ -1,0 +1,27 @@
+{
+  "existing": {
+    "daily_status": {
+      "DAILY_STATUS00": {
+        "id": "DAILY_STATUS00"
+      },
+      "DAILY_STATUS01": {
+        "id": "DAILY_STATUS01"
+      },
+      "DAILY_STATUS02": {
+        "id": "DAILY_STATUS02"
+      }
+    }
+  },
+  "new": {
+    "daily_status": {
+      "daily_status_ref01": {}
+    }
+  },
+  "requests": {
+    "GET /api/carousel/daily/{product_id}/status": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

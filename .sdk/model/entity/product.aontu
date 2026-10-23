@@ -1,0 +1,936 @@
+# Entity: product
+
+main: kit: entity: product: {
+
+  alias: field: {}
+
+  fields: {
+    agent_count: {
+      h: "Agent Count"
+      n: "agent_count"
+      r: true
+      t: "`$INTEGER`"
+    }
+    agents: {
+      h: "Agents"
+      n: "agents"
+      r: true
+      t: "`$ARRAY`"
+    }
+    createdAt: {
+      h: "Created At"
+      n: "createdAt"
+      r: false
+      t: "`$ANY`"
+    }
+    demoVideos: {
+      h: "Demo Videos"
+      n: "demoVideos"
+      r: false
+      t: "`$ANY`"
+    }
+    description: {
+      h: "Description"
+      n: "description"
+      op: {
+        update: {
+          req: true
+          type: "`$STRING`"
+        }
+      }
+      r: false
+      t: "`$STRING`"
+    }
+    favicon_url: {
+      h: "Favicon Url"
+      n: "favicon_url"
+      r: false
+      t: "`$ANY`"
+    }
+    howItWorks: {
+      h: "How It Works"
+      n: "howItWorks"
+      r: false
+      t: "`$ANY`"
+    }
+    how_it_works: {
+      h: "How It Works"
+      n: "how_it_works"
+      r: false
+      t: "`$ANY`"
+    }
+    id: {
+      fo: "uuid"
+      h: "Id"
+      n: "id"
+      r: true
+      t: "`$STRING`"
+    }
+    images: {
+      h: "Images"
+      n: "images"
+      r: false
+      t: "`$ANY`"
+    }
+    initial_agents: {
+      h: "Initial Agents"
+      n: "initial_agents"
+      r: false
+      t: "`$INTEGER`"
+    }
+    instagramHandle: {
+      h: "Instagram Handle"
+      n: "instagramHandle"
+      r: false
+      t: "`$ANY`"
+    }
+    instagram_handle: {
+      h: "Instagram Handle"
+      n: "instagram_handle"
+      r: false
+      t: "`$ANY`"
+    }
+    isActive: {
+      h: "Is Active"
+      n: "isActive"
+      r: false
+      t: "`$ANY`"
+    }
+    isApp: {
+      h: "Is App"
+      n: "isApp"
+      r: false
+      t: "`$ANY`"
+    }
+    is_active: {
+      h: "Is Active"
+      n: "is_active"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    is_app: {
+      h: "Is App"
+      n: "is_app"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    language: {
+      h: "Language"
+      n: "language"
+      r: false
+      t: "`$ANY`"
+    }
+    mediaAssets: {
+      h: "Media Assets"
+      n: "mediaAssets"
+      r: false
+      t: "`$ANY`"
+    }
+    media_asset_ids: {
+      h: "Media Asset Ids"
+      n: "media_asset_ids"
+      r: false
+      t: "`$ANY`"
+    }
+    media_assets: {
+      h: "Media Assets"
+      n: "media_assets"
+      r: false
+      t: "`$ANY`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      op: {
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      r: true
+      t: "`$STRING`"
+    }
+    otherInstructions: {
+      h: "Other Instructions"
+      n: "otherInstructions"
+      r: false
+      t: "`$ANY`"
+    }
+    other_instructions: {
+      h: "Other Instructions"
+      n: "other_instructions"
+      r: false
+      t: "`$ANY`"
+    }
+    outroVideo: {
+      h: "Outro Video"
+      n: "outroVideo"
+      r: false
+      t: "`$ANY`"
+    }
+    pexelsVideos: {
+      h: "Pexels Videos"
+      n: "pexelsVideos"
+      r: false
+      t: "`$ANY`"
+    }
+    pricing: {
+      h: "Pricing"
+      n: "pricing"
+      r: false
+      t: "`$ANY`"
+    }
+    pricingAndOffers: {
+      h: "Pricing And Offers"
+      n: "pricingAndOffers"
+      r: false
+      t: "`$ANY`"
+    }
+    pricing_and_offers: {
+      h: "Pricing And Offers"
+      n: "pricing_and_offers"
+      r: false
+      t: "`$ANY`"
+    }
+    product_demo_ids: {
+      h: "Product Demo Ids"
+      n: "product_demo_ids"
+      r: false
+      t: "`$ARRAY`"
+    }
+    product_details: {
+      h: "Product Details"
+      n: "product_details"
+      r: true
+      sh: "Product details for enterprise product creation"
+      t: "`$OBJECT`"
+    }
+    product_id: {
+      h: "Product Id"
+      n: "product_id"
+      r: true
+      t: "`$STRING`"
+    }
+    product_name: {
+      h: "Product Name"
+      n: "product_name"
+      r: true
+      t: "`$STRING`"
+    }
+    product_url: {
+      h: "Product Url"
+      n: "product_url"
+      r: true
+      t: "`$STRING`"
+    }
+    pronunciation: {
+      h: "Pronunciation"
+      n: "pronunciation"
+      r: false
+      t: "`$ANY`"
+    }
+    regenerate_sora2: {
+      h: "Regenerate Sora2"
+      n: "regenerate_sora2"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    repostSource: {
+      h: "Repost Source"
+      n: "repostSource"
+      r: false
+      t: "`$ANY`"
+    }
+    repost_source: {
+      h: "Repost Source"
+      n: "repost_source"
+      r: false
+      t: "`$ANY`"
+    }
+    screenshot_url: {
+      h: "Screenshot Url"
+      n: "screenshot_url"
+      r: false
+      t: "`$ANY`"
+    }
+    social_post_ids: {
+      h: "Social Post Ids"
+      n: "social_post_ids"
+      r: false
+      t: "`$ARRAY`"
+    }
+    targetAudience: {
+      h: "Target Audience"
+      n: "targetAudience"
+      r: false
+      t: "`$ANY`"
+    }
+    target_audience: {
+      h: "Target Audience"
+      n: "target_audience"
+      r: false
+      t: "`$ANY`"
+    }
+    templateProductId: {
+      h: "Template Product Id"
+      n: "templateProductId"
+      r: false
+      t: "`$ANY`"
+    }
+    tiktokHandle: {
+      h: "Tiktok Handle"
+      n: "tiktokHandle"
+      r: false
+      t: "`$ANY`"
+    }
+    tiktok_handle: {
+      h: "Tiktok Handle"
+      n: "tiktok_handle"
+      r: false
+      t: "`$ANY`"
+    }
+    total_count: {
+      h: "Total Count"
+      n: "total_count"
+      r: true
+      t: "`$INTEGER`"
+    }
+    updatedAt: {
+      h: "Updated At"
+      n: "updatedAt"
+      r: false
+      t: "`$ANY`"
+    }
+    url: {
+      h: "Url"
+      n: "url"
+      op: {
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      r: true
+      t: "`$STRING`"
+    }
+    userId: {
+      fo: "uuid"
+      h: "User Id"
+      n: "userId"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "product"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "handle"
+            "platform"
+          ]
+          co: {
+            id: "POST /api/products/{product_id}/validate-social-handle"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "product_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/products/{product_id}/validate-social-handle"
+          q: {
+            "$action": "validate_social_handle"
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              product_id: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "products"
+            }
+            {
+              var: "id"
+            }
+            {
+              lit: "validate-social-handle"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "favicon_url"
+            "initial_agents"
+            "product_demo_ids"
+            "product_details"
+            "product_url"
+            "screenshot_url"
+            "social_post_ids"
+          ]
+          co: {
+            id: "POST /api/enterprise/products"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/enterprise/products"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "enterprise"
+            }
+            {
+              lit: "products"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /api/products/clear"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/products/clear"
+          q: {
+            "$action": "clear"
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "products"
+            }
+            {
+              lit: "clear"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/admin/users/{user_id}/products"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "user_id"
+                or: "user_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/users/{user_id}/products"
+          q: {
+            exist: [
+              "user_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "users"
+            }
+            {
+              var: "user_id"
+            }
+            {
+              lit: "products"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/enterprise/products"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/enterprise/products"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "enterprise"
+            }
+            {
+              lit: "products"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.products`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/enterprise/agents/product/{product_id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "product_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/enterprise/agents/product/{product_id}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              product_id: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "enterprise"
+            }
+            {
+              lit: "agents"
+            }
+            {
+              lit: "product"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/enterprise/products/{product_id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "product_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/enterprise/products/{product_id}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              product_id: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "enterprise"
+            }
+            {
+              lit: "products"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/products/me"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/products/me"
+          q: {
+            "$action": "me"
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "products"
+            }
+            {
+              lit: "me"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    remove: {
+      name: "remove"
+      points: [
+        {
+          co: {
+            id: "DELETE /api/enterprise/products/{product_id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "product_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "DELETE"
+          o: "/api/enterprise/products/{product_id}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              product_id: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "enterprise"
+            }
+            {
+              lit: "products"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    update: {
+      name: "update"
+      points: [
+        {
+          bf: [
+            "description"
+            "how_it_works"
+            "instagram_handle"
+            "is_app"
+            "language"
+            "media_asset_ids"
+            "name"
+            "other_instructions"
+            "pricing_and_offers"
+            "pronunciation"
+            "regenerate_sora2"
+            "repost_source"
+            "target_audience"
+            "tiktok_handle"
+            "url"
+          ]
+          co: {
+            id: "PUT /api/enterprise/products/{product_id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "product_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PUT"
+          o: "/api/enterprise/products/{product_id}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              product_id: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "enterprise"
+            }
+            {
+              lit: "products"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "PUT /api/enterprise/products/{product_id}/activate"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "product_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PUT"
+          o: "/api/enterprise/products/{product_id}/activate"
+          q: {
+            "$action": "activate"
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              product_id: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "enterprise"
+            }
+            {
+              lit: "products"
+            }
+            {
+              var: "id"
+            }
+            {
+              lit: "activate"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "demoVideos"
+            "description"
+            "howItWorks"
+            "images"
+            "instagramHandle"
+            "isActive"
+            "isApp"
+            "language"
+            "mediaAssetIds"
+            "name"
+            "otherInstructions"
+            "outroVideo"
+            "pexelsVideos"
+            "pricingAndOffers"
+            "pronunciation"
+            "regenerateSora2"
+            "repostSource"
+            "targetAudience"
+            "templateProductId"
+            "tiktokHandle"
+            "url"
+          ]
+          co: {
+            id: "PUT /api/products/me"
+            source: "openapi3"
+            version: 2
+          }
+          m: "PUT"
+          o: "/api/products/me"
+          q: {
+            "$action": "me"
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "products"
+            }
+            {
+              lit: "me"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.user")]
+  ]
+
+}

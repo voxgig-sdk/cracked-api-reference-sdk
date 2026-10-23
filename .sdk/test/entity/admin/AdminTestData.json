@@ -1,0 +1,291 @@
+{
+  "existing": {
+    "admin": {
+      "ADMIN00": {
+        "apply": true,
+        "count": 231,
+        "created_at": "se8",
+        "date_from": "se9",
+        "date_to": "sea",
+        "email": "seb",
+        "id": "ADMIN00",
+        "include_failed": false,
+        "include_pending": true,
+        "include_records": false,
+        "issue_ids": "sf0",
+        "only_active": false,
+        "platform": "sf2",
+        "posting_method": "sf3",
+        "product_id": "PRODUCT01",
+        "query": "sf5",
+        "reason": "sf6",
+        "regenerate": false,
+        "status": "sf8",
+        "user_membership": "sf9",
+        "user_name": "sfa",
+        "user_onboarding_step": "sfb",
+        "video_type": "sfc",
+        "user_id": "USER01",
+        "video_id": "VIDEO01",
+        "agent_id": "AGENT01",
+        "queue_id": "QUEUE01",
+        "tester_id": "TESTER01"
+      },
+      "ADMIN01": {
+        "apply": true,
+        "count": 461,
+        "created_at": "s1ce",
+        "date_from": "s1cf",
+        "date_to": "s1d0",
+        "email": "s1d1",
+        "id": "ADMIN01",
+        "include_failed": false,
+        "include_pending": true,
+        "include_records": false,
+        "issue_ids": "s1d6",
+        "only_active": false,
+        "platform": "s1d8",
+        "posting_method": "s1d9",
+        "product_id": "PRODUCT01",
+        "query": "s1db",
+        "reason": "s1dc",
+        "regenerate": false,
+        "status": "s1de",
+        "user_membership": "s1df",
+        "user_name": "s1e0",
+        "user_onboarding_step": "s1e1",
+        "video_type": "s1e2",
+        "user_id": "USER01",
+        "video_id": "VIDEO01",
+        "agent_id": "AGENT01",
+        "queue_id": "QUEUE01",
+        "tester_id": "TESTER01"
+      },
+      "ADMIN02": {
+        "apply": true,
+        "count": 691,
+        "created_at": "s2b4",
+        "date_from": "s2b5",
+        "date_to": "s2b6",
+        "email": "s2b7",
+        "id": "ADMIN02",
+        "include_failed": false,
+        "include_pending": true,
+        "include_records": false,
+        "issue_ids": "s2bc",
+        "only_active": false,
+        "platform": "s2be",
+        "posting_method": "s2bf",
+        "product_id": "PRODUCT01",
+        "query": "s2c1",
+        "reason": "s2c2",
+        "regenerate": false,
+        "status": "s2c4",
+        "user_membership": "s2c5",
+        "user_name": "s2c6",
+        "user_onboarding_step": "s2c7",
+        "video_type": "s2c8",
+        "user_id": "USER01",
+        "video_id": "VIDEO01",
+        "agent_id": "AGENT01",
+        "queue_id": "QUEUE01",
+        "tester_id": "TESTER01"
+      }
+    }
+  },
+  "new": {
+    "admin": {
+      "admin_ref01": {
+        "apply": true,
+        "count": 921,
+        "created_at": "s39a",
+        "date_from": "s39b",
+        "date_to": "s39c",
+        "email": "s39d",
+        "include_failed": false,
+        "include_pending": true,
+        "include_records": false,
+        "issue_ids": "s3a2",
+        "only_active": false,
+        "platform": "s3a4",
+        "posting_method": "s3a5",
+        "product_id": "PRODUCT01",
+        "query": "s3a7",
+        "reason": "s3a8",
+        "regenerate": false,
+        "status": "s3aa",
+        "user_membership": "s3ab",
+        "user_name": "s3ac",
+        "user_onboarding_step": "s3ad",
+        "video_type": "s3ae"
+      }
+    }
+  },
+  "requests": {
+    "POST /api/admin/users/{user_id}/regenerate-video/{video_id}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/impersonate/{user_id}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/users/{user_id}/agents/reconcile": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/users/{user_id}/bulk-create-videos": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/users/{user_id}/clear-failed-videos": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/users/{user_id}/clear-future-auto-entries": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/users/{user_id}/clear-manual-entries": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/users/{user_id}/clear-today-auto-entries": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/users/{user_id}/retry-todays-videos": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/users/{user_id}/retry-videos": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/agents/social-profile-audit": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/batch-regenerate-sora2": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/customer-health/issues/retry": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/products-dashboard/repair-stats": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/schedule/clear-all-future-auto-entries": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/schedule/clear-today-auto-entries-for-all": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/stats/refresh-and-send-emails": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/stats/refresh-last-7-days": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/test-s3-copy": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/whitelist-testers": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/whitelist-testers": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/stats/by-date-and-type": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/users/{user_id}/failed-videos": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/users/{user_id}/pending-videos": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/users/{user_id}/schedule-queue": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/stats/aggregate": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/users/export": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /api/admin/users/{user_id}/agents/{agent_id}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /api/admin/users/{user_id}/schedule-queue/{queue_id}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /api/admin/users/{user_id}/video/{video_id}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /api/admin/whitelist-testers/{tester_id}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PUT /api/admin/agents/{agent_id}/type": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PUT /api/admin/agents/{agent_id}/active": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

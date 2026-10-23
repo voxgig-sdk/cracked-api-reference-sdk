@@ -1,0 +1,126 @@
+{
+  "existing": {
+    "create_carousel": {
+      "CREATE_CAROUSEL00": {
+        "copy_mode": "sdc",
+        "expected_owner_user_id": "EXPECTED_OWNER_USER01",
+        "expected_product_id": "EXPECTED_PRODUCT01",
+        "expected_product_name": "sdf",
+        "image_model": "se0",
+        "mention_product": false,
+        "message": "se2",
+        "num_slides": 227,
+        "owner_user_id": "OWNER_USER01",
+        "product_id": "PRODUCT01",
+        "product_name": "se6",
+        "product_placement": "se7",
+        "request_id": "REQUEST01",
+        "script_style_custom": "se9",
+        "script_style_id": "SCRIPT_STYLE01",
+        "selected_hook": "seb",
+        "status": "sec",
+        "success": false,
+        "template_id": "TEMPLATE01",
+        "video_id": "VIDEO01",
+        "visual_style_custom": "sf0",
+        "visual_style_id": "VISUAL_STYLE01",
+        "id": "CREATE_CAROUSEL00"
+      },
+      "CREATE_CAROUSEL01": {
+        "copy_mode": "s1b8",
+        "expected_owner_user_id": "EXPECTED_OWNER_USER01",
+        "expected_product_id": "EXPECTED_PRODUCT01",
+        "expected_product_name": "s1bb",
+        "image_model": "s1bc",
+        "mention_product": false,
+        "message": "s1be",
+        "num_slides": 447,
+        "owner_user_id": "OWNER_USER01",
+        "product_id": "PRODUCT01",
+        "product_name": "s1c2",
+        "product_placement": "s1c3",
+        "request_id": "REQUEST01",
+        "script_style_custom": "s1c5",
+        "script_style_id": "SCRIPT_STYLE01",
+        "selected_hook": "s1c7",
+        "status": "s1c8",
+        "success": false,
+        "template_id": "TEMPLATE01",
+        "video_id": "VIDEO01",
+        "visual_style_custom": "s1cc",
+        "visual_style_id": "VISUAL_STYLE01",
+        "id": "CREATE_CAROUSEL01"
+      },
+      "CREATE_CAROUSEL02": {
+        "copy_mode": "s294",
+        "expected_owner_user_id": "EXPECTED_OWNER_USER01",
+        "expected_product_id": "EXPECTED_PRODUCT01",
+        "expected_product_name": "s297",
+        "image_model": "s298",
+        "mention_product": false,
+        "message": "s29a",
+        "num_slides": 667,
+        "owner_user_id": "OWNER_USER01",
+        "product_id": "PRODUCT01",
+        "product_name": "s29e",
+        "product_placement": "s29f",
+        "request_id": "REQUEST01",
+        "script_style_custom": "s2a1",
+        "script_style_id": "SCRIPT_STYLE01",
+        "selected_hook": "s2a3",
+        "status": "s2a4",
+        "success": false,
+        "template_id": "TEMPLATE01",
+        "video_id": "VIDEO01",
+        "visual_style_custom": "s2a8",
+        "visual_style_id": "VISUAL_STYLE01",
+        "id": "CREATE_CAROUSEL02"
+      }
+    }
+  },
+  "new": {
+    "create_carousel": {
+      "create_carousel_ref01": {
+        "copy_mode": "s370",
+        "expected_owner_user_id": "EXPECTED_OWNER_USER01",
+        "expected_product_id": "EXPECTED_PRODUCT01",
+        "expected_product_name": "s373",
+        "image_model": "s374",
+        "mention_product": false,
+        "message": "s376",
+        "num_slides": 887,
+        "owner_user_id": "OWNER_USER01",
+        "product_id": "PRODUCT01",
+        "product_name": "s37a",
+        "product_placement": "s37b",
+        "request_id": "REQUEST01",
+        "script_style_custom": "s37d",
+        "script_style_id": "SCRIPT_STYLE01",
+        "selected_hook": "s37f",
+        "status": "s380",
+        "success": false,
+        "template_id": "TEMPLATE01",
+        "video_id": "VIDEO01",
+        "visual_style_custom": "s384",
+        "visual_style_id": "VISUAL_STYLE01"
+      }
+    }
+  },
+  "requests": {
+    "POST /api/carousel/create-from-exact": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/carousel/create-from-styles": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/carousel/create-from-template": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

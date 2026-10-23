@@ -1,0 +1,22 @@
+# BasicTopPostFlow
+
+main: kit: flow: BasicTopPostFlow:
+{
+  entity: "top_post",
+  kind: "basic",
+  name: "BasicTopPostFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "top_post_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicTopPostFlow"
+}

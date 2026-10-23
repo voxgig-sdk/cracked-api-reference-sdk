@@ -1,0 +1,28 @@
+# BasicScrapingStatusFlow
+
+main: kit: flow: BasicScrapingStatusFlow:
+{
+  entity: "scraping_status",
+  kind: "basic",
+  name: "BasicScrapingStatusFlow",
+  step: [
+    {
+      i: {
+        ref: "scraping_status_ref01",
+        srcdatavar: "scraping_status_ref01_data",
+        suffix: "_dt0"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-scraping_status_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicScrapingStatusFlow"
+}

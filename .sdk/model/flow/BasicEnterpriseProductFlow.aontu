@@ -1,0 +1,32 @@
+# BasicEnterpriseProductFlow
+
+main: kit: flow: BasicEnterpriseProductFlow:
+{
+  entity: "enterprise_product",
+  kind: "basic",
+  name: "BasicEnterpriseProductFlow",
+  step: [
+    {
+      i: {
+        ref: "enterprise_product_ref01",
+        srcdatavar: "enterprise_product_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "enterprise_product01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-enterprise_product_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicEnterpriseProductFlow"
+}

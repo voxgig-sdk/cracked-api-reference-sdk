@@ -1,0 +1,77 @@
+# Entity: generate_prompt
+
+main: kit: entity: generate_prompt: {
+
+  alias: field: {}
+
+  fields: {
+    hook_duration: {
+      h: "Hook Duration"
+      n: "hook_duration"
+      r: true
+      t: "`$INTEGER`"
+    }
+    media_asset_id: {
+      fo: "uuid"
+      h: "Media Asset Id"
+      n: "media_asset_id"
+      r: true
+      t: "`$STRING`"
+    }
+    media_asset_url: {
+      h: "Media Asset Url"
+      n: "media_asset_url"
+      r: true
+      t: "`$STRING`"
+    }
+    prompt: {
+      h: "Prompt"
+      n: "prompt"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  name: "generate_prompt"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "media_asset_id"
+          ]
+          co: {
+            id: "POST /api/video-variation/generate-prompt"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/video-variation/generate-prompt"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "video-variation"
+            }
+            {
+              lit: "generate-prompt"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

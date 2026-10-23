@@ -1,0 +1,18 @@
+# BasicGeneratePromptFlow
+
+main: kit: flow: BasicGeneratePromptFlow:
+{
+  entity: "generate_prompt",
+  kind: "basic",
+  name: "BasicGeneratePromptFlow",
+  step: [
+    {
+      i: {
+        ref: "generate_prompt_ref01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicGeneratePromptFlow"
+}

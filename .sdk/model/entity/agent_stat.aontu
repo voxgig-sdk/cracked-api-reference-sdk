@@ -1,0 +1,76 @@
+# Entity: agent_stat
+
+main: kit: entity: agent_stat: {
+
+  alias: field: {}
+
+  fields: {
+    agents_needed: {
+      h: "Agents Needed"
+      n: "agents_needed"
+      r: true
+      t: "`$INTEGER`"
+    }
+    dedicated_agents: {
+      h: "Dedicated Agents"
+      n: "dedicated_agents"
+      r: true
+      t: "`$OBJECT`"
+    }
+    shared_agents: {
+      h: "Shared Agents"
+      n: "shared_agents"
+      r: true
+      t: "`$OBJECT`"
+    }
+    total_agents: {
+      h: "Total Agents"
+      n: "total_agents"
+      r: true
+      t: "`$INTEGER`"
+    }
+  }
+
+  name: "agent_stat"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/admin/agents/stats"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/admin/agents/stats"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "agents"
+            }
+            {
+              lit: "stats"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

@@ -1,0 +1,225 @@
+# Entity: auto_schedule_setting
+
+main: kit: entity: auto_schedule_setting: {
+
+  alias: field: {}
+
+  fields: {
+    can_enable_repost: {
+      h: "Can Enable Repost"
+      n: "can_enable_repost"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    effective_posted_video_reuse_percent: {
+      h: "Effective Posted Video Reuse Percent"
+      n: "effective_posted_video_reuse_percent"
+      r: true
+      t: "`$INTEGER`"
+    }
+    enabled_video_types: {
+      h: "Enabled Video Types"
+      n: "enabled_video_types"
+      op: {
+        update: {
+          req: true
+          type: "`$ARRAY`"
+        }
+      }
+      r: false
+      sh: "List of enabled video type filters"
+      t: "`$ANY`"
+    }
+    is_enabled: {
+      h: "Is Enabled"
+      n: "is_enabled"
+      op: {
+        update: {
+          req: false
+          type: "`$BOOLEAN`"
+        }
+      }
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    lock_video_regeneration_controls: {
+      h: "Lock Video Regeneration Controls"
+      n: "lock_video_regeneration_controls"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    membership_tier: {
+      h: "Membership Tier"
+      n: "membership_tier"
+      r: true
+      t: "`$STRING`"
+    }
+    posted_video_reuse_percent: {
+      h: "Posted Video Reuse Percent"
+      n: "posted_video_reuse_percent"
+      r: false
+      t: "`$ANY`"
+    }
+    product_id: {
+      h: "Product Id"
+      n: "product_id"
+      r: false
+      t: "`$STRING`"
+    }
+    repost_source: {
+      h: "Repost Source"
+      n: "repost_source"
+      r: false
+      t: "`$ANY`"
+    }
+    videos_per_day: {
+      h: "Videos Per Day"
+      n: "videos_per_day"
+      r: true
+      t: "`$INTEGER`"
+    }
+  }
+
+  name: "auto_schedule_setting"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/schedule/settings"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "product_id"
+                or: "product_id"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/schedule/settings"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "schedule"
+            }
+            {
+              lit: "settings"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    update: {
+      name: "update"
+      points: [
+        {
+          bf: [
+            "is_enabled"
+          ]
+          co: {
+            id: "PUT /api/schedule/settings"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "product_id"
+                or: "product_id"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PUT"
+          o: "/api/schedule/settings"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "schedule"
+            }
+            {
+              lit: "settings"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "enabled_video_types"
+          ]
+          co: {
+            id: "PUT /api/schedule/settings/video-types"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "product_id"
+                or: "product_id"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PUT"
+          o: "/api/schedule/settings/video-types"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "schedule"
+            }
+            {
+              lit: "settings"
+            }
+            {
+              lit: "video-types"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

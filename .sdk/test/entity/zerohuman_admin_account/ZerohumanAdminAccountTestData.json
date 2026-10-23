@@ -1,0 +1,81 @@
+{
+  "existing": {
+    "zerohuman_admin_account": {
+      "ZEROHUMAN_ADMIN_ACCOUNT00": {
+        "account_mode": "s8c",
+        "active_queue_count": 141,
+        "assigned_agent": "s8e",
+        "created_at": "s8f",
+        "email": "s90",
+        "external_user_id": "EXTERNAL_USER01",
+        "membership": "s92",
+        "policy_code": "s93",
+        "product_id": "PRODUCT01",
+        "product_name": "s95",
+        "provisioning_status": "s96",
+        "subscription_status": "s97",
+        "updated_at": "s98",
+        "user_id": "USER01"
+      },
+      "ZEROHUMAN_ADMIN_ACCOUNT01": {
+        "account_mode": "s118",
+        "active_queue_count": 281,
+        "assigned_agent": "s11a",
+        "created_at": "s11b",
+        "email": "s11c",
+        "external_user_id": "EXTERNAL_USER01",
+        "membership": "s11e",
+        "policy_code": "s11f",
+        "product_id": "PRODUCT01",
+        "product_name": "s121",
+        "provisioning_status": "s122",
+        "subscription_status": "s123",
+        "updated_at": "s124",
+        "user_id": "USER01"
+      },
+      "ZEROHUMAN_ADMIN_ACCOUNT02": {
+        "account_mode": "s1a4",
+        "active_queue_count": 421,
+        "assigned_agent": "s1a6",
+        "created_at": "s1a7",
+        "email": "s1a8",
+        "external_user_id": "EXTERNAL_USER01",
+        "membership": "s1aa",
+        "policy_code": "s1ab",
+        "product_id": "PRODUCT01",
+        "product_name": "s1ad",
+        "provisioning_status": "s1ae",
+        "subscription_status": "s1af",
+        "updated_at": "s1b0",
+        "user_id": "USER01"
+      }
+    }
+  },
+  "new": {
+    "zerohuman_admin_account": {
+      "zerohuman_admin_account_ref01": {
+        "account_mode": "s230",
+        "active_queue_count": 561,
+        "assigned_agent": "s232",
+        "created_at": "s233",
+        "email": "s234",
+        "external_user_id": "EXTERNAL_USER01",
+        "membership": "s236",
+        "policy_code": "s237",
+        "product_id": "PRODUCT01",
+        "product_name": "s239",
+        "provisioning_status": "s23a",
+        "subscription_status": "s23b",
+        "updated_at": "s23c",
+        "user_id": "USER01"
+      }
+    }
+  },
+  "requests": {
+    "GET /api/admin/zerohuman/accounts": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

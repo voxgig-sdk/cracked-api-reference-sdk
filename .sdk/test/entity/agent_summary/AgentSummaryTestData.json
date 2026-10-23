@@ -1,0 +1,41 @@
+{
+  "existing": {
+    "agent_summary": {
+      "AGENT_SUMMARY00": {
+        "agent_count": 40,
+        "favicon_url": "s29",
+        "product_id": "PRODUCT01",
+        "product_name": "s2b"
+      },
+      "AGENT_SUMMARY01": {
+        "agent_count": 80,
+        "favicon_url": "s51",
+        "product_id": "PRODUCT01",
+        "product_name": "s53"
+      },
+      "AGENT_SUMMARY02": {
+        "agent_count": 120,
+        "favicon_url": "s79",
+        "product_id": "PRODUCT01",
+        "product_name": "s7b"
+      }
+    }
+  },
+  "new": {
+    "agent_summary": {
+      "agent_summary_ref01": {
+        "agent_count": 160,
+        "favicon_url": "sa1",
+        "product_id": "PRODUCT01",
+        "product_name": "sa3"
+      }
+    }
+  },
+  "requests": {
+    "GET /api/enterprise/agents/summary": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

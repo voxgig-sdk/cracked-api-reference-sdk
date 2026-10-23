@@ -1,0 +1,86 @@
+# Entity: stats_refresh_backfill
+
+main: kit: entity: stats_refresh_backfill: {
+
+  alias: field: {}
+
+  fields: {
+    message: {
+      h: "Message"
+      n: "message"
+      r: true
+      t: "`$STRING`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: true
+      t: "`$STRING`"
+    }
+    task_id: {
+      h: "Task Id"
+      n: "task_id"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  name: "stats_refresh_backfill"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "days"
+            "user_emails"
+          ]
+          co: {
+            id: "POST /api/admin/customer-health/backfill"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: 30
+                k: "query"
+                n: "day"
+                or: "days"
+                r: false
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/admin/customer-health/backfill"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "customer-health"
+            }
+            {
+              lit: "backfill"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

@@ -1,0 +1,76 @@
+{
+  "existing": {
+    "analytics_post": {
+      "ANALYTICS_POST00": {
+        "agent": "s82",
+        "comment": "s83",
+        "created_at": "s84",
+        "id": "ANALYTICS_POST00",
+        "product_id": "PRODUCT01",
+        "queue_position": "s87",
+        "results": "s88",
+        "scheduled_datetime": "s89",
+        "scraped_posts": "s8a",
+        "source_type": "s8b",
+        "status": "s8c",
+        "updated_at": "s8d",
+        "video": "s8e"
+      },
+      "ANALYTICS_POST01": {
+        "agent": "s104",
+        "comment": "s105",
+        "created_at": "s106",
+        "id": "ANALYTICS_POST01",
+        "product_id": "PRODUCT01",
+        "queue_position": "s109",
+        "results": "s10a",
+        "scheduled_datetime": "s10b",
+        "scraped_posts": "s10c",
+        "source_type": "s10d",
+        "status": "s10e",
+        "updated_at": "s10f",
+        "video": "s110"
+      },
+      "ANALYTICS_POST02": {
+        "agent": "s186",
+        "comment": "s187",
+        "created_at": "s188",
+        "id": "ANALYTICS_POST02",
+        "product_id": "PRODUCT01",
+        "queue_position": "s18b",
+        "results": "s18c",
+        "scheduled_datetime": "s18d",
+        "scraped_posts": "s18e",
+        "source_type": "s18f",
+        "status": "s190",
+        "updated_at": "s191",
+        "video": "s192"
+      }
+    }
+  },
+  "new": {
+    "analytics_post": {
+      "analytics_post_ref01": {
+        "agent": "s208",
+        "comment": "s209",
+        "created_at": "s20a",
+        "product_id": "PRODUCT01",
+        "queue_position": "s20d",
+        "results": "s20e",
+        "scheduled_datetime": "s20f",
+        "scraped_posts": "s210",
+        "source_type": "s211",
+        "status": "s212",
+        "updated_at": "s213",
+        "video": "s214"
+      }
+    }
+  },
+  "requests": {
+    "GET /api/analytics/posts": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

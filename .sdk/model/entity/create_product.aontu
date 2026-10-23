@@ -1,0 +1,77 @@
+# Entity: create_product
+
+main: kit: entity: create_product: {
+
+  alias: field: {}
+
+  fields: {
+    onboarding_data_id: {
+      h: "Onboarding Data Id"
+      n: "onboarding_data_id"
+      r: true
+      sh: "UUID of the OnboardingData record"
+      t: "`$STRING`"
+    }
+    product_id: {
+      h: "Product Id"
+      n: "product_id"
+      r: true
+      t: "`$STRING`"
+    }
+    success: {
+      h: "Success"
+      n: "success"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    videos_queued: {
+      h: "Videos Queued"
+      n: "videos_queued"
+      r: false
+      t: "`$INTEGER`"
+    }
+  }
+
+  name: "create_product"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "onboarding_data_id"
+          ]
+          co: {
+            id: "POST /api/onboarding-v6/create-product"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/onboarding-v6/create-product"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "onboarding-v6"
+            }
+            {
+              lit: "create-product"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

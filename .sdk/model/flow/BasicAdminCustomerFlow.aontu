@@ -1,0 +1,22 @@
+# BasicAdminCustomerFlow
+
+main: kit: flow: BasicAdminCustomerFlow:
+{
+  entity: "admin_customer",
+  kind: "basic",
+  name: "BasicAdminCustomerFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "admin_customer_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicAdminCustomerFlow"
+}

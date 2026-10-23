@@ -1,0 +1,32 @@
+# BasicCarouselAgentDetailFlow
+
+main: kit: flow: BasicCarouselAgentDetailFlow:
+{
+  entity: "carousel_agent_detail",
+  kind: "basic",
+  name: "BasicCarouselAgentDetailFlow",
+  step: [
+    {
+      i: {
+        ref: "carousel_agent_detail_ref01",
+        srcdatavar: "carousel_agent_detail_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "carousel_agent_detail01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-carousel_agent_detail_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicCarouselAgentDetailFlow"
+}

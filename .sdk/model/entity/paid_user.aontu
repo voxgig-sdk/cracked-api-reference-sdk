@@ -1,0 +1,133 @@
+# Entity: paid_user
+
+main: kit: entity: paid_user: {
+
+  alias: field: {}
+
+  fields: {
+    agents_count: {
+      h: "Agents Count"
+      n: "agents_count"
+      r: true
+      t: "`$INTEGER`"
+    }
+    assigned_agents_count: {
+      h: "Assigned Agents Count"
+      n: "assigned_agents_count"
+      r: false
+      t: "`$INTEGER`"
+    }
+    auto_schedule_enabled: {
+      h: "Auto Schedule Enabled"
+      n: "auto_schedule_enabled"
+      r: true
+      t: "`$ANY`"
+    }
+    credits: {
+      h: "Credits"
+      n: "credits"
+      r: true
+      t: "`$INTEGER`"
+    }
+    effective_agents_count: {
+      h: "Effective Agents Count"
+      n: "effective_agents_count"
+      r: true
+      t: "`$INTEGER`"
+    }
+    email: {
+      h: "Email"
+      n: "email"
+      r: true
+      t: "`$STRING`"
+    }
+    id: {
+      fo: "uuid"
+      h: "Id"
+      n: "id"
+      r: true
+      t: "`$STRING`"
+    }
+    is_internal_user: {
+      h: "Is Internal User"
+      n: "is_internal_user"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    is_migrated_user: {
+      h: "Is Migrated User"
+      n: "is_migrated_user"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    membership: {
+      h: "Membership"
+      n: "membership"
+      r: true
+      t: "`$ANY`"
+    }
+    scheduled_queue_count: {
+      h: "Scheduled Queue Count"
+      n: "scheduled_queue_count"
+      r: true
+      t: "`$INTEGER`"
+    }
+    subscription_details: {
+      h: "Subscription Details"
+      n: "subscription_details"
+      r: false
+      t: "`$ANY`"
+    }
+    subscription_status: {
+      h: "Subscription Status"
+      n: "subscription_status"
+      r: true
+      t: "`$ANY`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "paid_user"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/admin/paid-users"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/admin/paid-users"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "paid-users"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

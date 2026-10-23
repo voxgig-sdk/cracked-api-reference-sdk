@@ -1,0 +1,47 @@
+# BasicAutoScheduleSettingFlow
+
+main: kit: flow: BasicAutoScheduleSettingFlow:
+{
+  entity: "auto_schedule_setting",
+  kind: "basic",
+  name: "BasicAutoScheduleSettingFlow",
+  step: [
+    {
+      i: {
+        ref: "auto_schedule_setting_ref01",
+        srcdatavar: "auto_schedule_setting_ref01_data",
+        suffix: "_up0",
+        textfield: "membership_tier"
+      }
+
+      o: "update",
+      s: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-auto_schedule_setting_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "auto_schedule_setting_ref01",
+        srcdatavar: "auto_schedule_setting_ref01_data",
+        suffix: "_dt0"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-auto_schedule_setting_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicAutoScheduleSettingFlow"
+}

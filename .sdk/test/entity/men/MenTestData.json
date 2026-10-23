@@ -1,0 +1,21 @@
+{
+  "existing": {
+    "men": {
+      "MEN00": {},
+      "MEN01": {},
+      "MEN02": {}
+    }
+  },
+  "new": {
+    "men": {
+      "men_ref01": {}
+    }
+  },
+  "requests": {
+    "GET /api/videos/me": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

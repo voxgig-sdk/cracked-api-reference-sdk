@@ -1,0 +1,72 @@
+{
+  "existing": {
+    "agent_access_user_phone_farm": {
+      "AGENT_ACCESS_USER_PHONE_FARM00": {
+        "avatar": "s78",
+        "facebookUrl": "s79",
+        "id": "AGENT_ACCESS_USER_PHONE_FARM00",
+        "instagramUrl": "s7b",
+        "lastAdminSyncedAt": "s7c",
+        "name": "s7d",
+        "productId": "s7e",
+        "productName": "s7f",
+        "tiktokUrl": "s80",
+        "type": "s81",
+        "uploadPostPlatforms": "s82",
+        "youtubeUrl": "s83"
+      },
+      "AGENT_ACCESS_USER_PHONE_FARM01": {
+        "avatar": "sf0",
+        "facebookUrl": "sf1",
+        "id": "AGENT_ACCESS_USER_PHONE_FARM01",
+        "instagramUrl": "sf3",
+        "lastAdminSyncedAt": "sf4",
+        "name": "sf5",
+        "productId": "sf6",
+        "productName": "sf7",
+        "tiktokUrl": "sf8",
+        "type": "sf9",
+        "uploadPostPlatforms": "sfa",
+        "youtubeUrl": "sfb"
+      },
+      "AGENT_ACCESS_USER_PHONE_FARM02": {
+        "avatar": "s168",
+        "facebookUrl": "s169",
+        "id": "AGENT_ACCESS_USER_PHONE_FARM02",
+        "instagramUrl": "s16b",
+        "lastAdminSyncedAt": "s16c",
+        "name": "s16d",
+        "productId": "s16e",
+        "productName": "s16f",
+        "tiktokUrl": "s170",
+        "type": "s171",
+        "uploadPostPlatforms": "s172",
+        "youtubeUrl": "s173"
+      }
+    }
+  },
+  "new": {
+    "agent_access_user_phone_farm": {
+      "agent_access_user_phone_farm_ref01": {
+        "avatar": "s1e0",
+        "facebookUrl": "s1e1",
+        "instagramUrl": "s1e3",
+        "lastAdminSyncedAt": "s1e4",
+        "name": "s1e5",
+        "productId": "s1e6",
+        "productName": "s1e7",
+        "tiktokUrl": "s1e8",
+        "type": "s1e9",
+        "uploadPostPlatforms": "s1ea",
+        "youtubeUrl": "s1eb"
+      }
+    }
+  },
+  "requests": {
+    "GET /api/agent-access/user-phone-farm": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

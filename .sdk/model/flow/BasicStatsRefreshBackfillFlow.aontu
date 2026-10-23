@@ -1,0 +1,18 @@
+# BasicStatsRefreshBackfillFlow
+
+main: kit: flow: BasicStatsRefreshBackfillFlow:
+{
+  entity: "stats_refresh_backfill",
+  kind: "basic",
+  name: "BasicStatsRefreshBackfillFlow",
+  step: [
+    {
+      i: {
+        ref: "stats_refresh_backfill_ref01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicStatsRefreshBackfillFlow"
+}

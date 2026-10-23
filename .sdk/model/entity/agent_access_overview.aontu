@@ -1,0 +1,173 @@
+# Entity: agent_access_overview
+
+main: kit: entity: agent_access_overview: {
+
+  alias: field: {}
+
+  fields: {
+    activeUsers: {
+      h: "Active Users"
+      n: "activeUsers"
+      r: true
+      t: "`$INTEGER`"
+    }
+    generatedAt: {
+      fo: "date-time"
+      h: "Generated At"
+      n: "generatedAt"
+      r: true
+      t: "`$STRING`"
+    }
+    newUsersYesterday: {
+      h: "New Users Yesterday"
+      n: "newUsersYesterday"
+      r: true
+      t: "`$INTEGER`"
+    }
+    onboardingContextCounts: {
+      h: "Onboarding Context Counts"
+      n: "onboardingContextCounts"
+      r: true
+      t: "`$OBJECT`"
+    }
+    onboardingCurrentStepCounts: {
+      h: "Onboarding Current Step Counts"
+      n: "onboardingCurrentStepCounts"
+      r: true
+      t: "`$OBJECT`"
+    }
+    onboardingCurrentStepWindow: {
+      h: "Onboarding Current Step Window"
+      n: "onboardingCurrentStepWindow"
+      r: true
+      t: "`$OBJECT`"
+    }
+    onboardingFlowVariantCounts: {
+      h: "Onboarding Flow Variant Counts"
+      n: "onboardingFlowVariantCounts"
+      r: true
+      t: "`$OBJECT`"
+    }
+    onboardingLockedUntilActivation: {
+      h: "Onboarding Locked Until Activation"
+      n: "onboardingLockedUntilActivation"
+      r: true
+      t: "`$INTEGER`"
+    }
+    onboardingRecordsTotal: {
+      h: "Onboarding Records Total"
+      n: "onboardingRecordsTotal"
+      r: true
+      t: "`$INTEGER`"
+    }
+    onboardingRecordsWindow: {
+      h: "Onboarding Records Window"
+      n: "onboardingRecordsWindow"
+      r: true
+      t: "`$INTEGER`"
+    }
+    onboardingSocialScanStatusCounts: {
+      h: "Onboarding Social Scan Status Counts"
+      n: "onboardingSocialScanStatusCounts"
+      r: true
+      t: "`$OBJECT`"
+    }
+    onboardingWebsiteScrapeStatusCounts: {
+      h: "Onboarding Website Scrape Status Counts"
+      n: "onboardingWebsiteScrapeStatusCounts"
+      r: true
+      t: "`$OBJECT`"
+    }
+    subscriptionStatusCounts: {
+      h: "Subscription Status Counts"
+      n: "subscriptionStatusCounts"
+      r: true
+      t: "`$OBJECT`"
+    }
+    totalInternalUsers: {
+      h: "Total Internal Users"
+      n: "totalInternalUsers"
+      r: true
+      t: "`$INTEGER`"
+    }
+    totalUsers: {
+      h: "Total Users"
+      n: "totalUsers"
+      r: true
+      t: "`$INTEGER`"
+    }
+    trialStartedYesterday: {
+      h: "Trial Started Yesterday"
+      n: "trialStartedYesterday"
+      r: true
+      t: "`$INTEGER`"
+    }
+    trialingUsers: {
+      h: "Trialing Users"
+      n: "trialingUsers"
+      r: true
+      t: "`$INTEGER`"
+    }
+  }
+
+  name: "agent_access_overview"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/agent-access/overview"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "x_agent_access_key"
+                or: "x-agent-access-key"
+                r: false
+                t: "`$ANY`"
+              }
+            ]
+            query: [
+              {
+                ex: 7
+                k: "query"
+                n: "onboarding_window_day"
+                or: "onboarding_window_days"
+                r: false
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/agent-access/overview"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "agent-access"
+            }
+            {
+              lit: "overview"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

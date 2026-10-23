@@ -1,0 +1,21 @@
+{
+  "existing": {
+    "pexel": {
+      "PEXEL00": {},
+      "PEXEL01": {},
+      "PEXEL02": {}
+    }
+  },
+  "new": {
+    "pexel": {
+      "pexel_ref01": {}
+    }
+  },
+  "requests": {
+    "GET /api/pexels/search": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

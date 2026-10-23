@@ -1,0 +1,52 @@
+{
+  "existing": {
+    "retry_website_scrape": {
+      "RETRY_WEBSITE_SCRAPE00": {
+        "flow_variant": "s3c",
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "skip_demo": true,
+        "status": "s3f",
+        "success": true,
+        "url": "s41",
+        "id": "RETRY_WEBSITE_SCRAPE00"
+      },
+      "RETRY_WEBSITE_SCRAPE01": {
+        "flow_variant": "s78",
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "skip_demo": true,
+        "status": "s7b",
+        "success": true,
+        "url": "s7d",
+        "id": "RETRY_WEBSITE_SCRAPE01"
+      },
+      "RETRY_WEBSITE_SCRAPE02": {
+        "flow_variant": "sb4",
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "skip_demo": true,
+        "status": "sb7",
+        "success": true,
+        "url": "sb9",
+        "id": "RETRY_WEBSITE_SCRAPE02"
+      }
+    }
+  },
+  "new": {
+    "retry_website_scrape": {
+      "retry_website_scrape_ref01": {
+        "flow_variant": "sf0",
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "skip_demo": true,
+        "status": "sf3",
+        "success": true,
+        "url": "sf5"
+      }
+    }
+  },
+  "requests": {
+    "POST /api/onboarding-v6/retry-scrape": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

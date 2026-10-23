@@ -1,0 +1,82 @@
+# Entity: complete_chat_checkout
+
+main: kit: entity: complete_chat_checkout: {
+
+  alias: field: {}
+
+  fields: {
+    message: {
+      h: "Message"
+      n: "message"
+      r: false
+      t: "`$ANY`"
+    }
+    onboarding_data_id: {
+      h: "Onboarding Data Id"
+      n: "onboarding_data_id"
+      r: true
+      t: "`$STRING`"
+    }
+    product_id: {
+      h: "Product Id"
+      n: "product_id"
+      r: false
+      t: "`$STRING`"
+    }
+    ready: {
+      h: "Ready"
+      n: "ready"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    success: {
+      h: "Success"
+      n: "success"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+  }
+
+  name: "complete_chat_checkout"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "onboarding_data_id"
+          ]
+          co: {
+            id: "POST /api/onboarding-v6/complete-chat-checkout"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/onboarding-v6/complete-chat-checkout"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "onboarding-v6"
+            }
+            {
+              lit: "complete-chat-checkout"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

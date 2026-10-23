@@ -1,0 +1,184 @@
+# Entity: agent_post
+
+main: kit: entity: agent_post: {
+
+  alias: field: {}
+
+  fields: {
+    comments: {
+      h: "Comments"
+      n: "comments"
+      r: true
+      t: "`$INTEGER`"
+    }
+    error_message: {
+      h: "Error Message"
+      n: "error_message"
+      r: true
+      t: "`$ANY`"
+    }
+    id: {
+      fo: "uuid"
+      h: "Id"
+      n: "id"
+      r: true
+      t: "`$STRING`"
+    }
+    likes: {
+      h: "Likes"
+      n: "likes"
+      r: true
+      t: "`$INTEGER`"
+    }
+    product_id: {
+      h: "Product Id"
+      n: "product_id"
+      r: true
+      t: "`$STRING`"
+    }
+    results: {
+      h: "Results"
+      n: "results"
+      r: true
+      t: "`$ANY`"
+    }
+    scheduled_datetime: {
+      fo: "date-time"
+      h: "Scheduled Datetime"
+      n: "scheduled_datetime"
+      r: true
+      t: "`$STRING`"
+    }
+    source_type: {
+      h: "Source Type"
+      n: "source_type"
+      r: true
+      t: "`$STRING`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: true
+      t: "`$STRING`"
+    }
+    user_email: {
+      h: "User Email"
+      n: "user_email"
+      r: true
+      t: "`$STRING`"
+    }
+    user_id: {
+      fo: "uuid"
+      h: "User Id"
+      n: "user_id"
+      r: true
+      t: "`$STRING`"
+    }
+    user_name: {
+      h: "User Name"
+      n: "user_name"
+      r: true
+      t: "`$ANY`"
+    }
+    video_id: {
+      h: "Video Id"
+      n: "video_id"
+      r: true
+      t: "`$STRING`"
+    }
+    video_url: {
+      h: "Video Url"
+      n: "video_url"
+      r: true
+      t: "`$ANY`"
+    }
+    views: {
+      h: "Views"
+      n: "views"
+      r: true
+      t: "`$INTEGER`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "agent_post"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/admin/agents/{agent_id}/posts"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "agent_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                ex: "today"
+                k: "query"
+                n: "day"
+                or: "day"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/agents/{agent_id}/posts"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              agent_id: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "agents"
+            }
+            {
+              var: "id"
+            }
+            {
+              lit: "posts"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.entries`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

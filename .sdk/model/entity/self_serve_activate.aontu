@@ -1,0 +1,77 @@
+# Entity: self_serve_activate
+
+main: kit: entity: self_serve_activate: {
+
+  alias: field: {}
+
+  fields: {
+    onboarding_data_id: {
+      h: "Onboarding Data Id"
+      n: "onboarding_data_id"
+      r: true
+      sh: "UUID of the OnboardingData record"
+      t: "`$STRING`"
+    }
+    redirect_to_stripe: {
+      h: "Redirect To Stripe"
+      n: "redirect_to_stripe"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    stripe_checkout_url: {
+      h: "Stripe Checkout Url"
+      n: "stripe_checkout_url"
+      r: false
+      t: "`$ANY`"
+    }
+    success: {
+      h: "Success"
+      n: "success"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+  }
+
+  name: "self_serve_activate"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "onboarding_data_id"
+          ]
+          co: {
+            id: "POST /api/onboarding-v6/self-serve-activate"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/onboarding-v6/self-serve-activate"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "onboarding-v6"
+            }
+            {
+              lit: "self-serve-activate"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

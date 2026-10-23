@@ -1,0 +1,44 @@
+{
+  "existing": {
+    "generate_prompt": {
+      "GENERATE_PROMPT00": {
+        "hook_duration": 40,
+        "media_asset_id": "MEDIA_ASSET01",
+        "media_asset_url": "s2a",
+        "prompt": "s2b",
+        "id": "GENERATE_PROMPT00"
+      },
+      "GENERATE_PROMPT01": {
+        "hook_duration": 80,
+        "media_asset_id": "MEDIA_ASSET01",
+        "media_asset_url": "s52",
+        "prompt": "s53",
+        "id": "GENERATE_PROMPT01"
+      },
+      "GENERATE_PROMPT02": {
+        "hook_duration": 120,
+        "media_asset_id": "MEDIA_ASSET01",
+        "media_asset_url": "s7a",
+        "prompt": "s7b",
+        "id": "GENERATE_PROMPT02"
+      }
+    }
+  },
+  "new": {
+    "generate_prompt": {
+      "generate_prompt_ref01": {
+        "hook_duration": 160,
+        "media_asset_id": "MEDIA_ASSET01",
+        "media_asset_url": "sa2",
+        "prompt": "sa3"
+      }
+    }
+  },
+  "requests": {
+    "POST /api/video-variation/generate-prompt": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

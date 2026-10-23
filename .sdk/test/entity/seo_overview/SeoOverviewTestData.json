@@ -1,0 +1,45 @@
+{
+  "existing": {
+    "seo_overview": {
+      "SEO_OVERVIEW00": {
+        "clicks": 50,
+        "ctr": 51,
+        "date": "s34",
+        "impressions": 53,
+        "position": 54
+      },
+      "SEO_OVERVIEW01": {
+        "clicks": 100,
+        "ctr": 101,
+        "date": "s66",
+        "impressions": 103,
+        "position": 104
+      },
+      "SEO_OVERVIEW02": {
+        "clicks": 150,
+        "ctr": 151,
+        "date": "s98",
+        "impressions": 153,
+        "position": 154
+      }
+    }
+  },
+  "new": {
+    "seo_overview": {
+      "seo_overview_ref01": {
+        "clicks": 200,
+        "ctr": 201,
+        "date": "sca",
+        "impressions": 203,
+        "position": 204
+      }
+    }
+  },
+  "requests": {
+    "GET /api/seo/overview": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

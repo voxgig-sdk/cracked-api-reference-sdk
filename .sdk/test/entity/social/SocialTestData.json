@@ -1,0 +1,100 @@
+{
+  "existing": {
+    "social": {
+      "SOCIAL00": {
+        "code": "s5a",
+        "code_verifier": "s5b",
+        "createdAt": "s5c",
+        "id": "SOCIAL00",
+        "platform": "s5e",
+        "platformUserId": "s5f",
+        "updatedAt": "s60",
+        "userId": "s61",
+        "username": "s62"
+      },
+      "SOCIAL01": {
+        "code": "sb4",
+        "code_verifier": "sb5",
+        "createdAt": "sb6",
+        "id": "SOCIAL01",
+        "platform": "sb8",
+        "platformUserId": "sb9",
+        "updatedAt": "sba",
+        "userId": "sbb",
+        "username": "sbc"
+      },
+      "SOCIAL02": {
+        "code": "s10e",
+        "code_verifier": "s10f",
+        "createdAt": "s110",
+        "id": "SOCIAL02",
+        "platform": "s112",
+        "platformUserId": "s113",
+        "updatedAt": "s114",
+        "userId": "s115",
+        "username": "s116"
+      }
+    }
+  },
+  "new": {
+    "social": {
+      "social_ref01": {
+        "code": "s168",
+        "code_verifier": "s169",
+        "createdAt": "s16a",
+        "platform": "s16c",
+        "platformUserId": "s16d",
+        "updatedAt": "s16e",
+        "userId": "s16f",
+        "username": "s170"
+      }
+    }
+  },
+  "requests": {
+    "POST /social/instagram/exchange": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /social/tiktok/exchange": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /social/connections": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /social/platforms": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /social/instagram/auth": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /social/instagram/callback": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /social/tiktok/auth": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /social/tiktok/callback": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /social/connections/{platform}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

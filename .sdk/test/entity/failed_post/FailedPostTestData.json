@@ -1,0 +1,84 @@
+{
+  "existing": {
+    "failed_post": {
+      "FAILED_POST00": {
+        "agent_id": "AGENT01",
+        "agent_name": "s97",
+        "agent_platforms": "s98",
+        "error_message": "s99",
+        "id": "FAILED_POST00",
+        "product_id": "PRODUCT01",
+        "results": "s9c",
+        "scheduled_datetime": "s9d",
+        "source_type": "s9e",
+        "status": "s9f",
+        "user_email": "sa0",
+        "user_id": "USER01",
+        "user_name": "sa2",
+        "video_id": "VIDEO01",
+        "video_url": "sa4"
+      },
+      "FAILED_POST01": {
+        "agent_id": "AGENT01",
+        "agent_name": "s12d",
+        "agent_platforms": "s12e",
+        "error_message": "s12f",
+        "id": "FAILED_POST01",
+        "product_id": "PRODUCT01",
+        "results": "s132",
+        "scheduled_datetime": "s133",
+        "source_type": "s134",
+        "status": "s135",
+        "user_email": "s136",
+        "user_id": "USER01",
+        "user_name": "s138",
+        "video_id": "VIDEO01",
+        "video_url": "s13a"
+      },
+      "FAILED_POST02": {
+        "agent_id": "AGENT01",
+        "agent_name": "s1c3",
+        "agent_platforms": "s1c4",
+        "error_message": "s1c5",
+        "id": "FAILED_POST02",
+        "product_id": "PRODUCT01",
+        "results": "s1c8",
+        "scheduled_datetime": "s1c9",
+        "source_type": "s1ca",
+        "status": "s1cb",
+        "user_email": "s1cc",
+        "user_id": "USER01",
+        "user_name": "s1ce",
+        "video_id": "VIDEO01",
+        "video_url": "s1d0"
+      }
+    }
+  },
+  "new": {
+    "failed_post": {
+      "failed_post_ref01": {
+        "agent_id": "AGENT01",
+        "agent_name": "s259",
+        "agent_platforms": "s25a",
+        "error_message": "s25b",
+        "product_id": "PRODUCT01",
+        "results": "s25e",
+        "scheduled_datetime": "s25f",
+        "source_type": "s260",
+        "status": "s261",
+        "user_email": "s262",
+        "user_id": "USER01",
+        "user_name": "s264",
+        "video_id": "VIDEO01",
+        "video_url": "s266"
+      }
+    }
+  },
+  "requests": {
+    "GET /api/admin/failed-posts": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

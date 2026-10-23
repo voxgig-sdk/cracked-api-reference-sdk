@@ -1,0 +1,79 @@
+# Entity: save_survey
+
+main: kit: entity: save_survey: {
+
+  alias: field: {}
+
+  fields: {
+    email_sent: {
+      h: "Email Sent"
+      n: "email_sent"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    onboarding_data_id: {
+      h: "Onboarding Data Id"
+      n: "onboarding_data_id"
+      r: true
+      sh: "UUID of the OnboardingData record"
+      t: "`$STRING`"
+    }
+    success: {
+      h: "Success"
+      n: "success"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    survey: {
+      h: "Survey"
+      n: "survey"
+      r: true
+      sh: "Survey response data from frontend."
+      t: "`$OBJECT`"
+    }
+  }
+
+  name: "save_survey"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "onboarding_data_id"
+            "survey"
+          ]
+          co: {
+            id: "POST /api/onboarding-v6/save-survey"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/onboarding-v6/save-survey"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "onboarding-v6"
+            }
+            {
+              lit: "save-survey"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

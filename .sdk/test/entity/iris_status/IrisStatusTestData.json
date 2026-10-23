@@ -1,0 +1,41 @@
+{
+  "existing": {
+    "iris_status": {
+      "IRIS_STATUS00": {
+        "connectorsPreview": [],
+        "product": "s29",
+        "status": {},
+        "tasksPreview": []
+      },
+      "IRIS_STATUS01": {
+        "connectorsPreview": [],
+        "product": "s51",
+        "status": {},
+        "tasksPreview": []
+      },
+      "IRIS_STATUS02": {
+        "connectorsPreview": [],
+        "product": "s79",
+        "status": {},
+        "tasksPreview": []
+      }
+    }
+  },
+  "new": {
+    "iris_status": {
+      "iris_status_ref01": {
+        "connectorsPreview": [],
+        "product": "sa1",
+        "status": {},
+        "tasksPreview": []
+      }
+    }
+  },
+  "requests": {
+    "GET /api/iris/status": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

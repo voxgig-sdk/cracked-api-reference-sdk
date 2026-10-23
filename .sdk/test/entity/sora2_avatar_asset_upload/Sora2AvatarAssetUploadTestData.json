@@ -1,0 +1,52 @@
+{
+  "existing": {
+    "sora2_avatar_asset_upload": {
+      "SORA2_AVATAR_ASSET_UPLOAD00": {
+        "avatar_id": "AVATAR01",
+        "file": "s3d",
+        "run_output_dir": "s3e",
+        "s3_key": "s3f",
+        "upload_type": "s40",
+        "url": "s41",
+        "id": "SORA2_AVATAR_ASSET_UPLOAD00"
+      },
+      "SORA2_AVATAR_ASSET_UPLOAD01": {
+        "avatar_id": "AVATAR01",
+        "file": "s79",
+        "run_output_dir": "s7a",
+        "s3_key": "s7b",
+        "upload_type": "s7c",
+        "url": "s7d",
+        "id": "SORA2_AVATAR_ASSET_UPLOAD01"
+      },
+      "SORA2_AVATAR_ASSET_UPLOAD02": {
+        "avatar_id": "AVATAR01",
+        "file": "sb5",
+        "run_output_dir": "sb6",
+        "s3_key": "sb7",
+        "upload_type": "sb8",
+        "url": "sb9",
+        "id": "SORA2_AVATAR_ASSET_UPLOAD02"
+      }
+    }
+  },
+  "new": {
+    "sora2_avatar_asset_upload": {
+      "sora2_avatar_asset_upload_ref01": {
+        "avatar_id": "AVATAR01",
+        "file": "sf1",
+        "run_output_dir": "sf2",
+        "s3_key": "sf3",
+        "upload_type": "sf4",
+        "url": "sf5"
+      }
+    }
+  },
+  "requests": {
+    "POST /api/admin/sora2-avatars/upload-asset": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

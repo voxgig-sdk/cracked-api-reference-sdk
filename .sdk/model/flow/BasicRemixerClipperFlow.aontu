@@ -1,0 +1,40 @@
+# BasicRemixerClipperFlow
+
+main: kit: flow: BasicRemixerClipperFlow:
+{
+  entity: "remixer_clipper",
+  kind: "basic",
+  name: "BasicRemixerClipperFlow",
+  step: [
+    {
+      i: {
+        ref: "remixer_clipper_ref01"
+      }
+
+      m: {
+        identifier: "identifier01"
+      }
+
+      o: "create"
+    }
+
+    {
+      i: {
+        ref: "remixer_clipper_ref01",
+        srcdatavar: "remixer_clipper_ref01_data",
+        suffix: "_dt0"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-remixer_clipper_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicRemixerClipperFlow"
+}

@@ -1,0 +1,40 @@
+{
+  "existing": {
+    "agent_access_phil_video": {
+      "AGENT_ACCESS_PHIL_VIDEO00": {
+        "generatedAt": "s1e",
+        "targetDate": "s1f",
+        "videos": {},
+        "id": "AGENT_ACCESS_PHIL_VIDEO00"
+      },
+      "AGENT_ACCESS_PHIL_VIDEO01": {
+        "generatedAt": "s3c",
+        "targetDate": "s3d",
+        "videos": {},
+        "id": "AGENT_ACCESS_PHIL_VIDEO01"
+      },
+      "AGENT_ACCESS_PHIL_VIDEO02": {
+        "generatedAt": "s5a",
+        "targetDate": "s5b",
+        "videos": {},
+        "id": "AGENT_ACCESS_PHIL_VIDEO02"
+      }
+    }
+  },
+  "new": {
+    "agent_access_phil_video": {
+      "agent_access_phil_video_ref01": {
+        "generatedAt": "s78",
+        "targetDate": "s79",
+        "videos": {}
+      }
+    }
+  },
+  "requests": {
+    "GET /api/agent-access/phil-notifications/videos": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

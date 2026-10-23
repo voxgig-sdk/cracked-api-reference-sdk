@@ -1,0 +1,56 @@
+{
+  "existing": {
+    "sora2_avatar_stat": {
+      "SORA2_AVATAR_STAT00": {
+        "by_age_bucket": {},
+        "by_gender": {},
+        "by_prompt_key": {},
+        "by_race": {},
+        "completed_avatars": 74,
+        "completion_rate": 75,
+        "total_avatars": 76,
+        "id": "SORA2_AVATAR_STAT00"
+      },
+      "SORA2_AVATAR_STAT01": {
+        "by_age_bucket": {},
+        "by_gender": {},
+        "by_prompt_key": {},
+        "by_race": {},
+        "completed_avatars": 144,
+        "completion_rate": 145,
+        "total_avatars": 146,
+        "id": "SORA2_AVATAR_STAT01"
+      },
+      "SORA2_AVATAR_STAT02": {
+        "by_age_bucket": {},
+        "by_gender": {},
+        "by_prompt_key": {},
+        "by_race": {},
+        "completed_avatars": 214,
+        "completion_rate": 215,
+        "total_avatars": 216,
+        "id": "SORA2_AVATAR_STAT02"
+      }
+    }
+  },
+  "new": {
+    "sora2_avatar_stat": {
+      "sora2_avatar_stat_ref01": {
+        "by_age_bucket": {},
+        "by_gender": {},
+        "by_prompt_key": {},
+        "by_race": {},
+        "completed_avatars": 284,
+        "completion_rate": 285,
+        "total_avatars": 286
+      }
+    }
+  },
+  "requests": {
+    "GET /api/admin/sora2-avatars/stats": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

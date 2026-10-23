@@ -1,0 +1,98 @@
+# Entity: create_sora2_video
+
+main: kit: entity: create_sora2_video: {
+
+  alias: field: {}
+
+  fields: {
+    image_prompt: {
+      h: "Image Prompt"
+      n: "image_prompt"
+      r: false
+      t: "`$ANY`"
+    }
+    main_prompt: {
+      h: "Main Prompt"
+      n: "main_prompt"
+      r: true
+      t: "`$STRING`"
+    }
+    model: {
+      h: "Model"
+      n: "model"
+      r: false
+      t: "`$STRING`"
+    }
+    requires_polling: {
+      h: "Requires Polling"
+      n: "requires_polling"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    seconds: {
+      h: "Seconds"
+      n: "seconds"
+      r: false
+      t: "`$STRING`"
+    }
+    size: {
+      h: "Size"
+      n: "size"
+      r: false
+      t: "`$STRING`"
+    }
+    video: {
+      h: "Video"
+      n: "video"
+      r: true
+      t: "`$OBJECT`"
+    }
+  }
+
+  name: "create_sora2_video"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "image_prompt"
+            "main_prompt"
+            "model"
+            "seconds"
+            "size"
+          ]
+          co: {
+            id: "POST /api/core/create-sora2-video"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/core/create-sora2-video"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "core"
+            }
+            {
+              lit: "create-sora2-video"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

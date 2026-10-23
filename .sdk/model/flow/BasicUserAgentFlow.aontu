@@ -1,0 +1,38 @@
+# BasicUserAgentFlow
+
+main: kit: flow: BasicUserAgentFlow:
+{
+  entity: "user_agent",
+  kind: "basic",
+  name: "BasicUserAgentFlow",
+  step: [
+    {
+      i: {
+        ref: "user_agent_ref01"
+      }
+
+      m: {
+        user_id: "user01"
+      }
+
+      o: "create"
+    }
+
+    {
+      m: {
+        user_id: "user01"
+      }
+
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "user_agent_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicUserAgentFlow"
+}

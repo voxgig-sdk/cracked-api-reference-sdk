@@ -1,0 +1,18 @@
+# BasicStripeFlow
+
+main: kit: flow: BasicStripeFlow:
+{
+  entity: "stripe",
+  kind: "basic",
+  name: "BasicStripeFlow",
+  step: [
+    {
+      i: {
+        ref: "stripe_ref01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicStripeFlow"
+}

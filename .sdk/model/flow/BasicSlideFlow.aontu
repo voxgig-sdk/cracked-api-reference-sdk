@@ -1,0 +1,45 @@
+# BasicSlideFlow
+
+main: kit: flow: BasicSlideFlow:
+{
+  entity: "slide",
+  kind: "basic",
+  name: "BasicSlideFlow",
+  step: [
+    {
+      i: {
+        ref: "slide_ref01"
+      }
+
+      m: {
+        carousel_id: "carousel01",
+        slide_index: "slide_index01"
+      }
+
+      o: "create"
+    }
+
+    {
+      d: {
+        carousel_id: "carousel01"
+      }
+
+      i: {
+        ref: "slide_ref01",
+        srcdatavar: "slide_ref01_data",
+        suffix: "_up0"
+      }
+
+      o: "update",
+      s: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-slide_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicSlideFlow"
+}

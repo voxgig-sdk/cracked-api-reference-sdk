@@ -1,0 +1,22 @@
+# BasicPaidUserFlow
+
+main: kit: flow: BasicPaidUserFlow:
+{
+  entity: "paid_user",
+  kind: "basic",
+  name: "BasicPaidUserFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "paid_user_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicPaidUserFlow"
+}

@@ -1,0 +1,22 @@
+# BasicUsersHealthFlow
+
+main: kit: flow: BasicUsersHealthFlow:
+{
+  entity: "users_health",
+  kind: "basic",
+  name: "BasicUsersHealthFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "users_health_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicUsersHealthFlow"
+}

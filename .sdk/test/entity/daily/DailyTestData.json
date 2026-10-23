@@ -1,0 +1,27 @@
+{
+  "existing": {
+    "daily": {
+      "DAILY00": {
+        "id": "DAILY00"
+      },
+      "DAILY01": {
+        "id": "DAILY01"
+      },
+      "DAILY02": {
+        "id": "DAILY02"
+      }
+    }
+  },
+  "new": {
+    "daily": {
+      "daily_ref01": {}
+    }
+  },
+  "requests": {
+    "POST /api/carousel/daily/{product_id}/plan": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

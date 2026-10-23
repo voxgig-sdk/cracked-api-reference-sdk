@@ -1,0 +1,131 @@
+# Entity: admin_customer
+
+main: kit: entity: admin_customer: {
+
+  alias: field: {}
+
+  fields: {
+    account_type: {
+      h: "Account Type"
+      n: "account_type"
+      r: false
+      t: "`$ANY`"
+    }
+    active_vireel_agents: {
+      h: "Active Vireel Agents"
+      n: "active_vireel_agents"
+      r: true
+      t: "`$INTEGER`"
+    }
+    agents: {
+      h: "Agents"
+      n: "agents"
+      r: true
+      t: "`$ARRAY`"
+    }
+    billing_source: {
+      h: "Billing Source"
+      n: "billing_source"
+      r: true
+      t: "`$STRING`"
+    }
+    contracted_agents: {
+      h: "Contracted Agents"
+      n: "contracted_agents"
+      r: false
+      t: "`$ANY`"
+    }
+    email: {
+      h: "Email"
+      n: "email"
+      r: true
+      t: "`$STRING`"
+    }
+    membership: {
+      h: "Membership"
+      n: "membership"
+      r: false
+      t: "`$ANY`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: false
+      t: "`$STRING`"
+    }
+    pfa_only_agents: {
+      h: "Pfa Only Agents"
+      n: "pfa_only_agents"
+      r: true
+      t: "`$INTEGER`"
+    }
+    severity: {
+      h: "Severity"
+      n: "severity"
+      r: true
+      t: "`$STRING`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: true
+      t: "`$STRING`"
+    }
+    subscription_status: {
+      h: "Subscription Status"
+      n: "subscription_status"
+      r: false
+      t: "`$ANY`"
+    }
+    user_id: {
+      fo: "uuid"
+      h: "User Id"
+      n: "user_id"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  name: "admin_customer"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/admin/insights/customers"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/admin/insights/customers"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "insights"
+            }
+            {
+              lit: "customers"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

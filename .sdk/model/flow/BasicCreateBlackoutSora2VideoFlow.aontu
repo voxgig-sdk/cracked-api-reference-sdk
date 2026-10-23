@@ -1,0 +1,18 @@
+# BasicCreateBlackoutSora2VideoFlow
+
+main: kit: flow: BasicCreateBlackoutSora2VideoFlow:
+{
+  entity: "create_blackout_sora2_video",
+  kind: "basic",
+  name: "BasicCreateBlackoutSora2VideoFlow",
+  step: [
+    {
+      i: {
+        ref: "create_blackout_sora2_video_ref01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicCreateBlackoutSora2VideoFlow"
+}

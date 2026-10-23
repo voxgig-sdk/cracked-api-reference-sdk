@@ -1,0 +1,22 @@
+# BasicAgentAccessUserPostFlow
+
+main: kit: flow: BasicAgentAccessUserPostFlow:
+{
+  entity: "agent_access_user_post",
+  kind: "basic",
+  name: "BasicAgentAccessUserPostFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "agent_access_user_post_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicAgentAccessUserPostFlow"
+}

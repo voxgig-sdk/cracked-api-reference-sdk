@@ -1,0 +1,91 @@
+# Entity: agent_access_phil_stats_refresh
+
+main: kit: entity: agent_access_phil_stats_refresh: {
+
+  alias: field: {}
+
+  fields: {
+    generatedAt: {
+      fo: "date-time"
+      h: "Generated At"
+      n: "generatedAt"
+      r: true
+      t: "`$STRING`"
+    }
+    statsRefresh: {
+      h: "Stats Refresh"
+      n: "statsRefresh"
+      r: true
+      t: "`$OBJECT`"
+    }
+    targetDate: {
+      h: "Target Date"
+      n: "targetDate"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  name: "agent_access_phil_stats_refresh"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/agent-access/phil-notifications/stats-refresh"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "x_agent_access_key"
+                or: "x-agent-access-key"
+                r: false
+                t: "`$ANY`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "date"
+                or: "date"
+                r: false
+                t: "`$ANY`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/agent-access/phil-notifications/stats-refresh"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "agent-access"
+            }
+            {
+              lit: "phil-notifications"
+            }
+            {
+              lit: "stats-refresh"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

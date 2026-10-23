@@ -1,0 +1,118 @@
+# Entity: agent_access_user_post
+
+main: kit: entity: agent_access_user_post: {
+
+  alias: field: {}
+
+  fields: {
+    deltaYesterday: {
+      h: "Delta Yesterday"
+      n: "deltaYesterday"
+      r: true
+      t: "`$INTEGER`"
+    }
+    expectedVideosPerDay: {
+      h: "Expected Videos Per Day"
+      n: "expectedVideosPerDay"
+      r: true
+      t: "`$INTEGER`"
+    }
+    postedToday: {
+      h: "Posted Today"
+      n: "postedToday"
+      r: true
+      t: "`$INTEGER`"
+    }
+    postedYesterday: {
+      h: "Posted Yesterday"
+      n: "postedYesterday"
+      r: true
+      t: "`$INTEGER`"
+    }
+    productId: {
+      h: "Product Id"
+      n: "productId"
+      r: false
+      t: "`$ANY`"
+    }
+    productName: {
+      h: "Product Name"
+      n: "productName"
+      r: false
+      t: "`$ANY`"
+    }
+  }
+
+  name: "agent_access_user_post"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/agent-access/user-posts"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "x_agent_access_key"
+                or: "x-agent-access-key"
+                r: false
+                t: "`$ANY`"
+              }
+            ]
+            query: [
+              {
+                ex: 7
+                k: "query"
+                n: "day"
+                or: "days"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "email"
+                or: "email"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/agent-access/user-posts"
+          q: {
+            exist: [
+              "email"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "agent-access"
+            }
+            {
+              lit: "user-posts"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

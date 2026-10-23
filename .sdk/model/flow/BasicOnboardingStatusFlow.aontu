@@ -1,0 +1,22 @@
+# BasicOnboardingStatusFlow
+
+main: kit: flow: BasicOnboardingStatusFlow:
+{
+  entity: "onboarding_status",
+  kind: "basic",
+  name: "BasicOnboardingStatusFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "onboarding_status_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicOnboardingStatusFlow"
+}

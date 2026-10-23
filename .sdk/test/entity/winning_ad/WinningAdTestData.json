@@ -1,0 +1,48 @@
+{
+  "existing": {
+    "winning_ad": {
+      "WINNING_AD00": {
+        "created_at": "s3c",
+        "description": "s3d",
+        "id": "WINNING_AD00",
+        "source": "s3f",
+        "type": "s40",
+        "url": "s41"
+      },
+      "WINNING_AD01": {
+        "created_at": "s78",
+        "description": "s79",
+        "id": "WINNING_AD01",
+        "source": "s7b",
+        "type": "s7c",
+        "url": "s7d"
+      },
+      "WINNING_AD02": {
+        "created_at": "sb4",
+        "description": "sb5",
+        "id": "WINNING_AD02",
+        "source": "sb7",
+        "type": "sb8",
+        "url": "sb9"
+      }
+    }
+  },
+  "new": {
+    "winning_ad": {
+      "winning_ad_ref01": {
+        "created_at": "sf0",
+        "description": "sf1",
+        "source": "sf3",
+        "type": "sf4",
+        "url": "sf5"
+      }
+    }
+  },
+  "requests": {
+    "GET /api/video-variation/winning-ads": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

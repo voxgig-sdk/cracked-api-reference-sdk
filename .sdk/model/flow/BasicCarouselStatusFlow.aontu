@@ -1,0 +1,26 @@
+# BasicCarouselStatusFlow
+
+main: kit: flow: BasicCarouselStatusFlow:
+{
+  entity: "carousel_status",
+  kind: "basic",
+  name: "BasicCarouselStatusFlow",
+  step: [
+    {
+      m: {
+        video_id: "video01"
+      }
+
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "carousel_status_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicCarouselStatusFlow"
+}

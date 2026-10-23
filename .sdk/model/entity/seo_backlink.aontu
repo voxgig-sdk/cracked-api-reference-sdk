@@ -1,0 +1,98 @@
+# Entity: seo_backlink
+
+main: kit: entity: seo_backlink: {
+
+  alias: field: {}
+
+  fields: {
+    anchor_text: {
+      h: "Anchor Text"
+      n: "anchor_text"
+      r: true
+      t: "`$STRING`"
+    }
+    first_seen: {
+      h: "First Seen"
+      n: "first_seen"
+      r: true
+      t: "`$STRING`"
+    }
+    referring_domain: {
+      h: "Referring Domain"
+      n: "referring_domain"
+      r: true
+      t: "`$STRING`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: true
+      t: "`$STRING`"
+    }
+    target_page: {
+      h: "Target Page"
+      n: "target_page"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  name: "seo_backlink"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/seo/backlinks"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: 200
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "product_id"
+                or: "product_id"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/seo/backlinks"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "seo"
+            }
+            {
+              lit: "backlinks"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.rows`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

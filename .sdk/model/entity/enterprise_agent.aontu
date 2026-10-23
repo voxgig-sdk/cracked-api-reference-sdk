@@ -1,0 +1,196 @@
+# Entity: enterprise_agent
+
+main: kit: entity: enterprise_agent: {
+
+  alias: field: {}
+
+  fields: {
+    count: {
+      h: "Count"
+      n: "count"
+      op: {
+        create: {
+          req: false
+          type: "`$INTEGER`"
+        }
+      }
+      r: true
+      t: "`$INTEGER`"
+    }
+    product_id: {
+      fo: "uuid"
+      h: "Product Id"
+      n: "product_id"
+      r: true
+      t: "`$STRING`"
+    }
+    source_product_id: {
+      fo: "uuid"
+      h: "Source Product Id"
+      n: "source_product_id"
+      r: true
+      t: "`$STRING`"
+    }
+    target_product_id: {
+      fo: "uuid"
+      h: "Target Product Id"
+      n: "target_product_id"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  name: "enterprise_agent"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "count"
+            "product_id"
+          ]
+          co: {
+            id: "POST /api/enterprise/agents/assign"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/enterprise/agents/assign"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "enterprise"
+            }
+            {
+              lit: "agents"
+            }
+            {
+              lit: "assign"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "count"
+            "source_product_id"
+            "target_product_id"
+          ]
+          co: {
+            id: "POST /api/enterprise/agents/move"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/enterprise/agents/move"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "enterprise"
+            }
+            {
+              lit: "agents"
+            }
+            {
+              lit: "move"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "count"
+            "product_id"
+          ]
+          co: {
+            id: "POST /api/enterprise/agents/release"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/enterprise/agents/release"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "enterprise"
+            }
+            {
+              lit: "agents"
+            }
+            {
+              lit: "release"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/enterprise/agents/global-pool-status"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/enterprise/agents/global-pool-status"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "enterprise"
+            }
+            {
+              lit: "agents"
+            }
+            {
+              lit: "global-pool-status"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

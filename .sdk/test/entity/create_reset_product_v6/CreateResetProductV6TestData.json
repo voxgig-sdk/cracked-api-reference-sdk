@@ -1,0 +1,56 @@
+{
+  "existing": {
+    "create_reset_product_v6": {
+      "CREATE_RESET_PRODUCT_V600": {
+        "agents_transferred": 70,
+        "credits_deducted": 71,
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "product_id": "PRODUCT01",
+        "remaining_credits": 74,
+        "success": false,
+        "videos_queued": 76,
+        "id": "CREATE_RESET_PRODUCT_V600"
+      },
+      "CREATE_RESET_PRODUCT_V601": {
+        "agents_transferred": 140,
+        "credits_deducted": 141,
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "product_id": "PRODUCT01",
+        "remaining_credits": 144,
+        "success": false,
+        "videos_queued": 146,
+        "id": "CREATE_RESET_PRODUCT_V601"
+      },
+      "CREATE_RESET_PRODUCT_V602": {
+        "agents_transferred": 210,
+        "credits_deducted": 211,
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "product_id": "PRODUCT01",
+        "remaining_credits": 214,
+        "success": false,
+        "videos_queued": 216,
+        "id": "CREATE_RESET_PRODUCT_V602"
+      }
+    }
+  },
+  "new": {
+    "create_reset_product_v6": {
+      "create_reset_product_v6_ref01": {
+        "agents_transferred": 280,
+        "credits_deducted": 281,
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "product_id": "PRODUCT01",
+        "remaining_credits": 284,
+        "success": false,
+        "videos_queued": 286
+      }
+    }
+  },
+  "requests": {
+    "POST /api/reset-product/create-v6": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

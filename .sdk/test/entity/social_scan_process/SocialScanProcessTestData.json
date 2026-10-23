@@ -1,0 +1,44 @@
+{
+  "existing": {
+    "social_scan_process": {
+      "SOCIAL_SCAN_PROCESS00": {
+        "posts": [],
+        "product_id": "PRODUCT01",
+        "success": true,
+        "task_id": "TASK01",
+        "id": "SOCIAL_SCAN_PROCESS00"
+      },
+      "SOCIAL_SCAN_PROCESS01": {
+        "posts": [],
+        "product_id": "PRODUCT01",
+        "success": true,
+        "task_id": "TASK01",
+        "id": "SOCIAL_SCAN_PROCESS01"
+      },
+      "SOCIAL_SCAN_PROCESS02": {
+        "posts": [],
+        "product_id": "PRODUCT01",
+        "success": true,
+        "task_id": "TASK01",
+        "id": "SOCIAL_SCAN_PROCESS02"
+      }
+    }
+  },
+  "new": {
+    "social_scan_process": {
+      "social_scan_process_ref01": {
+        "posts": [],
+        "product_id": "PRODUCT01",
+        "success": true,
+        "task_id": "TASK01"
+      }
+    }
+  },
+  "requests": {
+    "POST /api/social-scan/process": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

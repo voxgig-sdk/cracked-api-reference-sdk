@@ -1,0 +1,148 @@
+{
+  "existing": {
+    "admin_healthrx": {
+      "ADMIN_HEALTHRX00": {
+        "action": "s82",
+        "delivery_enabled": false,
+        "id": "ADMIN_HEALTHRX00",
+        "option_id": "OPTION01",
+        "plan": {},
+        "preparation_enabled": false,
+        "product_id": "PRODUCT01",
+        "reason": "s89",
+        "request_key": "s8a",
+        "revision": 139,
+        "schedule_enabled": true,
+        "version": "s8d",
+        "viewed": true,
+        "item_id": "ITEM01",
+        "kind": "KIND01",
+        "comment_id": "COMMENT01",
+        "video_id": "VIDEO01"
+      },
+      "ADMIN_HEALTHRX01": {
+        "action": "s104",
+        "delivery_enabled": false,
+        "id": "ADMIN_HEALTHRX01",
+        "option_id": "OPTION01",
+        "plan": {},
+        "preparation_enabled": false,
+        "product_id": "PRODUCT01",
+        "reason": "s10b",
+        "request_key": "s10c",
+        "revision": 269,
+        "schedule_enabled": true,
+        "version": "s10f",
+        "viewed": true,
+        "item_id": "ITEM01",
+        "kind": "KIND01",
+        "comment_id": "COMMENT01",
+        "video_id": "VIDEO01"
+      },
+      "ADMIN_HEALTHRX02": {
+        "action": "s186",
+        "delivery_enabled": false,
+        "id": "ADMIN_HEALTHRX02",
+        "option_id": "OPTION01",
+        "plan": {},
+        "preparation_enabled": false,
+        "product_id": "PRODUCT01",
+        "reason": "s18d",
+        "request_key": "s18e",
+        "revision": 399,
+        "schedule_enabled": true,
+        "version": "s191",
+        "viewed": true,
+        "item_id": "ITEM01",
+        "kind": "KIND01",
+        "comment_id": "COMMENT01",
+        "video_id": "VIDEO01"
+      }
+    }
+  },
+  "new": {
+    "admin_healthrx": {
+      "admin_healthrx_ref01": {
+        "action": "s208",
+        "delivery_enabled": false,
+        "option_id": "OPTION01",
+        "plan": {},
+        "preparation_enabled": false,
+        "product_id": "PRODUCT01",
+        "reason": "s20f",
+        "request_key": "s210",
+        "revision": 529,
+        "schedule_enabled": true,
+        "version": "s213",
+        "viewed": true
+      }
+    }
+  },
+  "requests": {
+    "POST /api/admin/healthrx/items/{kind}/{item_id}/decision": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/healthrx/items/comments/{item_id}/selection": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/healthrx/videos/{source_id}/viewed": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/healthrx/automation/runs": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/healthrx/items/{kind}/{item_id}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/healthrx/automation": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/healthrx/automation/config": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/healthrx/videos": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/healthrx/customers": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/healthrx/inbox": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/healthrx/products": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/healthrx/summary": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PUT /api/admin/healthrx/automation/config": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

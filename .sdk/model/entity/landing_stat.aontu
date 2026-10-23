@@ -1,0 +1,92 @@
+# Entity: landing_stat
+
+main: kit: entity: landing_stat: {
+
+  alias: field: {}
+
+  fields: {
+    landing: {
+      h: "Landing"
+      n: "landing"
+      r: true
+      t: "`$OBJECT`"
+    }
+    microhub: {
+      h: "Microhub"
+      n: "microhub"
+      r: true
+      t: "`$OBJECT`"
+    }
+  }
+
+  name: "landing_stat"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/landings/{slug}/stats"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "slug"
+                or: "slug"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "product_id"
+                or: "product_id"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/landings/{slug}/stats"
+          q: {
+            exist: [
+              "slug"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "landings"
+            }
+            {
+              var: "slug"
+            }
+            {
+              lit: "stats"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.landing")]
+  ]
+
+}

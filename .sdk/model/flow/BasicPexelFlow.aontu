@@ -1,0 +1,22 @@
+# BasicPexelFlow
+
+main: kit: flow: BasicPexelFlow:
+{
+  entity: "pexel",
+  kind: "basic",
+  name: "BasicPexelFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "pexel_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicPexelFlow"
+}

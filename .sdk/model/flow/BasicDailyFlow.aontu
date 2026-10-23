@@ -1,0 +1,22 @@
+# BasicDailyFlow
+
+main: kit: flow: BasicDailyFlow:
+{
+  entity: "daily",
+  kind: "basic",
+  name: "BasicDailyFlow",
+  step: [
+    {
+      i: {
+        ref: "daily_ref01"
+      }
+
+      m: {
+        product_id: "product01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicDailyFlow"
+}

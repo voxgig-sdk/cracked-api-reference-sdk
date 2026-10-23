@@ -1,0 +1,47 @@
+{
+  "existing": {
+    "slide": {
+      "SLIDE00": {
+        "caption": "s1e",
+        "id": "SLIDE00",
+        "prompt": "s20",
+        "carousel_id": "CAROUSEL01",
+        "slide_index": "SLIDE_INDEX01"
+      },
+      "SLIDE01": {
+        "caption": "s3c",
+        "id": "SLIDE01",
+        "prompt": "s3e",
+        "carousel_id": "CAROUSEL01",
+        "slide_index": "SLIDE_INDEX01"
+      },
+      "SLIDE02": {
+        "caption": "s5a",
+        "id": "SLIDE02",
+        "prompt": "s5c",
+        "carousel_id": "CAROUSEL01",
+        "slide_index": "SLIDE_INDEX01"
+      }
+    }
+  },
+  "new": {
+    "slide": {
+      "slide_ref01": {
+        "caption": "s78",
+        "prompt": "s7a"
+      }
+    }
+  },
+  "requests": {
+    "POST /api/carousel/{video_id}/slides/{slide_index}/regenerate": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PATCH /api/carousel/{video_id}/slides/{slide_index}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

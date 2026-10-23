@@ -1,0 +1,22 @@
+# BasicCustomerHealthAllCustomersItemFlow
+
+main: kit: flow: BasicCustomerHealthAllCustomersItemFlow:
+{
+  entity: "customer_health_all_customers_item",
+  kind: "basic",
+  name: "BasicCustomerHealthAllCustomersItemFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "customer_health_all_customers_item_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicCustomerHealthAllCustomersItemFlow"
+}

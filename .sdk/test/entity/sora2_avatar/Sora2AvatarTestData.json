@@ -1,0 +1,115 @@
+{
+  "existing": {
+    "sora2_avatar": {
+      "SORA2_AVATAR00": {
+        "avatar_frame_url": "sbe",
+        "created_at": "sbf",
+        "current_step": 192,
+        "headshot_url": "sc1",
+        "id": "SORA2_AVATAR00",
+        "logs": {},
+        "prompt_key": "sc4",
+        "run_output_dir": "sc5",
+        "selected_age_bucket": "sc6",
+        "selected_gender": "sc7",
+        "selected_prompt": "sc8",
+        "selected_race": "sc9",
+        "sora2_cameo_handle": "sca",
+        "sora2_cameo_id": "SORA2_CAMEO01",
+        "sora2_cameo_link": "scc",
+        "sora2_display_name": "scd",
+        "sora2_task_id": "SORA2_TASK01",
+        "sora2_video_url": "scf",
+        "updated_at": "sd0"
+      },
+      "SORA2_AVATAR01": {
+        "avatar_frame_url": "s17c",
+        "created_at": "s17d",
+        "current_step": 382,
+        "headshot_url": "s17f",
+        "id": "SORA2_AVATAR01",
+        "logs": {},
+        "prompt_key": "s182",
+        "run_output_dir": "s183",
+        "selected_age_bucket": "s184",
+        "selected_gender": "s185",
+        "selected_prompt": "s186",
+        "selected_race": "s187",
+        "sora2_cameo_handle": "s188",
+        "sora2_cameo_id": "SORA2_CAMEO01",
+        "sora2_cameo_link": "s18a",
+        "sora2_display_name": "s18b",
+        "sora2_task_id": "SORA2_TASK01",
+        "sora2_video_url": "s18d",
+        "updated_at": "s18e"
+      },
+      "SORA2_AVATAR02": {
+        "avatar_frame_url": "s23a",
+        "created_at": "s23b",
+        "current_step": 572,
+        "headshot_url": "s23d",
+        "id": "SORA2_AVATAR02",
+        "logs": {},
+        "prompt_key": "s240",
+        "run_output_dir": "s241",
+        "selected_age_bucket": "s242",
+        "selected_gender": "s243",
+        "selected_prompt": "s244",
+        "selected_race": "s245",
+        "sora2_cameo_handle": "s246",
+        "sora2_cameo_id": "SORA2_CAMEO01",
+        "sora2_cameo_link": "s248",
+        "sora2_display_name": "s249",
+        "sora2_task_id": "SORA2_TASK01",
+        "sora2_video_url": "s24b",
+        "updated_at": "s24c"
+      }
+    }
+  },
+  "new": {
+    "sora2_avatar": {
+      "sora2_avatar_ref01": {
+        "avatar_frame_url": "s2f8",
+        "created_at": "s2f9",
+        "current_step": 762,
+        "headshot_url": "s2fb",
+        "logs": {},
+        "prompt_key": "s2fe",
+        "run_output_dir": "s2ff",
+        "selected_age_bucket": "s300",
+        "selected_gender": "s301",
+        "selected_prompt": "s302",
+        "selected_race": "s303",
+        "sora2_cameo_handle": "s304",
+        "sora2_cameo_id": "SORA2_CAMEO01",
+        "sora2_cameo_link": "s306",
+        "sora2_display_name": "s307",
+        "sora2_task_id": "SORA2_TASK01",
+        "sora2_video_url": "s309",
+        "updated_at": "s30a"
+      }
+    }
+  },
+  "requests": {
+    "POST /api/admin/sora2-avatars": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/sora2-avatars": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/sora2-avatars/{avatar_id}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PUT /api/admin/sora2-avatars/{avatar_id}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

@@ -1,0 +1,192 @@
+# Entity: admin_recent_signup
+
+main: kit: entity: admin_recent_signup: {
+
+  alias: field: {}
+
+  fields: {
+    created_at: {
+      fo: "date-time"
+      h: "Created At"
+      n: "created_at"
+      r: true
+      t: "`$STRING`"
+    }
+    current_step: {
+      h: "Current Step"
+      n: "current_step"
+      r: true
+      t: "`$STRING`"
+    }
+    email: {
+      h: "Email"
+      n: "email"
+      r: false
+      t: "`$STRING`"
+    }
+    email_source: {
+      h: "Email Source"
+      n: "email_source"
+      r: false
+      t: "`$ANY`"
+    }
+    error_message: {
+      h: "Error Message"
+      n: "error_message"
+      r: false
+      t: "`$ANY`"
+    }
+    flow_variant: {
+      h: "Flow Variant"
+      n: "flow_variant"
+      r: true
+      t: "`$STRING`"
+    }
+    id: {
+      fo: "uuid"
+      h: "Id"
+      n: "id"
+      r: true
+      t: "`$STRING`"
+    }
+    inactive_minutes: {
+      h: "Inactive Minutes"
+      n: "inactive_minutes"
+      r: true
+      t: "`$INTEGER`"
+    }
+    last_notification_at: {
+      h: "Last Notification At"
+      n: "last_notification_at"
+      r: false
+      t: "`$ANY`"
+    }
+    last_seen_at: {
+      fo: "date-time"
+      h: "Last Seen At"
+      n: "last_seen_at"
+      r: true
+      t: "`$STRING`"
+    }
+    likely_cause: {
+      h: "Likely Cause"
+      n: "likely_cause"
+      r: true
+      t: "`$STRING`"
+    }
+    notification_count: {
+      h: "Notification Count"
+      n: "notification_count"
+      r: true
+      t: "`$INTEGER`"
+    }
+    notification_events: {
+      h: "Notification Events"
+      n: "notification_events"
+      r: true
+      t: "`$ARRAY`"
+    }
+    product_id: {
+      h: "Product Id"
+      n: "product_id"
+      r: false
+      t: "`$STRING`"
+    }
+    product_name: {
+      h: "Product Name"
+      n: "product_name"
+      r: false
+      t: "`$ANY`"
+    }
+    product_url: {
+      h: "Product Url"
+      n: "product_url"
+      r: true
+      t: "`$STRING`"
+    }
+    severity: {
+      h: "Severity"
+      n: "severity"
+      r: true
+      t: "`$STRING`"
+    }
+    social_scan_status: {
+      h: "Social Scan Status"
+      n: "social_scan_status"
+      r: false
+      t: "`$ANY`"
+    }
+    stage_label: {
+      h: "Stage Label"
+      n: "stage_label"
+      r: true
+      t: "`$STRING`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: true
+      t: "`$STRING`"
+    }
+    updated_at: {
+      h: "Updated At"
+      n: "updated_at"
+      r: false
+      t: "`$ANY`"
+    }
+    website_scrape_status: {
+      h: "Website Scrape Status"
+      n: "website_scrape_status"
+      r: false
+      t: "`$ANY`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "admin_recent_signup"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/admin/insights/recent-signups"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/admin/insights/recent-signups"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "insights"
+            }
+            {
+              lit: "recent-signups"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.recent_signups`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

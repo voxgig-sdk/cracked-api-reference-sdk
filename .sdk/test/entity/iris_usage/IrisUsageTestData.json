@@ -1,0 +1,41 @@
+{
+  "existing": {
+    "iris_usage": {
+      "IRIS_USAGE00": {
+        "eventCount": 40,
+        "events": [],
+        "membershipId": "s2a",
+        "productScope": "s2b"
+      },
+      "IRIS_USAGE01": {
+        "eventCount": 80,
+        "events": [],
+        "membershipId": "s52",
+        "productScope": "s53"
+      },
+      "IRIS_USAGE02": {
+        "eventCount": 120,
+        "events": [],
+        "membershipId": "s7a",
+        "productScope": "s7b"
+      }
+    }
+  },
+  "new": {
+    "iris_usage": {
+      "iris_usage_ref01": {
+        "eventCount": 160,
+        "events": [],
+        "membershipId": "sa2",
+        "productScope": "sa3"
+      }
+    }
+  },
+  "requests": {
+    "GET /api/iris/usage": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

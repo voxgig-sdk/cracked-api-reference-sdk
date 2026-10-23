@@ -1,0 +1,132 @@
+# Entity: create_variation
+
+main: kit: entity: create_variation: {
+
+  alias: field: {}
+
+  fields: {
+    hook_duration: {
+      h: "Hook Duration"
+      n: "hook_duration"
+      r: true
+      t: "`$INTEGER`"
+    }
+    media_asset_id: {
+      fo: "uuid"
+      h: "Media Asset Id"
+      n: "media_asset_id"
+      r: true
+      t: "`$STRING`"
+    }
+    message: {
+      h: "Message"
+      n: "message"
+      r: true
+      t: "`$STRING`"
+    }
+    product_id: {
+      fo: "uuid"
+      h: "Product Id"
+      n: "product_id"
+      r: true
+      t: "`$STRING`"
+    }
+    prompt: {
+      h: "Prompt"
+      n: "prompt"
+      r: true
+      t: "`$STRING`"
+    }
+    task_id: {
+      h: "Task Id"
+      n: "task_id"
+      r: false
+      t: "`$STRING`"
+    }
+    video_id: {
+      fo: "uuid"
+      h: "Video Id"
+      n: "video_id"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  name: "create_variation"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "hook_duration"
+            "media_asset_id"
+            "product_id"
+            "prompt"
+          ]
+          co: {
+            id: "POST /api/video-variation/create-hook"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/video-variation/create-hook"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "video-variation"
+            }
+            {
+              lit: "create-hook"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "media_asset_id"
+            "product_id"
+          ]
+          co: {
+            id: "POST /api/video-variation/create-invisible"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/video-variation/create-invisible"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "video-variation"
+            }
+            {
+              lit: "create-invisible"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

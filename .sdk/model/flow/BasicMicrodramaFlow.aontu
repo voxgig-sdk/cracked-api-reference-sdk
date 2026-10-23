@@ -1,0 +1,55 @@
+# BasicMicrodramaFlow
+
+main: kit: flow: BasicMicrodramaFlow:
+{
+  entity: "microdrama",
+  kind: "basic",
+  name: "BasicMicrodramaFlow",
+  step: [
+    {
+      i: {
+        ref: "microdrama_ref01"
+      }
+
+      o: "create"
+    }
+
+    {
+      i: {
+        ref: "microdrama_ref01",
+        srcdatavar: "microdrama_ref01_data",
+        suffix: "_up0",
+        textfield: "idempotency_key"
+      }
+
+      o: "update",
+      s: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-microdrama_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "microdrama_ref01",
+        srcdatavar: "microdrama_ref01_data",
+        suffix: "_dt0"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-microdrama_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicMicrodramaFlow"
+}

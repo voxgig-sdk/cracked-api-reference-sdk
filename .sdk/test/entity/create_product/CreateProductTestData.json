@@ -1,0 +1,44 @@
+{
+  "existing": {
+    "create_product": {
+      "CREATE_PRODUCT00": {
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "product_id": "PRODUCT01",
+        "success": true,
+        "videos_queued": 43,
+        "id": "CREATE_PRODUCT00"
+      },
+      "CREATE_PRODUCT01": {
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "product_id": "PRODUCT01",
+        "success": true,
+        "videos_queued": 83,
+        "id": "CREATE_PRODUCT01"
+      },
+      "CREATE_PRODUCT02": {
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "product_id": "PRODUCT01",
+        "success": true,
+        "videos_queued": 123,
+        "id": "CREATE_PRODUCT02"
+      }
+    }
+  },
+  "new": {
+    "create_product": {
+      "create_product_ref01": {
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "product_id": "PRODUCT01",
+        "success": true,
+        "videos_queued": 163
+      }
+    }
+  },
+  "requests": {
+    "POST /api/onboarding-v6/create-product": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

@@ -1,0 +1,89 @@
+# Entity: link_in_bio
+
+main: kit: entity: link_in_bio: {
+
+  alias: field: {}
+
+  fields: {
+    linkInBioType: {
+      h: "Link In Bio Type"
+      n: "linkInBioType"
+      r: true
+      t: "`$STRING`"
+    }
+    redirectUrl: {
+      h: "Redirect Url"
+      n: "redirectUrl"
+      r: true
+      t: "`$STRING`"
+    }
+    slug: {
+      h: "Slug"
+      n: "slug"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  name: "link_in_bio"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/sites/{slug}/link-in-bio"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "slug"
+                or: "slug"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/sites/{slug}/link-in-bio"
+          q: {
+            exist: [
+              "slug"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "sites"
+            }
+            {
+              var: "slug"
+            }
+            {
+              lit: "link-in-bio"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.site")]
+  ]
+
+}

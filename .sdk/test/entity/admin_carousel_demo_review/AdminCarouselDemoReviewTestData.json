@@ -1,0 +1,59 @@
+{
+  "existing": {
+    "admin_carousel_demo_review": {
+      "ADMIN_CAROUSEL_DEMO_REVIEW00": {
+        "id": "ADMIN_CAROUSEL_DEMO_REVIEW00",
+        "items": [],
+        "reason": "s20",
+        "demo_review_id": "DEMO_REVIEW01"
+      },
+      "ADMIN_CAROUSEL_DEMO_REVIEW01": {
+        "id": "ADMIN_CAROUSEL_DEMO_REVIEW01",
+        "items": [],
+        "reason": "s3e",
+        "demo_review_id": "DEMO_REVIEW01"
+      },
+      "ADMIN_CAROUSEL_DEMO_REVIEW02": {
+        "id": "ADMIN_CAROUSEL_DEMO_REVIEW02",
+        "items": [],
+        "reason": "s5c",
+        "demo_review_id": "DEMO_REVIEW01"
+      }
+    }
+  },
+  "new": {
+    "admin_carousel_demo_review": {
+      "admin_carousel_demo_review_ref01": {
+        "items": [],
+        "reason": "s7a"
+      }
+    }
+  },
+  "requests": {
+    "POST /api/admin/carousels/demo-reviews/{formula_id}/decision": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/carousels/demo-reviews/bulk-approve": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/carousels/demo-reviews/{formula_id}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/carousels/demo-reviews/items": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PUT /api/admin/carousels/demo-reviews/{formula_id}/assignee": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

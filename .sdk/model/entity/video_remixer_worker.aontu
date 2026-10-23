@@ -1,0 +1,677 @@
+# Entity: video_remixer_worker
+
+main: kit: entity: video_remixer_worker: {
+
+  alias: field: {}
+
+  fields: {
+    captions_ass: {
+      h: "Captions Ass"
+      n: "captions_ass"
+      r: false
+      t: "`$STRING`"
+    }
+    captions_vtt: {
+      h: "Captions Vtt"
+      n: "captions_vtt"
+      r: false
+      t: "`$STRING`"
+    }
+    cost_usd: {
+      h: "Cost Usd"
+      n: "cost_usd"
+      r: false
+      t: "`$NUMBER`"
+    }
+    error: {
+      h: "Error"
+      n: "error"
+      r: true
+      t: "`$STRING`"
+    }
+    file: {
+      fo: "binary"
+      h: "File"
+      n: "file"
+      r: true
+      t: "`$STRING`"
+    }
+    kinds: {
+      h: "Kinds"
+      n: "kinds"
+      r: false
+      t: "`$ARRAY`"
+    }
+    lease_token: {
+      h: "Lease Token"
+      n: "lease_token"
+      r: true
+      t: "`$STRING`"
+    }
+    limit: {
+      h: "Limit"
+      n: "limit"
+      r: false
+      t: "`$INTEGER`"
+    }
+    manifest: {
+      h: "Manifest"
+      n: "manifest"
+      r: true
+      t: "`$STRING`"
+    }
+    model: {
+      h: "Model"
+      n: "model"
+      r: true
+      t: "`$STRING`"
+    }
+    processing_seconds: {
+      h: "Processing Seconds"
+      n: "processing_seconds"
+      r: false
+      t: "`$NUMBER`"
+    }
+    prompt_version: {
+      h: "Prompt Version"
+      n: "prompt_version"
+      r: true
+      t: "`$STRING`"
+    }
+    result: {
+      h: "Result"
+      n: "result"
+      r: false
+      t: "`$OBJECT`"
+    }
+    thumbnail: {
+      fo: "binary"
+      h: "Thumbnail"
+      n: "thumbnail"
+      r: true
+      t: "`$STRING`"
+    }
+    tier: {
+      h: "Tier"
+      n: "tier"
+      r: false
+      t: "`$STRING`"
+    }
+    worker_id: {
+      h: "Worker Id"
+      n: "worker_id"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  name: "video_remixer_worker"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "error"
+            "lease_token"
+            "worker_id"
+          ]
+          co: {
+            id: "POST /api/admin/video-remixer/worker/jobs/{identifier}/fail"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                ex: ""
+                k: "header"
+                n: "authorization"
+                or: "authorization"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "identifier"
+                or: "identifier"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/admin/video-remixer/worker/jobs/{identifier}/fail"
+          q: {
+            exist: [
+              "identifier"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "worker"
+            }
+            {
+              lit: "jobs"
+            }
+            {
+              var: "identifier"
+            }
+            {
+              lit: "fail"
+            }
+          ]
+          t: {
+            req: {
+              error: "`reqdata.error`"
+              lease_token: "`reqdata.lease_token`"
+              worker_id: "`reqdata.worker_id`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "lease_token"
+            "worker_id"
+          ]
+          co: {
+            id: "POST /api/admin/video-remixer/worker/jobs/{identifier}/heartbeat"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                ex: ""
+                k: "header"
+                n: "authorization"
+                or: "authorization"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "identifier"
+                or: "identifier"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/admin/video-remixer/worker/jobs/{identifier}/heartbeat"
+          q: {
+            exist: [
+              "identifier"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "worker"
+            }
+            {
+              lit: "jobs"
+            }
+            {
+              var: "identifier"
+            }
+            {
+              lit: "heartbeat"
+            }
+          ]
+          t: {
+            req: {
+              lease_token: "`reqdata.lease_token`"
+              worker_id: "`reqdata.worker_id`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "lease_token"
+            "worker_id"
+          ]
+          co: {
+            id: "POST /api/admin/video-remixer/worker/jobs/{identifier}/media"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                ex: ""
+                k: "header"
+                n: "authorization"
+                or: "authorization"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "identifier"
+                or: "identifier"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/admin/video-remixer/worker/jobs/{identifier}/media"
+          q: {
+            exist: [
+              "identifier"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "worker"
+            }
+            {
+              lit: "jobs"
+            }
+            {
+              var: "identifier"
+            }
+            {
+              lit: "media"
+            }
+          ]
+          t: {
+            req: {
+              lease_token: "`reqdata.lease_token`"
+              worker_id: "`reqdata.worker_id`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /api/admin/video-remixer/worker/jobs/{identifier}/render-output"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                ex: ""
+                k: "header"
+                n: "authorization"
+                or: "authorization"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: ""
+                k: "header"
+                n: "x_lease_token"
+                or: "x-lease-token"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: ""
+                k: "header"
+                n: "x_worker_id"
+                or: "x-worker-id"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "identifier"
+                or: "identifier"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/admin/video-remixer/worker/jobs/{identifier}/render-output"
+          q: {
+            exist: [
+              "identifier"
+            ]
+          }
+          rb: {
+            fields: [
+              {
+                name: "captions_ass"
+              }
+              {
+                name: "captions_vtt"
+              }
+              {
+                binary: true
+                name: "file"
+              }
+              {
+                name: "manifest"
+              }
+              {
+                binary: true
+                name: "thumbnail"
+              }
+            ]
+            kind: "multipart"
+            media: "multipart/form-data"
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "worker"
+            }
+            {
+              lit: "jobs"
+            }
+            {
+              var: "identifier"
+            }
+            {
+              lit: "render-output"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "cost_usd"
+            "lease_token"
+            "model"
+            "processing_seconds"
+            "prompt_version"
+            "result"
+            "worker_id"
+          ]
+          co: {
+            id: "POST /api/admin/video-remixer/worker/jobs/{identifier}/result"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                ex: ""
+                k: "header"
+                n: "authorization"
+                or: "authorization"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "identifier"
+                or: "identifier"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/admin/video-remixer/worker/jobs/{identifier}/result"
+          q: {
+            exist: [
+              "identifier"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "worker"
+            }
+            {
+              lit: "jobs"
+            }
+            {
+              var: "identifier"
+            }
+            {
+              lit: "result"
+            }
+          ]
+          t: {
+            req: {
+              cost_usd: "`reqdata.cost_usd`"
+              lease_token: "`reqdata.lease_token`"
+              model: "`reqdata.model`"
+              processing_seconds: "`reqdata.processing_second`"
+              prompt_version: "`reqdata.prompt_version`"
+              result: "`reqdata.result`"
+              worker_id: "`reqdata.worker_id`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /api/admin/video-remixer/worker/jobs/{identifier}/upload"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                ex: ""
+                k: "header"
+                n: "authorization"
+                or: "authorization"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: ""
+                k: "header"
+                n: "x_lease_token"
+                or: "x-lease-token"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: ""
+                k: "header"
+                n: "x_worker_id"
+                or: "x-worker-id"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "identifier"
+                or: "identifier"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/admin/video-remixer/worker/jobs/{identifier}/upload"
+          q: {
+            exist: [
+              "identifier"
+            ]
+          }
+          rb: {
+            fields: [
+              {
+                binary: true
+                name: "file"
+              }
+            ]
+            kind: "multipart"
+            media: "multipart/form-data"
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "worker"
+            }
+            {
+              lit: "jobs"
+            }
+            {
+              var: "identifier"
+            }
+            {
+              lit: "upload"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "kinds"
+            "limit"
+            "tier"
+            "worker_id"
+          ]
+          co: {
+            id: "POST /api/admin/video-remixer/worker/claim"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                ex: ""
+                k: "header"
+                n: "authorization"
+                or: "authorization"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/admin/video-remixer/worker/claim"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "worker"
+            }
+            {
+              lit: "claim"
+            }
+          ]
+          t: {
+            req: {
+              kinds: "`reqdata.kind`"
+              limit: "`reqdata.limit`"
+              tier: "`reqdata.tier`"
+              worker_id: "`reqdata.worker_id`"
+            }
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

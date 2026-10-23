@@ -1,0 +1,44 @@
+{
+  "existing": {
+    "agent_access_user_summary": {
+      "AGENT_ACCESS_USER_SUMMARY00": {
+        "deletedAt": "s32",
+        "id": "AGENT_ACCESS_USER_SUMMARY00",
+        "isActive": "s34",
+        "name": "s35",
+        "url": "s36"
+      },
+      "AGENT_ACCESS_USER_SUMMARY01": {
+        "deletedAt": "s64",
+        "id": "AGENT_ACCESS_USER_SUMMARY01",
+        "isActive": "s66",
+        "name": "s67",
+        "url": "s68"
+      },
+      "AGENT_ACCESS_USER_SUMMARY02": {
+        "deletedAt": "s96",
+        "id": "AGENT_ACCESS_USER_SUMMARY02",
+        "isActive": "s98",
+        "name": "s99",
+        "url": "s9a"
+      }
+    }
+  },
+  "new": {
+    "agent_access_user_summary": {
+      "agent_access_user_summary_ref01": {
+        "deletedAt": "sc8",
+        "isActive": "sca",
+        "name": "scb",
+        "url": "scc"
+      }
+    }
+  },
+  "requests": {
+    "GET /api/agent-access/user-summary": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

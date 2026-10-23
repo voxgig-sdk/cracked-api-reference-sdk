@@ -1,0 +1,94 @@
+# Entity: create_reset_product_v6
+
+main: kit: entity: create_reset_product_v6: {
+
+  alias: field: {}
+
+  fields: {
+    agents_transferred: {
+      h: "Agents Transferred"
+      n: "agents_transferred"
+      r: true
+      t: "`$INTEGER`"
+    }
+    credits_deducted: {
+      h: "Credits Deducted"
+      n: "credits_deducted"
+      r: true
+      t: "`$INTEGER`"
+    }
+    onboarding_data_id: {
+      h: "Onboarding Data Id"
+      n: "onboarding_data_id"
+      r: true
+      t: "`$STRING`"
+    }
+    product_id: {
+      h: "Product Id"
+      n: "product_id"
+      r: true
+      t: "`$STRING`"
+    }
+    remaining_credits: {
+      h: "Remaining Credits"
+      n: "remaining_credits"
+      r: true
+      t: "`$INTEGER`"
+    }
+    success: {
+      h: "Success"
+      n: "success"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    videos_queued: {
+      h: "Videos Queued"
+      n: "videos_queued"
+      r: true
+      t: "`$INTEGER`"
+    }
+  }
+
+  name: "create_reset_product_v6"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "onboarding_data_id"
+          ]
+          co: {
+            id: "POST /api/reset-product/create-v6"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/reset-product/create-v6"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "reset-product"
+            }
+            {
+              lit: "create-v6"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

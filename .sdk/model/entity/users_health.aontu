@@ -1,0 +1,274 @@
+# Entity: users_health
+
+main: kit: entity: users_health: {
+
+  alias: field: {}
+
+  fields: {
+    account_type: {
+      h: "Account Type"
+      n: "account_type"
+      r: true
+      t: "`$ANY`"
+    }
+    admin_notes: {
+      h: "Admin Notes"
+      n: "admin_notes"
+      r: false
+      t: "`$ANY`"
+    }
+    agents_count: {
+      h: "Agents Count"
+      n: "agents_count"
+      r: true
+      t: "`$INTEGER`"
+    }
+    agents_health: {
+      h: "Agents Health"
+      n: "agents_health"
+      r: true
+      t: "`$STRING`"
+    }
+    agents_issue: {
+      h: "Agents Issue"
+      n: "agents_issue"
+      r: true
+      t: "`$ANY`"
+    }
+    assigned_agents_count: {
+      h: "Assigned Agents Count"
+      n: "assigned_agents_count"
+      r: true
+      t: "`$INTEGER`"
+    }
+    auto_schedule_enabled: {
+      h: "Auto Schedule Enabled"
+      n: "auto_schedule_enabled"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    auto_schedule_health: {
+      h: "Auto Schedule Health"
+      n: "auto_schedule_health"
+      r: true
+      t: "`$STRING`"
+    }
+    auto_schedule_issue: {
+      h: "Auto Schedule Issue"
+      n: "auto_schedule_issue"
+      r: true
+      t: "`$ANY`"
+    }
+    auto_schedule_today_health: {
+      h: "Auto Schedule Today Health"
+      n: "auto_schedule_today_health"
+      r: true
+      t: "`$STRING`"
+    }
+    auto_schedule_today_issue: {
+      h: "Auto Schedule Today Issue"
+      n: "auto_schedule_today_issue"
+      r: true
+      t: "`$ANY`"
+    }
+    created_at: {
+      fo: "date-time"
+      h: "Created At"
+      n: "created_at"
+      r: true
+      t: "`$STRING`"
+    }
+    email: {
+      h: "Email"
+      n: "email"
+      r: true
+      t: "`$STRING`"
+    }
+    expected_agents_count: {
+      h: "Expected Agents Count"
+      n: "expected_agents_count"
+      r: true
+      t: "`$INTEGER`"
+    }
+    id: {
+      fo: "uuid"
+      h: "Id"
+      n: "id"
+      r: true
+      t: "`$STRING`"
+    }
+    is_bookmarked: {
+      h: "Is Bookmarked"
+      n: "is_bookmarked"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    is_internal_user: {
+      h: "Is Internal User"
+      n: "is_internal_user"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    is_migrated: {
+      h: "Is Migrated"
+      n: "is_migrated"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    membership: {
+      h: "Membership"
+      n: "membership"
+      r: true
+      t: "`$ANY`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: true
+      t: "`$STRING`"
+    }
+    posts_health: {
+      h: "Posts Health"
+      n: "posts_health"
+      r: true
+      t: "`$STRING`"
+    }
+    posts_issue: {
+      h: "Posts Issue"
+      n: "posts_issue"
+      r: true
+      t: "`$ANY`"
+    }
+    posts_today_health: {
+      h: "Posts Today Health"
+      n: "posts_today_health"
+      r: true
+      t: "`$STRING`"
+    }
+    posts_today_issue: {
+      h: "Posts Today Issue"
+      n: "posts_today_issue"
+      r: true
+      t: "`$ANY`"
+    }
+    subscription_status: {
+      h: "Subscription Status"
+      n: "subscription_status"
+      r: true
+      t: "`$ANY`"
+    }
+    today_expected_count: {
+      h: "Today Expected Count"
+      n: "today_expected_count"
+      r: true
+      t: "`$INTEGER`"
+    }
+    today_failed_count: {
+      h: "Today Failed Count"
+      n: "today_failed_count"
+      r: true
+      t: "`$INTEGER`"
+    }
+    today_scheduled_count: {
+      h: "Today Scheduled Count"
+      n: "today_scheduled_count"
+      r: true
+      t: "`$INTEGER`"
+    }
+    today_total_count: {
+      h: "Today Total Count"
+      n: "today_total_count"
+      r: true
+      t: "`$INTEGER`"
+    }
+    tomorrow_expected_count: {
+      h: "Tomorrow Expected Count"
+      n: "tomorrow_expected_count"
+      r: true
+      t: "`$INTEGER`"
+    }
+    tomorrow_scheduled_count: {
+      h: "Tomorrow Scheduled Count"
+      n: "tomorrow_scheduled_count"
+      r: true
+      t: "`$INTEGER`"
+    }
+    yesterday_failed_count: {
+      h: "Yesterday Failed Count"
+      n: "yesterday_failed_count"
+      r: true
+      t: "`$INTEGER`"
+    }
+    yesterday_total_count: {
+      h: "Yesterday Total Count"
+      n: "yesterday_total_count"
+      r: true
+      t: "`$INTEGER`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "users_health"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/admin/users-health"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: false
+                k: "query"
+                n: "include_internal_user"
+                or: "include_internal_users"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+              {
+                ex: false
+                k: "query"
+                n: "include_migrated_user"
+                or: "include_migrated_users"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/users-health"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "users-health"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.users`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

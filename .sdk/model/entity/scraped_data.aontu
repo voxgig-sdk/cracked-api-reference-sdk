@@ -1,0 +1,113 @@
+# Entity: scraped_data
+
+main: kit: entity: scraped_data: {
+
+  alias: field: {}
+
+  fields: {
+    description: {
+      h: "Description"
+      n: "description"
+      r: true
+      t: "`$STRING`"
+    }
+    homepageVideoUrl: {
+      h: "Homepage Video Url"
+      n: "homepageVideoUrl"
+      r: false
+      t: "`$ANY`"
+    }
+    howItWorks: {
+      h: "How It Works"
+      n: "howItWorks"
+      r: true
+      t: "`$STRING`"
+    }
+    imageUrls: {
+      h: "Image Urls"
+      n: "imageUrls"
+      r: true
+      t: "`$ARRAY`"
+    }
+    instagram_username: {
+      h: "Instagram Username"
+      n: "instagram_username"
+      r: false
+      t: "`$ANY`"
+    }
+    mediaAssets: {
+      h: "Media Assets"
+      n: "mediaAssets"
+      r: false
+      t: "`$ARRAY`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: true
+      t: "`$STRING`"
+    }
+    pricingAndOffers: {
+      h: "Pricing And Offers"
+      n: "pricingAndOffers"
+      r: true
+      t: "`$STRING`"
+    }
+    targetAudience: {
+      h: "Target Audience"
+      n: "targetAudience"
+      r: true
+      t: "`$STRING`"
+    }
+    url: {
+      h: "Url"
+      n: "url"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  name: "scraped_data"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "instagram_username"
+            "url"
+          ]
+          co: {
+            id: "POST /api/scraper/extract"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/scraper/extract"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "scraper"
+            }
+            {
+              lit: "extract"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

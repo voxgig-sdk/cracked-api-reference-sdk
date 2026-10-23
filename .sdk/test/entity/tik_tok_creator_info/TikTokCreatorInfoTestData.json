@@ -1,0 +1,57 @@
+{
+  "existing": {
+    "tik_tok_creator_info": {
+      "TIK_TOK_CREATOR_INFO00": {
+        "commentDisabled": true,
+        "creatorAvatarUrl": "s51",
+        "creatorNickname": "s52",
+        "creatorUsername": "s53",
+        "duetDisabled": true,
+        "maxVideoPostDurationSec": 85,
+        "privacyLevelOptions": [],
+        "stitchDisabled": false
+      },
+      "TIK_TOK_CREATOR_INFO01": {
+        "commentDisabled": true,
+        "creatorAvatarUrl": "sa1",
+        "creatorNickname": "sa2",
+        "creatorUsername": "sa3",
+        "duetDisabled": true,
+        "maxVideoPostDurationSec": 165,
+        "privacyLevelOptions": [],
+        "stitchDisabled": false
+      },
+      "TIK_TOK_CREATOR_INFO02": {
+        "commentDisabled": true,
+        "creatorAvatarUrl": "sf1",
+        "creatorNickname": "sf2",
+        "creatorUsername": "sf3",
+        "duetDisabled": true,
+        "maxVideoPostDurationSec": 245,
+        "privacyLevelOptions": [],
+        "stitchDisabled": false
+      }
+    }
+  },
+  "new": {
+    "tik_tok_creator_info": {
+      "tik_tok_creator_info_ref01": {
+        "commentDisabled": true,
+        "creatorAvatarUrl": "s141",
+        "creatorNickname": "s142",
+        "creatorUsername": "s143",
+        "duetDisabled": true,
+        "maxVideoPostDurationSec": 325,
+        "privacyLevelOptions": [],
+        "stitchDisabled": false
+      }
+    }
+  },
+  "requests": {
+    "GET /social/tiktok/creator-info": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

@@ -1,0 +1,203 @@
+# Entity: iris_capability
+
+main: kit: entity: iris_capability: {
+
+  alias: field: {}
+
+  fields: {
+    capability: {
+      h: "Capability"
+      n: "capability"
+      r: true
+      t: "`$STRING`"
+    }
+    correlationId: {
+      h: "Correlation Id"
+      n: "correlationId"
+      r: true
+      t: "`$STRING`"
+    }
+    errorCode: {
+      h: "Error Code"
+      n: "errorCode"
+      r: false
+      t: "`$ANY`"
+    }
+    externalProductId: {
+      h: "External Product Id"
+      n: "externalProductId"
+      r: false
+      t: "`$ANY`"
+    }
+    externalUserId: {
+      fo: "uuid"
+      h: "External User Id"
+      n: "externalUserId"
+      r: true
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+    idempotencyKey: {
+      h: "Idempotency Key"
+      n: "idempotencyKey"
+      r: true
+      t: "`$STRING`"
+    }
+    input: {
+      h: "Input"
+      n: "input"
+      r: false
+      t: "`$OBJECT`"
+    }
+    membershipId: {
+      h: "Membership Id"
+      n: "membershipId"
+      r: false
+      t: "`$ANY`"
+    }
+    message: {
+      h: "Message"
+      n: "message"
+      r: false
+      t: "`$ANY`"
+    }
+    ok: {
+      h: "Ok"
+      n: "ok"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    platformAccountId: {
+      h: "Platform Account Id"
+      n: "platformAccountId"
+      r: false
+      t: "`$ANY`"
+    }
+    platformLinkId: {
+      h: "Platform Link Id"
+      n: "platformLinkId"
+      r: false
+      t: "`$ANY`"
+    }
+    productScope: {
+      h: "Product Scope"
+      n: "productScope"
+      r: true
+      t: "`$STRING`"
+    }
+    requestedBy: {
+      h: "Requested By"
+      n: "requestedBy"
+      r: false
+      t: "`$OBJECT`"
+    }
+    result: {
+      h: "Result"
+      n: "result"
+      r: false
+      t: "`$OBJECT`"
+    }
+    retryable: {
+      h: "Retryable"
+      n: "retryable"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "iris_capability"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "capability"
+            "correlationId"
+            "externalProductId"
+            "externalUserId"
+            "idempotencyKey"
+            "input"
+            "membershipId"
+            "platformAccountId"
+            "platformLinkId"
+            "productScope"
+            "requestedBy"
+          ]
+          co: {
+            id: "POST /api/platform/capabilities/{capability_name}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "authorization"
+                or: "authorization"
+                r: false
+                t: "`$ANY`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "capability_name"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/platform/capabilities/{capability_name}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              capability_name: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "platform"
+            }
+            {
+              lit: "capabilities"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

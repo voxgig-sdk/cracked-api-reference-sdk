@@ -1,0 +1,283 @@
+# Entity: stats_refresh_issue
+
+main: kit: entity: stats_refresh_issue: {
+
+  alias: field: {}
+
+  fields: {
+    aged_over_24h: {
+      h: "Aged Over 24h"
+      n: "aged_over_24h"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    agent_id: {
+      h: "Agent Id"
+      n: "agent_id"
+      r: false
+      t: "`$STRING`"
+    }
+    agent_name_snapshot: {
+      h: "Agent Name Snapshot"
+      n: "agent_name_snapshot"
+      r: false
+      t: "`$ANY`"
+    }
+    first_detected_at: {
+      fo: "date-time"
+      h: "First Detected At"
+      n: "first_detected_at"
+      r: true
+      t: "`$STRING`"
+    }
+    id: {
+      fo: "uuid"
+      h: "Id"
+      n: "id"
+      r: true
+      t: "`$STRING`"
+    }
+    last_detected_at: {
+      fo: "date-time"
+      h: "Last Detected At"
+      n: "last_detected_at"
+      r: true
+      t: "`$STRING`"
+    }
+    last_refresh_completed_at: {
+      h: "Last Refresh Completed At"
+      n: "last_refresh_completed_at"
+      r: false
+      t: "`$ANY`"
+    }
+    last_seen_run_id: {
+      h: "Last Seen Run Id"
+      n: "last_seen_run_id"
+      r: false
+      t: "`$STRING`"
+    }
+    latest_error_message: {
+      h: "Latest Error Message"
+      n: "latest_error_message"
+      r: false
+      t: "`$ANY`"
+    }
+    next_retry_at: {
+      h: "Next Retry At"
+      n: "next_retry_at"
+      r: false
+      t: "`$ANY`"
+    }
+    platform: {
+      h: "Platform"
+      n: "platform"
+      r: true
+      t: "`$STRING`"
+    }
+    post_method: {
+      h: "Post Method"
+      n: "post_method"
+      r: false
+      t: "`$ANY`"
+    }
+    post_url: {
+      h: "Post Url"
+      n: "post_url"
+      r: false
+      t: "`$ANY`"
+    }
+    posted_date_et: {
+      fo: "date"
+      h: "Posted Date Et"
+      n: "posted_date_et"
+      r: true
+      t: "`$STRING`"
+    }
+    product_id: {
+      h: "Product Id"
+      n: "product_id"
+      r: false
+      t: "`$STRING`"
+    }
+    product_name_snapshot: {
+      h: "Product Name Snapshot"
+      n: "product_name_snapshot"
+      r: false
+      t: "`$ANY`"
+    }
+    reason_code: {
+      h: "Reason Code"
+      n: "reason_code"
+      r: true
+      t: "`$STRING`"
+    }
+    resolved_at: {
+      h: "Resolved At"
+      n: "resolved_at"
+      r: false
+      t: "`$ANY`"
+    }
+    retry_count: {
+      h: "Retry Count"
+      n: "retry_count"
+      r: true
+      t: "`$INTEGER`"
+    }
+    schedule_queue_id: {
+      h: "Schedule Queue Id"
+      n: "schedule_queue_id"
+      r: false
+      t: "`$STRING`"
+    }
+    scheduled_datetime_utc: {
+      fo: "date-time"
+      h: "Scheduled Datetime Utc"
+      n: "scheduled_datetime_utc"
+      r: true
+      t: "`$STRING`"
+    }
+    stale_after_sla: {
+      h: "Stale After Sla"
+      n: "stale_after_sla"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: true
+      t: "`$STRING`"
+    }
+    user_email_snapshot: {
+      h: "User Email Snapshot"
+      n: "user_email_snapshot"
+      r: true
+      t: "`$STRING`"
+    }
+    user_id: {
+      fo: "uuid"
+      h: "User Id"
+      n: "user_id"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "stats_refresh_issue"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/admin/customer-health/issues"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "date_from"
+                or: "date_from"
+                r: false
+                t: "`$ANY`"
+              }
+              {
+                k: "query"
+                n: "date_to"
+                or: "date_to"
+                r: false
+                t: "`$ANY`"
+              }
+              {
+                ex: 100
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                ex: 0
+                k: "query"
+                n: "offset"
+                or: "offset"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "platform"
+                or: "platform"
+                r: false
+                t: "`$ANY`"
+              }
+              {
+                k: "query"
+                n: "posting_method"
+                or: "posting_method"
+                r: false
+                t: "`$ANY`"
+              }
+              {
+                k: "query"
+                n: "query"
+                or: "query"
+                r: false
+                t: "`$ANY`"
+              }
+              {
+                k: "query"
+                n: "reason"
+                or: "reason"
+                r: false
+                t: "`$ANY`"
+              }
+              {
+                ex: "open"
+                k: "query"
+                n: "status"
+                or: "status"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/customer-health/issues"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "customer-health"
+            }
+            {
+              lit: "issues"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.issues`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

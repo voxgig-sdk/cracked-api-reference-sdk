@@ -1,0 +1,125 @@
+{
+  "existing": {
+    "video_remixer_worker": {
+      "VIDEO_REMIXER_WORKER00": {
+        "captions_ass": "sa0",
+        "captions_vtt": "sa1",
+        "cost_usd": 162,
+        "error": "sa3",
+        "file": "sa4",
+        "kinds": [],
+        "lease_token": "sa6",
+        "limit": 167,
+        "manifest": "sa8",
+        "model": "sa9",
+        "processing_seconds": 170,
+        "prompt_version": "sab",
+        "result": {},
+        "thumbnail": "sad",
+        "tier": "sae",
+        "worker_id": "WORKER01",
+        "identifier": "IDENTIFIER01",
+        "id": "VIDEO_REMIXER_WORKER00"
+      },
+      "VIDEO_REMIXER_WORKER01": {
+        "captions_ass": "s140",
+        "captions_vtt": "s141",
+        "cost_usd": 322,
+        "error": "s143",
+        "file": "s144",
+        "kinds": [],
+        "lease_token": "s146",
+        "limit": 327,
+        "manifest": "s148",
+        "model": "s149",
+        "processing_seconds": 330,
+        "prompt_version": "s14b",
+        "result": {},
+        "thumbnail": "s14d",
+        "tier": "s14e",
+        "worker_id": "WORKER01",
+        "identifier": "IDENTIFIER01",
+        "id": "VIDEO_REMIXER_WORKER01"
+      },
+      "VIDEO_REMIXER_WORKER02": {
+        "captions_ass": "s1e0",
+        "captions_vtt": "s1e1",
+        "cost_usd": 482,
+        "error": "s1e3",
+        "file": "s1e4",
+        "kinds": [],
+        "lease_token": "s1e6",
+        "limit": 487,
+        "manifest": "s1e8",
+        "model": "s1e9",
+        "processing_seconds": 490,
+        "prompt_version": "s1eb",
+        "result": {},
+        "thumbnail": "s1ed",
+        "tier": "s1ee",
+        "worker_id": "WORKER01",
+        "identifier": "IDENTIFIER01",
+        "id": "VIDEO_REMIXER_WORKER02"
+      }
+    }
+  },
+  "new": {
+    "video_remixer_worker": {
+      "video_remixer_worker_ref01": {
+        "captions_ass": "s280",
+        "captions_vtt": "s281",
+        "cost_usd": 642,
+        "error": "s283",
+        "file": "s284",
+        "kinds": [],
+        "lease_token": "s286",
+        "limit": 647,
+        "manifest": "s288",
+        "model": "s289",
+        "processing_seconds": 650,
+        "prompt_version": "s28b",
+        "result": {},
+        "thumbnail": "s28d",
+        "tier": "s28e",
+        "worker_id": "WORKER01"
+      }
+    }
+  },
+  "requests": {
+    "POST /api/admin/video-remixer/worker/jobs/{identifier}/fail": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/video-remixer/worker/jobs/{identifier}/heartbeat": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/video-remixer/worker/jobs/{identifier}/media": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/video-remixer/worker/jobs/{identifier}/render-output": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/video-remixer/worker/jobs/{identifier}/result": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/video-remixer/worker/jobs/{identifier}/upload": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/video-remixer/worker/claim": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

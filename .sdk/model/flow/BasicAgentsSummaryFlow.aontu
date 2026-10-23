@@ -1,0 +1,28 @@
+# BasicAgentsSummaryFlow
+
+main: kit: flow: BasicAgentsSummaryFlow:
+{
+  entity: "agents_summary",
+  kind: "basic",
+  name: "BasicAgentsSummaryFlow",
+  step: [
+    {
+      i: {
+        ref: "agents_summary_ref01",
+        srcdatavar: "agents_summary_ref01_data",
+        suffix: "_dt0"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-agents_summary_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicAgentsSummaryFlow"
+}

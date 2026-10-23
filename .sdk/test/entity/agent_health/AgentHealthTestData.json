@@ -1,0 +1,77 @@
+{
+  "existing": {
+    "agent_health": {
+      "AGENT_HEALTH00": {
+        "daily": [],
+        "dates": [],
+        "generated_at": "s84",
+        "groups": [],
+        "latest": {},
+        "live_date": "s87",
+        "phone_admin_generated_at": "s88",
+        "platform": "s89",
+        "post_target": 138,
+        "qa_managed_agent_ids": [],
+        "scope_prefixes": [],
+        "timezone": "s8d",
+        "warmup_target": 142
+      },
+      "AGENT_HEALTH01": {
+        "daily": [],
+        "dates": [],
+        "generated_at": "s106",
+        "groups": [],
+        "latest": {},
+        "live_date": "s109",
+        "phone_admin_generated_at": "s10a",
+        "platform": "s10b",
+        "post_target": 268,
+        "qa_managed_agent_ids": [],
+        "scope_prefixes": [],
+        "timezone": "s10f",
+        "warmup_target": 272
+      },
+      "AGENT_HEALTH02": {
+        "daily": [],
+        "dates": [],
+        "generated_at": "s188",
+        "groups": [],
+        "latest": {},
+        "live_date": "s18b",
+        "phone_admin_generated_at": "s18c",
+        "platform": "s18d",
+        "post_target": 398,
+        "qa_managed_agent_ids": [],
+        "scope_prefixes": [],
+        "timezone": "s191",
+        "warmup_target": 402
+      }
+    }
+  },
+  "new": {
+    "agent_health": {
+      "agent_health_ref01": {
+        "daily": [],
+        "dates": [],
+        "generated_at": "s20a",
+        "groups": [],
+        "latest": {},
+        "live_date": "s20d",
+        "phone_admin_generated_at": "s20e",
+        "platform": "s20f",
+        "post_target": 528,
+        "qa_managed_agent_ids": [],
+        "scope_prefixes": [],
+        "timezone": "s213",
+        "warmup_target": 532
+      }
+    }
+  },
+  "requests": {
+    "GET /api/admin/agent-health": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

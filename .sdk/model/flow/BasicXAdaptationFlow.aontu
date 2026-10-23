@@ -1,0 +1,28 @@
+# BasicXAdaptationFlow
+
+main: kit: flow: BasicXAdaptationFlow:
+{
+  entity: "x_adaptation",
+  kind: "basic",
+  name: "BasicXAdaptationFlow",
+  step: [
+    {
+      i: {
+        ref: "x_adaptation_ref01",
+        srcdatavar: "x_adaptation_ref01_data",
+        suffix: "_dt0"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-x_adaptation_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicXAdaptationFlow"
+}

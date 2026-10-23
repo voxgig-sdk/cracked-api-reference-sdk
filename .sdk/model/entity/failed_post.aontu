@@ -1,0 +1,159 @@
+# Entity: failed_post
+
+main: kit: entity: failed_post: {
+
+  alias: field: {}
+
+  fields: {
+    agent_id: {
+      h: "Agent Id"
+      n: "agent_id"
+      r: true
+      t: "`$STRING`"
+    }
+    agent_name: {
+      h: "Agent Name"
+      n: "agent_name"
+      r: true
+      t: "`$ANY`"
+    }
+    agent_platforms: {
+      h: "Agent Platforms"
+      n: "agent_platforms"
+      r: true
+      t: "`$ANY`"
+    }
+    error_message: {
+      h: "Error Message"
+      n: "error_message"
+      r: true
+      t: "`$ANY`"
+    }
+    id: {
+      fo: "uuid"
+      h: "Id"
+      n: "id"
+      r: true
+      t: "`$STRING`"
+    }
+    product_id: {
+      h: "Product Id"
+      n: "product_id"
+      r: true
+      t: "`$STRING`"
+    }
+    results: {
+      h: "Results"
+      n: "results"
+      r: true
+      t: "`$ANY`"
+    }
+    scheduled_datetime: {
+      fo: "date-time"
+      h: "Scheduled Datetime"
+      n: "scheduled_datetime"
+      r: true
+      t: "`$STRING`"
+    }
+    source_type: {
+      h: "Source Type"
+      n: "source_type"
+      r: true
+      t: "`$STRING`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: true
+      t: "`$STRING`"
+    }
+    user_email: {
+      h: "User Email"
+      n: "user_email"
+      r: true
+      t: "`$STRING`"
+    }
+    user_id: {
+      fo: "uuid"
+      h: "User Id"
+      n: "user_id"
+      r: true
+      t: "`$STRING`"
+    }
+    user_name: {
+      h: "User Name"
+      n: "user_name"
+      r: true
+      t: "`$ANY`"
+    }
+    video_id: {
+      h: "Video Id"
+      n: "video_id"
+      r: true
+      t: "`$STRING`"
+    }
+    video_url: {
+      h: "Video Url"
+      n: "video_url"
+      r: true
+      t: "`$ANY`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "failed_post"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/admin/failed-posts"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: "today"
+                k: "query"
+                n: "day"
+                or: "day"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/failed-posts"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "failed-posts"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.entries`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

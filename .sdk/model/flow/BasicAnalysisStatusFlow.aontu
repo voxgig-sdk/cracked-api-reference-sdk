@@ -1,0 +1,28 @@
+# BasicAnalysisStatusFlow
+
+main: kit: flow: BasicAnalysisStatusFlow:
+{
+  entity: "analysis_status",
+  kind: "basic",
+  name: "BasicAnalysisStatusFlow",
+  step: [
+    {
+      i: {
+        ref: "analysis_status_ref01",
+        srcdatavar: "analysis_status_ref01_data",
+        suffix: "_dt0"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-analysis_status_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicAnalysisStatusFlow"
+}

@@ -1,0 +1,53 @@
+{
+  "existing": {
+    "agent_access_user_agent": {
+      "AGENT_ACCESS_USER_AGENT00": {
+        "agentQuota": 70,
+        "agents": [],
+        "assignedByType": {},
+        "assignedTotal": 73,
+        "email": "s4a",
+        "products": [],
+        "userId": "s4c"
+      },
+      "AGENT_ACCESS_USER_AGENT01": {
+        "agentQuota": 140,
+        "agents": [],
+        "assignedByType": {},
+        "assignedTotal": 143,
+        "email": "s90",
+        "products": [],
+        "userId": "s92"
+      },
+      "AGENT_ACCESS_USER_AGENT02": {
+        "agentQuota": 210,
+        "agents": [],
+        "assignedByType": {},
+        "assignedTotal": 213,
+        "email": "sd6",
+        "products": [],
+        "userId": "sd8"
+      }
+    }
+  },
+  "new": {
+    "agent_access_user_agent": {
+      "agent_access_user_agent_ref01": {
+        "agentQuota": 280,
+        "agents": [],
+        "assignedByType": {},
+        "assignedTotal": 283,
+        "email": "s11c",
+        "products": [],
+        "userId": "s11e"
+      }
+    }
+  },
+  "requests": {
+    "GET /api/agent-access/user-agents": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

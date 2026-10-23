@@ -1,0 +1,73 @@
+{
+  "existing": {
+    "iris_task": {
+      "IRIS_TASK00": {
+        "approvalRequired": true,
+        "cadence": "s65",
+        "capability": "s66",
+        "completed": [],
+        "description": "s68",
+        "discover": [],
+        "productId": "s6a",
+        "recurring": [],
+        "requiredConnectors": [],
+        "title": "s6d",
+        "id": "IRIS_TASK00"
+      },
+      "IRIS_TASK01": {
+        "approvalRequired": true,
+        "cadence": "sc9",
+        "capability": "sca",
+        "completed": [],
+        "description": "scc",
+        "discover": [],
+        "productId": "sce",
+        "recurring": [],
+        "requiredConnectors": [],
+        "title": "sd1",
+        "id": "IRIS_TASK01"
+      },
+      "IRIS_TASK02": {
+        "approvalRequired": true,
+        "cadence": "s12d",
+        "capability": "s12e",
+        "completed": [],
+        "description": "s130",
+        "discover": [],
+        "productId": "s132",
+        "recurring": [],
+        "requiredConnectors": [],
+        "title": "s135",
+        "id": "IRIS_TASK02"
+      }
+    }
+  },
+  "new": {
+    "iris_task": {
+      "iris_task_ref01": {
+        "approvalRequired": true,
+        "cadence": "s191",
+        "capability": "s192",
+        "completed": [],
+        "description": "s194",
+        "discover": [],
+        "productId": "s196",
+        "recurring": [],
+        "requiredConnectors": [],
+        "title": "s199"
+      }
+    }
+  },
+  "requests": {
+    "POST /api/iris/tasks": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/iris/tasks": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

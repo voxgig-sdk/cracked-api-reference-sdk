@@ -1,0 +1,78 @@
+# Entity: re_roll_video
+
+main: kit: entity: re_roll_video: {
+
+  alias: field: {}
+
+  fields: {
+    queue_id: {
+      fo: "uuid"
+      h: "Queue Id"
+      n: "queue_id"
+      r: true
+      t: "`$STRING`"
+    }
+    requires_polling: {
+      h: "Requires Polling"
+      n: "requires_polling"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    skip_credit_check: {
+      h: "Skip Credit Check"
+      n: "skip_credit_check"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    video: {
+      h: "Video"
+      n: "video"
+      r: true
+      t: "`$OBJECT`"
+    }
+  }
+
+  name: "re_roll_video"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "queue_id"
+            "skip_credit_check"
+          ]
+          co: {
+            id: "POST /api/core/re-roll-video"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/core/re-roll-video"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "core"
+            }
+            {
+              lit: "re-roll-video"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

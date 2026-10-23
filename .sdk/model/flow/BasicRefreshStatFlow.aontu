@@ -1,0 +1,18 @@
+# BasicRefreshStatFlow
+
+main: kit: flow: BasicRefreshStatFlow:
+{
+  entity: "refresh_stat",
+  kind: "basic",
+  name: "BasicRefreshStatFlow",
+  step: [
+    {
+      i: {
+        ref: "refresh_stat_ref01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicRefreshStatFlow"
+}

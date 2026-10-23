@@ -1,0 +1,241 @@
+
+
+import Path from 'node:path'
+import * as Fs from 'node:fs'
+
+import { test, describe, afterEach } from 'node:test'
+import assert from 'node:assert'
+import { createLiveTransport } from '../../live-runner'
+import { runLiveEntity } from '../../live-entity'
+
+
+import { CrackedApiReferenceSDK, BaseFeature, config, stdutil } from '../../..'
+
+import {
+  envOverride,
+  liveClientOptions,
+  liveDelay,
+  loadEnvLocal,
+  makeCtrl,
+  makeMatch,
+  makeReqdata,
+  makeStepData,
+  makeValid,
+  maybeSkipControl,
+} from '../../utility'
+
+
+loadEnvLocal(__dirname + '/../../../.env.local')
+
+
+describe('AdminEntity', async () => {
+
+  // Per-test live pacing. Delay is read from sdk-test-control.json's
+  // `test.live.delayMs`; only sleeps when CRACKED_API_REFERENCE_TEST_LIVE=TRUE.
+  afterEach(liveDelay('CRACKED_API_REFERENCE_TEST_LIVE'))
+
+  test('instance', async () => {
+    const testsdk = CrackedApiReferenceSDK.test()
+    const ent = testsdk.Admin()
+    assert(null != ent)
+  })
+
+
+  class FailHook extends BaseFeature {
+    name = 'failhook'
+    version = '0.0.1'
+    active = true
+    unexpected = 0
+    init() { }
+    PreSpec() { throw new Error('admin hook failed') }
+    PreUnexpected() { this.unexpected++ }
+  }
+
+  test('stream-error', async () => {
+    const offline = { net: { offline: true } }
+    await assert.rejects(async () => {
+      for await (const _item of CrackedApiReferenceSDK.test(offline).Admin().stream('list')) { }
+    }, /offline/)
+
+    for await (const _item of CrackedApiReferenceSDK.test(offline).Admin()
+      .stream('list', undefined, { ctrl: { throw: false } })) { }
+
+    if (null != (config as any).feature?.rbac) {
+      const denied = CrackedApiReferenceSDK.test(undefined, { feature: { rbac: { active: true, deny: true } } })
+      await assert.rejects(async () => {
+        for await (const _item of denied.Admin().stream('list')) { }
+      }, (err: any) => 'rbac_denied' === err.code)
+    }
+  })
+
+  test('stream-ctrl', async () => {
+    const explain: any = {}
+    const ctrl: any = { explain }
+    for await (const _item of CrackedApiReferenceSDK.test().Admin().stream('list', undefined, { ctrl })) { }
+    assert.deepStrictEqual(Object.keys(ctrl), ['explain'])
+    assert(explain === ctrl.explain && 0 < Object.keys(explain).length)
+  })
+
+  test('unexpected', async () => {
+    const hook = new FailHook()
+    const client = new CrackedApiReferenceSDK({ feature: { test: { active: true } }, extend: [hook] })
+    await assert.rejects(client.Admin().list(), /hook failed/)
+    assert(0 < hook.unexpected)
+
+    const fired = hook.unexpected
+    assert.strictEqual(await client.Admin().list(undefined, { throw: false }), undefined)
+    assert(fired < hook.unexpected)
+  })
+
+  test('validate', async (t) => {
+    if (null == (config as any).feature?.validate) {
+      t.skip('feature not present in this SDK: validate')
+      return
+    }
+    const client = CrackedApiReferenceSDK.test(undefined, { feature: { validate: { active: true } } })
+    await assert.rejects(client.Admin().list({"apply":"x"} as any),
+      (err: any) => 'validate_failed' === err.code)
+  })
+
+
+
+  test('basic', async (t) => {
+
+    const live = 'TRUE' === process.env.CRACKED_API_REFERENCE_TEST_LIVE
+    for (const op of ['create', 'list', 'load']) {
+      if (!live && maybeSkipControl(t, 'entityOp', 'admin.' + op, live)) return
+    }
+
+    
+    const setup = basicSetup()
+    if (setup.live) {
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"apply":{"a":true,"h":"Apply","n":"apply","r":false,"sh":"Apply safe canonical or clean-only URL updates","t":"`$BOOLEAN`","key$":"apply","index$":0},"count":{"a":true,"h":"Count","n":"count","r":true,"t":"`$INTEGER`","key$":"count","index$":1},"created_at":{"a":true,"fo":"date-time","h":"Created At","n":"created_at","r":true,"t":"`$STRING`","key$":"created_at","index$":2},"date_from":{"a":true,"h":"Date From","n":"date_from","op":{"create":{"req":true,"type":"`$STRING`"}},"r":false,"t":"`$ANY`","key$":"date_from","index$":3},"date_to":{"a":true,"h":"Date To","n":"date_to","op":{"create":{"req":true,"type":"`$STRING`"}},"r":false,"t":"`$ANY`","key$":"date_to","index$":4},"email":{"a":true,"fo":"email","h":"Email","n":"email","r":true,"t":"`$STRING`","key$":"email","index$":5},"id":{"a":true,"h":"Id","n":"id","r":true,"t":"`$STRING`","key$":"id","index$":6},"include_failed":{"a":true,"h":"Include Failed","n":"include_failed","r":false,"t":"`$BOOLEAN`","key$":"include_failed","index$":7},"include_pending":{"a":true,"h":"Include Pending","n":"include_pending","r":false,"t":"`$BOOLEAN`","key$":"include_pending","index$":8},"include_records":{"a":true,"h":"Include Records","n":"include_records","r":false,"sh":"Include full per-field audit records in the response","t":"`$BOOLEAN`","key$":"include_records","index$":9},"issue_ids":{"a":true,"h":"Issue Ids","n":"issue_ids","r":false,"t":"`$ANY`","key$":"issue_ids","index$":10},"only_active":{"a":true,"h":"Only Active","n":"only_active","r":false,"sh":"Limit the audit to active agents","t":"`$BOOLEAN`","key$":"only_active","index$":11},"platform":{"a":true,"h":"Platform","n":"platform","r":false,"t":"`$ANY`","key$":"platform","index$":12},"posting_method":{"a":true,"h":"Posting Method","n":"posting_method","r":false,"t":"`$ANY`","key$":"posting_method","index$":13},"product_id":{"a":true,"fo":"uuid","h":"Product Id","n":"product_id","op":{"create":{"req":true,"type":"`$STRING`"}},"r":false,"t":"`$STRING`","key$":"product_id","index$":14},"query":{"a":true,"h":"Query","n":"query","r":false,"t":"`$ANY`","key$":"query","index$":15},"reason":{"a":true,"h":"Reason","n":"reason","r":false,"t":"`$ANY`","key$":"reason","index$":16},"regenerate":{"a":true,"h":"Regenerate","n":"regenerate","r":false,"t":"`$BOOLEAN`","key$":"regenerate","index$":17},"status":{"a":true,"h":"Status","n":"status","r":false,"t":"`$STRING`","key$":"status","index$":18},"user_membership":{"a":true,"h":"User Membership","n":"user_membership","r":false,"t":"`$ANY`","key$":"user_membership","index$":19},"user_name":{"a":true,"h":"User Name","n":"user_name","r":false,"t":"`$ANY`","key$":"user_name","index$":20},"user_onboarding_step":{"a":true,"h":"User Onboarding Step","n":"user_onboarding_step","r":false,"t":"`$ANY`","key$":"user_onboarding_step","index$":21},"video_type":{"a":true,"h":"Video Type","n":"video_type","r":true,"t":"`$STRING`","key$":"video_type","index$":22}},"id":{"field":"id","name":"id"},"name":"admin","op":{"create":{"input":"data","name":"create","points":[{"a":true,"co":{"id":"POST /api/admin/users/{user_id}/regenerate-video/{video_id}","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"user_id","or":"user_id","r":true,"t":"`$STRING`","index$":0},{"a":true,"k":"param","n":"video_id","or":"video_id","r":true,"t":"`$STRING`","index$":1}]},"k":"http","m":"POST","o":"/api/admin/users/{user_id}/regenerate-video/{video_id}","q":{"exist":["user_id","video_id"]},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"api"},{"lit":"admin"},{"lit":"users"},{"var":"user_id"},{"lit":"regenerate-video"},{"var":"video_id"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0},{"a":true,"co":{"id":"POST /api/admin/impersonate/{user_id}","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"user_id","or":"user_id","r":true,"t":"`$STRING`","index$":0}]},"k":"http","m":"POST","o":"/api/admin/impersonate/{user_id}","q":{"exist":["user_id"]},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"api"},{"lit":"admin"},{"lit":"impersonate"},{"var":"user_id"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":1},{"a":true,"co":{"id":"POST /api/admin/users/{user_id}/agents/reconcile","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"user_id","or":"user_id","r":true,"t":"`$STRING`","index$":0}],"query":[{"a":true,"k":"query","n":"phone_admin_pc_name","or":"phone_admin_pc_name","r":false,"t":"`$ANY`","index$":0},{"a":true,"k":"query","n":"product_id","or":"product_id","r":false,"t":"`$STRING`","index$":1}]},"k":"http","m":"POST","o":"/api/admin/users/{user_id}/agents/reconcile","q":{"exist":["user_id"]},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"api"},{"lit":"admin"},{"lit":"users"},{"var":"user_id"},{"lit":"agents"},{"lit":"reconcile"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":2},{"a":true,"bf":["count","product_id","video_type"],"co":{"id":"POST /api/admin/users/{user_id}/bulk-create-videos","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"user_id","or":"user_id","r":true,"t":"`$STRING`","index$":0}]},"k":"http","m":"POST","o":"/api/admin/users/{user_id}/bulk-create-videos","q":{"exist":["user_id"]},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"api"},{"lit":"admin"},{"lit":"users"},{"var":"user_id"},{"lit":"bulk-create-videos"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":3},{"a":true,"bf":["include_pending","product_id","regenerate"],"co":{"id":"POST /api/admin/users/{user_id}/clear-failed-videos","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"user_id","or":"user_id","r":true,"t":"`$STRING`","index$":0}]},"k":"http","m":"POST","o":"/api/admin/users/{user_id}/clear-failed-videos","q":{"exist":["user_id"]},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"api"},{"lit":"admin"},{"lit":"users"},{"var":"user_id"},{"lit":"clear-failed-videos"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":4},{"a":true,"co":{"id":"POST /api/admin/users/{user_id}/clear-future-auto-entries","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"user_id","or":"user_id","r":true,"t":"`$STRING`","index$":0}],"query":[{"a":true,"k":"query","n":"product_id","or":"product_id","r":false,"t":"`$STRING`","index$":0}]},"k":"http","m":"POST","o":"/api/admin/users/{user_id}/clear-future-auto-entries","q":{"exist":["user_id"]},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"api"},{"lit":"admin"},{"lit":"users"},{"var":"user_id"},{"lit":"clear-future-auto-entries"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":5},{"a":true,"co":{"id":"POST /api/admin/users/{user_id}/clear-manual-entries","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"user_id","or":"user_id","r":true,"t":"`$STRING`","index$":0}],"query":[{"a":true,"k":"query","n":"product_id","or":"product_id","r":false,"t":"`$STRING`","index$":0}]},"k":"http","m":"POST","o":"/api/admin/users/{user_id}/clear-manual-entries","q":{"exist":["user_id"]},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"api"},{"lit":"admin"},{"lit":"users"},{"var":"user_id"},{"lit":"clear-manual-entries"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":6},{"a":true,"co":{"id":"POST /api/admin/users/{user_id}/clear-today-auto-entries","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"user_id","or":"user_id","r":true,"t":"`$STRING`","index$":0}],"query":[{"a":true,"k":"query","n":"product_id","or":"product_id","r":false,"t":"`$STRING`","index$":0}]},"k":"http","m":"POST","o":"/api/admin/users/{user_id}/clear-today-auto-entries","q":{"exist":["user_id"]},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"api"},{"lit":"admin"},{"lit":"users"},{"var":"user_id"},{"lit":"clear-today-auto-entries"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":7},{"a":true,"bf":["include_failed","include_pending","product_id"],"co":{"id":"POST /api/admin/users/{user_id}/retry-todays-videos","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"user_id","or":"user_id","r":true,"t":"`$STRING`","index$":0}]},"k":"http","m":"POST","o":"/api/admin/users/{user_id}/retry-todays-videos","q":{"exist":["user_id"]},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"api"},{"lit":"admin"},{"lit":"users"},{"var":"user_id"},{"lit":"retry-todays-videos"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":8},{"a":true,"bf":["include_failed","include_pending","product_id"],"co":{"id":"POST /api/admin/users/{user_id}/retry-videos","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"user_id","or":"user_id","r":true,"t":"`$STRING`","index$":0}]},"k":"http","m":"POST","o":"/api/admin/users/{user_id}/retry-videos","q":{"exist":["user_id"]},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"api"},{"lit":"admin"},{"lit":"users"},{"var":"user_id"},{"lit":"retry-videos"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":9},{"a":true,"bf":["apply","include_records","only_active"],"co":{"id":"POST /api/admin/agents/social-profile-audit","source":"openapi3","version":2},"g":{},"k":"http","m":"POST","o":"/api/admin/agents/social-profile-audit","q":{},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"api"},{"lit":"admin"},{"lit":"agents"},{"lit":"social-profile-audit"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":10},{"a":true,"bf":["skip_regenerate_prompt","video_ids"],"co":{"id":"POST /api/admin/batch-regenerate-sora2","source":"openapi3","version":2},"g":{},"k":"http","m":"POST","o":"/api/admin/batch-regenerate-sora2","q":{"$action":"batch_regenerate_sora2"},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"api"},{"lit":"admin"},{"lit":"batch-regenerate-sora2"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":11},{"a":true,"bf":["date_from","date_to","issue_ids","platform","posting_method","query","reason","status"],"co":{"id":"POST /api/admin/customer-health/issues/retry","source":"openapi3","version":2},"g":{},"k":"http","m":"POST","o":"/api/admin/customer-health/issues/retry","q":{},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"api"},{"lit":"admin"},{"lit":"customer-health"},{"lit":"issues"},{"lit":"retry"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":12},{"a":true,"bf":["date_from","date_to","product_id"],"co":{"id":"POST /api/admin/products-dashboard/repair-stats","source":"openapi3","version":2},"g":{},"k":"http","m":"POST","o":"/api/admin/products-dashboard/repair-stats","q":{},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"api"},{"lit":"admin"},{"lit":"products-dashboard"},{"lit":"repair-stats"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":13},{"a":true,"co":{"id":"POST /api/admin/schedule/clear-all-future-auto-entries","source":"openapi3","version":2},"g":{},"k":"http","m":"POST","o":"/api/admin/schedule/clear-all-future-auto-entries","q":{},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"api"},{"lit":"admin"},{"lit":"schedule"},{"lit":"clear-all-future-auto-entries"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":14},{"a":true,"co":{"id":"POST /api/admin/schedule/clear-today-auto-entries-for-all","source":"openapi3","version":2},"g":{},"k":"http","m":"POST","o":"/api/admin/schedule/clear-today-auto-entries-for-all","q":{},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"api"},{"lit":"admin"},{"lit":"schedule"},{"lit":"clear-today-auto-entries-for-all"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":15},{"a":true,"co":{"id":"POST /api/admin/stats/refresh-and-send-emails","source":"openapi3","version":2},"g":{},"k":"http","m":"POST","o":"/api/admin/stats/refresh-and-send-emails","q":{},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"api"},{"lit":"admin"},{"lit":"stats"},{"lit":"refresh-and-send-emails"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":16},{"a":true,"co":{"id":"POST /api/admin/stats/refresh-last-7-days","source":"openapi3","version":2},"g":{"query":[{"a":true,"ex":"both","k":"query","n":"provider","or":"provider","r":false,"t":"`$STRING`","index$":0}]},"k":"http","m":"POST","o":"/api/admin/stats/refresh-last-7-days","q":{},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"api"},{"lit":"admin"},{"lit":"stats"},{"lit":"refresh-last-7-days"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":17},{"a":true,"bf":["source_video_id","target_user_id"],"co":{"id":"POST /api/admin/test-s3-copy","source":"openapi3","version":2},"g":{},"k":"http","m":"POST","o":"/api/admin/test-s3-copy","q":{"$action":"test_s3_copy"},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"api"},{"lit":"admin"},{"lit":"test-s3-copy"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":18},{"a":true,"bf":["email"],"co":{"id":"POST /api/admin/whitelist-testers","source":"openapi3","version":2},"g":{},"k":"http","m":"POST","o":"/api/admin/whitelist-testers","q":{},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"api"},{"lit":"admin"},{"lit":"whitelist-testers"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":19}],"key$":"create"},"list":{"input":"data","name":"list","points":[{"a":true,"co":{"id":"GET /api/admin/whitelist-testers","source":"openapi3","version":2},"g":{},"k":"http","m":"GET","o":"/api/admin/whitelist-testers","q":{},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"api"},{"lit":"admin"},{"lit":"whitelist-testers"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"list"},"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /api/admin/stats/by-date-and-type","source":"openapi3","version":2},"g":{"query":[{"a":true,"k":"query","n":"date","or":"date","r":true,"t":"`$STRING`","index$":0},{"a":true,"k":"query","n":"day","or":"days","r":false,"t":"`$ANY`","index$":1},{"a":true,"k":"query","n":"user_email","or":"user_email","r":false,"t":"`$ANY`","index$":2},{"a":true,"k":"query","n":"user_id","or":"user_id","r":false,"t":"`$STRING`","index$":3}]},"k":"http","m":"GET","o":"/api/admin/stats/by-date-and-type","q":{"exist":["date"]},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"api"},{"lit":"admin"},{"lit":"stats"},{"lit":"by-date-and-type"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0},{"a":true,"co":{"id":"GET /api/admin/users/{user_id}/failed-videos","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"user_id","or":"user_id","r":true,"t":"`$STRING`","index$":0}]},"k":"http","m":"GET","o":"/api/admin/users/{user_id}/failed-videos","q":{"exist":["user_id"]},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"api"},{"lit":"admin"},{"lit":"users"},{"var":"user_id"},{"lit":"failed-videos"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":1},{"a":true,"co":{"id":"GET /api/admin/users/{user_id}/pending-videos","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"user_id","or":"user_id","r":true,"t":"`$STRING`","index$":0}]},"k":"http","m":"GET","o":"/api/admin/users/{user_id}/pending-videos","q":{"exist":["user_id"]},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"api"},{"lit":"admin"},{"lit":"users"},{"var":"user_id"},{"lit":"pending-videos"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":2},{"a":true,"co":{"id":"GET /api/admin/users/{user_id}/schedule-queue","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"user_id","or":"user_id","r":true,"t":"`$STRING`","index$":0}],"query":[{"a":true,"k":"query","n":"date_filter","or":"date_filter","r":false,"t":"`$ANY`","index$":0},{"a":true,"k":"query","n":"product_id","or":"product_id","r":false,"t":"`$STRING`","index$":1}]},"k":"http","m":"GET","o":"/api/admin/users/{user_id}/schedule-queue","q":{"exist":["user_id"]},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"api"},{"lit":"admin"},{"lit":"users"},{"var":"user_id"},{"lit":"schedule-queue"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":3},{"a":true,"co":{"id":"GET /api/admin/stats/aggregate","source":"openapi3","version":2},"g":{"query":[{"a":true,"ex":7,"k":"query","n":"day","or":"days","r":false,"t":"`$INTEGER`","index$":0},{"a":true,"k":"query","n":"user_email","or":"user_email","r":false,"t":"`$ANY`","index$":1},{"a":true,"k":"query","n":"user_id","or":"user_id","r":false,"t":"`$STRING`","index$":2}]},"k":"http","m":"GET","o":"/api/admin/stats/aggregate","q":{},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"api"},{"lit":"admin"},{"lit":"stats"},{"lit":"aggregate"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":4},{"a":true,"co":{"id":"GET /api/admin/users/export","source":"openapi3","version":2},"g":{},"k":"http","m":"GET","o":"/api/admin/users/export","q":{},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"api"},{"lit":"admin"},{"lit":"users"},{"lit":"export"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":5}],"key$":"load"},"remove":{"input":"data","name":"remove","points":[{"a":true,"co":{"id":"DELETE /api/admin/users/{user_id}/agents/{agent_id}","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"agent_id","or":"agent_id","r":true,"t":"`$STRING`","index$":0},{"a":true,"k":"param","n":"user_id","or":"user_id","r":true,"t":"`$STRING`","index$":1}]},"k":"http","m":"DELETE","o":"/api/admin/users/{user_id}/agents/{agent_id}","q":{"exist":["agent_id","user_id"]},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"api"},{"lit":"admin"},{"lit":"users"},{"var":"user_id"},{"lit":"agents"},{"var":"agent_id"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0},{"a":true,"co":{"id":"DELETE /api/admin/users/{user_id}/schedule-queue/{queue_id}","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"queue_id","or":"queue_id","r":true,"t":"`$STRING`","index$":0},{"a":true,"k":"param","n":"user_id","or":"user_id","r":true,"t":"`$STRING`","index$":1}]},"k":"http","m":"DELETE","o":"/api/admin/users/{user_id}/schedule-queue/{queue_id}","q":{"exist":["queue_id","user_id"]},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"api"},{"lit":"admin"},{"lit":"users"},{"var":"user_id"},{"lit":"schedule-queue"},{"var":"queue_id"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":1},{"a":true,"co":{"id":"DELETE /api/admin/users/{user_id}/video/{video_id}","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"user_id","or":"user_id","r":true,"t":"`$STRING`","index$":0},{"a":true,"k":"param","n":"video_id","or":"video_id","r":true,"t":"`$STRING`","index$":1}]},"k":"http","m":"DELETE","o":"/api/admin/users/{user_id}/video/{video_id}","q":{"exist":["user_id","video_id"]},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"api"},{"lit":"admin"},{"lit":"users"},{"var":"user_id"},{"lit":"video"},{"var":"video_id"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":2},{"a":true,"co":{"id":"DELETE /api/admin/whitelist-testers/{tester_id}","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"tester_id","or":"tester_id","r":true,"t":"`$STRING`","index$":0}]},"k":"http","m":"DELETE","o":"/api/admin/whitelist-testers/{tester_id}","q":{"exist":["tester_id"]},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"api"},{"lit":"admin"},{"lit":"whitelist-testers"},{"var":"tester_id"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":3}],"key$":"remove"},"update":{"input":"data","name":"update","points":[{"a":true,"co":{"id":"PUT /api/admin/agents/{agent_id}/type","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"agent_id","or":"agent_id","r":true,"t":"`$STRING`","index$":0}],"query":[{"a":true,"k":"query","n":"agent_type","or":"agent_type","r":true,"t":"`$STRING`","index$":0}]},"k":"http","m":"PUT","o":"/api/admin/agents/{agent_id}/type","q":{"exist":["agent_id","agent_type"]},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"api"},{"lit":"admin"},{"lit":"agents"},{"var":"agent_id"},{"lit":"type"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0},{"a":true,"co":{"id":"PUT /api/admin/agents/{agent_id}/active","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"agent_id","or":"agent_id","r":true,"t":"`$STRING`","index$":0}],"query":[{"a":true,"k":"query","n":"is_active","or":"is_active","r":true,"t":"`$BOOLEAN`","index$":0}]},"k":"http","m":"PUT","o":"/api/admin/agents/{agent_id}/active","q":{"exist":["agent_id","is_active"]},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"api"},{"lit":"admin"},{"lit":"agents"},{"var":"agent_id"},{"lit":"active"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":1}],"key$":"update"}},"relations":{"ancestors":[["$.main.kit.entity.user"],["$.main.kit.entity.user","$.main.kit.entity.agent"],["$.main.kit.entity.user"],["$.main.kit.entity.user"],["$.main.kit.entity.user","$.main.kit.entity.video"]]},"key$":"admin","name__orig":"admin","Name":"Admin","name_":"admin","name-":"admin","NAME":"ADMIN","index$":3}, {"active":true,"entity":"admin","key$":"BasicAdminFlow","kind":"basic","name":"BasicAdminFlow","param":{},"step":[{"a":true,"d":{},"i":{"ref":"admin_ref01"},"m":{"user_id":"user01"},"o":"create","s":[],"v":[],"index$":0},{"a":true,"d":{},"i":{},"m":{},"o":"list","s":[],"v":[{"apply":"ItemExists","def":{"ref":"admin_ref01"}}],"index$":1},{"a":false,"d":{},"i":{"ref":"admin_ref01","srcdatavar":"admin_ref01_data","suffix":"_up0","textfield":"created_at"},"m":{},"o":"update","s":[{"apply":"TextFieldMark","def":{"mark":"Mark01-admin_ref01"}}],"v":[],"unreachable":true},{"a":true,"d":{},"i":{"ref":"admin_ref01","srcdatavar":"admin_ref01_data","suffix":"_dt0"},"m":{},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-admin_ref01"}}],"index$":2},{"a":false,"d":{},"i":{"ref":"admin_ref01","suffix":"_rm0"},"m":{"id":"admin01"},"o":"remove","s":[],"v":[],"unreachable":true},{"a":false,"d":{},"i":{"suffix":"_rt0"},"m":{},"o":"list","s":[],"v":[{"apply":"ItemNotExists","def":{"ref":"admin_ref01"}}],"unreachable":true}]}, 'Admin', {"POST /api/admin/users/{user_id}/regenerate-video/{video_id}":{"protocol":"http","parameters":[{"name":"user_id","in":"path","required":true,"schema":{"type":"string","format":"uuid","title":"User Id"},"index$":0},{"name":"video_id","in":"path","required":true,"schema":{"type":"string","format":"uuid","title":"Video Id"},"index$":1}]},"POST /api/admin/impersonate/{user_id}":{"protocol":"http","parameters":[{"name":"user_id","in":"path","required":true,"schema":{"type":"string","format":"uuid","title":"User Id"},"index$":0}]},"POST /api/admin/users/{user_id}/agents/reconcile":{"protocol":"http","parameters":[{"name":"user_id","in":"path","required":true,"schema":{"type":"string","format":"uuid","title":"User Id"},"index$":0},{"name":"product_id","in":"query","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Product Id"},"index$":1},{"name":"phone_admin_pc_name","in":"query","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"description":"Optional Phone Admin device PC name to claim agents from instead of the full available pool.","title":"Phone Admin Pc Name"},"description":"Optional Phone Admin device PC name to claim agents from instead of the full available pool.","index$":2}]},"POST /api/admin/users/{user_id}/bulk-create-videos":{"protocol":"http","requestBody":{"required":true,"content":{"application/json":{"schema":{"properties":{"video_type":{"type":"string","title":"Video Type","key$":"video_type"},"count":{"type":"integer","title":"Count","key$":"count"},"product_id":{"anyOf":[{"type":"string","format":"uuid"},{"type":"null"}],"title":"Product Id","key$":"product_id"}},"type":"object","required":["video_type","count"],"title":"BulkCreateVideosRequest","x-ref":"#/components/schemas/BulkCreateVideosRequest","index$":1}}}},"parameters":[{"name":"user_id","in":"path","required":true,"schema":{"type":"string","format":"uuid","title":"User Id"},"index$":0}]},"POST /api/admin/users/{user_id}/clear-failed-videos":{"protocol":"http","requestBody":{"required":true,"content":{"application/json":{"schema":{"properties":{"include_pending":{"type":"boolean","title":"Include Pending","default":true,"key$":"include_pending"},"regenerate":{"type":"boolean","title":"Regenerate","default":false,"key$":"regenerate"},"product_id":{"anyOf":[{"type":"string","format":"uuid"},{"type":"null"}],"title":"Product Id","key$":"product_id"}},"type":"object","title":"ClearVideosRequest","x-ref":"#/components/schemas/ClearVideosRequest","index$":1}}}},"parameters":[{"name":"user_id","in":"path","required":true,"schema":{"type":"string","format":"uuid","title":"User Id"},"index$":0}]},"POST /api/admin/users/{user_id}/clear-future-auto-entries":{"protocol":"http","parameters":[{"name":"user_id","in":"path","required":true,"schema":{"type":"string","format":"uuid","title":"User Id"},"index$":0},{"name":"product_id","in":"query","required":false,"schema":{"anyOf":[{"type":"string","format":"uuid"},{"type":"null"}],"description":"Optional product ID for enterprise users","title":"Product Id"},"description":"Optional product ID for enterprise users","index$":1}]},"POST /api/admin/users/{user_id}/clear-manual-entries":{"protocol":"http","parameters":[{"name":"user_id","in":"path","required":true,"schema":{"type":"string","format":"uuid","title":"User Id"},"index$":0},{"name":"product_id","in":"query","required":false,"schema":{"anyOf":[{"type":"string","format":"uuid"},{"type":"null"}],"description":"Optional product ID for enterprise users","title":"Product Id"},"description":"Optional product ID for enterprise users","index$":1}]},"POST /api/admin/users/{user_id}/clear-today-auto-entries":{"protocol":"http","parameters":[{"name":"user_id","in":"path","required":true,"schema":{"type":"string","format":"uuid","title":"User Id"},"index$":0},{"name":"product_id","in":"query","required":false,"schema":{"anyOf":[{"type":"string","format":"uuid"},{"type":"null"}],"description":"Optional product ID for enterprise users","title":"Product Id"},"description":"Optional product ID for enterprise users","index$":1}]},"POST /api/admin/users/{user_id}/retry-todays-videos":{"protocol":"http","requestBody":{"required":true,"content":{"application/json":{"schema":{"properties":{"include_failed":{"type":"boolean","title":"Include Failed","default":true,"key$":"include_failed"},"include_pending":{"type":"boolean","title":"Include Pending","default":true,"key$":"include_pending"},"product_id":{"anyOf":[{"type":"string","format":"uuid"},{"type":"null"}],"title":"Product Id","key$":"product_id"}},"type":"object","title":"RetryVideosRequest","x-ref":"#/components/schemas/RetryVideosRequest","index$":1}}}},"parameters":[{"name":"user_id","in":"path","required":true,"schema":{"type":"string","format":"uuid","title":"User Id"},"index$":0}]},"POST /api/admin/users/{user_id}/retry-videos":{"protocol":"http","requestBody":{"required":true,"content":{"application/json":{"schema":{"properties":{"include_failed":{"type":"boolean","title":"Include Failed","default":true,"key$":"include_failed"},"include_pending":{"type":"boolean","title":"Include Pending","default":true,"key$":"include_pending"},"product_id":{"anyOf":[{"type":"string","format":"uuid"},{"type":"null"}],"title":"Product Id","key$":"product_id"}},"type":"object","title":"RetryVideosRequest","x-ref":"#/components/schemas/RetryVideosRequest","index$":1}}}},"parameters":[{"name":"user_id","in":"path","required":true,"schema":{"type":"string","format":"uuid","title":"User Id"},"index$":0}]},"POST /api/admin/agents/social-profile-audit":{"protocol":"http","requestBody":{"content":{"application/json":{"schema":{"properties":{"apply":{"type":"boolean","title":"Apply","description":"Apply safe canonical or clean-only URL updates","default":false,"key$":"apply"},"only_active":{"type":"boolean","title":"Only Active","description":"Limit the audit to active agents","default":false,"key$":"only_active"},"include_records":{"type":"boolean","title":"Include Records","description":"Include full per-field audit records in the response","default":false,"key$":"include_records"}},"type":"object","title":"AgentSocialProfileAuditRequest","x-ref":"#/components/schemas/AgentSocialProfileAuditRequest","index$":1}}},"required":true},"parameters":[]},"POST /api/admin/batch-regenerate-sora2":{"protocol":"http","requestBody":{"content":{"application/json":{"schema":{"properties":{"video_ids":{"items":{"type":"string"},"type":"array","title":"Video Ids"},"skip_regenerate_prompt":{"type":"boolean","title":"Skip Regenerate Prompt","default":false}},"type":"object","required":["video_ids"],"title":"BatchRegenerateSora2Request","x-ref":"#/components/schemas/BatchRegenerateSora2Request"}}},"required":true},"parameters":[]},"POST /api/admin/customer-health/issues/retry":{"protocol":"http","requestBody":{"content":{"application/json":{"schema":{"properties":{"issue_ids":{"anyOf":[{"items":{"type":"string","format":"uuid"},"type":"array"},{"type":"null"}],"title":"Issue Ids","key$":"issue_ids"},"status":{"type":"string","title":"Status","default":"open","key$":"status"},"date_from":{"anyOf":[{"type":"string","format":"date"},{"type":"null"}],"title":"Date From","key$":"date_from"},"date_to":{"anyOf":[{"type":"string","format":"date"},{"type":"null"}],"title":"Date To","key$":"date_to"},"reason":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Reason","key$":"reason"},"platform":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Platform","key$":"platform"},"posting_method":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Posting Method","key$":"posting_method"},"query":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Query","key$":"query"}},"type":"object","title":"StatsRefreshIssueRetryRequest","x-ref":"#/components/schemas/StatsRefreshIssueRetryRequest","index$":1}}},"required":true},"parameters":[]},"POST /api/admin/products-dashboard/repair-stats":{"protocol":"http","requestBody":{"content":{"application/json":{"schema":{"properties":{"product_id":{"type":"string","format":"uuid","title":"Product Id","key$":"product_id"},"date_from":{"type":"string","format":"date","title":"Date From","key$":"date_from"},"date_to":{"type":"string","format":"date","title":"Date To","key$":"date_to"}},"type":"object","required":["product_id","date_from","date_to"],"title":"ProductDashboardStatsRepairRequest","x-ref":"#/components/schemas/ProductDashboardStatsRepairRequest","index$":1}}},"required":true},"parameters":[]},"POST /api/admin/schedule/clear-all-future-auto-entries":{"protocol":"http","parameters":[]},"POST /api/admin/schedule/clear-today-auto-entries-for-all":{"protocol":"http","parameters":[]},"POST /api/admin/stats/refresh-and-send-emails":{"protocol":"http","parameters":[]},"POST /api/admin/stats/refresh-last-7-days":{"protocol":"http","parameters":[{"name":"provider","in":"query","required":false,"schema":{"type":"string","enum":["both","scrapecreators","apify"],"title":"StatsScraperProvider","description":"Stats scraper provider to use: both, scrapecreators, or apify.","default":"both","x-ref":"#/components/schemas/StatsScraperProvider"},"description":"Stats scraper provider to use: both, scrapecreators, or apify.","index$":0}]},"POST /api/admin/test-s3-copy":{"protocol":"http","requestBody":{"content":{"application/json":{"schema":{"properties":{"source_video_id":{"type":"string","title":"Source Video Id"},"target_user_id":{"type":"string","title":"Target User Id"}},"type":"object","required":["source_video_id","target_user_id"],"title":"TestS3CopyRequest","x-ref":"#/components/schemas/TestS3CopyRequest"}}},"required":true},"parameters":[]},"POST /api/admin/whitelist-testers":{"protocol":"http","requestBody":{"content":{"application/json":{"schema":{"properties":{"email":{"type":"string","format":"email","title":"Email","key$":"email"}},"type":"object","required":["email"],"title":"WhitelistTesterCreate","x-ref":"#/components/schemas/WhitelistTesterCreate","index$":1}}},"required":true},"parameters":[]},"GET /api/admin/whitelist-testers":{"protocol":"http","parameters":[]},"GET /api/admin/stats/by-date-and-type":{"protocol":"http","parameters":[{"name":"date","in":"query","required":true,"schema":{"type":"string","description":"Date in YYYY-MM-DD format (EST/EDT)","title":"Date"},"description":"Date in YYYY-MM-DD format (EST/EDT)","index$":0},{"name":"days","in":"query","required":false,"schema":{"anyOf":[{"type":"integer","maximum":365,"minimum":1},{"type":"null"}],"description":"Number of days to include ending on the given date (EST/EDT)","title":"Days"},"description":"Number of days to include ending on the given date (EST/EDT)","index$":1},{"name":"user_email","in":"query","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"description":"Filter by user email (admin only)","title":"User Email"},"description":"Filter by user email (admin only)","index$":2},{"name":"user_id","in":"query","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"description":"Filter by user ID (admin only)","title":"User Id"},"description":"Filter by user ID (admin only)","index$":3}]},"GET /api/admin/users/{user_id}/failed-videos":{"protocol":"http","parameters":[{"name":"user_id","in":"path","required":true,"schema":{"type":"string","format":"uuid","title":"User Id"},"index$":0}]},"GET /api/admin/users/{user_id}/pending-videos":{"protocol":"http","parameters":[{"name":"user_id","in":"path","required":true,"schema":{"type":"string","format":"uuid","title":"User Id"},"index$":0}]},"GET /api/admin/users/{user_id}/schedule-queue":{"protocol":"http","parameters":[{"name":"user_id","in":"path","required":true,"schema":{"type":"string","format":"uuid","title":"User Id"},"index$":0},{"name":"product_id","in":"query","required":false,"schema":{"anyOf":[{"type":"string","format":"uuid"},{"type":"null"}],"description":"Optional product ID for enterprise users","title":"Product Id"},"description":"Optional product ID for enterprise users","index$":1},{"name":"date_filter","in":"query","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"description":"Filter by date: 'today', 'tomorrow', or 'yesterday' (EST timezone)","title":"Date Filter"},"description":"Filter by date: 'today', 'tomorrow', or 'yesterday' (EST timezone)","index$":2}]},"GET /api/admin/stats/aggregate":{"protocol":"http","parameters":[{"name":"days","in":"query","required":false,"schema":{"type":"integer","maximum":365,"minimum":1,"description":"Number of days to aggregate","default":7,"title":"Days"},"description":"Number of days to aggregate","index$":0},{"name":"user_email","in":"query","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"description":"Filter by user email (admin only)","title":"User Email"},"description":"Filter by user email (admin only)","index$":1},{"name":"user_id","in":"query","required":false,"schema":{"anyOf":[{"type":"string"},{"type":"null"}],"description":"Filter by user ID (admin only)","title":"User Id"},"description":"Filter by user ID (admin only)","index$":2}]},"GET /api/admin/users/export":{"protocol":"http","parameters":[]},"DELETE /api/admin/users/{user_id}/agents/{agent_id}":{"protocol":"http","parameters":[{"name":"user_id","in":"path","required":true,"schema":{"type":"string","format":"uuid","title":"User Id"},"index$":0},{"name":"agent_id","in":"path","required":true,"schema":{"type":"string","title":"Agent Id"},"index$":1}]},"DELETE /api/admin/users/{user_id}/schedule-queue/{queue_id}":{"protocol":"http","parameters":[{"name":"user_id","in":"path","required":true,"schema":{"type":"string","format":"uuid","title":"User Id"},"index$":0},{"name":"queue_id","in":"path","required":true,"schema":{"type":"string","format":"uuid","title":"Queue Id"},"index$":1}]},"DELETE /api/admin/users/{user_id}/video/{video_id}":{"protocol":"http","parameters":[{"name":"user_id","in":"path","required":true,"schema":{"type":"string","format":"uuid","title":"User Id"},"index$":0},{"name":"video_id","in":"path","required":true,"schema":{"type":"string","format":"uuid","title":"Video Id"},"index$":1}]},"DELETE /api/admin/whitelist-testers/{tester_id}":{"protocol":"http","parameters":[{"name":"tester_id","in":"path","required":true,"schema":{"type":"string","title":"Tester Id"},"index$":0}]},"PUT /api/admin/agents/{agent_id}/type":{"protocol":"http","parameters":[{"name":"agent_id","in":"path","required":true,"schema":{"type":"string","title":"Agent Id"},"index$":0},{"name":"agent_type","in":"query","required":true,"schema":{"type":"string","pattern":"^(shared|dedicated)$","title":"Agent Type"},"index$":1}]},"PUT /api/admin/agents/{agent_id}/active":{"protocol":"http","parameters":[{"name":"agent_id","in":"path","required":true,"schema":{"type":"string","title":"Agent Id"},"index$":0},{"name":"is_active","in":"query","required":true,"schema":{"type":"boolean","title":"Is Active"},"index$":1}]}}, { strict: LIVE_STRICT, t })
+    }
+    const client = setup.client
+    const struct = setup.struct
+
+    const isempty = struct.isempty
+    const select = struct.select
+
+
+    // CREATE
+    const admin_ref01_ent = client.Admin()
+    let admin_ref01_data = setup.data.new.admin['admin_ref01']
+    admin_ref01_data['user_id'] = setup.idmap['user01']
+
+    admin_ref01_data = (await admin_ref01_ent.create(admin_ref01_data)).data()
+    assert(null != admin_ref01_data.id)
+
+
+    // LIST
+    const admin_ref01_match: any = {}
+
+    const admin_ref01_list = (await admin_ref01_ent.list(admin_ref01_match)).map((e: any) => e.data())
+
+    assert(!isempty(select(admin_ref01_list, { id: admin_ref01_data.id })))
+
+
+    // LOAD
+    const admin_ref01_match_dt0: any = {}
+    admin_ref01_match_dt0.id = admin_ref01_data.id
+    const admin_ref01_data_dt0 = (await admin_ref01_ent.load(admin_ref01_match_dt0)).data()
+    assert(admin_ref01_data_dt0.id === admin_ref01_data.id)
+
+
+  })
+})
+
+
+
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true
+
+function basicSetup(extra?: any) {
+  // TODO: fix test def options
+  const options: any = {} // null
+
+  // TODO: needs test utility to resolve path
+  const entityDataFile =
+    Path.resolve(__dirname, 
+      '../../../../.sdk/test/entity/admin/AdminTestData.json')
+
+  // TODO: file ready util needed?
+  const entityDataSource = Fs.readFileSync(entityDataFile).toString('utf8')
+
+  // TODO: need a xlang JSON parse utility in voxgig/struct with better error msgs
+  const entityData = JSON.parse(entityDataSource)
+
+  options.entity = entityData.existing
+
+  let client = CrackedApiReferenceSDK.test(options, extra)
+  const struct = client.utility().struct
+  const merge = struct.merge
+  const transform = struct.transform
+
+  let idmap = transform(
+    ['admin01','admin02','admin03','user01','user02','user03','agent01','agent02','agent03','video01','video02','video03'],
+    {
+      '`$PACK`': ['', {
+        '`$KEY`': '`$COPY`',
+        '`$VAL`': ['`$FORMAT`', 'upper', '`$COPY`']
+      }]
+    })
+
+  const env = envOverride({
+    'CRACKED_API_REFERENCE_TEST_ADMIN_ENTID': idmap,
+    'CRACKED_API_REFERENCE_TEST_LIVE': 'FALSE',
+    'CRACKED_API_REFERENCE_TEST_EXPLAIN': 'FALSE',
+    'CRACKED_API_REFERENCE_APIKEY': '',
+    'CRACKED_API_REFERENCE_SERVER_BASE': "",
+  })
+
+  idmap = env['CRACKED_API_REFERENCE_TEST_ADMIN_ENTID']
+
+  const live = 'TRUE' === env.CRACKED_API_REFERENCE_TEST_LIVE
+
+  const transport = createLiveTransport()
+  if (live) {
+    const rawIds = process.env['CRACKED_API_REFERENCE_TEST_ADMIN_ENTID']
+    idmap = rawIds && rawIds.trim() ? JSON.parse(rawIds) : {}
+    if (!idmap || Array.isArray(idmap) || typeof idmap !== 'object') {
+      throw new Error('Live ENTID must be a JSON object')
+    }
+    client = new CrackedApiReferenceSDK(merge([
+      // FIRST, so the generated fields below win: sdk-test-control.json's
+      // test.client.options adds to the live client, it does not redirect it.
+      liveClientOptions(),
+      {
+        apikey: env.CRACKED_API_REFERENCE_APIKEY,
+        server: {
+          base: env.CRACKED_API_REFERENCE_SERVER_BASE,
+        },
+      },
+      // 'extra || {}', not a bare 'extra': struct.merge returns UNDEFINED when the
+      // last entry is undefined, and basicSetup is normally called with no
+      // argument at all - so a bare 'extra' silently discarded the apikey
+      // and server values above and handed the SDK undefined. Harmless
+      // while there was nothing in that object; not harmless now.
+      extra || {},
+      { system: { fetch: transport.fetch } }
+    ]))
+  }
+
+  const setup = {
+    idmap,
+    env,
+    options,
+    client,
+    struct,
+    data: entityData,
+    explain: 'TRUE' === env.CRACKED_API_REFERENCE_TEST_EXPLAIN,
+    live,
+    transport,
+    now: Date.now(),
+  }
+
+  return setup
+}
+  

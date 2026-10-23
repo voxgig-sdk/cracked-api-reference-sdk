@@ -1,0 +1,22 @@
+# BasicZerohumanAdminAccountFlow
+
+main: kit: flow: BasicZerohumanAdminAccountFlow:
+{
+  entity: "zerohuman_admin_account",
+  kind: "basic",
+  name: "BasicZerohumanAdminAccountFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "zerohuman_admin_account_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicZerohumanAdminAccountFlow"
+}

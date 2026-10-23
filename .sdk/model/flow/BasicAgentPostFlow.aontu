@@ -1,0 +1,26 @@
+# BasicAgentPostFlow
+
+main: kit: flow: BasicAgentPostFlow:
+{
+  entity: "agent_post",
+  kind: "basic",
+  name: "BasicAgentPostFlow",
+  step: [
+    {
+      m: {
+        agent_id: "agent01"
+      }
+
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "agent_post_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicAgentPostFlow"
+}

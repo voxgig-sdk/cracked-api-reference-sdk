@@ -1,0 +1,167 @@
+# Entity: admin_customer_success
+
+main: kit: entity: admin_customer_success: {
+
+  alias: field: {}
+
+  fields: {
+    active_agents: {
+      h: "Active Agents"
+      n: "active_agents"
+      r: true
+      t: "`$INTEGER`"
+    }
+    active_products: {
+      h: "Active Products"
+      n: "active_products"
+      r: true
+      t: "`$INTEGER`"
+    }
+    agents_count: {
+      h: "Agents Count"
+      n: "agents_count"
+      r: true
+      t: "`$INTEGER`"
+    }
+    auto_schedule_status: {
+      h: "Auto Schedule Status"
+      n: "auto_schedule_status"
+      r: true
+      t: "`$STRING`"
+    }
+    days_until_period_end: {
+      h: "Days Until Period End"
+      n: "days_until_period_end"
+      r: false
+      t: "`$ANY`"
+    }
+    email: {
+      h: "Email"
+      n: "email"
+      r: true
+      t: "`$STRING`"
+    }
+    feature_impact: {
+      h: "Feature Impact"
+      n: "feature_impact"
+      r: true
+      t: "`$STRING`"
+    }
+    last_notification_at: {
+      h: "Last Notification At"
+      n: "last_notification_at"
+      r: false
+      t: "`$ANY`"
+    }
+    membership: {
+      h: "Membership"
+      n: "membership"
+      r: false
+      t: "`$ANY`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: false
+      t: "`$STRING`"
+    }
+    notification_count: {
+      h: "Notification Count"
+      n: "notification_count"
+      r: true
+      t: "`$INTEGER`"
+    }
+    notification_events: {
+      h: "Notification Events"
+      n: "notification_events"
+      r: true
+      t: "`$ARRAY`"
+    }
+    priority: {
+      h: "Priority"
+      n: "priority"
+      r: true
+      t: "`$STRING`"
+    }
+    severity: {
+      h: "Severity"
+      n: "severity"
+      r: true
+      t: "`$STRING`"
+    }
+    status_label: {
+      h: "Status Label"
+      n: "status_label"
+      r: true
+      t: "`$STRING`"
+    }
+    subscription_current_period_end: {
+      h: "Subscription Current Period End"
+      n: "subscription_current_period_end"
+      r: false
+      t: "`$ANY`"
+    }
+    subscription_status: {
+      h: "Subscription Status"
+      n: "subscription_status"
+      r: false
+      t: "`$ANY`"
+    }
+    upcoming_posts: {
+      h: "Upcoming Posts"
+      n: "upcoming_posts"
+      r: true
+      t: "`$INTEGER`"
+    }
+    user_id: {
+      fo: "uuid"
+      h: "User Id"
+      n: "user_id"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  name: "admin_customer_success"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/admin/insights/customer-success"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/admin/insights/customer-success"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "insights"
+            }
+            {
+              lit: "customer-success"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.customer_success_cases`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

@@ -1,0 +1,94 @@
+# Entity: chat
+
+main: kit: entity: chat: {
+
+  alias: field: {}
+
+  fields: {
+    idempotencyKey: {
+      h: "Idempotency Key"
+      n: "idempotencyKey"
+      r: true
+      t: "`$STRING`"
+    }
+    message: {
+      h: "Message"
+      n: "message"
+      r: true
+      t: "`$STRING`"
+    }
+    sessionId: {
+      h: "Session Id"
+      n: "sessionId"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  name: "chat"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "idempotencyKey"
+            "message"
+            "sessionId"
+          ]
+          co: {
+            id: "POST /api/chat/sessions/{session_id}/messages"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "session_id"
+                or: "session_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/chat/sessions/{session_id}/messages"
+          q: {
+            exist: [
+              "session_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "chat"
+            }
+            {
+              lit: "sessions"
+            }
+            {
+              var: "session_id"
+            }
+            {
+              lit: "messages"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

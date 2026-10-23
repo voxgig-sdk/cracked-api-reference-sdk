@@ -1,0 +1,30 @@
+# BasicIrisTaskFlow
+
+main: kit: flow: BasicIrisTaskFlow:
+{
+  entity: "iris_task",
+  kind: "basic",
+  name: "BasicIrisTaskFlow",
+  step: [
+    {
+      i: {
+        ref: "iris_task_ref01"
+      }
+
+      o: "create"
+    }
+
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "iris_task_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicIrisTaskFlow"
+}

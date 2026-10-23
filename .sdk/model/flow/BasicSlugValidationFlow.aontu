@@ -1,0 +1,32 @@
+# BasicSlugValidationFlow
+
+main: kit: flow: BasicSlugValidationFlow:
+{
+  entity: "slug_validation",
+  kind: "basic",
+  name: "BasicSlugValidationFlow",
+  step: [
+    {
+      i: {
+        ref: "slug_validation_ref01",
+        srcdatavar: "slug_validation_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "slug_validation01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-slug_validation_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicSlugValidationFlow"
+}

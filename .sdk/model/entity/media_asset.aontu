@@ -1,0 +1,343 @@
+# Entity: media_asset
+
+main: kit: entity: media_asset: {
+
+  alias: field: {}
+
+  fields: {
+    category: {
+      h: "Category"
+      n: "category"
+      r: true
+      t: "`$STRING`"
+    }
+    createdAt: {
+      fo: "date-time"
+      h: "Created At"
+      n: "createdAt"
+      r: true
+      t: "`$STRING`"
+    }
+    description: {
+      h: "Description"
+      n: "description"
+      r: false
+      t: "`$STRING`"
+    }
+    file: {
+      fo: "binary"
+      h: "File"
+      n: "file"
+      r: true
+      t: "`$STRING`"
+    }
+    id: {
+      fo: "uuid"
+      h: "Id"
+      n: "id"
+      r: true
+      t: "`$STRING`"
+    }
+    media_assets: {
+      h: "Media Assets"
+      n: "media_assets"
+      r: true
+      t: "`$ARRAY`"
+    }
+    onboardingDataId: {
+      h: "Onboarding Data Id"
+      n: "onboardingDataId"
+      r: false
+      t: "`$ANY`"
+    }
+    onboarding_data_id: {
+      fo: "uuid"
+      h: "Onboarding Data Id"
+      n: "onboarding_data_id"
+      r: true
+      t: "`$STRING`"
+    }
+    productId: {
+      h: "Product Id"
+      n: "productId"
+      r: false
+      t: "`$ANY`"
+    }
+    product_id: {
+      h: "Product Id"
+      n: "product_id"
+      r: false
+      t: "`$STRING`"
+    }
+    source: {
+      h: "Source"
+      n: "source"
+      r: true
+      t: "`$STRING`"
+    }
+    type: {
+      h: "Type"
+      n: "type"
+      r: true
+      t: "`$STRING`"
+    }
+    updatedAt: {
+      fo: "date-time"
+      h: "Updated At"
+      n: "updatedAt"
+      r: true
+      t: "`$STRING`"
+    }
+    url: {
+      h: "Url"
+      n: "url"
+      r: true
+      t: "`$STRING`"
+    }
+    usedAt: {
+      h: "Used At"
+      n: "usedAt"
+      r: false
+      t: "`$ANY`"
+    }
+    veo3VideoId: {
+      h: "Veo3 Video Id"
+      n: "veo3VideoId"
+      r: false
+      t: "`$ANY`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "media_asset"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /api/media-assets/{media_asset_id}/exclude-copycat"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "media_asset_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/media-assets/{media_asset_id}/exclude-copycat"
+          q: {
+            "$action": "exclude_copycat"
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              media_asset_id: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "media-assets"
+            }
+            {
+              var: "id"
+            }
+            {
+              lit: "exclude-copycat"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /api/media-assets/upload"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/media-assets/upload"
+          q: {
+            "$action": "upload"
+          }
+          rb: {
+            fields: [
+              {
+                name: "category"
+              }
+              {
+                name: "description"
+              }
+              {
+                binary: true
+                name: "file"
+              }
+              {
+                name: "product_id"
+              }
+              {
+                name: "scene_id"
+              }
+              {
+                name: "source"
+              }
+              {
+                name: "type"
+              }
+              {
+                name: "veo3_video_id"
+              }
+            ]
+            kind: "multipart"
+            media: "multipart/form-data"
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "media-assets"
+            }
+            {
+              lit: "upload"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /api/onboarding-v6/repost-content/upload"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/onboarding-v6/repost-content/upload"
+          rb: {
+            fields: [
+              {
+                binary: true
+                name: "file"
+              }
+              {
+                name: "onboarding_data_id"
+              }
+            ]
+            kind: "multipart"
+            media: "multipart/form-data"
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "onboarding-v6"
+            }
+            {
+              lit: "repost-content"
+            }
+            {
+              lit: "upload"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/video-variation/media-assets/{product_id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "product_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/video-variation/media-assets/{product_id}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              product_id: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "video-variation"
+            }
+            {
+              lit: "media-assets"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

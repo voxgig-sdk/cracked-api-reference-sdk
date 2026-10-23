@@ -1,0 +1,193 @@
+# Entity: slide
+
+main: kit: entity: slide: {
+
+  alias: field: {}
+
+  fields: {
+    caption: {
+      h: "Caption"
+      n: "caption"
+      r: false
+      t: "`$ANY`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+    prompt: {
+      h: "Prompt"
+      n: "prompt"
+      r: false
+      t: "`$ANY`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "slide"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "caption"
+            "image_model"
+            "prompt"
+          ]
+          co: {
+            id: "POST /api/carousel/{video_id}/slides/{slide_index}/regenerate"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "carousel_id"
+                or: "video_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "slide_index"
+                or: "slide_index"
+                r: true
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/carousel/{video_id}/slides/{slide_index}/regenerate"
+          q: {
+            "$action": "regenerate"
+            exist: [
+              "carousel_id"
+              "slide_index"
+            ]
+          }
+          r: {
+            param: {
+              video_id: "carousel_id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "carousel"
+            }
+            {
+              var: "carousel_id"
+            }
+            {
+              lit: "slides"
+            }
+            {
+              var: "slide_index"
+            }
+            {
+              lit: "regenerate"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    update: {
+      name: "update"
+      points: [
+        {
+          bf: [
+            "caption"
+            "prompt"
+          ]
+          co: {
+            id: "PATCH /api/carousel/{video_id}/slides/{slide_index}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "carousel_id"
+                or: "video_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "id"
+                or: "slide_index"
+                r: true
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "PATCH"
+          o: "/api/carousel/{video_id}/slides/{slide_index}"
+          q: {
+            exist: [
+              "carousel_id"
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              slide_index: "id"
+              video_id: "carousel_id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "carousel"
+            }
+            {
+              var: "carousel_id"
+            }
+            {
+              lit: "slides"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.carousel")]
+    [path("$.main.kit.entity.carousel")]
+  ]
+
+}

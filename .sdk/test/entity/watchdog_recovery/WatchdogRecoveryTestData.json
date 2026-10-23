@@ -1,0 +1,45 @@
+{
+  "existing": {
+    "watchdog_recovery": {
+      "WATCHDOG_RECOVERY00": {
+        "item_id": "ITEM01",
+        "passed": false,
+        "table": "s20",
+        "id": "WATCHDOG_RECOVERY00"
+      },
+      "WATCHDOG_RECOVERY01": {
+        "item_id": "ITEM01",
+        "passed": false,
+        "table": "s3e",
+        "id": "WATCHDOG_RECOVERY01"
+      },
+      "WATCHDOG_RECOVERY02": {
+        "item_id": "ITEM01",
+        "passed": false,
+        "table": "s5c",
+        "id": "WATCHDOG_RECOVERY02"
+      }
+    }
+  },
+  "new": {
+    "watchdog_recovery": {
+      "watchdog_recovery_ref01": {
+        "item_id": "ITEM01",
+        "passed": false,
+        "table": "s7a"
+      }
+    }
+  },
+  "requests": {
+    "POST /api/v1/watchdog/recovery-queue/resolve": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/v1/watchdog/recovery-queue": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

@@ -1,0 +1,18 @@
+# BasicCompleteChatCheckoutFlow
+
+main: kit: flow: BasicCompleteChatCheckoutFlow:
+{
+  entity: "complete_chat_checkout",
+  kind: "basic",
+  name: "BasicCompleteChatCheckoutFlow",
+  step: [
+    {
+      i: {
+        ref: "complete_chat_checkout_ref01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicCompleteChatCheckoutFlow"
+}

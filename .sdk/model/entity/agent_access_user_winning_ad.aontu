@@ -1,0 +1,99 @@
+# Entity: agent_access_user_winning_ad
+
+main: kit: entity: agent_access_user_winning_ad: {
+
+  alias: field: {}
+
+  fields: {
+    productId: {
+      fo: "uuid"
+      h: "Product Id"
+      n: "productId"
+      r: true
+      t: "`$STRING`"
+    }
+    productName: {
+      h: "Product Name"
+      n: "productName"
+      r: true
+      t: "`$STRING`"
+    }
+    winningAds: {
+      h: "Winning Ads"
+      n: "winningAds"
+      r: true
+      t: "`$ARRAY`"
+    }
+    winningAdsCount: {
+      h: "Winning Ads Count"
+      n: "winningAdsCount"
+      r: true
+      t: "`$INTEGER`"
+    }
+  }
+
+  name: "agent_access_user_winning_ad"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/agent-access/user-winning-ads"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "x_agent_access_key"
+                or: "x-agent-access-key"
+                r: false
+                t: "`$ANY`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "email"
+                or: "email"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/agent-access/user-winning-ads"
+          q: {
+            exist: [
+              "email"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "agent-access"
+            }
+            {
+              lit: "user-winning-ads"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.perProduct`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

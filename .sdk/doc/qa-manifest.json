@@ -1,0 +1,35 @@
+{
+  "files": [
+    "SUMMARY.md"
+  ],
+  "config": ".sdk/doc/qa/vale.ini",
+  "routes": {},
+  "quoted": {
+    "SUMMARY.md": [
+      "Agent information for V6.",
+      "Apply safe canonical or clean-only URL updates",
+      "Assignment information for V6.",
+      "Backend API for Vireel application",
+      "End date to refresh stats for (defaults to `date_from`)",
+      "Include full per-field audit records in the response",
+      "Instagram username/handle to scrape",
+      "Limit the audit to active agents",
+      "List of enabled video type filters",
+      "New website URL to scrape",
+      "Product ID to use.",
+      "Product details for enterprise product creation",
+      "Scraping provider to use",
+      "Start date to refresh stats for (defaults to yesterday)",
+      "Successful Response",
+      "Survey response data from frontend.",
+      "Target step name",
+      "TikTok username/handle to scrape",
+      "True for self-serve users (skip demo booking)",
+      "UUID of created OnboardingData",
+      "UUID of existing OnboardingData",
+      "UUID of the OnboardingData record",
+      "UUID of the Product",
+      "Website URL to scrape"
+    ]
+  }
+}

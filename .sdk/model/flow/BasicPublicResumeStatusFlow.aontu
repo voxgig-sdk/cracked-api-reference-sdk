@@ -1,0 +1,28 @@
+# BasicPublicResumeStatusFlow
+
+main: kit: flow: BasicPublicResumeStatusFlow:
+{
+  entity: "public_resume_status",
+  kind: "basic",
+  name: "BasicPublicResumeStatusFlow",
+  step: [
+    {
+      i: {
+        ref: "public_resume_status_ref01",
+        srcdatavar: "public_resume_status_ref01_data",
+        suffix: "_dt0"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-public_resume_status_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicPublicResumeStatusFlow"
+}

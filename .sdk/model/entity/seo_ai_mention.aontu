@@ -1,0 +1,134 @@
+# Entity: seo_ai_mention
+
+main: kit: entity: seo_ai_mention: {
+
+  alias: field: {}
+
+  fields: {
+    bucket: {
+      h: "Bucket"
+      n: "bucket"
+      r: true
+      t: "`$STRING`"
+    }
+    domain_type: {
+      h: "Domain Type"
+      n: "domain_type"
+      r: true
+      t: "`$STRING`"
+    }
+    dominant_domain: {
+      h: "Dominant Domain"
+      n: "dominant_domain"
+      r: true
+      t: "`$STRING`"
+    }
+    engine: {
+      h: "Engine"
+      n: "engine"
+      r: true
+      t: "`$STRING`"
+    }
+    evidence: {
+      h: "Evidence"
+      n: "evidence"
+      r: true
+      t: "`$OBJECT`"
+    }
+    geo: {
+      h: "Geo"
+      n: "geo"
+      r: true
+      t: "`$STRING`"
+    }
+    language: {
+      h: "Language"
+      n: "language"
+      r: true
+      t: "`$STRING`"
+    }
+    primary_url: {
+      h: "Primary Url"
+      n: "primary_url"
+      r: true
+      t: "`$STRING`"
+    }
+    prompt_text: {
+      h: "Prompt Text"
+      n: "prompt_text"
+      r: true
+      t: "`$STRING`"
+    }
+    run_week: {
+      h: "Run Week"
+      n: "run_week"
+      r: true
+      t: "`$STRING`"
+    }
+    secondary_urls: {
+      h: "Secondary Urls"
+      n: "secondary_urls"
+      r: true
+      t: "`$ARRAY`"
+    }
+  }
+
+  name: "seo_ai_mention"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/seo/ai-mentions"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: 200
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "product_id"
+                or: "product_id"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/seo/ai-mentions"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "seo"
+            }
+            {
+              lit: "ai-mentions"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.rows`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

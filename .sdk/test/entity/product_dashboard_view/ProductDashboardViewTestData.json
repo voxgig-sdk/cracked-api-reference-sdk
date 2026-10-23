@@ -1,0 +1,33 @@
+{
+  "existing": {
+    "product_dashboard_view": {
+      "PRODUCT_DASHBOARD_VIEW00": {
+        "date": "s14",
+        "views": 21
+      },
+      "PRODUCT_DASHBOARD_VIEW01": {
+        "date": "s28",
+        "views": 41
+      },
+      "PRODUCT_DASHBOARD_VIEW02": {
+        "date": "s3c",
+        "views": 61
+      }
+    }
+  },
+  "new": {
+    "product_dashboard_view": {
+      "product_dashboard_view_ref01": {
+        "date": "s50",
+        "views": 81
+      }
+    }
+  },
+  "requests": {
+    "GET /api/admin/products-dashboard/views": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

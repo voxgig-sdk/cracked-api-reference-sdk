@@ -1,0 +1,73 @@
+# Entity: iris_usage
+
+main: kit: entity: iris_usage: {
+
+  alias: field: {}
+
+  fields: {
+    eventCount: {
+      h: "Event Count"
+      n: "eventCount"
+      r: false
+      t: "`$INTEGER`"
+    }
+    events: {
+      h: "Events"
+      n: "events"
+      r: false
+      t: "`$ARRAY`"
+    }
+    membershipId: {
+      h: "Membership Id"
+      n: "membershipId"
+      r: false
+      t: "`$ANY`"
+    }
+    productScope: {
+      h: "Product Scope"
+      n: "productScope"
+      r: false
+      t: "`$STRING`"
+    }
+  }
+
+  name: "iris_usage"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/iris/usage"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/iris/usage"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "iris"
+            }
+            {
+              lit: "usage"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.events`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

@@ -1,0 +1,22 @@
+# BasicAdminPostFlow
+
+main: kit: flow: BasicAdminPostFlow:
+{
+  entity: "admin_post",
+  kind: "basic",
+  name: "BasicAdminPostFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "admin_post_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicAdminPostFlow"
+}

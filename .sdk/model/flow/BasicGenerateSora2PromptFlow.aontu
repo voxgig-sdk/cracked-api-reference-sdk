@@ -1,0 +1,28 @@
+# BasicGenerateSora2PromptFlow
+
+main: kit: flow: BasicGenerateSora2PromptFlow:
+{
+  entity: "generate_sora2_prompt",
+  kind: "basic",
+  name: "BasicGenerateSora2PromptFlow",
+  step: [
+    {
+      i: {
+        ref: "generate_sora2_prompt_ref01",
+        srcdatavar: "generate_sora2_prompt_ref01_data",
+        suffix: "_dt0"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-generate_sora2_prompt_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicGenerateSora2PromptFlow"
+}

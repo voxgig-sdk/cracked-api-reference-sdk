@@ -1,0 +1,28 @@
+# BasicExactAvailabilityFlow
+
+main: kit: flow: BasicExactAvailabilityFlow:
+{
+  entity: "exact_availability",
+  kind: "basic",
+  name: "BasicExactAvailabilityFlow",
+  step: [
+    {
+      i: {
+        ref: "exact_availability_ref01",
+        srcdatavar: "exact_availability_ref01_data",
+        suffix: "_dt0"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-exact_availability_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicExactAvailabilityFlow"
+}

@@ -1,0 +1,56 @@
+{
+  "existing": {
+    "agent_access_phil_hourly_notification": {
+      "AGENT_ACCESS_PHIL_HOURLY_NOTIFICATION00": {
+        "generatedAt": "s46",
+        "phoneHealth": {},
+        "scheduledPosts": {},
+        "targetDate": "s49",
+        "uploadPostInstagramHealth": {},
+        "uploadPostTiktokHealth": {},
+        "uploadPostYoutubeHealth": {},
+        "id": "AGENT_ACCESS_PHIL_HOURLY_NOTIFICATION00"
+      },
+      "AGENT_ACCESS_PHIL_HOURLY_NOTIFICATION01": {
+        "generatedAt": "s8c",
+        "phoneHealth": {},
+        "scheduledPosts": {},
+        "targetDate": "s8f",
+        "uploadPostInstagramHealth": {},
+        "uploadPostTiktokHealth": {},
+        "uploadPostYoutubeHealth": {},
+        "id": "AGENT_ACCESS_PHIL_HOURLY_NOTIFICATION01"
+      },
+      "AGENT_ACCESS_PHIL_HOURLY_NOTIFICATION02": {
+        "generatedAt": "sd2",
+        "phoneHealth": {},
+        "scheduledPosts": {},
+        "targetDate": "sd5",
+        "uploadPostInstagramHealth": {},
+        "uploadPostTiktokHealth": {},
+        "uploadPostYoutubeHealth": {},
+        "id": "AGENT_ACCESS_PHIL_HOURLY_NOTIFICATION02"
+      }
+    }
+  },
+  "new": {
+    "agent_access_phil_hourly_notification": {
+      "agent_access_phil_hourly_notification_ref01": {
+        "generatedAt": "s118",
+        "phoneHealth": {},
+        "scheduledPosts": {},
+        "targetDate": "s11b",
+        "uploadPostInstagramHealth": {},
+        "uploadPostTiktokHealth": {},
+        "uploadPostYoutubeHealth": {}
+      }
+    }
+  },
+  "requests": {
+    "GET /api/agent-access/phil-notifications/hourly": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

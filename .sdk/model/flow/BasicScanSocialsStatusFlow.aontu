@@ -1,0 +1,28 @@
+# BasicScanSocialsStatusFlow
+
+main: kit: flow: BasicScanSocialsStatusFlow:
+{
+  entity: "scan_socials_status",
+  kind: "basic",
+  name: "BasicScanSocialsStatusFlow",
+  step: [
+    {
+      i: {
+        ref: "scan_socials_status_ref01",
+        srcdatavar: "scan_socials_status_ref01_data",
+        suffix: "_dt0"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-scan_socials_status_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicScanSocialsStatusFlow"
+}

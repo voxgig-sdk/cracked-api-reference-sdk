@@ -1,0 +1,83 @@
+# Entity: scrape
+
+main: kit: entity: scrape: {
+
+  alias: field: {}
+
+  fields: {
+    old_product_id: {
+      h: "Old Product Id"
+      n: "old_product_id"
+      r: true
+      t: "`$STRING`"
+    }
+    onboarding_data_id: {
+      h: "Onboarding Data Id"
+      n: "onboarding_data_id"
+      r: true
+      t: "`$STRING`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: true
+      t: "`$STRING`"
+    }
+    success: {
+      h: "Success"
+      n: "success"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    url: {
+      h: "Url"
+      n: "url"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  name: "scrape"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "old_product_id"
+            "url"
+          ]
+          co: {
+            id: "POST /api/reset-product/scrape"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/reset-product/scrape"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "reset-product"
+            }
+            {
+              lit: "scrape"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

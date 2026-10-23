@@ -1,0 +1,30 @@
+{
+  "existing": {
+    "enterprise_product": {
+      "ENTERPRISE_PRODUCT00": {
+        "product_id": "PRODUCT01",
+        "id": "ENTERPRISE_PRODUCT00"
+      },
+      "ENTERPRISE_PRODUCT01": {
+        "product_id": "PRODUCT01",
+        "id": "ENTERPRISE_PRODUCT01"
+      },
+      "ENTERPRISE_PRODUCT02": {
+        "product_id": "PRODUCT01",
+        "id": "ENTERPRISE_PRODUCT02"
+      }
+    }
+  },
+  "new": {
+    "enterprise_product": {
+      "enterprise_product_ref01": {}
+    }
+  },
+  "requests": {
+    "GET /api/enterprise/products/{product_id}/status": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

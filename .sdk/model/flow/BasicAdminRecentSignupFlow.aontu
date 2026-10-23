@@ -1,0 +1,22 @@
+# BasicAdminRecentSignupFlow
+
+main: kit: flow: BasicAdminRecentSignupFlow:
+{
+  entity: "admin_recent_signup",
+  kind: "basic",
+  name: "BasicAdminRecentSignupFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "admin_recent_signup_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicAdminRecentSignupFlow"
+}

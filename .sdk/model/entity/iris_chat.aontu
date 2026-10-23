@@ -1,0 +1,117 @@
+# Entity: iris_chat
+
+main: kit: entity: iris_chat: {
+
+  alias: field: {}
+
+  fields: {
+    artifacts: {
+      h: "Artifacts"
+      n: "artifacts"
+      r: false
+      t: "`$ARRAY`"
+    }
+    correlationId: {
+      h: "Correlation Id"
+      n: "correlationId"
+      r: true
+      t: "`$STRING`"
+    }
+    idempotencyKey: {
+      h: "Idempotency Key"
+      n: "idempotencyKey"
+      r: true
+      t: "`$STRING`"
+    }
+    message: {
+      h: "Message"
+      n: "message"
+      r: true
+      t: "`$STRING`"
+    }
+    mode: {
+      h: "Mode"
+      n: "mode"
+      r: true
+      t: "`$STRING`"
+    }
+    ok: {
+      h: "Ok"
+      n: "ok"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    pageContext: {
+      h: "Page Context"
+      n: "pageContext"
+      r: false
+      t: "`$OBJECT`"
+    }
+    productId: {
+      h: "Product Id"
+      n: "productId"
+      r: false
+      t: "`$ANY`"
+    }
+    runtimeStatus: {
+      h: "Runtime Status"
+      n: "runtimeStatus"
+      r: true
+      t: "`$STRING`"
+    }
+    sessionId: {
+      h: "Session Id"
+      n: "sessionId"
+      r: false
+      t: "`$ANY`"
+    }
+  }
+
+  name: "iris_chat"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "correlationId"
+            "idempotencyKey"
+            "message"
+            "pageContext"
+            "productId"
+            "sessionId"
+          ]
+          co: {
+            id: "POST /api/iris/chat"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/iris/chat"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "iris"
+            }
+            {
+              lit: "chat"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

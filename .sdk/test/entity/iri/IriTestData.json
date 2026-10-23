@@ -1,0 +1,51 @@
+{
+  "existing": {
+    "iri": {
+      "IRI00": {
+        "correlationId": "s1e",
+        "idempotencyKey": "s1f",
+        "productId": "s20",
+        "connector_id": "CONNECTOR01",
+        "task_id": "TASK01",
+        "id": "IRI00"
+      },
+      "IRI01": {
+        "correlationId": "s3c",
+        "idempotencyKey": "s3d",
+        "productId": "s3e",
+        "connector_id": "CONNECTOR01",
+        "task_id": "TASK01",
+        "id": "IRI01"
+      },
+      "IRI02": {
+        "correlationId": "s5a",
+        "idempotencyKey": "s5b",
+        "productId": "s5c",
+        "connector_id": "CONNECTOR01",
+        "task_id": "TASK01",
+        "id": "IRI02"
+      }
+    }
+  },
+  "new": {
+    "iri": {
+      "iri_ref01": {
+        "correlationId": "s78",
+        "idempotencyKey": "s79",
+        "productId": "s7a"
+      }
+    }
+  },
+  "requests": {
+    "POST /api/iris/connectors/{connector_id}/start": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/iris/tasks/{task_id}/run": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

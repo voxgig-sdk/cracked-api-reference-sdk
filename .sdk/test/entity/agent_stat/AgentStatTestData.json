@@ -1,0 +1,44 @@
+{
+  "existing": {
+    "agent_stat": {
+      "AGENT_STAT00": {
+        "agents_needed": 40,
+        "dedicated_agents": {},
+        "shared_agents": {},
+        "total_agents": 43,
+        "id": "AGENT_STAT00"
+      },
+      "AGENT_STAT01": {
+        "agents_needed": 80,
+        "dedicated_agents": {},
+        "shared_agents": {},
+        "total_agents": 83,
+        "id": "AGENT_STAT01"
+      },
+      "AGENT_STAT02": {
+        "agents_needed": 120,
+        "dedicated_agents": {},
+        "shared_agents": {},
+        "total_agents": 123,
+        "id": "AGENT_STAT02"
+      }
+    }
+  },
+  "new": {
+    "agent_stat": {
+      "agent_stat_ref01": {
+        "agents_needed": 160,
+        "dedicated_agents": {},
+        "shared_agents": {},
+        "total_agents": 163
+      }
+    }
+  },
+  "requests": {
+    "GET /api/admin/agents/stats": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

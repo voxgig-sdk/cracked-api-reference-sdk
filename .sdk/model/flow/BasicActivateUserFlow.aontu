@@ -1,0 +1,22 @@
+# BasicActivateUserFlow
+
+main: kit: flow: BasicActivateUserFlow:
+{
+  entity: "activate_user",
+  kind: "basic",
+  name: "BasicActivateUserFlow",
+  step: [
+    {
+      i: {
+        ref: "activate_user_ref01"
+      }
+
+      m: {
+        user_id: "user01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicActivateUserFlow"
+}

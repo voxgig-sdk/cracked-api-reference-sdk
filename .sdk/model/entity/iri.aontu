@@ -1,0 +1,144 @@
+# Entity: iri
+
+main: kit: entity: iri: {
+
+  alias: field: {}
+
+  fields: {
+    correlationId: {
+      h: "Correlation Id"
+      n: "correlationId"
+      r: false
+      t: "`$ANY`"
+    }
+    idempotencyKey: {
+      h: "Idempotency Key"
+      n: "idempotencyKey"
+      r: true
+      t: "`$STRING`"
+    }
+    productId: {
+      h: "Product Id"
+      n: "productId"
+      r: false
+      t: "`$ANY`"
+    }
+  }
+
+  name: "iri"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /api/iris/connectors/{connector_id}/start"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "connector_id"
+                or: "connector_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/iris/connectors/{connector_id}/start"
+          q: {
+            exist: [
+              "connector_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "iris"
+            }
+            {
+              lit: "connectors"
+            }
+            {
+              var: "connector_id"
+            }
+            {
+              lit: "start"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "correlationId"
+            "idempotencyKey"
+            "productId"
+          ]
+          co: {
+            id: "POST /api/iris/tasks/{task_id}/run"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "task_id"
+                or: "task_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/iris/tasks/{task_id}/run"
+          q: {
+            exist: [
+              "task_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "iris"
+            }
+            {
+              lit: "tasks"
+            }
+            {
+              var: "task_id"
+            }
+            {
+              lit: "run"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

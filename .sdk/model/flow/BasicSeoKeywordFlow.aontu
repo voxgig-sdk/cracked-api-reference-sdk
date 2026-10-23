@@ -1,0 +1,22 @@
+# BasicSeoKeywordFlow
+
+main: kit: flow: BasicSeoKeywordFlow:
+{
+  entity: "seo_keyword",
+  kind: "basic",
+  name: "BasicSeoKeywordFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "seo_keyword_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicSeoKeywordFlow"
+}

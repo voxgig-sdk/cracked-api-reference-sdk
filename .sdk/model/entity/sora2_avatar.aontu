@@ -1,0 +1,454 @@
+# Entity: sora2_avatar
+
+main: kit: entity: sora2_avatar: {
+
+  alias: field: {}
+
+  fields: {
+    avatar_frame_url: {
+      h: "Avatar Frame Url"
+      n: "avatar_frame_url"
+      r: false
+      t: "`$ANY`"
+    }
+    created_at: {
+      fo: "date-time"
+      h: "Created At"
+      n: "created_at"
+      r: true
+      t: "`$STRING`"
+    }
+    current_step: {
+      h: "Current Step"
+      n: "current_step"
+      r: false
+      t: "`$INTEGER`"
+    }
+    headshot_url: {
+      h: "Headshot Url"
+      n: "headshot_url"
+      r: false
+      t: "`$ANY`"
+    }
+    id: {
+      fo: "uuid"
+      h: "Id"
+      n: "id"
+      r: true
+      t: "`$STRING`"
+    }
+    logs: {
+      h: "Logs"
+      n: "logs"
+      r: false
+      t: "`$OBJECT`"
+    }
+    prompt_key: {
+      h: "Prompt Key"
+      n: "prompt_key"
+      op: {
+        update: {
+          req: false
+          type: "`$ANY`"
+        }
+      }
+      r: true
+      t: "`$STRING`"
+    }
+    run_output_dir: {
+      h: "Run Output Dir"
+      n: "run_output_dir"
+      r: false
+      t: "`$ANY`"
+    }
+    selected_age_bucket: {
+      h: "Selected Age Bucket"
+      n: "selected_age_bucket"
+      op: {
+        update: {
+          req: false
+          type: "`$ANY`"
+        }
+      }
+      r: true
+      t: "`$STRING`"
+    }
+    selected_gender: {
+      h: "Selected Gender"
+      n: "selected_gender"
+      op: {
+        update: {
+          req: false
+          type: "`$ANY`"
+        }
+      }
+      r: true
+      t: "`$STRING`"
+    }
+    selected_prompt: {
+      h: "Selected Prompt"
+      n: "selected_prompt"
+      r: false
+      t: "`$ANY`"
+    }
+    selected_race: {
+      h: "Selected Race"
+      n: "selected_race"
+      op: {
+        update: {
+          req: false
+          type: "`$ANY`"
+        }
+      }
+      r: true
+      t: "`$STRING`"
+    }
+    sora2_cameo_handle: {
+      h: "Sora2 Cameo Handle"
+      n: "sora2_cameo_handle"
+      r: false
+      t: "`$ANY`"
+    }
+    sora2_cameo_id: {
+      h: "Sora2 Cameo Id"
+      n: "sora2_cameo_id"
+      r: false
+      t: "`$STRING`"
+    }
+    sora2_cameo_link: {
+      h: "Sora2 Cameo Link"
+      n: "sora2_cameo_link"
+      r: false
+      t: "`$ANY`"
+    }
+    sora2_display_name: {
+      h: "Sora2 Display Name"
+      n: "sora2_display_name"
+      r: false
+      t: "`$ANY`"
+    }
+    sora2_task_id: {
+      h: "Sora2 Task Id"
+      n: "sora2_task_id"
+      r: false
+      t: "`$STRING`"
+    }
+    sora2_video_url: {
+      h: "Sora2 Video Url"
+      n: "sora2_video_url"
+      op: {
+        update: {
+          req: false
+          type: "`$ANY`"
+        }
+      }
+      r: true
+      t: "`$STRING`"
+    }
+    updated_at: {
+      fo: "date-time"
+      h: "Updated At"
+      n: "updated_at"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "sora2_avatar"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "avatar_frame_url"
+            "current_step"
+            "headshot_url"
+            "logs"
+            "prompt_key"
+            "run_output_dir"
+            "selected_age_bucket"
+            "selected_gender"
+            "selected_prompt"
+            "selected_race"
+            "sora2_cameo_handle"
+            "sora2_cameo_id"
+            "sora2_cameo_link"
+            "sora2_display_name"
+            "sora2_task_id"
+            "sora2_video_url"
+          ]
+          co: {
+            id: "POST /api/admin/sora2-avatars"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/admin/sora2-avatars"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "sora2-avatars"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/admin/sora2-avatars"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: false
+                k: "query"
+                n: "completed_only"
+                or: "completed_only"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+              {
+                k: "query"
+                n: "current_step"
+                or: "current_step"
+                r: false
+                t: "`$ANY`"
+              }
+              {
+                ex: 1
+                k: "query"
+                n: "page"
+                or: "page"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                ex: 50
+                k: "query"
+                n: "page_size"
+                or: "page_size"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "prompt_key"
+                or: "prompt_key"
+                r: false
+                t: "`$ANY`"
+              }
+              {
+                k: "query"
+                n: "search"
+                or: "search"
+                r: false
+                t: "`$ANY`"
+              }
+              {
+                k: "query"
+                n: "selected_age_bucket"
+                or: "selected_age_bucket"
+                r: false
+                t: "`$ANY`"
+              }
+              {
+                k: "query"
+                n: "selected_gender"
+                or: "selected_gender"
+                r: false
+                t: "`$ANY`"
+              }
+              {
+                k: "query"
+                n: "selected_race"
+                or: "selected_race"
+                r: false
+                t: "`$ANY`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/sora2-avatars"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "sora2-avatars"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.items`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/admin/sora2-avatars/{avatar_id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "avatar_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/sora2-avatars/{avatar_id}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              avatar_id: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "sora2-avatars"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    update: {
+      name: "update"
+      points: [
+        {
+          bf: [
+            "avatar_frame_url"
+            "current_step"
+            "headshot_url"
+            "logs"
+            "prompt_key"
+            "run_output_dir"
+            "selected_age_bucket"
+            "selected_gender"
+            "selected_prompt"
+            "selected_race"
+            "sora2_cameo_handle"
+            "sora2_cameo_id"
+            "sora2_cameo_link"
+            "sora2_display_name"
+            "sora2_task_id"
+            "sora2_video_url"
+          ]
+          co: {
+            id: "PUT /api/admin/sora2-avatars/{avatar_id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "avatar_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PUT"
+          o: "/api/admin/sora2-avatars/{avatar_id}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              avatar_id: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "sora2-avatars"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

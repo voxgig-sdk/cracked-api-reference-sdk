@@ -1,0 +1,484 @@
+package main
+
+import (
+	"context"
+	"encoding/json"
+	"fmt"
+	"strings"
+
+	"github.com/google/jsonschema-go/jsonschema"
+	"github.com/modelcontextprotocol/go-sdk/mcp"
+	sdk "github.com/voxgig-sdk/cracked-api-reference-sdk/go"
+)
+
+// ListArgs is what an agent sends to cracked-api-reference_list.
+type ListArgs struct {
+	Entity string         `json:"entity" jsonschema:"one of: admin | admin_customer | admin_customer_success | admin_generated_video | admin_insight | admin_metrics_summary | admin_post | admin_recent_signup | admin_user_view | admin_users_table_item | agent | agent_access_customers_health | agent_access_user_agent | agent_access_user_phone_farm | agent_access_user_post | agent_access_user_summary | agent_access_user_winning_ad | agent_access_winning_ads_summary | agent_detail | agent_health | agent_health_customer_option | agent_health_detail | agent_post | agent_summary | analytics_post | carousel | carousel_status | customer | customer_health_all_customers_item | customer_health_views_summary | dedicated_agents_dashboard | failed_post | iris_connector | iris_status | iris_task | iris_usage | men | onboarding_status | paid_user | pexel | phone_admin_available_agent_source | product | product_dashboard | product_dashboard_view | product_demo | product_landing | schedule_v2 | seo_ai_mention | seo_backlink | seo_keyword | seo_overview | seo_traffic | social | sora2_avatar | stat | stats_refresh_issue | stats_refresh_overview | stats_refresh_run_summary | tik_tok_creator_info | top_post | user_agent | user_health_detail | user_with_avatar_submission | users_health | winning_ad | zerohuman_admin_account"`
+	Query  map[string]any `json:"query,omitempty" jsonschema:"optional filter map; omit it for the first page"`
+}
+
+// LoadArgs is what an agent sends to cracked-api-reference_load.
+type LoadArgs struct {
+	Entity string         `json:"entity" jsonschema:"one of: active_onboarding | admin | admin_carousel | admin_carousel_demo_review | admin_healthrx | admin_insight | admin_slideshow_import | admin_video_remixer | agent_access_overview | agent_access_phil_hourly_notification | agent_access_phil_stats_refresh | agent_access_phil_video | agent_access_user_video | agent_stat | agents_summary | analysis_status | auto_schedule_setting | carousel | carousel_agent_detail | chat_history | comment | comment_campaign | customer_health | daily_status | enterprise_agent | enterprise_product | exact_availability | exact_formula | generate_sora2_prompt | healthrx | landing_stat | landing_status | link_in_bio | link_in_dm | link_in_post | media_asset | microdrama | microhub_public | product | public_resume_status | read_root_get | remixer_clipper | reset_product | scan_socials_status | schedule_v2 | scraping_status | seo | site | slug_validation | social | sora2_avatar | sora2_avatar_stat | style | template | user | video | watchdog_recovery | x_adaptation"`
+	Query  map[string]any `json:"query" jsonschema:"match map naming the record, such as {\"id\":1}"`
+}
+
+func registerTools(server *mcp.Server, client *sdk.CrackedApiReferenceSDK) {
+	mcp.AddTool(server, &mcp.Tool{
+		Name:        "cracked-api-reference_list",
+		Description: "List records from CrackedApiReference. Args: entity, query (optional filter map; omit it for the first page). Returns the first page of records as JSON.",
+		Annotations: &mcp.ToolAnnotations{ReadOnlyHint: true},
+		InputSchema: entitySchema[ListArgs]("admin", "admin_customer", "admin_customer_success", "admin_generated_video", "admin_insight", "admin_metrics_summary", "admin_post", "admin_recent_signup", "admin_user_view", "admin_users_table_item", "agent", "agent_access_customers_health", "agent_access_user_agent", "agent_access_user_phone_farm", "agent_access_user_post", "agent_access_user_summary", "agent_access_user_winning_ad", "agent_access_winning_ads_summary", "agent_detail", "agent_health", "agent_health_customer_option", "agent_health_detail", "agent_post", "agent_summary", "analytics_post", "carousel", "carousel_status", "customer", "customer_health_all_customers_item", "customer_health_views_summary", "dedicated_agents_dashboard", "failed_post", "iris_connector", "iris_status", "iris_task", "iris_usage", "men", "onboarding_status", "paid_user", "pexel", "phone_admin_available_agent_source", "product", "product_dashboard", "product_dashboard_view", "product_demo", "product_landing", "schedule_v2", "seo_ai_mention", "seo_backlink", "seo_keyword", "seo_overview", "seo_traffic", "social", "sora2_avatar", "stat", "stats_refresh_issue", "stats_refresh_overview", "stats_refresh_run_summary", "tik_tok_creator_info", "top_post", "user_agent", "user_health_detail", "user_with_avatar_submission", "users_health", "winning_ad", "zerohuman_admin_account"),
+	}, func(ctx context.Context, req *mcp.CallToolRequest, args ListArgs) (*mcp.CallToolResult, any, error) {
+		return runOp(ctx, client, "list", args.Entity, args.Query)
+	})
+	mcp.AddTool(server, &mcp.Tool{
+		Name:        "cracked-api-reference_load",
+		Description: "Load one record from CrackedApiReference. Args: entity, query (match map naming the record, such as {\"id\":1}). Returns the record as JSON.",
+		Annotations: &mcp.ToolAnnotations{ReadOnlyHint: true},
+		InputSchema: entitySchema[LoadArgs]("active_onboarding", "admin", "admin_carousel", "admin_carousel_demo_review", "admin_healthrx", "admin_insight", "admin_slideshow_import", "admin_video_remixer", "agent_access_overview", "agent_access_phil_hourly_notification", "agent_access_phil_stats_refresh", "agent_access_phil_video", "agent_access_user_video", "agent_stat", "agents_summary", "analysis_status", "auto_schedule_setting", "carousel", "carousel_agent_detail", "chat_history", "comment", "comment_campaign", "customer_health", "daily_status", "enterprise_agent", "enterprise_product", "exact_availability", "exact_formula", "generate_sora2_prompt", "healthrx", "landing_stat", "landing_status", "link_in_bio", "link_in_dm", "link_in_post", "media_asset", "microdrama", "microhub_public", "product", "public_resume_status", "read_root_get", "remixer_clipper", "reset_product", "scan_socials_status", "schedule_v2", "scraping_status", "seo", "site", "slug_validation", "social", "sora2_avatar", "sora2_avatar_stat", "style", "template", "user", "video", "watchdog_recovery", "x_adaptation"),
+	}, func(ctx context.Context, req *mcp.CallToolRequest, args LoadArgs) (*mcp.CallToolResult, any, error) {
+		return runOp(ctx, client, "load", args.Entity, args.Query)
+	})
+}
+
+// entitySchema is the schema inferred from In, its entity limited to the
+// entities the tool serves.
+func entitySchema[In any](names ...string) *jsonschema.Schema {
+	schema, err := jsonschema.For[In](nil)
+	if err != nil {
+		panic(err)
+	}
+	enum := make([]any, len(names))
+	for i, name := range names {
+		enum[i] = name
+	}
+	schema.Properties["entity"].Enum = enum
+	return schema
+}
+
+func runOp(_ context.Context, client *sdk.CrackedApiReferenceSDK, op string, entity string, input map[string]any) (*mcp.CallToolResult, any, error) {
+	ent, err := entityFor(client, entity)
+	if err != nil {
+		return toolError(err.Error())
+	}
+
+	var result any
+	switch op {
+	case "list":
+		result, err = ent.List(input, nil)
+	case "load":
+		result, err = ent.Load(input, nil)
+	case "create":
+		result, err = ent.Create(input, nil)
+	case "update":
+		result, err = ent.Update(input, nil)
+	case "patch":
+		result, err = ent.Patch(input, nil)
+	case "remove":
+		result, err = ent.Remove(input, nil)
+	default:
+		return toolError(fmt.Sprintf("unknown op %q", op))
+	}
+	if err != nil {
+		return toolError(err.Error())
+	}
+
+	// SDK returns *Entity wrappers; unwrap each via .Data() to get a
+	// plain map[string]any (or []any of maps for list) suitable for
+	// JSON marshalling.
+	data := extractData(result)
+	body, err := json.MarshalIndent(data, "", "  ")
+	if err != nil {
+		return toolError(fmt.Sprintf("marshal: %v", err))
+	}
+	return &mcp.CallToolResult{
+		Content: []mcp.Content{
+			&mcp.TextContent{Text: string(body)},
+		},
+	}, data, nil
+}
+
+// entityFor dispatches on the lowercase entity name. The generator
+// emits one `case "<name>":` per entity defined in the SDK model.
+func entityFor(client *sdk.CrackedApiReferenceSDK, name string) (sdk.CrackedApiReferenceEntity, error) {
+	switch strings.ToLower(name) {
+	case "activate":
+		return client.Activate(nil), nil
+	case "activate_user":
+		return client.ActivateUser(nil), nil
+	case "active_onboarding":
+		return client.ActiveOnboarding(nil), nil
+	case "admin":
+		return client.Admin(nil), nil
+	case "admin_account_reset":
+		return client.AdminAccountReset(nil), nil
+	case "admin_carousel":
+		return client.AdminCarousel(nil), nil
+	case "admin_carousel_demo_review":
+		return client.AdminCarouselDemoReview(nil), nil
+	case "admin_customer":
+		return client.AdminCustomer(nil), nil
+	case "admin_customer_success":
+		return client.AdminCustomerSuccess(nil), nil
+	case "admin_generated_video":
+		return client.AdminGeneratedVideo(nil), nil
+	case "admin_healthrx":
+		return client.AdminHealthrx(nil), nil
+	case "admin_insight":
+		return client.AdminInsight(nil), nil
+	case "admin_landing_task":
+		return client.AdminLandingTask(nil), nil
+	case "admin_metrics_summary":
+		return client.AdminMetricsSummary(nil), nil
+	case "admin_post":
+		return client.AdminPost(nil), nil
+	case "admin_recent_signup":
+		return client.AdminRecentSignup(nil), nil
+	case "admin_slideshow_diag":
+		return client.AdminSlideshowDiag(nil), nil
+	case "admin_slideshow_import":
+		return client.AdminSlideshowImport(nil), nil
+	case "admin_user_view":
+		return client.AdminUserView(nil), nil
+	case "admin_users_table_item":
+		return client.AdminUsersTableItem(nil), nil
+	case "admin_video_remixer":
+		return client.AdminVideoRemixer(nil), nil
+	case "advance_step":
+		return client.AdvanceStep(nil), nil
+	case "agent":
+		return client.Agent(nil), nil
+	case "agent_access_customers_health":
+		return client.AgentAccessCustomersHealth(nil), nil
+	case "agent_access_overview":
+		return client.AgentAccessOverview(nil), nil
+	case "agent_access_phil_hourly_notification":
+		return client.AgentAccessPhilHourlyNotification(nil), nil
+	case "agent_access_phil_stats_refresh":
+		return client.AgentAccessPhilStatsRefresh(nil), nil
+	case "agent_access_phil_video":
+		return client.AgentAccessPhilVideo(nil), nil
+	case "agent_access_user_agent":
+		return client.AgentAccessUserAgent(nil), nil
+	case "agent_access_user_phone_farm":
+		return client.AgentAccessUserPhoneFarm(nil), nil
+	case "agent_access_user_post":
+		return client.AgentAccessUserPost(nil), nil
+	case "agent_access_user_summary":
+		return client.AgentAccessUserSummary(nil), nil
+	case "agent_access_user_video":
+		return client.AgentAccessUserVideo(nil), nil
+	case "agent_access_user_winning_ad":
+		return client.AgentAccessUserWinningAd(nil), nil
+	case "agent_access_winning_ads_summary":
+		return client.AgentAccessWinningAdsSummary(nil), nil
+	case "agent_detail":
+		return client.AgentDetail(nil), nil
+	case "agent_health":
+		return client.AgentHealth(nil), nil
+	case "agent_health_customer_option":
+		return client.AgentHealthCustomerOption(nil), nil
+	case "agent_health_detail":
+		return client.AgentHealthDetail(nil), nil
+	case "agent_post":
+		return client.AgentPost(nil), nil
+	case "agent_stat":
+		return client.AgentStat(nil), nil
+	case "agent_summary":
+		return client.AgentSummary(nil), nil
+	case "agents_summary":
+		return client.AgentsSummary(nil), nil
+	case "analysis_status":
+		return client.AnalysisStatus(nil), nil
+	case "analytics_post":
+		return client.AnalyticsPost(nil), nil
+	case "analyze_product":
+		return client.AnalyzeProduct(nil), nil
+	case "assign_agent":
+		return client.AssignAgent(nil), nil
+	case "auth":
+		return client.Auth(nil), nil
+	case "auto_schedule_setting":
+		return client.AutoScheduleSetting(nil), nil
+	case "bulk_tik_tok_stats_update":
+		return client.BulkTikTokStatsUpdate(nil), nil
+	case "carousel":
+		return client.Carousel(nil), nil
+	case "carousel_agent_detail":
+		return client.CarouselAgentDetail(nil), nil
+	case "carousel_status":
+		return client.CarouselStatus(nil), nil
+	case "chat":
+		return client.Chat(nil), nil
+	case "chat_history":
+		return client.ChatHistory(nil), nil
+	case "chat_session":
+		return client.ChatSession(nil), nil
+	case "comment":
+		return client.Comment(nil), nil
+	case "comment_campaign":
+		return client.CommentCampaign(nil), nil
+	case "complete_chat_checkout":
+		return client.CompleteChatCheckout(nil), nil
+	case "create_blackout_sora2_video":
+		return client.CreateBlackoutSora2Video(nil), nil
+	case "create_carousel":
+		return client.CreateCarousel(nil), nil
+	case "create_product":
+		return client.CreateProduct(nil), nil
+	case "create_reset_product_v6":
+		return client.CreateResetProductV6(nil), nil
+	case "create_sora2_video":
+		return client.CreateSora2Video(nil), nil
+	case "create_variation":
+		return client.CreateVariation(nil), nil
+	case "customer":
+		return client.Customer(nil), nil
+	case "customer_health":
+		return client.CustomerHealth(nil), nil
+	case "customer_health_all_customers_item":
+		return client.CustomerHealthAllCustomersItem(nil), nil
+	case "customer_health_views_summary":
+		return client.CustomerHealthViewsSummary(nil), nil
+	case "daily":
+		return client.Daily(nil), nil
+	case "daily_status":
+		return client.DailyStatus(nil), nil
+	case "dedicated_agents_dashboard":
+		return client.DedicatedAgentsDashboard(nil), nil
+	case "enterprise_agent":
+		return client.EnterpriseAgent(nil), nil
+	case "enterprise_product":
+		return client.EnterpriseProduct(nil), nil
+	case "exact_availability":
+		return client.ExactAvailability(nil), nil
+	case "exact_formula":
+		return client.ExactFormula(nil), nil
+	case "extract_v2":
+		return client.ExtractV2(nil), nil
+	case "failed_post":
+		return client.FailedPost(nil), nil
+	case "file":
+		return client.File(nil), nil
+	case "generate_blackout_sora2_prompt":
+		return client.GenerateBlackoutSora2Prompt(nil), nil
+	case "generate_pomelli_demo":
+		return client.GeneratePomelliDemo(nil), nil
+	case "generate_prompt":
+		return client.GeneratePrompt(nil), nil
+	case "generate_sora2_prompt":
+		return client.GenerateSora2Prompt(nil), nil
+	case "healthrx":
+		return client.Healthrx(nil), nil
+	case "init_reset_product_v6":
+		return client.InitResetProductV6(nil), nil
+	case "iri":
+		return client.Iri(nil), nil
+	case "iris_capability":
+		return client.IrisCapability(nil), nil
+	case "iris_chat":
+		return client.IrisChat(nil), nil
+	case "iris_connector":
+		return client.IrisConnector(nil), nil
+	case "iris_status":
+		return client.IrisStatus(nil), nil
+	case "iris_task":
+		return client.IrisTask(nil), nil
+	case "iris_usage":
+		return client.IrisUsage(nil), nil
+	case "landing":
+		return client.Landing(nil), nil
+	case "landing_stat":
+		return client.LandingStat(nil), nil
+	case "landing_status":
+		return client.LandingStatus(nil), nil
+	case "link_in_bio":
+		return client.LinkInBio(nil), nil
+	case "link_in_dm":
+		return client.LinkInDm(nil), nil
+	case "link_in_post":
+		return client.LinkInPost(nil), nil
+	case "link_user":
+		return client.LinkUser(nil), nil
+	case "media_asset":
+		return client.MediaAsset(nil), nil
+	case "men":
+		return client.Men(nil), nil
+	case "microdrama":
+		return client.Microdrama(nil), nil
+	case "microhub_public":
+		return client.MicrohubPublic(nil), nil
+	case "onboarding_status":
+		return client.OnboardingStatus(nil), nil
+	case "onboarding_v6":
+		return client.OnboardingV6(nil), nil
+	case "paid_user":
+		return client.PaidUser(nil), nil
+	case "pexel":
+		return client.Pexel(nil), nil
+	case "phone_admin_available_agent_source":
+		return client.PhoneAdminAvailableAgentSource(nil), nil
+	case "product":
+		return client.Product(nil), nil
+	case "product_dashboard":
+		return client.ProductDashboard(nil), nil
+	case "product_dashboard_view":
+		return client.ProductDashboardView(nil), nil
+	case "product_demo":
+		return client.ProductDemo(nil), nil
+	case "product_landing":
+		return client.ProductLanding(nil), nil
+	case "public_resume_status":
+		return client.PublicResumeStatus(nil), nil
+	case "re_roll_video":
+		return client.ReRollVideo(nil), nil
+	case "read_root_get":
+		return client.ReadRootGet(nil), nil
+	case "record_demo_booked":
+		return client.RecordDemoBooked(nil), nil
+	case "refresh_stat":
+		return client.RefreshStat(nil), nil
+	case "remixer_clipper":
+		return client.RemixerClipper(nil), nil
+	case "reset_product":
+		return client.ResetProduct(nil), nil
+	case "retry_website_scrape":
+		return client.RetryWebsiteScrape(nil), nil
+	case "save_survey":
+		return client.SaveSurvey(nil), nil
+	case "scan_social":
+		return client.ScanSocial(nil), nil
+	case "scan_socials_public":
+		return client.ScanSocialsPublic(nil), nil
+	case "scan_socials_status":
+		return client.ScanSocialsStatus(nil), nil
+	case "schedule_v2":
+		return client.ScheduleV2(nil), nil
+	case "scrape":
+		return client.Scrape(nil), nil
+	case "scrape_website_public":
+		return client.ScrapeWebsitePublic(nil), nil
+	case "scraped_data":
+		return client.ScrapedData(nil), nil
+	case "scraping_status":
+		return client.ScrapingStatus(nil), nil
+	case "self_serve_activate":
+		return client.SelfServeActivate(nil), nil
+	case "seo":
+		return client.Seo(nil), nil
+	case "seo_ai_mention":
+		return client.SeoAiMention(nil), nil
+	case "seo_backlink":
+		return client.SeoBacklink(nil), nil
+	case "seo_keyword":
+		return client.SeoKeyword(nil), nil
+	case "seo_overview":
+		return client.SeoOverview(nil), nil
+	case "seo_traffic":
+		return client.SeoTraffic(nil), nil
+	case "share_access_link":
+		return client.ShareAccessLink(nil), nil
+	case "site":
+		return client.Site(nil), nil
+	case "slide":
+		return client.Slide(nil), nil
+	case "slug_validation":
+		return client.SlugValidation(nil), nil
+	case "social":
+		return client.Social(nil), nil
+	case "social_scan_preview":
+		return client.SocialScanPreview(nil), nil
+	case "social_scan_process":
+		return client.SocialScanProcess(nil), nil
+	case "social_scan_save":
+		return client.SocialScanSave(nil), nil
+	case "sora2_avatar":
+		return client.Sora2Avatar(nil), nil
+	case "sora2_avatar_asset_upload":
+		return client.Sora2AvatarAssetUpload(nil), nil
+	case "sora2_avatar_stat":
+		return client.Sora2AvatarStat(nil), nil
+	case "stat":
+		return client.Stat(nil), nil
+	case "stats_refresh_backfill":
+		return client.StatsRefreshBackfill(nil), nil
+	case "stats_refresh_issue":
+		return client.StatsRefreshIssue(nil), nil
+	case "stats_refresh_overview":
+		return client.StatsRefreshOverview(nil), nil
+	case "stats_refresh_run_summary":
+		return client.StatsRefreshRunSummary(nil), nil
+	case "stats_refresh_task_trigger":
+		return client.StatsRefreshTaskTrigger(nil), nil
+	case "stripe":
+		return client.Stripe(nil), nil
+	case "style":
+		return client.Style(nil), nil
+	case "template":
+		return client.Template(nil), nil
+	case "tik_tok_creator_info":
+		return client.TikTokCreatorInfo(nil), nil
+	case "top_post":
+		return client.TopPost(nil), nil
+	case "upload_post_agent":
+		return client.UploadPostAgent(nil), nil
+	case "user":
+		return client.User(nil), nil
+	case "user_agent":
+		return client.UserAgent(nil), nil
+	case "user_health_detail":
+		return client.UserHealthDetail(nil), nil
+	case "user_with_avatar_submission":
+		return client.UserWithAvatarSubmission(nil), nil
+	case "users_health":
+		return client.UsersHealth(nil), nil
+	case "video":
+		return client.Video(nil), nil
+	case "video_remixer_worker":
+		return client.VideoRemixerWorker(nil), nil
+	case "watchdog_recovery":
+		return client.WatchdogRecovery(nil), nil
+	case "winning_ad":
+		return client.WinningAd(nil), nil
+	case "x_adaptation":
+		return client.XAdaptation(nil), nil
+	case "zerohuman_admin_account":
+		return client.ZerohumanAdminAccount(nil), nil
+	}
+	return nil, fmt.Errorf("unknown entity %q", name)
+}
+
+func extractData(x any) any {
+	switch v := x.(type) {
+	case sdk.Entity:
+		return extractData(v.Data())
+	case []any:
+		out := make([]any, len(v))
+		for i, e := range v {
+			out[i] = extractData(e)
+		}
+		return out
+	case map[string]any:
+		out := make(map[string]any, len(v))
+		for k, vv := range v {
+			out[k] = extractData(vv)
+		}
+		return out
+	}
+	return x
+}
+
+func toolError(msg string) (*mcp.CallToolResult, any, error) {
+	return &mcp.CallToolResult{
+		IsError: true,
+		Content: []mcp.Content{
+			&mcp.TextContent{Text: msg},
+		},
+	}, nil, nil
+}
+
+// hint is an MCP annotation that defaults to true unless stated.
+func hint(b bool) *bool {
+	return &b
+}

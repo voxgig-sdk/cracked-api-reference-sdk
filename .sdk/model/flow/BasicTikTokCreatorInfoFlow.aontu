@@ -1,0 +1,22 @@
+# BasicTikTokCreatorInfoFlow
+
+main: kit: flow: BasicTikTokCreatorInfoFlow:
+{
+  entity: "tik_tok_creator_info",
+  kind: "basic",
+  name: "BasicTikTokCreatorInfoFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "tik_tok_creator_info_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicTikTokCreatorInfoFlow"
+}

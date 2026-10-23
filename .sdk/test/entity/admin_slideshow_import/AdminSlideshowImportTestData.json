@@ -1,0 +1,74 @@
+{
+  "existing": {
+    "admin_slideshow_import": {
+      "ADMIN_SLIDESHOW_IMPORT00": {
+        "agent_id": "AGENT01",
+        "batch_id": "BATCH01",
+        "caption": "s5c",
+        "day": "s5d",
+        "dry_run": true,
+        "engine_run": "s5f",
+        "formula_id": "FORMULA01",
+        "slides": [],
+        "title": "s62",
+        "id": "ADMIN_SLIDESHOW_IMPORT00"
+      },
+      "ADMIN_SLIDESHOW_IMPORT01": {
+        "agent_id": "AGENT01",
+        "batch_id": "BATCH01",
+        "caption": "sb6",
+        "day": "sb7",
+        "dry_run": true,
+        "engine_run": "sb9",
+        "formula_id": "FORMULA01",
+        "slides": [],
+        "title": "sbc",
+        "id": "ADMIN_SLIDESHOW_IMPORT01"
+      },
+      "ADMIN_SLIDESHOW_IMPORT02": {
+        "agent_id": "AGENT01",
+        "batch_id": "BATCH01",
+        "caption": "s110",
+        "day": "s111",
+        "dry_run": true,
+        "engine_run": "s113",
+        "formula_id": "FORMULA01",
+        "slides": [],
+        "title": "s116",
+        "id": "ADMIN_SLIDESHOW_IMPORT02"
+      }
+    }
+  },
+  "new": {
+    "admin_slideshow_import": {
+      "admin_slideshow_import_ref01": {
+        "agent_id": "AGENT01",
+        "batch_id": "BATCH01",
+        "caption": "s16a",
+        "day": "s16b",
+        "dry_run": true,
+        "engine_run": "s16d",
+        "formula_id": "FORMULA01",
+        "slides": [],
+        "title": "s170"
+      }
+    }
+  },
+  "requests": {
+    "POST /api/admin/slideshow-import2/{batch_id}/state": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/slideshow-import2/decks-json": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/slideshow-import2/{batch_id}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

@@ -1,0 +1,78 @@
+# Entity: landing_status
+
+main: kit: entity: landing_status: {
+
+  alias: field: {}
+
+  fields: {
+    errorMessage: {
+      h: "Error Message"
+      n: "errorMessage"
+      r: false
+      t: "`$ANY`"
+    }
+    landingStatus: {
+      h: "Landing Status"
+      n: "landingStatus"
+      r: true
+      t: "`$STRING`"
+    }
+    microhubStatus: {
+      h: "Microhub Status"
+      n: "microhubStatus"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  name: "landing_status"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/landings/status"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "product_id"
+                or: "product_id"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/landings/status"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "landings"
+            }
+            {
+              lit: "status"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

@@ -1,0 +1,18 @@
+# BasicRetryWebsiteScrapeFlow
+
+main: kit: flow: BasicRetryWebsiteScrapeFlow:
+{
+  entity: "retry_website_scrape",
+  kind: "basic",
+  name: "BasicRetryWebsiteScrapeFlow",
+  step: [
+    {
+      i: {
+        ref: "retry_website_scrape_ref01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicRetryWebsiteScrapeFlow"
+}

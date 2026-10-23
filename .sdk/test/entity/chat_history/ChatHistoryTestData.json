@@ -1,0 +1,84 @@
+{
+  "existing": {
+    "chat_history": {
+      "CHAT_HISTORY00": {
+        "chatSubVariant": "s78",
+        "createdAt": "s79",
+        "messages": [],
+        "model": "s7b",
+        "onboardingDataId": "s7c",
+        "routeRecommendation": "s7d",
+        "salesStage": "s7e",
+        "selectedPlan": "s7f",
+        "session": {},
+        "sessionId": "s81",
+        "status": "s82",
+        "updatedAt": "s83",
+        "session_id": "SESSION01",
+        "id": "CHAT_HISTORY00"
+      },
+      "CHAT_HISTORY01": {
+        "chatSubVariant": "sf0",
+        "createdAt": "sf1",
+        "messages": [],
+        "model": "sf3",
+        "onboardingDataId": "sf4",
+        "routeRecommendation": "sf5",
+        "salesStage": "sf6",
+        "selectedPlan": "sf7",
+        "session": {},
+        "sessionId": "sf9",
+        "status": "sfa",
+        "updatedAt": "sfb",
+        "session_id": "SESSION01",
+        "id": "CHAT_HISTORY01"
+      },
+      "CHAT_HISTORY02": {
+        "chatSubVariant": "s168",
+        "createdAt": "s169",
+        "messages": [],
+        "model": "s16b",
+        "onboardingDataId": "s16c",
+        "routeRecommendation": "s16d",
+        "salesStage": "s16e",
+        "selectedPlan": "s16f",
+        "session": {},
+        "sessionId": "s171",
+        "status": "s172",
+        "updatedAt": "s173",
+        "session_id": "SESSION01",
+        "id": "CHAT_HISTORY02"
+      }
+    }
+  },
+  "new": {
+    "chat_history": {
+      "chat_history_ref01": {
+        "chatSubVariant": "s1e0",
+        "createdAt": "s1e1",
+        "messages": [],
+        "model": "s1e3",
+        "onboardingDataId": "s1e4",
+        "routeRecommendation": "s1e5",
+        "salesStage": "s1e6",
+        "selectedPlan": "s1e7",
+        "session": {},
+        "sessionId": "s1e9",
+        "status": "s1ea",
+        "updatedAt": "s1eb"
+      }
+    }
+  },
+  "requests": {
+    "POST /api/chat/sessions": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/chat/sessions/{session_id}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

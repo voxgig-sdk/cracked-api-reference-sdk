@@ -1,0 +1,44 @@
+{
+  "existing": {
+    "analyze_product": {
+      "ANALYZE_PRODUCT00": {
+        "instagram_username": "s28",
+        "message": "s29",
+        "status": "s2a",
+        "url": "s2b",
+        "id": "ANALYZE_PRODUCT00"
+      },
+      "ANALYZE_PRODUCT01": {
+        "instagram_username": "s50",
+        "message": "s51",
+        "status": "s52",
+        "url": "s53",
+        "id": "ANALYZE_PRODUCT01"
+      },
+      "ANALYZE_PRODUCT02": {
+        "instagram_username": "s78",
+        "message": "s79",
+        "status": "s7a",
+        "url": "s7b",
+        "id": "ANALYZE_PRODUCT02"
+      }
+    }
+  },
+  "new": {
+    "analyze_product": {
+      "analyze_product_ref01": {
+        "instagram_username": "sa0",
+        "message": "sa1",
+        "status": "sa2",
+        "url": "sa3"
+      }
+    }
+  },
+  "requests": {
+    "POST /api/scraper/analyze-product": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

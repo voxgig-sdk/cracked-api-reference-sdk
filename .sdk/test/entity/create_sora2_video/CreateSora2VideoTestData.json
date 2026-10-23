@@ -1,0 +1,56 @@
+{
+  "existing": {
+    "create_sora2_video": {
+      "CREATE_SORA2_VIDEO00": {
+        "image_prompt": "s46",
+        "main_prompt": "s47",
+        "model": "s48",
+        "requires_polling": false,
+        "seconds": "s4a",
+        "size": "s4b",
+        "video": {},
+        "id": "CREATE_SORA2_VIDEO00"
+      },
+      "CREATE_SORA2_VIDEO01": {
+        "image_prompt": "s8c",
+        "main_prompt": "s8d",
+        "model": "s8e",
+        "requires_polling": false,
+        "seconds": "s90",
+        "size": "s91",
+        "video": {},
+        "id": "CREATE_SORA2_VIDEO01"
+      },
+      "CREATE_SORA2_VIDEO02": {
+        "image_prompt": "sd2",
+        "main_prompt": "sd3",
+        "model": "sd4",
+        "requires_polling": false,
+        "seconds": "sd6",
+        "size": "sd7",
+        "video": {},
+        "id": "CREATE_SORA2_VIDEO02"
+      }
+    }
+  },
+  "new": {
+    "create_sora2_video": {
+      "create_sora2_video_ref01": {
+        "image_prompt": "s118",
+        "main_prompt": "s119",
+        "model": "s11a",
+        "requires_polling": false,
+        "seconds": "s11c",
+        "size": "s11d",
+        "video": {}
+      }
+    }
+  },
+  "requests": {
+    "POST /api/core/create-sora2-video": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

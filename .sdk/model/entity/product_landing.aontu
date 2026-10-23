@@ -1,0 +1,535 @@
+# Entity: product_landing
+
+main: kit: entity: product_landing: {
+
+  alias: field: {}
+
+  fields: {
+    bio: {
+      h: "Bio"
+      n: "bio"
+      r: false
+      t: "`$ANY`"
+    }
+    commentingOnMyPosts: {
+      h: "Commenting On My Posts"
+      n: "commentingOnMyPosts"
+      op: {
+        update: {
+          req: false
+          type: "`$ANY`"
+        }
+      }
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    commentingOnOthersPosts: {
+      h: "Commenting On Others Posts"
+      n: "commentingOnOthersPosts"
+      op: {
+        update: {
+          req: false
+          type: "`$ANY`"
+        }
+      }
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    ctaButtonText: {
+      h: "Cta Button Text"
+      n: "ctaButtonText"
+      r: false
+      t: "`$ANY`"
+    }
+    ctaDescription: {
+      h: "Cta Description"
+      n: "ctaDescription"
+      r: false
+      t: "`$ANY`"
+    }
+    ctaLink: {
+      h: "Cta Link"
+      n: "ctaLink"
+      r: false
+      t: "`$ANY`"
+    }
+    ctaTitle: {
+      h: "Cta Title"
+      n: "ctaTitle"
+      r: false
+      t: "`$ANY`"
+    }
+    dmCommenters: {
+      h: "Dm Commenters"
+      n: "dmCommenters"
+      op: {
+        update: {
+          req: false
+          type: "`$ANY`"
+        }
+      }
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    dmInitialMessagePrompt: {
+      h: "Dm Initial Message Prompt"
+      n: "dmInitialMessagePrompt"
+      r: false
+      t: "`$ANY`"
+    }
+    dmOngoingResponsePrompt: {
+      h: "Dm Ongoing Response Prompt"
+      n: "dmOngoingResponsePrompt"
+      r: false
+      t: "`$ANY`"
+    }
+    firstCommentTextBeforeLink: {
+      h: "First Comment Text Before Link"
+      n: "firstCommentTextBeforeLink"
+      r: false
+      t: "`$ANY`"
+    }
+    headerImageUrl: {
+      h: "Header Image Url"
+      n: "headerImageUrl"
+      r: false
+      t: "`$ANY`"
+    }
+    id: {
+      fo: "uuid"
+      h: "Id"
+      n: "id"
+      r: true
+      t: "`$STRING`"
+    }
+    landingHtmlUrl: {
+      h: "Landing Html Url"
+      n: "landingHtmlUrl"
+      r: false
+      t: "`$ANY`"
+    }
+    landingLastGeneratedAt: {
+      h: "Landing Last Generated At"
+      n: "landingLastGeneratedAt"
+      r: false
+      t: "`$ANY`"
+    }
+    landingReferenceScreenshotUrl: {
+      h: "Landing Reference Screenshot Url"
+      n: "landingReferenceScreenshotUrl"
+      r: false
+      t: "`$ANY`"
+    }
+    landingScreenshotUrl: {
+      h: "Landing Screenshot Url"
+      n: "landingScreenshotUrl"
+      r: false
+      t: "`$ANY`"
+    }
+    landingStatus: {
+      h: "Landing Status"
+      n: "landingStatus"
+      r: true
+      t: "`$STRING`"
+    }
+    landingUrl: {
+      h: "Landing Url"
+      n: "landingUrl"
+      r: true
+      t: "`$STRING`"
+    }
+    linkInBioType: {
+      h: "Link In Bio Type"
+      n: "linkInBioType"
+      op: {
+        update: {
+          req: false
+          type: "`$ANY`"
+        }
+      }
+      r: true
+      t: "`$STRING`"
+    }
+    linkInDmsType: {
+      h: "Link In Dms Type"
+      n: "linkInDmsType"
+      op: {
+        update: {
+          req: false
+          type: "`$ANY`"
+        }
+      }
+      r: true
+      t: "`$STRING`"
+    }
+    linkInPostsType: {
+      h: "Link In Posts Type"
+      n: "linkInPostsType"
+      op: {
+        update: {
+          req: false
+          type: "`$ANY`"
+        }
+      }
+      r: true
+      t: "`$STRING`"
+    }
+    links: {
+      h: "Links"
+      n: "links"
+      r: false
+      t: "`$ANY`"
+    }
+    microhubBio: {
+      h: "Microhub Bio"
+      n: "microhubBio"
+      r: false
+      t: "`$ANY`"
+    }
+    microhubCtaButtonText: {
+      h: "Microhub Cta Button Text"
+      n: "microhubCtaButtonText"
+      r: false
+      t: "`$ANY`"
+    }
+    microhubCtaDescription: {
+      h: "Microhub Cta Description"
+      n: "microhubCtaDescription"
+      r: false
+      t: "`$ANY`"
+    }
+    microhubCtaLink: {
+      h: "Microhub Cta Link"
+      n: "microhubCtaLink"
+      r: false
+      t: "`$ANY`"
+    }
+    microhubCtaTitle: {
+      h: "Microhub Cta Title"
+      n: "microhubCtaTitle"
+      r: false
+      t: "`$ANY`"
+    }
+    microhubHeaderImageUrl: {
+      h: "Microhub Header Image Url"
+      n: "microhubHeaderImageUrl"
+      r: false
+      t: "`$ANY`"
+    }
+    microhubLinks: {
+      h: "Microhub Links"
+      n: "microhubLinks"
+      r: false
+      t: "`$ARRAY`"
+    }
+    microhubName: {
+      h: "Microhub Name"
+      n: "microhubName"
+      r: false
+      t: "`$ANY`"
+    }
+    microhubProfileImageUrl: {
+      h: "Microhub Profile Image Url"
+      n: "microhubProfileImageUrl"
+      r: false
+      t: "`$ANY`"
+    }
+    microhubScreenshotUrl: {
+      h: "Microhub Screenshot Url"
+      n: "microhubScreenshotUrl"
+      r: false
+      t: "`$ANY`"
+    }
+    microhubSocialLinks: {
+      h: "Microhub Social Links"
+      n: "microhubSocialLinks"
+      r: false
+      t: "`$OBJECT`"
+    }
+    microhubStatus: {
+      h: "Microhub Status"
+      n: "microhubStatus"
+      r: true
+      t: "`$STRING`"
+    }
+    microhubTestimonials: {
+      h: "Microhub Testimonials"
+      n: "microhubTestimonials"
+      r: false
+      t: "`$ARRAY`"
+    }
+    microhubUrl: {
+      h: "Microhub Url"
+      n: "microhubUrl"
+      r: true
+      t: "`$STRING`"
+    }
+    myPostsStylePrompt: {
+      h: "My Posts Style Prompt"
+      n: "myPostsStylePrompt"
+      r: false
+      t: "`$ANY`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: false
+      t: "`$STRING`"
+    }
+    othersStylePrompt: {
+      h: "Others Style Prompt"
+      n: "othersStylePrompt"
+      r: false
+      t: "`$ANY`"
+    }
+    othersTargetMarketPrompt: {
+      h: "Others Target Market Prompt"
+      n: "othersTargetMarketPrompt"
+      r: false
+      t: "`$ANY`"
+    }
+    productLinkSelection: {
+      h: "Product Link Selection"
+      n: "productLinkSelection"
+      op: {
+        update: {
+          req: false
+          type: "`$ANY`"
+        }
+      }
+      r: true
+      t: "`$STRING`"
+    }
+    productUrl: {
+      h: "Product Url"
+      n: "productUrl"
+      r: false
+      t: "`$ANY`"
+    }
+    profileImageUrl: {
+      h: "Profile Image Url"
+      n: "profileImageUrl"
+      r: false
+      t: "`$ANY`"
+    }
+    shortLink: {
+      h: "Short Link"
+      n: "shortLink"
+      r: false
+      t: "`$ANY`"
+    }
+    shortLinkKeyword: {
+      h: "Short Link Keyword"
+      n: "shortLinkKeyword"
+      r: false
+      t: "`$ANY`"
+    }
+    showLinkInFirstComment: {
+      h: "Show Link In First Comment"
+      n: "showLinkInFirstComment"
+      op: {
+        update: {
+          req: false
+          type: "`$ANY`"
+        }
+      }
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    slug: {
+      h: "Slug"
+      n: "slug"
+      op: {
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      r: true
+      t: "`$STRING`"
+    }
+    socialLinks: {
+      h: "Social Links"
+      n: "socialLinks"
+      r: false
+      t: "`$ANY`"
+    }
+    testimonials: {
+      h: "Testimonials"
+      n: "testimonials"
+      r: false
+      t: "`$ANY`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "product_landing"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/landings/me"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "product_id"
+                or: "product_id"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/landings/me"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "landings"
+            }
+            {
+              lit: "me"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    update: {
+      name: "update"
+      points: [
+        {
+          bf: [
+            "bio"
+            "ctaButtonText"
+            "ctaDescription"
+            "ctaLink"
+            "ctaTitle"
+            "headerImageUrl"
+            "links"
+            "name"
+            "profileImageUrl"
+            "socialLinks"
+            "testimonials"
+          ]
+          co: {
+            id: "PUT /api/landings/microhub"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "product_id"
+                or: "product_id"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PUT"
+          o: "/api/landings/microhub"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "landings"
+            }
+            {
+              lit: "microhub"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "commentingOnMyPosts"
+            "commentingOnOthersPosts"
+            "dmCommenters"
+            "dmInitialMessagePrompt"
+            "dmOngoingResponsePrompt"
+            "firstCommentTextBeforeLink"
+            "linkInBioType"
+            "linkInDmsType"
+            "linkInPostsType"
+            "myPostsStylePrompt"
+            "othersStylePrompt"
+            "othersTargetMarketPrompt"
+            "productLinkSelection"
+            "shortLink"
+            "shortLinkKeyword"
+            "showLinkInFirstComment"
+            "slug"
+          ]
+          co: {
+            id: "PUT /api/landings/settings"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "product_id"
+                or: "product_id"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PUT"
+          o: "/api/landings/settings"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "landings"
+            }
+            {
+              lit: "settings"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

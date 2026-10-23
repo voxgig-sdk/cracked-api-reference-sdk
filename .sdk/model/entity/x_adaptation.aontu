@@ -1,0 +1,49 @@
+# Entity: x_adaptation
+
+main: kit: entity: x_adaptation: {
+
+  alias: field: {}
+
+  name: "x_adaptation"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/carousel/x-adaptations"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/carousel/x-adaptations"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "carousel"
+            }
+            {
+              lit: "x-adaptations"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  fields: {
+  }
+
+
+
+}

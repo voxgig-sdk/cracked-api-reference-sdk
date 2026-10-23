@@ -1,0 +1,18 @@
+# BasicGeneratePomelliDemoFlow
+
+main: kit: flow: BasicGeneratePomelliDemoFlow:
+{
+  entity: "generate_pomelli_demo",
+  kind: "basic",
+  name: "BasicGeneratePomelliDemoFlow",
+  step: [
+    {
+      i: {
+        ref: "generate_pomelli_demo_ref01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicGeneratePomelliDemoFlow"
+}

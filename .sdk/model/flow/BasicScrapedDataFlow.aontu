@@ -1,0 +1,18 @@
+# BasicScrapedDataFlow
+
+main: kit: flow: BasicScrapedDataFlow:
+{
+  entity: "scraped_data",
+  kind: "basic",
+  name: "BasicScrapedDataFlow",
+  step: [
+    {
+      i: {
+        ref: "scraped_data_ref01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicScrapedDataFlow"
+}

@@ -1,0 +1,49 @@
+# Entity: exact_formula
+
+main: kit: entity: exact_formula: {
+
+  alias: field: {}
+
+  name: "exact_formula"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/carousel/exact-formulas"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/carousel/exact-formulas"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "carousel"
+            }
+            {
+              lit: "exact-formulas"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  fields: {
+  }
+
+
+
+}

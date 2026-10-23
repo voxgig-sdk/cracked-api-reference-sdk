@@ -1,0 +1,151 @@
+# Entity: auth
+
+main: kit: entity: auth: {
+
+  alias: field: {}
+
+  name: "auth"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "attribution"
+            "email"
+            "industry"
+            "returnTo"
+          ]
+          co: {
+            id: "POST /auth/magic-link"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/auth/magic-link"
+          q: {
+            "$action": "magic_link"
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "auth"
+            }
+            {
+              lit: "magic-link"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "attribution"
+            "industry"
+            "token"
+          ]
+          co: {
+            id: "POST /auth/verify-google-token"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/auth/verify-google-token"
+          q: {
+            "$action": "verify_google_token"
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "auth"
+            }
+            {
+              lit: "verify-google-token"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "industry"
+            "token"
+          ]
+          co: {
+            id: "POST /auth/verify-magic-link"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/auth/verify-magic-link"
+          q: {
+            "$action": "verify_magic_link"
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "auth"
+            }
+            {
+              lit: "verify-magic-link"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "token"
+          ]
+          co: {
+            id: "POST /auth/verify-share-access"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/auth/verify-share-access"
+          q: {
+            "$action": "verify_share_access"
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "auth"
+            }
+            {
+              lit: "verify-share-access"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  fields: {
+  }
+
+
+
+}

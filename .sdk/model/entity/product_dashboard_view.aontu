@@ -1,0 +1,96 @@
+# Entity: product_dashboard_view
+
+main: kit: entity: product_dashboard_view: {
+
+  alias: field: {}
+
+  fields: {
+    date: {
+      fo: "date"
+      h: "Date"
+      n: "date"
+      r: true
+      t: "`$STRING`"
+    }
+    views: {
+      h: "Views"
+      n: "views"
+      r: true
+      t: "`$INTEGER`"
+    }
+  }
+
+  name: "product_dashboard_view"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/admin/products-dashboard/views"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "date"
+                or: "date"
+                r: false
+                t: "`$ANY`"
+              }
+              {
+                k: "query"
+                n: "product_id"
+                or: "product_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                ex: 7
+                k: "query"
+                n: "range"
+                or: "range"
+                r: false
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/products-dashboard/views"
+          q: {
+            exist: [
+              "product_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "products-dashboard"
+            }
+            {
+              lit: "views"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.points`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

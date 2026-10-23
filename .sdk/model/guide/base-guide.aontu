@@ -1,0 +1,2343 @@
+# Generated from the API definition and overwritten on every build: do not
+# edit this file. Put customizations in the guide entry file, which includes
+# this one and overrides its defaults:
+#   guide.aontu
+
+guide: {
+  metrics: count: entity: 171
+  metrics: count: path: 422
+  metrics: count: method: 454
+
+  entity: activate: {
+    path: "/api/admin/users/{user_id}/activate": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: activate_user: {
+    path: "/api/admin/users/{user_id}/activate-and-complete-onboarding": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: active_onboarding: {
+    path: "/api/onboarding-v6/active-session": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: admin: {
+    path: "/api/admin/agents/social-profile-audit": {
+      op: create: method: *POST
+    }
+    path: "/api/admin/agents/{agent_id}/active": {
+      op: update: method: *PUT
+    }
+    path: "/api/admin/agents/{agent_id}/type": {
+      op: update: method: *PUT
+    }
+    path: "/api/admin/batch-regenerate-sora2": {
+      action: "batch_regenerate_sora2": {}
+      op: create: method: *POST
+    }
+    path: "/api/admin/customer-health/issues/retry": {
+      op: create: method: *POST
+    }
+    path: "/api/admin/impersonate/{user_id}": {
+      op: create: method: *POST
+    }
+    path: "/api/admin/products-dashboard/repair-stats": {
+      op: create: method: *POST
+    }
+    path: "/api/admin/schedule/clear-all-future-auto-entries": {
+      op: create: method: *POST
+    }
+    path: "/api/admin/schedule/clear-today-auto-entries-for-all": {
+      op: create: method: *POST
+    }
+    path: "/api/admin/stats/aggregate": {
+      op: load: method: *GET
+    }
+    path: "/api/admin/stats/by-date-and-type": {
+      op: load: method: *GET
+    }
+    path: "/api/admin/stats/refresh-and-send-emails": {
+      op: create: method: *POST
+    }
+    path: "/api/admin/stats/refresh-last-7-days": {
+      op: create: method: *POST
+    }
+    path: "/api/admin/test-s3-copy": {
+      action: "test_s3_copy": {}
+      op: create: method: *POST
+    }
+    path: "/api/admin/users/export": {
+      op: load: method: *GET
+    }
+    path: "/api/admin/users/{user_id}/agents/reconcile": {
+      op: create: method: *POST
+    }
+    path: "/api/admin/users/{user_id}/agents/{agent_id}": {
+      op: remove: method: *DELETE
+    }
+    path: "/api/admin/users/{user_id}/bulk-create-videos": {
+      op: create: method: *POST
+    }
+    path: "/api/admin/users/{user_id}/clear-failed-videos": {
+      op: create: method: *POST
+    }
+    path: "/api/admin/users/{user_id}/clear-future-auto-entries": {
+      op: create: method: *POST
+    }
+    path: "/api/admin/users/{user_id}/clear-manual-entries": {
+      op: create: method: *POST
+    }
+    path: "/api/admin/users/{user_id}/clear-today-auto-entries": {
+      op: create: method: *POST
+    }
+    path: "/api/admin/users/{user_id}/failed-videos": {
+      op: load: method: *GET
+    }
+    path: "/api/admin/users/{user_id}/pending-videos": {
+      op: load: method: *GET
+    }
+    path: "/api/admin/users/{user_id}/regenerate-video/{video_id}": {
+      op: create: method: *POST
+    }
+    path: "/api/admin/users/{user_id}/retry-todays-videos": {
+      op: create: method: *POST
+    }
+    path: "/api/admin/users/{user_id}/retry-videos": {
+      op: create: method: *POST
+    }
+    path: "/api/admin/users/{user_id}/schedule-queue": {
+      op: load: method: *GET
+    }
+    path: "/api/admin/users/{user_id}/schedule-queue/{queue_id}": {
+      op: remove: method: *DELETE
+    }
+    path: "/api/admin/users/{user_id}/video/{video_id}": {
+      op: remove: method: *DELETE
+    }
+    path: "/api/admin/whitelist-testers": {
+      op: create: method: *POST
+      op: list: method: *GET
+    }
+    path: "/api/admin/whitelist-testers/{tester_id}": {
+      op: remove: method: *DELETE
+    }
+  }
+
+  entity: admin_account_reset: {
+    path: "/api/admin/agent-account-reset": {
+      op: create: method: *POST
+      op: create: transform: req: "agent_ids": *("`reqdata.agent_id`")|top
+      op: create: transform: req: "agent_ids_sha256": *("`reqdata.agent_ids_sha256`")|top
+      op: create: transform: req: "backup_sha256": *("`reqdata.backup_sha256`")|top
+      op: create: transform: req: "batch_size": *("`reqdata.batch_size`")|top
+      op: create: transform: req: "confirmation": *("`reqdata.confirmation`")|top
+      op: create: transform: req: "customer_email": *("`reqdata.customer_email`")|top
+      op: create: transform: req: "pc_name": *("`reqdata.pc_name`")|top
+      op: create: transform: req: "phase": *("`reqdata.phase`")|top
+      op: create: transform: req: "product_id": *("`reqdata.product_id`")|top
+      op: create: transform: req: "video_ids": *("`reqdata.video_id`")|top
+    }
+  }
+
+  entity: admin_carousel: {
+    path: "/api/admin/carousels/demo-formulas": {
+      op: load: method: *GET
+    }
+    path: "/api/admin/carousels/demo-formulas/{formula_id}": {
+      op: load: method: *GET
+      op: update: method: *PUT
+    }
+    path: "/api/admin/carousels/freeform-production-prompt": {
+      op: load: method: *GET
+      op: update: method: *PUT
+    }
+    path: "/api/admin/carousels/production-prompts/{fmt}": {
+      op: load: method: *GET
+      op: update: method: *PUT
+    }
+    path: "/api/admin/carousels/slideshow-import/decks": {
+      op: create: method: *POST
+    }
+    path: "/api/admin/carousels/slideshow-import/decks-json": {
+      op: create: method: *POST
+    }
+    path: "/api/admin/carousels/slideshow-import/diag/{stage}": {
+      op: create: method: *POST
+    }
+    path: "/api/admin/carousels/slideshow-import/{batch_id}": {
+      op: load: method: *GET
+    }
+    path: "/api/admin/carousels/slideshow-import/{batch_id}/state": {
+      action: "state": {}
+      op: create: method: *POST
+    }
+  }
+
+  entity: admin_carousel_demo_review: {
+    path: "/api/admin/carousels/demo-reviews/bulk-approve": {
+      op: create: method: *POST
+    }
+    path: "/api/admin/carousels/demo-reviews/items": {
+      op: load: method: *GET
+    }
+    path: "/api/admin/carousels/demo-reviews/{formula_id}": {
+      rename: param: "formula_id": *"id"
+      op: load: method: *GET
+    }
+    path: "/api/admin/carousels/demo-reviews/{formula_id}/assignee": {
+      action: "assignee": {}
+      rename: param: "formula_id": *"demo_review_id"
+      op: update: method: *PUT
+    }
+    path: "/api/admin/carousels/demo-reviews/{formula_id}/decision": {
+      action: "decision": {}
+      rename: param: "formula_id": *"demo_review_id"
+      op: create: method: *POST
+    }
+  }
+
+  entity: admin_customer: {
+    path: "/api/admin/insights/customers": {
+      op: list: method: *GET
+    }
+  }
+
+  entity: admin_customer_success: {
+    path: "/api/admin/insights/customer-success": {
+      op: list: method: *GET
+      op: list: transform: res: *("`body.customer_success_cases`")|top
+    }
+  }
+
+  entity: admin_generated_video: {
+    path: "/api/admin/users/{user_id}/generated-videos": {
+      op: list: method: *GET
+      op: list: transform: res: *("`body.videos`")|top
+    }
+  }
+
+  entity: admin_healthrx: {
+    path: "/api/admin/healthrx/automation": {
+      op: load: method: *GET
+    }
+    path: "/api/admin/healthrx/automation/config": {
+      op: load: method: *GET
+      op: update: method: *PUT
+      op: update: transform: req: "delivery_enabled": *("`reqdata.delivery_enabled`")|top
+      op: update: transform: req: "plan": *("`reqdata.plan`")|top
+      op: update: transform: req: "preparation_enabled": *("`reqdata.preparation_enabled`")|top
+      op: update: transform: req: "product_id": *("`reqdata.product_id`")|top
+      op: update: transform: req: "revision": *("`reqdata.revision`")|top
+      op: update: transform: req: "schedule_enabled": *("`reqdata.schedule_enabled`")|top
+    }
+    path: "/api/admin/healthrx/automation/runs": {
+      op: create: method: *POST
+      op: create: transform: req: "plan": *("`reqdata.plan`")|top
+      op: create: transform: req: "product_id": *("`reqdata.product_id`")|top
+      op: create: transform: req: "request_key": *("`reqdata.request_key`")|top
+    }
+    path: "/api/admin/healthrx/customers": {
+      op: load: method: *GET
+    }
+    path: "/api/admin/healthrx/inbox": {
+      op: load: method: *GET
+    }
+    path: "/api/admin/healthrx/items/comments/{item_id}/selection": {
+      rename: param: "item_id": *"comment_id"
+      op: create: method: *POST
+      op: create: transform: req: "option_id": *("`reqdata.option_id`")|top
+      op: create: transform: req: "version": *("`reqdata.version`")|top
+    }
+    path: "/api/admin/healthrx/items/{kind}/{item_id}": {
+      op: load: method: *GET
+    }
+    path: "/api/admin/healthrx/items/{kind}/{item_id}/decision": {
+      op: create: method: *POST
+      op: create: transform: req: "action": *("`reqdata.action`")|top
+      op: create: transform: req: "reason": *("`reqdata.reason`")|top
+      op: create: transform: req: "version": *("`reqdata.version`")|top
+    }
+    path: "/api/admin/healthrx/products": {
+      op: load: method: *GET
+    }
+    path: "/api/admin/healthrx/summary": {
+      op: load: method: *GET
+    }
+    path: "/api/admin/healthrx/videos": {
+      op: load: method: *GET
+    }
+    path: "/api/admin/healthrx/videos/{source_id}/viewed": {
+      rename: param: "source_id": *"video_id"
+      op: create: method: *POST
+      op: create: transform: req: "product_id": *("`reqdata.product_id`")|top
+      op: create: transform: req: "viewed": *("`reqdata.viewed`")|top
+    }
+  }
+
+  entity: admin_insight: {
+    path: "/api/admin/insights": {
+      op: list: method: *GET
+    }
+    path: "/api/admin/insights/customer-agent-readiness": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: admin_landing_task: {
+    path: "/api/admin/users/{user_id}/regenerate-landing": {
+      op: create: method: *POST
+    }
+    path: "/api/admin/users/{user_id}/regenerate-microhub": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: admin_metrics_summary: {
+    path: "/api/admin/metrics/summary": {
+      op: list: method: *GET
+    }
+  }
+
+  entity: admin_post: {
+    path: "/api/admin/posts": {
+      op: list: method: *GET
+    }
+  }
+
+  entity: admin_recent_signup: {
+    path: "/api/admin/insights/recent-signups": {
+      op: list: method: *GET
+      op: list: transform: res: *("`body.recent_signups`")|top
+    }
+  }
+
+  entity: admin_slideshow_diag: {
+    path: "/api/admin/slideshow-diag/{stage}": {
+      rename: param: "stage": *"id"
+      op: create: method: *POST
+    }
+  }
+
+  entity: admin_slideshow_import: {
+    path: "/api/admin/slideshow-import2/decks-json": {
+      op: create: method: *POST
+    }
+    path: "/api/admin/slideshow-import2/{batch_id}": {
+      op: load: method: *GET
+    }
+    path: "/api/admin/slideshow-import2/{batch_id}/state": {
+      action: "state": {}
+      op: create: method: *POST
+    }
+  }
+
+  entity: admin_user_view: {
+    path: "/api/admin/users": {
+      op: list: method: *GET
+    }
+    path: "/api/admin/users/search": {
+      op: list: method: *GET
+    }
+    path: "/api/admin/users/{user_id}": {
+      op: remove: method: *DELETE
+      op: update: method: *PUT
+    }
+    path: "/api/admin/users/{user_id}/auto-schedule": {
+      action: "auto_schedule": {}
+      op: update: method: *PUT
+    }
+    path: "/api/admin/users/{user_id}/convert-to-enterprise": {
+      op: create: method: *POST
+    }
+    path: "/api/admin/users/{user_id}/fix-all": {
+      action: "fix_all": {}
+      op: create: method: *POST
+    }
+    path: "/api/admin/users/{user_id}/fix-auto-schedule": {
+      action: "fix_auto_schedule": {}
+      op: create: method: *POST
+    }
+    path: "/api/admin/users/{user_id}/fix-auto-schedule-by-date": {
+      action: "fix_auto_schedule_by_date": {}
+      op: create: method: *POST
+    }
+    path: "/api/admin/users/{user_id}/fix-auto-schedule-today": {
+      action: "fix_auto_schedule_today": {}
+      op: create: method: *POST
+    }
+    path: "/api/admin/users/{user_id}/fix-auto-schedule-today-force": {
+      action: "fix_auto_schedule_today_force": {}
+      op: create: method: *POST
+    }
+    path: "/api/admin/users/{user_id}/fix-auto-schedule-tomorrow": {
+      action: "fix_auto_schedule_tomorrow": {}
+      op: create: method: *POST
+    }
+    path: "/api/admin/users/{user_id}/fix-comments-today": {
+      action: "fix_comments_today": {}
+      op: create: method: *POST
+    }
+    path: "/api/admin/users/{user_id}/generate-pomelli-video": {
+      action: "generate_pomelli_video": {}
+      op: create: method: *POST
+    }
+    path: "/api/admin/users/{user_id}/posted-video-reuse": {
+      action: "posted_video_reuse": {}
+      op: update: method: *PUT
+    }
+    path: "/api/admin/users/{user_id}/repair-approved-source-queue-today": {
+      action: "repair_approved_source_queue_today": {}
+      op: create: method: *POST
+    }
+    path: "/api/admin/users/{user_id}/repost-tiktok-videos-tomorrow": {
+      action: "repost_tiktok_videos_tomorrow": {}
+      op: create: method: *POST
+    }
+    path: "/api/admin/users/{user_id}/reset-onboarding": {
+      action: "reset_onboarding": {}
+      op: create: method: *POST
+    }
+    path: "/api/admin/users/{user_id}/transfer-ownership": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: admin_users_table_item: {
+    path: "/api/admin/users/table": {
+      op: list: method: *GET
+      op: list: transform: res: *("`body.items`")|top
+    }
+  }
+
+  entity: admin_video_remixer: {
+    path: "/api/admin/video-remixer/analysis": {
+      op: create: method: *POST
+      op: create: transform: req: "idempotency_key": *("`reqdata.idempotency_key`")|top
+      op: create: transform: req: "kind": *("`reqdata.kind`")|top
+      op: create: transform: req: "pipeline": *("`reqdata.pipeline`")|top
+      op: create: transform: req: "source_id": *("`reqdata.source_id`")|top
+      op: create: transform: req: "tier": *("`reqdata.tier`")|top
+      op: load: method: *GET
+    }
+    path: "/api/admin/video-remixer/analysis/{identifier}/cancel": {
+      op: create: method: *POST
+    }
+    path: "/api/admin/video-remixer/analysis/{identifier}/retry": {
+      op: create: method: *POST
+    }
+    path: "/api/admin/video-remixer/audits": {
+      op: create: method: *POST
+      op: create: transform: req: "count": *("`reqdata.count`")|top
+      op: create: transform: req: "seed": *("`reqdata.seed`")|top
+      op: load: method: *GET
+    }
+    path: "/api/admin/video-remixer/audits/{identifier}/answer": {
+      op: update: method: *PUT
+      op: update: transform: req: "clip_id": *("`reqdata.clip_id`")|top
+      op: update: transform: req: "errors": *("`reqdata.error`")|top
+      op: update: transform: req: "expected_revision": *("`reqdata.expected_revision`")|top
+      op: update: transform: req: "human_role": *("`reqdata.human_role`")|top
+      op: update: transform: req: "notes": *("`reqdata.note`")|top
+    }
+    path: "/api/admin/video-remixer/batch-schedules": {
+      op: load: method: *GET
+    }
+    path: "/api/admin/video-remixer/batch-schedules/{identifier}": {
+      op: update: method: *PUT
+      op: update: transform: req: "auto_render": *("`reqdata.auto_render`")|top
+      op: update: transform: req: "channel": *("`reqdata.channel`")|top
+      op: update: transform: req: "count": *("`reqdata.count`")|top
+      op: update: transform: req: "enabled": *("`reqdata.enabled`")|top
+      op: update: transform: req: "expected_revision": *("`reqdata.expected_revision`")|top
+      op: update: transform: req: "formula_id": *("`reqdata.formula_id`")|top
+      op: update: transform: req: "hour_utc": *("`reqdata.hour_utc`")|top
+      op: update: transform: req: "minute_utc": *("`reqdata.minute_utc`")|top
+      op: update: transform: req: "name": *("`reqdata.name`")|top
+      op: update: transform: req: "seed_base": *("`reqdata.seed_base`")|top
+    }
+    path: "/api/admin/video-remixer/clipper-access": {
+      op: load: method: *GET
+    }
+    path: "/api/admin/video-remixer/clipper-access/{identifier}/revoke": {
+      op: create: method: *POST
+    }
+    path: "/api/admin/video-remixer/clipper-rubric": {
+      op: load: method: *GET
+      op: update: method: *PUT
+      op: update: transform: req: "expected_revision": *("`reqdata.expected_revision`")|top
+      op: update: transform: req: "levels": *("`reqdata.level`")|top
+      op: update: transform: req: "reason": *("`reqdata.reason`")|top
+    }
+    path: "/api/admin/video-remixer/clippers": {
+      op: load: method: *GET
+    }
+    path: "/api/admin/video-remixer/clippers/import": {
+      op: create: method: *POST
+      op: create: transform: req: "idempotency_key": *("`reqdata.idempotency_key`")|top
+      op: create: transform: req: "items": *("`reqdata.item`")|top
+    }
+    path: "/api/admin/video-remixer/clippers/import-csv": {
+      op: create: method: *POST
+    }
+    path: "/api/admin/video-remixer/clippers/{identifier}": {
+      op: update: method: *PUT
+      op: update: transform: req: "contact": *("`reqdata.contact`")|top
+      op: update: transform: req: "expected_revision": *("`reqdata.expected_revision`")|top
+      op: update: transform: req: "followers": *("`reqdata.follower`")|top
+      op: update: transform: req: "handles": *("`reqdata.handle`")|top
+      op: update: transform: req: "name": *("`reqdata.name`")|top
+      op: update: transform: req: "niche": *("`reqdata.niche`")|top
+      op: update: transform: req: "rate": *("`reqdata.rate`")|top
+      op: update: transform: req: "sample_links": *("`reqdata.sample_link`")|top
+      op: update: transform: req: "spiciness": *("`reqdata.spiciness`")|top
+      op: update: transform: req: "spiciness_notes": *("`reqdata.spiciness_note`")|top
+      op: update: transform: req: "status": *("`reqdata.status`")|top
+    }
+    path: "/api/admin/video-remixer/clippers/{identifier}/access": {
+      action: "access": {}
+      op: create: method: *POST
+      op: create: transform: req: "expires_days": *("`reqdata.expires_day`")|top
+      op: create: transform: req: "render_job_ids": *("`reqdata.render_job_id`")|top
+    }
+    path: "/api/admin/video-remixer/clips": {
+      op: load: method: *GET
+    }
+    path: "/api/admin/video-remixer/clips/{clip_id}": {
+      op: load: method: *GET
+    }
+    path: "/api/admin/video-remixer/clips/{clip_id}/labels": {
+      op: patch: method: *PATCH
+      op: patch: transform: req: "atomicity_class": *("`reqdata.atomicity_class`")|top
+      op: patch: transform: req: "crop_window": *("`reqdata.crop_window`")|top
+      op: patch: transform: req: "cta_product_id": *("`reqdata.cta_product_id`")|top
+      op: patch: transform: req: "end_ms": *("`reqdata.end_m`")|top
+      op: patch: transform: req: "expected_revision": *("`reqdata.expected_revision`")|top
+      op: patch: transform: req: "hook_subtype": *("`reqdata.hook_subtype`")|top
+      op: patch: transform: req: "medical_claim_present": *("`reqdata.medical_claim_present`")|top
+      op: patch: transform: req: "primary_role": *("`reqdata.primary_role`")|top
+      op: patch: transform: req: "reason": *("`reqdata.reason`")|top
+      op: patch: transform: req: "requires_medical_review": *("`reqdata.requires_medical_review`")|top
+      op: patch: transform: req: "review_status": *("`reqdata.review_status`")|top
+      op: patch: transform: req: "secondary_roles": *("`reqdata.secondary_role`")|top
+      op: patch: transform: req: "sensitive_personal_data_present": *("`reqdata.sensitive_personal_data_present`")|top
+      op: patch: transform: req: "soundbite_title": *("`reqdata.soundbite_title`")|top
+      op: patch: transform: req: "start_ms": *("`reqdata.start_m`")|top
+      op: patch: transform: req: "testimonial_strength": *("`reqdata.testimonial_strength`")|top
+      op: patch: transform: req: "testimonial_type": *("`reqdata.testimonial_type`")|top
+      op: patch: transform: req: "topic_tags": *("`reqdata.topic_tag`")|top
+    }
+    path: "/api/admin/video-remixer/clips/{clip_id}/media": {
+      action: "media": {}
+      op: create: method: *POST
+      op: create: transform: req: "purpose": *("`reqdata.purpose`")|top
+    }
+    path: "/api/admin/video-remixer/cost": {
+      op: load: method: *GET
+      op: patch: method: *PATCH
+      op: patch: transform: req: "media_enabled": *("`reqdata.media_enabled`")|top
+    }
+    path: "/api/admin/video-remixer/formulas": {
+      op: load: method: *GET
+    }
+    path: "/api/admin/video-remixer/formulas/proposals": {
+      op: create: method: *POST
+      op: create: transform: req: "idempotency_key": *("`reqdata.idempotency_key`")|top
+      op: create: transform: req: "polish": *("`reqdata.polish`")|top
+    }
+    path: "/api/admin/video-remixer/formulas/{identifier}": {
+      op: update: method: *PUT
+      op: update: transform: req: "channel_default": *("`reqdata.channel_default`")|top
+      op: update: transform: req: "expected_revision": *("`reqdata.expected_revision`")|top
+      op: update: transform: req: "music_policy": *("`reqdata.music_policy`")|top
+      op: update: transform: req: "name": *("`reqdata.name`")|top
+      op: update: transform: req: "origin": *("`reqdata.origin`")|top
+      op: update: transform: req: "rationale": *("`reqdata.rationale`")|top
+      op: update: transform: req: "reference_source_id": *("`reqdata.reference_source_id`")|top
+      op: update: transform: req: "slots": *("`reqdata.slot`")|top
+      op: update: transform: req: "status": *("`reqdata.status`")|top
+      op: update: transform: req: "total_target_ms": *("`reqdata.total_target_m`")|top
+    }
+    path: "/api/admin/video-remixer/imports": {
+      op: load: method: *GET
+    }
+    path: "/api/admin/video-remixer/imports/manifest": {
+      op: create: method: *POST
+      op: create: transform: req: "enqueue": *("`reqdata.enqueue`")|top
+      op: create: transform: req: "idempotency_key": *("`reqdata.idempotency_key`")|top
+      op: create: transform: req: "items": *("`reqdata.item`")|top
+      op: create: transform: req: "name": *("`reqdata.name`")|top
+      op: create: transform: req: "source": *("`reqdata.source`")|top
+    }
+    path: "/api/admin/video-remixer/imports/upload": {
+      op: create: method: *POST
+    }
+    path: "/api/admin/video-remixer/jobs": {
+      op: load: method: *GET
+    }
+    path: "/api/admin/video-remixer/jobs/{job_id}/cancel": {
+      op: create: method: *POST
+    }
+    path: "/api/admin/video-remixer/jobs/{job_id}/captions": {
+      op: load: method: *GET
+    }
+    path: "/api/admin/video-remixer/jobs/{job_id}/manifest": {
+      op: load: method: *GET
+    }
+    path: "/api/admin/video-remixer/jobs/{job_id}/media": {
+      op: create: method: *POST
+      op: create: transform: req: "purpose": *("`reqdata.purpose`")|top
+    }
+    path: "/api/admin/video-remixer/jobs/{job_id}/retry": {
+      op: create: method: *POST
+      op: create: transform: req: "idempotency_key": *("`reqdata.idempotency_key`")|top
+    }
+    path: "/api/admin/video-remixer/label-history": {
+      op: load: method: *GET
+    }
+    path: "/api/admin/video-remixer/library": {
+      op: load: method: *GET
+    }
+    path: "/api/admin/video-remixer/media/{token}": {
+      op: head: method: *HEAD
+      op: load: method: *GET
+    }
+    path: "/api/admin/video-remixer/overview": {
+      op: load: method: *GET
+    }
+    path: "/api/admin/video-remixer/planner-preview": {
+      op: create: method: *POST
+      op: create: transform: req: "anchor_clip_id": *("`reqdata.anchor_clip_id`")|top
+      op: create: transform: req: "channel": *("`reqdata.channel`")|top
+      op: create: transform: req: "clip_ids": *("`reqdata.clip_id`")|top
+      op: create: transform: req: "count": *("`reqdata.count`")|top
+      op: create: transform: req: "creator": *("`reqdata.creator`")|top
+      op: create: transform: req: "formula_ids": *("`reqdata.formula_id`")|top
+      op: create: transform: req: "planning_only": *("`reqdata.planning_only`")|top
+      op: create: transform: req: "seed": *("`reqdata.seed`")|top
+      op: create: transform: req: "topic": *("`reqdata.topic`")|top
+      op: create: transform: req: "use_learned_weights": *("`reqdata.use_learned_weight`")|top
+    }
+    path: "/api/admin/video-remixer/posts": {
+      op: load: method: *GET
+    }
+    path: "/api/admin/video-remixer/posts/export": {
+      op: load: method: *GET
+    }
+    path: "/api/admin/video-remixer/posts/{identifier}/link": {
+      op: update: method: *PUT
+      op: update: transform: req: "expected_revision": *("`reqdata.expected_revision`")|top
+      op: update: transform: req: "platform": *("`reqdata.platform`")|top
+      op: update: transform: req: "platform_post_id": *("`reqdata.platform_post_id`")|top
+      op: update: transform: req: "post_url": *("`reqdata.post_url`")|top
+      op: update: transform: req: "posted_at": *("`reqdata.posted_at`")|top
+    }
+    path: "/api/admin/video-remixer/posts/{identifier}/metrics": {
+      op: create: method: *POST
+      op: create: transform: req: "collected_at": *("`reqdata.collected_at`")|top
+      op: create: transform: req: "comments": *("`reqdata.comment`")|top
+      op: create: transform: req: "completion_rate": *("`reqdata.completion_rate`")|top
+      op: create: transform: req: "conversions": *("`reqdata.conversion`")|top
+      op: create: transform: req: "evidence": *("`reqdata.evidence`")|top
+      op: create: transform: req: "likes": *("`reqdata.like`")|top
+      op: create: transform: req: "platform_post_id": *("`reqdata.platform_post_id`")|top
+      op: create: transform: req: "post_url": *("`reqdata.post_url`")|top
+      op: create: transform: req: "shares": *("`reqdata.share`")|top
+      op: create: transform: req: "spend_usd": *("`reqdata.spend_usd`")|top
+      op: create: transform: req: "views": *("`reqdata.view`")|top
+      op: create: transform: req: "window": *("`reqdata.window`")|top
+    }
+    path: "/api/admin/video-remixer/products": {
+      op: load: method: *GET
+    }
+    path: "/api/admin/video-remixer/projects": {
+      op: create: method: *POST
+      op: create: transform: req: "expected_revision": *("`reqdata.expected_revision`")|top
+      op: create: transform: req: "timeline": *("`reqdata.timeline`")|top
+      op: load: method: *GET
+    }
+    path: "/api/admin/video-remixer/projects/{project_id}": {
+      op: update: method: *PUT
+      op: update: transform: req: "expected_revision": *("`reqdata.expected_revision`")|top
+      op: update: transform: req: "timeline": *("`reqdata.timeline`")|top
+    }
+    path: "/api/admin/video-remixer/projects/{project_id}/renders": {
+      op: create: method: *POST
+      op: create: transform: req: "idempotency_key": *("`reqdata.idempotency_key`")|top
+      op: create: transform: req: "revision": *("`reqdata.revision`")|top
+    }
+    path: "/api/admin/video-remixer/proofs": {
+      op: create: method: *POST
+      op: create: transform: req: "kim_clip_ids": *("`reqdata.kim_clip_id`")|top
+      op: create: transform: req: "name": *("`reqdata.name`")|top
+      op: create: transform: req: "run_id": *("`reqdata.run_id`")|top
+      op: create: transform: req: "terry_clip_ids": *("`reqdata.terry_clip_id`")|top
+      op: load: method: *GET
+    }
+    path: "/api/admin/video-remixer/proofs/{identifier}/staff-time": {
+      op: create: method: *POST
+      op: create: transform: req: "activity": *("`reqdata.activity`")|top
+      op: create: transform: req: "seconds": *("`reqdata.second`")|top
+    }
+    path: "/api/admin/video-remixer/recipes/{identifier}": {
+      op: load: method: *GET
+    }
+    path: "/api/admin/video-remixer/recipes/{identifier}/preflight": {
+      action: "preflight": {}
+      op: create: method: *POST
+      op: create: transform: req: "idempotency_key": *("`reqdata.idempotency_key`")|top
+      op: create: transform: req: "polish": *("`reqdata.polish`")|top
+      op: load: method: *GET
+    }
+    path: "/api/admin/video-remixer/recipes/{identifier}/render": {
+      action: "render": {}
+      op: create: method: *POST
+      op: create: transform: req: "idempotency_key": *("`reqdata.idempotency_key`")|top
+      op: create: transform: req: "polish": *("`reqdata.polish`")|top
+    }
+    path: "/api/admin/video-remixer/reports": {
+      op: load: method: *GET
+    }
+    path: "/api/admin/video-remixer/reports/aggregates": {
+      op: load: method: *GET
+    }
+    path: "/api/admin/video-remixer/reports/refresh": {
+      op: create: method: *POST
+    }
+    path: "/api/admin/video-remixer/reviews": {
+      op: load: method: *GET
+    }
+    path: "/api/admin/video-remixer/reviews/{identifier}": {
+      op: load: method: *GET
+    }
+    path: "/api/admin/video-remixer/reviews/{identifier}/checks": {
+      op: create: method: *POST
+      op: create: transform: req: "idempotency_key": *("`reqdata.idempotency_key`")|top
+      op: create: transform: req: "polish": *("`reqdata.polish`")|top
+    }
+    path: "/api/admin/video-remixer/reviews/{identifier}/decision": {
+      action: "decision": {}
+      op: create: method: *POST
+      op: create: transform: req: "decision": *("`reqdata.decision`")|top
+      op: create: transform: req: "expected_revision": *("`reqdata.expected_revision`")|top
+      op: create: transform: req: "reason": *("`reqdata.reason`")|top
+      op: create: transform: req: "review_seconds": *("`reqdata.review_second`")|top
+    }
+    path: "/api/admin/video-remixer/reviews/{identifier}/export": {
+      action: "export": {}
+      op: create: method: *POST
+    }
+    path: "/api/admin/video-remixer/reviews/{identifier}/handoff": {
+      action: "handoff": {}
+      op: create: method: *POST
+      op: create: transform: req: "agent_ids": *("`reqdata.agent_id`")|top
+      op: create: transform: req: "channel": *("`reqdata.channel`")|top
+      op: create: transform: req: "clipper_id": *("`reqdata.clipper_id`")|top
+      op: create: transform: req: "disclosure": *("`reqdata.disclosure`")|top
+      op: create: transform: req: "execute": *("`reqdata.execute`")|top
+      op: create: transform: req: "idempotency_key": *("`reqdata.idempotency_key`")|top
+      op: create: transform: req: "scheduled_at": *("`reqdata.scheduled_at`")|top
+      op: create: transform: req: "title": *("`reqdata.title`")|top
+    }
+    path: "/api/admin/video-remixer/reviews/{identifier}/human-check": {
+      action: "human_check": {}
+      op: create: method: *POST
+      op: create: transform: req: "claims": *("`reqdata.claim`")|top
+      op: create: transform: req: "claims_resolved": *("`reqdata.claims_resolved`")|top
+      op: create: transform: req: "evidence": *("`reqdata.evidence`")|top
+      op: create: transform: req: "expected_revision": *("`reqdata.expected_revision`")|top
+      op: create: transform: req: "policy_score": *("`reqdata.policy_score`")|top
+      op: create: transform: req: "review_seconds": *("`reqdata.review_second`")|top
+    }
+    path: "/api/admin/video-remixer/reviews/{identifier}/repair": {
+      action: "repair": {}
+      op: create: method: *POST
+      op: create: transform: req: "edit_seconds": *("`reqdata.edit_second`")|top
+      op: create: transform: req: "idempotency_key": *("`reqdata.idempotency_key`")|top
+      op: create: transform: req: "reason": *("`reqdata.reason`")|top
+      op: create: transform: req: "timeline": *("`reqdata.timeline`")|top
+    }
+    path: "/api/admin/video-remixer/runs": {
+      op: create: method: *POST
+      op: create: transform: req: "anchor_clip_id": *("`reqdata.anchor_clip_id`")|top
+      op: create: transform: req: "channel": *("`reqdata.channel`")|top
+      op: create: transform: req: "clip_ids": *("`reqdata.clip_id`")|top
+      op: create: transform: req: "count": *("`reqdata.count`")|top
+      op: create: transform: req: "creator": *("`reqdata.creator`")|top
+      op: create: transform: req: "formula_ids": *("`reqdata.formula_id`")|top
+      op: create: transform: req: "idempotency_key": *("`reqdata.idempotency_key`")|top
+      op: create: transform: req: "planning_only": *("`reqdata.planning_only`")|top
+      op: create: transform: req: "seed": *("`reqdata.seed`")|top
+      op: create: transform: req: "topic": *("`reqdata.topic`")|top
+      op: create: transform: req: "use_learned_weights": *("`reqdata.use_learned_weight`")|top
+      op: load: method: *GET
+    }
+    path: "/api/admin/video-remixer/runs/{identifier}": {
+      op: load: method: *GET
+      op: remove: method: *DELETE
+      op: remove: transform: req: "expected_revision": *("`reqdata.expected_revision`")|top
+    }
+    path: "/api/admin/video-remixer/runs/{identifier}/render": {
+      action: "render": {}
+      op: create: method: *POST
+      op: create: transform: req: "idempotency_key": *("`reqdata.idempotency_key`")|top
+      op: create: transform: req: "polish": *("`reqdata.polish`")|top
+    }
+    path: "/api/admin/video-remixer/runs/{identifier}/restore": {
+      action: "restore": {}
+      op: create: method: *POST
+      op: create: transform: req: "expected_revision": *("`reqdata.expected_revision`")|top
+    }
+    path: "/api/admin/video-remixer/source-policies/batch": {
+      op: update: method: *PUT
+      op: update: transform: req: "expected_revisions": *("`reqdata.expected_revision`")|top
+      op: update: transform: req: "policy": *("`reqdata.policy`")|top
+      op: update: transform: req: "source_ids": *("`reqdata.source_id`")|top
+    }
+    path: "/api/admin/video-remixer/sources": {
+      op: load: method: *GET
+    }
+    path: "/api/admin/video-remixer/sources/{source_id}/policy": {
+      op: update: method: *PUT
+      op: update: transform: req: "allowed_platforms": *("`reqdata.allowed_platform`")|top
+      op: update: transform: req: "campaign_allowed": *("`reqdata.campaign_allowed`")|top
+      op: update: transform: req: "confirmed_duplicate_of": *("`reqdata.confirmed_duplicate_of`")|top
+      op: update: transform: req: "consent_doc_uri": *("`reqdata.consent_doc_uri`")|top
+      op: update: transform: req: "creator_id": *("`reqdata.creator_id`")|top
+      op: update: transform: req: "derivative_edits_allowed": *("`reqdata.derivative_edits_allowed`")|top
+      op: update: transform: req: "expected_revision": *("`reqdata.expected_revision`")|top
+      op: update: transform: req: "external_ai_allowed": *("`reqdata.external_ai_allowed`")|top
+      op: update: transform: req: "medical_claim_present": *("`reqdata.medical_claim_present`")|top
+      op: update: transform: req: "music_bed_allowed": *("`reqdata.music_bed_allowed`")|top
+      op: update: transform: req: "owner_waiver": *("`reqdata.owner_waiver`")|top
+      op: update: transform: req: "paid_ads_allowed": *("`reqdata.paid_ads_allowed`")|top
+      op: update: transform: req: "patient_identifiable": *("`reqdata.patient_identifiable`")|top
+      op: update: transform: req: "person_type": *("`reqdata.person_type`")|top
+      op: update: transform: req: "reason": *("`reqdata.reason`")|top
+      op: update: transform: req: "requires_medical_review": *("`reqdata.requires_medical_review`")|top
+      op: update: transform: req: "rights_expires_at": *("`reqdata.rights_expires_at`")|top
+      op: update: transform: req: "rights_status": *("`reqdata.rights_status`")|top
+      op: update: transform: req: "sensitive_personal_data_present": *("`reqdata.sensitive_personal_data_present`")|top
+      op: update: transform: req: "shoot": *("`reqdata.shoot`")|top
+    }
+    path: "/api/admin/video-remixer/sources/{source_id}/reconcile-upload": {
+      op: create: method: *POST
+    }
+    path: "/api/admin/video-remixer/worker-keys": {
+      op: create: method: *POST
+      op: create: transform: req: "days": *("`reqdata.day`")|top
+      op: create: transform: req: "name": *("`reqdata.name`")|top
+      op: load: method: *GET
+    }
+    path: "/api/admin/video-remixer/worker-keys/{identifier}/revoke": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: advance_step: {
+    path: "/api/onboarding-v6/advance-step": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: agent: {
+    path: "/api/admin/agents": {
+      op: list: method: *GET
+    }
+  }
+
+  entity: agent_access_customers_health: {
+    path: "/api/admin/customers-health": {
+      op: list: method: *GET
+    }
+    path: "/api/agent-access/customers-health": {
+      op: list: method: *GET
+    }
+  }
+
+  entity: agent_access_overview: {
+    path: "/api/agent-access/overview": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: agent_access_phil_hourly_notification: {
+    path: "/api/agent-access/phil-notifications/hourly": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: agent_access_phil_stats_refresh: {
+    path: "/api/agent-access/phil-notifications/stats-refresh": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: agent_access_phil_video: {
+    path: "/api/agent-access/phil-notifications/videos": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: agent_access_user_agent: {
+    path: "/api/agent-access/user-agents": {
+      op: list: method: *GET
+    }
+  }
+
+  entity: agent_access_user_phone_farm: {
+    path: "/api/agent-access/user-phone-farm": {
+      op: list: method: *GET
+      op: list: transform: res: *("`body.agents`")|top
+    }
+  }
+
+  entity: agent_access_user_post: {
+    path: "/api/agent-access/user-posts": {
+      op: list: method: *GET
+    }
+  }
+
+  entity: agent_access_user_summary: {
+    path: "/api/agent-access/user-summary": {
+      op: list: method: *GET
+    }
+  }
+
+  entity: agent_access_user_video: {
+    path: "/api/agent-access/user-videos": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: agent_access_user_winning_ad: {
+    path: "/api/agent-access/user-winning-ads": {
+      op: list: method: *GET
+      op: list: transform: res: *("`body.perProduct`")|top
+    }
+  }
+
+  entity: agent_access_winning_ads_summary: {
+    path: "/api/agent-access/winning-ads-summary": {
+      op: list: method: *GET
+    }
+  }
+
+  entity: agent_detail: {
+    path: "/api/upload-post-agents/all": {
+      op: list: method: *GET
+    }
+    path: "/api/upload-post-agents/free": {
+      op: list: method: *GET
+      op: list: transform: res: *("`body.agents`")|top
+    }
+    path: "/api/upload-post-agents/{agent_id}/bio": {
+      rename: param: "agent_id": *"upload_post_agent_id"
+      op: patch: method: *PATCH
+    }
+    path: "/api/upload-post-agents/{agent_id}/name": {
+      rename: param: "agent_id": *"upload_post_agent_id"
+      op: patch: method: *PATCH
+    }
+    path: "/api/upload-post-agents/{agent_id}/role": {
+      rename: param: "agent_id": *"upload_post_agent_id"
+      op: patch: method: *PATCH
+    }
+  }
+
+  entity: agent_health: {
+    path: "/api/admin/agent-health": {
+      op: list: method: *GET
+    }
+  }
+
+  entity: agent_health_customer_option: {
+    path: "/api/admin/agent-health/customers": {
+      op: list: method: *GET
+      op: list: transform: res: *("`body.customers`")|top
+    }
+  }
+
+  entity: agent_health_detail: {
+    path: "/api/admin/agent-health/details": {
+      op: list: method: *GET
+    }
+  }
+
+  entity: agent_post: {
+    path: "/api/admin/agents/{agent_id}/posts": {
+      rename: param: "agent_id": *"id"
+      op: list: method: *GET
+      op: list: transform: res: *("`body.entries`")|top
+    }
+  }
+
+  entity: agent_stat: {
+    path: "/api/admin/agents/stats": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: agent_summary: {
+    path: "/api/enterprise/agents/summary": {
+      op: list: method: *GET
+      op: list: transform: res: *("`body.products`")|top
+    }
+  }
+
+  entity: agents_summary: {
+    path: "/api/admin/agents-summary": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: analysis_status: {
+    path: "/api/scraper/analysis-status": {
+      op: load: method: *GET
+      op: load: transform: res: *("`body.data`")|top
+    }
+  }
+
+  entity: analytics_post: {
+    path: "/api/analytics/posts": {
+      op: list: method: *GET
+    }
+  }
+
+  entity: analyze_product: {
+    path: "/api/scraper/analyze-product": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: assign_agent: {
+    path: "/api/onboarding-v6/assign-agent": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: auth: {
+    path: "/auth/magic-link": {
+      action: "magic_link": {}
+      op: create: method: *POST
+    }
+    path: "/auth/verify-google-token": {
+      action: "verify_google_token": {}
+      op: create: method: *POST
+    }
+    path: "/auth/verify-magic-link": {
+      action: "verify_magic_link": {}
+      op: create: method: *POST
+    }
+    path: "/auth/verify-share-access": {
+      action: "verify_share_access": {}
+      op: create: method: *POST
+    }
+  }
+
+  entity: auto_schedule_setting: {
+    path: "/api/schedule/settings": {
+      op: load: method: *GET
+      op: update: method: *PUT
+    }
+    path: "/api/schedule/settings/video-types": {
+      op: update: method: *PUT
+    }
+  }
+
+  entity: bulk_tik_tok_stats_update: {
+    path: "/api/upload-post-agents/bulk/tiktok-stats": {
+      op: patch: method: *PATCH
+    }
+  }
+
+  entity: carousel: {
+    path: "/api/admin/carousels": {
+      op: list: method: *GET
+      op: list: transform: res: *("`body.items`")|top
+    }
+    path: "/api/admin/carousels/{queue_id}": {
+      rename: param: "queue_id": *"id"
+      op: load: method: *GET
+    }
+    path: "/api/carousel/{video_id}/finalize": {
+      action: "finalize": {}
+      rename: param: "video_id": *"id"
+      op: create: method: *POST
+    }
+  }
+
+  entity: carousel_agent_detail: {
+    path: "/api/admin/carousels/agents/{agent_id}": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: carousel_status: {
+    path: "/api/carousel/{video_id}/status": {
+      rename: param: "video_id": *"id"
+      op: list: method: *GET
+    }
+  }
+
+  entity: chat: {
+    path: "/api/chat/sessions/{session_id}/messages": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: chat_history: {
+    path: "/api/chat/sessions": {
+      op: create: method: *POST
+    }
+    path: "/api/chat/sessions/{session_id}": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: chat_session: {
+    path: "/api/chat/sessions/{session_id}/complete": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: comment: {
+    path: "/api/comments/results": {
+      action: "result": {}
+      op: load: method: *GET
+    }
+  }
+
+  entity: comment_campaign: {
+    path: "/api/comments/products/{product_id}/campaign": {
+      op: load: method: *GET
+      op: update: method: *PUT
+      op: update: transform: req: "account_daily_limit": *("`reqdata.account_daily_limit`")|top
+      op: update: transform: req: "account_weekly_limit": *("`reqdata.account_weekly_limit`")|top
+      op: update: transform: req: "active_days_per_week": *("`reqdata.active_days_per_week`")|top
+      op: update: transform: req: "allowlist": *("`reqdata.allowlist`")|top
+      op: update: transform: req: "analysis_daily_limit": *("`reqdata.analysis_daily_limit`")|top
+      op: update: transform: req: "analysis_model": *("`reqdata.analysis_model`")|top
+      op: update: transform: req: "analysis_reservation_usd": *("`reqdata.analysis_reservation_usd`")|top
+      op: update: transform: req: "approved_markets": *("`reqdata.approved_market`")|top
+      op: update: transform: req: "brand_forward_enabled": *("`reqdata.brand_forward_enabled`")|top
+      op: update: transform: req: "briefs": *("`reqdata.brief`")|top
+      op: update: transform: req: "claims": *("`reqdata.claim`")|top
+      op: update: transform: req: "cohort_removal_threshold": *("`reqdata.cohort_removal_threshold`")|top
+      op: update: transform: req: "daily_cost_ceiling_usd": *("`reqdata.daily_cost_ceiling_usd`")|top
+      op: update: transform: req: "delivery_mode": *("`reqdata.delivery_mode`")|top
+      op: update: transform: req: "disclosure_mode": *("`reqdata.disclosure_mode`")|top
+      op: update: transform: req: "disclosure_template": *("`reqdata.disclosure_template`")|top
+      op: update: transform: req: "draft_options_count": *("`reqdata.draft_options_count`")|top
+      op: update: transform: req: "draft_review_reservation_usd": *("`reqdata.draft_review_reservation_usd`")|top
+      op: update: transform: req: "exceptional_daily_cap_approved": *("`reqdata.exceptional_daily_cap_approved`")|top
+      op: update: transform: req: "execution_enabled": *("`reqdata.execution_enabled`")|top
+      op: update: transform: req: "experiment_styles": *("`reqdata.experiment_style`")|top
+      op: update: transform: req: "inventory_factor": *("`reqdata.inventory_factor`")|top
+      op: update: transform: req: "keywords": *("`reqdata.keyword`")|top
+      op: update: transform: req: "max_duration_seconds": *("`reqdata.max_duration_second`")|top
+      op: update: transform: req: "metadata_pass_rate": *("`reqdata.metadata_pass_rate`")|top
+      op: update: transform: req: "min_interval_minutes": *("`reqdata.min_interval_minute`")|top
+      op: update: transform: req: "mode": *("`reqdata.mode`")|top
+      op: update: transform: req: "monitored_creators": *("`reqdata.monitored_creator`")|top
+      op: update: transform: req: "platform": *("`reqdata.platform`")|top
+      op: update: transform: req: "platform_permission_evidence": *("`reqdata.platform_permission_evidence`")|top
+      op: update: transform: req: "policy_approved_by": *("`reqdata.policy_approved_by`")|top
+      op: update: transform: req: "policy_expires_at": *("`reqdata.policy_expires_at`")|top
+      op: update: transform: req: "policy_version": *("`reqdata.policy_version`")|top
+      op: update: transform: req: "product_daily_limit": *("`reqdata.product_daily_limit`")|top
+      op: update: transform: req: "qualification_rate": *("`reqdata.qualification_rate`")|top
+      op: update: transform: req: "raw_daily_limit": *("`reqdata.raw_daily_limit`")|top
+      op: update: transform: req: "raw_result_reservation_usd": *("`reqdata.raw_result_reservation_usd`")|top
+      op: update: transform: req: "replies_enabled": *("`reqdata.replies_enabled`")|top
+      op: update: transform: req: "reviewer_model": *("`reqdata.reviewer_model`")|top
+      op: update: transform: req: "scan_interval_hours": *("`reqdata.scan_interval_hour`")|top
+      op: update: transform: req: "search_change_reason": *("`reqdata.search_change_reason`")|top
+      op: update: transform: req: "search_effective_at": *("`reqdata.search_effective_at`")|top
+      op: update: transform: req: "shadow_sample_limit": *("`reqdata.shadow_sample_limit`")|top
+      op: update: transform: req: "task_ttl_hours": *("`reqdata.task_ttl_hour`")|top
+      op: update: transform: req: "top_comment_analysis_enabled": *("`reqdata.top_comment_analysis_enabled`")|top
+      op: update: transform: req: "writer_model": *("`reqdata.writer_model`")|top
+    }
+    path: "/api/comments/products/{product_id}/campaign/pilot": {
+      op: create: method: *POST
+      op: create: transform: req: "agent_id": *("`reqdata.agent_id`")|top
+      op: create: transform: req: "candidate_only": *("`reqdata.candidate_only`")|top
+      op: create: transform: req: "request_key": *("`reqdata.request_key`")|top
+    }
+    path: "/api/comments/products/{product_id}/campaign/prepare": {
+      op: create: method: *POST
+    }
+    path: "/api/comments/products/{product_id}/campaign/preview": {
+      op: create: method: *POST
+    }
+    path: "/api/comments/products/{product_id}/campaign/runtime": {
+      op: load: method: *GET
+    }
+    path: "/api/comments/products/{product_id}/campaign/sources/{source_id}/resolve": {
+      op: create: method: *POST
+      op: create: transform: req: "action": *("`reqdata.action`")|top
+      op: create: transform: req: "reason": *("`reqdata.reason`")|top
+      op: create: transform: req: "spent_seconds": *("`reqdata.spent_second`")|top
+    }
+  }
+
+  entity: complete_chat_checkout: {
+    path: "/api/onboarding-v6/complete-chat-checkout": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: create_blackout_sora2_video: {
+    path: "/api/core/create-blackout-sora2-video": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: create_carousel: {
+    path: "/api/carousel/create-from-exact": {
+      op: create: method: *POST
+    }
+    path: "/api/carousel/create-from-styles": {
+      op: create: method: *POST
+    }
+    path: "/api/carousel/create-from-template": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: create_product: {
+    path: "/api/onboarding-v6/create-product": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: create_reset_product_v6: {
+    path: "/api/reset-product/create-v6": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: create_sora2_video: {
+    path: "/api/core/create-sora2-video": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: create_variation: {
+    path: "/api/video-variation/create-hook": {
+      op: create: method: *POST
+    }
+    path: "/api/video-variation/create-invisible": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: customer: {
+    path: "/api/admin/customer-health/customers": {
+      op: list: method: *GET
+    }
+  }
+
+  entity: customer_health: {
+    path: "/api/admin/customer-health/{user_id}": {
+      rename: param: "user_id": *"id"
+      op: load: method: *GET
+    }
+  }
+
+  entity: customer_health_all_customers_item: {
+    path: "/api/admin/customer-health/all-customers": {
+      op: list: method: *GET
+      op: list: transform: res: *("`body.customers`")|top
+    }
+  }
+
+  entity: customer_health_views_summary: {
+    path: "/api/admin/customer-health/views": {
+      op: list: method: *GET
+    }
+  }
+
+  entity: daily: {
+    path: "/api/carousel/daily/{product_id}/plan": {
+      action: "plan": {}
+      rename: param: "product_id": *"id"
+      op: create: method: *POST
+    }
+  }
+
+  entity: daily_status: {
+    path: "/api/carousel/daily/{product_id}/status": {
+      rename: param: "product_id": *"id"
+      op: load: method: *GET
+    }
+  }
+
+  entity: dedicated_agents_dashboard: {
+    path: "/api/admin/agents/dedicated-dashboard": {
+      op: list: method: *GET
+      op: list: transform: res: *("`body.agents`")|top
+    }
+  }
+
+  entity: enterprise_agent: {
+    path: "/api/enterprise/agents/assign": {
+      op: create: method: *POST
+    }
+    path: "/api/enterprise/agents/global-pool-status": {
+      op: load: method: *GET
+    }
+    path: "/api/enterprise/agents/move": {
+      op: create: method: *POST
+    }
+    path: "/api/enterprise/agents/release": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: enterprise_product: {
+    path: "/api/enterprise/products/{product_id}/status": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: exact_availability: {
+    path: "/api/carousel/exact-availability": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: exact_formula: {
+    path: "/api/carousel/exact-formulas": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: extract_v2: {
+    path: "/api/scraper/extract_v2": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: failed_post: {
+    path: "/api/admin/failed-posts": {
+      op: list: method: *GET
+      op: list: transform: res: *("`body.entries`")|top
+    }
+  }
+
+  entity: file: {
+    path: "/api/file-upload": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: generate_blackout_sora2_prompt: {
+    path: "/api/core/generate-blackout-sora2-prompt": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: generate_pomelli_demo: {
+    path: "/api/onboarding-v6/generate-pomelli-demo": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: generate_prompt: {
+    path: "/api/video-variation/generate-prompt": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: generate_sora2_prompt: {
+    path: "/api/core/generate-sora2-prompt": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: healthrx: {
+    path: "/api/healthrx/products/{product_id}": {
+      op: load: method: *GET
+    }
+    path: "/api/healthrx/products/{product_id}/accounts": {
+      op: create: method: *POST
+      op: create: transform: req: "agent_id": *("`reqdata.agent_id`")|top
+      op: create: transform: req: "profile": *("`reqdata.profile`")|top
+      op: create: transform: req: "reason": *("`reqdata.reason`")|top
+    }
+    path: "/api/healthrx/products/{product_id}/accounts/{account_id}/content": {
+      op: create: method: *POST
+      op: create: transform: req: "avatar_present": *("`reqdata.avatar_present`")|top
+      op: create: transform: req: "commercial": *("`reqdata.commercial`")|top
+      op: create: transform: req: "duration_seconds": *("`reqdata.duration_second`")|top
+      op: create: transform: req: "format": *("`reqdata.format`")|top
+      op: create: transform: req: "level": *("`reqdata.level`")|top
+      op: create: transform: req: "paid_campaign_id": *("`reqdata.paid_campaign_id`")|top
+      op: create: transform: req: "parent_content_id": *("`reqdata.parent_content_id`")|top
+      op: create: transform: req: "pillar": *("`reqdata.pillar`")|top
+      op: create: transform: req: "promotion_evidence": *("`reqdata.promotion_evidence`")|top
+      op: create: transform: req: "request_key": *("`reqdata.request_key`")|top
+      op: create: transform: req: "test_variable": *("`reqdata.test_variable`")|top
+      op: create: transform: req: "topic": *("`reqdata.topic`")|top
+    }
+    path: "/api/healthrx/products/{product_id}/accounts/{account_id}/contract": {
+      op: load: method: *GET
+    }
+    path: "/api/healthrx/products/{product_id}/accounts/{account_id}/launch": {
+      op: create: method: *POST
+    }
+    path: "/api/healthrx/products/{product_id}/accounts/{account_id}/pause": {
+      op: create: method: *POST
+      op: create: transform: req: "paused": *("`reqdata.paused`")|top
+      op: create: transform: req: "reason": *("`reqdata.reason`")|top
+    }
+    path: "/api/healthrx/products/{product_id}/attribution": {
+      action: "attribution": {}
+      op: create: method: *POST
+      op: create: transform: req: "account_id": *("`reqdata.account_id`")|top
+      op: create: transform: req: "attribution_method": *("`reqdata.attribution_method`")|top
+      op: create: transform: req: "comment_id": *("`reqdata.comment_id`")|top
+      op: create: transform: req: "content_id": *("`reqdata.content_id`")|top
+      op: create: transform: req: "contribution_usd": *("`reqdata.contribution_usd`")|top
+      op: create: transform: req: "event": *("`reqdata.event`")|top
+      op: create: transform: req: "evidence": *("`reqdata.evidence`")|top
+      op: create: transform: req: "external_key": *("`reqdata.external_key`")|top
+      op: create: transform: req: "occurred_at": *("`reqdata.occurred_at`")|top
+      op: create: transform: req: "revenue_usd": *("`reqdata.revenue_usd`")|top
+      op: create: transform: req: "source_system": *("`reqdata.source_system`")|top
+    }
+    path: "/api/healthrx/products/{product_id}/benchmarks": {
+      op: create: method: *POST
+      op: create: transform: req: "benchmark_set": *("`reqdata.benchmark_set`")|top
+      op: create: transform: req: "commercial_license_evidence": *("`reqdata.commercial_license_evidence`")|top
+      op: create: transform: req: "dimensions": *("`reqdata.dimension`")|top
+      op: create: transform: req: "evidence_urls": *("`reqdata.evidence_url`")|top
+      op: create: transform: req: "external_key": *("`reqdata.external_key`")|top
+      op: create: transform: req: "input_specification": *("`reqdata.input_specification`")|top
+      op: create: transform: req: "measured_at": *("`reqdata.measured_at`")|top
+      op: create: transform: req: "model_version": *("`reqdata.model_version`")|top
+      op: create: transform: req: "provider": *("`reqdata.provider`")|top
+      op: create: transform: req: "reference_version": *("`reqdata.reference_version`")|top
+    }
+    path: "/api/healthrx/products/{product_id}/content/{content_id}/resolve": {
+      op: create: method: *POST
+      op: create: transform: req: "action": *("`reqdata.action`")|top
+      op: create: transform: req: "reason": *("`reqdata.reason`")|top
+    }
+    path: "/api/healthrx/products/{product_id}/cost-receipts": {
+      op: create: method: *POST
+      op: create: transform: req: "attempt": *("`reqdata.attempt`")|top
+      op: create: transform: req: "content_id": *("`reqdata.content_id`")|top
+      op: create: transform: req: "external_key": *("`reqdata.external_key`")|top
+      op: create: transform: req: "includes_all_attempt_costs": *("`reqdata.includes_all_attempt_cost`")|top
+      op: create: transform: req: "provider_invoice_evidence": *("`reqdata.provider_invoice_evidence`")|top
+      op: create: transform: req: "total_cost_usd": *("`reqdata.total_cost_usd`")|top
+    }
+    path: "/api/healthrx/products/{product_id}/incidents": {
+      op: create: method: *POST
+      op: create: transform: req: "account_id": *("`reqdata.account_id`")|top
+      op: create: transform: req: "evidence": *("`reqdata.evidence`")|top
+      op: create: transform: req: "external_key": *("`reqdata.external_key`")|top
+      op: create: transform: req: "kind": *("`reqdata.kind`")|top
+      op: create: transform: req: "scope": *("`reqdata.scope`")|top
+    }
+    path: "/api/healthrx/products/{product_id}/incidents/{incident_id}/resolve": {
+      op: create: method: *POST
+      op: create: transform: req: "evidence": *("`reqdata.evidence`")|top
+    }
+    path: "/api/healthrx/products/{product_id}/profile-schema": {
+      op: load: method: *GET
+    }
+    path: "/api/healthrx/products/{product_id}/reports": {
+      op: load: method: *GET
+    }
+    path: "/api/healthrx/products/{product_id}/run": {
+      action: "run": {}
+      op: create: method: *POST
+    }
+  }
+
+  entity: init_reset_product_v6: {
+    path: "/api/reset-product/init-v6": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: iri: {
+    path: "/api/iris/connectors/{connector_id}/start": {
+      op: create: method: *POST
+    }
+    path: "/api/iris/tasks/{task_id}/run": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: iris_capability: {
+    path: "/api/platform/capabilities/{capability_name}": {
+      rename: param: "capability_name": *"id"
+      op: create: method: *POST
+    }
+  }
+
+  entity: iris_chat: {
+    path: "/api/iris/chat": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: iris_connector: {
+    path: "/api/iris/connectors": {
+      op: list: method: *GET
+      op: list: transform: res: *("`body.connectors`")|top
+    }
+  }
+
+  entity: iris_status: {
+    path: "/api/iris/status": {
+      op: list: method: *GET
+    }
+  }
+
+  entity: iris_task: {
+    path: "/api/iris/tasks": {
+      op: create: method: *POST
+      op: list: method: *GET
+    }
+  }
+
+  entity: iris_usage: {
+    path: "/api/iris/usage": {
+      op: list: method: *GET
+      op: list: transform: res: *("`body.events`")|top
+    }
+  }
+
+  entity: landing: {
+    path: "/api/landings/landing/reference-image": {
+      action: "reference_image": {}
+      op: create: method: *POST
+    }
+    path: "/api/landings/landing/regenerate": {
+      action: "regenerate": {}
+      op: create: method: *POST
+    }
+    path: "/api/landings/microhub/header-image": {
+      op: create: method: *POST
+    }
+    path: "/api/landings/microhub/profile-image": {
+      op: create: method: *POST
+    }
+    path: "/api/landings/microhub/testimonial-image/{index}": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: landing_stat: {
+    path: "/api/landings/{slug}/stats": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: landing_status: {
+    path: "/api/landings/status": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: link_in_bio: {
+    path: "/api/sites/{slug}/link-in-bio": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: link_in_dm: {
+    path: "/api/sites/{slug}/link-in-dms": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: link_in_post: {
+    path: "/api/sites/{slug}/link-in-posts": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: link_user: {
+    path: "/api/onboarding-v6/link-user": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: media_asset: {
+    path: "/api/media-assets/upload": {
+      action: "upload": {}
+      op: create: method: *POST
+    }
+    path: "/api/media-assets/{media_asset_id}/exclude-copycat": {
+      action: "exclude_copycat": {}
+      rename: param: "media_asset_id": *"id"
+      op: create: method: *POST
+    }
+    path: "/api/onboarding-v6/repost-content/upload": {
+      op: create: method: *POST
+    }
+    path: "/api/video-variation/media-assets/{product_id}": {
+      rename: param: "product_id": *"id"
+      op: load: method: *GET
+    }
+  }
+
+  entity: men: {
+    path: "/api/videos/me": {
+      op: list: method: *GET
+    }
+  }
+
+  entity: microdrama: {
+    path: "/api/microdrama/config": {
+      action: "config": {}
+      op: load: method: *GET
+    }
+    path: "/api/microdrama/episodes": {
+      action: "episode": {}
+      op: create: method: *POST
+      op: create: transform: req: "emotional_movement": *("`reqdata.emotional_movement`")|top
+      op: create: transform: req: "exclusions": *("`reqdata.exclusion`")|top
+      op: create: transform: req: "experiment_hypothesis": *("`reqdata.experiment_hypothesi`")|top
+      op: create: transform: req: "formula_id": *("`reqdata.formula_id`")|top
+      op: create: transform: req: "human_tension": *("`reqdata.human_tension`")|top
+      op: create: transform: req: "incident": *("`reqdata.incident`")|top
+      op: create: transform: req: "product_placement": *("`reqdata.product_placement`")|top
+      op: create: transform: req: "reference_version_ids": *("`reqdata.reference_version_id`")|top
+      op: create: transform: req: "series_id": *("`reqdata.series_id`")|top
+      op: create: transform: req: "title": *("`reqdata.title`")|top
+    }
+    path: "/api/microdrama/episodes/{episode_id}": {
+      op: load: method: *GET
+      op: patch: method: *PATCH
+      op: patch: transform: req: "expected_revision": *("`reqdata.expected_revision`")|top
+      op: patch: transform: req: "selected_premise_id": *("`reqdata.selected_premise_id`")|top
+      op: patch: transform: req: "title": *("`reqdata.title`")|top
+    }
+    path: "/api/microdrama/episodes/{episode_id}/approve": {
+      action: "approve": {}
+      op: create: method: *POST
+      op: create: transform: req: "expected_revision": *("`reqdata.expected_revision`")|top
+      op: create: transform: req: "manifest_hash": *("`reqdata.manifest_hash`")|top
+    }
+    path: "/api/microdrama/episodes/{episode_id}/exports": {
+      op: create: method: *POST
+    }
+    path: "/api/microdrama/episodes/{episode_id}/reviews": {
+      op: create: method: *POST
+      op: create: transform: req: "evidence": *("`reqdata.evidence`")|top
+      op: create: transform: req: "issues": *("`reqdata.issue`")|top
+      op: create: transform: req: "role": *("`reqdata.role`")|top
+      op: create: transform: req: "scores": *("`reqdata.score`")|top
+      op: create: transform: req: "subject_hash": *("`reqdata.subject_hash`")|top
+      op: create: transform: req: "verdict": *("`reqdata.verdict`")|top
+    }
+    path: "/api/microdrama/episodes/{episode_id}/runs": {
+      op: create: method: *POST
+      op: create: transform: req: "idempotency_key": *("`reqdata.idempotency_key`")|top
+      op: create: transform: req: "stage": *("`reqdata.stage`")|top
+    }
+    path: "/api/microdrama/formulas": {
+      action: "formula": {}
+      op: load: method: *GET
+    }
+    path: "/api/microdrama/reference-assets": {
+      action: "reference_asset": {}
+      op: create: method: *POST
+      op: create: transform: req: "classification": *("`reqdata.classification`")|top
+      op: create: transform: req: "compatibility_profile": *("`reqdata.compatibility_profile`")|top
+      op: create: transform: req: "editable_layout": *("`reqdata.editable_layout`")|top
+      op: create: transform: req: "family": *("`reqdata.family`")|top
+      op: create: transform: req: "generation_receipt": *("`reqdata.generation_receipt`")|top
+      op: create: transform: req: "height": *("`reqdata.height`")|top
+      op: create: transform: req: "origin": *("`reqdata.origin`")|top
+      op: create: transform: req: "raster_sha256": *("`reqdata.raster_sha256`")|top
+      op: create: transform: req: "raster_url": *("`reqdata.raster_url`")|top
+      op: create: transform: req: "rights_status": *("`reqdata.rights_status`")|top
+      op: create: transform: req: "s3_object_version": *("`reqdata.s3_object_version`")|top
+      op: create: transform: req: "source": *("`reqdata.source`")|top
+      op: create: transform: req: "version": *("`reqdata.version`")|top
+      op: create: transform: req: "width": *("`reqdata.width`")|top
+      op: load: method: *GET
+    }
+    path: "/api/microdrama/reference-assets/{reference_id}/review": {
+      rename: param: "reference_id": *"reference_asset_id"
+      op: create: method: *POST
+      op: create: transform: req: "reason": *("`reqdata.reason`")|top
+      op: create: transform: req: "status": *("`reqdata.status`")|top
+    }
+    path: "/api/microdrama/runs/{run_id}": {
+      op: load: method: *GET
+    }
+    path: "/api/microdrama/series": {
+      action: "series": {}
+      op: create: method: *POST
+      op: create: transform: req: "audience": *("`reqdata.audience`")|top
+      op: create: transform: req: "device_profile": *("`reqdata.device_profile`")|top
+      op: create: transform: req: "name": *("`reqdata.name`")|top
+      op: create: transform: req: "voice": *("`reqdata.voice`")|top
+      op: load: method: *GET
+    }
+  }
+
+  entity: microhub_public: {
+    path: "/api/sites/{slug}": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: onboarding_status: {
+    path: "/api/onboarding-v6/status": {
+      op: list: method: *GET
+    }
+  }
+
+  entity: onboarding_v6: {
+    path: "/api/onboarding-v6/repost-content/{media_asset_id}": {
+      op: remove: method: *DELETE
+    }
+  }
+
+  entity: paid_user: {
+    path: "/api/admin/paid-users": {
+      op: list: method: *GET
+    }
+  }
+
+  entity: pexel: {
+    path: "/api/pexels/search": {
+      action: "search": {}
+      op: list: method: *GET
+    }
+  }
+
+  entity: phone_admin_available_agent_source: {
+    path: "/api/admin/phone-admin/available-agent-sources": {
+      op: list: method: *GET
+      op: list: transform: res: *("`body.sources`")|top
+    }
+  }
+
+  entity: product: {
+    path: "/api/admin/users/{user_id}/products": {
+      op: list: method: *GET
+    }
+    path: "/api/enterprise/agents/product/{product_id}": {
+      rename: param: "product_id": *"id"
+      op: load: method: *GET
+    }
+    path: "/api/enterprise/products": {
+      op: create: method: *POST
+      op: list: method: *GET
+      op: list: transform: res: *("`body.products`")|top
+    }
+    path: "/api/enterprise/products/{product_id}": {
+      rename: param: "product_id": *"id"
+      op: load: method: *GET
+      op: remove: method: *DELETE
+      op: update: method: *PUT
+    }
+    path: "/api/enterprise/products/{product_id}/activate": {
+      action: "activate": {}
+      rename: param: "product_id": *"id"
+      op: update: method: *PUT
+    }
+    path: "/api/products/clear": {
+      action: "clear": {}
+      op: create: method: *POST
+    }
+    path: "/api/products/me": {
+      action: "me": {}
+      op: load: method: *GET
+      op: update: method: *PUT
+    }
+    path: "/api/products/{product_id}/validate-social-handle": {
+      action: "validate_social_handle": {}
+      rename: param: "product_id": *"id"
+      op: create: method: *POST
+    }
+  }
+
+  entity: product_dashboard: {
+    path: "/api/admin/products-dashboard": {
+      op: list: method: *GET
+    }
+  }
+
+  entity: product_dashboard_view: {
+    path: "/api/admin/products-dashboard/views": {
+      op: list: method: *GET
+      op: list: transform: res: *("`body.points`")|top
+    }
+  }
+
+  entity: product_demo: {
+    path: "/api/video-variation/product-demos": {
+      op: list: method: *GET
+      op: list: transform: res: *("`body.media_assets`")|top
+    }
+  }
+
+  entity: product_landing: {
+    path: "/api/landings/me": {
+      op: list: method: *GET
+    }
+    path: "/api/landings/microhub": {
+      op: update: method: *PUT
+    }
+    path: "/api/landings/settings": {
+      op: update: method: *PUT
+    }
+  }
+
+  entity: public_resume_status: {
+    path: "/api/onboarding-v6/resume-status-public": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: re_roll_video: {
+    path: "/api/core/re-roll-video": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: read_root_get: {
+    path: "/": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: record_demo_booked: {
+    path: "/api/chat/sessions/{session_id}/demo-booked": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: refresh_stat: {
+    path: "/api/analytics/refresh-stats": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: remixer_clipper: {
+    path: "/api/remixer-clippers/catalog": {
+      action: "catalog": {}
+      op: load: method: *GET
+    }
+    path: "/api/remixer-clippers/jobs/{identifier}/download": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: reset_product: {
+    path: "/api/reset-product/generate-videos-v6": {
+      action: "generate_videos_v6": {}
+      op: create: method: *POST
+    }
+    path: "/api/reset-product/generate-videos/status": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: retry_website_scrape: {
+    path: "/api/onboarding-v6/retry-scrape": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: save_survey: {
+    path: "/api/onboarding-v6/save-survey": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: scan_social: {
+    path: "/api/reset-product/scan-socials": {
+      op: create: method: *POST
+    }
+    path: "/api/video-variation/scan-socials": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: scan_socials_public: {
+    path: "/api/onboarding-v6/scan-socials-public": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: scan_socials_status: {
+    path: "/api/video-variation/scan-socials/status": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: schedule_v2: {
+    path: "/api/schedule/queue": {
+      op: list: method: *GET
+      op: list: transform: res: *("`body.items`")|top
+    }
+    path: "/api/schedule/queue/add": {
+      op: create: method: *POST
+    }
+    path: "/api/schedule/queue/reorder": {
+      op: create: method: *POST
+    }
+    path: "/api/schedule/queue/{queue_id}": {
+      op: remove: method: *DELETE
+    }
+    path: "/api/schedule/queue/{queue_id}/replace-video": {
+      action: "replace_video": {}
+      op: update: method: *PUT
+    }
+    path: "/api/schedule/results": {
+      op: load: method: *GET
+    }
+    path: "/api/schedule/test-daily-email": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: scrape: {
+    path: "/api/reset-product/scrape": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: scrape_website_public: {
+    path: "/api/onboarding-v6/scrape-website-public": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: scraped_data: {
+    path: "/api/scraper/extract": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: scraping_status: {
+    path: "/api/scraper/scraping_status": {
+      op: load: method: *GET
+      op: load: transform: res: *("`body.data`")|top
+    }
+  }
+
+  entity: self_serve_activate: {
+    path: "/api/onboarding-v6/self-serve-activate": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: seo: {
+    path: "/api/seo/oauth/status": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: seo_ai_mention: {
+    path: "/api/seo/ai-mentions": {
+      op: list: method: *GET
+      op: list: transform: res: *("`body.rows`")|top
+    }
+  }
+
+  entity: seo_backlink: {
+    path: "/api/seo/backlinks": {
+      op: list: method: *GET
+      op: list: transform: res: *("`body.rows`")|top
+    }
+  }
+
+  entity: seo_keyword: {
+    path: "/api/seo/keywords": {
+      op: list: method: *GET
+      op: list: transform: res: *("`body.rows`")|top
+    }
+  }
+
+  entity: seo_overview: {
+    path: "/api/seo/overview": {
+      op: list: method: *GET
+    }
+  }
+
+  entity: seo_traffic: {
+    path: "/api/seo/traffic": {
+      op: list: method: *GET
+    }
+  }
+
+  entity: share_access_link: {
+    path: "/auth/share-access-link": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: site: {
+    path: "/api/sites/slugs": {
+      action: "slug": {}
+      op: load: method: *GET
+    }
+  }
+
+  entity: slide: {
+    path: "/api/carousel/{video_id}/slides/{slide_index}": {
+      rename: param: "slide_index": *"id"
+      rename: param: "video_id": *"carousel_id"
+      op: patch: method: *PATCH
+    }
+    path: "/api/carousel/{video_id}/slides/{slide_index}/regenerate": {
+      action: "regenerate": {}
+      rename: param: "video_id": *"carousel_id"
+      op: create: method: *POST
+    }
+  }
+
+  entity: slug_validation: {
+    path: "/api/landings/validate-slug/{slug}": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: social: {
+    path: "/social/connections": {
+      op: list: method: *GET
+    }
+    path: "/social/connections/{platform}": {
+      op: remove: method: *DELETE
+    }
+    path: "/social/instagram/auth": {
+      op: load: method: *GET
+    }
+    path: "/social/instagram/callback": {
+      op: load: method: *GET
+    }
+    path: "/social/instagram/exchange": {
+      op: create: method: *POST
+    }
+    path: "/social/platforms": {
+      action: "platform": {}
+      op: list: method: *GET
+    }
+    path: "/social/tiktok/auth": {
+      op: load: method: *GET
+    }
+    path: "/social/tiktok/callback": {
+      op: load: method: *GET
+    }
+    path: "/social/tiktok/exchange": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: social_scan_preview: {
+    path: "/api/social-scan/preview": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: social_scan_process: {
+    path: "/api/social-scan/process": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: social_scan_save: {
+    path: "/api/social-scan/save": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: sora2_avatar: {
+    path: "/api/admin/sora2-avatars": {
+      op: create: method: *POST
+      op: list: method: *GET
+      op: list: transform: res: *("`body.items`")|top
+    }
+    path: "/api/admin/sora2-avatars/{avatar_id}": {
+      rename: param: "avatar_id": *"id"
+      op: load: method: *GET
+      op: update: method: *PUT
+    }
+  }
+
+  entity: sora2_avatar_asset_upload: {
+    path: "/api/admin/sora2-avatars/upload-asset": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: sora2_avatar_stat: {
+    path: "/api/admin/sora2-avatars/stats": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: stat: {
+    path: "/api/admin/stats/posts": {
+      action: "post": {}
+      op: list: method: *GET
+      op: list: transform: res: *("`body.daily_stats`")|top
+    }
+  }
+
+  entity: stats_refresh_backfill: {
+    path: "/api/admin/customer-health/backfill": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: stats_refresh_issue: {
+    path: "/api/admin/customer-health/issues": {
+      op: list: method: *GET
+      op: list: transform: res: *("`body.issues`")|top
+    }
+  }
+
+  entity: stats_refresh_overview: {
+    path: "/api/admin/customer-health/overview": {
+      op: list: method: *GET
+    }
+  }
+
+  entity: stats_refresh_run_summary: {
+    path: "/api/admin/customer-health/runs": {
+      op: list: method: *GET
+      op: list: transform: res: *("`body.runs`")|top
+    }
+  }
+
+  entity: stats_refresh_task_trigger: {
+    path: "/api/admin/customer-health/manual-refresh": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: stripe: {
+    path: "/api/stripe/associate-guest-checkout": {
+      action: "associate_guest_checkout": {}
+      op: create: method: *POST
+    }
+    path: "/api/stripe/cancel-trial": {
+      action: "cancel_trial": {}
+      op: create: method: *POST
+    }
+    path: "/api/stripe/create-checkout-session": {
+      action: "create_checkout_session": {}
+      op: create: method: *POST
+    }
+    path: "/api/stripe/create-credits-checkout-session": {
+      action: "create_credits_checkout_session": {}
+      op: create: method: *POST
+    }
+    path: "/api/stripe/create-guest-checkout-session": {
+      action: "create_guest_checkout_session": {}
+      op: create: method: *POST
+    }
+    path: "/api/stripe/create-portal-session": {
+      action: "create_portal_session": {}
+      op: create: method: *POST
+    }
+    path: "/api/stripe/end-trial-early": {
+      action: "end_trial_early": {}
+      op: create: method: *POST
+    }
+    path: "/api/stripe/update-subscription-quantity": {
+      action: "update_subscription_quantity": {}
+      op: create: method: *POST
+    }
+  }
+
+  entity: style: {
+    path: "/api/carousel/styles": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: template: {
+    path: "/api/carousel/templates": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: tik_tok_creator_info: {
+    path: "/social/tiktok/creator-info": {
+      op: list: method: *GET
+      op: list: transform: res: *("`body.privacyLevelOptions`")|top
+    }
+  }
+
+  entity: top_post: {
+    path: "/api/admin/stats/top-posts": {
+      op: list: method: *GET
+      op: list: transform: res: *("`body.posts`")|top
+    }
+  }
+
+  entity: upload_post_agent: {
+    path: "/api/upload-post-agents/sync-platforms": {
+      action: "sync_platform": {}
+      op: create: method: *POST
+    }
+  }
+
+  entity: user: {
+    path: "/api/upload-post-agents/user/{user_id}": {
+      rename: param: "user_id": *"id"
+      op: load: method: *GET
+    }
+    path: "/api/users/attribution": {
+      action: "attribution": {}
+      op: patch: method: *PATCH
+    }
+    path: "/api/users/industry": {
+      action: "industry": {}
+      op: patch: method: *PATCH
+    }
+    path: "/api/users/mark-schedule-welcome-seen": {
+      action: "mark_schedule_welcome_seen": {}
+      op: patch: method: *PATCH
+    }
+    path: "/auth/me": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: user_agent: {
+    path: "/api/admin/users/{user_id}/agents": {
+      rename: param: "user_id": *"id"
+      op: create: method: *POST
+      op: list: method: *GET
+      op: list: transform: res: *("`body.assignments`")|top
+    }
+  }
+
+  entity: user_health_detail: {
+    path: "/api/admin/users/{user_id}/health-detail": {
+      rename: param: "user_id": *"id"
+      op: list: method: *GET
+    }
+  }
+
+  entity: user_with_avatar_submission: {
+    path: "/api/admin/users/avatar-submissions": {
+      op: list: method: *GET
+    }
+  }
+
+  entity: users_health: {
+    path: "/api/admin/users-health": {
+      op: list: method: *GET
+      op: list: transform: res: *("`body.users`")|top
+    }
+  }
+
+  entity: video: {
+    path: "/api/core/update-video-captions": {
+      op: create: method: *POST
+    }
+    path: "/videos/": {
+      op: create: method: *POST
+    }
+    path: "/videos/{video_id}": {
+      rename: param: "video_id": *"id"
+      op: load: method: *GET
+      op: patch: method: *PATCH
+      op: remove: method: *DELETE
+    }
+    path: "/videos/{video_id}/retry-video": {
+      action: "retry_video": {}
+      rename: param: "video_id": *"id"
+      op: create: method: *POST
+    }
+    path: "/videos/{video_id}/template": {
+      action: "template": {}
+      rename: param: "video_id": *"id"
+      op: patch: method: *PATCH
+    }
+  }
+
+  entity: video_remixer_worker: {
+    path: "/api/admin/video-remixer/worker/claim": {
+      op: create: method: *POST
+      op: create: transform: req: "kinds": *("`reqdata.kind`")|top
+      op: create: transform: req: "limit": *("`reqdata.limit`")|top
+      op: create: transform: req: "tier": *("`reqdata.tier`")|top
+      op: create: transform: req: "worker_id": *("`reqdata.worker_id`")|top
+    }
+    path: "/api/admin/video-remixer/worker/jobs/{identifier}/fail": {
+      op: create: method: *POST
+      op: create: transform: req: "error": *("`reqdata.error`")|top
+      op: create: transform: req: "lease_token": *("`reqdata.lease_token`")|top
+      op: create: transform: req: "worker_id": *("`reqdata.worker_id`")|top
+    }
+    path: "/api/admin/video-remixer/worker/jobs/{identifier}/heartbeat": {
+      op: create: method: *POST
+      op: create: transform: req: "lease_token": *("`reqdata.lease_token`")|top
+      op: create: transform: req: "worker_id": *("`reqdata.worker_id`")|top
+    }
+    path: "/api/admin/video-remixer/worker/jobs/{identifier}/media": {
+      op: create: method: *POST
+      op: create: transform: req: "lease_token": *("`reqdata.lease_token`")|top
+      op: create: transform: req: "worker_id": *("`reqdata.worker_id`")|top
+    }
+    path: "/api/admin/video-remixer/worker/jobs/{identifier}/render-output": {
+      op: create: method: *POST
+    }
+    path: "/api/admin/video-remixer/worker/jobs/{identifier}/result": {
+      op: create: method: *POST
+      op: create: transform: req: "cost_usd": *("`reqdata.cost_usd`")|top
+      op: create: transform: req: "lease_token": *("`reqdata.lease_token`")|top
+      op: create: transform: req: "model": *("`reqdata.model`")|top
+      op: create: transform: req: "processing_seconds": *("`reqdata.processing_second`")|top
+      op: create: transform: req: "prompt_version": *("`reqdata.prompt_version`")|top
+      op: create: transform: req: "result": *("`reqdata.result`")|top
+      op: create: transform: req: "worker_id": *("`reqdata.worker_id`")|top
+    }
+    path: "/api/admin/video-remixer/worker/jobs/{identifier}/upload": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: watchdog_recovery: {
+    path: "/api/v1/watchdog/recovery-queue": {
+      op: load: method: *GET
+    }
+    path: "/api/v1/watchdog/recovery-queue/resolve": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: winning_ad: {
+    path: "/api/video-variation/winning-ads": {
+      op: list: method: *GET
+      op: list: transform: res: *("`body.media_assets`")|top
+    }
+  }
+
+  entity: x_adaptation: {
+    path: "/api/carousel/x-adaptations": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: zerohuman_admin_account: {
+    path: "/api/admin/zerohuman/accounts": {
+      op: list: method: *GET
+    }
+  }
+
+}

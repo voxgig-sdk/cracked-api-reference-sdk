@@ -1,0 +1,44 @@
+{
+  "existing": {
+    "social_scan_save": {
+      "SOCIAL_SCAN_SAVE00": {
+        "media_asset_ids": [],
+        "posts": [],
+        "product_id": "PRODUCT01",
+        "success": false,
+        "id": "SOCIAL_SCAN_SAVE00"
+      },
+      "SOCIAL_SCAN_SAVE01": {
+        "media_asset_ids": [],
+        "posts": [],
+        "product_id": "PRODUCT01",
+        "success": false,
+        "id": "SOCIAL_SCAN_SAVE01"
+      },
+      "SOCIAL_SCAN_SAVE02": {
+        "media_asset_ids": [],
+        "posts": [],
+        "product_id": "PRODUCT01",
+        "success": false,
+        "id": "SOCIAL_SCAN_SAVE02"
+      }
+    }
+  },
+  "new": {
+    "social_scan_save": {
+      "social_scan_save_ref01": {
+        "media_asset_ids": [],
+        "posts": [],
+        "product_id": "PRODUCT01",
+        "success": false
+      }
+    }
+  },
+  "requests": {
+    "POST /api/social-scan/save": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

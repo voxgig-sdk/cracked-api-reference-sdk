@@ -1,0 +1,49 @@
+# Entity: analysis_status
+
+main: kit: entity: analysis_status: {
+
+  alias: field: {}
+
+  name: "analysis_status"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/scraper/analysis-status"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/scraper/analysis-status"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "scraper"
+            }
+            {
+              lit: "analysis-status"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+      ]
+    }
+  }
+
+  fields: {
+  }
+
+
+
+}

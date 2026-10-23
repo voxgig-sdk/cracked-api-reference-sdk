@@ -1,0 +1,22 @@
+# BasicAnalyticsPostFlow
+
+main: kit: flow: BasicAnalyticsPostFlow:
+{
+  entity: "analytics_post",
+  kind: "basic",
+  name: "BasicAnalyticsPostFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "analytics_post_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicAnalyticsPostFlow"
+}

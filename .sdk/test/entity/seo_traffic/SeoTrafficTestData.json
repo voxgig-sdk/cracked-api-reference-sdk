@@ -1,0 +1,57 @@
+{
+  "existing": {
+    "seo_traffic": {
+      "SEO_TRAFFIC00": {
+        "end_date": "s50",
+        "series": [],
+        "site_url": "s52",
+        "start_date": "s53",
+        "top_countries": [],
+        "top_pages": [],
+        "top_queries": [],
+        "totals": {}
+      },
+      "SEO_TRAFFIC01": {
+        "end_date": "sa0",
+        "series": [],
+        "site_url": "sa2",
+        "start_date": "sa3",
+        "top_countries": [],
+        "top_pages": [],
+        "top_queries": [],
+        "totals": {}
+      },
+      "SEO_TRAFFIC02": {
+        "end_date": "sf0",
+        "series": [],
+        "site_url": "sf2",
+        "start_date": "sf3",
+        "top_countries": [],
+        "top_pages": [],
+        "top_queries": [],
+        "totals": {}
+      }
+    }
+  },
+  "new": {
+    "seo_traffic": {
+      "seo_traffic_ref01": {
+        "end_date": "s140",
+        "series": [],
+        "site_url": "s142",
+        "start_date": "s143",
+        "top_countries": [],
+        "top_pages": [],
+        "top_queries": [],
+        "totals": {}
+      }
+    }
+  },
+  "requests": {
+    "GET /api/seo/traffic": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

@@ -1,0 +1,22 @@
+# BasicIrisStatusFlow
+
+main: kit: flow: BasicIrisStatusFlow:
+{
+  entity: "iris_status",
+  kind: "basic",
+  name: "BasicIrisStatusFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "iris_status_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicIrisStatusFlow"
+}

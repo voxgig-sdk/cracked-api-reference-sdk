@@ -1,0 +1,61 @@
+{
+  "existing": {
+    "scan_social": {
+      "SCAN_SOCIAL00": {
+        "instagram_handle": "s46",
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "product_id": "PRODUCT01",
+        "status": "s49",
+        "success": true,
+        "task_id": "TASK01",
+        "tiktok_handle": "s4c",
+        "id": "SCAN_SOCIAL00"
+      },
+      "SCAN_SOCIAL01": {
+        "instagram_handle": "s8c",
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "product_id": "PRODUCT01",
+        "status": "s8f",
+        "success": true,
+        "task_id": "TASK01",
+        "tiktok_handle": "s92",
+        "id": "SCAN_SOCIAL01"
+      },
+      "SCAN_SOCIAL02": {
+        "instagram_handle": "sd2",
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "product_id": "PRODUCT01",
+        "status": "sd5",
+        "success": true,
+        "task_id": "TASK01",
+        "tiktok_handle": "sd8",
+        "id": "SCAN_SOCIAL02"
+      }
+    }
+  },
+  "new": {
+    "scan_social": {
+      "scan_social_ref01": {
+        "instagram_handle": "s118",
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "product_id": "PRODUCT01",
+        "status": "s11b",
+        "success": true,
+        "task_id": "TASK01",
+        "tiktok_handle": "s11e"
+      }
+    }
+  },
+  "requests": {
+    "POST /api/reset-product/scan-socials": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/video-variation/scan-socials": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

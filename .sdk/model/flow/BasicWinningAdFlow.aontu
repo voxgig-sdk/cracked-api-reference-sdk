@@ -1,0 +1,22 @@
+# BasicWinningAdFlow
+
+main: kit: flow: BasicWinningAdFlow:
+{
+  entity: "winning_ad",
+  kind: "basic",
+  name: "BasicWinningAdFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "winning_ad_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicWinningAdFlow"
+}

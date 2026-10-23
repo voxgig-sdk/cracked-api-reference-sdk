@@ -1,0 +1,60 @@
+{
+  "existing": {
+    "customer_health": {
+      "CUSTOMER_HEALTH00": {
+        "assigned_agents": {},
+        "available_dates": [],
+        "date": "s5c",
+        "email": "s5d",
+        "entries": [],
+        "id": "CUSTOMER_HEALTH00",
+        "performance_overview": {},
+        "platform_coverage_summary": {},
+        "user_id": "USER01"
+      },
+      "CUSTOMER_HEALTH01": {
+        "assigned_agents": {},
+        "available_dates": [],
+        "date": "sb6",
+        "email": "sb7",
+        "entries": [],
+        "id": "CUSTOMER_HEALTH01",
+        "performance_overview": {},
+        "platform_coverage_summary": {},
+        "user_id": "USER01"
+      },
+      "CUSTOMER_HEALTH02": {
+        "assigned_agents": {},
+        "available_dates": [],
+        "date": "s110",
+        "email": "s111",
+        "entries": [],
+        "id": "CUSTOMER_HEALTH02",
+        "performance_overview": {},
+        "platform_coverage_summary": {},
+        "user_id": "USER01"
+      }
+    }
+  },
+  "new": {
+    "customer_health": {
+      "customer_health_ref01": {
+        "assigned_agents": {},
+        "available_dates": [],
+        "date": "s16a",
+        "email": "s16b",
+        "entries": [],
+        "performance_overview": {},
+        "platform_coverage_summary": {},
+        "user_id": "USER01"
+      }
+    }
+  },
+  "requests": {
+    "GET /api/admin/customer-health/{user_id}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

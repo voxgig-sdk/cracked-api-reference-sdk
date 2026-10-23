@@ -1,0 +1,61 @@
+{
+  "existing": {
+    "admin_insight": {
+      "ADMIN_INSIGHT00": {
+        "customer_success_cases": [],
+        "customers": [],
+        "generated_at": "s48",
+        "pfa_database": {},
+        "recent_signups": [],
+        "summary": {},
+        "vireel_database": {},
+        "id": "ADMIN_INSIGHT00"
+      },
+      "ADMIN_INSIGHT01": {
+        "customer_success_cases": [],
+        "customers": [],
+        "generated_at": "s8e",
+        "pfa_database": {},
+        "recent_signups": [],
+        "summary": {},
+        "vireel_database": {},
+        "id": "ADMIN_INSIGHT01"
+      },
+      "ADMIN_INSIGHT02": {
+        "customer_success_cases": [],
+        "customers": [],
+        "generated_at": "sd4",
+        "pfa_database": {},
+        "recent_signups": [],
+        "summary": {},
+        "vireel_database": {},
+        "id": "ADMIN_INSIGHT02"
+      }
+    }
+  },
+  "new": {
+    "admin_insight": {
+      "admin_insight_ref01": {
+        "customer_success_cases": [],
+        "customers": [],
+        "generated_at": "s11a",
+        "pfa_database": {},
+        "recent_signups": [],
+        "summary": {},
+        "vireel_database": {}
+      }
+    }
+  },
+  "requests": {
+    "GET /api/admin/insights": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/insights/customer-agent-readiness": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

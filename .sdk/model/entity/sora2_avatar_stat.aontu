@@ -1,0 +1,126 @@
+# Entity: sora2_avatar_stat
+
+main: kit: entity: sora2_avatar_stat: {
+
+  alias: field: {}
+
+  fields: {
+    by_age_bucket: {
+      h: "By Age Bucket"
+      n: "by_age_bucket"
+      r: true
+      t: "`$OBJECT`"
+    }
+    by_gender: {
+      h: "By Gender"
+      n: "by_gender"
+      r: true
+      t: "`$OBJECT`"
+    }
+    by_prompt_key: {
+      h: "By Prompt Key"
+      n: "by_prompt_key"
+      r: true
+      t: "`$OBJECT`"
+    }
+    by_race: {
+      h: "By Race"
+      n: "by_race"
+      r: true
+      t: "`$OBJECT`"
+    }
+    completed_avatars: {
+      h: "Completed Avatars"
+      n: "completed_avatars"
+      r: true
+      t: "`$INTEGER`"
+    }
+    completion_rate: {
+      h: "Completion Rate"
+      n: "completion_rate"
+      r: true
+      t: "`$NUMBER`"
+    }
+    total_avatars: {
+      h: "Total Avatars"
+      n: "total_avatars"
+      r: true
+      t: "`$INTEGER`"
+    }
+  }
+
+  name: "sora2_avatar_stat"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/admin/sora2-avatars/stats"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "prompt_key"
+                or: "prompt_key"
+                r: false
+                t: "`$ANY`"
+              }
+              {
+                k: "query"
+                n: "selected_age_bucket"
+                or: "selected_age_bucket"
+                r: false
+                t: "`$ANY`"
+              }
+              {
+                k: "query"
+                n: "selected_gender"
+                or: "selected_gender"
+                r: false
+                t: "`$ANY`"
+              }
+              {
+                k: "query"
+                n: "selected_race"
+                or: "selected_race"
+                r: false
+                t: "`$ANY`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/sora2-avatars/stats"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "sora2-avatars"
+            }
+            {
+              lit: "stats"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

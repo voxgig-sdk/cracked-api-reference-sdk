@@ -1,0 +1,49 @@
+# Entity: style
+
+main: kit: entity: style: {
+
+  alias: field: {}
+
+  name: "style"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/carousel/styles"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/carousel/styles"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "carousel"
+            }
+            {
+              lit: "styles"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  fields: {
+  }
+
+
+
+}

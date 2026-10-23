@@ -1,0 +1,45 @@
+{
+  "existing": {
+    "seo_backlink": {
+      "SEO_BACKLINK00": {
+        "anchor_text": "s32",
+        "first_seen": "s33",
+        "referring_domain": "s34",
+        "status": "s35",
+        "target_page": "s36"
+      },
+      "SEO_BACKLINK01": {
+        "anchor_text": "s64",
+        "first_seen": "s65",
+        "referring_domain": "s66",
+        "status": "s67",
+        "target_page": "s68"
+      },
+      "SEO_BACKLINK02": {
+        "anchor_text": "s96",
+        "first_seen": "s97",
+        "referring_domain": "s98",
+        "status": "s99",
+        "target_page": "s9a"
+      }
+    }
+  },
+  "new": {
+    "seo_backlink": {
+      "seo_backlink_ref01": {
+        "anchor_text": "sc8",
+        "first_seen": "sc9",
+        "referring_domain": "sca",
+        "status": "scb",
+        "target_page": "scc"
+      }
+    }
+  },
+  "requests": {
+    "GET /api/seo/backlinks": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

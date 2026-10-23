@@ -1,0 +1,535 @@
+# Entity: video
+
+main: kit: entity: video: {
+
+  alias: field: {}
+
+  fields: {
+    agent_id: {
+      h: "Agent Id"
+      n: "agent_id"
+      r: false
+      t: "`$STRING`"
+    }
+    bookmarked: {
+      h: "Bookmarked"
+      n: "bookmarked"
+      r: false
+      t: "`$ANY`"
+    }
+    captions: {
+      h: "Captions"
+      n: "captions"
+      op: {
+        create: {
+          req: true
+          type: "`$STRING`"
+        }
+      }
+      r: false
+      t: "`$ANY`"
+    }
+    carousel_data: {
+      h: "Carousel Data"
+      n: "carousel_data"
+      r: false
+      t: "`$ANY`"
+    }
+    created_at: {
+      fo: "date-time"
+      h: "Created At"
+      n: "created_at"
+      r: true
+      t: "`$STRING`"
+    }
+    duration: {
+      h: "Duration"
+      n: "duration"
+      r: false
+      t: "`$NUMBER`"
+    }
+    generation_status: {
+      h: "Generation Status"
+      n: "generation_status"
+      r: false
+      t: "`$ANY`"
+    }
+    id: {
+      fo: "uuid4"
+      h: "Id"
+      n: "id"
+      r: true
+      t: "`$STRING`"
+    }
+    image_prompt: {
+      h: "Image Prompt"
+      n: "image_prompt"
+      r: false
+      t: "`$ANY`"
+    }
+    is_onboarding: {
+      h: "Is Onboarding"
+      n: "is_onboarding"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    is_template: {
+      h: "Is Template"
+      n: "is_template"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    main_avatar: {
+      h: "Main Avatar"
+      n: "main_avatar"
+      r: false
+      t: "`$ANY`"
+    }
+    main_prompt: {
+      h: "Main Prompt"
+      n: "main_prompt"
+      r: false
+      t: "`$ANY`"
+    }
+    media_asset_id: {
+      h: "Media Asset Id"
+      n: "media_asset_id"
+      r: false
+      t: "`$STRING`"
+    }
+    product_id: {
+      h: "Product Id"
+      n: "product_id"
+      r: false
+      t: "`$STRING`"
+    }
+    reel_id: {
+      h: "Reel Id"
+      n: "reel_id"
+      r: false
+      t: "`$STRING`"
+    }
+    thumbnail_url: {
+      h: "Thumbnail Url"
+      n: "thumbnail_url"
+      r: false
+      t: "`$ANY`"
+    }
+    title: {
+      h: "Title"
+      n: "title"
+      op: {
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      r: true
+      t: "`$STRING`"
+    }
+    type: {
+      h: "Type"
+      n: "type"
+      r: false
+      t: "`$ANY`"
+    }
+    updated_at: {
+      h: "Updated At"
+      n: "updated_at"
+      r: false
+      t: "`$ANY`"
+    }
+    url: {
+      h: "Url"
+      n: "url"
+      op: {
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      r: true
+      t: "`$STRING`"
+    }
+    user_id: {
+      h: "User Id"
+      n: "user_id"
+      r: false
+      t: "`$STRING`"
+    }
+    video_id: {
+      fo: "uuid"
+      h: "Video Id"
+      n: "video_id"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "video"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /videos/{video_id}/retry-video"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "video_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/videos/{video_id}/retry-video"
+          q: {
+            "$action": "retry_video"
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              video_id: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "videos"
+            }
+            {
+              var: "id"
+            }
+            {
+              lit: "retry-video"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "captions"
+            "video_id"
+          ]
+          co: {
+            id: "POST /api/core/update-video-captions"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/core/update-video-captions"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "core"
+            }
+            {
+              lit: "update-video-captions"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "agent_id"
+            "bookmarked"
+            "captions"
+            "carousel_data"
+            "duration"
+            "generation_status"
+            "image_prompt"
+            "is_onboarding"
+            "is_template"
+            "main_prompt"
+            "media_asset_id"
+            "product_id"
+            "reel_id"
+            "thumbnail_url"
+            "title"
+            "type"
+            "url"
+            "user_id"
+          ]
+          co: {
+            id: "POST /videos/"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/videos/"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "videos"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /videos/{video_id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "video_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/videos/{video_id}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              video_id: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "videos"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    remove: {
+      name: "remove"
+      points: [
+        {
+          co: {
+            id: "DELETE /videos/{video_id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "video_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "DELETE"
+          o: "/videos/{video_id}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              video_id: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "videos"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    update: {
+      name: "update"
+      points: [
+        {
+          bf: [
+            "agent_id"
+            "bookmarked"
+            "captions"
+            "carousel_data"
+            "duration"
+            "generation_status"
+            "image_prompt"
+            "is_onboarding"
+            "is_template"
+            "main_prompt"
+            "media_asset_id"
+            "product_id"
+            "reel_id"
+            "thumbnail_url"
+            "title"
+            "type"
+            "url"
+            "user_id"
+          ]
+          co: {
+            id: "PATCH /videos/{video_id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "video_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PATCH"
+          o: "/videos/{video_id}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              video_id: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "videos"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "is_template"
+          ]
+          co: {
+            id: "PATCH /videos/{video_id}/template"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "video_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PATCH"
+          o: "/videos/{video_id}/template"
+          q: {
+            "$action": "template"
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              video_id: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "videos"
+            }
+            {
+              var: "id"
+            }
+            {
+              lit: "template"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

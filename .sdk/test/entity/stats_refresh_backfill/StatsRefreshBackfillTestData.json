@@ -1,0 +1,40 @@
+{
+  "existing": {
+    "stats_refresh_backfill": {
+      "STATS_REFRESH_BACKFILL00": {
+        "message": "s1e",
+        "status": "s1f",
+        "task_id": "TASK01",
+        "id": "STATS_REFRESH_BACKFILL00"
+      },
+      "STATS_REFRESH_BACKFILL01": {
+        "message": "s3c",
+        "status": "s3d",
+        "task_id": "TASK01",
+        "id": "STATS_REFRESH_BACKFILL01"
+      },
+      "STATS_REFRESH_BACKFILL02": {
+        "message": "s5a",
+        "status": "s5b",
+        "task_id": "TASK01",
+        "id": "STATS_REFRESH_BACKFILL02"
+      }
+    }
+  },
+  "new": {
+    "stats_refresh_backfill": {
+      "stats_refresh_backfill_ref01": {
+        "message": "s78",
+        "status": "s79",
+        "task_id": "TASK01"
+      }
+    }
+  },
+  "requests": {
+    "POST /api/admin/customer-health/backfill": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

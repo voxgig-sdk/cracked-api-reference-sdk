@@ -1,0 +1,22 @@
+# BasicAdminMetricsSummaryFlow
+
+main: kit: flow: BasicAdminMetricsSummaryFlow:
+{
+  entity: "admin_metrics_summary",
+  kind: "basic",
+  name: "BasicAdminMetricsSummaryFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "admin_metrics_summary_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicAdminMetricsSummaryFlow"
+}

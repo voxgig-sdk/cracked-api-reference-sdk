@@ -1,0 +1,126 @@
+# Entity: seo_traffic
+
+main: kit: entity: seo_traffic: {
+
+  alias: field: {}
+
+  fields: {
+    end_date: {
+      fo: "date"
+      h: "End Date"
+      n: "end_date"
+      r: true
+      t: "`$STRING`"
+    }
+    series: {
+      h: "Series"
+      n: "series"
+      r: true
+      t: "`$ARRAY`"
+    }
+    site_url: {
+      h: "Site Url"
+      n: "site_url"
+      r: true
+      t: "`$STRING`"
+    }
+    start_date: {
+      fo: "date"
+      h: "Start Date"
+      n: "start_date"
+      r: true
+      t: "`$STRING`"
+    }
+    top_countries: {
+      h: "Top Countries"
+      n: "top_countries"
+      r: true
+      t: "`$ARRAY`"
+    }
+    top_pages: {
+      h: "Top Pages"
+      n: "top_pages"
+      r: true
+      t: "`$ARRAY`"
+    }
+    top_queries: {
+      h: "Top Queries"
+      n: "top_queries"
+      r: true
+      t: "`$ARRAY`"
+    }
+    totals: {
+      h: "Totals"
+      n: "totals"
+      r: true
+      t: "`$OBJECT`"
+    }
+  }
+
+  name: "seo_traffic"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/seo/traffic"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: 28
+                k: "query"
+                n: "day"
+                or: "days"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "product_id"
+                or: "product_id"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: 30
+                k: "query"
+                n: "top_limit"
+                or: "top_limit"
+                r: false
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/seo/traffic"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "seo"
+            }
+            {
+              lit: "traffic"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

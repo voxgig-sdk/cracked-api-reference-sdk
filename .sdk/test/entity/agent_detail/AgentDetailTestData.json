@@ -1,0 +1,107 @@
+{
+  "existing": {
+    "agent_detail": {
+      "AGENT_DETAIL00": {
+        "activeConnections": "s96",
+        "assignedAt": "s97",
+        "avatar": "s98",
+        "bio": "s99",
+        "facebookUrl": "s9a",
+        "id": "AGENT_DETAIL00",
+        "instagramUrl": "s9c",
+        "isActive": false,
+        "name": "s9e",
+        "role": "s9f",
+        "tiktokStats": "sa0",
+        "tiktokUrl": "sa1",
+        "type": "sa2",
+        "uploadPostPlatforms": "sa3",
+        "youtubeUrl": "sa4",
+        "upload_post_agent_id": "UPLOAD_POST_AGENT01"
+      },
+      "AGENT_DETAIL01": {
+        "activeConnections": "s12c",
+        "assignedAt": "s12d",
+        "avatar": "s12e",
+        "bio": "s12f",
+        "facebookUrl": "s130",
+        "id": "AGENT_DETAIL01",
+        "instagramUrl": "s132",
+        "isActive": false,
+        "name": "s134",
+        "role": "s135",
+        "tiktokStats": "s136",
+        "tiktokUrl": "s137",
+        "type": "s138",
+        "uploadPostPlatforms": "s139",
+        "youtubeUrl": "s13a",
+        "upload_post_agent_id": "UPLOAD_POST_AGENT01"
+      },
+      "AGENT_DETAIL02": {
+        "activeConnections": "s1c2",
+        "assignedAt": "s1c3",
+        "avatar": "s1c4",
+        "bio": "s1c5",
+        "facebookUrl": "s1c6",
+        "id": "AGENT_DETAIL02",
+        "instagramUrl": "s1c8",
+        "isActive": false,
+        "name": "s1ca",
+        "role": "s1cb",
+        "tiktokStats": "s1cc",
+        "tiktokUrl": "s1cd",
+        "type": "s1ce",
+        "uploadPostPlatforms": "s1cf",
+        "youtubeUrl": "s1d0",
+        "upload_post_agent_id": "UPLOAD_POST_AGENT01"
+      }
+    }
+  },
+  "new": {
+    "agent_detail": {
+      "agent_detail_ref01": {
+        "activeConnections": "s258",
+        "assignedAt": "s259",
+        "avatar": "s25a",
+        "bio": "s25b",
+        "facebookUrl": "s25c",
+        "instagramUrl": "s25e",
+        "isActive": false,
+        "name": "s260",
+        "role": "s261",
+        "tiktokStats": "s262",
+        "tiktokUrl": "s263",
+        "type": "s264",
+        "uploadPostPlatforms": "s265",
+        "youtubeUrl": "s266"
+      }
+    }
+  },
+  "requests": {
+    "GET /api/upload-post-agents/all": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/upload-post-agents/free": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PATCH /api/upload-post-agents/{agent_id}/bio": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PATCH /api/upload-post-agents/{agent_id}/name": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PATCH /api/upload-post-agents/{agent_id}/role": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

@@ -1,0 +1,22 @@
+# BasicAdminCustomerSuccessFlow
+
+main: kit: flow: BasicAdminCustomerSuccessFlow:
+{
+  entity: "admin_customer_success",
+  kind: "basic",
+  name: "BasicAdminCustomerSuccessFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "admin_customer_success_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicAdminCustomerSuccessFlow"
+}

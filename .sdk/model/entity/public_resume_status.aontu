@@ -1,0 +1,119 @@
+# Entity: public_resume_status
+
+main: kit: entity: public_resume_status: {
+
+  alias: field: {}
+
+  fields: {
+    can_resume_prelogin: {
+      h: "Can Resume Prelogin"
+      n: "can_resume_prelogin"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    content_collection_ready: {
+      h: "Content Collection Ready"
+      n: "content_collection_ready"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    current_step: {
+      h: "Current Step"
+      n: "current_step"
+      r: false
+      t: "`$ANY`"
+    }
+    exists: {
+      h: "Exists"
+      n: "exists"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    flow_variant: {
+      h: "Flow Variant"
+      n: "flow_variant"
+      r: false
+      t: "`$ANY`"
+    }
+    repost_content_count: {
+      h: "Repost Content Count"
+      n: "repost_content_count"
+      r: false
+      t: "`$INTEGER`"
+    }
+    repost_source: {
+      h: "Repost Source"
+      n: "repost_source"
+      r: false
+      t: "`$ANY`"
+    }
+    requires_repost_content: {
+      h: "Requires Repost Content"
+      n: "requires_repost_content"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    skip_demo: {
+      h: "Skip Demo"
+      n: "skip_demo"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+  }
+
+  name: "public_resume_status"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/onboarding-v6/resume-status-public"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "oid"
+                or: "oid"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/onboarding-v6/resume-status-public"
+          q: {
+            exist: [
+              "oid"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "onboarding-v6"
+            }
+            {
+              lit: "resume-status-public"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

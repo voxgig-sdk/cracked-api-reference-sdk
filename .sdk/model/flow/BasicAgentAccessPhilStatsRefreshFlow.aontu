@@ -1,0 +1,28 @@
+# BasicAgentAccessPhilStatsRefreshFlow
+
+main: kit: flow: BasicAgentAccessPhilStatsRefreshFlow:
+{
+  entity: "agent_access_phil_stats_refresh",
+  kind: "basic",
+  name: "BasicAgentAccessPhilStatsRefreshFlow",
+  step: [
+    {
+      i: {
+        ref: "agent_access_phil_stats_refresh_ref01",
+        srcdatavar: "agent_access_phil_stats_refresh_ref01_data",
+        suffix: "_dt0"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-agent_access_phil_stats_refresh_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicAgentAccessPhilStatsRefreshFlow"
+}

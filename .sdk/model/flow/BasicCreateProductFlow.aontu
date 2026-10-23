@@ -1,0 +1,18 @@
+# BasicCreateProductFlow
+
+main: kit: flow: BasicCreateProductFlow:
+{
+  entity: "create_product",
+  kind: "basic",
+  name: "BasicCreateProductFlow",
+  step: [
+    {
+      i: {
+        ref: "create_product_ref01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicCreateProductFlow"
+}

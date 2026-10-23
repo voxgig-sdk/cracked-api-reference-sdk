@@ -1,0 +1,18 @@
+# BasicSocialScanSaveFlow
+
+main: kit: flow: BasicSocialScanSaveFlow:
+{
+  entity: "social_scan_save",
+  kind: "basic",
+  name: "BasicSocialScanSaveFlow",
+  step: [
+    {
+      i: {
+        ref: "social_scan_save_ref01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicSocialScanSaveFlow"
+}

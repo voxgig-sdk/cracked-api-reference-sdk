@@ -1,0 +1,119 @@
+# Entity: onboarding_status
+
+main: kit: entity: onboarding_status: {
+
+  alias: field: {}
+
+  fields: {
+    comments: {
+      h: "Comments"
+      n: "comments"
+      r: false
+      t: "`$INTEGER`"
+    }
+    cover_image_url: {
+      h: "Cover Image Url"
+      n: "cover_image_url"
+      r: false
+      t: "`$ANY`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: true
+      t: "`$STRING`"
+    }
+    likes: {
+      h: "Likes"
+      n: "likes"
+      r: false
+      t: "`$INTEGER`"
+    }
+    platform: {
+      h: "Platform"
+      n: "platform"
+      r: true
+      t: "`$STRING`"
+    }
+    video_url: {
+      h: "Video Url"
+      n: "video_url"
+      r: false
+      t: "`$ANY`"
+    }
+    views: {
+      h: "Views"
+      n: "views"
+      r: false
+      t: "`$INTEGER`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "onboarding_status"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/onboarding-v6/status"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "account_type"
+                or: "account_type"
+                r: false
+                t: "`$ANY`"
+              }
+              {
+                k: "query"
+                n: "oid"
+                or: "oid"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/onboarding-v6/status"
+          q: {
+            exist: [
+              "oid"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "onboarding-v6"
+            }
+            {
+              lit: "status"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

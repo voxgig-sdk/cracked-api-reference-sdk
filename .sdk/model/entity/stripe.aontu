@@ -1,0 +1,293 @@
+# Entity: stripe
+
+main: kit: entity: stripe: {
+
+  alias: field: {}
+
+  name: "stripe"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "checkout_session_id"
+          ]
+          co: {
+            id: "POST /api/stripe/associate-guest-checkout"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/stripe/associate-guest-checkout"
+          q: {
+            "$action": "associate_guest_checkout"
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "stripe"
+            }
+            {
+              lit: "associate-guest-checkout"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /api/stripe/cancel-trial"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/stripe/cancel-trial"
+          q: {
+            "$action": "cancel_trial"
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "stripe"
+            }
+            {
+              lit: "cancel-trial"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "chat_plan_id"
+            "coupon_id"
+            "membership"
+            "onboarding_data_id"
+            "quantity"
+          ]
+          co: {
+            id: "POST /api/stripe/create-checkout-session"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/stripe/create-checkout-session"
+          q: {
+            "$action": "create_checkout_session"
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "stripe"
+            }
+            {
+              lit: "create-checkout-session"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "credits_per_unit"
+            "quantity"
+          ]
+          co: {
+            id: "POST /api/stripe/create-credits-checkout-session"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/stripe/create-credits-checkout-session"
+          q: {
+            "$action": "create_credits_checkout_session"
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "stripe"
+            }
+            {
+              lit: "create-credits-checkout-session"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "chat_plan_id"
+            "coupon_id"
+            "membership"
+            "onboarding_data_id"
+            "quantity"
+          ]
+          co: {
+            id: "POST /api/stripe/create-guest-checkout-session"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/stripe/create-guest-checkout-session"
+          q: {
+            "$action": "create_guest_checkout_session"
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "stripe"
+            }
+            {
+              lit: "create-guest-checkout-session"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /api/stripe/create-portal-session"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/stripe/create-portal-session"
+          q: {
+            "$action": "create_portal_session"
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "stripe"
+            }
+            {
+              lit: "create-portal-session"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /api/stripe/end-trial-early"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/stripe/end-trial-early"
+          q: {
+            "$action": "end_trial_early"
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "stripe"
+            }
+            {
+              lit: "end-trial-early"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "quantity"
+          ]
+          co: {
+            id: "POST /api/stripe/update-subscription-quantity"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/stripe/update-subscription-quantity"
+          q: {
+            "$action": "update_subscription_quantity"
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "stripe"
+            }
+            {
+              lit: "update-subscription-quantity"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  fields: {
+  }
+
+
+
+}

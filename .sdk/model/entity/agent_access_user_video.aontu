@@ -1,0 +1,106 @@
+# Entity: agent_access_user_video
+
+main: kit: entity: agent_access_user_video: {
+
+  alias: field: {}
+
+  fields: {
+    allTime: {
+      h: "All Time"
+      n: "allTime"
+      r: true
+      t: "`$OBJECT`"
+    }
+    email: {
+      fo: "email"
+      h: "Email"
+      n: "email"
+      r: true
+      t: "`$STRING`"
+    }
+    today: {
+      h: "Today"
+      n: "today"
+      r: true
+      t: "`$OBJECT`"
+    }
+    userId: {
+      fo: "uuid"
+      h: "User Id"
+      n: "userId"
+      r: true
+      t: "`$STRING`"
+    }
+    yesterday: {
+      h: "Yesterday"
+      n: "yesterday"
+      r: true
+      t: "`$OBJECT`"
+    }
+  }
+
+  name: "agent_access_user_video"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/agent-access/user-videos"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "x_agent_access_key"
+                or: "x-agent-access-key"
+                r: false
+                t: "`$ANY`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "email"
+                or: "email"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/agent-access/user-videos"
+          q: {
+            exist: [
+              "email"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "agent-access"
+            }
+            {
+              lit: "user-videos"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

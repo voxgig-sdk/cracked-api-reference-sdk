@@ -1,0 +1,48 @@
+{
+  "existing": {
+    "init_reset_product_v6": {
+      "INIT_RESET_PRODUCT_V600": {
+        "auto_schedule_disabled": true,
+        "old_product_id": "OLD_PRODUCT01",
+        "product_id": "PRODUCT01",
+        "queue_entries_cleared": 53,
+        "success": true,
+        "id": "INIT_RESET_PRODUCT_V600"
+      },
+      "INIT_RESET_PRODUCT_V601": {
+        "auto_schedule_disabled": true,
+        "old_product_id": "OLD_PRODUCT01",
+        "product_id": "PRODUCT01",
+        "queue_entries_cleared": 103,
+        "success": true,
+        "id": "INIT_RESET_PRODUCT_V601"
+      },
+      "INIT_RESET_PRODUCT_V602": {
+        "auto_schedule_disabled": true,
+        "old_product_id": "OLD_PRODUCT01",
+        "product_id": "PRODUCT01",
+        "queue_entries_cleared": 153,
+        "success": true,
+        "id": "INIT_RESET_PRODUCT_V602"
+      }
+    }
+  },
+  "new": {
+    "init_reset_product_v6": {
+      "init_reset_product_v6_ref01": {
+        "auto_schedule_disabled": true,
+        "old_product_id": "OLD_PRODUCT01",
+        "product_id": "PRODUCT01",
+        "queue_entries_cleared": 203,
+        "success": true
+      }
+    }
+  },
+  "requests": {
+    "POST /api/reset-product/init-v6": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

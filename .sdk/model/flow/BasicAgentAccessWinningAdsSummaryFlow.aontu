@@ -1,0 +1,22 @@
+# BasicAgentAccessWinningAdsSummaryFlow
+
+main: kit: flow: BasicAgentAccessWinningAdsSummaryFlow:
+{
+  entity: "agent_access_winning_ads_summary",
+  kind: "basic",
+  name: "BasicAgentAccessWinningAdsSummaryFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "agent_access_winning_ads_summary_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicAgentAccessWinningAdsSummaryFlow"
+}

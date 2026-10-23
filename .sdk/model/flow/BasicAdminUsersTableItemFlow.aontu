@@ -1,0 +1,22 @@
+# BasicAdminUsersTableItemFlow
+
+main: kit: flow: BasicAdminUsersTableItemFlow:
+{
+  entity: "admin_users_table_item",
+  kind: "basic",
+  name: "BasicAdminUsersTableItemFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "admin_users_table_item_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicAdminUsersTableItemFlow"
+}

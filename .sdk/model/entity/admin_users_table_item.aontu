@@ -1,0 +1,157 @@
+# Entity: admin_users_table_item
+
+main: kit: entity: admin_users_table_item: {
+
+  alias: field: {}
+
+  fields: {
+    activated: {
+      h: "Activated"
+      n: "activated"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    agents_count: {
+      h: "Agents Count"
+      n: "agents_count"
+      r: false
+      t: "`$INTEGER`"
+    }
+    created_at: {
+      fo: "date-time"
+      h: "Created At"
+      n: "created_at"
+      r: true
+      t: "`$STRING`"
+    }
+    credits: {
+      h: "Credits"
+      n: "credits"
+      r: true
+      t: "`$INTEGER`"
+    }
+    demo_booked: {
+      h: "Demo Booked"
+      n: "demo_booked"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    email: {
+      h: "Email"
+      n: "email"
+      r: true
+      t: "`$STRING`"
+    }
+    id: {
+      fo: "uuid"
+      h: "Id"
+      n: "id"
+      r: true
+      t: "`$STRING`"
+    }
+    membership: {
+      h: "Membership"
+      n: "membership"
+      r: true
+      t: "`$ANY`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: true
+      t: "`$STRING`"
+    }
+    onboarding_flow: {
+      h: "Onboarding Flow"
+      n: "onboarding_flow"
+      r: true
+      t: "`$STRING`"
+    }
+    product_name: {
+      h: "Product Name"
+      n: "product_name"
+      r: true
+      t: "`$ANY`"
+    }
+    product_url: {
+      h: "Product Url"
+      n: "product_url"
+      r: true
+      t: "`$ANY`"
+    }
+    survey_data: {
+      h: "Survey Data"
+      n: "survey_data"
+      r: true
+      t: "`$ANY`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "admin_users_table_item"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/admin/users/table"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: 1
+                k: "query"
+                n: "page"
+                or: "page"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                ex: 20
+                k: "query"
+                n: "page_size"
+                or: "page_size"
+                r: false
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/users/table"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "users"
+            }
+            {
+              lit: "table"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.items`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

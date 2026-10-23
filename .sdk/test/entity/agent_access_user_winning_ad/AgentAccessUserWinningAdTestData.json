@@ -1,0 +1,41 @@
+{
+  "existing": {
+    "agent_access_user_winning_ad": {
+      "AGENT_ACCESS_USER_WINNING_AD00": {
+        "productId": "s28",
+        "productName": "s29",
+        "winningAds": [],
+        "winningAdsCount": 43
+      },
+      "AGENT_ACCESS_USER_WINNING_AD01": {
+        "productId": "s50",
+        "productName": "s51",
+        "winningAds": [],
+        "winningAdsCount": 83
+      },
+      "AGENT_ACCESS_USER_WINNING_AD02": {
+        "productId": "s78",
+        "productName": "s79",
+        "winningAds": [],
+        "winningAdsCount": 123
+      }
+    }
+  },
+  "new": {
+    "agent_access_user_winning_ad": {
+      "agent_access_user_winning_ad_ref01": {
+        "productId": "sa0",
+        "productName": "sa1",
+        "winningAds": [],
+        "winningAdsCount": 163
+      }
+    }
+  },
+  "requests": {
+    "GET /api/agent-access/user-winning-ads": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

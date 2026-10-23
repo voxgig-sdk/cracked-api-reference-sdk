@@ -1,0 +1,78 @@
+# Entity: social_scan_save
+
+main: kit: entity: social_scan_save: {
+
+  alias: field: {}
+
+  fields: {
+    media_asset_ids: {
+      h: "Media Asset Ids"
+      n: "media_asset_ids"
+      r: true
+      t: "`$ARRAY`"
+    }
+    posts: {
+      h: "Posts"
+      n: "posts"
+      r: true
+      t: "`$ARRAY`"
+    }
+    product_id: {
+      fo: "uuid"
+      h: "Product Id"
+      n: "product_id"
+      r: true
+      t: "`$STRING`"
+    }
+    success: {
+      h: "Success"
+      n: "success"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+  }
+
+  name: "social_scan_save"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "posts"
+            "product_id"
+          ]
+          co: {
+            id: "POST /api/social-scan/save"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/social-scan/save"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "social-scan"
+            }
+            {
+              lit: "save"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

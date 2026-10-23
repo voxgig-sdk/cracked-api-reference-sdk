@@ -1,0 +1,75 @@
+{
+  "existing": {
+    "chat_session": {
+      "CHAT_SESSION00": {
+        "chatSubVariant": "s6e",
+        "createdAt": "s6f",
+        "model": "s70",
+        "plan": "s71",
+        "route": "s72",
+        "routeRecommendation": "s73",
+        "salesStage": "s74",
+        "selectedPlan": "s75",
+        "sessionId": "s76",
+        "status": "s77",
+        "updatedAt": "s78",
+        "session_id": "SESSION01",
+        "id": "CHAT_SESSION00"
+      },
+      "CHAT_SESSION01": {
+        "chatSubVariant": "sdc",
+        "createdAt": "sdd",
+        "model": "sde",
+        "plan": "sdf",
+        "route": "se0",
+        "routeRecommendation": "se1",
+        "salesStage": "se2",
+        "selectedPlan": "se3",
+        "sessionId": "se4",
+        "status": "se5",
+        "updatedAt": "se6",
+        "session_id": "SESSION01",
+        "id": "CHAT_SESSION01"
+      },
+      "CHAT_SESSION02": {
+        "chatSubVariant": "s14a",
+        "createdAt": "s14b",
+        "model": "s14c",
+        "plan": "s14d",
+        "route": "s14e",
+        "routeRecommendation": "s14f",
+        "salesStage": "s150",
+        "selectedPlan": "s151",
+        "sessionId": "s152",
+        "status": "s153",
+        "updatedAt": "s154",
+        "session_id": "SESSION01",
+        "id": "CHAT_SESSION02"
+      }
+    }
+  },
+  "new": {
+    "chat_session": {
+      "chat_session_ref01": {
+        "chatSubVariant": "s1b8",
+        "createdAt": "s1b9",
+        "model": "s1ba",
+        "plan": "s1bb",
+        "route": "s1bc",
+        "routeRecommendation": "s1bd",
+        "salesStage": "s1be",
+        "selectedPlan": "s1bf",
+        "sessionId": "s1c0",
+        "status": "s1c1",
+        "updatedAt": "s1c2"
+      }
+    }
+  },
+  "requests": {
+    "POST /api/chat/sessions/{session_id}/complete": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

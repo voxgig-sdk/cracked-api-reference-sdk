@@ -1,0 +1,39 @@
+{
+  "existing": {
+    "slug_validation": {
+      "SLUG_VALIDATION00": {
+        "reason": "s14",
+        "valid": false,
+        "slug": "SLUG01",
+        "id": "SLUG_VALIDATION00"
+      },
+      "SLUG_VALIDATION01": {
+        "reason": "s28",
+        "valid": false,
+        "slug": "SLUG01",
+        "id": "SLUG_VALIDATION01"
+      },
+      "SLUG_VALIDATION02": {
+        "reason": "s3c",
+        "valid": false,
+        "slug": "SLUG01",
+        "id": "SLUG_VALIDATION02"
+      }
+    }
+  },
+  "new": {
+    "slug_validation": {
+      "slug_validation_ref01": {
+        "reason": "s50",
+        "valid": false
+      }
+    }
+  },
+  "requests": {
+    "GET /api/landings/validate-slug/{slug}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

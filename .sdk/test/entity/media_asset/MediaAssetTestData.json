@@ -1,0 +1,103 @@
+{
+  "existing": {
+    "media_asset": {
+      "MEDIA_ASSET00": {
+        "category": "sa0",
+        "createdAt": "sa1",
+        "description": "sa2",
+        "file": "sa3",
+        "id": "MEDIA_ASSET00",
+        "media_assets": [],
+        "onboardingDataId": "sa6",
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "productId": "sa8",
+        "product_id": "PRODUCT01",
+        "source": "saa",
+        "type": "sab",
+        "updatedAt": "sac",
+        "url": "sad",
+        "usedAt": "sae",
+        "veo3VideoId": "saf"
+      },
+      "MEDIA_ASSET01": {
+        "category": "s140",
+        "createdAt": "s141",
+        "description": "s142",
+        "file": "s143",
+        "id": "MEDIA_ASSET01",
+        "media_assets": [],
+        "onboardingDataId": "s146",
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "productId": "s148",
+        "product_id": "PRODUCT01",
+        "source": "s14a",
+        "type": "s14b",
+        "updatedAt": "s14c",
+        "url": "s14d",
+        "usedAt": "s14e",
+        "veo3VideoId": "s14f"
+      },
+      "MEDIA_ASSET02": {
+        "category": "s1e0",
+        "createdAt": "s1e1",
+        "description": "s1e2",
+        "file": "s1e3",
+        "id": "MEDIA_ASSET02",
+        "media_assets": [],
+        "onboardingDataId": "s1e6",
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "productId": "s1e8",
+        "product_id": "PRODUCT01",
+        "source": "s1ea",
+        "type": "s1eb",
+        "updatedAt": "s1ec",
+        "url": "s1ed",
+        "usedAt": "s1ee",
+        "veo3VideoId": "s1ef"
+      }
+    }
+  },
+  "new": {
+    "media_asset": {
+      "media_asset_ref01": {
+        "category": "s280",
+        "createdAt": "s281",
+        "description": "s282",
+        "file": "s283",
+        "media_assets": [],
+        "onboardingDataId": "s286",
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "productId": "s288",
+        "product_id": "PRODUCT01",
+        "source": "s28a",
+        "type": "s28b",
+        "updatedAt": "s28c",
+        "url": "s28d",
+        "usedAt": "s28e",
+        "veo3VideoId": "s28f"
+      }
+    }
+  },
+  "requests": {
+    "POST /api/media-assets/{media_asset_id}/exclude-copycat": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/media-assets/upload": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/onboarding-v6/repost-content/upload": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/video-variation/media-assets/{product_id}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

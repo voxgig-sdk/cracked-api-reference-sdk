@@ -1,0 +1,29 @@
+{
+  "existing": {
+    "iris_connector": {
+      "IRIS_CONNECTOR00": {
+        "connectors": []
+      },
+      "IRIS_CONNECTOR01": {
+        "connectors": []
+      },
+      "IRIS_CONNECTOR02": {
+        "connectors": []
+      }
+    }
+  },
+  "new": {
+    "iris_connector": {
+      "iris_connector_ref01": {
+        "connectors": []
+      }
+    }
+  },
+  "requests": {
+    "GET /api/iris/connectors": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

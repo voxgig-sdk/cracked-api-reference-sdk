@@ -1,0 +1,110 @@
+# Entity: scrape_website_public
+
+main: kit: entity: scrape_website_public: {
+
+  alias: field: {}
+
+  fields: {
+    flow_variant: {
+      h: "Flow Variant"
+      n: "flow_variant"
+      r: false
+      t: "`$STRING`"
+    }
+    onboarding_data_id: {
+      h: "Onboarding Data Id"
+      n: "onboarding_data_id"
+      r: true
+      sh: "UUID of created OnboardingData"
+      t: "`$STRING`"
+    }
+    skip_demo: {
+      h: "Skip Demo"
+      n: "skip_demo"
+      r: false
+      sh: "True for self-serve users (skip demo booking)"
+      t: "`$BOOLEAN`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: true
+      t: "`$STRING`"
+    }
+    success: {
+      h: "Success"
+      n: "success"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    url: {
+      h: "Url"
+      n: "url"
+      r: true
+      sh: "Website URL to scrape"
+      t: "`$STRING`"
+    }
+  }
+
+  name: "scrape_website_public"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "skip_demo"
+            "url"
+          ]
+          co: {
+            id: "POST /api/onboarding-v6/scrape-website-public"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "context"
+                or: "context"
+                r: false
+                t: "`$ANY`"
+              }
+              {
+                k: "query"
+                n: "flow"
+                or: "flow"
+                r: false
+                t: "`$ANY`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/onboarding-v6/scrape-website-public"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "onboarding-v6"
+            }
+            {
+              lit: "scrape-website-public"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

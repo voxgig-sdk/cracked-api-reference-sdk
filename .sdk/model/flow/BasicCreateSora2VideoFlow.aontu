@@ -1,0 +1,18 @@
+# BasicCreateSora2VideoFlow
+
+main: kit: flow: BasicCreateSora2VideoFlow:
+{
+  entity: "create_sora2_video",
+  kind: "basic",
+  name: "BasicCreateSora2VideoFlow",
+  step: [
+    {
+      i: {
+        ref: "create_sora2_video_ref01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicCreateSora2VideoFlow"
+}

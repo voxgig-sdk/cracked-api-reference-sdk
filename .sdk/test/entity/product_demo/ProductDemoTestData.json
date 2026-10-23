@@ -1,0 +1,48 @@
+{
+  "existing": {
+    "product_demo": {
+      "PRODUCT_DEMO00": {
+        "created_at": "s3c",
+        "description": "s3d",
+        "id": "PRODUCT_DEMO00",
+        "source": "s3f",
+        "type": "s40",
+        "url": "s41"
+      },
+      "PRODUCT_DEMO01": {
+        "created_at": "s78",
+        "description": "s79",
+        "id": "PRODUCT_DEMO01",
+        "source": "s7b",
+        "type": "s7c",
+        "url": "s7d"
+      },
+      "PRODUCT_DEMO02": {
+        "created_at": "sb4",
+        "description": "sb5",
+        "id": "PRODUCT_DEMO02",
+        "source": "sb7",
+        "type": "sb8",
+        "url": "sb9"
+      }
+    }
+  },
+  "new": {
+    "product_demo": {
+      "product_demo_ref01": {
+        "created_at": "sf0",
+        "description": "sf1",
+        "source": "sf3",
+        "type": "sf4",
+        "url": "sf5"
+      }
+    }
+  },
+  "requests": {
+    "GET /api/video-variation/product-demos": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

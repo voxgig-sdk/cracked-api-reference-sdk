@@ -1,0 +1,40 @@
+# BasicAdminInsightFlow
+
+main: kit: flow: BasicAdminInsightFlow:
+{
+  entity: "admin_insight",
+  kind: "basic",
+  name: "BasicAdminInsightFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "admin_insight_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "admin_insight_ref01",
+        srcdatavar: "admin_insight_ref01_data",
+        suffix: "_dt0"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-admin_insight_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicAdminInsightFlow"
+}

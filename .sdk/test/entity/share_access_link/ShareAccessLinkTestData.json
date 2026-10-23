@@ -1,0 +1,36 @@
+{
+  "existing": {
+    "share_access_link": {
+      "SHARE_ACCESS_LINK00": {
+        "share_token": "s14",
+        "share_url": "s15",
+        "id": "SHARE_ACCESS_LINK00"
+      },
+      "SHARE_ACCESS_LINK01": {
+        "share_token": "s28",
+        "share_url": "s29",
+        "id": "SHARE_ACCESS_LINK01"
+      },
+      "SHARE_ACCESS_LINK02": {
+        "share_token": "s3c",
+        "share_url": "s3d",
+        "id": "SHARE_ACCESS_LINK02"
+      }
+    }
+  },
+  "new": {
+    "share_access_link": {
+      "share_access_link_ref01": {
+        "share_token": "s50",
+        "share_url": "s51"
+      }
+    }
+  },
+  "requests": {
+    "POST /auth/share-access-link": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

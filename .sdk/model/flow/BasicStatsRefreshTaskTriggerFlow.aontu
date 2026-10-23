@@ -1,0 +1,18 @@
+# BasicStatsRefreshTaskTriggerFlow
+
+main: kit: flow: BasicStatsRefreshTaskTriggerFlow:
+{
+  entity: "stats_refresh_task_trigger",
+  kind: "basic",
+  name: "BasicStatsRefreshTaskTriggerFlow",
+  step: [
+    {
+      i: {
+        ref: "stats_refresh_task_trigger_ref01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicStatsRefreshTaskTriggerFlow"
+}

@@ -1,0 +1,58 @@
+# Entity: share_access_link
+
+main: kit: entity: share_access_link: {
+
+  alias: field: {}
+
+  fields: {
+    share_token: {
+      h: "Share Token"
+      n: "share_token"
+      r: true
+      t: "`$STRING`"
+    }
+    share_url: {
+      h: "Share Url"
+      n: "share_url"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  name: "share_access_link"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /auth/share-access-link"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/auth/share-access-link"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "auth"
+            }
+            {
+              lit: "share-access-link"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

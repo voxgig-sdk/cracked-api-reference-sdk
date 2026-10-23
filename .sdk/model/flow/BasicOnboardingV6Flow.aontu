@@ -1,0 +1,9 @@
+# BasicOnboardingV6Flow
+
+main: kit: flow: BasicOnboardingV6Flow:
+{
+  entity: "onboarding_v6",
+  kind: "basic",
+  name: "BasicOnboardingV6Flow",
+  "key$": "BasicOnboardingV6Flow"
+}

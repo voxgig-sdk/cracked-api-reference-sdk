@@ -1,0 +1,18 @@
+# BasicShareAccessLinkFlow
+
+main: kit: flow: BasicShareAccessLinkFlow:
+{
+  entity: "share_access_link",
+  kind: "basic",
+  name: "BasicShareAccessLinkFlow",
+  step: [
+    {
+      i: {
+        ref: "share_access_link_ref01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicShareAccessLinkFlow"
+}

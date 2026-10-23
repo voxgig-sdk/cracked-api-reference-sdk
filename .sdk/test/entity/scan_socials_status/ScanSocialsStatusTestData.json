@@ -1,0 +1,48 @@
+{
+  "existing": {
+    "scan_socials_status": {
+      "SCAN_SOCIALS_STATUS00": {
+        "ads_count": 50,
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "product_id": "PRODUCT01",
+        "status": "s35",
+        "task_id": "TASK01",
+        "id": "SCAN_SOCIALS_STATUS00"
+      },
+      "SCAN_SOCIALS_STATUS01": {
+        "ads_count": 100,
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "product_id": "PRODUCT01",
+        "status": "s67",
+        "task_id": "TASK01",
+        "id": "SCAN_SOCIALS_STATUS01"
+      },
+      "SCAN_SOCIALS_STATUS02": {
+        "ads_count": 150,
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "product_id": "PRODUCT01",
+        "status": "s99",
+        "task_id": "TASK01",
+        "id": "SCAN_SOCIALS_STATUS02"
+      }
+    }
+  },
+  "new": {
+    "scan_socials_status": {
+      "scan_socials_status_ref01": {
+        "ads_count": 200,
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "product_id": "PRODUCT01",
+        "status": "scb",
+        "task_id": "TASK01"
+      }
+    }
+  },
+  "requests": {
+    "GET /api/video-variation/scan-socials/status": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

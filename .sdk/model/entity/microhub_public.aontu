@@ -1,0 +1,140 @@
+# Entity: microhub_public
+
+main: kit: entity: microhub_public: {
+
+  alias: field: {}
+
+  fields: {
+    bio: {
+      h: "Bio"
+      n: "bio"
+      r: false
+      t: "`$ANY`"
+    }
+    ctaButtonText: {
+      h: "Cta Button Text"
+      n: "ctaButtonText"
+      r: false
+      t: "`$ANY`"
+    }
+    ctaDescription: {
+      h: "Cta Description"
+      n: "ctaDescription"
+      r: false
+      t: "`$ANY`"
+    }
+    ctaLink: {
+      h: "Cta Link"
+      n: "ctaLink"
+      r: false
+      t: "`$ANY`"
+    }
+    ctaTitle: {
+      h: "Cta Title"
+      n: "ctaTitle"
+      r: false
+      t: "`$ANY`"
+    }
+    headerImageUrl: {
+      h: "Header Image Url"
+      n: "headerImageUrl"
+      r: false
+      t: "`$ANY`"
+    }
+    links: {
+      h: "Links"
+      n: "links"
+      r: false
+      t: "`$ARRAY`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: false
+      t: "`$STRING`"
+    }
+    profileImageUrl: {
+      h: "Profile Image Url"
+      n: "profileImageUrl"
+      r: false
+      t: "`$ANY`"
+    }
+    slug: {
+      h: "Slug"
+      n: "slug"
+      r: true
+      t: "`$STRING`"
+    }
+    socialLinks: {
+      h: "Social Links"
+      n: "socialLinks"
+      r: false
+      t: "`$OBJECT`"
+    }
+    testimonials: {
+      h: "Testimonials"
+      n: "testimonials"
+      r: false
+      t: "`$ARRAY`"
+    }
+  }
+
+  name: "microhub_public"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/sites/{slug}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "slug"
+                or: "slug"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/sites/{slug}"
+          q: {
+            exist: [
+              "slug"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "sites"
+            }
+            {
+              var: "slug"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.site")]
+  ]
+
+}

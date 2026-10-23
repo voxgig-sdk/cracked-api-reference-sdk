@@ -1,0 +1,18 @@
+# BasicReRollVideoFlow
+
+main: kit: flow: BasicReRollVideoFlow:
+{
+  entity: "re_roll_video",
+  kind: "basic",
+  name: "BasicReRollVideoFlow",
+  step: [
+    {
+      i: {
+        ref: "re_roll_video_ref01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicReRollVideoFlow"
+}

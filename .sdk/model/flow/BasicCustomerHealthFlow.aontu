@@ -1,0 +1,32 @@
+# BasicCustomerHealthFlow
+
+main: kit: flow: BasicCustomerHealthFlow:
+{
+  entity: "customer_health",
+  kind: "basic",
+  name: "BasicCustomerHealthFlow",
+  step: [
+    {
+      i: {
+        ref: "customer_health_ref01",
+        srcdatavar: "customer_health_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "customer_health01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-customer_health_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicCustomerHealthFlow"
+}

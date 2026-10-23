@@ -1,0 +1,165 @@
+# Entity: stats_refresh_overview
+
+main: kit: entity: stats_refresh_overview: {
+
+  alias: field: {}
+
+  fields: {
+    active_run: {
+      h: "Active Run"
+      n: "active_run"
+      r: false
+      t: "`$ANY`"
+    }
+    aged_over_24h: {
+      h: "Aged Over 24h"
+      n: "aged_over_24h"
+      r: true
+      t: "`$INTEGER`"
+    }
+    backlog_preview: {
+      h: "Backlog Preview"
+      n: "backlog_preview"
+      r: true
+      t: "`$ARRAY`"
+    }
+    coverage_percent: {
+      h: "Coverage Percent"
+      n: "coverage_percent"
+      r: true
+      t: "`$NUMBER`"
+    }
+    customer_counts: {
+      h: "Customer Counts"
+      n: "customer_counts"
+      r: true
+      t: "`$OBJECT`"
+    }
+    date: {
+      h: "Date"
+      n: "date"
+      r: true
+      t: "`$STRING`"
+    }
+    generated_at: {
+      h: "Generated At"
+      n: "generated_at"
+      r: true
+      t: "`$STRING`"
+    }
+    method_counts: {
+      h: "Method Counts"
+      n: "method_counts"
+      r: true
+      t: "`$OBJECT`"
+    }
+    platform_counts: {
+      h: "Platform Counts"
+      n: "platform_counts"
+      r: true
+      t: "`$OBJECT`"
+    }
+    platform_units_resolved: {
+      h: "Platform Units Resolved"
+      n: "platform_units_resolved"
+      r: true
+      t: "`$INTEGER`"
+    }
+    platform_units_total: {
+      h: "Platform Units Total"
+      n: "platform_units_total"
+      r: true
+      t: "`$INTEGER`"
+    }
+    platform_units_unresolved: {
+      h: "Platform Units Unresolved"
+      n: "platform_units_unresolved"
+      r: true
+      t: "`$INTEGER`"
+    }
+    posted_entries: {
+      h: "Posted Entries"
+      n: "posted_entries"
+      r: true
+      t: "`$INTEGER`"
+    }
+    reason_counts: {
+      h: "Reason Counts"
+      n: "reason_counts"
+      r: true
+      t: "`$OBJECT`"
+    }
+    sla_deadline_et: {
+      h: "Sla Deadline Et"
+      n: "sla_deadline_et"
+      r: true
+      t: "`$STRING`"
+    }
+    stale_after_sla: {
+      h: "Stale After Sla"
+      n: "stale_after_sla"
+      r: true
+      t: "`$INTEGER`"
+    }
+    top_affected_customers: {
+      h: "Top Affected Customers"
+      n: "top_affected_customers"
+      r: true
+      t: "`$ARRAY`"
+    }
+  }
+
+  name: "stats_refresh_overview"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/admin/customer-health/overview"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "date"
+                or: "date"
+                r: false
+                t: "`$ANY`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/customer-health/overview"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "customer-health"
+            }
+            {
+              lit: "overview"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

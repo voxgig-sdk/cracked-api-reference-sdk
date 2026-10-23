@@ -1,0 +1,22 @@
+# BasicPhoneAdminAvailableAgentSourceFlow
+
+main: kit: flow: BasicPhoneAdminAvailableAgentSourceFlow:
+{
+  entity: "phone_admin_available_agent_source",
+  kind: "basic",
+  name: "BasicPhoneAdminAvailableAgentSourceFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "phone_admin_available_agent_source_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicPhoneAdminAvailableAgentSourceFlow"
+}

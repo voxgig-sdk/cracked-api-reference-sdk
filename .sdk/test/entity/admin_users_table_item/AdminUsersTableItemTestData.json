@@ -1,0 +1,76 @@
+{
+  "existing": {
+    "admin_users_table_item": {
+      "ADMIN_USERS_TABLE_ITEM00": {
+        "activated": true,
+        "agents_count": 131,
+        "created_at": "s84",
+        "credits": 133,
+        "demo_booked": true,
+        "email": "s87",
+        "id": "ADMIN_USERS_TABLE_ITEM00",
+        "membership": "s89",
+        "name": "s8a",
+        "onboarding_flow": "s8b",
+        "product_name": "s8c",
+        "product_url": "s8d",
+        "survey_data": "s8e"
+      },
+      "ADMIN_USERS_TABLE_ITEM01": {
+        "activated": true,
+        "agents_count": 261,
+        "created_at": "s106",
+        "credits": 263,
+        "demo_booked": true,
+        "email": "s109",
+        "id": "ADMIN_USERS_TABLE_ITEM01",
+        "membership": "s10b",
+        "name": "s10c",
+        "onboarding_flow": "s10d",
+        "product_name": "s10e",
+        "product_url": "s10f",
+        "survey_data": "s110"
+      },
+      "ADMIN_USERS_TABLE_ITEM02": {
+        "activated": true,
+        "agents_count": 391,
+        "created_at": "s188",
+        "credits": 393,
+        "demo_booked": true,
+        "email": "s18b",
+        "id": "ADMIN_USERS_TABLE_ITEM02",
+        "membership": "s18d",
+        "name": "s18e",
+        "onboarding_flow": "s18f",
+        "product_name": "s190",
+        "product_url": "s191",
+        "survey_data": "s192"
+      }
+    }
+  },
+  "new": {
+    "admin_users_table_item": {
+      "admin_users_table_item_ref01": {
+        "activated": true,
+        "agents_count": 521,
+        "created_at": "s20a",
+        "credits": 523,
+        "demo_booked": true,
+        "email": "s20d",
+        "membership": "s20f",
+        "name": "s210",
+        "onboarding_flow": "s211",
+        "product_name": "s212",
+        "product_url": "s213",
+        "survey_data": "s214"
+      }
+    }
+  },
+  "requests": {
+    "GET /api/admin/users/table": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

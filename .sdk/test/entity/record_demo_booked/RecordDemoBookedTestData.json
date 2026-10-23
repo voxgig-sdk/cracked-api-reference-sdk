@@ -1,0 +1,47 @@
+{
+  "existing": {
+    "record_demo_booked": {
+      "RECORD_DEMO_BOOKED00": {
+        "calendlyEventUri": "s28",
+        "calendlyInviteeUri": "s29",
+        "message": {},
+        "session": {},
+        "session_id": "SESSION01",
+        "id": "RECORD_DEMO_BOOKED00"
+      },
+      "RECORD_DEMO_BOOKED01": {
+        "calendlyEventUri": "s50",
+        "calendlyInviteeUri": "s51",
+        "message": {},
+        "session": {},
+        "session_id": "SESSION01",
+        "id": "RECORD_DEMO_BOOKED01"
+      },
+      "RECORD_DEMO_BOOKED02": {
+        "calendlyEventUri": "s78",
+        "calendlyInviteeUri": "s79",
+        "message": {},
+        "session": {},
+        "session_id": "SESSION01",
+        "id": "RECORD_DEMO_BOOKED02"
+      }
+    }
+  },
+  "new": {
+    "record_demo_booked": {
+      "record_demo_booked_ref01": {
+        "calendlyEventUri": "sa0",
+        "calendlyInviteeUri": "sa1",
+        "message": {},
+        "session": {}
+      }
+    }
+  },
+  "requests": {
+    "POST /api/chat/sessions/{session_id}/demo-booked": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

@@ -1,0 +1,22 @@
+# BasicIrisCapabilityFlow
+
+main: kit: flow: BasicIrisCapabilityFlow:
+{
+  entity: "iris_capability",
+  kind: "basic",
+  name: "BasicIrisCapabilityFlow",
+  step: [
+    {
+      i: {
+        ref: "iris_capability_ref01"
+      }
+
+      m: {
+        capability_name: "capability_name01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicIrisCapabilityFlow"
+}

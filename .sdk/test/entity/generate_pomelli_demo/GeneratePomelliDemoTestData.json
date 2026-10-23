@@ -1,0 +1,48 @@
+{
+  "existing": {
+    "generate_pomelli_demo": {
+      "GENERATE_POMELLI_DEMO00": {
+        "current_demo_count": 50,
+        "max_demos": 51,
+        "message": "s34",
+        "product_id": "PRODUCT01",
+        "success": true,
+        "id": "GENERATE_POMELLI_DEMO00"
+      },
+      "GENERATE_POMELLI_DEMO01": {
+        "current_demo_count": 100,
+        "max_demos": 101,
+        "message": "s66",
+        "product_id": "PRODUCT01",
+        "success": true,
+        "id": "GENERATE_POMELLI_DEMO01"
+      },
+      "GENERATE_POMELLI_DEMO02": {
+        "current_demo_count": 150,
+        "max_demos": 151,
+        "message": "s98",
+        "product_id": "PRODUCT01",
+        "success": true,
+        "id": "GENERATE_POMELLI_DEMO02"
+      }
+    }
+  },
+  "new": {
+    "generate_pomelli_demo": {
+      "generate_pomelli_demo_ref01": {
+        "current_demo_count": 200,
+        "max_demos": 201,
+        "message": "sca",
+        "product_id": "PRODUCT01",
+        "success": true
+      }
+    }
+  },
+  "requests": {
+    "POST /api/onboarding-v6/generate-pomelli-demo": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

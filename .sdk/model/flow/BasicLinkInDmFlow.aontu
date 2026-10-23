@@ -1,0 +1,32 @@
+# BasicLinkInDmFlow
+
+main: kit: flow: BasicLinkInDmFlow:
+{
+  entity: "link_in_dm",
+  kind: "basic",
+  name: "BasicLinkInDmFlow",
+  step: [
+    {
+      i: {
+        ref: "link_in_dm_ref01",
+        srcdatavar: "link_in_dm_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "link_in_dm01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-link_in_dm_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicLinkInDmFlow"
+}

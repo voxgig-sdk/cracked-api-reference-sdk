@@ -1,0 +1,95 @@
+# Entity: user_with_avatar_submission
+
+main: kit: entity: user_with_avatar_submission: {
+
+  alias: field: {}
+
+  fields: {
+    avatar_image_url: {
+      h: "Avatar Image Url"
+      n: "avatar_image_url"
+      r: true
+      t: "`$STRING`"
+    }
+    avatar_voice_url: {
+      h: "Avatar Voice Url"
+      n: "avatar_voice_url"
+      r: true
+      t: "`$STRING`"
+    }
+    created_at: {
+      fo: "date-time"
+      h: "Created At"
+      n: "created_at"
+      r: true
+      t: "`$STRING`"
+    }
+    email: {
+      h: "Email"
+      n: "email"
+      r: true
+      t: "`$STRING`"
+    }
+    id: {
+      fo: "uuid"
+      h: "Id"
+      n: "id"
+      r: true
+      t: "`$STRING`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "user_with_avatar_submission"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/admin/users/avatar-submissions"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/admin/users/avatar-submissions"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "users"
+            }
+            {
+              lit: "avatar-submissions"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

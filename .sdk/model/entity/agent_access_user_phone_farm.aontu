@@ -1,0 +1,151 @@
+# Entity: agent_access_user_phone_farm
+
+main: kit: entity: agent_access_user_phone_farm: {
+
+  alias: field: {}
+
+  fields: {
+    avatar: {
+      h: "Avatar"
+      n: "avatar"
+      r: false
+      t: "`$ANY`"
+    }
+    facebookUrl: {
+      h: "Facebook Url"
+      n: "facebookUrl"
+      r: false
+      t: "`$ANY`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: true
+      t: "`$STRING`"
+    }
+    instagramUrl: {
+      h: "Instagram Url"
+      n: "instagramUrl"
+      r: false
+      t: "`$ANY`"
+    }
+    lastAdminSyncedAt: {
+      h: "Last Admin Synced At"
+      n: "lastAdminSyncedAt"
+      r: false
+      t: "`$ANY`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: true
+      t: "`$STRING`"
+    }
+    productId: {
+      h: "Product Id"
+      n: "productId"
+      r: false
+      t: "`$ANY`"
+    }
+    productName: {
+      h: "Product Name"
+      n: "productName"
+      r: false
+      t: "`$ANY`"
+    }
+    tiktokUrl: {
+      h: "Tiktok Url"
+      n: "tiktokUrl"
+      r: false
+      t: "`$ANY`"
+    }
+    type: {
+      h: "Type"
+      n: "type"
+      r: false
+      t: "`$ANY`"
+    }
+    uploadPostPlatforms: {
+      h: "Upload Post Platforms"
+      n: "uploadPostPlatforms"
+      r: false
+      t: "`$ANY`"
+    }
+    youtubeUrl: {
+      h: "Youtube Url"
+      n: "youtubeUrl"
+      r: false
+      t: "`$ANY`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "agent_access_user_phone_farm"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/agent-access/user-phone-farm"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "x_agent_access_key"
+                or: "x-agent-access-key"
+                r: false
+                t: "`$ANY`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "email"
+                or: "email"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/agent-access/user-phone-farm"
+          q: {
+            exist: [
+              "email"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "agent-access"
+            }
+            {
+              lit: "user-phone-farm"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.agents`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

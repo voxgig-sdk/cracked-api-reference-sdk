@@ -1,0 +1,44 @@
+{
+  "existing": {
+    "assign_agent": {
+      "ASSIGN_AGENT00": {
+        "agent": {},
+        "assignment": {},
+        "mock_agents": [],
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "id": "ASSIGN_AGENT00"
+      },
+      "ASSIGN_AGENT01": {
+        "agent": {},
+        "assignment": {},
+        "mock_agents": [],
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "id": "ASSIGN_AGENT01"
+      },
+      "ASSIGN_AGENT02": {
+        "agent": {},
+        "assignment": {},
+        "mock_agents": [],
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "id": "ASSIGN_AGENT02"
+      }
+    }
+  },
+  "new": {
+    "assign_agent": {
+      "assign_agent_ref01": {
+        "agent": {},
+        "assignment": {},
+        "mock_agents": [],
+        "onboarding_data_id": "ONBOARDING_DATA01"
+      }
+    }
+  },
+  "requests": {
+    "POST /api/onboarding-v6/assign-agent": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

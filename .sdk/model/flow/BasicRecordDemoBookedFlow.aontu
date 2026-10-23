@@ -1,0 +1,22 @@
+# BasicRecordDemoBookedFlow
+
+main: kit: flow: BasicRecordDemoBookedFlow:
+{
+  entity: "record_demo_booked",
+  kind: "basic",
+  name: "BasicRecordDemoBookedFlow",
+  step: [
+    {
+      i: {
+        ref: "record_demo_booked_ref01"
+      }
+
+      m: {
+        session_id: "session01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicRecordDemoBookedFlow"
+}

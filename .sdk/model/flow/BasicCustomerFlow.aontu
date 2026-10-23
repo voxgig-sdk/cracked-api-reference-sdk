@@ -1,0 +1,22 @@
+# BasicCustomerFlow
+
+main: kit: flow: BasicCustomerFlow:
+{
+  entity: "customer",
+  kind: "basic",
+  name: "BasicCustomerFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "customer_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicCustomerFlow"
+}

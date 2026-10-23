@@ -1,0 +1,31 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      description: "Backend API for Vireel application"
+      security: {
+        in: "header"
+        name: "Authorization"
+        prefix: "Bearer"
+        scheme: "HTTPBearer"
+        type: "http"
+      }
+      servers: [
+        {
+          url: "{base}"
+          variables: {
+            base: {
+              description: "The base URL of the API, which its definition does not name."
+            }
+          }
+        }
+      ]
+      summary: "Backend API for Vireel application"
+      title: "Vireel API"
+      version: "1.0.0"
+    }
+  }
+}
+

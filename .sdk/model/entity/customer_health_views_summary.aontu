@@ -1,0 +1,162 @@
+# Entity: customer_health_views_summary
+
+main: kit: entity: customer_health_views_summary: {
+
+  alias: field: {}
+
+  fields: {
+    average_views_per_result: {
+      h: "Average Views Per Result"
+      n: "average_views_per_result"
+      r: true
+      t: "`$INTEGER`"
+    }
+    date: {
+      h: "Date"
+      n: "date"
+      r: true
+      t: "`$STRING`"
+    }
+    end_date: {
+      h: "End Date"
+      n: "end_date"
+      r: false
+      t: "`$ANY`"
+    }
+    paid_users_count: {
+      h: "Paid Users Count"
+      n: "paid_users_count"
+      r: true
+      t: "`$INTEGER`"
+    }
+    posted_results: {
+      h: "Posted Results"
+      n: "posted_results"
+      r: true
+      t: "`$INTEGER`"
+    }
+    range: {
+      h: "Range"
+      n: "range"
+      r: true
+      t: "`$STRING`"
+    }
+    start_date: {
+      h: "Start Date"
+      n: "start_date"
+      r: false
+      t: "`$ANY`"
+    }
+    top_users: {
+      h: "Top Users"
+      n: "top_users"
+      r: true
+      t: "`$ARRAY`"
+    }
+    total_views: {
+      h: "Total Views"
+      n: "total_views"
+      r: true
+      t: "`$INTEGER`"
+    }
+    trend: {
+      h: "Trend"
+      n: "trend"
+      r: true
+      t: "`$ARRAY`"
+    }
+    trend_granularity: {
+      h: "Trend Granularity"
+      n: "trend_granularity"
+      r: true
+      t: "`$STRING`"
+    }
+    user_email: {
+      h: "User Email"
+      n: "user_email"
+      r: false
+      t: "`$ANY`"
+    }
+    user_id: {
+      h: "User Id"
+      n: "user_id"
+      r: false
+      t: "`$STRING`"
+    }
+    users_with_views: {
+      h: "Users With Views"
+      n: "users_with_views"
+      r: true
+      t: "`$INTEGER`"
+    }
+  }
+
+  name: "customer_health_views_summary"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/admin/customer-health/views"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "date"
+                or: "date"
+                r: false
+                t: "`$ANY`"
+              }
+              {
+                ex: "selected_date"
+                k: "query"
+                n: "range"
+                or: "range"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "user_id"
+                or: "user_id"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/customer-health/views"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "customer-health"
+            }
+            {
+              lit: "views"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

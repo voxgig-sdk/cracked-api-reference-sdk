@@ -1,0 +1,97 @@
+# Entity: tik_tok_creator_info
+
+main: kit: entity: tik_tok_creator_info: {
+
+  alias: field: {}
+
+  fields: {
+    commentDisabled: {
+      h: "Comment Disabled"
+      n: "commentDisabled"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    creatorAvatarUrl: {
+      h: "Creator Avatar Url"
+      n: "creatorAvatarUrl"
+      r: false
+      t: "`$ANY`"
+    }
+    creatorNickname: {
+      h: "Creator Nickname"
+      n: "creatorNickname"
+      r: false
+      t: "`$ANY`"
+    }
+    creatorUsername: {
+      h: "Creator Username"
+      n: "creatorUsername"
+      r: false
+      t: "`$ANY`"
+    }
+    duetDisabled: {
+      h: "Duet Disabled"
+      n: "duetDisabled"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    maxVideoPostDurationSec: {
+      h: "Max Video Post Duration Sec"
+      n: "maxVideoPostDurationSec"
+      r: false
+      t: "`$INTEGER`"
+    }
+    privacyLevelOptions: {
+      h: "Privacy Level Options"
+      n: "privacyLevelOptions"
+      r: false
+      t: "`$ARRAY`"
+    }
+    stitchDisabled: {
+      h: "Stitch Disabled"
+      n: "stitchDisabled"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+  }
+
+  name: "tik_tok_creator_info"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /social/tiktok/creator-info"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/social/tiktok/creator-info"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "social"
+            }
+            {
+              lit: "tiktok"
+            }
+            {
+              lit: "creator-info"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.privacyLevelOptions`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

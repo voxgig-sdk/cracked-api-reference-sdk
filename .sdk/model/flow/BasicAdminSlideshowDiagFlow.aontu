@@ -1,0 +1,22 @@
+# BasicAdminSlideshowDiagFlow
+
+main: kit: flow: BasicAdminSlideshowDiagFlow:
+{
+  entity: "admin_slideshow_diag",
+  kind: "basic",
+  name: "BasicAdminSlideshowDiagFlow",
+  step: [
+    {
+      i: {
+        ref: "admin_slideshow_diag_ref01"
+      }
+
+      m: {
+        stage: "stage01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicAdminSlideshowDiagFlow"
+}

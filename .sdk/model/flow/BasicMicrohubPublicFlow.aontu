@@ -1,0 +1,32 @@
+# BasicMicrohubPublicFlow
+
+main: kit: flow: BasicMicrohubPublicFlow:
+{
+  entity: "microhub_public",
+  kind: "basic",
+  name: "BasicMicrohubPublicFlow",
+  step: [
+    {
+      i: {
+        ref: "microhub_public_ref01",
+        srcdatavar: "microhub_public_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "microhub_public01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-microhub_public_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicMicrohubPublicFlow"
+}

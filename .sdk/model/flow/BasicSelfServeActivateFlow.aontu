@@ -1,0 +1,18 @@
+# BasicSelfServeActivateFlow
+
+main: kit: flow: BasicSelfServeActivateFlow:
+{
+  entity: "self_serve_activate",
+  kind: "basic",
+  name: "BasicSelfServeActivateFlow",
+  step: [
+    {
+      i: {
+        ref: "self_serve_activate_ref01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicSelfServeActivateFlow"
+}

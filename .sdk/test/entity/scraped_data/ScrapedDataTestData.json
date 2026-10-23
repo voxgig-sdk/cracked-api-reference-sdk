@@ -1,0 +1,68 @@
+{
+  "existing": {
+    "scraped_data": {
+      "SCRAPED_DATA00": {
+        "description": "s64",
+        "homepageVideoUrl": "s65",
+        "howItWorks": "s66",
+        "imageUrls": [],
+        "instagram_username": "s68",
+        "mediaAssets": [],
+        "name": "s6a",
+        "pricingAndOffers": "s6b",
+        "targetAudience": "s6c",
+        "url": "s6d",
+        "id": "SCRAPED_DATA00"
+      },
+      "SCRAPED_DATA01": {
+        "description": "sc8",
+        "homepageVideoUrl": "sc9",
+        "howItWorks": "sca",
+        "imageUrls": [],
+        "instagram_username": "scc",
+        "mediaAssets": [],
+        "name": "sce",
+        "pricingAndOffers": "scf",
+        "targetAudience": "sd0",
+        "url": "sd1",
+        "id": "SCRAPED_DATA01"
+      },
+      "SCRAPED_DATA02": {
+        "description": "s12c",
+        "homepageVideoUrl": "s12d",
+        "howItWorks": "s12e",
+        "imageUrls": [],
+        "instagram_username": "s130",
+        "mediaAssets": [],
+        "name": "s132",
+        "pricingAndOffers": "s133",
+        "targetAudience": "s134",
+        "url": "s135",
+        "id": "SCRAPED_DATA02"
+      }
+    }
+  },
+  "new": {
+    "scraped_data": {
+      "scraped_data_ref01": {
+        "description": "s190",
+        "homepageVideoUrl": "s191",
+        "howItWorks": "s192",
+        "imageUrls": [],
+        "instagram_username": "s194",
+        "mediaAssets": [],
+        "name": "s196",
+        "pricingAndOffers": "s197",
+        "targetAudience": "s198",
+        "url": "s199"
+      }
+    }
+  },
+  "requests": {
+    "POST /api/scraper/extract": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

@@ -1,0 +1,115 @@
+# Entity: customer_health_all_customers_item
+
+main: kit: entity: customer_health_all_customers_item: {
+
+  alias: field: {}
+
+  fields: {
+    account_type: {
+      h: "Account Type"
+      n: "account_type"
+      r: false
+      t: "`$ANY`"
+    }
+    assigned_agents_count: {
+      h: "Assigned Agents Count"
+      n: "assigned_agents_count"
+      r: true
+      t: "`$INTEGER`"
+    }
+    daily_stats: {
+      h: "Daily Stats"
+      n: "daily_stats"
+      r: true
+      t: "`$ARRAY`"
+    }
+    email: {
+      h: "Email"
+      n: "email"
+      r: true
+      t: "`$STRING`"
+    }
+    is_migrated: {
+      h: "Is Migrated"
+      n: "is_migrated"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    total_views: {
+      h: "Total Views"
+      n: "total_views"
+      r: true
+      t: "`$INTEGER`"
+    }
+    user_id: {
+      fo: "uuid"
+      h: "User Id"
+      n: "user_id"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  name: "customer_health_all_customers_item"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/admin/customer-health/all-customers"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: 10
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                ex: 0
+                k: "query"
+                n: "offset"
+                or: "offset"
+                r: false
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/customer-health/all-customers"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "customer-health"
+            }
+            {
+              lit: "all-customers"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.customers`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

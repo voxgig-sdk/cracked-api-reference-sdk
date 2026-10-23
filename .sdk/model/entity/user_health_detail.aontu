@@ -1,0 +1,454 @@
+# Entity: user_health_detail
+
+main: kit: entity: user_health_detail: {
+
+  alias: field: {}
+
+  fields: {
+    account_type: {
+      h: "Account Type"
+      n: "account_type"
+      r: true
+      t: "`$ANY`"
+    }
+    activated: {
+      h: "Activated"
+      n: "activated"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    activated_by_admin_at: {
+      h: "Activated By Admin At"
+      n: "activated_by_admin_at"
+      r: false
+      t: "`$ANY`"
+    }
+    activated_by_admin_id: {
+      h: "Activated By Admin Id"
+      n: "activated_by_admin_id"
+      r: false
+      t: "`$STRING`"
+    }
+    admin_notes: {
+      h: "Admin Notes"
+      n: "admin_notes"
+      r: false
+      t: "`$ANY`"
+    }
+    agents_count: {
+      h: "Agents Count"
+      n: "agents_count"
+      r: false
+      t: "`$INTEGER`"
+    }
+    assigned_agents: {
+      h: "Assigned Agents"
+      n: "assigned_agents"
+      r: true
+      t: "`$ARRAY`"
+    }
+    assigned_agents_count: {
+      h: "Assigned Agents Count"
+      n: "assigned_agents_count"
+      r: true
+      t: "`$INTEGER`"
+    }
+    assigned_agents_preview_limit: {
+      h: "Assigned Agents Preview Limit"
+      n: "assigned_agents_preview_limit"
+      r: false
+      t: "`$INTEGER`"
+    }
+    assigned_agents_truncated: {
+      h: "Assigned Agents Truncated"
+      n: "assigned_agents_truncated"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    auto_schedule_enabled: {
+      h: "Auto Schedule Enabled"
+      n: "auto_schedule_enabled"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    comments_expected_per_day: {
+      h: "Comments Expected Per Day"
+      n: "comments_expected_per_day"
+      r: false
+      t: "`$INTEGER`"
+    }
+    comments_fix_block_reason: {
+      h: "Comments Fix Block Reason"
+      n: "comments_fix_block_reason"
+      r: false
+      t: "`$ANY`"
+    }
+    comments_fix_ready: {
+      h: "Comments Fix Ready"
+      n: "comments_fix_ready"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    comments_today_failed: {
+      h: "Comments Today Failed"
+      n: "comments_today_failed"
+      r: false
+      t: "`$INTEGER`"
+    }
+    comments_today_posted: {
+      h: "Comments Today Posted"
+      n: "comments_today_posted"
+      r: false
+      t: "`$INTEGER`"
+    }
+    comments_today_scheduled: {
+      h: "Comments Today Scheduled"
+      n: "comments_today_scheduled"
+      r: false
+      t: "`$INTEGER`"
+    }
+    comments_yesterday_failed: {
+      h: "Comments Yesterday Failed"
+      n: "comments_yesterday_failed"
+      r: false
+      t: "`$INTEGER`"
+    }
+    comments_yesterday_posted: {
+      h: "Comments Yesterday Posted"
+      n: "comments_yesterday_posted"
+      r: false
+      t: "`$INTEGER`"
+    }
+    comments_yesterday_total: {
+      h: "Comments Yesterday Total"
+      n: "comments_yesterday_total"
+      r: false
+      t: "`$INTEGER`"
+    }
+    created_at: {
+      fo: "date-time"
+      h: "Created At"
+      n: "created_at"
+      r: true
+      t: "`$STRING`"
+    }
+    credits: {
+      h: "Credits"
+      n: "credits"
+      r: true
+      t: "`$INTEGER`"
+    }
+    effective_posted_video_reuse_percent: {
+      h: "Effective Posted Video Reuse Percent"
+      n: "effective_posted_video_reuse_percent"
+      r: true
+      t: "`$INTEGER`"
+    }
+    email: {
+      h: "Email"
+      n: "email"
+      r: true
+      t: "`$STRING`"
+    }
+    expected_agents_count: {
+      h: "Expected Agents Count"
+      n: "expected_agents_count"
+      r: true
+      t: "`$INTEGER`"
+    }
+    id: {
+      fo: "uuid"
+      h: "Id"
+      n: "id"
+      r: true
+      t: "`$STRING`"
+    }
+    is_activated_by_admin: {
+      h: "Is Activated By Admin"
+      n: "is_activated_by_admin"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    is_admin: {
+      h: "Is Admin"
+      n: "is_admin"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    is_bookmarked: {
+      h: "Is Bookmarked"
+      n: "is_bookmarked"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    is_internal_user: {
+      h: "Is Internal User"
+      n: "is_internal_user"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    is_migrated: {
+      h: "Is Migrated"
+      n: "is_migrated"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    landing_slug: {
+      h: "Landing Slug"
+      n: "landing_slug"
+      r: false
+      t: "`$ANY`"
+    }
+    landing_status: {
+      h: "Landing Status"
+      n: "landing_status"
+      r: false
+      t: "`$ANY`"
+    }
+    landing_url: {
+      h: "Landing Url"
+      n: "landing_url"
+      r: false
+      t: "`$ANY`"
+    }
+    membership: {
+      h: "Membership"
+      n: "membership"
+      r: true
+      t: "`$ANY`"
+    }
+    microhub_status: {
+      h: "Microhub Status"
+      n: "microhub_status"
+      r: false
+      t: "`$ANY`"
+    }
+    microhub_url: {
+      h: "Microhub Url"
+      n: "microhub_url"
+      r: false
+      t: "`$ANY`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: true
+      t: "`$STRING`"
+    }
+    onboarding_flow: {
+      h: "Onboarding Flow"
+      n: "onboarding_flow"
+      r: true
+      t: "`$STRING`"
+    }
+    posted_video_reuse_percent: {
+      h: "Posted Video Reuse Percent"
+      n: "posted_video_reuse_percent"
+      r: false
+      t: "`$ANY`"
+    }
+    product_id: {
+      h: "Product Id"
+      n: "product_id"
+      r: true
+      t: "`$STRING`"
+    }
+    product_name: {
+      h: "Product Name"
+      n: "product_name"
+      r: true
+      t: "`$ANY`"
+    }
+    product_url: {
+      h: "Product Url"
+      n: "product_url"
+      r: true
+      t: "`$ANY`"
+    }
+    subscription_status: {
+      h: "Subscription Status"
+      n: "subscription_status"
+      r: true
+      t: "`$ANY`"
+    }
+    survey_data: {
+      h: "Survey Data"
+      n: "survey_data"
+      r: false
+      t: "`$ANY`"
+    }
+    today_failed: {
+      h: "Today Failed"
+      n: "today_failed"
+      r: true
+      t: "`$INTEGER`"
+    }
+    today_posted: {
+      h: "Today Posted"
+      n: "today_posted"
+      r: true
+      t: "`$INTEGER`"
+    }
+    today_scheduled: {
+      h: "Today Scheduled"
+      n: "today_scheduled"
+      r: true
+      t: "`$INTEGER`"
+    }
+    tomorrow_capacity: {
+      h: "Tomorrow Capacity"
+      n: "tomorrow_capacity"
+      r: true
+      t: "`$INTEGER`"
+    }
+    tomorrow_scheduled: {
+      h: "Tomorrow Scheduled"
+      n: "tomorrow_scheduled"
+      r: true
+      t: "`$INTEGER`"
+    }
+    videos_completed: {
+      h: "Videos Completed"
+      n: "videos_completed"
+      r: true
+      t: "`$INTEGER`"
+    }
+    videos_failed: {
+      h: "Videos Failed"
+      n: "videos_failed"
+      r: true
+      t: "`$INTEGER`"
+    }
+    videos_pending: {
+      h: "Videos Pending"
+      n: "videos_pending"
+      r: true
+      t: "`$INTEGER`"
+    }
+    videos_stale: {
+      h: "Videos Stale"
+      n: "videos_stale"
+      r: true
+      t: "`$INTEGER`"
+    }
+    videos_total: {
+      h: "Videos Total"
+      n: "videos_total"
+      r: true
+      t: "`$INTEGER`"
+    }
+    yesterday_failed: {
+      h: "Yesterday Failed"
+      n: "yesterday_failed"
+      r: true
+      t: "`$INTEGER`"
+    }
+    yesterday_failed_entries: {
+      h: "Yesterday Failed Entries"
+      n: "yesterday_failed_entries"
+      r: true
+      t: "`$ARRAY`"
+    }
+    yesterday_posted: {
+      h: "Yesterday Posted"
+      n: "yesterday_posted"
+      r: true
+      t: "`$INTEGER`"
+    }
+    yesterday_total: {
+      h: "Yesterday Total"
+      n: "yesterday_total"
+      r: true
+      t: "`$INTEGER`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "user_health_detail"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/admin/users/{user_id}/health-detail"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "user_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                ex: 50
+                k: "query"
+                n: "assigned_agents_preview_limit"
+                or: "assigned_agents_preview_limit"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "product_id"
+                or: "product_id"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/users/{user_id}/health-detail"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              user_id: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "users"
+            }
+            {
+              var: "id"
+            }
+            {
+              lit: "health-detail"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

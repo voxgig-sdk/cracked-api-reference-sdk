@@ -1,0 +1,53 @@
+{
+  "existing": {
+    "product_dashboard": {
+      "PRODUCT_DASHBOARD00": {
+        "agents": [],
+        "date": "s47",
+        "pagination": {},
+        "phone_admin_error": "s49",
+        "products": [],
+        "selected_product": "s4b",
+        "summary": {}
+      },
+      "PRODUCT_DASHBOARD01": {
+        "agents": [],
+        "date": "s8d",
+        "pagination": {},
+        "phone_admin_error": "s8f",
+        "products": [],
+        "selected_product": "s91",
+        "summary": {}
+      },
+      "PRODUCT_DASHBOARD02": {
+        "agents": [],
+        "date": "sd3",
+        "pagination": {},
+        "phone_admin_error": "sd5",
+        "products": [],
+        "selected_product": "sd7",
+        "summary": {}
+      }
+    }
+  },
+  "new": {
+    "product_dashboard": {
+      "product_dashboard_ref01": {
+        "agents": [],
+        "date": "s119",
+        "pagination": {},
+        "phone_admin_error": "s11b",
+        "products": [],
+        "selected_product": "s11d",
+        "summary": {}
+      }
+    }
+  },
+  "requests": {
+    "GET /api/admin/products-dashboard": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

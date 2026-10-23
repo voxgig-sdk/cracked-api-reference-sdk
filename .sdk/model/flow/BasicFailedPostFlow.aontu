@@ -1,0 +1,22 @@
+# BasicFailedPostFlow
+
+main: kit: flow: BasicFailedPostFlow:
+{
+  entity: "failed_post",
+  kind: "basic",
+  name: "BasicFailedPostFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "failed_post_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicFailedPostFlow"
+}

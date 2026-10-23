@@ -1,0 +1,99 @@
+# Entity: seo_overview
+
+main: kit: entity: seo_overview: {
+
+  alias: field: {}
+
+  fields: {
+    clicks: {
+      h: "Clicks"
+      n: "clicks"
+      r: true
+      t: "`$NUMBER`"
+    }
+    ctr: {
+      h: "Ctr"
+      n: "ctr"
+      r: true
+      t: "`$NUMBER`"
+    }
+    date: {
+      fo: "date"
+      h: "Date"
+      n: "date"
+      r: true
+      t: "`$STRING`"
+    }
+    impressions: {
+      h: "Impressions"
+      n: "impressions"
+      r: true
+      t: "`$NUMBER`"
+    }
+    position: {
+      h: "Position"
+      n: "position"
+      r: true
+      t: "`$NUMBER`"
+    }
+  }
+
+  name: "seo_overview"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/seo/overview"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: 28
+                k: "query"
+                n: "day"
+                or: "days"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "product_id"
+                or: "product_id"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/seo/overview"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "seo"
+            }
+            {
+              lit: "overview"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

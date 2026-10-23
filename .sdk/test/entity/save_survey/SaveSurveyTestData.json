@@ -1,0 +1,44 @@
+{
+  "existing": {
+    "save_survey": {
+      "SAVE_SURVEY00": {
+        "email_sent": true,
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "success": true,
+        "survey": {},
+        "id": "SAVE_SURVEY00"
+      },
+      "SAVE_SURVEY01": {
+        "email_sent": true,
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "success": true,
+        "survey": {},
+        "id": "SAVE_SURVEY01"
+      },
+      "SAVE_SURVEY02": {
+        "email_sent": true,
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "success": true,
+        "survey": {},
+        "id": "SAVE_SURVEY02"
+      }
+    }
+  },
+  "new": {
+    "save_survey": {
+      "save_survey_ref01": {
+        "email_sent": true,
+        "onboarding_data_id": "ONBOARDING_DATA01",
+        "success": true,
+        "survey": {}
+      }
+    }
+  },
+  "requests": {
+    "POST /api/onboarding-v6/save-survey": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

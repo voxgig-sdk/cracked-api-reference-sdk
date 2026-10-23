@@ -1,0 +1,473 @@
+# Entity: social
+
+main: kit: entity: social: {
+
+  alias: field: {}
+
+  fields: {
+    code: {
+      h: "Code"
+      n: "code"
+      r: true
+      t: "`$STRING`"
+    }
+    code_verifier: {
+      h: "Code Verifier"
+      n: "code_verifier"
+      r: true
+      t: "`$STRING`"
+    }
+    createdAt: {
+      fo: "date-time"
+      h: "Created At"
+      n: "createdAt"
+      r: true
+      t: "`$STRING`"
+    }
+    id: {
+      fo: "uuid4"
+      h: "Id"
+      n: "id"
+      r: true
+      t: "`$STRING`"
+    }
+    platform: {
+      h: "Platform"
+      n: "platform"
+      r: true
+      t: "`$STRING`"
+    }
+    platformUserId: {
+      h: "Platform User Id"
+      n: "platformUserId"
+      r: true
+      t: "`$STRING`"
+    }
+    updatedAt: {
+      h: "Updated At"
+      n: "updatedAt"
+      r: false
+      t: "`$ANY`"
+    }
+    userId: {
+      fo: "uuid4"
+      h: "User Id"
+      n: "userId"
+      r: true
+      t: "`$STRING`"
+    }
+    username: {
+      h: "Username"
+      n: "username"
+      r: false
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "social"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "code"
+            "code_verifier"
+          ]
+          co: {
+            id: "POST /social/instagram/exchange"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/social/instagram/exchange"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "social"
+            }
+            {
+              lit: "instagram"
+            }
+            {
+              lit: "exchange"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "code"
+            "code_verifier"
+          ]
+          co: {
+            id: "POST /social/tiktok/exchange"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/social/tiktok/exchange"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "social"
+            }
+            {
+              lit: "tiktok"
+            }
+            {
+              lit: "exchange"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /social/connections"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/social/connections"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "social"
+            }
+            {
+              lit: "connections"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /social/platforms"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/social/platforms"
+          q: {
+            "$action": "platform"
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "social"
+            }
+            {
+              lit: "platforms"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /social/instagram/auth"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "code_challenge"
+                or: "code_challenge"
+                r: false
+                t: "`$ANY`"
+              }
+              {
+                ex: "S256"
+                k: "query"
+                n: "code_challenge_method"
+                or: "code_challenge_method"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/social/instagram/auth"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "social"
+            }
+            {
+              lit: "instagram"
+            }
+            {
+              lit: "auth"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /social/instagram/callback"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "code"
+                or: "code"
+                r: false
+                t: "`$ANY`"
+              }
+              {
+                k: "query"
+                n: "error"
+                or: "error"
+                r: false
+                t: "`$ANY`"
+              }
+              {
+                k: "query"
+                n: "error_description"
+                or: "error_description"
+                r: false
+                t: "`$ANY`"
+              }
+              {
+                k: "query"
+                n: "state"
+                or: "state"
+                r: false
+                t: "`$ANY`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/social/instagram/callback"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "social"
+            }
+            {
+              lit: "instagram"
+            }
+            {
+              lit: "callback"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /social/tiktok/auth"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "code_challenge"
+                or: "code_challenge"
+                r: false
+                t: "`$ANY`"
+              }
+              {
+                ex: "S256"
+                k: "query"
+                n: "code_challenge_method"
+                or: "code_challenge_method"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/social/tiktok/auth"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "social"
+            }
+            {
+              lit: "tiktok"
+            }
+            {
+              lit: "auth"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /social/tiktok/callback"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "code"
+                or: "code"
+                r: false
+                t: "`$ANY`"
+              }
+              {
+                k: "query"
+                n: "error"
+                or: "error"
+                r: false
+                t: "`$ANY`"
+              }
+              {
+                k: "query"
+                n: "error_description"
+                or: "error_description"
+                r: false
+                t: "`$ANY`"
+              }
+              {
+                k: "query"
+                n: "state"
+                or: "state"
+                r: false
+                t: "`$ANY`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/social/tiktok/callback"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "social"
+            }
+            {
+              lit: "tiktok"
+            }
+            {
+              lit: "callback"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    remove: {
+      name: "remove"
+      points: [
+        {
+          co: {
+            id: "DELETE /social/connections/{platform}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "platform"
+                or: "platform"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "DELETE"
+          o: "/social/connections/{platform}"
+          q: {
+            exist: [
+              "platform"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "social"
+            }
+            {
+              lit: "connections"
+            }
+            {
+              var: "platform"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

@@ -1,0 +1,18 @@
+# BasicSora2AvatarAssetUploadFlow
+
+main: kit: flow: BasicSora2AvatarAssetUploadFlow:
+{
+  entity: "sora2_avatar_asset_upload",
+  kind: "basic",
+  name: "BasicSora2AvatarAssetUploadFlow",
+  step: [
+    {
+      i: {
+        ref: "sora2_avatar_asset_upload_ref01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicSora2AvatarAssetUploadFlow"
+}

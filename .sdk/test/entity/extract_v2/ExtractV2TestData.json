@@ -1,0 +1,44 @@
+{
+  "existing": {
+    "extract_v2": {
+      "EXTRACT_V200": {
+        "instagram_username": "s28",
+        "message": "s29",
+        "status": "s2a",
+        "url": "s2b",
+        "id": "EXTRACT_V200"
+      },
+      "EXTRACT_V201": {
+        "instagram_username": "s50",
+        "message": "s51",
+        "status": "s52",
+        "url": "s53",
+        "id": "EXTRACT_V201"
+      },
+      "EXTRACT_V202": {
+        "instagram_username": "s78",
+        "message": "s79",
+        "status": "s7a",
+        "url": "s7b",
+        "id": "EXTRACT_V202"
+      }
+    }
+  },
+  "new": {
+    "extract_v2": {
+      "extract_v2_ref01": {
+        "instagram_username": "sa0",
+        "message": "sa1",
+        "status": "sa2",
+        "url": "sa3"
+      }
+    }
+  },
+  "requests": {
+    "POST /api/scraper/extract_v2": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

@@ -1,0 +1,839 @@
+# Entity: comment_campaign
+
+main: kit: entity: comment_campaign: {
+
+  alias: field: {}
+
+  fields: {
+    account_daily_limit: {
+      h: "Account Daily Limit"
+      n: "account_daily_limit"
+      r: false
+      t: "`$INTEGER`"
+    }
+    account_weekly_limit: {
+      h: "Account Weekly Limit"
+      n: "account_weekly_limit"
+      r: false
+      t: "`$INTEGER`"
+    }
+    action: {
+      h: "Action"
+      n: "action"
+      r: true
+      t: "`$STRING`"
+    }
+    active_days_per_week: {
+      h: "Active Days Per Week"
+      n: "active_days_per_week"
+      r: false
+      t: "`$INTEGER`"
+    }
+    agent_id: {
+      h: "Agent Id"
+      n: "agent_id"
+      r: true
+      t: "`$STRING`"
+    }
+    allowlist: {
+      h: "Allowlist"
+      n: "allowlist"
+      r: false
+      t: "`$ARRAY`"
+    }
+    analysis_daily_limit: {
+      h: "Analysis Daily Limit"
+      n: "analysis_daily_limit"
+      r: false
+      t: "`$INTEGER`"
+    }
+    analysis_model: {
+      h: "Analysis Model"
+      n: "analysis_model"
+      r: false
+      t: "`$STRING`"
+    }
+    analysis_reservation_usd: {
+      h: "Analysis Reservation Usd"
+      n: "analysis_reservation_usd"
+      r: false
+      t: "`$NUMBER`"
+    }
+    approved_markets: {
+      h: "Approved Markets"
+      n: "approved_markets"
+      r: false
+      t: "`$ARRAY`"
+    }
+    brand_forward_enabled: {
+      h: "Brand Forward Enabled"
+      n: "brand_forward_enabled"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    briefs: {
+      h: "Briefs"
+      n: "briefs"
+      r: false
+      t: "`$OBJECT`"
+    }
+    candidate_only: {
+      h: "Candidate Only"
+      n: "candidate_only"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    claims: {
+      h: "Claims"
+      n: "claims"
+      r: false
+      t: "`$ARRAY`"
+    }
+    cohort_removal_threshold: {
+      h: "Cohort Removal Threshold"
+      n: "cohort_removal_threshold"
+      r: false
+      t: "`$INTEGER`"
+    }
+    daily_cost_ceiling_usd: {
+      h: "Daily Cost Ceiling Usd"
+      n: "daily_cost_ceiling_usd"
+      r: false
+      t: "`$NUMBER`"
+    }
+    delivery_mode: {
+      h: "Delivery Mode"
+      n: "delivery_mode"
+      r: false
+      t: "`$STRING`"
+    }
+    disclosure_mode: {
+      h: "Disclosure Mode"
+      n: "disclosure_mode"
+      r: false
+      t: "`$STRING`"
+    }
+    disclosure_template: {
+      h: "Disclosure Template"
+      n: "disclosure_template"
+      r: false
+      t: "`$STRING`"
+    }
+    draft_options_count: {
+      h: "Draft Options Count"
+      n: "draft_options_count"
+      r: false
+      t: "`$INTEGER`"
+    }
+    draft_review_reservation_usd: {
+      h: "Draft Review Reservation Usd"
+      n: "draft_review_reservation_usd"
+      r: false
+      t: "`$NUMBER`"
+    }
+    exceptional_daily_cap_approved: {
+      h: "Exceptional Daily Cap Approved"
+      n: "exceptional_daily_cap_approved"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    execution_enabled: {
+      h: "Execution Enabled"
+      n: "execution_enabled"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    experiment_styles: {
+      h: "Experiment Styles"
+      n: "experiment_styles"
+      r: false
+      t: "`$ARRAY`"
+    }
+    inventory_factor: {
+      h: "Inventory Factor"
+      n: "inventory_factor"
+      r: false
+      t: "`$NUMBER`"
+    }
+    keywords: {
+      h: "Keywords"
+      n: "keywords"
+      r: false
+      t: "`$ARRAY`"
+    }
+    max_duration_seconds: {
+      h: "Max Duration Seconds"
+      n: "max_duration_seconds"
+      r: false
+      t: "`$ANY`"
+    }
+    metadata_pass_rate: {
+      h: "Metadata Pass Rate"
+      n: "metadata_pass_rate"
+      r: false
+      t: "`$NUMBER`"
+    }
+    min_interval_minutes: {
+      h: "Min Interval Minutes"
+      n: "min_interval_minutes"
+      r: false
+      t: "`$INTEGER`"
+    }
+    mode: {
+      h: "Mode"
+      n: "mode"
+      r: false
+      t: "`$STRING`"
+    }
+    monitored_creators: {
+      h: "Monitored Creators"
+      n: "monitored_creators"
+      r: false
+      t: "`$ARRAY`"
+    }
+    platform: {
+      h: "Platform"
+      n: "platform"
+      r: false
+      t: "`$STRING`"
+    }
+    platform_permission_evidence: {
+      h: "Platform Permission Evidence"
+      n: "platform_permission_evidence"
+      r: false
+      t: "`$STRING`"
+    }
+    policy_approved_by: {
+      h: "Policy Approved By"
+      n: "policy_approved_by"
+      r: false
+      t: "`$STRING`"
+    }
+    policy_expires_at: {
+      h: "Policy Expires At"
+      n: "policy_expires_at"
+      r: false
+      t: "`$ANY`"
+    }
+    policy_version: {
+      h: "Policy Version"
+      n: "policy_version"
+      r: false
+      t: "`$STRING`"
+    }
+    product_daily_limit: {
+      h: "Product Daily Limit"
+      n: "product_daily_limit"
+      r: false
+      t: "`$INTEGER`"
+    }
+    qualification_rate: {
+      h: "Qualification Rate"
+      n: "qualification_rate"
+      r: false
+      t: "`$NUMBER`"
+    }
+    raw_daily_limit: {
+      h: "Raw Daily Limit"
+      n: "raw_daily_limit"
+      r: false
+      t: "`$INTEGER`"
+    }
+    raw_result_reservation_usd: {
+      h: "Raw Result Reservation Usd"
+      n: "raw_result_reservation_usd"
+      r: false
+      t: "`$NUMBER`"
+    }
+    reason: {
+      h: "Reason"
+      n: "reason"
+      r: true
+      t: "`$STRING`"
+    }
+    replies_enabled: {
+      h: "Replies Enabled"
+      n: "replies_enabled"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    request_key: {
+      h: "Request Key"
+      n: "request_key"
+      r: true
+      t: "`$STRING`"
+    }
+    reviewer_model: {
+      h: "Reviewer Model"
+      n: "reviewer_model"
+      r: false
+      t: "`$STRING`"
+    }
+    scan_interval_hours: {
+      h: "Scan Interval Hours"
+      n: "scan_interval_hours"
+      r: false
+      t: "`$INTEGER`"
+    }
+    search_change_reason: {
+      h: "Search Change Reason"
+      n: "search_change_reason"
+      r: false
+      t: "`$STRING`"
+    }
+    search_effective_at: {
+      h: "Search Effective At"
+      n: "search_effective_at"
+      r: false
+      t: "`$ANY`"
+    }
+    shadow_sample_limit: {
+      h: "Shadow Sample Limit"
+      n: "shadow_sample_limit"
+      r: false
+      t: "`$INTEGER`"
+    }
+    spent_seconds: {
+      h: "Spent Seconds"
+      n: "spent_seconds"
+      r: false
+      t: "`$ANY`"
+    }
+    task_ttl_hours: {
+      h: "Task Ttl Hours"
+      n: "task_ttl_hours"
+      r: false
+      t: "`$INTEGER`"
+    }
+    top_comment_analysis_enabled: {
+      h: "Top Comment Analysis Enabled"
+      n: "top_comment_analysis_enabled"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    writer_model: {
+      h: "Writer Model"
+      n: "writer_model"
+      r: false
+      t: "`$STRING`"
+    }
+  }
+
+  name: "comment_campaign"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "action"
+            "reason"
+            "spent_seconds"
+          ]
+          co: {
+            id: "POST /api/comments/products/{product_id}/campaign/sources/{source_id}/resolve"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "product_id"
+                or: "product_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "source_id"
+                or: "source_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/comments/products/{product_id}/campaign/sources/{source_id}/resolve"
+          q: {
+            exist: [
+              "product_id"
+              "source_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "comments"
+            }
+            {
+              lit: "products"
+            }
+            {
+              var: "product_id"
+            }
+            {
+              lit: "campaign"
+            }
+            {
+              lit: "sources"
+            }
+            {
+              var: "source_id"
+            }
+            {
+              lit: "resolve"
+            }
+          ]
+          t: {
+            req: {
+              action: "`reqdata.action`"
+              reason: "`reqdata.reason`"
+              spent_seconds: "`reqdata.spent_second`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "agent_id"
+            "candidate_only"
+            "request_key"
+          ]
+          co: {
+            id: "POST /api/comments/products/{product_id}/campaign/pilot"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "product_id"
+                or: "product_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/comments/products/{product_id}/campaign/pilot"
+          q: {
+            exist: [
+              "product_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "comments"
+            }
+            {
+              lit: "products"
+            }
+            {
+              var: "product_id"
+            }
+            {
+              lit: "campaign"
+            }
+            {
+              lit: "pilot"
+            }
+          ]
+          t: {
+            req: {
+              agent_id: "`reqdata.agent_id`"
+              candidate_only: "`reqdata.candidate_only`"
+              request_key: "`reqdata.request_key`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /api/comments/products/{product_id}/campaign/prepare"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "product_id"
+                or: "product_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/comments/products/{product_id}/campaign/prepare"
+          q: {
+            exist: [
+              "product_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "comments"
+            }
+            {
+              lit: "products"
+            }
+            {
+              var: "product_id"
+            }
+            {
+              lit: "campaign"
+            }
+            {
+              lit: "prepare"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /api/comments/products/{product_id}/campaign/preview"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "product_id"
+                or: "product_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/comments/products/{product_id}/campaign/preview"
+          q: {
+            exist: [
+              "product_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "comments"
+            }
+            {
+              lit: "products"
+            }
+            {
+              var: "product_id"
+            }
+            {
+              lit: "campaign"
+            }
+            {
+              lit: "preview"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/comments/products/{product_id}/campaign"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "product_id"
+                or: "product_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/comments/products/{product_id}/campaign"
+          q: {
+            exist: [
+              "product_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "comments"
+            }
+            {
+              lit: "products"
+            }
+            {
+              var: "product_id"
+            }
+            {
+              lit: "campaign"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/comments/products/{product_id}/campaign/runtime"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "product_id"
+                or: "product_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/comments/products/{product_id}/campaign/runtime"
+          q: {
+            exist: [
+              "product_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "comments"
+            }
+            {
+              lit: "products"
+            }
+            {
+              var: "product_id"
+            }
+            {
+              lit: "campaign"
+            }
+            {
+              lit: "runtime"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    update: {
+      name: "update"
+      points: [
+        {
+          bf: [
+            "account_daily_limit"
+            "account_weekly_limit"
+            "active_days_per_week"
+            "allowlist"
+            "analysis_daily_limit"
+            "analysis_model"
+            "analysis_reservation_usd"
+            "approved_markets"
+            "brand_forward_enabled"
+            "briefs"
+            "claims"
+            "cohort_removal_threshold"
+            "daily_cost_ceiling_usd"
+            "delivery_mode"
+            "disclosure_mode"
+            "disclosure_template"
+            "draft_options_count"
+            "draft_review_reservation_usd"
+            "exceptional_daily_cap_approved"
+            "execution_enabled"
+            "experiment_styles"
+            "inventory_factor"
+            "keywords"
+            "max_duration_seconds"
+            "metadata_pass_rate"
+            "min_interval_minutes"
+            "mode"
+            "monitored_creators"
+            "platform"
+            "platform_permission_evidence"
+            "policy_approved_by"
+            "policy_expires_at"
+            "policy_version"
+            "product_daily_limit"
+            "qualification_rate"
+            "raw_daily_limit"
+            "raw_result_reservation_usd"
+            "replies_enabled"
+            "reviewer_model"
+            "scan_interval_hours"
+            "search_change_reason"
+            "search_effective_at"
+            "shadow_sample_limit"
+            "task_ttl_hours"
+            "top_comment_analysis_enabled"
+            "writer_model"
+          ]
+          co: {
+            id: "PUT /api/comments/products/{product_id}/campaign"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "product_id"
+                or: "product_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PUT"
+          o: "/api/comments/products/{product_id}/campaign"
+          q: {
+            exist: [
+              "product_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "comments"
+            }
+            {
+              lit: "products"
+            }
+            {
+              var: "product_id"
+            }
+            {
+              lit: "campaign"
+            }
+          ]
+          t: {
+            req: {
+              account_daily_limit: "`reqdata.account_daily_limit`"
+              account_weekly_limit: "`reqdata.account_weekly_limit`"
+              active_days_per_week: "`reqdata.active_days_per_week`"
+              allowlist: "`reqdata.allowlist`"
+              analysis_daily_limit: "`reqdata.analysis_daily_limit`"
+              analysis_model: "`reqdata.analysis_model`"
+              analysis_reservation_usd: "`reqdata.analysis_reservation_usd`"
+              approved_markets: "`reqdata.approved_market`"
+              brand_forward_enabled: "`reqdata.brand_forward_enabled`"
+              briefs: "`reqdata.brief`"
+              claims: "`reqdata.claim`"
+              cohort_removal_threshold: "`reqdata.cohort_removal_threshold`"
+              daily_cost_ceiling_usd: "`reqdata.daily_cost_ceiling_usd`"
+              delivery_mode: "`reqdata.delivery_mode`"
+              disclosure_mode: "`reqdata.disclosure_mode`"
+              disclosure_template: "`reqdata.disclosure_template`"
+              draft_options_count: "`reqdata.draft_options_count`"
+              draft_review_reservation_usd: "`reqdata.draft_review_reservation_usd`"
+              exceptional_daily_cap_approved: "`reqdata.exceptional_daily_cap_approved`"
+              execution_enabled: "`reqdata.execution_enabled`"
+              experiment_styles: "`reqdata.experiment_style`"
+              inventory_factor: "`reqdata.inventory_factor`"
+              keywords: "`reqdata.keyword`"
+              max_duration_seconds: "`reqdata.max_duration_second`"
+              metadata_pass_rate: "`reqdata.metadata_pass_rate`"
+              min_interval_minutes: "`reqdata.min_interval_minute`"
+              mode: "`reqdata.mode`"
+              monitored_creators: "`reqdata.monitored_creator`"
+              platform: "`reqdata.platform`"
+              platform_permission_evidence: "`reqdata.platform_permission_evidence`"
+              policy_approved_by: "`reqdata.policy_approved_by`"
+              policy_expires_at: "`reqdata.policy_expires_at`"
+              policy_version: "`reqdata.policy_version`"
+              product_daily_limit: "`reqdata.product_daily_limit`"
+              qualification_rate: "`reqdata.qualification_rate`"
+              raw_daily_limit: "`reqdata.raw_daily_limit`"
+              raw_result_reservation_usd: "`reqdata.raw_result_reservation_usd`"
+              replies_enabled: "`reqdata.replies_enabled`"
+              reviewer_model: "`reqdata.reviewer_model`"
+              scan_interval_hours: "`reqdata.scan_interval_hour`"
+              search_change_reason: "`reqdata.search_change_reason`"
+              search_effective_at: "`reqdata.search_effective_at`"
+              shadow_sample_limit: "`reqdata.shadow_sample_limit`"
+              task_ttl_hours: "`reqdata.task_ttl_hour`"
+              top_comment_analysis_enabled: "`reqdata.top_comment_analysis_enabled`"
+              writer_model: "`reqdata.writer_model`"
+            }
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.product")]
+    [path("$.main.kit.entity.product")]
+  ]
+
+}

@@ -1,0 +1,18 @@
+# BasicAnalyzeProductFlow
+
+main: kit: flow: BasicAnalyzeProductFlow:
+{
+  entity: "analyze_product",
+  kind: "basic",
+  name: "BasicAnalyzeProductFlow",
+  step: [
+    {
+      i: {
+        ref: "analyze_product_ref01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicAnalyzeProductFlow"
+}

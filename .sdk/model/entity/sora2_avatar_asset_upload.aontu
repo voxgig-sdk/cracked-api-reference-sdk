@@ -1,0 +1,108 @@
+# Entity: sora2_avatar_asset_upload
+
+main: kit: entity: sora2_avatar_asset_upload: {
+
+  alias: field: {}
+
+  fields: {
+    avatar_id: {
+      h: "Avatar Id"
+      n: "avatar_id"
+      r: false
+      t: "`$STRING`"
+    }
+    file: {
+      fo: "binary"
+      h: "File"
+      n: "file"
+      r: true
+      t: "`$STRING`"
+    }
+    run_output_dir: {
+      h: "Run Output Dir"
+      n: "run_output_dir"
+      r: false
+      t: "`$ANY`"
+    }
+    s3_key: {
+      h: "S3 Key"
+      n: "s3_key"
+      r: true
+      t: "`$STRING`"
+    }
+    upload_type: {
+      h: "Upload Type"
+      n: "upload_type"
+      r: true
+      t: "`$STRING`"
+    }
+    url: {
+      h: "Url"
+      n: "url"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  name: "sora2_avatar_asset_upload"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /api/admin/sora2-avatars/upload-asset"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/admin/sora2-avatars/upload-asset"
+          rb: {
+            fields: [
+              {
+                name: "avatar_id"
+              }
+              {
+                binary: true
+                name: "file"
+              }
+              {
+                name: "run_output_dir"
+              }
+              {
+                name: "upload_type"
+              }
+            ]
+            kind: "multipart"
+            media: "multipart/form-data"
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "sora2-avatars"
+            }
+            {
+              lit: "upload-asset"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

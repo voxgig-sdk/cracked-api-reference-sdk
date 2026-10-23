@@ -1,0 +1,116 @@
+{
+  "existing": {
+    "stats_refresh_run_summary": {
+      "STATS_REFRESH_RUN_SUMMARY00": {
+        "celery_task_id": "CELERY_TASK01",
+        "completed_at": "se7",
+        "entries_failed": 232,
+        "entries_skipped": 233,
+        "entries_total": 234,
+        "entries_updated": 235,
+        "error_summary_json": "sec",
+        "id": "STATS_REFRESH_RUN_SUMMARY00",
+        "issues_opened": 238,
+        "issues_resolved": 239,
+        "platform_units_resolved": 240,
+        "platform_units_total": 241,
+        "platform_units_unresolved": 242,
+        "platform_updates_via_profile": 243,
+        "platform_updates_via_url": 244,
+        "provider": "sf5",
+        "refresh_trigger": "sf6",
+        "requested_by_email": "sf7",
+        "run_type": "sf8",
+        "started_at": "sf9",
+        "status": "sfa",
+        "target_date_et": "sfb",
+        "users_count": 252
+      },
+      "STATS_REFRESH_RUN_SUMMARY01": {
+        "celery_task_id": "CELERY_TASK01",
+        "completed_at": "s1cd",
+        "entries_failed": 462,
+        "entries_skipped": 463,
+        "entries_total": 464,
+        "entries_updated": 465,
+        "error_summary_json": "s1d2",
+        "id": "STATS_REFRESH_RUN_SUMMARY01",
+        "issues_opened": 468,
+        "issues_resolved": 469,
+        "platform_units_resolved": 470,
+        "platform_units_total": 471,
+        "platform_units_unresolved": 472,
+        "platform_updates_via_profile": 473,
+        "platform_updates_via_url": 474,
+        "provider": "s1db",
+        "refresh_trigger": "s1dc",
+        "requested_by_email": "s1dd",
+        "run_type": "s1de",
+        "started_at": "s1df",
+        "status": "s1e0",
+        "target_date_et": "s1e1",
+        "users_count": 482
+      },
+      "STATS_REFRESH_RUN_SUMMARY02": {
+        "celery_task_id": "CELERY_TASK01",
+        "completed_at": "s2b3",
+        "entries_failed": 692,
+        "entries_skipped": 693,
+        "entries_total": 694,
+        "entries_updated": 695,
+        "error_summary_json": "s2b8",
+        "id": "STATS_REFRESH_RUN_SUMMARY02",
+        "issues_opened": 698,
+        "issues_resolved": 699,
+        "platform_units_resolved": 700,
+        "platform_units_total": 701,
+        "platform_units_unresolved": 702,
+        "platform_updates_via_profile": 703,
+        "platform_updates_via_url": 704,
+        "provider": "s2c1",
+        "refresh_trigger": "s2c2",
+        "requested_by_email": "s2c3",
+        "run_type": "s2c4",
+        "started_at": "s2c5",
+        "status": "s2c6",
+        "target_date_et": "s2c7",
+        "users_count": 712
+      }
+    }
+  },
+  "new": {
+    "stats_refresh_run_summary": {
+      "stats_refresh_run_summary_ref01": {
+        "celery_task_id": "CELERY_TASK01",
+        "completed_at": "s399",
+        "entries_failed": 922,
+        "entries_skipped": 923,
+        "entries_total": 924,
+        "entries_updated": 925,
+        "error_summary_json": "s39e",
+        "issues_opened": 928,
+        "issues_resolved": 929,
+        "platform_units_resolved": 930,
+        "platform_units_total": 931,
+        "platform_units_unresolved": 932,
+        "platform_updates_via_profile": 933,
+        "platform_updates_via_url": 934,
+        "provider": "s3a7",
+        "refresh_trigger": "s3a8",
+        "requested_by_email": "s3a9",
+        "run_type": "s3aa",
+        "started_at": "s3ab",
+        "status": "s3ac",
+        "target_date_et": "s3ad",
+        "users_count": 942
+      }
+    }
+  },
+  "requests": {
+    "GET /api/admin/customer-health/runs": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

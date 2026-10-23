@@ -1,0 +1,614 @@
+{
+  point: "warning"
+  note: "no server URL in the definition (servers[0].url): the SDK takes it as the server variable `base`; set the `server` build option to fix one"
+}
+
+
+{
+  point: "warning"
+  note: "Points POST /api/admin/impersonate/{user_id}, POST /api/admin/users/{user_id}/agents/reconcile, POST /api/admin/users/{user_id}/bulk-create-videos, POST /api/admin/users/{user_id}/clear-failed-videos, POST /api/admin/users/{user_id}/clear-future-auto-entries, POST /api/admin/users/{user_id}/clear-manual-entries, POST /api/admin/users/{user_id}/clear-today-auto-entries, POST /api/admin/users/{user_id}/retry-todays-videos and POST /api/admin/users/{user_id}/retry-videos on entity=admin op=create have the same selector (exist: user_id), so only POST /api/admin/impersonate/{user_id} is ever chosen. An action or another entity in guide.aontu tells them apart."
+  entity: "admin"
+  op: "create"
+  points: [
+    "POST /api/admin/impersonate/{user_id}"
+    "POST /api/admin/users/{user_id}/agents/reconcile"
+    "POST /api/admin/users/{user_id}/bulk-create-videos"
+    "POST /api/admin/users/{user_id}/clear-failed-videos"
+    "POST /api/admin/users/{user_id}/clear-future-auto-entries"
+    "POST /api/admin/users/{user_id}/clear-manual-entries"
+    "POST /api/admin/users/{user_id}/clear-today-auto-entries"
+    "POST /api/admin/users/{user_id}/retry-todays-videos"
+    "POST /api/admin/users/{user_id}/retry-videos"
+  ]
+
+}
+
+
+{
+  point: "warning"
+  note: "Points POST /api/admin/agents/social-profile-audit, POST /api/admin/customer-health/issues/retry, POST /api/admin/products-dashboard/repair-stats, POST /api/admin/schedule/clear-all-future-auto-entries, POST /api/admin/schedule/clear-today-auto-entries-for-all, POST /api/admin/stats/refresh-and-send-emails, POST /api/admin/stats/refresh-last-7-days and POST /api/admin/whitelist-testers on entity=admin op=create have the same selector (exist: none), so only POST /api/admin/agents/social-profile-audit is ever chosen. An action or another entity in guide.aontu tells them apart."
+  entity: "admin"
+  op: "create"
+  points: [
+    "POST /api/admin/agents/social-profile-audit"
+    "POST /api/admin/customer-health/issues/retry"
+    "POST /api/admin/products-dashboard/repair-stats"
+    "POST /api/admin/schedule/clear-all-future-auto-entries"
+    "POST /api/admin/schedule/clear-today-auto-entries-for-all"
+    "POST /api/admin/stats/refresh-and-send-emails"
+    "POST /api/admin/stats/refresh-last-7-days"
+    "POST /api/admin/whitelist-testers"
+  ]
+
+}
+
+
+{
+  point: "warning"
+  note: "Points GET /api/admin/users/{user_id}/failed-videos, GET /api/admin/users/{user_id}/pending-videos and GET /api/admin/users/{user_id}/schedule-queue on entity=admin op=load have the same selector (exist: user_id), so only GET /api/admin/users/{user_id}/failed-videos is ever chosen. An action or another entity in guide.aontu tells them apart."
+  entity: "admin"
+  op: "load"
+  points: [
+    "GET /api/admin/users/{user_id}/failed-videos"
+    "GET /api/admin/users/{user_id}/pending-videos"
+    "GET /api/admin/users/{user_id}/schedule-queue"
+  ]
+
+}
+
+
+{
+  point: "warning"
+  note: "Points GET /api/admin/stats/aggregate and GET /api/admin/users/export on entity=admin op=load have the same selector (exist: none), so only GET /api/admin/stats/aggregate is ever chosen. An action or another entity in guide.aontu tells them apart."
+  entity: "admin"
+  op: "load"
+  points: [
+    "GET /api/admin/stats/aggregate"
+    "GET /api/admin/users/export"
+  ]
+
+}
+
+
+{
+  point: "warning"
+  note: "Points POST /api/admin/carousels/slideshow-import/decks and POST /api/admin/carousels/slideshow-import/decks-json on entity=admin_carousel op=create have the same selector (exist: none), so only POST /api/admin/carousels/slideshow-import/decks is ever chosen. An action or another entity in guide.aontu tells them apart."
+  entity: "admin_carousel"
+  op: "create"
+  points: [
+    "POST /api/admin/carousels/slideshow-import/decks"
+    "POST /api/admin/carousels/slideshow-import/decks-json"
+  ]
+
+}
+
+
+{
+  point: "warning"
+  note: "Points GET /api/admin/carousels/demo-formulas and GET /api/admin/carousels/freeform-production-prompt on entity=admin_carousel op=load have the same selector (exist: none), so only GET /api/admin/carousels/demo-formulas is ever chosen. An action or another entity in guide.aontu tells them apart."
+  entity: "admin_carousel"
+  op: "load"
+  points: [
+    "GET /api/admin/carousels/demo-formulas"
+    "GET /api/admin/carousels/freeform-production-prompt"
+  ]
+
+}
+
+
+{
+  point: "warning"
+  note: "Points GET /api/admin/healthrx/automation, GET /api/admin/healthrx/automation/config and GET /api/admin/healthrx/videos on entity=admin_healthrx op=load have the same selector (exist: product_id), so only GET /api/admin/healthrx/automation is ever chosen. An action or another entity in guide.aontu tells them apart."
+  entity: "admin_healthrx"
+  op: "load"
+  points: [
+    "GET /api/admin/healthrx/automation"
+    "GET /api/admin/healthrx/automation/config"
+    "GET /api/admin/healthrx/videos"
+  ]
+
+}
+
+
+{
+  point: "warning"
+  note: "Points GET /api/admin/healthrx/customers, GET /api/admin/healthrx/inbox, GET /api/admin/healthrx/products and GET /api/admin/healthrx/summary on entity=admin_healthrx op=load have the same selector (exist: none), so only GET /api/admin/healthrx/customers is ever chosen. An action or another entity in guide.aontu tells them apart."
+  entity: "admin_healthrx"
+  op: "load"
+  points: [
+    "GET /api/admin/healthrx/customers"
+    "GET /api/admin/healthrx/inbox"
+    "GET /api/admin/healthrx/products"
+    "GET /api/admin/healthrx/summary"
+  ]
+
+}
+
+
+{
+  point: "warning"
+  note: "Points POST /api/admin/users/{user_id}/regenerate-landing and POST /api/admin/users/{user_id}/regenerate-microhub on entity=admin_landing_task op=create have the same selector (exist: user_id), so only POST /api/admin/users/{user_id}/regenerate-landing is ever chosen. An action or another entity in guide.aontu tells them apart."
+  entity: "admin_landing_task"
+  op: "create"
+  points: [
+    "POST /api/admin/users/{user_id}/regenerate-landing"
+    "POST /api/admin/users/{user_id}/regenerate-microhub"
+  ]
+
+}
+
+
+{
+  point: "warning"
+  note: "Points POST /api/admin/users/{user_id}/convert-to-enterprise and POST /api/admin/users/{user_id}/transfer-ownership on entity=admin_user_view op=create have the same selector (exist: user_id), so only POST /api/admin/users/{user_id}/convert-to-enterprise is ever chosen. An action or another entity in guide.aontu tells them apart."
+  entity: "admin_user_view"
+  op: "create"
+  points: [
+    "POST /api/admin/users/{user_id}/convert-to-enterprise"
+    "POST /api/admin/users/{user_id}/transfer-ownership"
+  ]
+
+}
+
+
+{
+  point: "warning"
+  note: "Points POST /api/admin/video-remixer/analysis/{identifier}/cancel, POST /api/admin/video-remixer/analysis/{identifier}/retry, POST /api/admin/video-remixer/clipper-access/{identifier}/revoke, POST /api/admin/video-remixer/posts/{identifier}/metrics, POST /api/admin/video-remixer/proofs/{identifier}/staff-time, POST /api/admin/video-remixer/reviews/{identifier}/checks and POST /api/admin/video-remixer/worker-keys/{identifier}/revoke on entity=admin_video_remixer op=create have the same selector (exist: identifier), so only POST /api/admin/video-remixer/analysis/{identifier}/cancel is ever chosen. An action or another entity in guide.aontu tells them apart."
+  entity: "admin_video_remixer"
+  op: "create"
+  points: [
+    "POST /api/admin/video-remixer/analysis/{identifier}/cancel"
+    "POST /api/admin/video-remixer/analysis/{identifier}/retry"
+    "POST /api/admin/video-remixer/clipper-access/{identifier}/revoke"
+    "POST /api/admin/video-remixer/posts/{identifier}/metrics"
+    "POST /api/admin/video-remixer/proofs/{identifier}/staff-time"
+    "POST /api/admin/video-remixer/reviews/{identifier}/checks"
+    "POST /api/admin/video-remixer/worker-keys/{identifier}/revoke"
+  ]
+
+}
+
+
+{
+  point: "warning"
+  note: "Points POST /api/admin/video-remixer/recipes/{identifier}/render and POST /api/admin/video-remixer/runs/{identifier}/render on entity=admin_video_remixer op=create have the same selector (exist: identifier; $action: render), so only POST /api/admin/video-remixer/recipes/{identifier}/render is ever chosen. An action or another entity in guide.aontu tells them apart."
+  entity: "admin_video_remixer"
+  op: "create"
+  points: [
+    "POST /api/admin/video-remixer/recipes/{identifier}/render"
+    "POST /api/admin/video-remixer/runs/{identifier}/render"
+  ]
+
+}
+
+
+{
+  point: "warning"
+  note: "Points POST /api/admin/video-remixer/jobs/{job_id}/cancel, POST /api/admin/video-remixer/jobs/{job_id}/media and POST /api/admin/video-remixer/jobs/{job_id}/retry on entity=admin_video_remixer op=create have the same selector (exist: job_id), so only POST /api/admin/video-remixer/jobs/{job_id}/cancel is ever chosen. An action or another entity in guide.aontu tells them apart."
+  entity: "admin_video_remixer"
+  op: "create"
+  points: [
+    "POST /api/admin/video-remixer/jobs/{job_id}/cancel"
+    "POST /api/admin/video-remixer/jobs/{job_id}/media"
+    "POST /api/admin/video-remixer/jobs/{job_id}/retry"
+  ]
+
+}
+
+
+{
+  point: "warning"
+  note: "Points POST /api/admin/video-remixer/analysis, POST /api/admin/video-remixer/audits, POST /api/admin/video-remixer/clippers/import, POST /api/admin/video-remixer/clippers/import-csv, POST /api/admin/video-remixer/formulas/proposals, POST /api/admin/video-remixer/imports/manifest, POST /api/admin/video-remixer/imports/upload, POST /api/admin/video-remixer/planner-preview, POST /api/admin/video-remixer/projects, POST /api/admin/video-remixer/proofs, POST /api/admin/video-remixer/reports/refresh, POST /api/admin/video-remixer/runs and POST /api/admin/video-remixer/worker-keys on entity=admin_video_remixer op=create have the same selector (exist: none), so only POST /api/admin/video-remixer/analysis is ever chosen. An action or another entity in guide.aontu tells them apart."
+  entity: "admin_video_remixer"
+  op: "create"
+  points: [
+    "POST /api/admin/video-remixer/analysis"
+    "POST /api/admin/video-remixer/audits"
+    "POST /api/admin/video-remixer/clippers/import"
+    "POST /api/admin/video-remixer/clippers/import-csv"
+    "POST /api/admin/video-remixer/formulas/proposals"
+    "POST /api/admin/video-remixer/imports/manifest"
+    "POST /api/admin/video-remixer/imports/upload"
+    "POST /api/admin/video-remixer/planner-preview"
+    "POST /api/admin/video-remixer/projects"
+    "POST /api/admin/video-remixer/proofs"
+    "POST /api/admin/video-remixer/reports/refresh"
+    "POST /api/admin/video-remixer/runs"
+    "POST /api/admin/video-remixer/worker-keys"
+  ]
+
+}
+
+
+{
+  point: "warning"
+  note: "Points GET /api/admin/video-remixer/recipes/{identifier}, GET /api/admin/video-remixer/reviews/{identifier} and GET /api/admin/video-remixer/runs/{identifier} on entity=admin_video_remixer op=load have the same selector (exist: identifier), so only GET /api/admin/video-remixer/recipes/{identifier} is ever chosen. An action or another entity in guide.aontu tells them apart."
+  entity: "admin_video_remixer"
+  op: "load"
+  points: [
+    "GET /api/admin/video-remixer/recipes/{identifier}"
+    "GET /api/admin/video-remixer/reviews/{identifier}"
+    "GET /api/admin/video-remixer/runs/{identifier}"
+  ]
+
+}
+
+
+{
+  point: "warning"
+  note: "Points GET /api/admin/video-remixer/jobs/{job_id}/captions and GET /api/admin/video-remixer/jobs/{job_id}/manifest on entity=admin_video_remixer op=load have the same selector (exist: job_id), so only GET /api/admin/video-remixer/jobs/{job_id}/captions is ever chosen. An action or another entity in guide.aontu tells them apart."
+  entity: "admin_video_remixer"
+  op: "load"
+  points: [
+    "GET /api/admin/video-remixer/jobs/{job_id}/captions"
+    "GET /api/admin/video-remixer/jobs/{job_id}/manifest"
+  ]
+
+}
+
+
+{
+  point: "warning"
+  note: "Points GET /api/admin/video-remixer/analysis, GET /api/admin/video-remixer/audits, GET /api/admin/video-remixer/batch-schedules, GET /api/admin/video-remixer/clipper-access, GET /api/admin/video-remixer/clipper-rubric, GET /api/admin/video-remixer/clippers, GET /api/admin/video-remixer/clips, GET /api/admin/video-remixer/cost, GET /api/admin/video-remixer/formulas, GET /api/admin/video-remixer/imports, GET /api/admin/video-remixer/jobs, GET /api/admin/video-remixer/label-history, GET /api/admin/video-remixer/library, GET /api/admin/video-remixer/overview, GET /api/admin/video-remixer/posts, GET /api/admin/video-remixer/posts/export, GET /api/admin/video-remixer/products, GET /api/admin/video-remixer/projects, GET /api/admin/video-remixer/proofs, GET /api/admin/video-remixer/reports, GET /api/admin/video-remixer/reports/aggregates, GET /api/admin/video-remixer/reviews, GET /api/admin/video-remixer/runs, GET /api/admin/video-remixer/sources and GET /api/admin/video-remixer/worker-keys on entity=admin_video_remixer op=load have the same selector (exist: none), so only GET /api/admin/video-remixer/analysis is ever chosen. An action or another entity in guide.aontu tells them apart."
+  entity: "admin_video_remixer"
+  op: "load"
+  points: [
+    "GET /api/admin/video-remixer/analysis"
+    "GET /api/admin/video-remixer/audits"
+    "GET /api/admin/video-remixer/batch-schedules"
+    "GET /api/admin/video-remixer/clipper-access"
+    "GET /api/admin/video-remixer/clipper-rubric"
+    "GET /api/admin/video-remixer/clippers"
+    "GET /api/admin/video-remixer/clips"
+    "GET /api/admin/video-remixer/cost"
+    "GET /api/admin/video-remixer/formulas"
+    "GET /api/admin/video-remixer/imports"
+    "GET /api/admin/video-remixer/jobs"
+    "GET /api/admin/video-remixer/label-history"
+    "GET /api/admin/video-remixer/library"
+    "GET /api/admin/video-remixer/overview"
+    "GET /api/admin/video-remixer/posts"
+    "GET /api/admin/video-remixer/posts/export"
+    "GET /api/admin/video-remixer/products"
+    "GET /api/admin/video-remixer/projects"
+    "GET /api/admin/video-remixer/proofs"
+    "GET /api/admin/video-remixer/reports"
+    "GET /api/admin/video-remixer/reports/aggregates"
+    "GET /api/admin/video-remixer/reviews"
+    "GET /api/admin/video-remixer/runs"
+    "GET /api/admin/video-remixer/sources"
+    "GET /api/admin/video-remixer/worker-keys"
+  ]
+
+}
+
+
+{
+  point: "warning"
+  note: "Points PUT /api/admin/video-remixer/audits/{identifier}/answer, PUT /api/admin/video-remixer/batch-schedules/{identifier}, PUT /api/admin/video-remixer/clippers/{identifier}, PUT /api/admin/video-remixer/formulas/{identifier} and PUT /api/admin/video-remixer/posts/{identifier}/link on entity=admin_video_remixer op=update have the same selector (exist: identifier), so only PUT /api/admin/video-remixer/audits/{identifier}/answer is ever chosen. An action or another entity in guide.aontu tells them apart."
+  entity: "admin_video_remixer"
+  op: "update"
+  points: [
+    "PUT /api/admin/video-remixer/audits/{identifier}/answer"
+    "PUT /api/admin/video-remixer/batch-schedules/{identifier}"
+    "PUT /api/admin/video-remixer/clippers/{identifier}"
+    "PUT /api/admin/video-remixer/formulas/{identifier}"
+    "PUT /api/admin/video-remixer/posts/{identifier}/link"
+  ]
+
+}
+
+
+{
+  point: "warning"
+  note: "Points PUT /api/admin/video-remixer/clipper-rubric and PUT /api/admin/video-remixer/source-policies/batch on entity=admin_video_remixer op=update have the same selector (exist: none), so only PUT /api/admin/video-remixer/clipper-rubric is ever chosen. An action or another entity in guide.aontu tells them apart."
+  entity: "admin_video_remixer"
+  op: "update"
+  points: [
+    "PUT /api/admin/video-remixer/clipper-rubric"
+    "PUT /api/admin/video-remixer/source-policies/batch"
+  ]
+
+}
+
+
+{
+  point: "warning"
+  note: "Points GET /api/admin/customers-health and GET /api/agent-access/customers-health on entity=agent_access_customers_health op=list have the same selector (exist: none), so only GET /api/admin/customers-health is ever chosen. An action or another entity in guide.aontu tells them apart."
+  entity: "agent_access_customers_health"
+  op: "list"
+  points: [
+    "GET /api/admin/customers-health"
+    "GET /api/agent-access/customers-health"
+  ]
+
+}
+
+
+{
+  point: "warning"
+  note: "Points GET /api/upload-post-agents/all and GET /api/upload-post-agents/free on entity=agent_detail op=list have the same selector (exist: none), so only GET /api/upload-post-agents/all is ever chosen. An action or another entity in guide.aontu tells them apart."
+  entity: "agent_detail"
+  op: "list"
+  points: [
+    "GET /api/upload-post-agents/all"
+    "GET /api/upload-post-agents/free"
+  ]
+
+}
+
+
+{
+  point: "warning"
+  note: "Points PATCH /api/upload-post-agents/{agent_id}/bio, PATCH /api/upload-post-agents/{agent_id}/name and PATCH /api/upload-post-agents/{agent_id}/role on entity=agent_detail op=update have the same selector (exist: upload_post_agent_id), so only PATCH /api/upload-post-agents/{agent_id}/bio is ever chosen. An action or another entity in guide.aontu tells them apart."
+  entity: "agent_detail"
+  op: "update"
+  points: [
+    "PATCH /api/upload-post-agents/{agent_id}/bio"
+    "PATCH /api/upload-post-agents/{agent_id}/name"
+    "PATCH /api/upload-post-agents/{agent_id}/role"
+  ]
+
+}
+
+
+{
+  point: "warning"
+  note: "Points PUT /api/schedule/settings and PUT /api/schedule/settings/video-types on entity=auto_schedule_setting op=update have the same selector (exist: none), so only PUT /api/schedule/settings is ever chosen. An action or another entity in guide.aontu tells them apart."
+  entity: "auto_schedule_setting"
+  op: "update"
+  points: [
+    "PUT /api/schedule/settings"
+    "PUT /api/schedule/settings/video-types"
+  ]
+
+}
+
+
+{
+  point: "warning"
+  note: "Points POST /api/comments/products/{product_id}/campaign/pilot, POST /api/comments/products/{product_id}/campaign/prepare and POST /api/comments/products/{product_id}/campaign/preview on entity=comment_campaign op=create have the same selector (exist: product_id), so only POST /api/comments/products/{product_id}/campaign/pilot is ever chosen. An action or another entity in guide.aontu tells them apart."
+  entity: "comment_campaign"
+  op: "create"
+  points: [
+    "POST /api/comments/products/{product_id}/campaign/pilot"
+    "POST /api/comments/products/{product_id}/campaign/prepare"
+    "POST /api/comments/products/{product_id}/campaign/preview"
+  ]
+
+}
+
+
+{
+  point: "warning"
+  note: "Points GET /api/comments/products/{product_id}/campaign and GET /api/comments/products/{product_id}/campaign/runtime on entity=comment_campaign op=load have the same selector (exist: product_id), so only GET /api/comments/products/{product_id}/campaign is ever chosen. An action or another entity in guide.aontu tells them apart."
+  entity: "comment_campaign"
+  op: "load"
+  points: [
+    "GET /api/comments/products/{product_id}/campaign"
+    "GET /api/comments/products/{product_id}/campaign/runtime"
+  ]
+
+}
+
+
+{
+  point: "warning"
+  note: "Points POST /api/carousel/create-from-exact, POST /api/carousel/create-from-styles and POST /api/carousel/create-from-template on entity=create_carousel op=create have the same selector (exist: none), so only POST /api/carousel/create-from-exact is ever chosen. An action or another entity in guide.aontu tells them apart."
+  entity: "create_carousel"
+  op: "create"
+  points: [
+    "POST /api/carousel/create-from-exact"
+    "POST /api/carousel/create-from-styles"
+    "POST /api/carousel/create-from-template"
+  ]
+
+}
+
+
+{
+  point: "warning"
+  note: "Points POST /api/video-variation/create-hook and POST /api/video-variation/create-invisible on entity=create_variation op=create have the same selector (exist: none), so only POST /api/video-variation/create-hook is ever chosen. An action or another entity in guide.aontu tells them apart."
+  entity: "create_variation"
+  op: "create"
+  points: [
+    "POST /api/video-variation/create-hook"
+    "POST /api/video-variation/create-invisible"
+  ]
+
+}
+
+
+{
+  point: "warning"
+  note: "Points POST /api/enterprise/agents/assign, POST /api/enterprise/agents/move and POST /api/enterprise/agents/release on entity=enterprise_agent op=create have the same selector (exist: none), so only POST /api/enterprise/agents/assign is ever chosen. An action or another entity in guide.aontu tells them apart."
+  entity: "enterprise_agent"
+  op: "create"
+  points: [
+    "POST /api/enterprise/agents/assign"
+    "POST /api/enterprise/agents/move"
+    "POST /api/enterprise/agents/release"
+  ]
+
+}
+
+
+{
+  point: "warning"
+  note: "Points POST /api/healthrx/products/{product_id}/accounts/{account_id}/content, POST /api/healthrx/products/{product_id}/accounts/{account_id}/launch and POST /api/healthrx/products/{product_id}/accounts/{account_id}/pause on entity=healthrx op=create have the same selector (exist: account_id,product_id), so only POST /api/healthrx/products/{product_id}/accounts/{account_id}/content is ever chosen. An action or another entity in guide.aontu tells them apart."
+  entity: "healthrx"
+  op: "create"
+  points: [
+    "POST /api/healthrx/products/{product_id}/accounts/{account_id}/content"
+    "POST /api/healthrx/products/{product_id}/accounts/{account_id}/launch"
+    "POST /api/healthrx/products/{product_id}/accounts/{account_id}/pause"
+  ]
+
+}
+
+
+{
+  point: "warning"
+  note: "Points POST /api/healthrx/products/{product_id}/accounts, POST /api/healthrx/products/{product_id}/benchmarks, POST /api/healthrx/products/{product_id}/cost-receipts and POST /api/healthrx/products/{product_id}/incidents on entity=healthrx op=create have the same selector (exist: product_id), so only POST /api/healthrx/products/{product_id}/accounts is ever chosen. An action or another entity in guide.aontu tells them apart."
+  entity: "healthrx"
+  op: "create"
+  points: [
+    "POST /api/healthrx/products/{product_id}/accounts"
+    "POST /api/healthrx/products/{product_id}/benchmarks"
+    "POST /api/healthrx/products/{product_id}/cost-receipts"
+    "POST /api/healthrx/products/{product_id}/incidents"
+  ]
+
+}
+
+
+{
+  point: "warning"
+  note: "Points GET /api/healthrx/products/{product_id}, GET /api/healthrx/products/{product_id}/profile-schema and GET /api/healthrx/products/{product_id}/reports on entity=healthrx op=load have the same selector (exist: product_id), so only GET /api/healthrx/products/{product_id} is ever chosen. An action or another entity in guide.aontu tells them apart."
+  entity: "healthrx"
+  op: "load"
+  points: [
+    "GET /api/healthrx/products/{product_id}"
+    "GET /api/healthrx/products/{product_id}/profile-schema"
+    "GET /api/healthrx/products/{product_id}/reports"
+  ]
+
+}
+
+
+{
+  point: "warning"
+  note: "Points POST /api/landings/microhub/header-image and POST /api/landings/microhub/profile-image on entity=landing op=create have the same selector (exist: none), so only POST /api/landings/microhub/header-image is ever chosen. An action or another entity in guide.aontu tells them apart."
+  entity: "landing"
+  op: "create"
+  points: [
+    "POST /api/landings/microhub/header-image"
+    "POST /api/landings/microhub/profile-image"
+  ]
+
+}
+
+
+{
+  point: "warning"
+  note: "Points POST /api/microdrama/episodes/{episode_id}/exports, POST /api/microdrama/episodes/{episode_id}/reviews and POST /api/microdrama/episodes/{episode_id}/runs on entity=microdrama op=create have the same selector (exist: episode_id), so only POST /api/microdrama/episodes/{episode_id}/exports is ever chosen. An action or another entity in guide.aontu tells them apart."
+  entity: "microdrama"
+  op: "create"
+  points: [
+    "POST /api/microdrama/episodes/{episode_id}/exports"
+    "POST /api/microdrama/episodes/{episode_id}/reviews"
+    "POST /api/microdrama/episodes/{episode_id}/runs"
+  ]
+
+}
+
+
+{
+  point: "warning"
+  note: "Points GET /api/enterprise/agents/product/{product_id} and GET /api/enterprise/products/{product_id} on entity=product op=load have the same selector (exist: id), so only GET /api/enterprise/agents/product/{product_id} is ever chosen. An action or another entity in guide.aontu tells them apart."
+  entity: "product"
+  op: "load"
+  points: [
+    "GET /api/enterprise/agents/product/{product_id}"
+    "GET /api/enterprise/products/{product_id}"
+  ]
+
+}
+
+
+{
+  point: "warning"
+  note: "Points PUT /api/landings/microhub and PUT /api/landings/settings on entity=product_landing op=update have the same selector (exist: none), so only PUT /api/landings/microhub is ever chosen. An action or another entity in guide.aontu tells them apart."
+  entity: "product_landing"
+  op: "update"
+  points: [
+    "PUT /api/landings/microhub"
+    "PUT /api/landings/settings"
+  ]
+
+}
+
+
+{
+  point: "warning"
+  note: "Points POST /api/reset-product/scan-socials and POST /api/video-variation/scan-socials on entity=scan_social op=create have the same selector (exist: none), so only POST /api/reset-product/scan-socials is ever chosen. An action or another entity in guide.aontu tells them apart."
+  entity: "scan_social"
+  op: "create"
+  points: [
+    "POST /api/reset-product/scan-socials"
+    "POST /api/video-variation/scan-socials"
+  ]
+
+}
+
+
+{
+  point: "warning"
+  note: "Points POST /api/schedule/queue/add, POST /api/schedule/queue/reorder and POST /api/schedule/test-daily-email on entity=schedule_v2 op=create have the same selector (exist: none), so only POST /api/schedule/queue/add is ever chosen. An action or another entity in guide.aontu tells them apart."
+  entity: "schedule_v2"
+  op: "create"
+  points: [
+    "POST /api/schedule/queue/add"
+    "POST /api/schedule/queue/reorder"
+    "POST /api/schedule/test-daily-email"
+  ]
+
+}
+
+
+{
+  point: "warning"
+  note: "Points POST /social/instagram/exchange and POST /social/tiktok/exchange on entity=social op=create have the same selector (exist: none), so only POST /social/instagram/exchange is ever chosen. An action or another entity in guide.aontu tells them apart."
+  entity: "social"
+  op: "create"
+  points: [
+    "POST /social/instagram/exchange"
+    "POST /social/tiktok/exchange"
+  ]
+
+}
+
+
+{
+  point: "warning"
+  note: "Points GET /social/instagram/auth, GET /social/instagram/callback, GET /social/tiktok/auth and GET /social/tiktok/callback on entity=social op=load have the same selector (exist: none), so only GET /social/instagram/auth is ever chosen. An action or another entity in guide.aontu tells them apart."
+  entity: "social"
+  op: "load"
+  points: [
+    "GET /social/instagram/auth"
+    "GET /social/instagram/callback"
+    "GET /social/tiktok/auth"
+    "GET /social/tiktok/callback"
+  ]
+
+}
+
+
+{
+  point: "warning"
+  note: "Points POST /api/core/update-video-captions and POST /videos/ on entity=video op=create have the same selector (exist: none), so only POST /api/core/update-video-captions is ever chosen. An action or another entity in guide.aontu tells them apart."
+  entity: "video"
+  op: "create"
+  points: [
+    "POST /api/core/update-video-captions"
+    "POST /videos/"
+  ]
+
+}
+
+
+{
+  point: "warning"
+  note: "Points POST /api/admin/video-remixer/worker/jobs/{identifier}/fail, POST /api/admin/video-remixer/worker/jobs/{identifier}/heartbeat, POST /api/admin/video-remixer/worker/jobs/{identifier}/media, POST /api/admin/video-remixer/worker/jobs/{identifier}/render-output, POST /api/admin/video-remixer/worker/jobs/{identifier}/result and POST /api/admin/video-remixer/worker/jobs/{identifier}/upload on entity=video_remixer_worker op=create have the same selector (exist: identifier), so only POST /api/admin/video-remixer/worker/jobs/{identifier}/fail is ever chosen. An action or another entity in guide.aontu tells them apart."
+  entity: "video_remixer_worker"
+  op: "create"
+  points: [
+    "POST /api/admin/video-remixer/worker/jobs/{identifier}/fail"
+    "POST /api/admin/video-remixer/worker/jobs/{identifier}/heartbeat"
+    "POST /api/admin/video-remixer/worker/jobs/{identifier}/media"
+    "POST /api/admin/video-remixer/worker/jobs/{identifier}/render-output"
+    "POST /api/admin/video-remixer/worker/jobs/{identifier}/result"
+    "POST /api/admin/video-remixer/worker/jobs/{identifier}/upload"
+  ]
+
+}

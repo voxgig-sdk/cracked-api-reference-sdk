@@ -1,0 +1,56 @@
+{
+  "existing": {
+    "top_post": {
+      "TOP_POST00": {
+        "comments": 80,
+        "id": "TOP_POST00",
+        "likes": 82,
+        "platforms": [],
+        "scheduled_datetime": "s54",
+        "user_email": "s55",
+        "user_id": "USER01",
+        "views": 87
+      },
+      "TOP_POST01": {
+        "comments": 160,
+        "id": "TOP_POST01",
+        "likes": 162,
+        "platforms": [],
+        "scheduled_datetime": "sa4",
+        "user_email": "sa5",
+        "user_id": "USER01",
+        "views": 167
+      },
+      "TOP_POST02": {
+        "comments": 240,
+        "id": "TOP_POST02",
+        "likes": 242,
+        "platforms": [],
+        "scheduled_datetime": "sf4",
+        "user_email": "sf5",
+        "user_id": "USER01",
+        "views": 247
+      }
+    }
+  },
+  "new": {
+    "top_post": {
+      "top_post_ref01": {
+        "comments": 320,
+        "likes": 322,
+        "platforms": [],
+        "scheduled_datetime": "s144",
+        "user_email": "s145",
+        "user_id": "USER01",
+        "views": 327
+      }
+    }
+  },
+  "requests": {
+    "GET /api/admin/stats/top-posts": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

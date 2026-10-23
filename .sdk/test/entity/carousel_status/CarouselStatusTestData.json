@@ -1,0 +1,64 @@
+{
+  "existing": {
+    "carousel_status": {
+      "CAROUSEL_STATUS00": {
+        "caption": "s64",
+        "error": "s65",
+        "id": "CAROUSEL_STATUS00",
+        "image_model": "s67",
+        "image_provider": "s68",
+        "image_task_id": "IMAGE_TASK01",
+        "image_url": "s6a",
+        "index": 107,
+        "prompt": "s6c",
+        "status": "s6d"
+      },
+      "CAROUSEL_STATUS01": {
+        "caption": "sc8",
+        "error": "sc9",
+        "id": "CAROUSEL_STATUS01",
+        "image_model": "scb",
+        "image_provider": "scc",
+        "image_task_id": "IMAGE_TASK01",
+        "image_url": "sce",
+        "index": 207,
+        "prompt": "sd0",
+        "status": "sd1"
+      },
+      "CAROUSEL_STATUS02": {
+        "caption": "s12c",
+        "error": "s12d",
+        "id": "CAROUSEL_STATUS02",
+        "image_model": "s12f",
+        "image_provider": "s130",
+        "image_task_id": "IMAGE_TASK01",
+        "image_url": "s132",
+        "index": 307,
+        "prompt": "s134",
+        "status": "s135"
+      }
+    }
+  },
+  "new": {
+    "carousel_status": {
+      "carousel_status_ref01": {
+        "caption": "s190",
+        "error": "s191",
+        "image_model": "s193",
+        "image_provider": "s194",
+        "image_task_id": "IMAGE_TASK01",
+        "image_url": "s196",
+        "index": 407,
+        "prompt": "s198",
+        "status": "s199"
+      }
+    }
+  },
+  "requests": {
+    "GET /api/carousel/{video_id}/status": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

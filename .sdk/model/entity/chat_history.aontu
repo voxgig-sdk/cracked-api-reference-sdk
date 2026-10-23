@@ -1,0 +1,178 @@
+# Entity: chat_history
+
+main: kit: entity: chat_history: {
+
+  alias: field: {}
+
+  fields: {
+    chatSubVariant: {
+      h: "Chat Sub Variant"
+      n: "chatSubVariant"
+      r: true
+      t: "`$STRING`"
+    }
+    createdAt: {
+      fo: "date-time"
+      h: "Created At"
+      n: "createdAt"
+      r: true
+      t: "`$STRING`"
+    }
+    messages: {
+      h: "Messages"
+      n: "messages"
+      r: true
+      t: "`$ARRAY`"
+    }
+    model: {
+      h: "Model"
+      n: "model"
+      r: false
+      t: "`$ANY`"
+    }
+    onboardingDataId: {
+      h: "Onboarding Data Id"
+      n: "onboardingDataId"
+      r: true
+      t: "`$STRING`"
+    }
+    routeRecommendation: {
+      h: "Route Recommendation"
+      n: "routeRecommendation"
+      r: false
+      t: "`$ANY`"
+    }
+    salesStage: {
+      h: "Sales Stage"
+      n: "salesStage"
+      r: true
+      t: "`$STRING`"
+    }
+    selectedPlan: {
+      h: "Selected Plan"
+      n: "selectedPlan"
+      r: false
+      t: "`$ANY`"
+    }
+    session: {
+      h: "Session"
+      n: "session"
+      r: true
+      t: "`$OBJECT`"
+    }
+    sessionId: {
+      h: "Session Id"
+      n: "sessionId"
+      r: true
+      t: "`$STRING`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: true
+      t: "`$STRING`"
+    }
+    updatedAt: {
+      fo: "date-time"
+      h: "Updated At"
+      n: "updatedAt"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  name: "chat_history"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "onboardingDataId"
+          ]
+          co: {
+            id: "POST /api/chat/sessions"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/chat/sessions"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "chat"
+            }
+            {
+              lit: "sessions"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/chat/sessions/{session_id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "session_id"
+                or: "session_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/chat/sessions/{session_id}"
+          q: {
+            exist: [
+              "session_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "chat"
+            }
+            {
+              lit: "sessions"
+            }
+            {
+              var: "session_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

@@ -1,0 +1,49 @@
+# Entity: exact_availability
+
+main: kit: entity: exact_availability: {
+
+  alias: field: {}
+
+  name: "exact_availability"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/carousel/exact-availability"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/carousel/exact-availability"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "carousel"
+            }
+            {
+              lit: "exact-availability"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  fields: {
+  }
+
+
+
+}

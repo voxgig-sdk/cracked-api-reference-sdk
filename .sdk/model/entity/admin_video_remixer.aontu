@@ -1,0 +1,4858 @@
+# Entity: admin_video_remixer
+
+main: kit: entity: admin_video_remixer: {
+
+  alias: field: {}
+
+  fields: {
+    activity: {
+      h: "Activity"
+      n: "activity"
+      r: true
+      t: "`$STRING`"
+    }
+    allowed_platforms: {
+      h: "Allowed Platforms"
+      n: "allowed_platforms"
+      r: false
+      t: "`$ARRAY`"
+    }
+    anchor_clip_id: {
+      h: "Anchor Clip Id"
+      n: "anchor_clip_id"
+      r: false
+      t: "`$STRING`"
+    }
+    atomicity_class: {
+      h: "Atomicity Class"
+      n: "atomicity_class"
+      r: false
+      t: "`$ANY`"
+    }
+    auto_render: {
+      h: "Auto Render"
+      n: "auto_render"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    campaign_allowed: {
+      h: "Campaign Allowed"
+      n: "campaign_allowed"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    channel: {
+      h: "Channel"
+      n: "channel"
+      r: false
+      t: "`$STRING`"
+    }
+    channel_default: {
+      h: "Channel Default"
+      n: "channel_default"
+      r: false
+      t: "`$STRING`"
+    }
+    clip_id: {
+      h: "Clip Id"
+      n: "clip_id"
+      r: true
+      t: "`$STRING`"
+    }
+    clip_ids: {
+      h: "Clip Ids"
+      n: "clip_ids"
+      r: false
+      t: "`$ARRAY`"
+    }
+    collected_at: {
+      fo: "date-time"
+      h: "Collected At"
+      n: "collected_at"
+      r: true
+      t: "`$STRING`"
+    }
+    comments: {
+      h: "Comments"
+      n: "comments"
+      r: false
+      t: "`$ANY`"
+    }
+    completion_rate: {
+      h: "Completion Rate"
+      n: "completion_rate"
+      r: false
+      t: "`$ANY`"
+    }
+    confirmed_duplicate_of: {
+      h: "Confirmed Duplicate Of"
+      n: "confirmed_duplicate_of"
+      r: false
+      t: "`$ANY`"
+    }
+    consent_doc_uri: {
+      h: "Consent Doc Uri"
+      n: "consent_doc_uri"
+      r: false
+      t: "`$STRING`"
+    }
+    contact: {
+      h: "Contact"
+      n: "contact"
+      r: false
+      t: "`$STRING`"
+    }
+    conversions: {
+      h: "Conversions"
+      n: "conversions"
+      r: false
+      t: "`$ANY`"
+    }
+    count: {
+      h: "Count"
+      n: "count"
+      r: false
+      t: "`$INTEGER`"
+    }
+    creator: {
+      h: "Creator"
+      n: "creator"
+      r: false
+      t: "`$STRING`"
+    }
+    creator_id: {
+      h: "Creator Id"
+      n: "creator_id"
+      r: false
+      t: "`$STRING`"
+    }
+    crop_window: {
+      h: "Crop Window"
+      n: "crop_window"
+      r: false
+      t: "`$ANY`"
+    }
+    cta_product_id: {
+      h: "Cta Product Id"
+      n: "cta_product_id"
+      r: false
+      t: "`$STRING`"
+    }
+    days: {
+      h: "Days"
+      n: "days"
+      r: false
+      t: "`$INTEGER`"
+    }
+    derivative_edits_allowed: {
+      h: "Derivative Edits Allowed"
+      n: "derivative_edits_allowed"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    enabled: {
+      h: "Enabled"
+      n: "enabled"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    end_ms: {
+      h: "End Ms"
+      n: "end_ms"
+      r: false
+      t: "`$ANY`"
+    }
+    enqueue: {
+      h: "Enqueue"
+      n: "enqueue"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    errors: {
+      h: "Errors"
+      n: "errors"
+      r: false
+      t: "`$ARRAY`"
+    }
+    evidence: {
+      h: "Evidence"
+      n: "evidence"
+      r: true
+      t: "`$STRING`"
+    }
+    expected_revision: {
+      h: "Expected Revision"
+      n: "expected_revision"
+      op: {
+        update: {
+          req: true
+          type: "`$INTEGER`"
+        }
+      }
+      r: false
+      t: "`$ANY`"
+    }
+    expected_revisions: {
+      h: "Expected Revisions"
+      n: "expected_revisions"
+      r: true
+      t: "`$OBJECT`"
+    }
+    external_ai_allowed: {
+      h: "External Ai Allowed"
+      n: "external_ai_allowed"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    file: {
+      fo: "binary"
+      h: "File"
+      n: "file"
+      r: true
+      t: "`$STRING`"
+    }
+    followers: {
+      h: "Followers"
+      n: "followers"
+      r: false
+      t: "`$ANY`"
+    }
+    formula_id: {
+      h: "Formula Id"
+      n: "formula_id"
+      r: true
+      t: "`$STRING`"
+    }
+    formula_ids: {
+      h: "Formula Ids"
+      n: "formula_ids"
+      r: true
+      t: "`$ARRAY`"
+    }
+    handles: {
+      h: "Handles"
+      n: "handles"
+      r: false
+      t: "`$OBJECT`"
+    }
+    hook_subtype: {
+      h: "Hook Subtype"
+      n: "hook_subtype"
+      r: false
+      t: "`$ANY`"
+    }
+    hour_utc: {
+      h: "Hour Utc"
+      n: "hour_utc"
+      r: false
+      t: "`$INTEGER`"
+    }
+    human_role: {
+      h: "Human Role"
+      n: "human_role"
+      r: true
+      t: "`$STRING`"
+    }
+    idempotency_key: {
+      h: "Idempotency Key"
+      n: "idempotency_key"
+      r: true
+      t: "`$STRING`"
+    }
+    items: {
+      h: "Items"
+      n: "items"
+      r: true
+      t: "`$ARRAY`"
+    }
+    kim_clip_ids: {
+      h: "Kim Clip Ids"
+      n: "kim_clip_ids"
+      r: true
+      t: "`$ARRAY`"
+    }
+    kind: {
+      h: "Kind"
+      n: "kind"
+      r: true
+      t: "`$STRING`"
+    }
+    levels: {
+      h: "Levels"
+      n: "levels"
+      r: true
+      t: "`$OBJECT`"
+    }
+    likes: {
+      h: "Likes"
+      n: "likes"
+      r: false
+      t: "`$ANY`"
+    }
+    media_enabled: {
+      h: "Media Enabled"
+      n: "media_enabled"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    medical_claim_present: {
+      h: "Medical Claim Present"
+      n: "medical_claim_present"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    minute_utc: {
+      h: "Minute Utc"
+      n: "minute_utc"
+      r: false
+      t: "`$INTEGER`"
+    }
+    music_bed_allowed: {
+      h: "Music Bed Allowed"
+      n: "music_bed_allowed"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    music_policy: {
+      h: "Music Policy"
+      n: "music_policy"
+      r: false
+      t: "`$STRING`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: true
+      t: "`$STRING`"
+    }
+    niche: {
+      h: "Niche"
+      n: "niche"
+      r: false
+      t: "`$STRING`"
+    }
+    notes: {
+      h: "Notes"
+      n: "notes"
+      r: false
+      t: "`$STRING`"
+    }
+    origin: {
+      h: "Origin"
+      n: "origin"
+      r: false
+      t: "`$STRING`"
+    }
+    owner_waiver: {
+      h: "Owner Waiver"
+      n: "owner_waiver"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    paid_ads_allowed: {
+      h: "Paid Ads Allowed"
+      n: "paid_ads_allowed"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    patient_identifiable: {
+      h: "Patient Identifiable"
+      n: "patient_identifiable"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    person_type: {
+      h: "Person Type"
+      n: "person_type"
+      r: false
+      t: "`$STRING`"
+    }
+    pipeline: {
+      h: "Pipeline"
+      n: "pipeline"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    planning_only: {
+      h: "Planning Only"
+      n: "planning_only"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    platform: {
+      h: "Platform"
+      n: "platform"
+      r: true
+      t: "`$STRING`"
+    }
+    platform_post_id: {
+      h: "Platform Post Id"
+      n: "platform_post_id"
+      r: true
+      t: "`$STRING`"
+    }
+    policy: {
+      h: "Policy"
+      n: "policy"
+      r: true
+      t: "`$OBJECT`"
+    }
+    polish: {
+      h: "Polish"
+      n: "polish"
+      r: false
+      t: "`$STRING`"
+    }
+    post_url: {
+      h: "Post Url"
+      n: "post_url"
+      r: true
+      t: "`$STRING`"
+    }
+    posted_at: {
+      fo: "date-time"
+      h: "Posted At"
+      n: "posted_at"
+      r: true
+      t: "`$STRING`"
+    }
+    primary_role: {
+      h: "Primary Role"
+      n: "primary_role"
+      r: false
+      t: "`$ANY`"
+    }
+    purpose: {
+      h: "Purpose"
+      n: "purpose"
+      r: true
+      t: "`$STRING`"
+    }
+    rate: {
+      h: "Rate"
+      n: "rate"
+      r: false
+      t: "`$NUMBER`"
+    }
+    rationale: {
+      h: "Rationale"
+      n: "rationale"
+      r: false
+      t: "`$STRING`"
+    }
+    reason: {
+      h: "Reason"
+      n: "reason"
+      r: true
+      t: "`$STRING`"
+    }
+    reference_source_id: {
+      h: "Reference Source Id"
+      n: "reference_source_id"
+      r: false
+      t: "`$STRING`"
+    }
+    requires_medical_review: {
+      h: "Requires Medical Review"
+      n: "requires_medical_review"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    review_status: {
+      h: "Review Status"
+      n: "review_status"
+      r: false
+      t: "`$ANY`"
+    }
+    revision: {
+      h: "Revision"
+      n: "revision"
+      r: true
+      t: "`$INTEGER`"
+    }
+    rights_expires_at: {
+      h: "Rights Expires At"
+      n: "rights_expires_at"
+      r: false
+      t: "`$ANY`"
+    }
+    rights_status: {
+      h: "Rights Status"
+      n: "rights_status"
+      r: false
+      t: "`$STRING`"
+    }
+    run_id: {
+      h: "Run Id"
+      n: "run_id"
+      r: true
+      t: "`$STRING`"
+    }
+    sample_links: {
+      h: "Sample Links"
+      n: "sample_links"
+      r: false
+      t: "`$ARRAY`"
+    }
+    secondary_roles: {
+      h: "Secondary Roles"
+      n: "secondary_roles"
+      r: false
+      t: "`$ANY`"
+    }
+    seconds: {
+      h: "Seconds"
+      n: "seconds"
+      r: true
+      t: "`$INTEGER`"
+    }
+    seed: {
+      h: "Seed"
+      n: "seed"
+      r: false
+      t: "`$INTEGER`"
+    }
+    seed_base: {
+      h: "Seed Base"
+      n: "seed_base"
+      r: false
+      t: "`$INTEGER`"
+    }
+    sensitive_personal_data_present: {
+      h: "Sensitive Personal Data Present"
+      n: "sensitive_personal_data_present"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    shares: {
+      h: "Shares"
+      n: "shares"
+      r: false
+      t: "`$ANY`"
+    }
+    shoot: {
+      h: "Shoot"
+      n: "shoot"
+      r: false
+      t: "`$STRING`"
+    }
+    slots: {
+      h: "Slots"
+      n: "slots"
+      r: true
+      t: "`$ARRAY`"
+    }
+    soundbite_title: {
+      h: "Soundbite Title"
+      n: "soundbite_title"
+      r: false
+      t: "`$ANY`"
+    }
+    source: {
+      h: "Source"
+      n: "source"
+      r: true
+      t: "`$STRING`"
+    }
+    source_id: {
+      h: "Source Id"
+      n: "source_id"
+      r: true
+      t: "`$STRING`"
+    }
+    source_ids: {
+      h: "Source Ids"
+      n: "source_ids"
+      r: true
+      t: "`$ARRAY`"
+    }
+    spend_usd: {
+      h: "Spend Usd"
+      n: "spend_usd"
+      r: false
+      t: "`$ANY`"
+    }
+    spiciness: {
+      h: "Spiciness"
+      n: "spiciness"
+      r: false
+      t: "`$ANY`"
+    }
+    spiciness_notes: {
+      h: "Spiciness Notes"
+      n: "spiciness_notes"
+      r: false
+      t: "`$STRING`"
+    }
+    start_ms: {
+      h: "Start Ms"
+      n: "start_ms"
+      r: false
+      t: "`$ANY`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: false
+      t: "`$STRING`"
+    }
+    terry_clip_ids: {
+      h: "Terry Clip Ids"
+      n: "terry_clip_ids"
+      r: true
+      t: "`$ARRAY`"
+    }
+    testimonial_strength: {
+      h: "Testimonial Strength"
+      n: "testimonial_strength"
+      r: false
+      t: "`$ANY`"
+    }
+    testimonial_type: {
+      h: "Testimonial Type"
+      n: "testimonial_type"
+      r: false
+      t: "`$ANY`"
+    }
+    tier: {
+      h: "Tier"
+      n: "tier"
+      r: false
+      t: "`$STRING`"
+    }
+    timeline: {
+      h: "Timeline"
+      n: "timeline"
+      r: true
+      t: "`$OBJECT`"
+    }
+    topic: {
+      h: "Topic"
+      n: "topic"
+      r: false
+      t: "`$STRING`"
+    }
+    topic_tags: {
+      h: "Topic Tags"
+      n: "topic_tags"
+      r: false
+      t: "`$ANY`"
+    }
+    total_target_ms: {
+      h: "Total Target Ms"
+      n: "total_target_ms"
+      r: true
+      t: "`$INTEGER`"
+    }
+    use_learned_weights: {
+      h: "Use Learned Weights"
+      n: "use_learned_weights"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    views: {
+      h: "Views"
+      n: "views"
+      r: false
+      t: "`$ANY`"
+    }
+    window: {
+      h: "Window"
+      n: "window"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  name: "admin_video_remixer"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "purpose"
+          ]
+          co: {
+            id: "POST /api/admin/video-remixer/clips/{clip_id}/media"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "clip_id"
+                or: "clip_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/admin/video-remixer/clips/{clip_id}/media"
+          q: {
+            "$action": "media"
+            exist: [
+              "clip_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "clips"
+            }
+            {
+              var: "clip_id"
+            }
+            {
+              lit: "media"
+            }
+          ]
+          t: {
+            req: {
+              purpose: "`reqdata.purpose`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /api/admin/video-remixer/analysis/{identifier}/cancel"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "identifier"
+                or: "identifier"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/admin/video-remixer/analysis/{identifier}/cancel"
+          q: {
+            exist: [
+              "identifier"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "analysis"
+            }
+            {
+              var: "identifier"
+            }
+            {
+              lit: "cancel"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /api/admin/video-remixer/analysis/{identifier}/retry"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "identifier"
+                or: "identifier"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/admin/video-remixer/analysis/{identifier}/retry"
+          q: {
+            exist: [
+              "identifier"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "analysis"
+            }
+            {
+              var: "identifier"
+            }
+            {
+              lit: "retry"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /api/admin/video-remixer/clipper-access/{identifier}/revoke"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "identifier"
+                or: "identifier"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/admin/video-remixer/clipper-access/{identifier}/revoke"
+          q: {
+            exist: [
+              "identifier"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "clipper-access"
+            }
+            {
+              var: "identifier"
+            }
+            {
+              lit: "revoke"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "expires_days"
+            "render_job_ids"
+          ]
+          co: {
+            id: "POST /api/admin/video-remixer/clippers/{identifier}/access"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "identifier"
+                or: "identifier"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/admin/video-remixer/clippers/{identifier}/access"
+          q: {
+            "$action": "access"
+            exist: [
+              "identifier"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "clippers"
+            }
+            {
+              var: "identifier"
+            }
+            {
+              lit: "access"
+            }
+          ]
+          t: {
+            req: {
+              expires_days: "`reqdata.expires_day`"
+              render_job_ids: "`reqdata.render_job_id`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "collected_at"
+            "comments"
+            "completion_rate"
+            "conversions"
+            "evidence"
+            "likes"
+            "platform_post_id"
+            "post_url"
+            "shares"
+            "spend_usd"
+            "views"
+            "window"
+          ]
+          co: {
+            id: "POST /api/admin/video-remixer/posts/{identifier}/metrics"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "identifier"
+                or: "identifier"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/admin/video-remixer/posts/{identifier}/metrics"
+          q: {
+            exist: [
+              "identifier"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "posts"
+            }
+            {
+              var: "identifier"
+            }
+            {
+              lit: "metrics"
+            }
+          ]
+          t: {
+            req: {
+              collected_at: "`reqdata.collected_at`"
+              comments: "`reqdata.comment`"
+              completion_rate: "`reqdata.completion_rate`"
+              conversions: "`reqdata.conversion`"
+              evidence: "`reqdata.evidence`"
+              likes: "`reqdata.like`"
+              platform_post_id: "`reqdata.platform_post_id`"
+              post_url: "`reqdata.post_url`"
+              shares: "`reqdata.share`"
+              spend_usd: "`reqdata.spend_usd`"
+              views: "`reqdata.view`"
+              window: "`reqdata.window`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "activity"
+            "seconds"
+          ]
+          co: {
+            id: "POST /api/admin/video-remixer/proofs/{identifier}/staff-time"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "identifier"
+                or: "identifier"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/admin/video-remixer/proofs/{identifier}/staff-time"
+          q: {
+            exist: [
+              "identifier"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "proofs"
+            }
+            {
+              var: "identifier"
+            }
+            {
+              lit: "staff-time"
+            }
+          ]
+          t: {
+            req: {
+              activity: "`reqdata.activity`"
+              seconds: "`reqdata.second`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "claims"
+            "claims_resolved"
+            "evidence"
+            "expected_revision"
+            "policy_score"
+            "review_seconds"
+          ]
+          co: {
+            id: "POST /api/admin/video-remixer/reviews/{identifier}/human-check"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "identifier"
+                or: "identifier"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/admin/video-remixer/reviews/{identifier}/human-check"
+          q: {
+            "$action": "human_check"
+            exist: [
+              "identifier"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "reviews"
+            }
+            {
+              var: "identifier"
+            }
+            {
+              lit: "human-check"
+            }
+          ]
+          t: {
+            req: {
+              claims: "`reqdata.claim`"
+              claims_resolved: "`reqdata.claims_resolved`"
+              evidence: "`reqdata.evidence`"
+              expected_revision: "`reqdata.expected_revision`"
+              policy_score: "`reqdata.policy_score`"
+              review_seconds: "`reqdata.review_second`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "idempotency_key"
+            "polish"
+          ]
+          co: {
+            id: "POST /api/admin/video-remixer/recipes/{identifier}/preflight"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "identifier"
+                or: "identifier"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/admin/video-remixer/recipes/{identifier}/preflight"
+          q: {
+            "$action": "preflight"
+            exist: [
+              "identifier"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "recipes"
+            }
+            {
+              var: "identifier"
+            }
+            {
+              lit: "preflight"
+            }
+          ]
+          t: {
+            req: {
+              idempotency_key: "`reqdata.idempotency_key`"
+              polish: "`reqdata.polish`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "idempotency_key"
+            "polish"
+          ]
+          co: {
+            id: "POST /api/admin/video-remixer/recipes/{identifier}/render"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "identifier"
+                or: "identifier"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/admin/video-remixer/recipes/{identifier}/render"
+          q: {
+            "$action": "render"
+            exist: [
+              "identifier"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "recipes"
+            }
+            {
+              var: "identifier"
+            }
+            {
+              lit: "render"
+            }
+          ]
+          t: {
+            req: {
+              idempotency_key: "`reqdata.idempotency_key`"
+              polish: "`reqdata.polish`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "idempotency_key"
+            "polish"
+          ]
+          co: {
+            id: "POST /api/admin/video-remixer/reviews/{identifier}/checks"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "identifier"
+                or: "identifier"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/admin/video-remixer/reviews/{identifier}/checks"
+          q: {
+            exist: [
+              "identifier"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "reviews"
+            }
+            {
+              var: "identifier"
+            }
+            {
+              lit: "checks"
+            }
+          ]
+          t: {
+            req: {
+              idempotency_key: "`reqdata.idempotency_key`"
+              polish: "`reqdata.polish`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "decision"
+            "expected_revision"
+            "reason"
+            "review_seconds"
+          ]
+          co: {
+            id: "POST /api/admin/video-remixer/reviews/{identifier}/decision"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "identifier"
+                or: "identifier"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/admin/video-remixer/reviews/{identifier}/decision"
+          q: {
+            "$action": "decision"
+            exist: [
+              "identifier"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "reviews"
+            }
+            {
+              var: "identifier"
+            }
+            {
+              lit: "decision"
+            }
+          ]
+          t: {
+            req: {
+              decision: "`reqdata.decision`"
+              expected_revision: "`reqdata.expected_revision`"
+              reason: "`reqdata.reason`"
+              review_seconds: "`reqdata.review_second`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /api/admin/video-remixer/reviews/{identifier}/export"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "identifier"
+                or: "identifier"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                ex: "paid"
+                k: "query"
+                n: "channel"
+                or: "channel"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/admin/video-remixer/reviews/{identifier}/export"
+          q: {
+            "$action": "export"
+            exist: [
+              "identifier"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "reviews"
+            }
+            {
+              var: "identifier"
+            }
+            {
+              lit: "export"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "agent_ids"
+            "channel"
+            "clipper_id"
+            "disclosure"
+            "execute"
+            "idempotency_key"
+            "scheduled_at"
+            "title"
+          ]
+          co: {
+            id: "POST /api/admin/video-remixer/reviews/{identifier}/handoff"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "identifier"
+                or: "identifier"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/admin/video-remixer/reviews/{identifier}/handoff"
+          q: {
+            "$action": "handoff"
+            exist: [
+              "identifier"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "reviews"
+            }
+            {
+              var: "identifier"
+            }
+            {
+              lit: "handoff"
+            }
+          ]
+          t: {
+            req: {
+              agent_ids: "`reqdata.agent_id`"
+              channel: "`reqdata.channel`"
+              clipper_id: "`reqdata.clipper_id`"
+              disclosure: "`reqdata.disclosure`"
+              execute: "`reqdata.execute`"
+              idempotency_key: "`reqdata.idempotency_key`"
+              scheduled_at: "`reqdata.scheduled_at`"
+              title: "`reqdata.title`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "idempotency_key"
+            "polish"
+          ]
+          co: {
+            id: "POST /api/admin/video-remixer/runs/{identifier}/render"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "identifier"
+                or: "identifier"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/admin/video-remixer/runs/{identifier}/render"
+          q: {
+            "$action": "render"
+            exist: [
+              "identifier"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "runs"
+            }
+            {
+              var: "identifier"
+            }
+            {
+              lit: "render"
+            }
+          ]
+          t: {
+            req: {
+              idempotency_key: "`reqdata.idempotency_key`"
+              polish: "`reqdata.polish`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "edit_seconds"
+            "idempotency_key"
+            "reason"
+            "timeline"
+          ]
+          co: {
+            id: "POST /api/admin/video-remixer/reviews/{identifier}/repair"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "identifier"
+                or: "identifier"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/admin/video-remixer/reviews/{identifier}/repair"
+          q: {
+            "$action": "repair"
+            exist: [
+              "identifier"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "reviews"
+            }
+            {
+              var: "identifier"
+            }
+            {
+              lit: "repair"
+            }
+          ]
+          t: {
+            req: {
+              edit_seconds: "`reqdata.edit_second`"
+              idempotency_key: "`reqdata.idempotency_key`"
+              reason: "`reqdata.reason`"
+              timeline: "`reqdata.timeline`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "expected_revision"
+          ]
+          co: {
+            id: "POST /api/admin/video-remixer/runs/{identifier}/restore"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "identifier"
+                or: "identifier"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/admin/video-remixer/runs/{identifier}/restore"
+          q: {
+            "$action": "restore"
+            exist: [
+              "identifier"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "runs"
+            }
+            {
+              var: "identifier"
+            }
+            {
+              lit: "restore"
+            }
+          ]
+          t: {
+            req: {
+              expected_revision: "`reqdata.expected_revision`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /api/admin/video-remixer/worker-keys/{identifier}/revoke"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "identifier"
+                or: "identifier"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/admin/video-remixer/worker-keys/{identifier}/revoke"
+          q: {
+            exist: [
+              "identifier"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "worker-keys"
+            }
+            {
+              var: "identifier"
+            }
+            {
+              lit: "revoke"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /api/admin/video-remixer/jobs/{job_id}/cancel"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "job_id"
+                or: "job_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/admin/video-remixer/jobs/{job_id}/cancel"
+          q: {
+            exist: [
+              "job_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "jobs"
+            }
+            {
+              var: "job_id"
+            }
+            {
+              lit: "cancel"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "purpose"
+          ]
+          co: {
+            id: "POST /api/admin/video-remixer/jobs/{job_id}/media"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "job_id"
+                or: "job_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/admin/video-remixer/jobs/{job_id}/media"
+          q: {
+            exist: [
+              "job_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "jobs"
+            }
+            {
+              var: "job_id"
+            }
+            {
+              lit: "media"
+            }
+          ]
+          t: {
+            req: {
+              purpose: "`reqdata.purpose`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "idempotency_key"
+          ]
+          co: {
+            id: "POST /api/admin/video-remixer/jobs/{job_id}/retry"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "job_id"
+                or: "job_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/admin/video-remixer/jobs/{job_id}/retry"
+          q: {
+            exist: [
+              "job_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "jobs"
+            }
+            {
+              var: "job_id"
+            }
+            {
+              lit: "retry"
+            }
+          ]
+          t: {
+            req: {
+              idempotency_key: "`reqdata.idempotency_key`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "idempotency_key"
+            "revision"
+          ]
+          co: {
+            id: "POST /api/admin/video-remixer/projects/{project_id}/renders"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "project_id"
+                or: "project_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/admin/video-remixer/projects/{project_id}/renders"
+          q: {
+            exist: [
+              "project_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "projects"
+            }
+            {
+              var: "project_id"
+            }
+            {
+              lit: "renders"
+            }
+          ]
+          t: {
+            req: {
+              idempotency_key: "`reqdata.idempotency_key`"
+              revision: "`reqdata.revision`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /api/admin/video-remixer/sources/{source_id}/reconcile-upload"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "source_id"
+                or: "source_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/admin/video-remixer/sources/{source_id}/reconcile-upload"
+          q: {
+            exist: [
+              "source_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "sources"
+            }
+            {
+              var: "source_id"
+            }
+            {
+              lit: "reconcile-upload"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "idempotency_key"
+            "kind"
+            "pipeline"
+            "source_id"
+            "tier"
+          ]
+          co: {
+            id: "POST /api/admin/video-remixer/analysis"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/admin/video-remixer/analysis"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "analysis"
+            }
+          ]
+          t: {
+            req: {
+              idempotency_key: "`reqdata.idempotency_key`"
+              kind: "`reqdata.kind`"
+              pipeline: "`reqdata.pipeline`"
+              source_id: "`reqdata.source_id`"
+              tier: "`reqdata.tier`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "count"
+            "seed"
+          ]
+          co: {
+            id: "POST /api/admin/video-remixer/audits"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/admin/video-remixer/audits"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "audits"
+            }
+          ]
+          t: {
+            req: {
+              count: "`reqdata.count`"
+              seed: "`reqdata.seed`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "idempotency_key"
+            "items"
+          ]
+          co: {
+            id: "POST /api/admin/video-remixer/clippers/import"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/admin/video-remixer/clippers/import"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "clippers"
+            }
+            {
+              lit: "import"
+            }
+          ]
+          t: {
+            req: {
+              idempotency_key: "`reqdata.idempotency_key`"
+              items: "`reqdata.item`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /api/admin/video-remixer/clippers/import-csv"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/admin/video-remixer/clippers/import-csv"
+          rb: {
+            fields: [
+              {
+                binary: true
+                name: "file"
+              }
+            ]
+            kind: "multipart"
+            media: "multipart/form-data"
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "clippers"
+            }
+            {
+              lit: "import-csv"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "idempotency_key"
+            "polish"
+          ]
+          co: {
+            id: "POST /api/admin/video-remixer/formulas/proposals"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/admin/video-remixer/formulas/proposals"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "formulas"
+            }
+            {
+              lit: "proposals"
+            }
+          ]
+          t: {
+            req: {
+              idempotency_key: "`reqdata.idempotency_key`"
+              polish: "`reqdata.polish`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "enqueue"
+            "idempotency_key"
+            "items"
+            "name"
+            "source"
+          ]
+          co: {
+            id: "POST /api/admin/video-remixer/imports/manifest"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/admin/video-remixer/imports/manifest"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "imports"
+            }
+            {
+              lit: "manifest"
+            }
+          ]
+          t: {
+            req: {
+              enqueue: "`reqdata.enqueue`"
+              idempotency_key: "`reqdata.idempotency_key`"
+              items: "`reqdata.item`"
+              name: "`reqdata.name`"
+              source: "`reqdata.source`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /api/admin/video-remixer/imports/upload"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/admin/video-remixer/imports/upload"
+          rb: {
+            fields: [
+              {
+                binary: true
+                name: "file"
+              }
+            ]
+            kind: "multipart"
+            media: "multipart/form-data"
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "imports"
+            }
+            {
+              lit: "upload"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "anchor_clip_id"
+            "channel"
+            "clip_ids"
+            "count"
+            "creator"
+            "formula_ids"
+            "planning_only"
+            "seed"
+            "topic"
+            "use_learned_weights"
+          ]
+          co: {
+            id: "POST /api/admin/video-remixer/planner-preview"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/admin/video-remixer/planner-preview"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "planner-preview"
+            }
+          ]
+          t: {
+            req: {
+              anchor_clip_id: "`reqdata.anchor_clip_id`"
+              channel: "`reqdata.channel`"
+              clip_ids: "`reqdata.clip_id`"
+              count: "`reqdata.count`"
+              creator: "`reqdata.creator`"
+              formula_ids: "`reqdata.formula_id`"
+              planning_only: "`reqdata.planning_only`"
+              seed: "`reqdata.seed`"
+              topic: "`reqdata.topic`"
+              use_learned_weights: "`reqdata.use_learned_weight`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "expected_revision"
+            "timeline"
+          ]
+          co: {
+            id: "POST /api/admin/video-remixer/projects"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/admin/video-remixer/projects"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "projects"
+            }
+          ]
+          t: {
+            req: {
+              expected_revision: "`reqdata.expected_revision`"
+              timeline: "`reqdata.timeline`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "kim_clip_ids"
+            "name"
+            "run_id"
+            "terry_clip_ids"
+          ]
+          co: {
+            id: "POST /api/admin/video-remixer/proofs"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/admin/video-remixer/proofs"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "proofs"
+            }
+          ]
+          t: {
+            req: {
+              kim_clip_ids: "`reqdata.kim_clip_id`"
+              name: "`reqdata.name`"
+              run_id: "`reqdata.run_id`"
+              terry_clip_ids: "`reqdata.terry_clip_id`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /api/admin/video-remixer/reports/refresh"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/admin/video-remixer/reports/refresh"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "reports"
+            }
+            {
+              lit: "refresh"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "anchor_clip_id"
+            "channel"
+            "clip_ids"
+            "count"
+            "creator"
+            "formula_ids"
+            "idempotency_key"
+            "planning_only"
+            "seed"
+            "topic"
+            "use_learned_weights"
+          ]
+          co: {
+            id: "POST /api/admin/video-remixer/runs"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/admin/video-remixer/runs"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "runs"
+            }
+          ]
+          t: {
+            req: {
+              anchor_clip_id: "`reqdata.anchor_clip_id`"
+              channel: "`reqdata.channel`"
+              clip_ids: "`reqdata.clip_id`"
+              count: "`reqdata.count`"
+              creator: "`reqdata.creator`"
+              formula_ids: "`reqdata.formula_id`"
+              idempotency_key: "`reqdata.idempotency_key`"
+              planning_only: "`reqdata.planning_only`"
+              seed: "`reqdata.seed`"
+              topic: "`reqdata.topic`"
+              use_learned_weights: "`reqdata.use_learned_weight`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "days"
+            "name"
+          ]
+          co: {
+            id: "POST /api/admin/video-remixer/worker-keys"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/admin/video-remixer/worker-keys"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "worker-keys"
+            }
+          ]
+          t: {
+            req: {
+              days: "`reqdata.day`"
+              name: "`reqdata.name`"
+            }
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/admin/video-remixer/clips/{clip_id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "clip_id"
+                or: "clip_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/video-remixer/clips/{clip_id}"
+          q: {
+            exist: [
+              "clip_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "clips"
+            }
+            {
+              var: "clip_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/admin/video-remixer/recipes/{identifier}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "identifier"
+                or: "identifier"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/video-remixer/recipes/{identifier}"
+          q: {
+            exist: [
+              "identifier"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "recipes"
+            }
+            {
+              var: "identifier"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/admin/video-remixer/recipes/{identifier}/preflight"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "identifier"
+                or: "identifier"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/video-remixer/recipes/{identifier}/preflight"
+          q: {
+            "$action": "preflight"
+            exist: [
+              "identifier"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "recipes"
+            }
+            {
+              var: "identifier"
+            }
+            {
+              lit: "preflight"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/admin/video-remixer/reviews/{identifier}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "identifier"
+                or: "identifier"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/video-remixer/reviews/{identifier}"
+          q: {
+            exist: [
+              "identifier"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "reviews"
+            }
+            {
+              var: "identifier"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/admin/video-remixer/runs/{identifier}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "identifier"
+                or: "identifier"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/video-remixer/runs/{identifier}"
+          q: {
+            exist: [
+              "identifier"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "runs"
+            }
+            {
+              var: "identifier"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/admin/video-remixer/jobs/{job_id}/captions"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "job_id"
+                or: "job_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/video-remixer/jobs/{job_id}/captions"
+          q: {
+            exist: [
+              "job_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "jobs"
+            }
+            {
+              var: "job_id"
+            }
+            {
+              lit: "captions"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/admin/video-remixer/jobs/{job_id}/manifest"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "job_id"
+                or: "job_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/video-remixer/jobs/{job_id}/manifest"
+          q: {
+            exist: [
+              "job_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "jobs"
+            }
+            {
+              var: "job_id"
+            }
+            {
+              lit: "manifest"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/admin/video-remixer/media/{token}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "token"
+                or: "token"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/video-remixer/media/{token}"
+          q: {
+            exist: [
+              "token"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "media"
+            }
+            {
+              var: "token"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/admin/video-remixer/analysis"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/admin/video-remixer/analysis"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "analysis"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/admin/video-remixer/audits"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/admin/video-remixer/audits"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "audits"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/admin/video-remixer/batch-schedules"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/admin/video-remixer/batch-schedules"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "batch-schedules"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/admin/video-remixer/clipper-access"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/admin/video-remixer/clipper-access"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "clipper-access"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/admin/video-remixer/clipper-rubric"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/admin/video-remixer/clipper-rubric"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "clipper-rubric"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/admin/video-remixer/clippers"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/admin/video-remixer/clippers"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "clippers"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/admin/video-remixer/clips"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: ""
+                k: "query"
+                n: "creator"
+                or: "creator"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: 24
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                ex: false
+                k: "query"
+                n: "medical"
+                or: "medical"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+              {
+                ex: 0
+                k: "query"
+                n: "offset"
+                or: "offset"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                ex: ""
+                k: "query"
+                n: "query"
+                or: "query"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: ""
+                k: "query"
+                n: "scene"
+                or: "scene"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "reusable"
+                k: "query"
+                n: "sort"
+                or: "sort"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: ""
+                k: "query"
+                n: "visual_role"
+                or: "visual_role"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/video-remixer/clips"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "clips"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/admin/video-remixer/cost"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/admin/video-remixer/cost"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "cost"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/admin/video-remixer/formulas"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/admin/video-remixer/formulas"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "formulas"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/admin/video-remixer/imports"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/admin/video-remixer/imports"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "imports"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/admin/video-remixer/jobs"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/admin/video-remixer/jobs"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "jobs"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/admin/video-remixer/label-history"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: ""
+                k: "query"
+                n: "clip_id"
+                or: "clip_id"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: ""
+                k: "query"
+                n: "source_id"
+                or: "source_id"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/video-remixer/label-history"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "label-history"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/admin/video-remixer/library"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: ""
+                k: "query"
+                n: "clip_id"
+                or: "clip_ids"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: ""
+                k: "query"
+                n: "creator"
+                or: "creator"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: 24
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                ex: 3600
+                k: "query"
+                n: "max_duration"
+                or: "max_duration"
+                r: false
+                t: "`$NUMBER`"
+              }
+              {
+                ex: false
+                k: "query"
+                n: "medical"
+                or: "medical"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+              {
+                ex: 0
+                k: "query"
+                n: "min_duration"
+                or: "min_duration"
+                r: false
+                t: "`$NUMBER`"
+              }
+              {
+                ex: 0
+                k: "query"
+                n: "min_score"
+                or: "min_score"
+                r: false
+                t: "`$NUMBER`"
+              }
+              {
+                ex: 0
+                k: "query"
+                n: "offset"
+                or: "offset"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                ex: ""
+                k: "query"
+                n: "orientation"
+                or: "orientation"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: ""
+                k: "query"
+                n: "query"
+                or: "query"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: ""
+                k: "query"
+                n: "review_status"
+                or: "review_status"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: ""
+                k: "query"
+                n: "right"
+                or: "rights"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: ""
+                k: "query"
+                n: "role"
+                or: "role"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "reusable"
+                k: "query"
+                n: "sort"
+                or: "sort"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: ""
+                k: "query"
+                n: "subtype"
+                or: "subtype"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: ""
+                k: "query"
+                n: "topic"
+                or: "topic"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/video-remixer/library"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "library"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/admin/video-remixer/overview"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/admin/video-remixer/overview"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "overview"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/admin/video-remixer/posts"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/admin/video-remixer/posts"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "posts"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/admin/video-remixer/posts/export"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/admin/video-remixer/posts/export"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "posts"
+            }
+            {
+              lit: "export"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/admin/video-remixer/products"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: ""
+                k: "query"
+                n: "search"
+                or: "search"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/video-remixer/products"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "products"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/admin/video-remixer/projects"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/admin/video-remixer/projects"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "projects"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/admin/video-remixer/proofs"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/admin/video-remixer/proofs"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "proofs"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/admin/video-remixer/reports"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/admin/video-remixer/reports"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "reports"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/admin/video-remixer/reports/aggregates"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/admin/video-remixer/reports/aggregates"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "reports"
+            }
+            {
+              lit: "aggregates"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/admin/video-remixer/reviews"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/admin/video-remixer/reviews"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "reviews"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/admin/video-remixer/runs"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: false
+                k: "query"
+                n: "deleted"
+                or: "deleted"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/video-remixer/runs"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "runs"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/admin/video-remixer/sources"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/admin/video-remixer/sources"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "sources"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/admin/video-remixer/worker-keys"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/admin/video-remixer/worker-keys"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "worker-keys"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    patch: {
+      name: "patch"
+      points: [
+        {
+          bf: [
+            "atomicity_class"
+            "crop_window"
+            "cta_product_id"
+            "end_ms"
+            "expected_revision"
+            "hook_subtype"
+            "medical_claim_present"
+            "primary_role"
+            "reason"
+            "requires_medical_review"
+            "review_status"
+            "secondary_roles"
+            "sensitive_personal_data_present"
+            "soundbite_title"
+            "start_ms"
+            "testimonial_strength"
+            "testimonial_type"
+            "topic_tags"
+          ]
+          co: {
+            id: "PATCH /api/admin/video-remixer/clips/{clip_id}/labels"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "clip_id"
+                or: "clip_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PATCH"
+          o: "/api/admin/video-remixer/clips/{clip_id}/labels"
+          q: {
+            exist: [
+              "clip_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "clips"
+            }
+            {
+              var: "clip_id"
+            }
+            {
+              lit: "labels"
+            }
+          ]
+          t: {
+            req: {
+              atomicity_class: "`reqdata.atomicity_class`"
+              crop_window: "`reqdata.crop_window`"
+              cta_product_id: "`reqdata.cta_product_id`"
+              end_ms: "`reqdata.end_m`"
+              expected_revision: "`reqdata.expected_revision`"
+              hook_subtype: "`reqdata.hook_subtype`"
+              medical_claim_present: "`reqdata.medical_claim_present`"
+              primary_role: "`reqdata.primary_role`"
+              reason: "`reqdata.reason`"
+              requires_medical_review: "`reqdata.requires_medical_review`"
+              review_status: "`reqdata.review_status`"
+              secondary_roles: "`reqdata.secondary_role`"
+              sensitive_personal_data_present: "`reqdata.sensitive_personal_data_present`"
+              soundbite_title: "`reqdata.soundbite_title`"
+              start_ms: "`reqdata.start_m`"
+              testimonial_strength: "`reqdata.testimonial_strength`"
+              testimonial_type: "`reqdata.testimonial_type`"
+              topic_tags: "`reqdata.topic_tag`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "media_enabled"
+          ]
+          co: {
+            id: "PATCH /api/admin/video-remixer/cost"
+            source: "openapi3"
+            version: 2
+          }
+          m: "PATCH"
+          o: "/api/admin/video-remixer/cost"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "cost"
+            }
+          ]
+          t: {
+            req: {
+              media_enabled: "`reqdata.media_enabled`"
+            }
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    remove: {
+      name: "remove"
+      points: [
+        {
+          bf: [
+            "expected_revision"
+          ]
+          co: {
+            id: "DELETE /api/admin/video-remixer/runs/{identifier}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "identifier"
+                or: "identifier"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "DELETE"
+          o: "/api/admin/video-remixer/runs/{identifier}"
+          q: {
+            exist: [
+              "identifier"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "runs"
+            }
+            {
+              var: "identifier"
+            }
+          ]
+          t: {
+            req: {
+              expected_revision: "`reqdata.expected_revision`"
+            }
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    update: {
+      name: "update"
+      points: [
+        {
+          bf: [
+            "clip_id"
+            "errors"
+            "expected_revision"
+            "human_role"
+            "notes"
+          ]
+          co: {
+            id: "PUT /api/admin/video-remixer/audits/{identifier}/answer"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "identifier"
+                or: "identifier"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PUT"
+          o: "/api/admin/video-remixer/audits/{identifier}/answer"
+          q: {
+            exist: [
+              "identifier"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "audits"
+            }
+            {
+              var: "identifier"
+            }
+            {
+              lit: "answer"
+            }
+          ]
+          t: {
+            req: {
+              clip_id: "`reqdata.clip_id`"
+              errors: "`reqdata.error`"
+              expected_revision: "`reqdata.expected_revision`"
+              human_role: "`reqdata.human_role`"
+              notes: "`reqdata.note`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "auto_render"
+            "channel"
+            "count"
+            "enabled"
+            "expected_revision"
+            "formula_id"
+            "hour_utc"
+            "minute_utc"
+            "name"
+            "seed_base"
+          ]
+          co: {
+            id: "PUT /api/admin/video-remixer/batch-schedules/{identifier}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "identifier"
+                or: "identifier"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PUT"
+          o: "/api/admin/video-remixer/batch-schedules/{identifier}"
+          q: {
+            exist: [
+              "identifier"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "batch-schedules"
+            }
+            {
+              var: "identifier"
+            }
+          ]
+          t: {
+            req: {
+              auto_render: "`reqdata.auto_render`"
+              channel: "`reqdata.channel`"
+              count: "`reqdata.count`"
+              enabled: "`reqdata.enabled`"
+              expected_revision: "`reqdata.expected_revision`"
+              formula_id: "`reqdata.formula_id`"
+              hour_utc: "`reqdata.hour_utc`"
+              minute_utc: "`reqdata.minute_utc`"
+              name: "`reqdata.name`"
+              seed_base: "`reqdata.seed_base`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "contact"
+            "expected_revision"
+            "followers"
+            "handles"
+            "name"
+            "niche"
+            "rate"
+            "sample_links"
+            "spiciness"
+            "spiciness_notes"
+            "status"
+          ]
+          co: {
+            id: "PUT /api/admin/video-remixer/clippers/{identifier}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "identifier"
+                or: "identifier"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PUT"
+          o: "/api/admin/video-remixer/clippers/{identifier}"
+          q: {
+            exist: [
+              "identifier"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "clippers"
+            }
+            {
+              var: "identifier"
+            }
+          ]
+          t: {
+            req: {
+              contact: "`reqdata.contact`"
+              expected_revision: "`reqdata.expected_revision`"
+              followers: "`reqdata.follower`"
+              handles: "`reqdata.handle`"
+              name: "`reqdata.name`"
+              niche: "`reqdata.niche`"
+              rate: "`reqdata.rate`"
+              sample_links: "`reqdata.sample_link`"
+              spiciness: "`reqdata.spiciness`"
+              spiciness_notes: "`reqdata.spiciness_note`"
+              status: "`reqdata.status`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "channel_default"
+            "expected_revision"
+            "music_policy"
+            "name"
+            "origin"
+            "rationale"
+            "reference_source_id"
+            "slots"
+            "status"
+            "total_target_ms"
+          ]
+          co: {
+            id: "PUT /api/admin/video-remixer/formulas/{identifier}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "identifier"
+                or: "identifier"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PUT"
+          o: "/api/admin/video-remixer/formulas/{identifier}"
+          q: {
+            exist: [
+              "identifier"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "formulas"
+            }
+            {
+              var: "identifier"
+            }
+          ]
+          t: {
+            req: {
+              channel_default: "`reqdata.channel_default`"
+              expected_revision: "`reqdata.expected_revision`"
+              music_policy: "`reqdata.music_policy`"
+              name: "`reqdata.name`"
+              origin: "`reqdata.origin`"
+              rationale: "`reqdata.rationale`"
+              reference_source_id: "`reqdata.reference_source_id`"
+              slots: "`reqdata.slot`"
+              status: "`reqdata.status`"
+              total_target_ms: "`reqdata.total_target_m`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "expected_revision"
+            "platform"
+            "platform_post_id"
+            "post_url"
+            "posted_at"
+          ]
+          co: {
+            id: "PUT /api/admin/video-remixer/posts/{identifier}/link"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "identifier"
+                or: "identifier"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PUT"
+          o: "/api/admin/video-remixer/posts/{identifier}/link"
+          q: {
+            exist: [
+              "identifier"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "posts"
+            }
+            {
+              var: "identifier"
+            }
+            {
+              lit: "link"
+            }
+          ]
+          t: {
+            req: {
+              expected_revision: "`reqdata.expected_revision`"
+              platform: "`reqdata.platform`"
+              platform_post_id: "`reqdata.platform_post_id`"
+              post_url: "`reqdata.post_url`"
+              posted_at: "`reqdata.posted_at`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "expected_revision"
+            "timeline"
+          ]
+          co: {
+            id: "PUT /api/admin/video-remixer/projects/{project_id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "project_id"
+                or: "project_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PUT"
+          o: "/api/admin/video-remixer/projects/{project_id}"
+          q: {
+            exist: [
+              "project_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "projects"
+            }
+            {
+              var: "project_id"
+            }
+          ]
+          t: {
+            req: {
+              expected_revision: "`reqdata.expected_revision`"
+              timeline: "`reqdata.timeline`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "allowed_platforms"
+            "campaign_allowed"
+            "confirmed_duplicate_of"
+            "consent_doc_uri"
+            "creator_id"
+            "derivative_edits_allowed"
+            "expected_revision"
+            "external_ai_allowed"
+            "medical_claim_present"
+            "music_bed_allowed"
+            "owner_waiver"
+            "paid_ads_allowed"
+            "patient_identifiable"
+            "person_type"
+            "reason"
+            "requires_medical_review"
+            "rights_expires_at"
+            "rights_status"
+            "sensitive_personal_data_present"
+            "shoot"
+          ]
+          co: {
+            id: "PUT /api/admin/video-remixer/sources/{source_id}/policy"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "source_id"
+                or: "source_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PUT"
+          o: "/api/admin/video-remixer/sources/{source_id}/policy"
+          q: {
+            exist: [
+              "source_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "sources"
+            }
+            {
+              var: "source_id"
+            }
+            {
+              lit: "policy"
+            }
+          ]
+          t: {
+            req: {
+              allowed_platforms: "`reqdata.allowed_platform`"
+              campaign_allowed: "`reqdata.campaign_allowed`"
+              confirmed_duplicate_of: "`reqdata.confirmed_duplicate_of`"
+              consent_doc_uri: "`reqdata.consent_doc_uri`"
+              creator_id: "`reqdata.creator_id`"
+              derivative_edits_allowed: "`reqdata.derivative_edits_allowed`"
+              expected_revision: "`reqdata.expected_revision`"
+              external_ai_allowed: "`reqdata.external_ai_allowed`"
+              medical_claim_present: "`reqdata.medical_claim_present`"
+              music_bed_allowed: "`reqdata.music_bed_allowed`"
+              owner_waiver: "`reqdata.owner_waiver`"
+              paid_ads_allowed: "`reqdata.paid_ads_allowed`"
+              patient_identifiable: "`reqdata.patient_identifiable`"
+              person_type: "`reqdata.person_type`"
+              reason: "`reqdata.reason`"
+              requires_medical_review: "`reqdata.requires_medical_review`"
+              rights_expires_at: "`reqdata.rights_expires_at`"
+              rights_status: "`reqdata.rights_status`"
+              sensitive_personal_data_present: "`reqdata.sensitive_personal_data_present`"
+              shoot: "`reqdata.shoot`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "expected_revision"
+            "levels"
+            "reason"
+          ]
+          co: {
+            id: "PUT /api/admin/video-remixer/clipper-rubric"
+            source: "openapi3"
+            version: 2
+          }
+          m: "PUT"
+          o: "/api/admin/video-remixer/clipper-rubric"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "clipper-rubric"
+            }
+          ]
+          t: {
+            req: {
+              expected_revision: "`reqdata.expected_revision`"
+              levels: "`reqdata.level`"
+              reason: "`reqdata.reason`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "expected_revisions"
+            "policy"
+            "source_ids"
+          ]
+          co: {
+            id: "PUT /api/admin/video-remixer/source-policies/batch"
+            source: "openapi3"
+            version: 2
+          }
+          m: "PUT"
+          o: "/api/admin/video-remixer/source-policies/batch"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "video-remixer"
+            }
+            {
+              lit: "source-policies"
+            }
+            {
+              lit: "batch"
+            }
+          ]
+          t: {
+            req: {
+              expected_revisions: "`reqdata.expected_revision`"
+              policy: "`reqdata.policy`"
+              source_ids: "`reqdata.source_id`"
+            }
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

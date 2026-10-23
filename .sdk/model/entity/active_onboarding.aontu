@@ -1,0 +1,67 @@
+# Entity: active_onboarding
+
+main: kit: entity: active_onboarding: {
+
+  alias: field: {}
+
+  fields: {
+    current_step: {
+      h: "Current Step"
+      n: "current_step"
+      r: false
+      t: "`$ANY`"
+    }
+    has_active_onboarding: {
+      h: "Has Active Onboarding"
+      n: "has_active_onboarding"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    onboarding_data_id: {
+      h: "Onboarding Data Id"
+      n: "onboarding_data_id"
+      r: false
+      t: "`$STRING`"
+    }
+  }
+
+  name: "active_onboarding"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/onboarding-v6/active-session"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/onboarding-v6/active-session"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "onboarding-v6"
+            }
+            {
+              lit: "active-session"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

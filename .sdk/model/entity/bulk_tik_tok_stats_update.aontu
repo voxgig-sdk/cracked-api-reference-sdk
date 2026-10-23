@@ -1,0 +1,73 @@
+# Entity: bulk_tik_tok_stats_update
+
+main: kit: entity: bulk_tik_tok_stats_update: {
+
+  alias: field: {}
+
+  fields: {
+    failedIds: {
+      h: "Failed Ids"
+      n: "failedIds"
+      r: true
+      t: "`$ARRAY`"
+    }
+    updatedCount: {
+      h: "Updated Count"
+      n: "updatedCount"
+      r: true
+      t: "`$INTEGER`"
+    }
+    updates: {
+      h: "Updates"
+      n: "updates"
+      r: true
+      t: "`$ARRAY`"
+    }
+  }
+
+  name: "bulk_tik_tok_stats_update"
+  op: {
+    update: {
+      name: "update"
+      points: [
+        {
+          bf: [
+            "updates"
+          ]
+          co: {
+            id: "PATCH /api/upload-post-agents/bulk/tiktok-stats"
+            source: "openapi3"
+            version: 2
+          }
+          m: "PATCH"
+          o: "/api/upload-post-agents/bulk/tiktok-stats"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "upload-post-agents"
+            }
+            {
+              lit: "bulk"
+            }
+            {
+              lit: "tiktok-stats"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

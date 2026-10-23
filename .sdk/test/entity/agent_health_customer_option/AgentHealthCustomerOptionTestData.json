@@ -1,0 +1,37 @@
+{
+  "existing": {
+    "agent_health_customer_option": {
+      "AGENT_HEALTH_CUSTOMER_OPTION00": {
+        "agent_count": 30,
+        "email": "s1f",
+        "user_id": "USER01"
+      },
+      "AGENT_HEALTH_CUSTOMER_OPTION01": {
+        "agent_count": 60,
+        "email": "s3d",
+        "user_id": "USER01"
+      },
+      "AGENT_HEALTH_CUSTOMER_OPTION02": {
+        "agent_count": 90,
+        "email": "s5b",
+        "user_id": "USER01"
+      }
+    }
+  },
+  "new": {
+    "agent_health_customer_option": {
+      "agent_health_customer_option_ref01": {
+        "agent_count": 120,
+        "email": "s79",
+        "user_id": "USER01"
+      }
+    }
+  },
+  "requests": {
+    "GET /api/admin/agent-health/customers": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

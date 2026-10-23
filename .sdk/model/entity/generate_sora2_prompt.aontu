@@ -1,0 +1,55 @@
+# Entity: generate_sora2_prompt
+
+main: kit: entity: generate_sora2_prompt: {
+
+  alias: field: {}
+
+  fields: {
+    prompt: {
+      h: "Prompt"
+      n: "prompt"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  name: "generate_sora2_prompt"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/core/generate-sora2-prompt"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/core/generate-sora2-prompt"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "core"
+            }
+            {
+              lit: "generate-sora2-prompt"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

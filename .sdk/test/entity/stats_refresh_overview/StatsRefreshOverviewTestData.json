@@ -1,0 +1,93 @@
+{
+  "existing": {
+    "stats_refresh_overview": {
+      "STATS_REFRESH_OVERVIEW00": {
+        "active_run": "saa",
+        "aged_over_24h": 171,
+        "backlog_preview": [],
+        "coverage_percent": 173,
+        "customer_counts": {},
+        "date": "saf",
+        "generated_at": "sb0",
+        "method_counts": {},
+        "platform_counts": {},
+        "platform_units_resolved": 179,
+        "platform_units_total": 180,
+        "platform_units_unresolved": 181,
+        "posted_entries": 182,
+        "reason_counts": {},
+        "sla_deadline_et": "sb8",
+        "stale_after_sla": 185,
+        "top_affected_customers": []
+      },
+      "STATS_REFRESH_OVERVIEW01": {
+        "active_run": "s154",
+        "aged_over_24h": 341,
+        "backlog_preview": [],
+        "coverage_percent": 343,
+        "customer_counts": {},
+        "date": "s159",
+        "generated_at": "s15a",
+        "method_counts": {},
+        "platform_counts": {},
+        "platform_units_resolved": 349,
+        "platform_units_total": 350,
+        "platform_units_unresolved": 351,
+        "posted_entries": 352,
+        "reason_counts": {},
+        "sla_deadline_et": "s162",
+        "stale_after_sla": 355,
+        "top_affected_customers": []
+      },
+      "STATS_REFRESH_OVERVIEW02": {
+        "active_run": "s1fe",
+        "aged_over_24h": 511,
+        "backlog_preview": [],
+        "coverage_percent": 513,
+        "customer_counts": {},
+        "date": "s203",
+        "generated_at": "s204",
+        "method_counts": {},
+        "platform_counts": {},
+        "platform_units_resolved": 519,
+        "platform_units_total": 520,
+        "platform_units_unresolved": 521,
+        "posted_entries": 522,
+        "reason_counts": {},
+        "sla_deadline_et": "s20c",
+        "stale_after_sla": 525,
+        "top_affected_customers": []
+      }
+    }
+  },
+  "new": {
+    "stats_refresh_overview": {
+      "stats_refresh_overview_ref01": {
+        "active_run": "s2a8",
+        "aged_over_24h": 681,
+        "backlog_preview": [],
+        "coverage_percent": 683,
+        "customer_counts": {},
+        "date": "s2ad",
+        "generated_at": "s2ae",
+        "method_counts": {},
+        "platform_counts": {},
+        "platform_units_resolved": 689,
+        "platform_units_total": 690,
+        "platform_units_unresolved": 691,
+        "posted_entries": 692,
+        "reason_counts": {},
+        "sla_deadline_et": "s2b6",
+        "stale_after_sla": 695,
+        "top_affected_customers": []
+      }
+    }
+  },
+  "requests": {
+    "GET /api/admin/customer-health/overview": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

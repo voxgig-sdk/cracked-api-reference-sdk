@@ -1,0 +1,145 @@
+# Entity: watchdog_recovery
+
+main: kit: entity: watchdog_recovery: {
+
+  alias: field: {}
+
+  fields: {
+    item_id: {
+      h: "Item Id"
+      n: "item_id"
+      r: true
+      t: "`$STRING`"
+    }
+    passed: {
+      h: "Passed"
+      n: "passed"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    table: {
+      h: "Table"
+      n: "table"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  name: "watchdog_recovery"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "item_id"
+            "passed"
+            "table"
+          ]
+          co: {
+            id: "POST /api/v1/watchdog/recovery-queue/resolve"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "x_watchdog_key"
+                or: "x-watchdog-key"
+                r: false
+                t: "`$ANY`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/v1/watchdog/recovery-queue/resolve"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "v1"
+            }
+            {
+              lit: "watchdog"
+            }
+            {
+              lit: "recovery-queue"
+            }
+            {
+              lit: "resolve"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/v1/watchdog/recovery-queue"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "x_watchdog_key"
+                or: "x-watchdog-key"
+                r: false
+                t: "`$ANY`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "device_id"
+                or: "device_ids"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/v1/watchdog/recovery-queue"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "v1"
+            }
+            {
+              lit: "watchdog"
+            }
+            {
+              lit: "recovery-queue"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

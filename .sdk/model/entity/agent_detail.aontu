@@ -1,0 +1,391 @@
+# Entity: agent_detail
+
+main: kit: entity: agent_detail: {
+
+  alias: field: {}
+
+  fields: {
+    activeConnections: {
+      h: "Active Connections"
+      n: "activeConnections"
+      r: false
+      t: "`$ANY`"
+    }
+    assignedAt: {
+      h: "Assigned At"
+      n: "assignedAt"
+      r: false
+      t: "`$ANY`"
+    }
+    avatar: {
+      h: "Avatar"
+      n: "avatar"
+      r: true
+      t: "`$STRING`"
+    }
+    bio: {
+      h: "Bio"
+      n: "bio"
+      r: false
+      t: "`$ANY`"
+    }
+    facebookUrl: {
+      h: "Facebook Url"
+      n: "facebookUrl"
+      r: false
+      t: "`$ANY`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: true
+      t: "`$STRING`"
+    }
+    instagramUrl: {
+      h: "Instagram Url"
+      n: "instagramUrl"
+      r: false
+      t: "`$ANY`"
+    }
+    isActive: {
+      h: "Is Active"
+      n: "isActive"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: true
+      t: "`$STRING`"
+    }
+    role: {
+      h: "Role"
+      n: "role"
+      r: false
+      t: "`$ANY`"
+    }
+    tiktokStats: {
+      h: "Tiktok Stats"
+      n: "tiktokStats"
+      r: false
+      t: "`$ANY`"
+    }
+    tiktokUrl: {
+      h: "Tiktok Url"
+      n: "tiktokUrl"
+      r: false
+      t: "`$ANY`"
+    }
+    type: {
+      h: "Type"
+      n: "type"
+      r: true
+      t: "`$STRING`"
+    }
+    uploadPostPlatforms: {
+      h: "Upload Post Platforms"
+      n: "uploadPostPlatforms"
+      r: false
+      t: "`$ANY`"
+    }
+    youtubeUrl: {
+      h: "Youtube Url"
+      n: "youtubeUrl"
+      r: false
+      t: "`$ANY`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "agent_detail"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/upload-post-agents/all"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "agent_type"
+                or: "agent_type"
+                r: false
+                t: "`$ANY`"
+              }
+              {
+                ex: false
+                k: "query"
+                n: "include_inactive"
+                or: "include_inactive"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+              {
+                ex: 100
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/upload-post-agents/all"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "upload-post-agents"
+            }
+            {
+              lit: "all"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/upload-post-agents/free"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "agent_type"
+                or: "agent_type"
+                r: false
+                t: "`$ANY`"
+              }
+              {
+                ex: 100
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/upload-post-agents/free"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "upload-post-agents"
+            }
+            {
+              lit: "free"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.agents`"
+          }
+        }
+      ]
+    }
+    update: {
+      name: "update"
+      points: [
+        {
+          bf: [
+            "bio"
+          ]
+          co: {
+            id: "PATCH /api/upload-post-agents/{agent_id}/bio"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "upload_post_agent_id"
+                or: "agent_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PATCH"
+          o: "/api/upload-post-agents/{agent_id}/bio"
+          q: {
+            exist: [
+              "upload_post_agent_id"
+            ]
+          }
+          r: {
+            param: {
+              agent_id: "upload_post_agent_id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "upload-post-agents"
+            }
+            {
+              var: "upload_post_agent_id"
+            }
+            {
+              lit: "bio"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "name"
+          ]
+          co: {
+            id: "PATCH /api/upload-post-agents/{agent_id}/name"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "upload_post_agent_id"
+                or: "agent_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PATCH"
+          o: "/api/upload-post-agents/{agent_id}/name"
+          q: {
+            exist: [
+              "upload_post_agent_id"
+            ]
+          }
+          r: {
+            param: {
+              agent_id: "upload_post_agent_id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "upload-post-agents"
+            }
+            {
+              var: "upload_post_agent_id"
+            }
+            {
+              lit: "name"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "role"
+          ]
+          co: {
+            id: "PATCH /api/upload-post-agents/{agent_id}/role"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "upload_post_agent_id"
+                or: "agent_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PATCH"
+          o: "/api/upload-post-agents/{agent_id}/role"
+          q: {
+            exist: [
+              "upload_post_agent_id"
+            ]
+          }
+          r: {
+            param: {
+              agent_id: "upload_post_agent_id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "upload-post-agents"
+            }
+            {
+              var: "upload_post_agent_id"
+            }
+            {
+              lit: "role"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.upload_post_agent")]
+  ]
+
+}

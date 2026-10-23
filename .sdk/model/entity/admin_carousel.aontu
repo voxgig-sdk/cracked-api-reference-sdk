@@ -1,0 +1,750 @@
+# Entity: admin_carousel
+
+main: kit: entity: admin_carousel: {
+
+  alias: field: {}
+
+  fields: {
+    agent_id: {
+      h: "Agent Id"
+      n: "agent_id"
+      op: {
+        create: {
+          req: true
+          type: "`$STRING`"
+        }
+      }
+      r: false
+      t: "`$STRING`"
+    }
+    batch_id: {
+      h: "Batch Id"
+      n: "batch_id"
+      op: {
+        create: {
+          req: true
+          type: "`$STRING`"
+        }
+      }
+      r: false
+      t: "`$STRING`"
+    }
+    caption: {
+      h: "Caption"
+      n: "caption"
+      op: {
+        create: {
+          req: true
+          type: "`$STRING`"
+        }
+      }
+      r: false
+      t: "`$STRING`"
+    }
+    content_base64: {
+      h: "Content Base64"
+      n: "content_base64"
+      r: false
+      t: "`$STRING`"
+    }
+    day: {
+      h: "Day"
+      n: "day"
+      op: {
+        create: {
+          req: true
+          type: "`$STRING`"
+        }
+      }
+      r: false
+      t: "`$ANY`"
+    }
+    dry_run: {
+      h: "Dry Run"
+      n: "dry_run"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    engine_run: {
+      h: "Engine Run"
+      n: "engine_run"
+      r: false
+      t: "`$STRING`"
+    }
+    expected_revision: {
+      h: "Expected Revision"
+      n: "expected_revision"
+      r: true
+      t: "`$STRING`"
+    }
+    formula: {
+      h: "Formula"
+      n: "formula"
+      r: true
+      t: "`$OBJECT`"
+    }
+    formula_id: {
+      h: "Formula Id"
+      n: "formula_id"
+      op: {
+        create: {
+          req: true
+          type: "`$STRING`"
+        }
+      }
+      r: false
+      t: "`$STRING`"
+    }
+    prompt: {
+      h: "Prompt"
+      n: "prompt"
+      r: true
+      t: "`$STRING`"
+    }
+    slides: {
+      h: "Slides"
+      n: "slides"
+      r: true
+      t: "`$ARRAY`"
+    }
+    title: {
+      h: "Title"
+      n: "title"
+      op: {
+        create: {
+          req: true
+          type: "`$STRING`"
+        }
+        update: {
+          req: true
+          type: "`$STRING`"
+        }
+      }
+      r: false
+      t: "`$STRING`"
+    }
+  }
+
+  name: "admin_carousel"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "action"
+            "dry_run"
+          ]
+          co: {
+            id: "POST /api/admin/carousels/slideshow-import/{batch_id}/state"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "batch_id"
+                or: "batch_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/admin/carousels/slideshow-import/{batch_id}/state"
+          q: {
+            "$action": "state"
+            exist: [
+              "batch_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "carousels"
+            }
+            {
+              lit: "slideshow-import"
+            }
+            {
+              var: "batch_id"
+            }
+            {
+              lit: "state"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "agent_id"
+            "batch_id"
+            "caption"
+            "content_base64"
+            "day"
+            "formula_id"
+            "title"
+          ]
+          co: {
+            id: "POST /api/admin/carousels/slideshow-import/diag/{stage}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "stage"
+                or: "stage"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/admin/carousels/slideshow-import/diag/{stage}"
+          q: {
+            exist: [
+              "stage"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "carousels"
+            }
+            {
+              lit: "slideshow-import"
+            }
+            {
+              lit: "diag"
+            }
+            {
+              var: "stage"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /api/admin/carousels/slideshow-import/decks"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/admin/carousels/slideshow-import/decks"
+          rb: {
+            fields: [
+              {
+                name: "agent_id"
+              }
+              {
+                name: "batch_id"
+              }
+              {
+                name: "caption"
+              }
+              {
+                name: "day"
+              }
+              {
+                name: "dry_run"
+              }
+              {
+                name: "engine_run"
+              }
+              {
+                name: "formula_id"
+              }
+              {
+                binary: true
+                list: true
+                name: "slides"
+              }
+              {
+                name: "title"
+              }
+            ]
+            kind: "multipart"
+            media: "multipart/form-data"
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "carousels"
+            }
+            {
+              lit: "slideshow-import"
+            }
+            {
+              lit: "decks"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "agent_id"
+            "batch_id"
+            "caption"
+            "day"
+            "dry_run"
+            "engine_run"
+            "formula_id"
+            "slides"
+            "title"
+          ]
+          co: {
+            id: "POST /api/admin/carousels/slideshow-import/decks-json"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/admin/carousels/slideshow-import/decks-json"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "carousels"
+            }
+            {
+              lit: "slideshow-import"
+            }
+            {
+              lit: "decks-json"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/admin/carousels/slideshow-import/{batch_id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "batch_id"
+                or: "batch_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/carousels/slideshow-import/{batch_id}"
+          q: {
+            exist: [
+              "batch_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "carousels"
+            }
+            {
+              lit: "slideshow-import"
+            }
+            {
+              var: "batch_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/admin/carousels/production-prompts/{fmt}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "fmt"
+                or: "fmt"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/carousels/production-prompts/{fmt}"
+          q: {
+            exist: [
+              "fmt"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "carousels"
+            }
+            {
+              lit: "production-prompts"
+            }
+            {
+              var: "fmt"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/admin/carousels/demo-formulas/{formula_id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "formula_id"
+                or: "formula_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/carousels/demo-formulas/{formula_id}"
+          q: {
+            exist: [
+              "formula_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "carousels"
+            }
+            {
+              lit: "demo-formulas"
+            }
+            {
+              var: "formula_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/admin/carousels/demo-formulas"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "product_id"
+                or: "product_id"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/carousels/demo-formulas"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "carousels"
+            }
+            {
+              lit: "demo-formulas"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/admin/carousels/freeform-production-prompt"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/admin/carousels/freeform-production-prompt"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "carousels"
+            }
+            {
+              lit: "freeform-production-prompt"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    update: {
+      name: "update"
+      points: [
+        {
+          bf: [
+            "expected_revision"
+            "prompt"
+          ]
+          co: {
+            id: "PUT /api/admin/carousels/production-prompts/{fmt}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "fmt"
+                or: "fmt"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PUT"
+          o: "/api/admin/carousels/production-prompts/{fmt}"
+          q: {
+            exist: [
+              "fmt"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "carousels"
+            }
+            {
+              lit: "production-prompts"
+            }
+            {
+              var: "fmt"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "expected_revision"
+            "formula"
+            "title"
+          ]
+          co: {
+            id: "PUT /api/admin/carousels/demo-formulas/{formula_id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "formula_id"
+                or: "formula_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PUT"
+          o: "/api/admin/carousels/demo-formulas/{formula_id}"
+          q: {
+            exist: [
+              "formula_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "carousels"
+            }
+            {
+              lit: "demo-formulas"
+            }
+            {
+              var: "formula_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "expected_revision"
+            "prompt"
+          ]
+          co: {
+            id: "PUT /api/admin/carousels/freeform-production-prompt"
+            source: "openapi3"
+            version: 2
+          }
+          m: "PUT"
+          o: "/api/admin/carousels/freeform-production-prompt"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "carousels"
+            }
+            {
+              lit: "freeform-production-prompt"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

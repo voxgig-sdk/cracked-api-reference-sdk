@@ -1,0 +1,36 @@
+# BasicResetProductFlow
+
+main: kit: flow: BasicResetProductFlow:
+{
+  entity: "reset_product",
+  kind: "basic",
+  name: "BasicResetProductFlow",
+  step: [
+    {
+      i: {
+        ref: "reset_product_ref01"
+      }
+
+      o: "create"
+    }
+
+    {
+      i: {
+        ref: "reset_product_ref01",
+        srcdatavar: "reset_product_ref01_data",
+        suffix: "_dt0"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-reset_product_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicResetProductFlow"
+}

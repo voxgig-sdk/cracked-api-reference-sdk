@@ -1,0 +1,18 @@
+# BasicIrisChatFlow
+
+main: kit: flow: BasicIrisChatFlow:
+{
+  entity: "iris_chat",
+  kind: "basic",
+  name: "BasicIrisChatFlow",
+  step: [
+    {
+      i: {
+        ref: "iris_chat_ref01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicIrisChatFlow"
+}

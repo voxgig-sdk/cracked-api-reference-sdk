@@ -1,0 +1,28 @@
+# BasicLandingStatusFlow
+
+main: kit: flow: BasicLandingStatusFlow:
+{
+  entity: "landing_status",
+  kind: "basic",
+  name: "BasicLandingStatusFlow",
+  step: [
+    {
+      i: {
+        ref: "landing_status_ref01",
+        srcdatavar: "landing_status_ref01_data",
+        suffix: "_dt0"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-landing_status_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicLandingStatusFlow"
+}

@@ -1,0 +1,45 @@
+{
+  "existing": {
+    "seo_keyword": {
+      "SEO_KEYWORD00": {
+        "blog_page": "s32",
+        "current_position": 51,
+        "keyword": "s34",
+        "keyword_group": "s35",
+        "position_change": 54
+      },
+      "SEO_KEYWORD01": {
+        "blog_page": "s64",
+        "current_position": 101,
+        "keyword": "s66",
+        "keyword_group": "s67",
+        "position_change": 104
+      },
+      "SEO_KEYWORD02": {
+        "blog_page": "s96",
+        "current_position": 151,
+        "keyword": "s98",
+        "keyword_group": "s99",
+        "position_change": 154
+      }
+    }
+  },
+  "new": {
+    "seo_keyword": {
+      "seo_keyword_ref01": {
+        "blog_page": "sc8",
+        "current_position": 201,
+        "keyword": "sca",
+        "keyword_group": "scb",
+        "position_change": 204
+      }
+    }
+  },
+  "requests": {
+    "GET /api/seo/keywords": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

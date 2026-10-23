@@ -1,0 +1,137 @@
+# Entity: agent_access_winning_ads_summary
+
+main: kit: entity: agent_access_winning_ads_summary: {
+
+  alias: field: {}
+
+  fields: {
+    email: {
+      fo: "email"
+      h: "Email"
+      n: "email"
+      r: true
+      t: "`$STRING`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: false
+      t: "`$STRING`"
+    }
+    productCount: {
+      h: "Product Count"
+      n: "productCount"
+      r: true
+      t: "`$INTEGER`"
+    }
+    productsWithWinningAds: {
+      h: "Products With Winning Ads"
+      n: "productsWithWinningAds"
+      r: true
+      t: "`$INTEGER`"
+    }
+    subscriptionStatus: {
+      h: "Subscription Status"
+      n: "subscriptionStatus"
+      r: false
+      t: "`$ANY`"
+    }
+    totalWinningAds: {
+      h: "Total Winning Ads"
+      n: "totalWinningAds"
+      r: true
+      t: "`$INTEGER`"
+    }
+    userId: {
+      fo: "uuid"
+      h: "User Id"
+      n: "userId"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  name: "agent_access_winning_ads_summary"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/agent-access/winning-ads-summary"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "x_agent_access_key"
+                or: "x-agent-access-key"
+                r: false
+                t: "`$ANY`"
+              }
+            ]
+            query: [
+              {
+                ex: false
+                k: "query"
+                n: "include_internal"
+                or: "include_internal"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+              {
+                ex: 200
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                ex: 0
+                k: "query"
+                n: "offset"
+                or: "offset"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "subscription_status"
+                or: "subscription_statuses"
+                r: false
+                t: "`$ANY`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/agent-access/winning-ads-summary"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "agent-access"
+            }
+            {
+              lit: "winning-ads-summary"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

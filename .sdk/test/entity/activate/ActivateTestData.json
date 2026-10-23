@@ -1,0 +1,43 @@
+{
+  "existing": {
+    "activate": {
+      "ACTIVATE00": {
+        "activated_at": "s1e",
+        "message": "s1f",
+        "success": true,
+        "user_id": "USER01",
+        "id": "ACTIVATE00"
+      },
+      "ACTIVATE01": {
+        "activated_at": "s3c",
+        "message": "s3d",
+        "success": true,
+        "user_id": "USER01",
+        "id": "ACTIVATE01"
+      },
+      "ACTIVATE02": {
+        "activated_at": "s5a",
+        "message": "s5b",
+        "success": true,
+        "user_id": "USER01",
+        "id": "ACTIVATE02"
+      }
+    }
+  },
+  "new": {
+    "activate": {
+      "activate_ref01": {
+        "activated_at": "s78",
+        "message": "s79",
+        "success": true
+      }
+    }
+  },
+  "requests": {
+    "POST /api/admin/users/{user_id}/activate": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

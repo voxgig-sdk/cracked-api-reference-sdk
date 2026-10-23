@@ -1,0 +1,22 @@
+# BasicSeoTrafficFlow
+
+main: kit: flow: BasicSeoTrafficFlow:
+{
+  entity: "seo_traffic",
+  kind: "basic",
+  name: "BasicSeoTrafficFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "seo_traffic_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicSeoTrafficFlow"
+}

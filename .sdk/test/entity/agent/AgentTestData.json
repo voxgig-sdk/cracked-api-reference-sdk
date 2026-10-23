@@ -1,0 +1,52 @@
+{
+  "existing": {
+    "agent": {
+      "AGENT00": {
+        "active_connections": 70,
+        "at_capacity": false,
+        "id": "AGENT00",
+        "is_active": false,
+        "name": "s4a",
+        "tiktok_stats": "s4b",
+        "type": "s4c"
+      },
+      "AGENT01": {
+        "active_connections": 140,
+        "at_capacity": false,
+        "id": "AGENT01",
+        "is_active": false,
+        "name": "s90",
+        "tiktok_stats": "s91",
+        "type": "s92"
+      },
+      "AGENT02": {
+        "active_connections": 210,
+        "at_capacity": false,
+        "id": "AGENT02",
+        "is_active": false,
+        "name": "sd6",
+        "tiktok_stats": "sd7",
+        "type": "sd8"
+      }
+    }
+  },
+  "new": {
+    "agent": {
+      "agent_ref01": {
+        "active_connections": 280,
+        "at_capacity": false,
+        "is_active": false,
+        "name": "s11c",
+        "tiktok_stats": "s11d",
+        "type": "s11e"
+      }
+    }
+  },
+  "requests": {
+    "GET /api/admin/agents": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

@@ -1,0 +1,18 @@
+# BasicLandingFlow
+
+main: kit: flow: BasicLandingFlow:
+{
+  entity: "landing",
+  kind: "basic",
+  name: "BasicLandingFlow",
+  step: [
+    {
+      i: {
+        ref: "landing_ref01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicLandingFlow"
+}

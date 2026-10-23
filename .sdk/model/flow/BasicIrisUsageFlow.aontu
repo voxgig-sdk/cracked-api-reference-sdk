@@ -1,0 +1,22 @@
+# BasicIrisUsageFlow
+
+main: kit: flow: BasicIrisUsageFlow:
+{
+  entity: "iris_usage",
+  kind: "basic",
+  name: "BasicIrisUsageFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "iris_usage_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicIrisUsageFlow"
+}

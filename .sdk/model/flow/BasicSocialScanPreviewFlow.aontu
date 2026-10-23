@@ -1,0 +1,18 @@
+# BasicSocialScanPreviewFlow
+
+main: kit: flow: BasicSocialScanPreviewFlow:
+{
+  entity: "social_scan_preview",
+  kind: "basic",
+  name: "BasicSocialScanPreviewFlow",
+  step: [
+    {
+      i: {
+        ref: "social_scan_preview_ref01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicSocialScanPreviewFlow"
+}

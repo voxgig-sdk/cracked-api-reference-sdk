@@ -1,0 +1,22 @@
+# BasicAdminLandingTaskFlow
+
+main: kit: flow: BasicAdminLandingTaskFlow:
+{
+  entity: "admin_landing_task",
+  kind: "basic",
+  name: "BasicAdminLandingTaskFlow",
+  step: [
+    {
+      i: {
+        ref: "admin_landing_task_ref01"
+      }
+
+      m: {
+        user_id: "user01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicAdminLandingTaskFlow"
+}

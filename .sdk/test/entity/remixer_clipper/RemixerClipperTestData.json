@@ -1,0 +1,35 @@
+{
+  "existing": {
+    "remixer_clipper": {
+      "REMIXER_CLIPPER00": {
+        "identifier": "IDENTIFIER01",
+        "id": "REMIXER_CLIPPER00"
+      },
+      "REMIXER_CLIPPER01": {
+        "identifier": "IDENTIFIER01",
+        "id": "REMIXER_CLIPPER01"
+      },
+      "REMIXER_CLIPPER02": {
+        "identifier": "IDENTIFIER01",
+        "id": "REMIXER_CLIPPER02"
+      }
+    }
+  },
+  "new": {
+    "remixer_clipper": {
+      "remixer_clipper_ref01": {}
+    }
+  },
+  "requests": {
+    "POST /api/remixer-clippers/jobs/{identifier}/download": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/remixer-clippers/catalog": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

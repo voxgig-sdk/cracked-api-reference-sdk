@@ -1,0 +1,28 @@
+# BasicAgentAccessPhilHourlyNotificationFlow
+
+main: kit: flow: BasicAgentAccessPhilHourlyNotificationFlow:
+{
+  entity: "agent_access_phil_hourly_notification",
+  kind: "basic",
+  name: "BasicAgentAccessPhilHourlyNotificationFlow",
+  step: [
+    {
+      i: {
+        ref: "agent_access_phil_hourly_notification_ref01",
+        srcdatavar: "agent_access_phil_hourly_notification_ref01_data",
+        suffix: "_dt0"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-agent_access_phil_hourly_notification_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicAgentAccessPhilHourlyNotificationFlow"
+}

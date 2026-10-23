@@ -1,0 +1,44 @@
+{
+  "existing": {
+    "link_in_post": {
+      "LINK_IN_POST00": {
+        "linkInPostsType": "s28",
+        "redirectUrl": "s29",
+        "showLinkInFirstComment": true,
+        "slug": "s2b",
+        "id": "LINK_IN_POST00"
+      },
+      "LINK_IN_POST01": {
+        "linkInPostsType": "s50",
+        "redirectUrl": "s51",
+        "showLinkInFirstComment": true,
+        "slug": "s53",
+        "id": "LINK_IN_POST01"
+      },
+      "LINK_IN_POST02": {
+        "linkInPostsType": "s78",
+        "redirectUrl": "s79",
+        "showLinkInFirstComment": true,
+        "slug": "s7b",
+        "id": "LINK_IN_POST02"
+      }
+    }
+  },
+  "new": {
+    "link_in_post": {
+      "link_in_post_ref01": {
+        "linkInPostsType": "sa0",
+        "redirectUrl": "sa1",
+        "showLinkInFirstComment": true,
+        "slug": "sa3"
+      }
+    }
+  },
+  "requests": {
+    "GET /api/sites/{slug}/link-in-posts": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

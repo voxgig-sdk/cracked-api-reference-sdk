@@ -1,0 +1,52 @@
+# Entity: seo
+
+main: kit: entity: seo: {
+
+  alias: field: {}
+
+  name: "seo"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/seo/oauth/status"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/seo/oauth/status"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "seo"
+            }
+            {
+              lit: "oauth"
+            }
+            {
+              lit: "status"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  fields: {
+  }
+
+
+
+}

@@ -1,0 +1,76 @@
+{
+  "existing": {
+    "paid_user": {
+      "PAID_USER00": {
+        "agents_count": 130,
+        "assigned_agents_count": 131,
+        "auto_schedule_enabled": "s84",
+        "credits": 133,
+        "effective_agents_count": 134,
+        "email": "s87",
+        "id": "PAID_USER00",
+        "is_internal_user": false,
+        "is_migrated_user": true,
+        "membership": "s8b",
+        "scheduled_queue_count": 140,
+        "subscription_details": "s8d",
+        "subscription_status": "s8e"
+      },
+      "PAID_USER01": {
+        "agents_count": 260,
+        "assigned_agents_count": 261,
+        "auto_schedule_enabled": "s106",
+        "credits": 263,
+        "effective_agents_count": 264,
+        "email": "s109",
+        "id": "PAID_USER01",
+        "is_internal_user": false,
+        "is_migrated_user": true,
+        "membership": "s10d",
+        "scheduled_queue_count": 270,
+        "subscription_details": "s10f",
+        "subscription_status": "s110"
+      },
+      "PAID_USER02": {
+        "agents_count": 390,
+        "assigned_agents_count": 391,
+        "auto_schedule_enabled": "s188",
+        "credits": 393,
+        "effective_agents_count": 394,
+        "email": "s18b",
+        "id": "PAID_USER02",
+        "is_internal_user": false,
+        "is_migrated_user": true,
+        "membership": "s18f",
+        "scheduled_queue_count": 400,
+        "subscription_details": "s191",
+        "subscription_status": "s192"
+      }
+    }
+  },
+  "new": {
+    "paid_user": {
+      "paid_user_ref01": {
+        "agents_count": 520,
+        "assigned_agents_count": 521,
+        "auto_schedule_enabled": "s20a",
+        "credits": 523,
+        "effective_agents_count": 524,
+        "email": "s20d",
+        "is_internal_user": false,
+        "is_migrated_user": true,
+        "membership": "s211",
+        "scheduled_queue_count": 530,
+        "subscription_details": "s213",
+        "subscription_status": "s214"
+      }
+    }
+  },
+  "requests": {
+    "GET /api/admin/paid-users": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

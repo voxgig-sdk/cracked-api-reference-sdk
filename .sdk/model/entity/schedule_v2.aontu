@@ -1,0 +1,537 @@
+# Entity: schedule_v2
+
+main: kit: entity: schedule_v2: {
+
+  alias: field: {}
+
+  fields: {
+    agent: {
+      h: "Agent"
+      n: "agent"
+      r: false
+      t: "`$ANY`"
+    }
+    comment: {
+      h: "Comment"
+      n: "comment"
+      r: false
+      t: "`$ANY`"
+    }
+    created_at: {
+      fo: "date-time"
+      h: "Created At"
+      n: "created_at"
+      r: true
+      t: "`$STRING`"
+    }
+    id: {
+      fo: "uuid"
+      h: "Id"
+      n: "id"
+      r: true
+      t: "`$STRING`"
+    }
+    instagram_posted_by: {
+      h: "Instagram Posted By"
+      n: "instagram_posted_by"
+      r: false
+      t: "`$ANY`"
+    }
+    instagram_posted_url: {
+      h: "Instagram Posted Url"
+      n: "instagram_posted_url"
+      r: false
+      t: "`$ANY`"
+    }
+    instagram_scraped_social_post_id: {
+      h: "Instagram Scraped Social Post Id"
+      n: "instagram_scraped_social_post_id"
+      r: false
+      t: "`$STRING`"
+    }
+    is_instagram_posted: {
+      h: "Is Instagram Posted"
+      n: "is_instagram_posted"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    is_tiktok_posted: {
+      h: "Is Tiktok Posted"
+      n: "is_tiktok_posted"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    is_youtube_posted: {
+      h: "Is Youtube Posted"
+      n: "is_youtube_posted"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    reorders: {
+      h: "Reorders"
+      n: "reorders"
+      r: true
+      t: "`$ARRAY`"
+    }
+    results: {
+      h: "Results"
+      n: "results"
+      r: false
+      t: "`$ANY`"
+    }
+    scheduled_datetime: {
+      fo: "date-time"
+      h: "Scheduled Datetime"
+      n: "scheduled_datetime"
+      r: true
+      t: "`$STRING`"
+    }
+    source_type: {
+      h: "Source Type"
+      n: "source_type"
+      r: true
+      t: "`$STRING`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: true
+      t: "`$STRING`"
+    }
+    tiktok_posted_by: {
+      h: "Tiktok Posted By"
+      n: "tiktok_posted_by"
+      r: false
+      t: "`$ANY`"
+    }
+    tiktok_posted_url: {
+      h: "Tiktok Posted Url"
+      n: "tiktok_posted_url"
+      r: false
+      t: "`$ANY`"
+    }
+    tiktok_scraped_social_post_id: {
+      h: "Tiktok Scraped Social Post Id"
+      n: "tiktok_scraped_social_post_id"
+      r: false
+      t: "`$STRING`"
+    }
+    video: {
+      h: "Video"
+      n: "video"
+      r: false
+      t: "`$ANY`"
+    }
+    video_id: {
+      fo: "uuid"
+      h: "Video Id"
+      n: "video_id"
+      r: true
+      t: "`$STRING`"
+    }
+    youtube_posted_by: {
+      h: "Youtube Posted By"
+      n: "youtube_posted_by"
+      r: false
+      t: "`$ANY`"
+    }
+    youtube_posted_url: {
+      h: "Youtube Posted Url"
+      n: "youtube_posted_url"
+      r: false
+      t: "`$ANY`"
+    }
+    youtube_scraped_social_post_id: {
+      h: "Youtube Scraped Social Post Id"
+      n: "youtube_scraped_social_post_id"
+      r: false
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "schedule_v2"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "video_id"
+          ]
+          co: {
+            id: "POST /api/schedule/queue/add"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "product_id"
+                or: "product_id"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/schedule/queue/add"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "schedule"
+            }
+            {
+              lit: "queue"
+            }
+            {
+              lit: "add"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "reorders"
+          ]
+          co: {
+            id: "POST /api/schedule/queue/reorder"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/schedule/queue/reorder"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "schedule"
+            }
+            {
+              lit: "queue"
+            }
+            {
+              lit: "reorder"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /api/schedule/test-daily-email"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/schedule/test-daily-email"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "schedule"
+            }
+            {
+              lit: "test-daily-email"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/schedule/queue"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: false
+                k: "query"
+                n: "all_product"
+                or: "all_products"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+              {
+                ex: 100
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                ex: 0
+                k: "query"
+                n: "offset"
+                or: "offset"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "product_id"
+                or: "product_id"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "status"
+                or: "status"
+                r: false
+                t: "`$ANY`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/schedule/queue"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "schedule"
+            }
+            {
+              lit: "queue"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.items`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/schedule/results"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: false
+                k: "query"
+                n: "all_product"
+                or: "all_products"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+              {
+                ex: 7
+                k: "query"
+                n: "day"
+                or: "days"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                ex: 100
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                ex: 0
+                k: "query"
+                n: "offset"
+                or: "offset"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "product_id"
+                or: "product_id"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/schedule/results"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "schedule"
+            }
+            {
+              lit: "results"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    remove: {
+      name: "remove"
+      points: [
+        {
+          co: {
+            id: "DELETE /api/schedule/queue/{queue_id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "queue_id"
+                or: "queue_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "DELETE"
+          o: "/api/schedule/queue/{queue_id}"
+          q: {
+            exist: [
+              "queue_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "schedule"
+            }
+            {
+              lit: "queue"
+            }
+            {
+              var: "queue_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    update: {
+      name: "update"
+      points: [
+        {
+          bf: [
+            "video_id"
+          ]
+          co: {
+            id: "PUT /api/schedule/queue/{queue_id}/replace-video"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "queue_id"
+                or: "queue_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PUT"
+          o: "/api/schedule/queue/{queue_id}/replace-video"
+          q: {
+            "$action": "replace_video"
+            exist: [
+              "queue_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "schedule"
+            }
+            {
+              lit: "queue"
+            }
+            {
+              var: "queue_id"
+            }
+            {
+              lit: "replace-video"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

@@ -1,0 +1,40 @@
+{
+  "existing": {
+    "generate_blackout_sora2_prompt": {
+      "GENERATE_BLACKOUT_SORA2_PROMPT00": {
+        "media_asset_id": "MEDIA_ASSET01",
+        "product_id": "PRODUCT01",
+        "prompt": "s20",
+        "id": "GENERATE_BLACKOUT_SORA2_PROMPT00"
+      },
+      "GENERATE_BLACKOUT_SORA2_PROMPT01": {
+        "media_asset_id": "MEDIA_ASSET01",
+        "product_id": "PRODUCT01",
+        "prompt": "s3e",
+        "id": "GENERATE_BLACKOUT_SORA2_PROMPT01"
+      },
+      "GENERATE_BLACKOUT_SORA2_PROMPT02": {
+        "media_asset_id": "MEDIA_ASSET01",
+        "product_id": "PRODUCT01",
+        "prompt": "s5c",
+        "id": "GENERATE_BLACKOUT_SORA2_PROMPT02"
+      }
+    }
+  },
+  "new": {
+    "generate_blackout_sora2_prompt": {
+      "generate_blackout_sora2_prompt_ref01": {
+        "media_asset_id": "MEDIA_ASSET01",
+        "product_id": "PRODUCT01",
+        "prompt": "s7a"
+      }
+    }
+  },
+  "requests": {
+    "POST /api/core/generate-blackout-sora2-prompt": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

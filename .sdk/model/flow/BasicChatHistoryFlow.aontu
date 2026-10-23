@@ -1,0 +1,40 @@
+# BasicChatHistoryFlow
+
+main: kit: flow: BasicChatHistoryFlow:
+{
+  entity: "chat_history",
+  kind: "basic",
+  name: "BasicChatHistoryFlow",
+  step: [
+    {
+      i: {
+        ref: "chat_history_ref01"
+      }
+
+      o: "create"
+    }
+
+    {
+      i: {
+        ref: "chat_history_ref01",
+        srcdatavar: "chat_history_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "chat_history01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-chat_history_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicChatHistoryFlow"
+}

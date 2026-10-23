@@ -1,0 +1,32 @@
+# BasicLinkInPostFlow
+
+main: kit: flow: BasicLinkInPostFlow:
+{
+  entity: "link_in_post",
+  kind: "basic",
+  name: "BasicLinkInPostFlow",
+  step: [
+    {
+      i: {
+        ref: "link_in_post_ref01",
+        srcdatavar: "link_in_post_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "link_in_post01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-link_in_post_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicLinkInPostFlow"
+}

@@ -1,0 +1,1219 @@
+# Entity: healthrx
+
+main: kit: entity: healthrx: {
+
+  alias: field: {}
+
+  fields: {
+    account_id: {
+      h: "Account Id"
+      n: "account_id"
+      r: false
+      t: "`$STRING`"
+    }
+    action: {
+      h: "Action"
+      n: "action"
+      r: false
+      t: "`$STRING`"
+    }
+    agent_id: {
+      h: "Agent Id"
+      n: "agent_id"
+      r: true
+      t: "`$STRING`"
+    }
+    attempt: {
+      h: "Attempt"
+      n: "attempt"
+      r: true
+      t: "`$INTEGER`"
+    }
+    avatar_present: {
+      h: "Avatar Present"
+      n: "avatar_present"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    benchmark_set: {
+      h: "Benchmark Set"
+      n: "benchmark_set"
+      r: true
+      t: "`$STRING`"
+    }
+    commercial: {
+      h: "Commercial"
+      n: "commercial"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    commercial_license_evidence: {
+      h: "Commercial License Evidence"
+      n: "commercial_license_evidence"
+      r: true
+      t: "`$STRING`"
+    }
+    content_id: {
+      fo: "uuid"
+      h: "Content Id"
+      n: "content_id"
+      r: true
+      t: "`$STRING`"
+    }
+    dimensions: {
+      h: "Dimensions"
+      n: "dimensions"
+      r: true
+      t: "`$OBJECT`"
+      union: {
+        branches: 3
+        count: 1
+        depth: 1
+      }
+    }
+    duration_seconds: {
+      h: "Duration Seconds"
+      n: "duration_seconds"
+      r: false
+      t: "`$INTEGER`"
+    }
+    evidence: {
+      h: "Evidence"
+      n: "evidence"
+      r: true
+      t: "`$STRING`"
+    }
+    evidence_urls: {
+      h: "Evidence Urls"
+      n: "evidence_urls"
+      r: true
+      t: "`$ARRAY`"
+    }
+    external_key: {
+      h: "External Key"
+      n: "external_key"
+      r: true
+      t: "`$STRING`"
+    }
+    format: {
+      h: "Format"
+      n: "format"
+      r: false
+      t: "`$STRING`"
+    }
+    includes_all_attempt_costs: {
+      h: "Includes All Attempt Costs"
+      n: "includes_all_attempt_costs"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    input_specification: {
+      h: "Input Specification"
+      n: "input_specification"
+      r: true
+      t: "`$OBJECT`"
+    }
+    kind: {
+      h: "Kind"
+      n: "kind"
+      r: true
+      t: "`$STRING`"
+    }
+    level: {
+      h: "Level"
+      n: "level"
+      r: false
+      t: "`$INTEGER`"
+    }
+    measured_at: {
+      fo: "date-time"
+      h: "Measured At"
+      n: "measured_at"
+      r: true
+      t: "`$STRING`"
+    }
+    model_version: {
+      h: "Model Version"
+      n: "model_version"
+      r: true
+      t: "`$STRING`"
+    }
+    paid_campaign_id: {
+      h: "Paid Campaign Id"
+      n: "paid_campaign_id"
+      r: false
+      t: "`$STRING`"
+    }
+    parent_content_id: {
+      h: "Parent Content Id"
+      n: "parent_content_id"
+      r: false
+      t: "`$STRING`"
+    }
+    paused: {
+      h: "Paused"
+      n: "paused"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    pillar: {
+      h: "Pillar"
+      n: "pillar"
+      r: true
+      t: "`$STRING`"
+    }
+    profile: {
+      h: "Profile"
+      n: "profile"
+      r: true
+      t: "`$OBJECT`"
+    }
+    promotion_evidence: {
+      h: "Promotion Evidence"
+      n: "promotion_evidence"
+      r: false
+      t: "`$STRING`"
+    }
+    provider: {
+      h: "Provider"
+      n: "provider"
+      r: true
+      t: "`$STRING`"
+    }
+    provider_invoice_evidence: {
+      h: "Provider Invoice Evidence"
+      n: "provider_invoice_evidence"
+      r: true
+      t: "`$STRING`"
+    }
+    reason: {
+      h: "Reason"
+      n: "reason"
+      r: true
+      t: "`$STRING`"
+    }
+    reference_version: {
+      h: "Reference Version"
+      n: "reference_version"
+      r: true
+      t: "`$STRING`"
+    }
+    request_key: {
+      h: "Request Key"
+      n: "request_key"
+      r: true
+      t: "`$STRING`"
+    }
+    scope: {
+      h: "Scope"
+      n: "scope"
+      r: false
+      t: "`$STRING`"
+    }
+    test_variable: {
+      h: "Test Variable"
+      n: "test_variable"
+      r: true
+      t: "`$STRING`"
+    }
+    topic: {
+      h: "Topic"
+      n: "topic"
+      r: true
+      t: "`$STRING`"
+    }
+    total_cost_usd: {
+      h: "Total Cost Usd"
+      n: "total_cost_usd"
+      r: true
+      t: "`$NUMBER`"
+    }
+  }
+
+  name: "healthrx"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "avatar_present"
+            "commercial"
+            "duration_seconds"
+            "format"
+            "level"
+            "paid_campaign_id"
+            "parent_content_id"
+            "pillar"
+            "promotion_evidence"
+            "request_key"
+            "test_variable"
+            "topic"
+          ]
+          co: {
+            id: "POST /api/healthrx/products/{product_id}/accounts/{account_id}/content"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "account_id"
+                or: "account_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "product_id"
+                or: "product_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/healthrx/products/{product_id}/accounts/{account_id}/content"
+          q: {
+            exist: [
+              "account_id"
+              "product_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "healthrx"
+            }
+            {
+              lit: "products"
+            }
+            {
+              var: "product_id"
+            }
+            {
+              lit: "accounts"
+            }
+            {
+              var: "account_id"
+            }
+            {
+              lit: "content"
+            }
+          ]
+          t: {
+            req: {
+              avatar_present: "`reqdata.avatar_present`"
+              commercial: "`reqdata.commercial`"
+              duration_seconds: "`reqdata.duration_second`"
+              format: "`reqdata.format`"
+              level: "`reqdata.level`"
+              paid_campaign_id: "`reqdata.paid_campaign_id`"
+              parent_content_id: "`reqdata.parent_content_id`"
+              pillar: "`reqdata.pillar`"
+              promotion_evidence: "`reqdata.promotion_evidence`"
+              request_key: "`reqdata.request_key`"
+              test_variable: "`reqdata.test_variable`"
+              topic: "`reqdata.topic`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /api/healthrx/products/{product_id}/accounts/{account_id}/launch"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "account_id"
+                or: "account_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "product_id"
+                or: "product_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/healthrx/products/{product_id}/accounts/{account_id}/launch"
+          q: {
+            exist: [
+              "account_id"
+              "product_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "healthrx"
+            }
+            {
+              lit: "products"
+            }
+            {
+              var: "product_id"
+            }
+            {
+              lit: "accounts"
+            }
+            {
+              var: "account_id"
+            }
+            {
+              lit: "launch"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "paused"
+            "reason"
+          ]
+          co: {
+            id: "POST /api/healthrx/products/{product_id}/accounts/{account_id}/pause"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "account_id"
+                or: "account_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "product_id"
+                or: "product_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/healthrx/products/{product_id}/accounts/{account_id}/pause"
+          q: {
+            exist: [
+              "account_id"
+              "product_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "healthrx"
+            }
+            {
+              lit: "products"
+            }
+            {
+              var: "product_id"
+            }
+            {
+              lit: "accounts"
+            }
+            {
+              var: "account_id"
+            }
+            {
+              lit: "pause"
+            }
+          ]
+          t: {
+            req: {
+              paused: "`reqdata.paused`"
+              reason: "`reqdata.reason`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "action"
+            "reason"
+          ]
+          co: {
+            id: "POST /api/healthrx/products/{product_id}/content/{content_id}/resolve"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "content_id"
+                or: "content_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "product_id"
+                or: "product_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/healthrx/products/{product_id}/content/{content_id}/resolve"
+          q: {
+            exist: [
+              "content_id"
+              "product_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "healthrx"
+            }
+            {
+              lit: "products"
+            }
+            {
+              var: "product_id"
+            }
+            {
+              lit: "content"
+            }
+            {
+              var: "content_id"
+            }
+            {
+              lit: "resolve"
+            }
+          ]
+          t: {
+            req: {
+              action: "`reqdata.action`"
+              reason: "`reqdata.reason`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "evidence"
+          ]
+          co: {
+            id: "POST /api/healthrx/products/{product_id}/incidents/{incident_id}/resolve"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "incident_id"
+                or: "incident_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "product_id"
+                or: "product_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/healthrx/products/{product_id}/incidents/{incident_id}/resolve"
+          q: {
+            exist: [
+              "incident_id"
+              "product_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "healthrx"
+            }
+            {
+              lit: "products"
+            }
+            {
+              var: "product_id"
+            }
+            {
+              lit: "incidents"
+            }
+            {
+              var: "incident_id"
+            }
+            {
+              lit: "resolve"
+            }
+          ]
+          t: {
+            req: {
+              evidence: "`reqdata.evidence`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "agent_id"
+            "profile"
+            "reason"
+          ]
+          co: {
+            id: "POST /api/healthrx/products/{product_id}/accounts"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "product_id"
+                or: "product_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/healthrx/products/{product_id}/accounts"
+          q: {
+            exist: [
+              "product_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "healthrx"
+            }
+            {
+              lit: "products"
+            }
+            {
+              var: "product_id"
+            }
+            {
+              lit: "accounts"
+            }
+          ]
+          t: {
+            req: {
+              agent_id: "`reqdata.agent_id`"
+              profile: "`reqdata.profile`"
+              reason: "`reqdata.reason`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "account_id"
+            "attribution_method"
+            "comment_id"
+            "content_id"
+            "contribution_usd"
+            "event"
+            "evidence"
+            "external_key"
+            "occurred_at"
+            "revenue_usd"
+            "source_system"
+          ]
+          co: {
+            id: "POST /api/healthrx/products/{product_id}/attribution"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "product_id"
+                or: "product_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/healthrx/products/{product_id}/attribution"
+          q: {
+            "$action": "attribution"
+            exist: [
+              "product_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "healthrx"
+            }
+            {
+              lit: "products"
+            }
+            {
+              var: "product_id"
+            }
+            {
+              lit: "attribution"
+            }
+          ]
+          t: {
+            req: {
+              account_id: "`reqdata.account_id`"
+              attribution_method: "`reqdata.attribution_method`"
+              comment_id: "`reqdata.comment_id`"
+              content_id: "`reqdata.content_id`"
+              contribution_usd: "`reqdata.contribution_usd`"
+              event: "`reqdata.event`"
+              evidence: "`reqdata.evidence`"
+              external_key: "`reqdata.external_key`"
+              occurred_at: "`reqdata.occurred_at`"
+              revenue_usd: "`reqdata.revenue_usd`"
+              source_system: "`reqdata.source_system`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "benchmark_set"
+            "commercial_license_evidence"
+            "dimensions"
+            "evidence_urls"
+            "external_key"
+            "input_specification"
+            "measured_at"
+            "model_version"
+            "provider"
+            "reference_version"
+          ]
+          co: {
+            id: "POST /api/healthrx/products/{product_id}/benchmarks"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "product_id"
+                or: "product_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/healthrx/products/{product_id}/benchmarks"
+          q: {
+            exist: [
+              "product_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "healthrx"
+            }
+            {
+              lit: "products"
+            }
+            {
+              var: "product_id"
+            }
+            {
+              lit: "benchmarks"
+            }
+          ]
+          t: {
+            req: {
+              benchmark_set: "`reqdata.benchmark_set`"
+              commercial_license_evidence: "`reqdata.commercial_license_evidence`"
+              dimensions: "`reqdata.dimension`"
+              evidence_urls: "`reqdata.evidence_url`"
+              external_key: "`reqdata.external_key`"
+              input_specification: "`reqdata.input_specification`"
+              measured_at: "`reqdata.measured_at`"
+              model_version: "`reqdata.model_version`"
+              provider: "`reqdata.provider`"
+              reference_version: "`reqdata.reference_version`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "attempt"
+            "content_id"
+            "external_key"
+            "includes_all_attempt_costs"
+            "provider_invoice_evidence"
+            "total_cost_usd"
+          ]
+          co: {
+            id: "POST /api/healthrx/products/{product_id}/cost-receipts"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "product_id"
+                or: "product_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/healthrx/products/{product_id}/cost-receipts"
+          q: {
+            exist: [
+              "product_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "healthrx"
+            }
+            {
+              lit: "products"
+            }
+            {
+              var: "product_id"
+            }
+            {
+              lit: "cost-receipts"
+            }
+          ]
+          t: {
+            req: {
+              attempt: "`reqdata.attempt`"
+              content_id: "`reqdata.content_id`"
+              external_key: "`reqdata.external_key`"
+              includes_all_attempt_costs: "`reqdata.includes_all_attempt_cost`"
+              provider_invoice_evidence: "`reqdata.provider_invoice_evidence`"
+              total_cost_usd: "`reqdata.total_cost_usd`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "account_id"
+            "evidence"
+            "external_key"
+            "kind"
+            "scope"
+          ]
+          co: {
+            id: "POST /api/healthrx/products/{product_id}/incidents"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "product_id"
+                or: "product_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/healthrx/products/{product_id}/incidents"
+          q: {
+            exist: [
+              "product_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "healthrx"
+            }
+            {
+              lit: "products"
+            }
+            {
+              var: "product_id"
+            }
+            {
+              lit: "incidents"
+            }
+          ]
+          t: {
+            req: {
+              account_id: "`reqdata.account_id`"
+              evidence: "`reqdata.evidence`"
+              external_key: "`reqdata.external_key`"
+              kind: "`reqdata.kind`"
+              scope: "`reqdata.scope`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /api/healthrx/products/{product_id}/run"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "product_id"
+                or: "product_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/healthrx/products/{product_id}/run"
+          q: {
+            "$action": "run"
+            exist: [
+              "product_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "healthrx"
+            }
+            {
+              lit: "products"
+            }
+            {
+              var: "product_id"
+            }
+            {
+              lit: "run"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/healthrx/products/{product_id}/accounts/{account_id}/contract"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "account_id"
+                or: "account_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "product_id"
+                or: "product_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/healthrx/products/{product_id}/accounts/{account_id}/contract"
+          q: {
+            exist: [
+              "account_id"
+              "product_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "healthrx"
+            }
+            {
+              lit: "products"
+            }
+            {
+              var: "product_id"
+            }
+            {
+              lit: "accounts"
+            }
+            {
+              var: "account_id"
+            }
+            {
+              lit: "contract"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/healthrx/products/{product_id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "product_id"
+                or: "product_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/healthrx/products/{product_id}"
+          q: {
+            exist: [
+              "product_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "healthrx"
+            }
+            {
+              lit: "products"
+            }
+            {
+              var: "product_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/healthrx/products/{product_id}/profile-schema"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "product_id"
+                or: "product_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/healthrx/products/{product_id}/profile-schema"
+          q: {
+            exist: [
+              "product_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "healthrx"
+            }
+            {
+              lit: "products"
+            }
+            {
+              var: "product_id"
+            }
+            {
+              lit: "profile-schema"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/healthrx/products/{product_id}/reports"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "product_id"
+                or: "product_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/healthrx/products/{product_id}/reports"
+          q: {
+            exist: [
+              "product_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "healthrx"
+            }
+            {
+              lit: "products"
+            }
+            {
+              var: "product_id"
+            }
+            {
+              lit: "reports"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.product")]
+    [path("$.main.kit.entity.product")]
+    [path("$.main.kit.entity.product")]
+    [path("$.main.kit.entity.product")]
+  ]
+
+}

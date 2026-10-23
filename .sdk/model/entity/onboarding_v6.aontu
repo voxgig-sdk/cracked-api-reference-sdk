@@ -1,0 +1,78 @@
+# Entity: onboarding_v6
+
+main: kit: entity: onboarding_v6: {
+
+  alias: field: {}
+
+  name: "onboarding_v6"
+  op: {
+    remove: {
+      name: "remove"
+      points: [
+        {
+          co: {
+            id: "DELETE /api/onboarding-v6/repost-content/{media_asset_id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "media_asset_id"
+                or: "media_asset_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "onboarding_data_id"
+                or: "onboarding_data_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "DELETE"
+          o: "/api/onboarding-v6/repost-content/{media_asset_id}"
+          q: {
+            exist: [
+              "media_asset_id"
+              "onboarding_data_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "onboarding-v6"
+            }
+            {
+              lit: "repost-content"
+            }
+            {
+              var: "media_asset_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  fields: {
+  }
+
+
+
+}

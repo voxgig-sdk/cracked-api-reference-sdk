@@ -1,0 +1,92 @@
+{
+  "existing": {
+    "iris_capability": {
+      "IRIS_CAPABILITY00": {
+        "capability": "saa",
+        "correlationId": "sab",
+        "errorCode": "sac",
+        "externalProductId": "sad",
+        "externalUserId": "sae",
+        "id": "IRIS_CAPABILITY00",
+        "idempotencyKey": "sb0",
+        "input": {},
+        "membershipId": "sb2",
+        "message": "sb3",
+        "ok": true,
+        "platformAccountId": "sb5",
+        "platformLinkId": "sb6",
+        "productScope": "sb7",
+        "requestedBy": {},
+        "result": {},
+        "retryable": true
+      },
+      "IRIS_CAPABILITY01": {
+        "capability": "s154",
+        "correlationId": "s155",
+        "errorCode": "s156",
+        "externalProductId": "s157",
+        "externalUserId": "s158",
+        "id": "IRIS_CAPABILITY01",
+        "idempotencyKey": "s15a",
+        "input": {},
+        "membershipId": "s15c",
+        "message": "s15d",
+        "ok": true,
+        "platformAccountId": "s15f",
+        "platformLinkId": "s160",
+        "productScope": "s161",
+        "requestedBy": {},
+        "result": {},
+        "retryable": true
+      },
+      "IRIS_CAPABILITY02": {
+        "capability": "s1fe",
+        "correlationId": "s1ff",
+        "errorCode": "s200",
+        "externalProductId": "s201",
+        "externalUserId": "s202",
+        "id": "IRIS_CAPABILITY02",
+        "idempotencyKey": "s204",
+        "input": {},
+        "membershipId": "s206",
+        "message": "s207",
+        "ok": true,
+        "platformAccountId": "s209",
+        "platformLinkId": "s20a",
+        "productScope": "s20b",
+        "requestedBy": {},
+        "result": {},
+        "retryable": true
+      }
+    }
+  },
+  "new": {
+    "iris_capability": {
+      "iris_capability_ref01": {
+        "capability": "s2a8",
+        "correlationId": "s2a9",
+        "errorCode": "s2aa",
+        "externalProductId": "s2ab",
+        "externalUserId": "s2ac",
+        "idempotencyKey": "s2ae",
+        "input": {},
+        "membershipId": "s2b0",
+        "message": "s2b1",
+        "ok": true,
+        "platformAccountId": "s2b3",
+        "platformLinkId": "s2b4",
+        "productScope": "s2b5",
+        "requestedBy": {},
+        "result": {},
+        "retryable": true
+      }
+    }
+  },
+  "requests": {
+    "POST /api/platform/capabilities/{capability_name}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

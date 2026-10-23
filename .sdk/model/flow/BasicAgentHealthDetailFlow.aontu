@@ -1,0 +1,22 @@
+# BasicAgentHealthDetailFlow
+
+main: kit: flow: BasicAgentHealthDetailFlow:
+{
+  entity: "agent_health_detail",
+  kind: "basic",
+  name: "BasicAgentHealthDetailFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "agent_health_detail_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicAgentHealthDetailFlow"
+}

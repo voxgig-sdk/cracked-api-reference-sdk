@@ -1,0 +1,36 @@
+{
+  "existing": {
+    "agents_summary": {
+      "AGENTS_SUMMARY00": {
+        "total_agents": 20,
+        "total_agents_count_sum": 21,
+        "id": "AGENTS_SUMMARY00"
+      },
+      "AGENTS_SUMMARY01": {
+        "total_agents": 40,
+        "total_agents_count_sum": 41,
+        "id": "AGENTS_SUMMARY01"
+      },
+      "AGENTS_SUMMARY02": {
+        "total_agents": 60,
+        "total_agents_count_sum": 61,
+        "id": "AGENTS_SUMMARY02"
+      }
+    }
+  },
+  "new": {
+    "agents_summary": {
+      "agents_summary_ref01": {
+        "total_agents": 80,
+        "total_agents_count_sum": 81
+      }
+    }
+  },
+  "requests": {
+    "GET /api/admin/agents-summary": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

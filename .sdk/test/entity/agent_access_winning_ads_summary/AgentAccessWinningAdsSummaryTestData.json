@@ -1,0 +1,53 @@
+{
+  "existing": {
+    "agent_access_winning_ads_summary": {
+      "AGENT_ACCESS_WINNING_ADS_SUMMARY00": {
+        "email": "s46",
+        "name": "s47",
+        "productCount": 72,
+        "productsWithWinningAds": 73,
+        "subscriptionStatus": "s4a",
+        "totalWinningAds": 75,
+        "userId": "s4c"
+      },
+      "AGENT_ACCESS_WINNING_ADS_SUMMARY01": {
+        "email": "s8c",
+        "name": "s8d",
+        "productCount": 142,
+        "productsWithWinningAds": 143,
+        "subscriptionStatus": "s90",
+        "totalWinningAds": 145,
+        "userId": "s92"
+      },
+      "AGENT_ACCESS_WINNING_ADS_SUMMARY02": {
+        "email": "sd2",
+        "name": "sd3",
+        "productCount": 212,
+        "productsWithWinningAds": 213,
+        "subscriptionStatus": "sd6",
+        "totalWinningAds": 215,
+        "userId": "sd8"
+      }
+    }
+  },
+  "new": {
+    "agent_access_winning_ads_summary": {
+      "agent_access_winning_ads_summary_ref01": {
+        "email": "s118",
+        "name": "s119",
+        "productCount": 282,
+        "productsWithWinningAds": 283,
+        "subscriptionStatus": "s11c",
+        "totalWinningAds": 285,
+        "userId": "s11e"
+      }
+    }
+  },
+  "requests": {
+    "GET /api/agent-access/winning-ads-summary": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

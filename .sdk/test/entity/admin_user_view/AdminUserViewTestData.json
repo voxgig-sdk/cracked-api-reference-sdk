@@ -1,0 +1,205 @@
+{
+  "existing": {
+    "admin_user_view": {
+      "ADMIN_USER_VIEW00": {
+        "account_type": "sdc",
+        "admin_notes": "sdd",
+        "agents_count": 222,
+        "created_at": "sdf",
+        "credits": 224,
+        "email": "se1",
+        "id": "ADMIN_USER_VIEW00",
+        "industry": "se3",
+        "is_admin": true,
+        "is_bookmarked": false,
+        "is_internal_user": true,
+        "membership": "se7",
+        "name": "se8",
+        "new_email": "se9",
+        "partner_external_user_id": "PARTNER_EXTERNAL_USER01",
+        "partner_policy_code": "seb",
+        "partner_source": "sec",
+        "product_name": "sed",
+        "product_url": "see",
+        "skip": false,
+        "subscription_details": "sf0",
+        "subscription_status": "sf1",
+        "user_id": "USER01"
+      },
+      "ADMIN_USER_VIEW01": {
+        "account_type": "s1b8",
+        "admin_notes": "s1b9",
+        "agents_count": 442,
+        "created_at": "s1bb",
+        "credits": 444,
+        "email": "s1bd",
+        "id": "ADMIN_USER_VIEW01",
+        "industry": "s1bf",
+        "is_admin": true,
+        "is_bookmarked": false,
+        "is_internal_user": true,
+        "membership": "s1c3",
+        "name": "s1c4",
+        "new_email": "s1c5",
+        "partner_external_user_id": "PARTNER_EXTERNAL_USER01",
+        "partner_policy_code": "s1c7",
+        "partner_source": "s1c8",
+        "product_name": "s1c9",
+        "product_url": "s1ca",
+        "skip": false,
+        "subscription_details": "s1cc",
+        "subscription_status": "s1cd",
+        "user_id": "USER01"
+      },
+      "ADMIN_USER_VIEW02": {
+        "account_type": "s294",
+        "admin_notes": "s295",
+        "agents_count": 662,
+        "created_at": "s297",
+        "credits": 664,
+        "email": "s299",
+        "id": "ADMIN_USER_VIEW02",
+        "industry": "s29b",
+        "is_admin": true,
+        "is_bookmarked": false,
+        "is_internal_user": true,
+        "membership": "s29f",
+        "name": "s2a0",
+        "new_email": "s2a1",
+        "partner_external_user_id": "PARTNER_EXTERNAL_USER01",
+        "partner_policy_code": "s2a3",
+        "partner_source": "s2a4",
+        "product_name": "s2a5",
+        "product_url": "s2a6",
+        "skip": false,
+        "subscription_details": "s2a8",
+        "subscription_status": "s2a9",
+        "user_id": "USER01"
+      }
+    }
+  },
+  "new": {
+    "admin_user_view": {
+      "admin_user_view_ref01": {
+        "account_type": "s370",
+        "admin_notes": "s371",
+        "agents_count": 882,
+        "created_at": "s373",
+        "credits": 884,
+        "email": "s375",
+        "industry": "s377",
+        "is_admin": true,
+        "is_bookmarked": false,
+        "is_internal_user": true,
+        "membership": "s37b",
+        "name": "s37c",
+        "new_email": "s37d",
+        "partner_external_user_id": "PARTNER_EXTERNAL_USER01",
+        "partner_policy_code": "s37f",
+        "partner_source": "s380",
+        "product_name": "s381",
+        "product_url": "s382",
+        "skip": false,
+        "subscription_details": "s384",
+        "subscription_status": "s385"
+      }
+    }
+  },
+  "requests": {
+    "POST /api/admin/users/{user_id}/fix-auto-schedule-by-date": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/users/{user_id}/repair-approved-source-queue-today": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/users/{user_id}/convert-to-enterprise": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/users/{user_id}/fix-all": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/users/{user_id}/fix-auto-schedule": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/users/{user_id}/fix-auto-schedule-today": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/users/{user_id}/fix-auto-schedule-today-force": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/users/{user_id}/fix-auto-schedule-tomorrow": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/users/{user_id}/fix-comments-today": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/users/{user_id}/generate-pomelli-video": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/users/{user_id}/repost-tiktok-videos-tomorrow": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/users/{user_id}/reset-onboarding": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/users/{user_id}/transfer-ownership": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/users/search": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/users": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /api/admin/users/{user_id}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PUT /api/admin/users/{user_id}/auto-schedule": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PUT /api/admin/users/{user_id}/posted-video-reuse": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PUT /api/admin/users/{user_id}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "existing": {
+    "user_with_avatar_submission": {
+      "USER_WITH_AVATAR_SUBMISSION00": {
+        "avatar_image_url": "s3c",
+        "avatar_voice_url": "s3d",
+        "created_at": "s3e",
+        "email": "s3f",
+        "id": "USER_WITH_AVATAR_SUBMISSION00",
+        "name": "s41"
+      },
+      "USER_WITH_AVATAR_SUBMISSION01": {
+        "avatar_image_url": "s78",
+        "avatar_voice_url": "s79",
+        "created_at": "s7a",
+        "email": "s7b",
+        "id": "USER_WITH_AVATAR_SUBMISSION01",
+        "name": "s7d"
+      },
+      "USER_WITH_AVATAR_SUBMISSION02": {
+        "avatar_image_url": "sb4",
+        "avatar_voice_url": "sb5",
+        "created_at": "sb6",
+        "email": "sb7",
+        "id": "USER_WITH_AVATAR_SUBMISSION02",
+        "name": "sb9"
+      }
+    }
+  },
+  "new": {
+    "user_with_avatar_submission": {
+      "user_with_avatar_submission_ref01": {
+        "avatar_image_url": "sf0",
+        "avatar_voice_url": "sf1",
+        "created_at": "sf2",
+        "email": "sf3",
+        "name": "sf5"
+      }
+    }
+  },
+  "requests": {
+    "GET /api/admin/users/avatar-submissions": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

@@ -1,0 +1,68 @@
+# BasicAdminVideoRemixerFlow
+
+main: kit: flow: BasicAdminVideoRemixerFlow:
+{
+  entity: "admin_video_remixer",
+  kind: "basic",
+  name: "BasicAdminVideoRemixerFlow",
+  step: [
+    {
+      i: {
+        ref: "admin_video_remixer_ref01"
+      }
+
+      o: "create"
+    }
+
+    {
+      i: {
+        ref: "admin_video_remixer_ref01",
+        srcdatavar: "admin_video_remixer_ref01_data",
+        suffix: "_up0",
+        textfield: "activity"
+      }
+
+      o: "update",
+      s: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-admin_video_remixer_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "admin_video_remixer_ref01",
+        srcdatavar: "admin_video_remixer_ref01_data",
+        suffix: "_dt0"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-admin_video_remixer_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "admin_video_remixer_ref01",
+        suffix: "_rm0"
+      }
+
+      m: {
+        id: "admin_video_remixer01"
+      }
+
+      o: "remove"
+    }
+  ],
+  "key$": "BasicAdminVideoRemixerFlow"
+}

@@ -1,0 +1,91 @@
+# Entity: retry_website_scrape
+
+main: kit: entity: retry_website_scrape: {
+
+  alias: field: {}
+
+  fields: {
+    flow_variant: {
+      h: "Flow Variant"
+      n: "flow_variant"
+      r: false
+      t: "`$STRING`"
+    }
+    onboarding_data_id: {
+      h: "Onboarding Data Id"
+      n: "onboarding_data_id"
+      r: true
+      sh: "UUID of existing OnboardingData"
+      t: "`$STRING`"
+    }
+    skip_demo: {
+      h: "Skip Demo"
+      n: "skip_demo"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: true
+      t: "`$STRING`"
+    }
+    success: {
+      h: "Success"
+      n: "success"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    url: {
+      h: "Url"
+      n: "url"
+      r: true
+      sh: "New website URL to scrape"
+      t: "`$STRING`"
+    }
+  }
+
+  name: "retry_website_scrape"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "onboarding_data_id"
+            "url"
+          ]
+          co: {
+            id: "POST /api/onboarding-v6/retry-scrape"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/onboarding-v6/retry-scrape"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "onboarding-v6"
+            }
+            {
+              lit: "retry-scrape"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

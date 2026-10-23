@@ -1,0 +1,141 @@
+# Entity: scan_social
+
+main: kit: entity: scan_social: {
+
+  alias: field: {}
+
+  fields: {
+    instagram_handle: {
+      h: "Instagram Handle"
+      n: "instagram_handle"
+      r: false
+      t: "`$ANY`"
+    }
+    onboarding_data_id: {
+      h: "Onboarding Data Id"
+      n: "onboarding_data_id"
+      r: true
+      t: "`$STRING`"
+    }
+    product_id: {
+      fo: "uuid"
+      h: "Product Id"
+      n: "product_id"
+      op: {
+        create: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      r: true
+      t: "`$STRING`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: true
+      t: "`$STRING`"
+    }
+    success: {
+      h: "Success"
+      n: "success"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    task_id: {
+      h: "Task Id"
+      n: "task_id"
+      r: false
+      t: "`$STRING`"
+    }
+    tiktok_handle: {
+      h: "Tiktok Handle"
+      n: "tiktok_handle"
+      op: {
+        create: {
+          req: true
+          type: "`$STRING`"
+        }
+      }
+      r: false
+      t: "`$ANY`"
+    }
+  }
+
+  name: "scan_social"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "instagram_handle"
+            "onboarding_data_id"
+            "tiktok_handle"
+          ]
+          co: {
+            id: "POST /api/reset-product/scan-socials"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/reset-product/scan-socials"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "reset-product"
+            }
+            {
+              lit: "scan-socials"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          bf: [
+            "product_id"
+            "tiktok_handle"
+          ]
+          co: {
+            id: "POST /api/video-variation/scan-socials"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/video-variation/scan-socials"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "video-variation"
+            }
+            {
+              lit: "scan-socials"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

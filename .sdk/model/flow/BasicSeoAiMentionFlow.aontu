@@ -1,0 +1,22 @@
+# BasicSeoAiMentionFlow
+
+main: kit: flow: BasicSeoAiMentionFlow:
+{
+  entity: "seo_ai_mention",
+  kind: "basic",
+  name: "BasicSeoAiMentionFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "seo_ai_mention_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicSeoAiMentionFlow"
+}

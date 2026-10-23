@@ -1,0 +1,27 @@
+{
+  "existing": {
+    "upload_post_agent": {
+      "UPLOAD_POST_AGENT00": {
+        "id": "UPLOAD_POST_AGENT00"
+      },
+      "UPLOAD_POST_AGENT01": {
+        "id": "UPLOAD_POST_AGENT01"
+      },
+      "UPLOAD_POST_AGENT02": {
+        "id": "UPLOAD_POST_AGENT02"
+      }
+    }
+  },
+  "new": {
+    "upload_post_agent": {
+      "upload_post_agent_ref01": {}
+    }
+  },
+  "requests": {
+    "POST /api/upload-post-agents/sync-platforms": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

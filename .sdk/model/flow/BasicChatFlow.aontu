@@ -1,0 +1,22 @@
+# BasicChatFlow
+
+main: kit: flow: BasicChatFlow:
+{
+  entity: "chat",
+  kind: "basic",
+  name: "BasicChatFlow",
+  step: [
+    {
+      i: {
+        ref: "chat_ref01"
+      }
+
+      m: {
+        session_id: "session01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicChatFlow"
+}

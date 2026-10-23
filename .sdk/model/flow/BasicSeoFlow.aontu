@@ -1,0 +1,28 @@
+# BasicSeoFlow
+
+main: kit: flow: BasicSeoFlow:
+{
+  entity: "seo",
+  kind: "basic",
+  name: "BasicSeoFlow",
+  step: [
+    {
+      i: {
+        ref: "seo_ref01",
+        srcdatavar: "seo_ref01_data",
+        suffix: "_dt0"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-seo_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicSeoFlow"
+}

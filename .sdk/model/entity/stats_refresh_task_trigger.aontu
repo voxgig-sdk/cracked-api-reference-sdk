@@ -1,0 +1,82 @@
+# Entity: stats_refresh_task_trigger
+
+main: kit: entity: stats_refresh_task_trigger: {
+
+  alias: field: {}
+
+  fields: {
+    message: {
+      h: "Message"
+      n: "message"
+      r: true
+      t: "`$STRING`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: true
+      t: "`$STRING`"
+    }
+    target_date: {
+      h: "Target Date"
+      n: "target_date"
+      r: true
+      t: "`$STRING`"
+    }
+    task_id: {
+      h: "Task Id"
+      n: "task_id"
+      r: true
+      t: "`$STRING`"
+    }
+    users_count: {
+      h: "Users Count"
+      n: "users_count"
+      r: false
+      t: "`$INTEGER`"
+    }
+  }
+
+  name: "stats_refresh_task_trigger"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /api/admin/customer-health/manual-refresh"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/admin/customer-health/manual-refresh"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "customer-health"
+            }
+            {
+              lit: "manual-refresh"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

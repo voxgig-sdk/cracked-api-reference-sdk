@@ -1,0 +1,84 @@
+# Entity: iris_status
+
+main: kit: entity: iris_status: {
+
+  alias: field: {}
+
+  fields: {
+    connectorsPreview: {
+      h: "Connectors Preview"
+      n: "connectorsPreview"
+      r: false
+      t: "`$ARRAY`"
+    }
+    product: {
+      h: "Product"
+      n: "product"
+      r: false
+      t: "`$ANY`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: true
+      t: "`$OBJECT`"
+    }
+    tasksPreview: {
+      h: "Tasks Preview"
+      n: "tasksPreview"
+      r: false
+      t: "`$ARRAY`"
+    }
+  }
+
+  name: "iris_status"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/iris/status"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "product_id"
+                or: "product_id"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/iris/status"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "iris"
+            }
+            {
+              lit: "status"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

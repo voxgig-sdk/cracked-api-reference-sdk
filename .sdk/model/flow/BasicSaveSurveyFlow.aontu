@@ -1,0 +1,18 @@
+# BasicSaveSurveyFlow
+
+main: kit: flow: BasicSaveSurveyFlow:
+{
+  entity: "save_survey",
+  kind: "basic",
+  name: "BasicSaveSurveyFlow",
+  step: [
+    {
+      i: {
+        ref: "save_survey_ref01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicSaveSurveyFlow"
+}

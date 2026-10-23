@@ -1,0 +1,203 @@
+# Entity: analytics_post
+
+main: kit: entity: analytics_post: {
+
+  alias: field: {}
+
+  fields: {
+    agent: {
+      h: "Agent"
+      n: "agent"
+      r: false
+      t: "`$ANY`"
+    }
+    comment: {
+      h: "Comment"
+      n: "comment"
+      r: false
+      t: "`$ANY`"
+    }
+    created_at: {
+      fo: "date-time"
+      h: "Created At"
+      n: "created_at"
+      r: true
+      t: "`$STRING`"
+    }
+    id: {
+      fo: "uuid"
+      h: "Id"
+      n: "id"
+      r: true
+      t: "`$STRING`"
+    }
+    product_id: {
+      h: "Product Id"
+      n: "product_id"
+      r: false
+      t: "`$STRING`"
+    }
+    queue_position: {
+      h: "Queue Position"
+      n: "queue_position"
+      r: false
+      t: "`$ANY`"
+    }
+    results: {
+      h: "Results"
+      n: "results"
+      r: false
+      t: "`$ANY`"
+    }
+    scheduled_datetime: {
+      fo: "date-time"
+      h: "Scheduled Datetime"
+      n: "scheduled_datetime"
+      r: true
+      t: "`$STRING`"
+    }
+    scraped_posts: {
+      h: "Scraped Posts"
+      n: "scraped_posts"
+      r: false
+      t: "`$ANY`"
+    }
+    source_type: {
+      h: "Source Type"
+      n: "source_type"
+      r: true
+      t: "`$STRING`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: true
+      t: "`$STRING`"
+    }
+    updated_at: {
+      fo: "date-time"
+      h: "Updated At"
+      n: "updated_at"
+      r: true
+      t: "`$STRING`"
+    }
+    video: {
+      h: "Video"
+      n: "video"
+      r: false
+      t: "`$ANY`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "analytics_post"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/analytics/posts"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "x_agent_access_key"
+                or: "x-agent-access-key"
+                r: false
+                t: "`$ANY`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "agent_id"
+                or: "agent_id"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "date_from"
+                or: "date_from"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "date_to"
+                or: "date_to"
+                r: false
+                t: "`$ANY`"
+              }
+              {
+                k: "query"
+                n: "email"
+                or: "email"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "product_id"
+                or: "product_id"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "status"
+                or: "status"
+                r: false
+                t: "`$ANY`"
+              }
+              {
+                k: "query"
+                n: "user_id"
+                or: "user_id"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/analytics/posts"
+          q: {
+            exist: [
+              "date_from"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "analytics"
+            }
+            {
+              lit: "posts"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

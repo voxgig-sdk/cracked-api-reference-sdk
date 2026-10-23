@@ -1,0 +1,22 @@
+# BasicAgentAccessCustomersHealthFlow
+
+main: kit: flow: BasicAgentAccessCustomersHealthFlow:
+{
+  entity: "agent_access_customers_health",
+  kind: "basic",
+  name: "BasicAgentAccessCustomersHealthFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "agent_access_customers_health_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicAgentAccessCustomersHealthFlow"
+}

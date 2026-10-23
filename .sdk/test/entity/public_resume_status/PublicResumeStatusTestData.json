@@ -1,0 +1,64 @@
+{
+  "existing": {
+    "public_resume_status": {
+      "PUBLIC_RESUME_STATUS00": {
+        "can_resume_prelogin": true,
+        "content_collection_ready": false,
+        "current_step": "s5c",
+        "exists": false,
+        "flow_variant": "s5e",
+        "repost_content_count": 95,
+        "repost_source": "s60",
+        "requires_repost_content": false,
+        "skip_demo": true,
+        "id": "PUBLIC_RESUME_STATUS00"
+      },
+      "PUBLIC_RESUME_STATUS01": {
+        "can_resume_prelogin": true,
+        "content_collection_ready": false,
+        "current_step": "sb6",
+        "exists": false,
+        "flow_variant": "sb8",
+        "repost_content_count": 185,
+        "repost_source": "sba",
+        "requires_repost_content": false,
+        "skip_demo": true,
+        "id": "PUBLIC_RESUME_STATUS01"
+      },
+      "PUBLIC_RESUME_STATUS02": {
+        "can_resume_prelogin": true,
+        "content_collection_ready": false,
+        "current_step": "s110",
+        "exists": false,
+        "flow_variant": "s112",
+        "repost_content_count": 275,
+        "repost_source": "s114",
+        "requires_repost_content": false,
+        "skip_demo": true,
+        "id": "PUBLIC_RESUME_STATUS02"
+      }
+    }
+  },
+  "new": {
+    "public_resume_status": {
+      "public_resume_status_ref01": {
+        "can_resume_prelogin": true,
+        "content_collection_ready": false,
+        "current_step": "s16a",
+        "exists": false,
+        "flow_variant": "s16c",
+        "repost_content_count": 365,
+        "repost_source": "s16e",
+        "requires_repost_content": false,
+        "skip_demo": true
+      }
+    }
+  },
+  "requests": {
+    "GET /api/onboarding-v6/resume-status-public": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

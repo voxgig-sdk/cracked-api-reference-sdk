@@ -1,0 +1,350 @@
+# Entity: admin_post
+
+main: kit: entity: admin_post: {
+
+  alias: field: {}
+
+  fields: {
+    admin_job_ids: {
+      h: "Admin Job Ids"
+      n: "admin_job_ids"
+      r: true
+      t: "`$ANY`"
+    }
+    agent_id: {
+      h: "Agent Id"
+      n: "agent_id"
+      r: true
+      t: "`$STRING`"
+    }
+    agent_name: {
+      h: "Agent Name"
+      n: "agent_name"
+      r: true
+      t: "`$ANY`"
+    }
+    agent_platform_urls: {
+      h: "Agent Platform Urls"
+      n: "agent_platform_urls"
+      r: true
+      t: "`$ANY`"
+    }
+    agent_url: {
+      h: "Agent Url"
+      n: "agent_url"
+      r: true
+      t: "`$ANY`"
+    }
+    comments: {
+      h: "Comments"
+      n: "comments"
+      r: true
+      t: "`$INTEGER`"
+    }
+    error_message: {
+      h: "Error Message"
+      n: "error_message"
+      r: true
+      t: "`$ANY`"
+    }
+    failed_at: {
+      h: "Failed At"
+      n: "failed_at"
+      r: true
+      t: "`$ANY`"
+    }
+    id: {
+      fo: "uuid"
+      h: "Id"
+      n: "id"
+      r: true
+      t: "`$STRING`"
+    }
+    instagram_posted_by: {
+      h: "Instagram Posted By"
+      n: "instagram_posted_by"
+      r: true
+      t: "`$ANY`"
+    }
+    instagram_posted_url: {
+      h: "Instagram Posted Url"
+      n: "instagram_posted_url"
+      r: true
+      t: "`$ANY`"
+    }
+    instagram_scraped_social_post_id: {
+      h: "Instagram Scraped Social Post Id"
+      n: "instagram_scraped_social_post_id"
+      r: true
+      t: "`$STRING`"
+    }
+    is_instagram_posted: {
+      h: "Is Instagram Posted"
+      n: "is_instagram_posted"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    is_tiktok_posted: {
+      h: "Is Tiktok Posted"
+      n: "is_tiktok_posted"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    is_youtube_posted: {
+      h: "Is Youtube Posted"
+      n: "is_youtube_posted"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    last_refreshed_at: {
+      h: "Last Refreshed At"
+      n: "last_refreshed_at"
+      r: true
+      t: "`$ANY`"
+    }
+    likes: {
+      h: "Likes"
+      n: "likes"
+      r: true
+      t: "`$INTEGER`"
+    }
+    platform_post_methods: {
+      h: "Platform Post Methods"
+      n: "platform_post_methods"
+      r: true
+      t: "`$ANY`"
+    }
+    platform_urls: {
+      h: "Platform Urls"
+      n: "platform_urls"
+      r: true
+      t: "`$ANY`"
+    }
+    post_method: {
+      h: "Post Method"
+      n: "post_method"
+      r: true
+      t: "`$ANY`"
+    }
+    post_platforms: {
+      h: "Post Platforms"
+      n: "post_platforms"
+      r: true
+      t: "`$ANY`"
+    }
+    post_url: {
+      h: "Post Url"
+      n: "post_url"
+      r: true
+      t: "`$ANY`"
+    }
+    posted_at: {
+      h: "Posted At"
+      n: "posted_at"
+      r: true
+      t: "`$ANY`"
+    }
+    product_id: {
+      h: "Product Id"
+      n: "product_id"
+      r: true
+      t: "`$STRING`"
+    }
+    results_status: {
+      h: "Results Status"
+      n: "results_status"
+      r: true
+      t: "`$ANY`"
+    }
+    scheduled_datetime: {
+      fo: "date-time"
+      h: "Scheduled Datetime"
+      n: "scheduled_datetime"
+      r: true
+      t: "`$STRING`"
+    }
+    source_type: {
+      h: "Source Type"
+      n: "source_type"
+      r: true
+      t: "`$STRING`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: true
+      t: "`$STRING`"
+    }
+    tiktok_posted_by: {
+      h: "Tiktok Posted By"
+      n: "tiktok_posted_by"
+      r: true
+      t: "`$ANY`"
+    }
+    tiktok_posted_url: {
+      h: "Tiktok Posted Url"
+      n: "tiktok_posted_url"
+      r: true
+      t: "`$ANY`"
+    }
+    tiktok_scraped_social_post_id: {
+      h: "Tiktok Scraped Social Post Id"
+      n: "tiktok_scraped_social_post_id"
+      r: true
+      t: "`$STRING`"
+    }
+    upload_post_error: {
+      h: "Upload Post Error"
+      n: "upload_post_error"
+      r: true
+      t: "`$ANY`"
+    }
+    upload_post_status: {
+      h: "Upload Post Status"
+      n: "upload_post_status"
+      r: true
+      t: "`$ANY`"
+    }
+    upload_post_uploads: {
+      h: "Upload Post Uploads"
+      n: "upload_post_uploads"
+      r: true
+      t: "`$ANY`"
+    }
+    user_email: {
+      h: "User Email"
+      n: "user_email"
+      r: true
+      t: "`$STRING`"
+    }
+    user_id: {
+      fo: "uuid"
+      h: "User Id"
+      n: "user_id"
+      r: true
+      t: "`$STRING`"
+    }
+    user_name: {
+      h: "User Name"
+      n: "user_name"
+      r: true
+      t: "`$ANY`"
+    }
+    video_id: {
+      h: "Video Id"
+      n: "video_id"
+      r: true
+      t: "`$STRING`"
+    }
+    video_url: {
+      h: "Video Url"
+      n: "video_url"
+      r: true
+      t: "`$ANY`"
+    }
+    views: {
+      h: "Views"
+      n: "views"
+      r: true
+      t: "`$INTEGER`"
+    }
+    youtube_posted_by: {
+      h: "Youtube Posted By"
+      n: "youtube_posted_by"
+      r: true
+      t: "`$ANY`"
+    }
+    youtube_posted_url: {
+      h: "Youtube Posted Url"
+      n: "youtube_posted_url"
+      r: true
+      t: "`$ANY`"
+    }
+    youtube_scraped_social_post_id: {
+      h: "Youtube Scraped Social Post Id"
+      n: "youtube_scraped_social_post_id"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "admin_post"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/admin/posts"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "date"
+                or: "date"
+                r: false
+                t: "`$ANY`"
+              }
+              {
+                ex: true
+                k: "query"
+                n: "include_entry"
+                or: "include_entries"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+              {
+                ex: "all"
+                k: "query"
+                n: "platform"
+                or: "platform"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "all"
+                k: "query"
+                n: "posting_method"
+                or: "posting_method"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/admin/posts"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "posts"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

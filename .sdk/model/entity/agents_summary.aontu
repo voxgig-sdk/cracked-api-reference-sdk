@@ -1,0 +1,61 @@
+# Entity: agents_summary
+
+main: kit: entity: agents_summary: {
+
+  alias: field: {}
+
+  fields: {
+    total_agents: {
+      h: "Total Agents"
+      n: "total_agents"
+      r: true
+      t: "`$INTEGER`"
+    }
+    total_agents_count_sum: {
+      h: "Total Agents Count Sum"
+      n: "total_agents_count_sum"
+      r: true
+      t: "`$INTEGER`"
+    }
+  }
+
+  name: "agents_summary"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/admin/agents-summary"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/admin/agents-summary"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "agents-summary"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}
