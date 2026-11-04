@@ -164,6 +164,9 @@ describe("PexelEntity", function()
       pexel_ref01_data = helpers.to_map(pexel_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LIST
     local pexel_ref01_ent = client:Pexel(nil)
     local pexel_ref01_match = {}

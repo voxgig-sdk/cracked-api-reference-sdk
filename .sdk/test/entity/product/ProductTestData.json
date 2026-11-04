@@ -249,6 +249,11 @@
       "version": 2,
       "source": "openapi3"
     },
+    "GET /api/enterprise/products/{product_id}/status": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
     "GET /api/products/me": {
       "provenance": "operation-contract",
       "version": 2,

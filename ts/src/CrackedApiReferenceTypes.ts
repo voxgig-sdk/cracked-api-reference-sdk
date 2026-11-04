@@ -45,28 +45,23 @@ export interface ActiveOnboardingLoadMatch {
 
 export interface Admin {
   apply?: boolean
-  count: number
   created_at: string
   date_from?: any
   date_to?: any
   email: string
   id: string
-  include_failed?: boolean
-  include_pending?: boolean
   include_records?: boolean
   issue_ids?: any
   only_active?: boolean
   platform?: any
   posting_method?: any
-  product_id?: string
+  product_id: string
   query?: any
   reason?: any
-  regenerate?: boolean
   status?: string
   user_membership?: any
   user_name?: any
   user_onboarding_step?: any
-  video_type: string
 }
 
 export interface AdminLoadMatch {
@@ -78,14 +73,11 @@ export interface AdminLoadMatch {
 
 export interface AdminListMatch {
   apply?: boolean
-  count?: number
   created_at?: string
   date_from?: any
   date_to?: any
   email?: string
   id?: string
-  include_failed?: boolean
-  include_pending?: boolean
   include_records?: boolean
   issue_ids?: any
   only_active?: boolean
@@ -94,25 +86,20 @@ export interface AdminListMatch {
   product_id?: string
   query?: any
   reason?: any
-  regenerate?: boolean
   status?: string
   user_membership?: any
   user_name?: any
   user_onboarding_step?: any
-  video_type?: string
 }
 
 export interface AdminCreateData {
   user_id: string
   apply?: boolean
-  count: number
   created_at: string
   date_from: any
   date_to: any
   email: string
   id: string
-  include_failed?: boolean
-  include_pending?: boolean
   include_records?: boolean
   issue_ids?: any
   only_active?: boolean
@@ -121,47 +108,16 @@ export interface AdminCreateData {
   product_id: string
   query?: any
   reason?: any
-  regenerate?: boolean
   status?: string
   user_membership?: any
   user_name?: any
   user_onboarding_step?: any
-  video_type: string
 
   // Selects a custom action instead of the plain create:
   //   'batch_regenerate_sora2' | 'test_s3_copy'
   // The remaining keys are that action's own payload.
   $action?: string
   [action: string]: any
-}
-
-export interface AdminUpdateData {
-  agent_id: string
-  agent_type?: string
-  is_active?: boolean
-  apply?: boolean
-  count?: number
-  created_at?: string
-  date_from?: any
-  date_to?: any
-  email?: string
-  id?: string
-  include_failed?: boolean
-  include_pending?: boolean
-  include_records?: boolean
-  issue_ids?: any
-  only_active?: boolean
-  platform?: any
-  posting_method?: any
-  product_id?: string
-  query?: any
-  reason?: any
-  regenerate?: boolean
-  status?: string
-  user_membership?: any
-  user_name?: any
-  user_onboarding_step?: any
-  video_type?: string
 }
 
 export interface AdminRemoveMatch {
@@ -416,13 +372,25 @@ export interface AdminHealthrxUpdateData {
 }
 
 export interface AdminInsight {
-  customer_success_cases: any[]
-  customers: any[]
-  generated_at: string
-  pfa_database: Record<string, any>
-  recent_signups: any[]
-  summary: Record<string, any>
-  vireel_database: Record<string, any>
+  active_agents: number
+  active_products: number
+  agents_count: number
+  auto_schedule_status: string
+  days_until_period_end?: any
+  email: string
+  feature_impact: string
+  last_notification_at?: any
+  membership?: any
+  name?: string
+  notification_count: number
+  notification_events: any[]
+  priority: string
+  severity: string
+  status_label: string
+  subscription_current_period_end?: any
+  subscription_status?: any
+  upcoming_posts: number
+  user_id: string
 }
 
 export interface AdminInsightLoadMatch {
@@ -433,13 +401,25 @@ export interface AdminInsightLoadMatch {
 }
 
 export interface AdminInsightListMatch {
-  customer_success_cases?: any[]
-  customers?: any[]
-  generated_at?: string
-  pfa_database?: Record<string, any>
-  recent_signups?: any[]
-  summary?: Record<string, any>
-  vireel_database?: Record<string, any>
+  active_agents?: number
+  active_products?: number
+  agents_count?: number
+  auto_schedule_status?: string
+  days_until_period_end?: any
+  email?: string
+  feature_impact?: string
+  last_notification_at?: any
+  membership?: any
+  name?: string
+  notification_count?: number
+  notification_events?: any[]
+  priority?: string
+  severity?: string
+  status_label?: string
+  subscription_current_period_end?: any
+  subscription_status?: any
+  upcoming_posts?: number
+  user_id?: string
 }
 
 export interface AdminLandingTask {
@@ -453,14 +433,8 @@ export interface AdminLandingTaskCreateData {
 }
 
 export interface AdminMetricsSummary {
-  paid_users_by_level: any[]
-  total_cancellations: number
-  total_previews_generated: number
-  total_signups: number
-  total_videos_generated: number
-  url_attempts: number
-  user_credits: any[]
-  user_gifted_credits: any[]
+  count: number
+  level: string
 }
 
 export interface AdminMetricsSummaryListMatch {
@@ -680,12 +654,6 @@ export interface AdminUserViewCreateData {
   skip: boolean
   subscription_details?: any
   subscription_status: any
-
-  // Selects a custom action instead of the plain create:
-  //   'fix_all' | 'fix_auto_schedule' | 'fix_auto_schedule_by_date' | 'fix_auto_schedule_today' | 'fix_auto_schedule_today_force' | 'fix_auto_schedule_tomorrow' | 'fix_comments_today' | 'generate_pomelli_video' | 'repair_approved_source_queue_today' | 'repost_tiktok_videos_tomorrow' | 'reset_onboarding'
-  // The remaining keys are that action's own payload.
-  $action?: string
-  [action: string]: any
 }
 
 export interface AdminUserViewUpdateData {
@@ -697,12 +665,6 @@ export interface AdminUserViewUpdateData {
   is_bookmarked?: boolean
   is_internal_user?: boolean
   membership?: any
-
-  // Selects a custom action instead of the plain update:
-  //   'auto_schedule' | 'posted_video_reuse'
-  // The remaining keys are that action's own payload.
-  $action?: string
-  [action: string]: any
 }
 
 export interface AdminUserViewRemoveMatch {
@@ -1082,6 +1044,23 @@ export interface AgentListMatch {
   agent_type?: any
 }
 
+export interface AgentUpdateData {
+  id: string
+  is_active?: boolean
+  agent_type?: string
+  active_connections?: number
+  at_capacity?: boolean
+  name?: string
+  tiktok_stats?: any
+  type?: string
+
+  // Selects a custom action instead of the plain update:
+  //   'active' | 'type'
+  // The remaining keys are that action's own payload.
+  $action?: string
+  [action: string]: any
+}
+
 export interface AgentAccessCustomersHealth {
   accountType?: any
   agentQuota: number
@@ -1166,13 +1145,17 @@ export interface AgentAccessPhilVideoLoadMatch {
 }
 
 export interface AgentAccessUserAgent {
-  agentQuota: number
-  agents: any[]
-  assignedByType: Record<string, any>
-  assignedTotal: number
-  email: string
-  products: any[]
-  userId: string
+  avatar?: any
+  facebookUrl?: any
+  id: string
+  instagramUrl?: any
+  name: string
+  productId?: any
+  productName?: any
+  tiktokUrl?: any
+  type?: any
+  uploadPostPlatforms?: any
+  youtubeUrl?: any
 }
 
 export interface AgentAccessUserAgentListMatch {
@@ -1296,19 +1279,12 @@ export interface AgentDetailUpdateData {
 }
 
 export interface AgentHealth {
-  daily: any[]
-  dates: any[]
-  generated_at: string
-  groups: any[]
-  latest: Record<string, any>
-  live_date?: any
-  phone_admin_generated_at: string
-  platform?: string
-  post_target: number
-  qa_managed_agent_ids?: any[]
-  scope_prefixes: any[]
-  timezone: string
-  warmup_target: number
+  accounts: Record<string, any>
+  date: string
+  overall: Record<string, any>
+  posts: Record<string, any>
+  views: Record<string, any>
+  warmups: Record<string, any>
 }
 
 export interface AgentHealthListMatch {
@@ -1332,19 +1308,12 @@ export interface AgentHealthCustomerOptionListMatch {
 }
 
 export interface AgentHealthDetail {
-  archived_issue_total?: number
-  date: string
-  generated_at: string
-  group_id: string
-  has_more: boolean
-  issue_total: number
-  issues: any[]
-  limit: number
-  metric: string
-  offset: number
-  warmup_runs?: any[]
-  warning_total?: number
-  warnings?: any[]
+  agent_id: string
+  category: string
+  connection_status: string
+  device_status: string
+  issue?: any
+  state: string
 }
 
 export interface AgentHealthDetailListMatch {
@@ -1375,7 +1344,7 @@ export interface AgentPost {
 }
 
 export interface AgentPostListMatch {
-  id: string
+  agent_id: string
   day?: string
 }
 
@@ -1535,7 +1504,6 @@ export interface Carousel {
   formula_id?: string
   formula_name?: any
   generation?: Record<string, any>
-  id?: string
   image_prompt?: any
   likes?: any
   main_prompt?: any
@@ -1633,7 +1601,6 @@ export interface CarouselAgentDetailLoadMatch {
 export interface CarouselStatus {
   caption: any
   error?: any
-  id?: string
   image_model?: any
   image_provider?: any
   image_task_id?: string
@@ -1644,20 +1611,7 @@ export interface CarouselStatus {
 }
 
 export interface CarouselStatusListMatch {
-  id: string
-}
-
-export interface Chat {
-  idempotencyKey: string
-  message: string
-  sessionId: string
-}
-
-export interface ChatCreateData {
-  session_id: string
-  idempotencyKey: string
-  message: string
-  sessionId: string
+  carousel_id: string
 }
 
 export interface ChatHistory {
@@ -1686,6 +1640,8 @@ export interface ChatHistoryCreateData {
 export interface ChatSession {
   chatSubVariant: string
   createdAt: string
+  idempotencyKey: string
+  message: string
   model?: any
   plan?: any
   route?: any
@@ -1699,8 +1655,11 @@ export interface ChatSession {
 
 export interface ChatSessionCreateData {
   session_id: string
+  idempotencyKey: string
+  message: string
   plan?: any
   route?: any
+  sessionId: string
 }
 
 export interface Comment {
@@ -2038,7 +1997,6 @@ export interface CustomerHealth {
   date: string
   email: string
   entries: any[]
-  id?: string
   performance_overview: Record<string, any>
   platform_coverage_summary: Record<string, any>
   user_id: string
@@ -2065,20 +2023,10 @@ export interface CustomerHealthAllCustomersItemListMatch {
 }
 
 export interface CustomerHealthViewsSummary {
-  average_views_per_result: number
-  date: string
-  end_date?: any
-  paid_users_count: number
+  email: string
   posted_results: number
-  range: string
-  start_date?: any
-  top_users: any[]
-  total_views: number
-  trend: any[]
-  trend_granularity: string
-  user_email?: any
-  user_id?: string
-  users_with_views: number
+  user_id: string
+  views: number
 }
 
 export interface CustomerHealthViewsSummaryListMatch {
@@ -2103,11 +2051,10 @@ export interface DailyCreateData {
 }
 
 export interface DailyStatus {
-  id?: string
 }
 
 export interface DailyStatusLoadMatch {
-  id: string
+  daily_id: string
   day: string
 }
 
@@ -2174,13 +2121,6 @@ export interface EnterpriseAgentCreateData {
   product_id: string
   source_product_id: string
   target_product_id: string
-}
-
-export interface EnterpriseProduct {
-}
-
-export interface EnterpriseProductLoadMatch {
-  product_id: string
 }
 
 export interface ExactAvailability {
@@ -2382,19 +2322,6 @@ export interface InitResetProductV6CreateData {
   product_id?: string
 }
 
-export interface Iri {
-  correlationId?: any
-  idempotencyKey: string
-  productId?: any
-}
-
-export interface IriCreateData {
-  connector_id: string
-  correlationId?: any
-  idempotencyKey: string
-  productId?: any
-}
-
 export interface IrisCapability {
   capability: string
   correlationId: string
@@ -2460,6 +2387,11 @@ export interface IrisConnectorListMatch {
   connectors?: any[]
 }
 
+export interface IrisConnectorCreateData {
+  connector_id: string
+  connectors?: any[]
+}
+
 export interface IrisStatus {
   connectorsPreview?: any[]
   product?: any
@@ -2476,8 +2408,10 @@ export interface IrisTask {
   cadence?: string
   capability?: any
   completed?: any[]
+  correlationId?: any
   description?: string
   discover?: any[]
+  idempotencyKey: string
   productId?: any
   recurring?: any[]
   requiredConnectors?: any[]
@@ -2492,7 +2426,9 @@ export interface IrisTaskCreateData {
   approvalRequired?: boolean
   cadence?: string
   capability?: any
+  correlationId?: any
   description?: string
+  idempotencyKey: string
   productId?: any
   requiredConnectors?: any[]
   title: string
@@ -2861,7 +2797,7 @@ export interface ProductLoadMatch {
   id: string
 
   // Selects a custom action instead of the plain load:
-  //   'me'
+  //   'me' | 'status'
   // The remaining keys are that action's own payload.
   $action?: string
   [action: string]: any
@@ -2965,13 +2901,18 @@ export interface ProductRemoveMatch {
 }
 
 export interface ProductDashboard {
-  agents: any[]
-  date: string
-  pagination: Record<string, any>
-  phone_admin_error?: any
-  products: any[]
-  selected_product: any
-  summary: Record<string, any>
+  comments: number
+  failed_entries: number
+  has_tiktok_community_violation?: boolean
+  id: string
+  likes: number
+  metrics_pending_count?: number
+  name: string
+  platforms: any[]
+  posted_entries: number
+  posting_entries: number
+  scheduled_entries: number
+  views: number
 }
 
 export interface ProductDashboardListMatch {
@@ -3019,6 +2960,7 @@ export interface ProductLanding {
   dmOngoingResponsePrompt?: any
   firstCommentTextBeforeLink?: any
   headerImageUrl?: any
+  icon?: any
   id: string
   landingHtmlUrl?: any
   landingLastGeneratedAt?: any
@@ -3057,6 +2999,7 @@ export interface ProductLanding {
   slug: string
   socialLinks?: any
   testimonials?: any
+  url: string
 }
 
 export interface ProductLandingListMatch {
@@ -3121,12 +3064,6 @@ export interface ReRollVideo {
 export interface ReRollVideoCreateData {
   queue_id: string
   skip_credit_check?: boolean
-}
-
-export interface ReadRootGet {
-}
-
-export interface ReadRootGetLoadMatch {
 }
 
 export interface RecordDemoBooked {
@@ -3205,6 +3142,12 @@ export interface RetryWebsiteScrapeCreateData {
   url: string
 }
 
+export interface RootGet {
+}
+
+export interface RootGetLoadMatch {
+}
+
 export interface SaveSurvey {
   email_sent?: boolean
   onboarding_data_id: string
@@ -3260,6 +3203,20 @@ export interface ScanSocialsStatus {
 export interface ScanSocialsStatusLoadMatch {
   onboarding_data_id?: string
   product_id?: string
+}
+
+export interface ScheduleQueue {
+}
+
+export interface ScheduleQueueUpdateData {
+  queue_id: string
+  video_id?: any
+
+  // Selects a custom action instead of the plain update:
+  //   'replace_video'
+  // The remaining keys are that action's own payload.
+  $action?: string
+  [action: string]: any
 }
 
 export interface ScheduleV2 {
@@ -3328,17 +3285,6 @@ export interface ScheduleV2CreateData {
   youtube_posted_by?: any
   youtube_posted_url?: any
   youtube_scraped_social_post_id?: string
-}
-
-export interface ScheduleV2UpdateData {
-  queue_id: string
-  video_id?: string
-
-  // Selects a custom action instead of the plain update:
-  //   'replace_video'
-  // The remaining keys are that action's own payload.
-  $action?: string
-  [action: string]: any
 }
 
 export interface ScheduleV2RemoveMatch {
@@ -3475,14 +3421,11 @@ export interface SeoOverviewListMatch {
 }
 
 export interface SeoTraffic {
-  end_date: string
-  series: any[]
-  site_url: string
-  start_date: string
-  top_countries: any[]
-  top_pages: any[]
-  top_queries: any[]
-  totals: Record<string, any>
+  clicks: number
+  ctr: number
+  date: string
+  impressions: number
+  position: number
 }
 
 export interface SeoTrafficListMatch {
@@ -3808,23 +3751,24 @@ export interface StatsRefreshIssueListMatch {
 }
 
 export interface StatsRefreshOverview {
-  active_run?: any
-  aged_over_24h: number
-  backlog_preview: any[]
-  coverage_percent: number
-  customer_counts: Record<string, any>
-  date: string
-  generated_at: string
-  method_counts: Record<string, any>
-  platform_counts: Record<string, any>
-  platform_units_resolved: number
-  platform_units_total: number
-  platform_units_unresolved: number
-  posted_entries: number
-  reason_counts: Record<string, any>
-  sla_deadline_et: string
-  stale_after_sla: number
-  top_affected_customers: any[]
+  aged_over_24h: boolean
+  agent_id?: string
+  agent_name?: any
+  is_resolved: boolean
+  last_refresh_completed_at?: any
+  latest_error_message?: any
+  platform: string
+  post_method?: any
+  post_url?: any
+  posted_date_et: string
+  product_id?: string
+  product_name?: any
+  reason_code?: any
+  schedule_queue_id: string
+  scheduled_datetime_utc: string
+  stale_after_sla: boolean
+  user_email: string
+  user_id: string
 }
 
 export interface StatsRefreshOverviewListMatch {
@@ -4004,6 +3948,65 @@ export interface User {
 export interface UserLoadMatch {
   id: string
   product_id?: string
+
+  // Selects a custom action instead of the plain load:
+  //   'failed_video' | 'pending_video' | 'schedule_queue'
+  // The remaining keys are that action's own payload.
+  $action?: string
+  [action: string]: any
+}
+
+export interface UserCreateData {
+  id: string
+  product_id?: string
+  target_date?: string
+  phone_admin_pc_name?: any
+  background?: boolean
+  accountType?: any
+  activatedByAdminAt?: any
+  activatedByAdminId?: any
+  agents: any[]
+  agentsCount?: any
+  attribution?: any
+  avatarImageUrl?: any
+  avatarVoiceUrl?: any
+  createdAt: string
+  credits?: number
+  email: string
+  googleId?: any
+  hasSeenScheduleWelcome?: boolean
+  industry?: any
+  instagramId?: any
+  isActivatedByAdmin?: boolean
+  isAdmin?: boolean
+  isInternalUser?: any
+  isMigrated?: any
+  isResettingProduct?: any
+  membership?: any
+  name: string
+  partnerDirectLoginDisabled?: boolean
+  partnerExternalUserId?: any
+  partnerPolicyCode?: any
+  partnerSource?: any
+  picture?: any
+  stripeCustomerId?: any
+  stripeSubscriptionId?: any
+  subscriptionCurrentPeriodEnd?: any
+  subscriptionStatus?: any
+  totalCount: number
+  updatedAt: string
+  userId: string
+  count?: any
+  include_failed?: any
+  include_pending?: any
+  regenerate?: any
+  video_type?: any
+
+  // Selects a custom action instead of the plain create:
+  //   'agent_reconcile' | 'bulk_create_video' | 'clear_failed_video' | 'clear_future_auto_entry' | 'clear_manual_entry' | 'clear_today_auto_entry' | 'fix_all' | 'fix_auto_schedule' | 'fix_auto_schedule_by_date' | 'fix_auto_schedule_today' | 'fix_auto_schedule_today_force' | 'fix_auto_schedule_tomorrow' | 'fix_comments_today' | 'generate_pomelli_video' | 'repair_approved_source_queue_today' | 'repost_tiktok_videos_tomorrow' | 'reset_onboarding' | 'retry_todays_video' | 'retry_video'
+  // The remaining keys are that action's own payload.
+  $action?: string
+  [action: string]: any
 }
 
 export interface UserUpdateData {
@@ -4042,9 +4045,11 @@ export interface UserUpdateData {
   totalCount?: number
   updatedAt?: string
   userId?: string
+  posted_video_reuse_percent?: any
+  rebuild?: any
 
   // Selects a custom action instead of the plain update:
-  //   'attribution' | 'industry' | 'mark_schedule_welcome_seen'
+  //   'attribution' | 'auto_schedule' | 'industry' | 'mark_schedule_welcome_seen' | 'posted_video_reuse'
   // The remaining keys are that action's own payload.
   $action?: string
   [action: string]: any
@@ -4055,19 +4060,18 @@ export interface UserAgent {
   assigned_at: string
   assignment_id: string
   expires_at?: any
-  id?: string
   status: string
 }
 
 export interface UserAgentListMatch {
-  id: string
+  user_id: string
   limit?: number
   offset?: number
   product_id?: string
 }
 
 export interface UserAgentCreateData {
-  id: string
+  user_id: string
   agent_id?: string
   phone_admin_pc_name?: any
   product_id?: string
@@ -4079,69 +4083,13 @@ export interface UserAgentCreateData {
 }
 
 export interface UserHealthDetail {
-  account_type: any
-  activated: boolean
-  activated_by_admin_at?: any
-  activated_by_admin_id?: string
-  admin_notes?: any
-  agents_count?: number
-  assigned_agents: any[]
-  assigned_agents_count: number
-  assigned_agents_preview_limit?: number
-  assigned_agents_truncated?: boolean
-  auto_schedule_enabled: boolean
-  comments_expected_per_day?: number
-  comments_fix_block_reason?: any
-  comments_fix_ready?: boolean
-  comments_today_failed?: number
-  comments_today_posted?: number
-  comments_today_scheduled?: number
-  comments_yesterday_failed?: number
-  comments_yesterday_posted?: number
-  comments_yesterday_total?: number
-  created_at: string
-  credits: number
-  effective_posted_video_reuse_percent: number
-  email: string
-  expected_agents_count: number
   id: string
-  is_activated_by_admin: boolean
-  is_admin: boolean
-  is_bookmarked?: boolean
-  is_internal_user: boolean
-  is_migrated: boolean
-  landing_slug?: any
-  landing_status?: any
-  landing_url?: any
-  membership: any
-  microhub_status?: any
-  microhub_url?: any
   name: string
-  onboarding_flow: string
-  posted_video_reuse_percent?: any
-  product_id: string
-  product_name: any
-  product_url: any
-  subscription_status: any
-  survey_data?: any
-  today_failed: number
-  today_posted: number
-  today_scheduled: number
-  tomorrow_capacity: number
-  tomorrow_scheduled: number
-  videos_completed: number
-  videos_failed: number
-  videos_pending: number
-  videos_stale: number
-  videos_total: number
-  yesterday_failed: number
-  yesterday_failed_entries: any[]
-  yesterday_posted: number
-  yesterday_total: number
+  type: string
 }
 
 export interface UserHealthDetailListMatch {
-  id: string
+  user_id: string
   assigned_agents_preview_limit?: number
   product_id?: string
 }

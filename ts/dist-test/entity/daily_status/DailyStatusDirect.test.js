@@ -29,19 +29,24 @@ const utility_1 = require("../../utility");
         const setup = directSetup({ id: 'direct01' });
         if ((0, utility_1.maybeSkipControl)(t, 'direct', 'direct-load-daily_status', setup.live))
             return;
-        if ((0, utility_1.skipIfMissingIds)(t, setup, ["daily_status01"], LIVE_STRICT))
+        if (setup.live && 'TRUE' === process.env.VOXGIG_GETONLY_GUARD && null == setup.idmap?.["daily01"]) {
+            console.log("LIVE STEP {\"id\":\"direct-load-daily_status\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs daily01, which only POST /api/carousel/daily/{product_id}/plan gives\"}");
+            t.skip("Live coverage incomplete: direct-load-daily_status excluded (GET-only live run: needs daily01, which only POST /api/carousel/daily/{product_id}/plan gives)");
+            return;
+        }
+        if ((0, utility_1.skipIfMissingIds)(t, setup, ["daily01"], LIVE_STRICT))
             return;
         const { client, calls } = setup;
         const params = {};
         const query = {};
         if (setup.live) {
-            params.id = setup.idmap['daily_status01'];
+            params.daily_id = setup.idmap['daily01'];
         }
         else {
-            params.id = 'direct01';
+            params.daily_id = 'direct01';
         }
         const result = await client.direct({
-            path: 'api/carousel/daily/{id}/status',
+            path: 'api/carousel/daily/{daily_id}/status',
             method: 'GET',
             params,
             query,

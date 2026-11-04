@@ -212,6 +212,9 @@ func TestStatsRefreshIssueEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = statsRefreshIssueRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LIST
 		statsRefreshIssueRef01Ent := client.StatsRefreshIssue(nil)
 		statsRefreshIssueRef01Match := map[string]any{}

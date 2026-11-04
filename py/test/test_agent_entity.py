@@ -125,6 +125,10 @@ class TestAgentEntity:
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
                 return
+        if setup["live"] and os.environ.get("VOXGIG_GETONLY_GUARD") == "TRUE":
+            print("LIVE STEP {\"id\":\"agent.update.1\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs PUT /api/admin/agents/{agent_id}/active\"}")
+            return self._run_get_only_flow(setup)
+
         client = setup["client"]
 
         # Bootstrap entity data from existing test data.
@@ -134,6 +138,28 @@ class TestAgentEntity:
         if len(agent_ref01_data_raw) > 0:
             agent_ref01_data = helpers.to_map(agent_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
+        # LIST
+        agent_ref01_ent = client.Agent(None)
+        agent_ref01_match = {}
+
+        agent_ref01_list_result = agent_ref01_ent.list(agent_ref01_match, None)
+        assert isinstance(agent_ref01_list_result, list)
+
+
+    def _run_get_only_flow(self, setup):
+        client = setup["client"]
+
+        # Bootstrap entity data from existing test data.
+        agent_ref01_data_raw = vs.items(helpers.to_map(
+            vs.getpath(setup["data"], "existing.agent")))
+        agent_ref01_data = None
+        if len(agent_ref01_data_raw) > 0:
+            agent_ref01_data = helpers.to_map(agent_ref01_data_raw[0][1])
+
+        if setup["live"]:
+            runner.live_pace()
         # LIST
         agent_ref01_ent = client.Agent(None)
         agent_ref01_match = {}

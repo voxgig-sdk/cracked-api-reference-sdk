@@ -171,8 +171,51 @@ class SocialEntityTest < Minitest::Test
         return
       end
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE"
+      puts "LIVE STEP {\"id\":\"social.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /social/instagram/exchange\"}"
+      puts "LIVE STEP {\"id\":\"social.remove.3\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs DELETE /social/connections/{platform}\"}"
+      puts "LIVE STEP {\"id\":\"social.list.4\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: checks a removal this run does not make\"}"
+    client = setup[:client]
+    if setup[:live]
+      _live_id = setup[:synthetic_only] ? nil : setup[:idmap]["social01"]
+      Runner.live_pace
+      Runner.live_existing(setup, LIVE_STRICT, "social", "id", _live_id) do
+        client.Social(nil).list({}, nil)
+      end
+    end
+
+    # Bootstrap entity data from existing test data.
+    social_ref01_data_raw = Vs.items(Helpers.to_map(
+      Vs.getpath(setup[:data], "existing.social")))
+    social_ref01_data = nil
+    if social_ref01_data_raw.length > 0
+      social_ref01_data = Helpers.to_map(social_ref01_data_raw[0][1])
+    end
+
+    Runner.live_pace if setup[:live]
+    # LIST
+    social_ref01_ent = client.Social(nil)
+    social_ref01_match = {}
+
+    social_ref01_list_result = social_ref01_ent.list(social_ref01_match, nil)
+    assert social_ref01_list_result.is_a?(Array)
+
+    Runner.live_pace if setup[:live]
+    # LOAD
+    social_ref01_match_dt0 = {
+      "id" => social_ref01_data["id"],
+    }
+    social_ref01_data_dt0_loaded = social_ref01_ent.load(social_ref01_match_dt0, nil)
+    social_ref01_data_dt0_load_result = Helpers.to_map(social_ref01_data_dt0_loaded.respond_to?(:data_get) ? social_ref01_data_dt0_loaded.data_get : social_ref01_data_dt0_loaded)
+    assert !social_ref01_data_dt0_load_result.nil?
+    assert Runner.live_same_id(social_ref01_data_dt0_load_result["id"], social_ref01_data["id"])
+
+      return
+    end
+
     client = setup[:client]
 
+    Runner.live_pace if setup[:live]
     # CREATE
     social_ref01_ent = client.Social(nil)
     social_ref01_data = Helpers.to_map(Vs.getprop(
@@ -183,6 +226,7 @@ class SocialEntityTest < Minitest::Test
     assert !social_ref01_data.nil?
     assert !social_ref01_data["id"].nil?
 
+    Runner.live_pace if setup[:live]
     # LIST
     social_ref01_match = {}
 
@@ -194,6 +238,7 @@ class SocialEntityTest < Minitest::Test
       { "id" => social_ref01_data["id"] })
     assert !Vs.isempty(found_item)
 
+    Runner.live_pace if setup[:live]
     # LOAD
     social_ref01_match_dt0 = {
       "id" => social_ref01_data["id"],
@@ -201,14 +246,16 @@ class SocialEntityTest < Minitest::Test
     social_ref01_data_dt0_loaded = social_ref01_ent.load(social_ref01_match_dt0, nil)
     social_ref01_data_dt0_load_result = Helpers.to_map(social_ref01_data_dt0_loaded.respond_to?(:data_get) ? social_ref01_data_dt0_loaded.data_get : social_ref01_data_dt0_loaded)
     assert !social_ref01_data_dt0_load_result.nil?
-    assert_equal social_ref01_data_dt0_load_result["id"], social_ref01_data["id"]
+    assert Runner.live_same_id(social_ref01_data_dt0_load_result["id"], social_ref01_data["id"])
 
+    Runner.live_pace if setup[:live]
     # REMOVE
     social_ref01_match_rm0 = {
       "id" => social_ref01_data["id"],
     }
     social_ref01_ent.remove(social_ref01_match_rm0, nil)
 
+    Runner.live_pace if setup[:live]
     # LIST
     social_ref01_match_rt0 = {}
 

@@ -44,6 +44,31 @@ describe("HealthrxEntity", function()
         return
       end
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" then
+      print("LIVE STEP {\"id\":\"healthrx.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/healthrx/products/{product_id}/accounts/{account_id}/content\"}")
+    local client = setup.client
+
+    -- Bootstrap entity data from existing test data.
+    local healthrx_ref01_data_raw = vs.items(helpers.to_map(
+      vs.getpath(setup.data, "existing.healthrx")))
+    local healthrx_ref01_data = nil
+    if #healthrx_ref01_data_raw > 0 then
+      healthrx_ref01_data = helpers.to_map(healthrx_ref01_data_raw[1][2])
+    end
+
+    if setup.live then
+      runner.live_pace()
+    end
+    -- LOAD
+    local healthrx_ref01_ent = client:Healthrx(nil)
+    local healthrx_ref01_match_dt0 = {}
+    local healthrx_ref01_data_dt0_loaded, err = healthrx_ref01_ent:load(healthrx_ref01_match_dt0, nil)
+    assert.is_nil(err)
+    assert.is_not_nil(healthrx_ref01_data_dt0_loaded)
+
+      return
+    end
+
     if setup.live then
       for _, _live_key in ipairs({"product01"}) do
         if setup.synthetic_only or setup.idmap[_live_key] == nil then
@@ -53,6 +78,9 @@ describe("HealthrxEntity", function()
     end
     local client = setup.client
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- CREATE
     local healthrx_ref01_ent = client:Healthrx(nil)
     local healthrx_ref01_data = helpers.to_map(vs.getprop(
@@ -64,6 +92,9 @@ describe("HealthrxEntity", function()
     healthrx_ref01_data = helpers.to_map(type(healthrx_ref01_data_result) == 'table' and healthrx_ref01_data_result.data_get and healthrx_ref01_data_result:data_get() or healthrx_ref01_data_result)
     assert.is_not_nil(healthrx_ref01_data)
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LOAD
     local healthrx_ref01_match_dt0 = {}
     local healthrx_ref01_data_dt0_loaded, err = healthrx_ref01_ent:load(healthrx_ref01_match_dt0, nil)

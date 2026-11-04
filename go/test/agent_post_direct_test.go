@@ -34,26 +34,31 @@ func TestAgentPostDirect(t *testing.T) {
 			return
 		}
 		if setup.live {
-			for _, _liveKey := range []string{"agent_post01"} {
+			for _, _liveKey := range []string{"agent01"} {
 				if v := setup.idmap[_liveKey]; v == nil {
 					liveMiss(t, agent_postDirectLiveStrict, "Live test blocked: needs %s via CRACKED_API_REFERENCE_TEST_AGENT_POST_ENTID", _liveKey)
 					return
 				}
 			}
 		}
+		if setup.live {
+			livePace()
+		}
 		client := setup.client
 
 		params := map[string]any{}
+		query := map[string]any{}
 		if setup.live {
-			params["id"] = setup.idmap["agent_post01"]
+			params["agent_id"] = setup.idmap["agent01"]
 		} else {
-			params["id"] = "direct01"
+			params["agent_id"] = "direct01"
 		}
 
 		result, err := client.Direct(map[string]any{
-			"path":   "api/admin/agents/{id}/posts",
+			"path":   "api/admin/agents/{agent_id}/posts",
 			"method": "GET",
 			"params": params,
+			"query":  query,
 		})
 		if setup.live {
 			if err != nil {

@@ -62,6 +62,9 @@ class ActiveOnboardingEntityTest extends TestCase
             $active_onboarding_ref01_data = Helpers::to_map($active_onboarding_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LOAD
         $active_onboarding_ref01_ent = $client->ActiveOnboarding(null);
         $active_onboarding_ref01_match_dt0 = [];

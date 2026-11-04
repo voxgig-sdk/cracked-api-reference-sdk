@@ -62,6 +62,9 @@ class LandingStatusEntityTest extends TestCase
             $landing_status_ref01_data = Helpers::to_map($landing_status_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LOAD
         $landing_status_ref01_ent = $client->LandingStatus(null);
         $landing_status_ref01_match_dt0 = [];

@@ -60,29 +60,23 @@ const utility_1 = require("../../utility");
             return;
         }
         const client = __1.CrackedApiReferenceSDK.test(undefined, { feature: { validate: { active: true } } });
-        await node_assert_1.default.rejects(client.DailyStatus().load({ "id": 1, "day": "x" }), (err) => 'validate_failed' === err.code);
+        await node_assert_1.default.rejects(client.DailyStatus().load({ "daily_id": 1, "day": "x" }), (err) => 'validate_failed' === err.code);
     });
     (0, node_test_1.test)('basic', async (t) => {
         const live = 'TRUE' === process.env.CRACKED_API_REFERENCE_TEST_LIVE;
-        for (const op of ['load']) {
+        for (const op of []) {
             if (!live && (0, utility_1.maybeSkipControl)(t, 'entityOp', 'daily_status.' + op, live))
                 return;
         }
         const setup = basicSetup();
         if (setup.live) {
-            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": { "id": { "a": true, "h": "Id", "n": "id", "r": false, "t": "`$STRING`", "key$": "id", "index$": 0 } }, "id": { "field": "id", "name": "id" }, "name": "daily_status", "op": { "load": { "input": "data", "name": "load", "points": [{ "a": true, "co": { "id": "GET /api/carousel/daily/{product_id}/status", "source": "openapi3", "version": 2 }, "g": { "params": [{ "a": true, "k": "param", "n": "id", "or": "product_id", "r": true, "t": "`$STRING`", "index$": 0 }], "query": [{ "a": true, "k": "query", "n": "day", "or": "day", "r": true, "t": "`$STRING`", "index$": 0 }] }, "k": "http", "m": "GET", "o": "/api/carousel/daily/{product_id}/status", "q": { "exist": ["day", "id"] }, "r": { "param": { "product_id": "id" } }, "rs": { "kind": "json", "media": "application/json" }, "s": [{ "lit": "api" }, { "lit": "carousel" }, { "lit": "daily" }, { "var": "id" }, { "lit": "status" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "load" } }, "relations": { "ancestors": [] }, "key$": "daily_status", "name__orig": "daily_status", "Name": "DailyStatus", "name_": "daily_status", "name-": "daily-status", "NAME": "DAILY_STATUS", "index$": 70 }, { "active": true, "entity": "daily_status", "key$": "BasicDailyStatusFlow", "kind": "basic", "name": "BasicDailyStatusFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": { "ref": "daily_status_ref01", "srcdatavar": "daily_status_ref01_data", "suffix": "_dt0" }, "m": { "id": "daily_status01" }, "o": "load", "s": [], "v": [{ "apply": "TextFieldMark", "def": { "mark": "Mark01-daily_status_ref01" } }], "index$": 0 }] }, 'DailyStatus', { "GET /api/carousel/daily/{product_id}/status": { "protocol": "http", "parameters": [{ "name": "product_id", "in": "path", "required": true, "schema": { "type": "string", "format": "uuid", "title": "Product Id" }, "index$": 0 }, { "name": "day", "in": "query", "required": true, "schema": { "type": "string", "title": "Day" }, "index$": 1 }] } }, { strict: LIVE_STRICT, t });
+            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": {}, "name": "daily_status", "op": { "load": { "input": "data", "name": "load", "points": [{ "a": true, "co": { "id": "GET /api/carousel/daily/{product_id}/status", "source": "openapi3", "version": 2 }, "g": { "params": [{ "a": true, "k": "param", "n": "daily_id", "or": "product_id", "r": true, "t": "`$STRING`", "index$": 0 }], "query": [{ "a": true, "k": "query", "n": "day", "or": "day", "r": true, "t": "`$STRING`", "index$": 0 }] }, "k": "http", "m": "GET", "o": "/api/carousel/daily/{product_id}/status", "q": { "exist": ["daily_id", "day"] }, "r": { "param": { "product_id": "daily_id" } }, "rs": { "kind": "json", "media": "application/json" }, "s": [{ "lit": "api" }, { "lit": "carousel" }, { "lit": "daily" }, { "var": "daily_id" }, { "lit": "status" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "load" } }, "relations": { "ancestors": [["$.main.kit.entity.daily"]] }, "key$": "daily_status", "name__orig": "daily_status", "Name": "DailyStatus", "name_": "daily_status", "name-": "daily-status", "NAME": "DAILY_STATUS", "index$": 69 }, { "active": true, "entity": "daily_status", "key$": "BasicDailyStatusFlow", "kind": "basic", "name": "BasicDailyStatusFlow", "param": {}, "step": [{ "a": false, "d": {}, "i": { "ref": "daily_status_ref01", "srcdatavar": "daily_status_ref01_data", "suffix": "_dt0" }, "m": { "id": "daily_status01" }, "o": "load", "s": [], "v": [{ "apply": "TextFieldMark", "def": { "mark": "Mark01-daily_status_ref01" } }], "unreachable": true }] }, 'DailyStatus', { "GET /api/carousel/daily/{product_id}/status": { "protocol": "http", "parameters": [{ "name": "product_id", "in": "path", "required": true, "schema": { "type": "string", "format": "uuid", "title": "Product Id" }, "index$": 0 }, { "name": "day", "in": "query", "required": true, "schema": { "type": "string", "title": "Day" }, "index$": 1 }] } }, { strict: LIVE_STRICT, t });
         }
         const client = setup.client;
         const struct = setup.struct;
         const isempty = struct.isempty;
         const select = struct.select;
         let daily_status_ref01_data = Object.values(setup.data.existing.daily_status)[0];
-        // LOAD
-        const daily_status_ref01_ent = client.DailyStatus();
-        const daily_status_ref01_match_dt0 = {};
-        daily_status_ref01_match_dt0.id = daily_status_ref01_data.id;
-        const daily_status_ref01_data_dt0 = (await daily_status_ref01_ent.load(daily_status_ref01_match_dt0)).data();
-        (0, node_assert_1.default)(daily_status_ref01_data_dt0.id === daily_status_ref01_data.id);
     });
 });
 // main.kit.test.live.strict is true (the default is true): a live
@@ -104,7 +98,7 @@ function basicSetup(extra) {
     const struct = client.utility().struct;
     const merge = struct.merge;
     const transform = struct.transform;
-    let idmap = transform(['daily_status01', 'daily_status02', 'daily_status03'], {
+    let idmap = transform(['daily_status01', 'daily_status02', 'daily_status03', 'daily01', 'daily02', 'daily03'], {
         '`$PACK`': ['', {
                 '`$KEY`': '`$COPY`',
                 '`$VAL`': ['`$FORMAT`', 'upper', '`$COPY`']

@@ -38,7 +38,7 @@ func TestUserHealthDetailEntity(t *testing.T) {
 		client := sdk.TestSDK(nil, map[string]any{
 			"feature": map[string]any{"validate": map[string]any{"active": true}},
 		})
-		_, err := client.UserHealthDetail(nil).List(map[string]any{"id": 1}, nil)
+		_, err := client.UserHealthDetail(nil).List(map[string]any{"user_id": 1}, nil)
 		if sdkerr, ok := err.(*core.CrackedApiReferenceError); !ok || "validate_failed" != sdkerr.Code {
 			t.Fatalf("expected validate_failed, got %v", err)
 		}
@@ -53,7 +53,7 @@ func TestUserHealthDetailEntity(t *testing.T) {
 		if setup.live {
 			_mode = "live"
 		}
-		for _, _op := range []string{} {
+		for _, _op := range []string{"list"} {
 			if _shouldSkip, _reason := isControlSkipped("entityOp", "user_health_detail." + _op, _mode); _shouldSkip {
 				if _reason == "" {
 					_reason = "skipped via sdk-test-control.json"
@@ -62,6 +62,16 @@ func TestUserHealthDetailEntity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live {
+			for _, _liveKey := range []string{"user01"} {
+				if setup.syntheticOnly || setup.idmap[_liveKey] == nil {
+					liveMiss(t, user_health_detailEntityLiveStrict, "Live entity test blocked: needs %s via CRACKED_API_REFERENCE_TEST_USER_HEALTH_DETAIL_ENTID", _liveKey)
+				}
+			}
+		}
+		client := setup.client
+		_ = client
+
 		// Bootstrap entity data from existing test data (no create step in flow).
 		userHealthDetailRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.user_health_detail")))
 		var userHealthDetailRef01Data map[string]any
@@ -71,6 +81,24 @@ func TestUserHealthDetailEntity(t *testing.T) {
 		// Discard guards against Go's unused-var check when the flow's steps
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = userHealthDetailRef01Data
+
+		if setup.live {
+			livePace()
+		}
+		// LIST
+		userHealthDetailRef01Ent := client.UserHealthDetail(nil)
+		userHealthDetailRef01Match := map[string]any{
+			"user_id": setup.idmap["user01"],
+		}
+
+		userHealthDetailRef01ListResult, err := userHealthDetailRef01Ent.List(userHealthDetailRef01Match, nil)
+		if err != nil {
+			t.Fatalf("list failed: %v", err)
+		}
+		_, userHealthDetailRef01ListOk := userHealthDetailRef01ListResult.([]any)
+		if !userHealthDetailRef01ListOk {
+			t.Fatalf("expected list result to be an array, got %T", userHealthDetailRef01ListResult)
+		}
 
 	})
 }
@@ -100,7 +128,7 @@ func user_health_detailBasicSetup(extra map[string]any) *entityTestSetup {
 
 	// Generate idmap via transform, matching TS pattern.
 	idmap, _ := vs.Transform(
-		[]any{"user_health_detail01", "user_health_detail02", "user_health_detail03"},
+		[]any{"user_health_detail01", "user_health_detail02", "user_health_detail03", "user01", "user02", "user03"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
 				"`$KEY`": "`$COPY`",

@@ -1,6 +1,7 @@
 # CarouselStatus direct test
 
 import json
+import os
 import pytest
 
 from crackedapireference_sdk.utility.voxgig_struct import voxgig_struct as vs
@@ -33,22 +34,26 @@ class TestCarouselStatusDirect:
             pytest.skip(_reason or "skipped via sdk-test-control.json")
             return
         if setup["live"]:
-            for _live_key in ["carousel_status01"]:
+            for _live_key in ["carousel01"]:
                 if setup["idmap"].get(_live_key) is None:
                     runner.live_miss(LIVE_STRICT, f"Live test blocked: needs {_live_key} via CRACKED_API_REFERENCE_TEST_CAROUSEL_STATUS_ENTID")
 
+        if setup["live"]:
+            runner.live_pace()
         client = setup["client"]
 
         params = {}
+        query = {}
         if setup["live"]:
-            params["id"] = setup["idmap"].get("carousel_status01")
+            params["carousel_id"] = setup["idmap"].get("carousel01")
         else:
-            params["id"] = "direct01"
+            params["carousel_id"] = "direct01"
 
         result = client.direct({
-            "path": "api/carousel/{id}/status",
+            "path": "api/carousel/{carousel_id}/status",
             "method": "GET",
             "params": params,
+            "query": query,
         })
         if setup["live"]:
             if not _live_ok(result):

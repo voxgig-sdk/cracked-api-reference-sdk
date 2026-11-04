@@ -62,6 +62,12 @@ func TestRecordDemoBookedEntity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" {
+			t.Log("LIVE STEP {\"id\":\"record_demo_booked.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/chat/sessions/{session_id}/demo-booked\"}")
+			t.Skip("Live coverage incomplete: record_demo_booked.create.0 excluded (GET-only live run: needs POST /api/chat/sessions/{session_id}/demo-booked)")
+			return
+		}
+
 		if setup.live {
 			for _, _liveKey := range []string{"session01"} {
 				if setup.syntheticOnly || setup.idmap[_liveKey] == nil {
@@ -72,6 +78,9 @@ func TestRecordDemoBookedEntity(t *testing.T) {
 		client := setup.client
 		_ = client
 
+		if setup.live {
+			livePace()
+		}
 		// CREATE
 		recordDemoBookedRef01Ent := client.RecordDemoBooked(nil)
 		recordDemoBookedRef01Data := core.ToMapAny(vs.GetProp(

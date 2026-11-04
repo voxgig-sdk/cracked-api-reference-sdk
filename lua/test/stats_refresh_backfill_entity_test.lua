@@ -44,8 +44,17 @@ describe("StatsRefreshBackfillEntity", function()
         return
       end
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" then
+      print("LIVE STEP {\"id\":\"stats_refresh_backfill.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/admin/customer-health/backfill\"}")
+      pending("Live coverage incomplete: stats_refresh_backfill.create.0 excluded (GET-only live run: needs POST /api/admin/customer-health/backfill)")
+      return
+    end
+
     local client = setup.client
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- CREATE
     local stats_refresh_backfill_ref01_ent = client:StatsRefreshBackfill(nil)
     local stats_refresh_backfill_ref01_data = helpers.to_map(vs.getprop(

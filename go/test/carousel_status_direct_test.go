@@ -34,26 +34,31 @@ func TestCarouselStatusDirect(t *testing.T) {
 			return
 		}
 		if setup.live {
-			for _, _liveKey := range []string{"carousel_status01"} {
+			for _, _liveKey := range []string{"carousel01"} {
 				if v := setup.idmap[_liveKey]; v == nil {
 					liveMiss(t, carousel_statusDirectLiveStrict, "Live test blocked: needs %s via CRACKED_API_REFERENCE_TEST_CAROUSEL_STATUS_ENTID", _liveKey)
 					return
 				}
 			}
 		}
+		if setup.live {
+			livePace()
+		}
 		client := setup.client
 
 		params := map[string]any{}
+		query := map[string]any{}
 		if setup.live {
-			params["id"] = setup.idmap["carousel_status01"]
+			params["carousel_id"] = setup.idmap["carousel01"]
 		} else {
-			params["id"] = "direct01"
+			params["carousel_id"] = "direct01"
 		}
 
 		result, err := client.Direct(map[string]any{
-			"path":   "api/carousel/{id}/status",
+			"path":   "api/carousel/{carousel_id}/status",
 			"method": "GET",
 			"params": params,
+			"query":  query,
 		})
 		if setup.live {
 			if err != nil {

@@ -62,9 +62,18 @@ func TestScrapedDataEntity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" {
+			t.Log("LIVE STEP {\"id\":\"scraped_data.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/scraper/extract\"}")
+			t.Skip("Live coverage incomplete: scraped_data.create.0 excluded (GET-only live run: needs POST /api/scraper/extract)")
+			return
+		}
+
 		client := setup.client
 		_ = client
 
+		if setup.live {
+			livePace()
+		}
 		// CREATE
 		scrapedDataRef01Ent := client.ScrapedData(nil)
 		scrapedDataRef01Data := core.ToMapAny(vs.GetProp(

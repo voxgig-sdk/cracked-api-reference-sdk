@@ -46,6 +46,9 @@ class AgentAccessPhilStatsRefreshEntityTest extends TestCase
             $agent_access_phil_stats_refresh_ref01_data = Helpers::to_map($agent_access_phil_stats_refresh_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LOAD
         $agent_access_phil_stats_refresh_ref01_ent = $client->AgentAccessPhilStatsRefresh(null);
         $agent_access_phil_stats_refresh_ref01_match_dt0 = [];

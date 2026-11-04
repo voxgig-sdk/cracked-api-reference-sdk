@@ -33,14 +33,19 @@ class SocialDirectTest extends TestCase
             $this->markTestSkipped($_reason ?? "skipped via sdk-test-control.json");
             return;
         }
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         $client = $setup["client"];
 
         $params = [];
+        $query = [];
 
         $result = $client->direct([
             "path" => "social/connections",
             "method" => "GET",
             "params" => $params,
+            "query" => $query,
         ]);
         if ($setup["live"]) {
             if (!self::liveOk($result)) {
@@ -67,6 +72,9 @@ class SocialDirectTest extends TestCase
         if ($_shouldSkip) {
             $this->markTestSkipped($_reason ?? "skipped via sdk-test-control.json");
             return;
+        }
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
         }
         $client = $setup["client"];
 

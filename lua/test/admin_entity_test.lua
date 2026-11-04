@@ -154,6 +154,57 @@ describe("AdminEntity", function()
         return
       end
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" then
+      print("LIVE STEP {\"id\":\"admin.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/admin/users/{user_id}/regenerate-video/{video_id}\"}")
+      print("LIVE STEP {\"id\":\"admin.remove.3\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs DELETE /api/admin/users/{user_id}/agents/{agent_id}\"}")
+      print("LIVE STEP {\"id\":\"admin.list.4\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: checks a removal this run does not make\"}")
+    local client = setup.client
+    if setup.live then
+      local _live_id = nil
+      if not setup.synthetic_only then
+        _live_id = setup.idmap["admin01"]
+      end
+      runner.live_pace()
+      runner.live_existing(pending, setup, LIVE_STRICT, "admin", function()
+        return client:Admin(nil):list({}, nil)
+      end, "id", _live_id)
+    end
+
+    -- Bootstrap entity data from existing test data.
+    local admin_ref01_data_raw = vs.items(helpers.to_map(
+      vs.getpath(setup.data, "existing.admin")))
+    local admin_ref01_data = nil
+    if #admin_ref01_data_raw > 0 then
+      admin_ref01_data = helpers.to_map(admin_ref01_data_raw[1][2])
+    end
+
+    if setup.live then
+      runner.live_pace()
+    end
+    -- LIST
+    local admin_ref01_ent = client:Admin(nil)
+    local admin_ref01_match = {}
+
+    local admin_ref01_list_result, err = admin_ref01_ent:list(admin_ref01_match, nil)
+    assert.is_nil(err)
+    assert.is_table(admin_ref01_list_result)
+
+    if setup.live then
+      runner.live_pace()
+    end
+    -- LOAD
+    local admin_ref01_match_dt0 = {
+      id = admin_ref01_data["id"],
+    }
+    local admin_ref01_data_dt0_loaded, err = admin_ref01_ent:load(admin_ref01_match_dt0, nil)
+    assert.is_nil(err)
+    local admin_ref01_data_dt0_load_result = helpers.to_map(type(admin_ref01_data_dt0_loaded) == 'table' and admin_ref01_data_dt0_loaded.data_get and admin_ref01_data_dt0_loaded:data_get() or admin_ref01_data_dt0_loaded)
+    assert.is_not_nil(admin_ref01_data_dt0_load_result)
+    assert.is_true(runner.live_same_id(admin_ref01_data_dt0_load_result["id"], admin_ref01_data["id"]))
+
+      return
+    end
+
     if setup.live then
       for _, _live_key in ipairs({"user01"}) do
         if setup.synthetic_only or setup.idmap[_live_key] == nil then
@@ -163,6 +214,9 @@ describe("AdminEntity", function()
     end
     local client = setup.client
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- CREATE
     local admin_ref01_ent = client:Admin(nil)
     local admin_ref01_data = helpers.to_map(vs.getprop(
@@ -175,6 +229,9 @@ describe("AdminEntity", function()
     assert.is_not_nil(admin_ref01_data)
     assert.is_not_nil(admin_ref01_data["id"])
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LIST
     local admin_ref01_match = {}
 
@@ -187,6 +244,9 @@ describe("AdminEntity", function()
       { id = admin_ref01_data["id"] })
     assert.is_false(vs.isempty(found_item))
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LOAD
     local admin_ref01_match_dt0 = {
       id = admin_ref01_data["id"],
@@ -195,7 +255,7 @@ describe("AdminEntity", function()
     assert.is_nil(err)
     local admin_ref01_data_dt0_load_result = helpers.to_map(type(admin_ref01_data_dt0_loaded) == 'table' and admin_ref01_data_dt0_loaded.data_get and admin_ref01_data_dt0_loaded:data_get() or admin_ref01_data_dt0_loaded)
     assert.is_not_nil(admin_ref01_data_dt0_load_result)
-    assert.are.equal(admin_ref01_data_dt0_load_result["id"], admin_ref01_data["id"])
+    assert.is_true(runner.live_same_id(admin_ref01_data_dt0_load_result["id"], admin_ref01_data["id"]))
 
   end)
 end)
@@ -220,7 +280,7 @@ function admin_basic_setup(extra)
 
   -- Generate idmap via transform.
   local idmap = vs.transform(
-    { "admin01", "admin02", "admin03", "user01", "user02", "user03", "agent01", "agent02", "agent03", "video01", "video02", "video03" },
+    { "admin01", "admin02", "admin03", "user01", "user02", "user03", "agent01", "agent02", "agent03", "schedule_queue01", "schedule_queue02", "schedule_queue03", "video01", "video02", "video03" },
     {
       ["`$PACK`"] = { "", {
         ["`$KEY`"] = "`$COPY`",

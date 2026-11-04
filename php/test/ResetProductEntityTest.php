@@ -36,8 +36,35 @@ class ResetProductEntityTest extends TestCase
                 return;
             }
         }
+        if (!empty($setup["live"]) && getenv('VOXGIG_GETONLY_GUARD') === "TRUE") {
+            fwrite(STDOUT, 'LIVE STEP {"id":"reset_product.create.0","state":"excluded","attempted":false,"reason":"GET-only live run: needs POST /api/reset-product/generate-videos-v6"}' . "\n");
         $client = $setup["client"];
 
+        // Bootstrap entity data from existing test data.
+        $reset_product_ref01_data_raw = Vs::items(Helpers::to_map(
+            Vs::getpath($setup["data"], "existing.reset_product")));
+        $reset_product_ref01_data = null;
+        if (count($reset_product_ref01_data_raw) > 0) {
+            $reset_product_ref01_data = Helpers::to_map($reset_product_ref01_data_raw[0][1]);
+        }
+
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
+        // LOAD
+        $reset_product_ref01_ent = $client->ResetProduct(null);
+        $reset_product_ref01_match_dt0 = [];
+        $reset_product_ref01_data_dt0_loaded = $reset_product_ref01_ent->load($reset_product_ref01_match_dt0, null);
+        $this->assertNotNull($reset_product_ref01_data_dt0_loaded);
+
+            return;
+        }
+
+        $client = $setup["client"];
+
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // CREATE
         $reset_product_ref01_ent = $client->ResetProduct(null);
         $reset_product_ref01_data = Helpers::to_map(Vs::getprop(
@@ -47,6 +74,9 @@ class ResetProductEntityTest extends TestCase
         $reset_product_ref01_data = Helpers::to_map(is_object($reset_product_ref01_data_result) && method_exists($reset_product_ref01_data_result, 'data_get') ? $reset_product_ref01_data_result->data_get() : $reset_product_ref01_data_result);
         $this->assertNotNull($reset_product_ref01_data);
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LOAD
         $reset_product_ref01_match_dt0 = [];
         $reset_product_ref01_data_dt0_loaded = $reset_product_ref01_ent->load($reset_product_ref01_match_dt0, null);

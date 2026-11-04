@@ -153,6 +153,8 @@ class TestIrisUsageEntity:
         if len(iris_usage_ref01_data_raw) > 0:
             iris_usage_ref01_data = helpers.to_map(iris_usage_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LIST
         iris_usage_ref01_ent = client.IrisUsage(None)
         iris_usage_ref01_match = {}

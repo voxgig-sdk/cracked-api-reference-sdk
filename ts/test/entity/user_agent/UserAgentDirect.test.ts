@@ -43,19 +43,24 @@ describe('UserAgentDirect', async () => {
     if (liveScenariosActive()) { t.skip('Covered by live operation scenarios'); return }
     const setup = directSetup([{ id: 'direct01' }, { id: 'direct02' }])
     if (maybeSkipControl(t, 'direct', 'direct-list-user_agent', setup.live)) return
-    if (skipIfMissingIds(t, setup, ["user_agent01"], LIVE_STRICT)) return
+    if (setup.live && 'TRUE' === process.env.VOXGIG_GETONLY_GUARD && null == setup.idmap?.["user01"]) {
+      console.log("LIVE STEP {\"id\":\"direct-list-user_agent\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs user01, which only POST /api/admin/users/{user_id}/fix-auto-schedule-by-date gives\"}")
+      t.skip("Live coverage incomplete: direct-list-user_agent excluded (GET-only live run: needs user01, which only POST /api/admin/users/{user_id}/fix-auto-schedule-by-date gives)")
+      return
+    }
+    if (skipIfMissingIds(t, setup, ["user01"], LIVE_STRICT)) return
     const { client, calls } = setup
 
     const params: any = {}
     const query: any = {}
     if (setup.live) {
-      params.id = setup.idmap['user_agent01']
+      params.user_id = setup.idmap['user01']
     } else {
-      params.id = 'direct01'
+      params.user_id = 'direct01'
     }
 
     const result: any = await client.direct({
-      path: 'api/admin/users/{id}/agents',
+      path: 'api/admin/users/{user_id}/agents',
       method: 'GET',
       params,
       query,

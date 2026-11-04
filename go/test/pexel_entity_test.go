@@ -212,6 +212,9 @@ func TestPexelEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = pexelRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LIST
 		pexelRef01Ent := client.Pexel(nil)
 		pexelRef01Match := map[string]any{}

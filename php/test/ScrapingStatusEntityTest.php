@@ -46,6 +46,9 @@ class ScrapingStatusEntityTest extends TestCase
             $scraping_status_ref01_data = Helpers::to_map($scraping_status_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LOAD
         $scraping_status_ref01_ent = $client->ScrapingStatus(null);
         $scraping_status_ref01_match_dt0 = [];

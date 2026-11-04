@@ -211,6 +211,9 @@ class AdminPostEntityTest extends TestCase
             $admin_post_ref01_data = Helpers::to_map($admin_post_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LIST
         $admin_post_ref01_ent = $client->AdminPost(null);
         $admin_post_ref01_match = [];

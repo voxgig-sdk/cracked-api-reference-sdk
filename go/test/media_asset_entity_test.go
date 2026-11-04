@@ -62,9 +62,19 @@ func TestMediaAssetEntity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" {
+			t.Log("LIVE STEP {\"id\":\"media_asset.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/media-assets/{media_asset_id}/exclude-copycat\"}")
+			t.Log("LIVE STEP {\"id\":\"media_asset.load.1\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: reads a record only media_asset.create.0 gives\"}")
+			t.Skip("Live coverage incomplete: media_asset.create.0 excluded (GET-only live run: needs POST /api/media-assets/{media_asset_id}/exclude-copycat); media_asset.load.1 excluded (GET-only live run: reads a record only media_asset.create.0 gives)")
+			return
+		}
+
 		client := setup.client
 		_ = client
 
+		if setup.live {
+			livePace()
+		}
 		// CREATE
 		mediaAssetRef01Ent := client.MediaAsset(nil)
 		mediaAssetRef01Data := core.ToMapAny(vs.GetProp(
@@ -78,13 +88,16 @@ func TestMediaAssetEntity(t *testing.T) {
 		if mediaAssetRef01Data == nil {
 			t.Fatal("expected create result to be a map")
 		}
-		if mediaAssetRef01Data["id"] == nil {
+		if mediaAssetRef01Data["product_id"] == nil {
 			t.Fatal("expected created entity to have an id")
 		}
 
+		if setup.live {
+			livePace()
+		}
 		// LOAD
 		mediaAssetRef01MatchDt0 := map[string]any{
-			"id": mediaAssetRef01Data["id"],
+			"id": mediaAssetRef01Data["product_id"],
 		}
 		mediaAssetRef01DataDt0Loaded, err := mediaAssetRef01Ent.Load(mediaAssetRef01MatchDt0, nil)
 		if err != nil {
@@ -94,7 +107,7 @@ func TestMediaAssetEntity(t *testing.T) {
 		if mediaAssetRef01DataDt0LoadResult == nil {
 			t.Fatal("expected load result to be a map")
 		}
-		if mediaAssetRef01DataDt0LoadResult["id"] != mediaAssetRef01Data["id"] {
+		if !liveSameId(mediaAssetRef01DataDt0LoadResult["product_id"], mediaAssetRef01Data["product_id"]) {
 			t.Fatal("expected load result id to match")
 		}
 
@@ -117,6 +130,12 @@ func media_assetBasicSetup(extra map[string]any) *entityTestSetup {
 	var entityData map[string]any
 	if err := json.Unmarshal(entityDataSource, &entityData); err != nil {
 		panic("failed to parse media_asset test data: " + err.Error())
+	}
+
+	for _, rec := range core.ToMapAny(vs.GetPath(entityData, "existing.media_asset")) {
+		if recMap := core.ToMapAny(rec); recMap != nil && recMap["id"] != nil {
+			recMap["product_id"] = recMap["id"]
+		}
 	}
 
 	options := map[string]any{}

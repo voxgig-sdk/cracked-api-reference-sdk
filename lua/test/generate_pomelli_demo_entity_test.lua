@@ -44,8 +44,17 @@ describe("GeneratePomelliDemoEntity", function()
         return
       end
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" then
+      print("LIVE STEP {\"id\":\"generate_pomelli_demo.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/onboarding-v6/generate-pomelli-demo\"}")
+      pending("Live coverage incomplete: generate_pomelli_demo.create.0 excluded (GET-only live run: needs POST /api/onboarding-v6/generate-pomelli-demo)")
+      return
+    end
+
     local client = setup.client
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- CREATE
     local generate_pomelli_demo_ref01_ent = client:GeneratePomelliDemo(nil)
     local generate_pomelli_demo_ref01_data = helpers.to_map(vs.getprop(

@@ -41,8 +41,33 @@ class AdminVideoRemixerEntityTest < Minitest::Test
         return
       end
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE"
+      puts "LIVE STEP {\"id\":\"admin_video_remixer.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/admin/video-remixer/clips/{clip_id}/media\"}"
+      puts "LIVE STEP {\"id\":\"admin_video_remixer.update.1\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs PUT /api/admin/video-remixer/audits/{identifier}/answer\"}"
+      puts "LIVE STEP {\"id\":\"admin_video_remixer.remove.3\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs DELETE /api/admin/video-remixer/runs/{identifier}\"}"
     client = setup[:client]
 
+    # Bootstrap entity data from existing test data.
+    admin_video_remixer_ref01_data_raw = Vs.items(Helpers.to_map(
+      Vs.getpath(setup[:data], "existing.admin_video_remixer")))
+    admin_video_remixer_ref01_data = nil
+    if admin_video_remixer_ref01_data_raw.length > 0
+      admin_video_remixer_ref01_data = Helpers.to_map(admin_video_remixer_ref01_data_raw[0][1])
+    end
+
+    Runner.live_pace if setup[:live]
+    # LOAD
+    admin_video_remixer_ref01_ent = client.AdminVideoRemixer(nil)
+    admin_video_remixer_ref01_match_dt0 = {}
+    admin_video_remixer_ref01_data_dt0_loaded = admin_video_remixer_ref01_ent.load(admin_video_remixer_ref01_match_dt0, nil)
+    assert !admin_video_remixer_ref01_data_dt0_loaded.nil?
+
+      return
+    end
+
+    client = setup[:client]
+
+    Runner.live_pace if setup[:live]
     # CREATE
     admin_video_remixer_ref01_ent = client.AdminVideoRemixer(nil)
     admin_video_remixer_ref01_data = Helpers.to_map(Vs.getprop(
@@ -52,6 +77,7 @@ class AdminVideoRemixerEntityTest < Minitest::Test
     admin_video_remixer_ref01_data = Helpers.to_map(admin_video_remixer_ref01_data_result.respond_to?(:data_get) ? admin_video_remixer_ref01_data_result.data_get : admin_video_remixer_ref01_data_result)
     assert !admin_video_remixer_ref01_data.nil?
 
+    Runner.live_pace if setup[:live]
     # UPDATE
     admin_video_remixer_ref01_data_up0_up = {
     }
@@ -65,6 +91,7 @@ class AdminVideoRemixerEntityTest < Minitest::Test
     assert !admin_video_remixer_ref01_resdata_up0.nil?
     assert_equal admin_video_remixer_ref01_resdata_up0[admin_video_remixer_ref01_markdef_up0_name], admin_video_remixer_ref01_markdef_up0_value
 
+    Runner.live_pace if setup[:live]
     # LOAD
     admin_video_remixer_ref01_match_dt0 = {}
     admin_video_remixer_ref01_data_dt0_loaded = admin_video_remixer_ref01_ent.load(admin_video_remixer_ref01_match_dt0, nil)

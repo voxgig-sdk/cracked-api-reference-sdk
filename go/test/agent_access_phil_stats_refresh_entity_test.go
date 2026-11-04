@@ -62,6 +62,9 @@ func TestAgentAccessPhilStatsRefreshEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = agentAccessPhilStatsRefreshRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LOAD
 		agentAccessPhilStatsRefreshRef01Ent := client.AgentAccessPhilStatsRefresh(nil)
 		agentAccessPhilStatsRefreshRef01MatchDt0 := map[string]any{}

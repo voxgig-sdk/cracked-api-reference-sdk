@@ -60,6 +60,8 @@ class TestPublicResumeStatusEntity:
         if len(public_resume_status_ref01_data_raw) > 0:
             public_resume_status_ref01_data = helpers.to_map(public_resume_status_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LOAD
         public_resume_status_ref01_ent = client.PublicResumeStatus(None)
         public_resume_status_ref01_match_dt0 = {}

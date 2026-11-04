@@ -46,6 +46,9 @@ class ExactFormulaEntityTest extends TestCase
             $exact_formula_ref01_data = Helpers::to_map($exact_formula_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LOAD
         $exact_formula_ref01_ent = $client->ExactFormula(null);
         $exact_formula_ref01_match_dt0 = [];

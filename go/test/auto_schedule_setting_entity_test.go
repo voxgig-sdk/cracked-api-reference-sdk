@@ -63,6 +63,8 @@ func TestAutoScheduleSettingEntity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" {
+			t.Log("LIVE STEP {\"id\":\"auto_schedule_setting.update.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs PUT /api/schedule/settings\"}")
 		client := setup.client
 		_ = client
 
@@ -76,6 +78,39 @@ func TestAutoScheduleSettingEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = autoScheduleSettingRef01Data
 
+		if setup.live {
+			livePace()
+		}
+		// LOAD
+		autoScheduleSettingRef01Ent := client.AutoScheduleSetting(nil)
+		autoScheduleSettingRef01MatchDt0 := map[string]any{}
+		autoScheduleSettingRef01DataDt0Loaded, err := autoScheduleSettingRef01Ent.Load(autoScheduleSettingRef01MatchDt0, nil)
+		if err != nil {
+			t.Fatalf("load failed: %v", err)
+		}
+		if autoScheduleSettingRef01DataDt0Loaded == nil {
+			t.Fatal("expected load result to be non-nil")
+		}
+
+		return
+		}
+
+		client := setup.client
+		_ = client
+
+		// Bootstrap entity data from existing test data (no create step in flow).
+		autoScheduleSettingRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.auto_schedule_setting")))
+		var autoScheduleSettingRef01Data map[string]any
+		if len(autoScheduleSettingRef01DataRaw) > 0 {
+			autoScheduleSettingRef01Data = core.ToMapAny(autoScheduleSettingRef01DataRaw[0][1])
+		}
+		// Discard guards against Go's unused-var check when the flow's steps
+		// happen not to consume the bootstrap data (e.g. list-only flows).
+		_ = autoScheduleSettingRef01Data
+
+		if setup.live {
+			livePace()
+		}
 		// UPDATE
 		autoScheduleSettingRef01Ent := client.AutoScheduleSetting(nil)
 		autoScheduleSettingRef01DataUp0Up := map[string]any{
@@ -97,6 +132,9 @@ func TestAutoScheduleSettingEntity(t *testing.T) {
 			t.Fatalf("expected %s to be updated, got %v", autoScheduleSettingRef01MarkdefUp0Name, autoScheduleSettingRef01ResdataUp0[autoScheduleSettingRef01MarkdefUp0Name])
 		}
 
+		if setup.live {
+			livePace()
+		}
 		// LOAD
 		autoScheduleSettingRef01MatchDt0 := map[string]any{}
 		autoScheduleSettingRef01DataDt0Loaded, err := autoScheduleSettingRef01Ent.Load(autoScheduleSettingRef01MatchDt0, nil)

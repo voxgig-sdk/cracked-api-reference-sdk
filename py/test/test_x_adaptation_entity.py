@@ -51,6 +51,8 @@ class TestXAdaptationEntity:
         if len(x_adaptation_ref01_data_raw) > 0:
             x_adaptation_ref01_data = helpers.to_map(x_adaptation_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LOAD
         x_adaptation_ref01_ent = client.XAdaptation(None)
         x_adaptation_ref01_match_dt0 = {}

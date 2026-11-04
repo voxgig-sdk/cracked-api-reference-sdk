@@ -229,6 +229,9 @@ class SeoKeywordEntityTest extends TestCase
             $seo_keyword_ref01_data = Helpers::to_map($seo_keyword_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LIST
         $seo_keyword_ref01_ent = $client->SeoKeyword(null);
         $seo_keyword_ref01_match = [];

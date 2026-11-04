@@ -93,7 +93,6 @@ class ReadmeExamplesTest extends TestCase
         "Carousel" => "carousel",
         "CarouselAgentDetail" => "carousel_agent_detail",
         "CarouselStatus" => "carousel_status",
-        "Chat" => "chat",
         "ChatHistory" => "chat_history",
         "ChatSession" => "chat_session",
         "Comment" => "comment",
@@ -113,7 +112,6 @@ class ReadmeExamplesTest extends TestCase
         "DailyStatus" => "daily_status",
         "DedicatedAgentsDashboard" => "dedicated_agents_dashboard",
         "EnterpriseAgent" => "enterprise_agent",
-        "EnterpriseProduct" => "enterprise_product",
         "ExactAvailability" => "exact_availability",
         "ExactFormula" => "exact_formula",
         "ExtractV2" => "extract_v2",
@@ -125,7 +123,6 @@ class ReadmeExamplesTest extends TestCase
         "GenerateSora2Prompt" => "generate_sora2_prompt",
         "Healthrx" => "healthrx",
         "InitResetProductV6" => "init_reset_product_v6",
-        "Iri" => "iri",
         "IrisCapability" => "iris_capability",
         "IrisChat" => "iris_chat",
         "IrisConnector" => "iris_connector",
@@ -155,16 +152,17 @@ class ReadmeExamplesTest extends TestCase
         "ProductLanding" => "product_landing",
         "PublicResumeStatus" => "public_resume_status",
         "ReRollVideo" => "re_roll_video",
-        "ReadRootGet" => "read_root_get",
         "RecordDemoBooked" => "record_demo_booked",
         "RefreshStat" => "refresh_stat",
         "RemixerClipper" => "remixer_clipper",
         "ResetProduct" => "reset_product",
         "RetryWebsiteScrape" => "retry_website_scrape",
+        "RootGet" => "root_get",
         "SaveSurvey" => "save_survey",
         "ScanSocial" => "scan_social",
         "ScanSocialsPublic" => "scan_socials_public",
         "ScanSocialsStatus" => "scan_socials_status",
+        "ScheduleQueue" => "schedule_queue",
         "ScheduleV2" => "schedule_v2",
         "Scrape" => "scrape",
         "ScrapeWebsitePublic" => "scrape_website_public",
@@ -211,6 +209,15 @@ class ReadmeExamplesTest extends TestCase
         "WinningAd" => "winning_ad",
         "XAdaptation" => "x_adaptation",
         "ZerohumanAdminAccount" => "zerohuman_admin_account",
+    ];
+
+    // Fixture key => the entity's declared identity field, where it is not "id".
+    private const ID_FIELDS = [
+        'carousel' => 'queue_id',
+        'customer_health' => 'user_id',
+        'media_asset' => 'product_id',
+        'product' => 'product_id',
+        'user' => 'userId',
     ];
 
     // Documented SDK method names — used only to recognise the NARROW
@@ -383,6 +390,16 @@ class ReadmeExamplesTest extends TestCase
         $this->assertSame([], $failures, "docs php blocks with syntax errors:\n" . implode("\n\n", $failures));
     }
 
+    /** The one mock record seeded per entity, keyed as the mock keys it. */
+    private static function seedRecord(string $storage): array
+    {
+        $record = ["id" => "test01"];
+        if (isset(self::ID_FIELDS[$storage])) {
+            $record[self::ID_FIELDS[$storage]] = "test01";
+        }
+        return $record;
+    }
+
     /**
      * Build the SDK 'entity' fixture option for the entities a block references,
      * falling back to seeding all entities when none are named.
@@ -392,12 +409,12 @@ class ReadmeExamplesTest extends TestCase
         $refs = [];
         foreach (self::ENTITIES as $name => $storage) {
             if (preg_match('/\$client->' . preg_quote($name, '/') . '\b/', $block)) {
-                $refs[$storage] = ["test01" => ["id" => "test01"]];
+                $refs[$storage] = ["test01" => self::seedRecord($storage)];
             }
         }
         if (empty($refs)) {
             foreach (self::ENTITIES as $storage) {
-                $refs[$storage] = ["test01" => ["id" => "test01"]];
+                $refs[$storage] = ["test01" => self::seedRecord($storage)];
             }
         }
         return ["entity" => $refs];

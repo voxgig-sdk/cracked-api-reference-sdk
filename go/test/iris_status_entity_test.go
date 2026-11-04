@@ -212,6 +212,9 @@ func TestIrisStatusEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = irisStatusRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LIST
 		irisStatusRef01Ent := client.IrisStatus(nil)
 		irisStatusRef01Match := map[string]any{}

@@ -41,8 +41,14 @@ class GenerateBlackoutSora2PromptEntityTest < Minitest::Test
         return
       end
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE"
+      puts "LIVE STEP {\"id\":\"generate_blackout_sora2_prompt.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/core/generate-blackout-sora2-prompt\"}"
+      skip("Live coverage incomplete: generate_blackout_sora2_prompt.create.0 excluded (GET-only live run: needs POST /api/core/generate-blackout-sora2-prompt)")
+    end
+
     client = setup[:client]
 
+    Runner.live_pace if setup[:live]
     # CREATE
     generate_blackout_sora2_prompt_ref01_ent = client.GenerateBlackoutSora2Prompt(nil)
     generate_blackout_sora2_prompt_ref01_data = Helpers.to_map(Vs.getprop(

@@ -219,8 +219,56 @@ class SocialEntityTest extends TestCase
                 return;
             }
         }
+        if (!empty($setup["live"]) && getenv('VOXGIG_GETONLY_GUARD') === "TRUE") {
+            fwrite(STDOUT, 'LIVE STEP {"id":"social.create.0","state":"excluded","attempted":false,"reason":"GET-only live run: needs POST /social/instagram/exchange"}' . "\n");
+            fwrite(STDOUT, 'LIVE STEP {"id":"social.remove.3","state":"excluded","attempted":false,"reason":"GET-only live run: needs DELETE /social/connections/{platform}"}' . "\n");
+            fwrite(STDOUT, 'LIVE STEP {"id":"social.list.4","state":"excluded","attempted":false,"reason":"GET-only live run: checks a removal this run does not make"}' . "\n");
+        $client = $setup["client"];
+        if (!empty($setup["live"])) {
+            $_liveId = empty($setup["synthetic_only"]) ? ($setup["idmap"]["social01"] ?? null) : null;
+            Runner::live_pace();
+            Runner::live_existing($setup, self::LIVE_STRICT, "social",
+                fn() => $client->Social(null)->list([], null), "id", $_liveId);
+        }
+
+        // Bootstrap entity data from existing test data.
+        $social_ref01_data_raw = Vs::items(Helpers::to_map(
+            Vs::getpath($setup["data"], "existing.social")));
+        $social_ref01_data = null;
+        if (count($social_ref01_data_raw) > 0) {
+            $social_ref01_data = Helpers::to_map($social_ref01_data_raw[0][1]);
+        }
+
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
+        // LIST
+        $social_ref01_ent = $client->Social(null);
+        $social_ref01_match = [];
+
+        $social_ref01_list_result = $social_ref01_ent->list($social_ref01_match, null);
+        $this->assertIsArray($social_ref01_list_result);
+
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
+        // LOAD
+        $social_ref01_match_dt0 = [
+            "id" => $social_ref01_data["id"],
+        ];
+        $social_ref01_data_dt0_loaded = $social_ref01_ent->load($social_ref01_match_dt0, null);
+        $social_ref01_data_dt0_load_result = Helpers::to_map(is_object($social_ref01_data_dt0_loaded) && method_exists($social_ref01_data_dt0_loaded, 'data_get') ? $social_ref01_data_dt0_loaded->data_get() : $social_ref01_data_dt0_loaded);
+        $this->assertNotNull($social_ref01_data_dt0_load_result);
+        $this->assertTrue(Runner::live_same_id($social_ref01_data_dt0_load_result["id"] ?? null, $social_ref01_data["id"]));
+
+            return;
+        }
+
         $client = $setup["client"];
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // CREATE
         $social_ref01_ent = $client->Social(null);
         $social_ref01_data = Helpers::to_map(Vs::getprop(
@@ -231,6 +279,9 @@ class SocialEntityTest extends TestCase
         $this->assertNotNull($social_ref01_data);
         $this->assertNotNull($social_ref01_data["id"]);
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LIST
         $social_ref01_match = [];
 
@@ -242,6 +293,9 @@ class SocialEntityTest extends TestCase
             ["id" => $social_ref01_data["id"]]);
         $this->assertNotEmpty($found_item);
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LOAD
         $social_ref01_match_dt0 = [
             "id" => $social_ref01_data["id"],
@@ -249,14 +303,20 @@ class SocialEntityTest extends TestCase
         $social_ref01_data_dt0_loaded = $social_ref01_ent->load($social_ref01_match_dt0, null);
         $social_ref01_data_dt0_load_result = Helpers::to_map(is_object($social_ref01_data_dt0_loaded) && method_exists($social_ref01_data_dt0_loaded, 'data_get') ? $social_ref01_data_dt0_loaded->data_get() : $social_ref01_data_dt0_loaded);
         $this->assertNotNull($social_ref01_data_dt0_load_result);
-        $this->assertEquals($social_ref01_data_dt0_load_result["id"], $social_ref01_data["id"]);
+        $this->assertTrue(Runner::live_same_id($social_ref01_data_dt0_load_result["id"] ?? null, $social_ref01_data["id"]));
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // REMOVE
         $social_ref01_match_rm0 = [
             "id" => $social_ref01_data["id"],
         ];
         $social_ref01_ent->remove($social_ref01_match_rm0, null);
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LIST
         $social_ref01_match_rt0 = [];
 

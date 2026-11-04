@@ -1,6 +1,7 @@
 # UserHealthDetail direct test
 
 import json
+import os
 import pytest
 
 from crackedapireference_sdk.utility.voxgig_struct import voxgig_struct as vs
@@ -32,23 +33,31 @@ class TestUserHealthDetailDirect:
         if _skip:
             pytest.skip(_reason or "skipped via sdk-test-control.json")
             return
+        if setup["live"] and os.environ.get("VOXGIG_GETONLY_GUARD") == "TRUE" and setup["idmap"].get("user01") is None:
+            print("LIVE STEP {\"id\":\"direct-list-user_health_detail\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs user01, which only POST /api/admin/users/{user_id}/fix-auto-schedule-by-date gives\"}")
+            pytest.skip("Live coverage incomplete: direct-list-user_health_detail excluded (GET-only live run: needs user01, which only POST /api/admin/users/{user_id}/fix-auto-schedule-by-date gives)")
+
         if setup["live"]:
-            for _live_key in ["user_health_detail01"]:
+            for _live_key in ["user01"]:
                 if setup["idmap"].get(_live_key) is None:
                     runner.live_miss(LIVE_STRICT, f"Live test blocked: needs {_live_key} via CRACKED_API_REFERENCE_TEST_USER_HEALTH_DETAIL_ENTID")
 
+        if setup["live"]:
+            runner.live_pace()
         client = setup["client"]
 
         params = {}
+        query = {}
         if setup["live"]:
-            params["id"] = setup["idmap"].get("user_health_detail01")
+            params["user_id"] = setup["idmap"].get("user01")
         else:
-            params["id"] = "direct01"
+            params["user_id"] = "direct01"
 
         result = client.direct({
-            "path": "api/admin/users/{id}/health-detail",
+            "path": "api/admin/users/{user_id}/health-detail",
             "method": "GET",
             "params": params,
+            "query": query,
         })
         if setup["live"]:
             if not _live_ok(result):

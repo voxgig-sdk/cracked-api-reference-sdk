@@ -44,6 +44,32 @@ describe("CommentCampaignEntity", function()
         return
       end
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" then
+      print("LIVE STEP {\"id\":\"comment_campaign.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/comments/products/{product_id}/campaign/sources/{source_id}/resolve\"}")
+      print("LIVE STEP {\"id\":\"comment_campaign.update.1\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs PUT /api/comments/products/{product_id}/campaign\"}")
+    local client = setup.client
+
+    -- Bootstrap entity data from existing test data.
+    local comment_campaign_ref01_data_raw = vs.items(helpers.to_map(
+      vs.getpath(setup.data, "existing.comment_campaign")))
+    local comment_campaign_ref01_data = nil
+    if #comment_campaign_ref01_data_raw > 0 then
+      comment_campaign_ref01_data = helpers.to_map(comment_campaign_ref01_data_raw[1][2])
+    end
+
+    if setup.live then
+      runner.live_pace()
+    end
+    -- LOAD
+    local comment_campaign_ref01_ent = client:CommentCampaign(nil)
+    local comment_campaign_ref01_match_dt0 = {}
+    local comment_campaign_ref01_data_dt0_loaded, err = comment_campaign_ref01_ent:load(comment_campaign_ref01_match_dt0, nil)
+    assert.is_nil(err)
+    assert.is_not_nil(comment_campaign_ref01_data_dt0_loaded)
+
+      return
+    end
+
     if setup.live then
       for _, _live_key in ipairs({"product01"}) do
         if setup.synthetic_only or setup.idmap[_live_key] == nil then
@@ -53,6 +79,9 @@ describe("CommentCampaignEntity", function()
     end
     local client = setup.client
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- CREATE
     local comment_campaign_ref01_ent = client:CommentCampaign(nil)
     local comment_campaign_ref01_data = helpers.to_map(vs.getprop(
@@ -64,6 +93,9 @@ describe("CommentCampaignEntity", function()
     comment_campaign_ref01_data = helpers.to_map(type(comment_campaign_ref01_data_result) == 'table' and comment_campaign_ref01_data_result.data_get and comment_campaign_ref01_data_result:data_get() or comment_campaign_ref01_data_result)
     assert.is_not_nil(comment_campaign_ref01_data)
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- UPDATE
     local comment_campaign_ref01_data_up0_up = {
     }
@@ -78,6 +110,9 @@ describe("CommentCampaignEntity", function()
     assert.is_not_nil(comment_campaign_ref01_resdata_up0)
     assert.are.equal(comment_campaign_ref01_resdata_up0[comment_campaign_ref01_markdef_up0_name], comment_campaign_ref01_markdef_up0_value)
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LOAD
     local comment_campaign_ref01_match_dt0 = {}
     local comment_campaign_ref01_data_dt0_loaded, err = comment_campaign_ref01_ent:load(comment_campaign_ref01_match_dt0, nil)

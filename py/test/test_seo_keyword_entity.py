@@ -153,6 +153,8 @@ class TestSeoKeywordEntity:
         if len(seo_keyword_ref01_data_raw) > 0:
             seo_keyword_ref01_data = helpers.to_map(seo_keyword_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LIST
         seo_keyword_ref01_ent = client.SeoKeyword(None)
         seo_keyword_ref01_match = {}

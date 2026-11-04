@@ -45,9 +45,18 @@ describe("CustomerHealthEntity", function()
       end
     end
     if setup.live then
-      runner.live_miss(pending, LIVE_STRICT, "Live entity test blocked: " .. "the flow loads a customer_health record it has no list to find")
+      for _, _live_key in ipairs({"customer_health01"}) do
+        if setup.synthetic_only or setup.idmap[_live_key] == nil then
+          runner.live_miss(pending, LIVE_STRICT, "Live entity test blocked: needs " .. _live_key .. " via CRACKED_API_REFERENCE_TEST_CUSTOMER_HEALTH_ENTID")
+        end
+      end
     end
     local client = setup.client
+    if setup.live then
+      runner.live_existing(pending, setup, LIVE_STRICT, "customer_health", function()
+        return { { id = setup.idmap["customer_health01"] } }
+      end, "user_id", setup.idmap["customer_health01"])
+    end
 
     -- Bootstrap entity data from existing test data.
     local customer_health_ref01_data_raw = vs.items(helpers.to_map(
@@ -57,16 +66,19 @@ describe("CustomerHealthEntity", function()
       customer_health_ref01_data = helpers.to_map(customer_health_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LOAD
     local customer_health_ref01_ent = client:CustomerHealth(nil)
     local customer_health_ref01_match_dt0 = {
-      id = customer_health_ref01_data["id"],
+      id = customer_health_ref01_data["user_id"],
     }
     local customer_health_ref01_data_dt0_loaded, err = customer_health_ref01_ent:load(customer_health_ref01_match_dt0, nil)
     assert.is_nil(err)
     local customer_health_ref01_data_dt0_load_result = helpers.to_map(type(customer_health_ref01_data_dt0_loaded) == 'table' and customer_health_ref01_data_dt0_loaded.data_get and customer_health_ref01_data_dt0_loaded:data_get() or customer_health_ref01_data_dt0_loaded)
     assert.is_not_nil(customer_health_ref01_data_dt0_load_result)
-    assert.are.equal(customer_health_ref01_data_dt0_load_result["id"], customer_health_ref01_data["id"])
+    assert.is_true(runner.live_same_id(customer_health_ref01_data_dt0_load_result["user_id"], customer_health_ref01_data["user_id"]))
 
   end)
 end)
@@ -83,6 +95,12 @@ function customer_health_basic_setup(extra)
   f:close()
 
   local entity_data = json.decode(entity_data_source)
+
+  for _, rec in pairs(((entity_data["existing"] or {})["customer_health"]) or {}) do
+    if type(rec) == "table" and rec["id"] ~= nil then
+      rec["user_id"] = rec["id"]
+    end
+  end
 
   local options = {}
   options["entity"] = entity_data["existing"]

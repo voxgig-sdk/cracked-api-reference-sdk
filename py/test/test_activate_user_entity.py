@@ -51,12 +51,18 @@ class TestActivateUserEntity:
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
                 return
+        if setup["live"] and os.environ.get("VOXGIG_GETONLY_GUARD") == "TRUE":
+            print("LIVE STEP {\"id\":\"activate_user.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/admin/users/{user_id}/activate-and-complete-onboarding\"}")
+            pytest.skip("Live coverage incomplete: activate_user.create.0 excluded (GET-only live run: needs POST /api/admin/users/{user_id}/activate-and-complete-onboarding)")
+
         if setup["live"]:
             for _live_key in ["user01"]:
                 if setup.get("synthetic_only") or setup["idmap"].get(_live_key) is None:
                     runner.live_miss(LIVE_STRICT, f"Live entity test blocked: needs {_live_key} via CRACKED_API_REFERENCE_TEST_ACTIVATE_USER_ENTID")
         client = setup["client"]
 
+        if setup["live"]:
+            runner.live_pace()
         # CREATE
         activate_user_ref01_ent = client.ActivateUser(None)
         activate_user_ref01_data = helpers.to_map(vs.getprop(

@@ -33,7 +33,7 @@ class UserHealthDetailEntityTest extends TestCase
         $client = CrackedApiReferenceSDK::test(null, ["feature" => ["validate" => ["active" => true]]]);
         $err = null;
         try {
-            $client->UserHealthDetail(null)->list(["id" => 1], null);
+            $client->UserHealthDetail(null)->list(["user_id" => 1], null);
         } catch (\Throwable $e) {
             $err = $e;
         }
@@ -45,11 +45,18 @@ class UserHealthDetailEntityTest extends TestCase
         $setup = user_health_detail_basic_setup(null);
         // Per-op sdk-test-control.json skip.
         $_live = !empty($setup["live"]);
-        foreach ([] as $_op) {
+        foreach (["list"] as $_op) {
             [$_shouldSkip, $_reason] = Runner::is_control_skipped("entityOp", "user_health_detail." . $_op, $_live ? "live" : "unit");
             if ($_shouldSkip) {
                 $this->markTestSkipped($_reason ?? "skipped via sdk-test-control.json");
                 return;
+            }
+        }
+        if (!empty($setup["live"])) {
+            foreach (["user01"] as $_liveKey) {
+                if (!empty($setup["synthetic_only"]) || null === ($setup["idmap"][$_liveKey] ?? null)) {
+                    Runner::live_miss(self::LIVE_STRICT, "Live entity test blocked: needs " . $_liveKey . " via CRACKED_API_REFERENCE_TEST_USER_HEALTH_DETAIL_ENTID");
+                }
             }
         }
         $client = $setup["client"];
@@ -61,6 +68,18 @@ class UserHealthDetailEntityTest extends TestCase
         if (count($user_health_detail_ref01_data_raw) > 0) {
             $user_health_detail_ref01_data = Helpers::to_map($user_health_detail_ref01_data_raw[0][1]);
         }
+
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
+        // LIST
+        $user_health_detail_ref01_ent = $client->UserHealthDetail(null);
+        $user_health_detail_ref01_match = [
+            "user_id" => $setup["idmap"]["user01"],
+        ];
+
+        $user_health_detail_ref01_list_result = $user_health_detail_ref01_ent->list($user_health_detail_ref01_match, null);
+        $this->assertIsArray($user_health_detail_ref01_list_result);
 
     }
 }
@@ -80,7 +99,7 @@ function user_health_detail_basic_setup($extra)
 
     // Generate idmap.
     $idmap = [];
-    foreach (["user_health_detail01", "user_health_detail02", "user_health_detail03"] as $k) {
+    foreach (["user_health_detail01", "user_health_detail02", "user_health_detail03", "user01", "user02", "user03"] as $k) {
         $idmap[$k] = strtoupper($k);
     }
 

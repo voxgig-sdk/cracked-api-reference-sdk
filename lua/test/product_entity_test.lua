@@ -154,6 +154,58 @@ describe("ProductEntity", function()
         return
       end
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" then
+      print("LIVE STEP {\"id\":\"product.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/products/{product_id}/validate-social-handle\"}")
+      print("LIVE STEP {\"id\":\"product.update.2\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs PUT /api/enterprise/products/{product_id}\"}")
+      print("LIVE STEP {\"id\":\"product.remove.4\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs DELETE /api/enterprise/products/{product_id}\"}")
+      print("LIVE STEP {\"id\":\"product.list.5\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: checks a removal this run does not make\"}")
+    local client = setup.client
+    if setup.live then
+      local _live_id = nil
+      if not setup.synthetic_only then
+        _live_id = setup.idmap["product01"]
+      end
+      runner.live_pace()
+      runner.live_existing(pending, setup, LIVE_STRICT, "product", function()
+        return client:Product(nil):list({}, nil)
+      end, "product_id", _live_id)
+    end
+
+    -- Bootstrap entity data from existing test data.
+    local product_ref01_data_raw = vs.items(helpers.to_map(
+      vs.getpath(setup.data, "existing.product")))
+    local product_ref01_data = nil
+    if #product_ref01_data_raw > 0 then
+      product_ref01_data = helpers.to_map(product_ref01_data_raw[1][2])
+    end
+
+    if setup.live then
+      runner.live_pace()
+    end
+    -- LIST
+    local product_ref01_ent = client:Product(nil)
+    local product_ref01_match = {}
+
+    local product_ref01_list_result, err = product_ref01_ent:list(product_ref01_match, nil)
+    assert.is_nil(err)
+    assert.is_table(product_ref01_list_result)
+
+    if setup.live then
+      runner.live_pace()
+    end
+    -- LOAD
+    local product_ref01_match_dt0 = {
+      id = product_ref01_data["product_id"],
+    }
+    local product_ref01_data_dt0_loaded, err = product_ref01_ent:load(product_ref01_match_dt0, nil)
+    assert.is_nil(err)
+    local product_ref01_data_dt0_load_result = helpers.to_map(type(product_ref01_data_dt0_loaded) == 'table' and product_ref01_data_dt0_loaded.data_get and product_ref01_data_dt0_loaded:data_get() or product_ref01_data_dt0_loaded)
+    assert.is_not_nil(product_ref01_data_dt0_load_result)
+    assert.is_true(runner.live_same_id(product_ref01_data_dt0_load_result["product_id"], product_ref01_data["product_id"]))
+
+      return
+    end
+
     if setup.live then
       for _, _live_key in ipairs({"user01"}) do
         if setup.synthetic_only or setup.idmap[_live_key] == nil then
@@ -163,6 +215,9 @@ describe("ProductEntity", function()
     end
     local client = setup.client
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- CREATE
     local product_ref01_ent = client:Product(nil)
     local product_ref01_data = helpers.to_map(vs.getprop(
@@ -173,8 +228,11 @@ describe("ProductEntity", function()
     assert.is_nil(err)
     product_ref01_data = helpers.to_map(type(product_ref01_data_result) == 'table' and product_ref01_data_result.data_get and product_ref01_data_result:data_get() or product_ref01_data_result)
     assert.is_not_nil(product_ref01_data)
-    assert.is_not_nil(product_ref01_data["id"])
+    assert.is_not_nil(product_ref01_data["product_id"])
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LIST
     local product_ref01_match = {}
 
@@ -184,12 +242,15 @@ describe("ProductEntity", function()
 
     local found_item = vs.select(
       runner.entity_list_to_data(product_ref01_list_result),
-      { id = product_ref01_data["id"] })
+      { product_id = product_ref01_data["product_id"] })
     assert.is_false(vs.isempty(found_item))
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- UPDATE
     local product_ref01_data_up0_up = {
-      id = product_ref01_data["id"],
+      id = product_ref01_data["product_id"],
     }
 
     local product_ref01_markdef_up0_name = "description"
@@ -200,26 +261,35 @@ describe("ProductEntity", function()
     assert.is_nil(err)
     local product_ref01_resdata_up0 = helpers.to_map(type(product_ref01_resdata_up0_result) == 'table' and product_ref01_resdata_up0_result.data_get and product_ref01_resdata_up0_result:data_get() or product_ref01_resdata_up0_result)
     assert.is_not_nil(product_ref01_resdata_up0)
-    assert.are.equal(product_ref01_resdata_up0["id"], product_ref01_data_up0_up["id"])
+    assert.is_true(runner.live_same_id(product_ref01_resdata_up0["product_id"], product_ref01_data_up0_up["id"]))
     assert.are.equal(product_ref01_resdata_up0[product_ref01_markdef_up0_name], product_ref01_markdef_up0_value)
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LOAD
     local product_ref01_match_dt0 = {
-      id = product_ref01_data["id"],
+      id = product_ref01_data["product_id"],
     }
     local product_ref01_data_dt0_loaded, err = product_ref01_ent:load(product_ref01_match_dt0, nil)
     assert.is_nil(err)
     local product_ref01_data_dt0_load_result = helpers.to_map(type(product_ref01_data_dt0_loaded) == 'table' and product_ref01_data_dt0_loaded.data_get and product_ref01_data_dt0_loaded:data_get() or product_ref01_data_dt0_loaded)
     assert.is_not_nil(product_ref01_data_dt0_load_result)
-    assert.are.equal(product_ref01_data_dt0_load_result["id"], product_ref01_data["id"])
+    assert.is_true(runner.live_same_id(product_ref01_data_dt0_load_result["product_id"], product_ref01_data["product_id"]))
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- REMOVE
     local product_ref01_match_rm0 = {
-      id = product_ref01_data["id"],
+      id = product_ref01_data["product_id"],
     }
     local _, err = product_ref01_ent:remove(product_ref01_match_rm0, nil)
     assert.is_nil(err)
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LIST
     local product_ref01_match_rt0 = {}
 
@@ -229,7 +299,7 @@ describe("ProductEntity", function()
 
     local not_found_item = vs.select(
       runner.entity_list_to_data(product_ref01_list_rt0_result),
-      { id = product_ref01_data["id"] })
+      { product_id = product_ref01_data["product_id"] })
     assert.is_true(vs.isempty(not_found_item))
 
   end)
@@ -247,6 +317,12 @@ function product_basic_setup(extra)
   f:close()
 
   local entity_data = json.decode(entity_data_source)
+
+  for _, rec in pairs(((entity_data["existing"] or {})["product"]) or {}) do
+    if type(rec) == "table" and rec["id"] ~= nil then
+      rec["product_id"] = rec["id"]
+    end
+  end
 
   local options = {}
   options["entity"] = entity_data["existing"]

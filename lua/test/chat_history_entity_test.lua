@@ -44,8 +44,17 @@ describe("ChatHistoryEntity", function()
         return
       end
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" then
+      print("LIVE STEP {\"id\":\"chat_history.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/chat/sessions\"}")
+      pending("Live coverage incomplete: chat_history.create.0 excluded (GET-only live run: needs POST /api/chat/sessions)")
+      return
+    end
+
     local client = setup.client
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- CREATE
     local chat_history_ref01_ent = client:ChatHistory(nil)
     local chat_history_ref01_data = helpers.to_map(vs.getprop(

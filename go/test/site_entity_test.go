@@ -62,6 +62,9 @@ func TestSiteEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = siteRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LOAD
 		siteRef01Ent := client.Site(nil)
 		siteRef01MatchDt0 := map[string]any{}

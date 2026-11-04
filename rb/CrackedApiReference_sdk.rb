@@ -153,6 +153,13 @@ class CrackedApiReferenceSDK
       uh.each { |k, v| ctx.spec.headers[k] = v }
     end
 
+    # A raw request has no point to declare its response type, so it asks
+    # for the JSON it reads: an API that negotiates on Accept otherwise
+    # answers in its own default format. A caller's own accept wins.
+    unless ctx.spec.headers.keys.any? { |k| k.to_s.downcase == "accept" }
+      ctx.spec.headers["accept"] = "application/json"
+    end
+
     _, err = utility.prepare_auth.call(ctx)
     raise err if err
 
@@ -185,9 +192,9 @@ class CrackedApiReferenceSDK
     {
       "ok" => false,
       "err" => CrackedApiReferenceError.new(
-        "#{op}_allow",
         "CrackedApiReferenceSDK: #{op}: operation not allowed by" \
-        " SDK option allow.op value: \"#{allow_op}\""),
+        " SDK option allow.op value: \"#{allow_op}\"",
+        code: "#{op}_allow"),
     }
   end
 
@@ -306,7 +313,7 @@ class CrackedApiReferenceSDK
       msg = "graphql error" if msg.nil? || msg.to_s.empty?
       res["ok"] = false
       res["err"] = CrackedApiReferenceError.new(
-        "graphql_error", "CrackedApiReferenceSDK: graphql: #{msg}")
+        "CrackedApiReferenceSDK: graphql: #{msg}", code: "graphql_error")
       res["graphql"] = errors
     end
 
@@ -685,13 +692,6 @@ class CrackedApiReferenceSDK
   end
 
 
-  # Canonical facade: client.Chat.list / client.Chat.load({ "id" => ... })
-  def Chat(data = nil)
-    require_relative 'entity/chat_entity'
-    ChatEntity.new(self, data)
-  end
-
-
   # Canonical facade: client.ChatHistory.list / client.ChatHistory.load({ "id" => ... })
   def ChatHistory(data = nil)
     require_relative 'entity/chat_history_entity'
@@ -825,13 +825,6 @@ class CrackedApiReferenceSDK
   end
 
 
-  # Canonical facade: client.EnterpriseProduct.list / client.EnterpriseProduct.load({ "id" => ... })
-  def EnterpriseProduct(data = nil)
-    require_relative 'entity/enterprise_product_entity'
-    EnterpriseProductEntity.new(self, data)
-  end
-
-
   # Canonical facade: client.ExactAvailability.list / client.ExactAvailability.load({ "id" => ... })
   def ExactAvailability(data = nil)
     require_relative 'entity/exact_availability_entity'
@@ -906,13 +899,6 @@ class CrackedApiReferenceSDK
   def InitResetProductV6(data = nil)
     require_relative 'entity/init_reset_product_v6_entity'
     InitResetProductV6Entity.new(self, data)
-  end
-
-
-  # Canonical facade: client.Iri.list / client.Iri.load({ "id" => ... })
-  def Iri(data = nil)
-    require_relative 'entity/iri_entity'
-    IriEntity.new(self, data)
   end
 
 
@@ -1119,13 +1105,6 @@ class CrackedApiReferenceSDK
   end
 
 
-  # Canonical facade: client.ReadRootGet.list / client.ReadRootGet.load({ "id" => ... })
-  def ReadRootGet(data = nil)
-    require_relative 'entity/read_root_get_entity'
-    ReadRootGetEntity.new(self, data)
-  end
-
-
   # Canonical facade: client.RecordDemoBooked.list / client.RecordDemoBooked.load({ "id" => ... })
   def RecordDemoBooked(data = nil)
     require_relative 'entity/record_demo_booked_entity'
@@ -1161,6 +1140,13 @@ class CrackedApiReferenceSDK
   end
 
 
+  # Canonical facade: client.RootGet.list / client.RootGet.load({ "id" => ... })
+  def RootGet(data = nil)
+    require_relative 'entity/root_get_entity'
+    RootGetEntity.new(self, data)
+  end
+
+
   # Canonical facade: client.SaveSurvey.list / client.SaveSurvey.load({ "id" => ... })
   def SaveSurvey(data = nil)
     require_relative 'entity/save_survey_entity'
@@ -1186,6 +1172,13 @@ class CrackedApiReferenceSDK
   def ScanSocialsStatus(data = nil)
     require_relative 'entity/scan_socials_status_entity'
     ScanSocialsStatusEntity.new(self, data)
+  end
+
+
+  # Canonical facade: client.ScheduleQueue.list / client.ScheduleQueue.load({ "id" => ... })
+  def ScheduleQueue(data = nil)
+    require_relative 'entity/schedule_queue_entity'
+    ScheduleQueueEntity.new(self, data)
   end
 
 

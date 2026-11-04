@@ -72,7 +72,7 @@ main: kit: entity: iris_status: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.connectorsPreview`"
           }
         }
       ]

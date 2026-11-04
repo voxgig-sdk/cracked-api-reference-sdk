@@ -44,8 +44,17 @@ describe("ScanSocialsPublicEntity", function()
         return
       end
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" then
+      print("LIVE STEP {\"id\":\"scan_socials_public.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/onboarding-v6/scan-socials-public\"}")
+      pending("Live coverage incomplete: scan_socials_public.create.0 excluded (GET-only live run: needs POST /api/onboarding-v6/scan-socials-public)")
+      return
+    end
+
     local client = setup.client
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- CREATE
     local scan_socials_public_ref01_ent = client:ScanSocialsPublic(nil)
     local scan_socials_public_ref01_data = helpers.to_map(vs.getprop(

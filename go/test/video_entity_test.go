@@ -63,9 +63,21 @@ func TestVideoEntity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" {
+			t.Log("LIVE STEP {\"id\":\"video.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /videos/{video_id}/retry-video\"}")
+			t.Log("LIVE STEP {\"id\":\"video.update.1\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs PATCH /videos/{video_id}\"}")
+			t.Log("LIVE STEP {\"id\":\"video.load.2\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: reads a record only video.create.0 gives\"}")
+			t.Log("LIVE STEP {\"id\":\"video.remove.3\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs DELETE /videos/{video_id}\"}")
+			t.Skip("Live coverage incomplete: video.create.0 excluded (GET-only live run: needs POST /videos/{video_id}/retry-video); video.update.1 excluded (GET-only live run: needs PATCH /videos/{video_id}); video.load.2 excluded (GET-only live run: reads a record only video.create.0 gives); video.remove.3 excluded (GET-only live run: needs DELETE /videos/{video_id})")
+			return
+		}
+
 		client := setup.client
 		_ = client
 
+		if setup.live {
+			livePace()
+		}
 		// CREATE
 		videoRef01Ent := client.Video(nil)
 		videoRef01Data := core.ToMapAny(vs.GetProp(
@@ -83,6 +95,9 @@ func TestVideoEntity(t *testing.T) {
 			t.Fatal("expected created entity to have an id")
 		}
 
+		if setup.live {
+			livePace()
+		}
 		// UPDATE
 		videoRef01DataUp0Up := map[string]any{
 			"id": videoRef01Data["id"],
@@ -100,13 +115,16 @@ func TestVideoEntity(t *testing.T) {
 		if videoRef01ResdataUp0 == nil {
 			t.Fatal("expected update result to be a map")
 		}
-		if videoRef01ResdataUp0["id"] != videoRef01DataUp0Up["id"] {
+		if !liveSameId(videoRef01ResdataUp0["id"], videoRef01DataUp0Up["id"]) {
 			t.Fatal("expected update result id to match")
 		}
 		if videoRef01ResdataUp0[videoRef01MarkdefUp0Name] != videoRef01MarkdefUp0Value {
 			t.Fatalf("expected %s to be updated, got %v", videoRef01MarkdefUp0Name, videoRef01ResdataUp0[videoRef01MarkdefUp0Name])
 		}
 
+		if setup.live {
+			livePace()
+		}
 		// LOAD
 		videoRef01MatchDt0 := map[string]any{
 			"id": videoRef01Data["id"],
@@ -119,10 +137,13 @@ func TestVideoEntity(t *testing.T) {
 		if videoRef01DataDt0LoadResult == nil {
 			t.Fatal("expected load result to be a map")
 		}
-		if videoRef01DataDt0LoadResult["id"] != videoRef01Data["id"] {
+		if !liveSameId(videoRef01DataDt0LoadResult["id"], videoRef01Data["id"]) {
 			t.Fatal("expected load result id to match")
 		}
 
+		if setup.live {
+			livePace()
+		}
 		// REMOVE
 		videoRef01MatchRm0 := map[string]any{
 			"id": videoRef01Data["id"],

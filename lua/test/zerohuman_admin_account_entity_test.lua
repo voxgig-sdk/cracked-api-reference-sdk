@@ -164,6 +164,9 @@ describe("ZerohumanAdminAccountEntity", function()
       zerohuman_admin_account_ref01_data = helpers.to_map(zerohuman_admin_account_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LIST
     local zerohuman_admin_account_ref01_ent = client:ZerohumanAdminAccount(nil)
     local zerohuman_admin_account_ref01_match = {}

@@ -16,7 +16,7 @@ Learn more about Voxgig SDKs at [voxgig.com/sdk](https://voxgig.com/sdk/).
 
 ## Entities, not endpoints
 
-This SDK exposes the API as **171 semantic entities** that you
+This SDK exposes the API as **169 semantic entities** that you
 call directly, instead of assembling URL paths and query strings. See the [Entities](#entities) table below for the full list. Entities are
 **Capitalised** to mark them as the primary surface, each with the operations they
 support (`list`, `load`, `create`, `update`, `patch`, `remove`):
@@ -46,22 +46,22 @@ network, and no credentials:
 // Shape: { entity: { <entity-name>: { <id>: <record> } } }
 const client = CrackedApiReferenceSDK.test({
   entity: {
-    admin_insight: {
+    agent_health: {
       test01: { id: 'test01' },
     },
   },
 })
-const admininsights = await client.AdminInsight().list()
-// admininsights is an array of AdminInsight entities, one per mock record
-console.log(admininsights.map((admininsight) => admininsight.data()))
+const agenthealths = await client.AgentHealth().list()
+// agenthealths is an array of AgentHealth entities, one per mock record
+console.log(agenthealths.map((agenthealth) => agenthealth.data()))
 ```
 
 ### Python
 
 ```python
 client = CrackedApiReferenceSDK.test()
-admininsights = client.AdminInsight().list()
-print([item.data_get() for item in admininsights])
+agenthealths = client.AgentHealth().list()
+print([item.data_get() for item in agenthealths])
 ```
 
 ### PHP
@@ -69,16 +69,16 @@ print([item.data_get() for item in admininsights])
 ```php
 // Seed fixture data so offline calls resolve without a live server.
 $client = CrackedApiReferenceSDK::test([
-    "entity" => ["admin_insight" => ["test01" => []]],
+    "entity" => ["agent_health" => ["test01" => []]],
 ]);
-$admininsights = $client->AdminInsight()->list();
+$agenthealths = $client->AgentHealth()->list();
 ```
 
 ### Golang
 
 ```go
 client := sdk.Test()
-result, err := client.AdminInsight(nil).List(
+result, err := client.AgentHealth(nil).List(
     nil, nil,
 )
 ```
@@ -88,16 +88,16 @@ result, err := client.AdminInsight(nil).List(
 ```ruby
 # Seed fixture data so offline calls resolve without a live server.
 client = CrackedApiReferenceSDK.test({
-  "entity" => { "admin_insight" => { "test01" => {} } },
+  "entity" => { "agent_health" => { "test01" => {} } },
 })
-admininsights = client.AdminInsight.list()
+agenthealths = client.AgentHealth.list()
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local results, err = client:AdminInsight():list()
+local results, err = client:AgentHealth():list()
 ```
 
 ## Packages
@@ -171,14 +171,14 @@ Then add it to your agent's MCP config (Claude Desktop, Cursor, etc.):
 
 ## Entities
 
-The API exposes 171 entities:
+The API exposes 169 entities:
 
 | Entity | Description | API path |
 | --- | --- | --- |
 | **Activate** | The Activate entity (create). | `/api/admin/users/{user_id}/activate` |
 | **ActivateUser** | The ActivateUser entity (create). | `/api/admin/users/{user_id}/activate-and-complete-onboarding` |
 | **ActiveOnboarding** | The ActiveOnboarding entity (load). | `/api/onboarding-v6/active-session` |
-| **Admin** | The Admin entity (create, list, load, remove, update). | `/api/admin/whitelist-testers` |
+| **Admin** | The Admin entity (create, list, load, remove). | `/api/admin/whitelist-testers` |
 | **AdminAccountReset** | The AdminAccountReset entity (create). | `/api/admin/agent-account-reset` |
 | **AdminCarousel** | The AdminCarousel entity (create, load, update). | `/api/admin/carousels/slideshow-import/{batch_id}` |
 | **AdminCarouselDemoReview** | The AdminCarouselDemoReview entity (create, load, update). | `/api/admin/carousels/demo-reviews/{formula_id}` |
@@ -197,7 +197,7 @@ The API exposes 171 entities:
 | **AdminUsersTableItem** | The AdminUsersTableItem entity (list). | `/api/admin/users/table` |
 | **AdminVideoRemixer** | The AdminVideoRemixer entity (create, load, patch, remove, update). | `/api/admin/video-remixer/clips/{clip_id}` |
 | **AdvanceStep** | The AdvanceStep entity (create). | `/api/onboarding-v6/advance-step` |
-| **Agent** | The Agent entity (list). | `/api/admin/agents` |
+| **Agent** | The Agent entity (list, update). | `/api/admin/agents` |
 | **AgentAccessCustomersHealth** | The AgentAccessCustomersHealth entity (list). | `/api/admin/customers-health` |
 | **AgentAccessOverview** | The AgentAccessOverview entity (load). | `/api/agent-access/overview` |
 | **AgentAccessPhilHourlyNotification** | The AgentAccessPhilHourlyNotification entity (load). | `/api/agent-access/phil-notifications/hourly` |
@@ -228,7 +228,6 @@ The API exposes 171 entities:
 | **Carousel** | The Carousel entity (create, list, load). | `/api/admin/carousels` |
 | **CarouselAgentDetail** | The CarouselAgentDetail entity (load). | `/api/admin/carousels/agents/{agent_id}` |
 | **CarouselStatus** | The CarouselStatus entity (list). | `/api/carousel/{video_id}/status` |
-| **Chat** | The Chat entity (create). | `/api/chat/sessions/{session_id}/messages` |
 | **ChatHistory** | The ChatHistory entity (create, load). | `/api/chat/sessions/{session_id}` |
 | **ChatSession** | The ChatSession entity (create). | `/api/chat/sessions/{session_id}/complete` |
 | **Comment** | The Comment entity (load). | `/api/comments/results` |
@@ -248,7 +247,6 @@ The API exposes 171 entities:
 | **DailyStatus** | The DailyStatus entity (load). | `/api/carousel/daily/{product_id}/status` |
 | **DedicatedAgentsDashboard** | The DedicatedAgentsDashboard entity (list). | `/api/admin/agents/dedicated-dashboard` |
 | **EnterpriseAgent** | The EnterpriseAgent entity (create, load). | `/api/enterprise/agents/global-pool-status` |
-| **EnterpriseProduct** | The EnterpriseProduct entity (load). | `/api/enterprise/products/{product_id}/status` |
 | **ExactAvailability** | The ExactAvailability entity (load). | `/api/carousel/exact-availability` |
 | **ExactFormula** | The ExactFormula entity (load). | `/api/carousel/exact-formulas` |
 | **ExtractV2** | The ExtractV2 entity (create). | `/api/scraper/extract_v2` |
@@ -260,10 +258,9 @@ The API exposes 171 entities:
 | **GenerateSora2Prompt** | The GenerateSora2Prompt entity (load). | `/api/core/generate-sora2-prompt` |
 | **Healthrx** | The Healthrx entity (create, load). | `/api/healthrx/products/{product_id}/accounts/{account_id}/contract` |
 | **InitResetProductV6** | The InitResetProductV6 entity (create). | `/api/reset-product/init-v6` |
-| **Iri** | The Iri entity (create). | `/api/iris/connectors/{connector_id}/start` |
 | **IrisCapability** | The IrisCapability entity (create). | `/api/platform/capabilities/{capability_name}` |
 | **IrisChat** | The IrisChat entity (create). | `/api/iris/chat` |
-| **IrisConnector** | The IrisConnector entity (list). | `/api/iris/connectors` |
+| **IrisConnector** | The IrisConnector entity (create, list). | `/api/iris/connectors` |
 | **IrisStatus** | The IrisStatus entity (list). | `/api/iris/status` |
 | **IrisTask** | The IrisTask entity (create, list). | `/api/iris/tasks` |
 | **IrisUsage** | The IrisUsage entity (list). | `/api/iris/usage` |
@@ -290,17 +287,18 @@ The API exposes 171 entities:
 | **ProductLanding** | The ProductLanding entity (list, update). | `/api/landings/me` |
 | **PublicResumeStatus** | The PublicResumeStatus entity (load). | `/api/onboarding-v6/resume-status-public` |
 | **ReRollVideo** | The ReRollVideo entity (create). | `/api/core/re-roll-video` |
-| **ReadRootGet** | The ReadRootGet entity (load). | `/` |
 | **RecordDemoBooked** | The RecordDemoBooked entity (create). | `/api/chat/sessions/{session_id}/demo-booked` |
 | **RefreshStat** | The RefreshStat entity (create). | `/api/analytics/refresh-stats` |
 | **RemixerClipper** | The RemixerClipper entity (create, load). | `/api/remixer-clippers/catalog` |
 | **ResetProduct** | The ResetProduct entity (create, load). | `/api/reset-product/generate-videos/status` |
 | **RetryWebsiteScrape** | The RetryWebsiteScrape entity (create). | `/api/onboarding-v6/retry-scrape` |
+| **RootGet** | The RootGet entity (load). | `/` |
 | **SaveSurvey** | The SaveSurvey entity (create). | `/api/onboarding-v6/save-survey` |
 | **ScanSocial** | The ScanSocial entity (create). | `/api/reset-product/scan-socials` |
 | **ScanSocialsPublic** | The ScanSocialsPublic entity (create). | `/api/onboarding-v6/scan-socials-public` |
 | **ScanSocialsStatus** | The ScanSocialsStatus entity (load). | `/api/video-variation/scan-socials/status` |
-| **ScheduleV2** | The ScheduleV2 entity (create, list, load, remove, update). | `/api/schedule/queue` |
+| **ScheduleQueue** | The ScheduleQueue entity (update). | `/api/schedule/queue/{queue_id}/replace-video` |
+| **ScheduleV2** | The ScheduleV2 entity (create, list, load, remove). | `/api/schedule/queue` |
 | **Scrape** | The Scrape entity (create). | `/api/reset-product/scrape` |
 | **ScrapeWebsitePublic** | The ScrapeWebsitePublic entity (create). | `/api/onboarding-v6/scrape-website-public` |
 | **ScrapedData** | The ScrapedData entity (create). | `/api/scraper/extract` |
@@ -335,7 +333,7 @@ The API exposes 171 entities:
 | **TikTokCreatorInfo** | The TikTokCreatorInfo entity (list). | `/social/tiktok/creator-info` |
 | **TopPost** | The TopPost entity (list). | `/api/admin/stats/top-posts` |
 | **UploadPostAgent** | The UploadPostAgent entity (create). | `/api/upload-post-agents/sync-platforms` |
-| **User** | The User entity (load, update). | `/api/upload-post-agents/user/{user_id}` |
+| **User** | The User entity (create, load, update). | `/api/upload-post-agents/user/{user_id}` |
 | **UserAgent** | The UserAgent entity (create, list). | `/api/admin/users/{user_id}/agents` |
 | **UserHealthDetail** | The UserHealthDetail entity (list). | `/api/admin/users/{user_id}/health-detail` |
 | **UserWithAvatarSubmission** | The UserWithAvatarSubmission entity (list). | `/api/admin/users/avatar-submissions` |

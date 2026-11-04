@@ -143,6 +143,8 @@ class TestAgentAccessUserWinningAdEntity:
         if len(agent_access_user_winning_ad_ref01_data_raw) > 0:
             agent_access_user_winning_ad_ref01_data = helpers.to_map(agent_access_user_winning_ad_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LIST
         agent_access_user_winning_ad_ref01_ent = client.AgentAccessUserWinningAd(None)
         agent_access_user_winning_ad_ref01_match = {}

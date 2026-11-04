@@ -30,25 +30,32 @@ class DailyStatusDirectTest extends TestCase
             $this->markTestSkipped($_reason ?? "skipped via sdk-test-control.json");
             return;
         }
+        if (!empty($setup["live"]) && getenv('VOXGIG_GETONLY_GUARD') === "TRUE" && null === ($setup["idmap"]['daily01'] ?? null)) {
+            fwrite(STDOUT, 'LIVE STEP {"id":"direct-load-daily_status","state":"excluded","attempted":false,"reason":"GET-only live run: needs daily01, which only POST /api/carousel/daily/{product_id}/plan gives"}' . "\n");
+            $this->markTestSkipped('Live coverage incomplete: direct-load-daily_status excluded (GET-only live run: needs daily01, which only POST /api/carousel/daily/{product_id}/plan gives)');
+        }
         if ($setup["live"]) {
-            foreach (["daily_status01"] as $_liveKey) {
+            foreach (["daily01"] as $_liveKey) {
                 if (null === ($setup["idmap"][$_liveKey] ?? null)) {
                     Runner::live_miss(self::LIVE_STRICT, "Live test blocked: needs " . $_liveKey . " via CRACKED_API_REFERENCE_TEST_DAILY_STATUS_ENTID");
                 }
             }
+        }
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
         }
         $client = $setup["client"];
 
         $params = [];
         $query = [];
         if ($setup["live"]) {
-            $params["id"] = $setup["idmap"]["daily_status01"] ?? null;
+            $params["daily_id"] = $setup["idmap"]["daily01"] ?? null;
         } else {
-            $params["id"] = "direct01";
+            $params["daily_id"] = "direct01";
         }
 
         $result = $client->direct([
-            "path" => "api/carousel/daily/{id}/status",
+            "path" => "api/carousel/daily/{daily_id}/status",
             "method" => "GET",
             "params" => $params,
             "query" => $query,

@@ -157,6 +157,49 @@ class ProductEntityTest < Minitest::Test
         return
       end
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE"
+      puts "LIVE STEP {\"id\":\"product.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/products/{product_id}/validate-social-handle\"}"
+      puts "LIVE STEP {\"id\":\"product.update.2\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs PUT /api/enterprise/products/{product_id}\"}"
+      puts "LIVE STEP {\"id\":\"product.remove.4\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs DELETE /api/enterprise/products/{product_id}\"}"
+      puts "LIVE STEP {\"id\":\"product.list.5\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: checks a removal this run does not make\"}"
+    client = setup[:client]
+    if setup[:live]
+      _live_id = setup[:synthetic_only] ? nil : setup[:idmap]["product01"]
+      Runner.live_pace
+      Runner.live_existing(setup, LIVE_STRICT, "product", "product_id", _live_id) do
+        client.Product(nil).list({}, nil)
+      end
+    end
+
+    # Bootstrap entity data from existing test data.
+    product_ref01_data_raw = Vs.items(Helpers.to_map(
+      Vs.getpath(setup[:data], "existing.product")))
+    product_ref01_data = nil
+    if product_ref01_data_raw.length > 0
+      product_ref01_data = Helpers.to_map(product_ref01_data_raw[0][1])
+    end
+
+    Runner.live_pace if setup[:live]
+    # LIST
+    product_ref01_ent = client.Product(nil)
+    product_ref01_match = {}
+
+    product_ref01_list_result = product_ref01_ent.list(product_ref01_match, nil)
+    assert product_ref01_list_result.is_a?(Array)
+
+    Runner.live_pace if setup[:live]
+    # LOAD
+    product_ref01_match_dt0 = {
+      "id" => product_ref01_data["product_id"],
+    }
+    product_ref01_data_dt0_loaded = product_ref01_ent.load(product_ref01_match_dt0, nil)
+    product_ref01_data_dt0_load_result = Helpers.to_map(product_ref01_data_dt0_loaded.respond_to?(:data_get) ? product_ref01_data_dt0_loaded.data_get : product_ref01_data_dt0_loaded)
+    assert !product_ref01_data_dt0_load_result.nil?
+    assert Runner.live_same_id(product_ref01_data_dt0_load_result["product_id"], product_ref01_data["product_id"])
+
+      return
+    end
+
     if setup[:live]
       ["user01"].each do |_live_key|
         if setup[:synthetic_only] || setup[:idmap][_live_key].nil?
@@ -166,6 +209,7 @@ class ProductEntityTest < Minitest::Test
     end
     client = setup[:client]
 
+    Runner.live_pace if setup[:live]
     # CREATE
     product_ref01_ent = client.Product(nil)
     product_ref01_data = Helpers.to_map(Vs.getprop(
@@ -175,8 +219,9 @@ class ProductEntityTest < Minitest::Test
     product_ref01_data_result = product_ref01_ent.create(product_ref01_data, nil)
     product_ref01_data = Helpers.to_map(product_ref01_data_result.respond_to?(:data_get) ? product_ref01_data_result.data_get : product_ref01_data_result)
     assert !product_ref01_data.nil?
-    assert !product_ref01_data["id"].nil?
+    assert !product_ref01_data["product_id"].nil?
 
+    Runner.live_pace if setup[:live]
     # LIST
     product_ref01_match = {}
 
@@ -185,12 +230,13 @@ class ProductEntityTest < Minitest::Test
 
     found_item = Vs.select(
       Runner.entity_list_to_data(product_ref01_list_result),
-      { "id" => product_ref01_data["id"] })
+      { "product_id" => product_ref01_data["product_id"] })
     assert !Vs.isempty(found_item)
 
+    Runner.live_pace if setup[:live]
     # UPDATE
     product_ref01_data_up0_up = {
-      "id" => product_ref01_data["id"],
+      "id" => product_ref01_data["product_id"],
     }
 
     product_ref01_markdef_up0_name = "description"
@@ -200,24 +246,27 @@ class ProductEntityTest < Minitest::Test
     product_ref01_resdata_up0_result = product_ref01_ent.update(product_ref01_data_up0_up, nil)
     product_ref01_resdata_up0 = Helpers.to_map(product_ref01_resdata_up0_result.respond_to?(:data_get) ? product_ref01_resdata_up0_result.data_get : product_ref01_resdata_up0_result)
     assert !product_ref01_resdata_up0.nil?
-    assert_equal product_ref01_resdata_up0["id"], product_ref01_data_up0_up["id"]
+    assert Runner.live_same_id(product_ref01_resdata_up0["product_id"], product_ref01_data_up0_up["id"])
     assert_equal product_ref01_resdata_up0[product_ref01_markdef_up0_name], product_ref01_markdef_up0_value
 
+    Runner.live_pace if setup[:live]
     # LOAD
     product_ref01_match_dt0 = {
-      "id" => product_ref01_data["id"],
+      "id" => product_ref01_data["product_id"],
     }
     product_ref01_data_dt0_loaded = product_ref01_ent.load(product_ref01_match_dt0, nil)
     product_ref01_data_dt0_load_result = Helpers.to_map(product_ref01_data_dt0_loaded.respond_to?(:data_get) ? product_ref01_data_dt0_loaded.data_get : product_ref01_data_dt0_loaded)
     assert !product_ref01_data_dt0_load_result.nil?
-    assert_equal product_ref01_data_dt0_load_result["id"], product_ref01_data["id"]
+    assert Runner.live_same_id(product_ref01_data_dt0_load_result["product_id"], product_ref01_data["product_id"])
 
+    Runner.live_pace if setup[:live]
     # REMOVE
     product_ref01_match_rm0 = {
-      "id" => product_ref01_data["id"],
+      "id" => product_ref01_data["product_id"],
     }
     product_ref01_ent.remove(product_ref01_match_rm0, nil)
 
+    Runner.live_pace if setup[:live]
     # LIST
     product_ref01_match_rt0 = {}
 
@@ -226,7 +275,7 @@ class ProductEntityTest < Minitest::Test
 
     not_found_item = Vs.select(
       Runner.entity_list_to_data(product_ref01_list_rt0_result),
-      { "id" => product_ref01_data["id"] })
+      { "product_id" => product_ref01_data["product_id"] })
     assert Vs.isempty(not_found_item)
 
   end
@@ -238,6 +287,10 @@ def product_basic_setup(extra)
   entity_data_file = File.join(__dir__, "..", "..", ".sdk", "test", "entity", "product", "ProductTestData.json")
   entity_data_source = File.read(entity_data_file, encoding: "UTF-8")
   entity_data = JSON.parse(entity_data_source)
+
+  ((entity_data["existing"] || {})["product"] || {}).each_value do |rec|
+    rec["product_id"] = rec["id"] if rec.is_a?(Hash) && !rec["id"].nil?
+  end
 
   options = {}
   options["entity"] = entity_data["existing"]

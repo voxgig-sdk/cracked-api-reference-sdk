@@ -44,6 +44,8 @@ describe("AutoScheduleSettingEntity", function()
         return
       end
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" then
+      print("LIVE STEP {\"id\":\"auto_schedule_setting.update.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs PUT /api/schedule/settings\"}")
     local client = setup.client
 
     -- Bootstrap entity data from existing test data.
@@ -54,6 +56,32 @@ describe("AutoScheduleSettingEntity", function()
       auto_schedule_setting_ref01_data = helpers.to_map(auto_schedule_setting_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
+    -- LOAD
+    local auto_schedule_setting_ref01_ent = client:AutoScheduleSetting(nil)
+    local auto_schedule_setting_ref01_match_dt0 = {}
+    local auto_schedule_setting_ref01_data_dt0_loaded, err = auto_schedule_setting_ref01_ent:load(auto_schedule_setting_ref01_match_dt0, nil)
+    assert.is_nil(err)
+    assert.is_not_nil(auto_schedule_setting_ref01_data_dt0_loaded)
+
+      return
+    end
+
+    local client = setup.client
+
+    -- Bootstrap entity data from existing test data.
+    local auto_schedule_setting_ref01_data_raw = vs.items(helpers.to_map(
+      vs.getpath(setup.data, "existing.auto_schedule_setting")))
+    local auto_schedule_setting_ref01_data = nil
+    if #auto_schedule_setting_ref01_data_raw > 0 then
+      auto_schedule_setting_ref01_data = helpers.to_map(auto_schedule_setting_ref01_data_raw[1][2])
+    end
+
+    if setup.live then
+      runner.live_pace()
+    end
     -- UPDATE
     local auto_schedule_setting_ref01_ent = client:AutoScheduleSetting(nil)
     local auto_schedule_setting_ref01_data_up0_up = {
@@ -69,6 +97,9 @@ describe("AutoScheduleSettingEntity", function()
     assert.is_not_nil(auto_schedule_setting_ref01_resdata_up0)
     assert.are.equal(auto_schedule_setting_ref01_resdata_up0[auto_schedule_setting_ref01_markdef_up0_name], auto_schedule_setting_ref01_markdef_up0_value)
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LOAD
     local auto_schedule_setting_ref01_match_dt0 = {}
     local auto_schedule_setting_ref01_data_dt0_loaded, err = auto_schedule_setting_ref01_ent:load(auto_schedule_setting_ref01_match_dt0, nil)

@@ -4,20 +4,6 @@ main: kit: entity: daily_status: {
 
   alias: field: {}
 
-  fields: {
-    id: {
-      h: "Id"
-      n: "id"
-      r: false
-      t: "`$STRING`"
-    }
-  }
-
-  id: {
-    field: "id"
-    name: "id"
-  }
-
   name: "daily_status"
   op: {
     load: {
@@ -33,7 +19,7 @@ main: kit: entity: daily_status: {
             params: [
               {
                 k: "param"
-                n: "id"
+                n: "daily_id"
                 or: "product_id"
                 r: true
                 t: "`$STRING`"
@@ -53,13 +39,13 @@ main: kit: entity: daily_status: {
           o: "/api/carousel/daily/{product_id}/status"
           q: {
             exist: [
+              "daily_id"
               "day"
-              "id"
             ]
           }
           r: {
             param: {
-              product_id: "id"
+              product_id: "daily_id"
             }
           }
           rs: {
@@ -77,7 +63,7 @@ main: kit: entity: daily_status: {
               lit: "daily"
             }
             {
-              var: "id"
+              var: "daily_id"
             }
             {
               lit: "status"
@@ -92,6 +78,12 @@ main: kit: entity: daily_status: {
     }
   }
 
+  fields: {
+  }
 
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.daily")]
+  ]
 
 }

@@ -60,6 +60,8 @@ class TestScanSocialsStatusEntity:
         if len(scan_socials_status_ref01_data_raw) > 0:
             scan_socials_status_ref01_data = helpers.to_map(scan_socials_status_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LOAD
         scan_socials_status_ref01_ent = client.ScanSocialsStatus(None)
         scan_socials_status_ref01_match_dt0 = {}

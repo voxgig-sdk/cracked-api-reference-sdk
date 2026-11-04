@@ -62,6 +62,17 @@ func TestIrisCapabilityEntity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" {
+			t.Log("LIVE STEP {\"id\":\"iris_capability.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/platform/capabilities/{capability_name}\"}")
+			t.Skip("Live coverage incomplete: iris_capability.create.0 excluded (GET-only live run: needs POST /api/platform/capabilities/{capability_name})")
+			return
+		}
+
+		if setup.live {
+			t.Skip("Live coverage incomplete: the flow has no step to run")
+			return
+		}
+
 		// Bootstrap entity data from existing test data (no create step in flow).
 		irisCapabilityRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.iris_capability")))
 		var irisCapabilityRef01Data map[string]any

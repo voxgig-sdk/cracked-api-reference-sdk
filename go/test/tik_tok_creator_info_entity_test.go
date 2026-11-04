@@ -212,6 +212,9 @@ func TestTikTokCreatorInfoEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = tikTokCreatorInfoRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LIST
 		tikTokCreatorInfoRef01Ent := client.TikTokCreatorInfo(nil)
 		tikTokCreatorInfoRef01Match := map[string]any{}

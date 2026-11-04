@@ -186,6 +186,8 @@ func TestAgentEntity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" {
+			t.Log("LIVE STEP {\"id\":\"agent.update.1\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs PUT /api/admin/agents/{agent_id}/active\"}")
 		client := setup.client
 		_ = client
 
@@ -199,6 +201,41 @@ func TestAgentEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = agentRef01Data
 
+		if setup.live {
+			livePace()
+		}
+		// LIST
+		agentRef01Ent := client.Agent(nil)
+		agentRef01Match := map[string]any{}
+
+		agentRef01ListResult, err := agentRef01Ent.List(agentRef01Match, nil)
+		if err != nil {
+			t.Fatalf("list failed: %v", err)
+		}
+		_, agentRef01ListOk := agentRef01ListResult.([]any)
+		if !agentRef01ListOk {
+			t.Fatalf("expected list result to be an array, got %T", agentRef01ListResult)
+		}
+
+		return
+		}
+
+		client := setup.client
+		_ = client
+
+		// Bootstrap entity data from existing test data (no create step in flow).
+		agentRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.agent")))
+		var agentRef01Data map[string]any
+		if len(agentRef01DataRaw) > 0 {
+			agentRef01Data = core.ToMapAny(agentRef01DataRaw[0][1])
+		}
+		// Discard guards against Go's unused-var check when the flow's steps
+		// happen not to consume the bootstrap data (e.g. list-only flows).
+		_ = agentRef01Data
+
+		if setup.live {
+			livePace()
+		}
 		// LIST
 		agentRef01Ent := client.Agent(nil)
 		agentRef01Match := map[string]any{}

@@ -139,11 +139,6 @@
       "provenance": "operation-contract",
       "version": 2,
       "source": "openapi3"
-    },
-    "PUT /api/schedule/queue/{queue_id}/replace-video": {
-      "provenance": "operation-contract",
-      "version": 2,
-      "source": "openapi3"
     }
   }
 }

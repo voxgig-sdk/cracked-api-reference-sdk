@@ -222,6 +222,9 @@ class StatEntityTest extends TestCase
             $stat_ref01_data = Helpers::to_map($stat_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LIST
         $stat_ref01_ent = $client->Stat(null);
         $stat_ref01_match = [];

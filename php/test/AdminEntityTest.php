@@ -180,11 +180,11 @@ class AdminEntityTest extends TestCase
             $this->markTestSkipped('feature not present in this SDK: validate');
         }
         $opts = ["feature" => ["validate" => ["active" => true, "request" => false, "response" => true]]];
-        $listed = CrackedApiReferenceSDK::test(['entity' => ['admin' => ['v1' => ['count' => 1, 'created_at' => 'x', 'date_from' => 'x', 'date_to' => 'x', 'email' => 'x', 'issue_ids' => 'x', 'platform' => 'x', 'posting_method' => 'x', 'query' => 'x', 'reason' => 'x', 'user_membership' => 'x', 'user_name' => 'x', 'user_onboarding_step' => 'x', 'video_type' => 'x']]]], $opts)->Admin(null)->list(null, null);
+        $listed = CrackedApiReferenceSDK::test(['entity' => ['admin' => ['v1' => ['created_at' => 'x', 'date_from' => 'x', 'date_to' => 'x', 'email' => 'x', 'issue_ids' => 'x', 'platform' => 'x', 'posting_method' => 'x', 'product_id' => 'x', 'query' => 'x', 'reason' => 'x', 'user_membership' => 'x', 'user_name' => 'x', 'user_onboarding_step' => 'x']]]], $opts)->Admin(null)->list(null, null);
         $this->assertSame(['v1'], array_map(fn($ent) => $ent->data_get()['id'] ?? null, $listed));
         $err = null;
         try {
-            CrackedApiReferenceSDK::test(['entity' => ['admin' => ['v1' => ['count' => 'x', 'created_at' => 'x', 'date_from' => 'x', 'date_to' => 'x', 'email' => 'x', 'issue_ids' => 'x', 'platform' => 'x', 'posting_method' => 'x', 'query' => 'x', 'reason' => 'x', 'user_membership' => 'x', 'user_name' => 'x', 'user_onboarding_step' => 'x', 'video_type' => 'x']]]], $opts)->Admin(null)->list(null, null);
+            CrackedApiReferenceSDK::test(['entity' => ['admin' => ['v1' => ['created_at' => 1, 'date_from' => 'x', 'date_to' => 'x', 'email' => 'x', 'issue_ids' => 'x', 'platform' => 'x', 'posting_method' => 'x', 'product_id' => 'x', 'query' => 'x', 'reason' => 'x', 'user_membership' => 'x', 'user_name' => 'x', 'user_onboarding_step' => 'x']]]], $opts)->Admin(null)->list(null, null);
         } catch (\Throwable $e) {
             $err = $e;
         }
@@ -219,6 +219,51 @@ class AdminEntityTest extends TestCase
                 return;
             }
         }
+        if (!empty($setup["live"]) && getenv('VOXGIG_GETONLY_GUARD') === "TRUE") {
+            fwrite(STDOUT, 'LIVE STEP {"id":"admin.create.0","state":"excluded","attempted":false,"reason":"GET-only live run: needs POST /api/admin/users/{user_id}/regenerate-video/{video_id}"}' . "\n");
+            fwrite(STDOUT, 'LIVE STEP {"id":"admin.remove.3","state":"excluded","attempted":false,"reason":"GET-only live run: needs DELETE /api/admin/users/{user_id}/agents/{agent_id}"}' . "\n");
+            fwrite(STDOUT, 'LIVE STEP {"id":"admin.list.4","state":"excluded","attempted":false,"reason":"GET-only live run: checks a removal this run does not make"}' . "\n");
+        $client = $setup["client"];
+        if (!empty($setup["live"])) {
+            $_liveId = empty($setup["synthetic_only"]) ? ($setup["idmap"]["admin01"] ?? null) : null;
+            Runner::live_pace();
+            Runner::live_existing($setup, self::LIVE_STRICT, "admin",
+                fn() => $client->Admin(null)->list([], null), "id", $_liveId);
+        }
+
+        // Bootstrap entity data from existing test data.
+        $admin_ref01_data_raw = Vs::items(Helpers::to_map(
+            Vs::getpath($setup["data"], "existing.admin")));
+        $admin_ref01_data = null;
+        if (count($admin_ref01_data_raw) > 0) {
+            $admin_ref01_data = Helpers::to_map($admin_ref01_data_raw[0][1]);
+        }
+
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
+        // LIST
+        $admin_ref01_ent = $client->Admin(null);
+        $admin_ref01_match = [];
+
+        $admin_ref01_list_result = $admin_ref01_ent->list($admin_ref01_match, null);
+        $this->assertIsArray($admin_ref01_list_result);
+
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
+        // LOAD
+        $admin_ref01_match_dt0 = [
+            "id" => $admin_ref01_data["id"],
+        ];
+        $admin_ref01_data_dt0_loaded = $admin_ref01_ent->load($admin_ref01_match_dt0, null);
+        $admin_ref01_data_dt0_load_result = Helpers::to_map(is_object($admin_ref01_data_dt0_loaded) && method_exists($admin_ref01_data_dt0_loaded, 'data_get') ? $admin_ref01_data_dt0_loaded->data_get() : $admin_ref01_data_dt0_loaded);
+        $this->assertNotNull($admin_ref01_data_dt0_load_result);
+        $this->assertTrue(Runner::live_same_id($admin_ref01_data_dt0_load_result["id"] ?? null, $admin_ref01_data["id"]));
+
+            return;
+        }
+
         if (!empty($setup["live"])) {
             foreach (["user01"] as $_liveKey) {
                 if (!empty($setup["synthetic_only"]) || null === ($setup["idmap"][$_liveKey] ?? null)) {
@@ -228,6 +273,9 @@ class AdminEntityTest extends TestCase
         }
         $client = $setup["client"];
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // CREATE
         $admin_ref01_ent = $client->Admin(null);
         $admin_ref01_data = Helpers::to_map(Vs::getprop(
@@ -239,6 +287,9 @@ class AdminEntityTest extends TestCase
         $this->assertNotNull($admin_ref01_data);
         $this->assertNotNull($admin_ref01_data["id"]);
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LIST
         $admin_ref01_match = [];
 
@@ -250,6 +301,9 @@ class AdminEntityTest extends TestCase
             ["id" => $admin_ref01_data["id"]]);
         $this->assertNotEmpty($found_item);
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LOAD
         $admin_ref01_match_dt0 = [
             "id" => $admin_ref01_data["id"],
@@ -257,7 +311,7 @@ class AdminEntityTest extends TestCase
         $admin_ref01_data_dt0_loaded = $admin_ref01_ent->load($admin_ref01_match_dt0, null);
         $admin_ref01_data_dt0_load_result = Helpers::to_map(is_object($admin_ref01_data_dt0_loaded) && method_exists($admin_ref01_data_dt0_loaded, 'data_get') ? $admin_ref01_data_dt0_loaded->data_get() : $admin_ref01_data_dt0_loaded);
         $this->assertNotNull($admin_ref01_data_dt0_load_result);
-        $this->assertEquals($admin_ref01_data_dt0_load_result["id"], $admin_ref01_data["id"]);
+        $this->assertTrue(Runner::live_same_id($admin_ref01_data_dt0_load_result["id"] ?? null, $admin_ref01_data["id"]));
 
     }
 }
@@ -277,7 +331,7 @@ function admin_basic_setup($extra)
 
     // Generate idmap.
     $idmap = [];
-    foreach (["admin01", "admin02", "admin03", "user01", "user02", "user03", "agent01", "agent02", "agent03", "video01", "video02", "video03"] as $k) {
+    foreach (["admin01", "admin02", "admin03", "user01", "user02", "user03", "agent01", "agent02", "agent03", "schedule_queue01", "schedule_queue02", "schedule_queue03", "video01", "video02", "video03"] as $k) {
         $idmap[$k] = strtoupper($k);
     }
 

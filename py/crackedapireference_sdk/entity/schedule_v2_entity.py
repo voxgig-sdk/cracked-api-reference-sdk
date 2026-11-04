@@ -9,7 +9,6 @@ from crackedapireference_sdk.crackedapireference_types import (
     ScheduleV2LoadMatch,
     ScheduleV2ListMatch,
     ScheduleV2CreateData,
-    ScheduleV2UpdateData,
     ScheduleV2RemoveMatch,
 )
 
@@ -275,26 +274,6 @@ class ScheduleV2Entity:
 
 
     
-    def update(self, reqdata: ScheduleV2UpdateData, ctrl=None) -> ScheduleV2Entity:
-        utility = self._utility
-        ctx = utility.make_context({
-            "opname": "update",
-            "ctrl": ctrl,
-            "match": self._match,
-            "data": self._data,
-            "reqdata": reqdata,
-        }, self._entctx)
-
-        def post_done():
-            if ctx.result is not None:
-                if ctx.result.resmatch is not None:
-                    self._match = ctx.result.resmatch
-                if ctx.result.resdata is not None:
-                    self._data = helpers.to_map(vs.clone(ctx.result.resdata)) or {}
-
-        return self._run_op(ctx, post_done)
-
-
 
     
 

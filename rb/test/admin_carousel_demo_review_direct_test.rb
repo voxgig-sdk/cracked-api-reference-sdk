@@ -24,6 +24,10 @@ class AdminCarouselDemoReviewDirectTest < Minitest::Test
       skip(_reason || "skipped via sdk-test-control.json")
       return
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE" && setup[:idmap]["admin_carousel_demo_review01"].nil?
+      puts "LIVE STEP {\"id\":\"direct-load-admin_carousel_demo_review\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs admin_carousel_demo_review01, which only POST /api/admin/carousels/demo-reviews/{formula_id}/decision gives\"}"
+      skip("Live coverage incomplete: direct-load-admin_carousel_demo_review excluded (GET-only live run: needs admin_carousel_demo_review01, which only POST /api/admin/carousels/demo-reviews/{formula_id}/decision gives)")
+    end
     if setup[:live]
       ["admin_carousel_demo_review01"].each do |_live_key|
         if setup[:idmap][_live_key].nil?
@@ -31,6 +35,7 @@ class AdminCarouselDemoReviewDirectTest < Minitest::Test
         end
       end
     end
+    Runner.live_pace if setup[:live]
     client = setup[:client]
 
     params = {}

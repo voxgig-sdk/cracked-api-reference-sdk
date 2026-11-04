@@ -87,19 +87,29 @@ describe('IrisConnectorEntity', async () => {
     assert(fired < hook.unexpected)
   })
 
+  test('validate', async (t) => {
+    if (null == (config as any).feature?.validate) {
+      t.skip('feature not present in this SDK: validate')
+      return
+    }
+    const client = CrackedApiReferenceSDK.test(undefined, { feature: { validate: { active: true } } })
+    await assert.rejects(client.IrisConnector().create({"connector_id":1} as any),
+      (err: any) => 'validate_failed' === err.code)
+  })
+
 
 
   test('basic', async (t) => {
 
     const live = 'TRUE' === process.env.CRACKED_API_REFERENCE_TEST_LIVE
-    for (const op of ['list']) {
+    for (const op of ['create', 'list']) {
       if (!live && maybeSkipControl(t, 'entityOp', 'iris_connector.' + op, live)) return
     }
 
     
     const setup = basicSetup()
     if (setup.live) {
-      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"connectors":{"a":true,"h":"Connectors","n":"connectors","r":false,"t":"`$ARRAY`","key$":"connectors","index$":0}},"name":"iris_connector","op":{"list":{"input":"data","name":"list","points":[{"a":true,"co":{"id":"GET /api/iris/connectors","source":"openapi3","version":2},"g":{},"k":"http","m":"GET","o":"/api/iris/connectors","q":{},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"api"},{"lit":"iris"},{"lit":"connectors"}],"t":{"req":"`reqdata`","res":"`body.connectors`"},"index$":0}],"key$":"list"}},"relations":{"ancestors":[]},"key$":"iris_connector","name__orig":"iris_connector","Name":"IrisConnector","name_":"iris_connector","name-":"iris-connector","NAME":"IRIS_CONNECTOR","index$":88}, {"active":true,"entity":"iris_connector","key$":"BasicIrisConnectorFlow","kind":"basic","name":"BasicIrisConnectorFlow","param":{},"step":[{"a":true,"d":{},"i":{},"m":{},"o":"list","s":[],"v":[{"apply":"ItemExists","def":{"ref":"iris_connector_ref01"}}],"index$":0}]}, 'IrisConnector', {"GET /api/iris/connectors":{"protocol":"http","parameters":[]}}, { strict: LIVE_STRICT, t })
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"connectors":{"a":true,"h":"Connectors","n":"connectors","r":false,"t":"`$ARRAY`","key$":"connectors","index$":0}},"name":"iris_connector","op":{"create":{"input":"data","name":"create","points":[{"a":true,"co":{"id":"POST /api/iris/connectors/{connector_id}/start","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"connector_id","or":"connector_id","r":true,"t":"`$STRING`","index$":0}]},"k":"http","m":"POST","o":"/api/iris/connectors/{connector_id}/start","q":{"exist":["connector_id"]},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"api"},{"lit":"iris"},{"lit":"connectors"},{"var":"connector_id"},{"lit":"start"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"create"},"list":{"input":"data","name":"list","points":[{"a":true,"co":{"id":"GET /api/iris/connectors","source":"openapi3","version":2},"g":{},"k":"http","m":"GET","o":"/api/iris/connectors","q":{},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"api"},{"lit":"iris"},{"lit":"connectors"}],"t":{"req":"`reqdata`","res":"`body.connectors`"},"index$":0}],"key$":"list"}},"relations":{"ancestors":[]},"key$":"iris_connector","name__orig":"iris_connector","Name":"IrisConnector","name_":"iris_connector","name-":"iris-connector","NAME":"IRIS_CONNECTOR","index$":85}, {"active":true,"entity":"iris_connector","key$":"BasicIrisConnectorFlow","kind":"basic","name":"BasicIrisConnectorFlow","param":{},"step":[{"a":true,"d":{},"i":{"ref":"iris_connector_ref01"},"m":{"connector_id":"connector01"},"o":"create","s":[],"v":[],"index$":0},{"a":true,"d":{},"i":{},"m":{},"o":"list","s":[],"v":[{"apply":"ItemExists","def":{"ref":"iris_connector_ref01"}}],"index$":1}]}, 'IrisConnector', {"POST /api/iris/connectors/{connector_id}/start":{"protocol":"http","parameters":[{"name":"connector_id","in":"path","required":true,"schema":{"type":"string","title":"Connector Id"},"index$":0}]},"GET /api/iris/connectors":{"protocol":"http","parameters":[]}}, { strict: LIVE_STRICT, t }, 'TRUE' === process.env.VOXGIG_GETONLY_GUARD ? {"iris_connector.create.0":"GET-only live run: needs POST /api/iris/connectors/{connector_id}/start"} : {})
     }
     const client = setup.client
     const struct = setup.struct
@@ -107,10 +117,17 @@ describe('IrisConnectorEntity', async () => {
     const isempty = struct.isempty
     const select = struct.select
 
-    let iris_connector_ref01_data = Object.values(setup.data.existing.iris_connector)[0] as any
+
+    // CREATE
+    const iris_connector_ref01_ent = client.IrisConnector()
+    let iris_connector_ref01_data = setup.data.new.iris_connector['iris_connector_ref01']
+    iris_connector_ref01_data['connector_id'] = setup.idmap['connector01']
+
+    iris_connector_ref01_data = (await iris_connector_ref01_ent.create(iris_connector_ref01_data)).data()
+    assert(null != iris_connector_ref01_data)
+
 
     // LIST
-    const iris_connector_ref01_ent = client.IrisConnector()
     const iris_connector_ref01_match: any = {}
 
     const iris_connector_ref01_list = (await iris_connector_ref01_ent.list(iris_connector_ref01_match)).map((e: any) => e.data())
@@ -150,7 +167,7 @@ function basicSetup(extra?: any) {
   const transform = struct.transform
 
   let idmap = transform(
-    ['iris_connector01','iris_connector02','iris_connector03'],
+    ['iris_connector01','iris_connector02','iris_connector03','connector01'],
     {
       '`$PACK`': ['', {
         '`$KEY`': '`$COPY`',

@@ -28,21 +28,24 @@ class AgentPostDirectTest < Minitest::Test
       return
     end
     if setup[:live]
-      ["agent_post01"].each do |_live_key|
+      ["agent01"].each do |_live_key|
         if setup[:idmap][_live_key].nil?
           Runner.live_miss(LIVE_STRICT, "Live test blocked: needs #{_live_key} via CRACKED_API_REFERENCE_TEST_AGENT_POST_ENTID")
         end
       end
     end
+    Runner.live_pace if setup[:live]
     client = setup[:client]
 
     params = {}
-    params["id"] = setup[:live] ? setup[:idmap]["agent_post01"] : "direct01"
+    query = {}
+    params["agent_id"] = setup[:live] ? setup[:idmap]["agent01"] : "direct01"
 
     result = client.direct({
-      "path" => "api/admin/agents/{id}/posts",
+      "path" => "api/admin/agents/{agent_id}/posts",
       "method" => "GET",
       "params" => params,
+      "query" => query,
     })
     if setup[:live]
       unless live_ok(result)

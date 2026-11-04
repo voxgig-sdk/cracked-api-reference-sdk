@@ -37,7 +37,7 @@ class TestAgentPostEntity:
         client = CrackedApiReferenceSDK.test(
             None, {"feature": {"validate": {"active": True}}})
         with pytest.raises(Exception) as err:
-            client.AgentPost(None).list({"id": 1}, None)
+            client.AgentPost(None).list({"agent_id": 1}, None)
         assert "validate_failed" == getattr(err.value, "code", None)
 
     def test_should_run_basic_flow(self):
@@ -46,11 +46,15 @@ class TestAgentPostEntity:
         # multiple ops; skipping any one skips the whole flow (steps depend
         # on each other).
         _live = setup.get("live", False)
-        for _op in []:
+        for _op in ["list"]:
             _skip, _reason = runner.is_control_skipped("entityOp", "agent_post." + _op, "live" if _live else "unit")
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
                 return
+        if setup["live"]:
+            for _live_key in ["agent01"]:
+                if setup.get("synthetic_only") or setup["idmap"].get(_live_key) is None:
+                    runner.live_miss(LIVE_STRICT, f"Live entity test blocked: needs {_live_key} via CRACKED_API_REFERENCE_TEST_AGENT_POST_ENTID")
         client = setup["client"]
 
         # Bootstrap entity data from existing test data.
@@ -59,6 +63,17 @@ class TestAgentPostEntity:
         agent_post_ref01_data = None
         if len(agent_post_ref01_data_raw) > 0:
             agent_post_ref01_data = helpers.to_map(agent_post_ref01_data_raw[0][1])
+
+        if setup["live"]:
+            runner.live_pace()
+        # LIST
+        agent_post_ref01_ent = client.AgentPost(None)
+        agent_post_ref01_match = {
+            "agent_id": setup["idmap"]["agent01"],
+        }
+
+        agent_post_ref01_list_result = agent_post_ref01_ent.list(agent_post_ref01_match, None)
+        assert isinstance(agent_post_ref01_list_result, list)
 
 
 
@@ -78,7 +93,7 @@ def _agent_post_basic_setup(extra):
 
     # Generate idmap via transform.
     idmap = vs.transform(
-        ["agent_post01", "agent_post02", "agent_post03"],
+        ["agent_post01", "agent_post02", "agent_post03", "agent01", "agent02", "agent03"],
         {
             "`$PACK`": ["", {
                 "`$KEY`": "`$COPY`",

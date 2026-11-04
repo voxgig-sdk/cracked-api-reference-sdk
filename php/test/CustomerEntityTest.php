@@ -229,6 +229,9 @@ class CustomerEntityTest extends TestCase
             $customer_ref01_data = Helpers::to_map($customer_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LIST
         $customer_ref01_ent = $client->Customer(null);
         $customer_ref01_match = [];

@@ -62,9 +62,18 @@ func TestAdminAccountResetEntity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" {
+			t.Log("LIVE STEP {\"id\":\"admin_account_reset.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/admin/agent-account-reset\"}")
+			t.Skip("Live coverage incomplete: admin_account_reset.create.0 excluded (GET-only live run: needs POST /api/admin/agent-account-reset)")
+			return
+		}
+
 		client := setup.client
 		_ = client
 
+		if setup.live {
+			livePace()
+		}
 		// CREATE
 		adminAccountResetRef01Ent := client.AdminAccountReset(nil)
 		adminAccountResetRef01Data := core.ToMapAny(vs.GetProp(

@@ -41,8 +41,31 @@ class EnterpriseAgentEntityTest < Minitest::Test
         return
       end
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE"
+      puts "LIVE STEP {\"id\":\"enterprise_agent.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/enterprise/agents/assign\"}"
     client = setup[:client]
 
+    # Bootstrap entity data from existing test data.
+    enterprise_agent_ref01_data_raw = Vs.items(Helpers.to_map(
+      Vs.getpath(setup[:data], "existing.enterprise_agent")))
+    enterprise_agent_ref01_data = nil
+    if enterprise_agent_ref01_data_raw.length > 0
+      enterprise_agent_ref01_data = Helpers.to_map(enterprise_agent_ref01_data_raw[0][1])
+    end
+
+    Runner.live_pace if setup[:live]
+    # LOAD
+    enterprise_agent_ref01_ent = client.EnterpriseAgent(nil)
+    enterprise_agent_ref01_match_dt0 = {}
+    enterprise_agent_ref01_data_dt0_loaded = enterprise_agent_ref01_ent.load(enterprise_agent_ref01_match_dt0, nil)
+    assert !enterprise_agent_ref01_data_dt0_loaded.nil?
+
+      return
+    end
+
+    client = setup[:client]
+
+    Runner.live_pace if setup[:live]
     # CREATE
     enterprise_agent_ref01_ent = client.EnterpriseAgent(nil)
     enterprise_agent_ref01_data = Helpers.to_map(Vs.getprop(
@@ -52,6 +75,7 @@ class EnterpriseAgentEntityTest < Minitest::Test
     enterprise_agent_ref01_data = Helpers.to_map(enterprise_agent_ref01_data_result.respond_to?(:data_get) ? enterprise_agent_ref01_data_result.data_get : enterprise_agent_ref01_data_result)
     assert !enterprise_agent_ref01_data.nil?
 
+    Runner.live_pace if setup[:live]
     # LOAD
     enterprise_agent_ref01_match_dt0 = {}
     enterprise_agent_ref01_data_dt0_loaded = enterprise_agent_ref01_ent.load(enterprise_agent_ref01_match_dt0, nil)

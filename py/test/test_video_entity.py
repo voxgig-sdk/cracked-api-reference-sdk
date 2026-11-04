@@ -51,8 +51,17 @@ class TestVideoEntity:
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
                 return
+        if setup["live"] and os.environ.get("VOXGIG_GETONLY_GUARD") == "TRUE":
+            print("LIVE STEP {\"id\":\"video.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /videos/{video_id}/retry-video\"}")
+            print("LIVE STEP {\"id\":\"video.update.1\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs PATCH /videos/{video_id}\"}")
+            print("LIVE STEP {\"id\":\"video.load.2\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: reads a record only video.create.0 gives\"}")
+            print("LIVE STEP {\"id\":\"video.remove.3\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs DELETE /videos/{video_id}\"}")
+            pytest.skip("Live coverage incomplete: video.create.0 excluded (GET-only live run: needs POST /videos/{video_id}/retry-video); video.update.1 excluded (GET-only live run: needs PATCH /videos/{video_id}); video.load.2 excluded (GET-only live run: reads a record only video.create.0 gives); video.remove.3 excluded (GET-only live run: needs DELETE /videos/{video_id})")
+
         client = setup["client"]
 
+        if setup["live"]:
+            runner.live_pace()
         # CREATE
         video_ref01_ent = client.Video(None)
         video_ref01_data = helpers.to_map(vs.getprop(
@@ -62,6 +71,8 @@ class TestVideoEntity:
         assert video_ref01_data is not None
         assert video_ref01_data["id"] is not None
 
+        if setup["live"]:
+            runner.live_pace()
         # UPDATE
         video_ref01_data_up0_up = {
             "id": video_ref01_data["id"],
@@ -73,9 +84,11 @@ class TestVideoEntity:
 
         video_ref01_resdata_up0 = helpers.to_map(runner.entity_data(video_ref01_ent.update(video_ref01_data_up0_up, None)))
         assert video_ref01_resdata_up0 is not None
-        assert video_ref01_resdata_up0["id"] == video_ref01_data_up0_up["id"]
+        assert runner.live_same_id(video_ref01_resdata_up0.get("id"), video_ref01_data_up0_up["id"])
         assert video_ref01_resdata_up0[video_ref01_markdef_up0_name] == video_ref01_markdef_up0_value
 
+        if setup["live"]:
+            runner.live_pace()
         # LOAD
         video_ref01_match_dt0 = {
             "id": video_ref01_data["id"],
@@ -83,8 +96,10 @@ class TestVideoEntity:
         video_ref01_data_dt0_loaded = video_ref01_ent.load(video_ref01_match_dt0, None)
         video_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(video_ref01_data_dt0_loaded))
         assert video_ref01_data_dt0_load_result is not None
-        assert video_ref01_data_dt0_load_result["id"] == video_ref01_data["id"]
+        assert runner.live_same_id(video_ref01_data_dt0_load_result.get("id"), video_ref01_data["id"])
 
+        if setup["live"]:
+            runner.live_pace()
         # REMOVE
         video_ref01_match_rm0 = {
             "id": video_ref01_data["id"],

@@ -52,8 +52,16 @@ class IrisChatEntityTest extends TestCase
                 return;
             }
         }
+        if (!empty($setup["live"]) && getenv('VOXGIG_GETONLY_GUARD') === "TRUE") {
+            fwrite(STDOUT, 'LIVE STEP {"id":"iris_chat.create.0","state":"excluded","attempted":false,"reason":"GET-only live run: needs POST /api/iris/chat"}' . "\n");
+            $this->markTestSkipped('Live coverage incomplete: iris_chat.create.0 excluded (GET-only live run: needs POST /api/iris/chat)');
+        }
+
         $client = $setup["client"];
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // CREATE
         $iris_chat_ref01_ent = $client->IrisChat(null);
         $iris_chat_ref01_data = Helpers::to_map(Vs::getprop(

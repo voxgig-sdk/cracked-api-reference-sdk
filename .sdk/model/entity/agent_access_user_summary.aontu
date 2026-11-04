@@ -98,7 +98,7 @@ main: kit: entity: agent_access_user_summary: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.products`"
           }
         }
       ]

@@ -43,6 +43,9 @@ describe("StyleEntity", function()
       style_ref01_data = helpers.to_map(style_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LOAD
     local style_ref01_ent = client:Style(nil)
     local style_ref01_match_dt0 = {}

@@ -164,6 +164,9 @@ describe("SeoAiMentionEntity", function()
       seo_ai_mention_ref01_data = helpers.to_map(seo_ai_mention_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LIST
     local seo_ai_mention_ref01_ent = client:SeoAiMention(nil)
     local seo_ai_mention_ref01_match = {}

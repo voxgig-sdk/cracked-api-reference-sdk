@@ -212,6 +212,9 @@ func TestTopPostEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = topPostRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LIST
 		topPostRef01Ent := client.TopPost(nil)
 		topPostRef01Match := map[string]any{}

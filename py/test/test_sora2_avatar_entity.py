@@ -144,8 +144,15 @@ class TestSora2AvatarEntity:
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
                 return
+        if setup["live"] and os.environ.get("VOXGIG_GETONLY_GUARD") == "TRUE":
+            print("LIVE STEP {\"id\":\"sora2_avatar.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/admin/sora2-avatars\"}")
+            print("LIVE STEP {\"id\":\"sora2_avatar.update.2\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs PUT /api/admin/sora2-avatars/{avatar_id}\"}")
+            return self._run_get_only_flow(setup)
+
         client = setup["client"]
 
+        if setup["live"]:
+            runner.live_pace()
         # CREATE
         sora2_avatar_ref01_ent = client.Sora2Avatar(None)
         sora2_avatar_ref01_data = helpers.to_map(vs.getprop(
@@ -155,6 +162,8 @@ class TestSora2AvatarEntity:
         assert sora2_avatar_ref01_data is not None
         assert sora2_avatar_ref01_data["id"] is not None
 
+        if setup["live"]:
+            runner.live_pace()
         # LIST
         sora2_avatar_ref01_match = {}
 
@@ -166,6 +175,8 @@ class TestSora2AvatarEntity:
             {"id": sora2_avatar_ref01_data["id"]})
         assert not vs.isempty(found_item)
 
+        if setup["live"]:
+            runner.live_pace()
         # UPDATE
         sora2_avatar_ref01_data_up0_up = {
             "id": sora2_avatar_ref01_data["id"],
@@ -177,9 +188,11 @@ class TestSora2AvatarEntity:
 
         sora2_avatar_ref01_resdata_up0 = helpers.to_map(runner.entity_data(sora2_avatar_ref01_ent.update(sora2_avatar_ref01_data_up0_up, None)))
         assert sora2_avatar_ref01_resdata_up0 is not None
-        assert sora2_avatar_ref01_resdata_up0["id"] == sora2_avatar_ref01_data_up0_up["id"]
+        assert runner.live_same_id(sora2_avatar_ref01_resdata_up0.get("id"), sora2_avatar_ref01_data_up0_up["id"])
         assert sora2_avatar_ref01_resdata_up0[sora2_avatar_ref01_markdef_up0_name] == sora2_avatar_ref01_markdef_up0_value
 
+        if setup["live"]:
+            runner.live_pace()
         # LOAD
         sora2_avatar_ref01_match_dt0 = {
             "id": sora2_avatar_ref01_data["id"],
@@ -187,7 +200,44 @@ class TestSora2AvatarEntity:
         sora2_avatar_ref01_data_dt0_loaded = sora2_avatar_ref01_ent.load(sora2_avatar_ref01_match_dt0, None)
         sora2_avatar_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(sora2_avatar_ref01_data_dt0_loaded))
         assert sora2_avatar_ref01_data_dt0_load_result is not None
-        assert sora2_avatar_ref01_data_dt0_load_result["id"] == sora2_avatar_ref01_data["id"]
+        assert runner.live_same_id(sora2_avatar_ref01_data_dt0_load_result.get("id"), sora2_avatar_ref01_data["id"])
+
+
+    def _run_get_only_flow(self, setup):
+        client = setup["client"]
+        if setup["live"]:
+            _live_id = None if setup.get("synthetic_only") else setup["idmap"].get("sora2_avatar01")
+            runner.live_pace()
+            runner.live_existing(setup, LIVE_STRICT, "sora2_avatar",
+                                 lambda: client.Sora2Avatar(None).list({}, None),
+                                 "id", _live_id)
+
+        # Bootstrap entity data from existing test data.
+        sora2_avatar_ref01_data_raw = vs.items(helpers.to_map(
+            vs.getpath(setup["data"], "existing.sora2_avatar")))
+        sora2_avatar_ref01_data = None
+        if len(sora2_avatar_ref01_data_raw) > 0:
+            sora2_avatar_ref01_data = helpers.to_map(sora2_avatar_ref01_data_raw[0][1])
+
+        if setup["live"]:
+            runner.live_pace()
+        # LIST
+        sora2_avatar_ref01_ent = client.Sora2Avatar(None)
+        sora2_avatar_ref01_match = {}
+
+        sora2_avatar_ref01_list_result = sora2_avatar_ref01_ent.list(sora2_avatar_ref01_match, None)
+        assert isinstance(sora2_avatar_ref01_list_result, list)
+
+        if setup["live"]:
+            runner.live_pace()
+        # LOAD
+        sora2_avatar_ref01_match_dt0 = {
+            "id": sora2_avatar_ref01_data["id"],
+        }
+        sora2_avatar_ref01_data_dt0_loaded = sora2_avatar_ref01_ent.load(sora2_avatar_ref01_match_dt0, None)
+        sora2_avatar_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(sora2_avatar_ref01_data_dt0_loaded))
+        assert sora2_avatar_ref01_data_dt0_load_result is not None
+        assert runner.live_same_id(sora2_avatar_ref01_data_dt0_load_result.get("id"), sora2_avatar_ref01_data["id"])
 
 
 

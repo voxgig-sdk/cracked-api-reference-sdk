@@ -41,6 +41,8 @@ class AutoScheduleSettingEntityTest < Minitest::Test
         return
       end
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE"
+      puts "LIVE STEP {\"id\":\"auto_schedule_setting.update.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs PUT /api/schedule/settings\"}"
     client = setup[:client]
 
     # Bootstrap entity data from existing test data.
@@ -51,6 +53,27 @@ class AutoScheduleSettingEntityTest < Minitest::Test
       auto_schedule_setting_ref01_data = Helpers.to_map(auto_schedule_setting_ref01_data_raw[0][1])
     end
 
+    Runner.live_pace if setup[:live]
+    # LOAD
+    auto_schedule_setting_ref01_ent = client.AutoScheduleSetting(nil)
+    auto_schedule_setting_ref01_match_dt0 = {}
+    auto_schedule_setting_ref01_data_dt0_loaded = auto_schedule_setting_ref01_ent.load(auto_schedule_setting_ref01_match_dt0, nil)
+    assert !auto_schedule_setting_ref01_data_dt0_loaded.nil?
+
+      return
+    end
+
+    client = setup[:client]
+
+    # Bootstrap entity data from existing test data.
+    auto_schedule_setting_ref01_data_raw = Vs.items(Helpers.to_map(
+      Vs.getpath(setup[:data], "existing.auto_schedule_setting")))
+    auto_schedule_setting_ref01_data = nil
+    if auto_schedule_setting_ref01_data_raw.length > 0
+      auto_schedule_setting_ref01_data = Helpers.to_map(auto_schedule_setting_ref01_data_raw[0][1])
+    end
+
+    Runner.live_pace if setup[:live]
     # UPDATE
     auto_schedule_setting_ref01_ent = client.AutoScheduleSetting(nil)
     auto_schedule_setting_ref01_data_up0_up = {
@@ -65,6 +88,7 @@ class AutoScheduleSettingEntityTest < Minitest::Test
     assert !auto_schedule_setting_ref01_resdata_up0.nil?
     assert_equal auto_schedule_setting_ref01_resdata_up0[auto_schedule_setting_ref01_markdef_up0_name], auto_schedule_setting_ref01_markdef_up0_value
 
+    Runner.live_pace if setup[:live]
     # LOAD
     auto_schedule_setting_ref01_match_dt0 = {}
     auto_schedule_setting_ref01_data_dt0_loaded = auto_schedule_setting_ref01_ent.load(auto_schedule_setting_ref01_match_dt0, nil)

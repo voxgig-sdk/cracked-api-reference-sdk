@@ -51,6 +51,8 @@ class TestExactFormulaEntity:
         if len(exact_formula_ref01_data_raw) > 0:
             exact_formula_ref01_data = helpers.to_map(exact_formula_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LOAD
         exact_formula_ref01_ent = client.ExactFormula(None)
         exact_formula_ref01_match_dt0 = {}

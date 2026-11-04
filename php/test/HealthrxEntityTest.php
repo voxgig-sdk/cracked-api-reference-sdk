@@ -52,6 +52,30 @@ class HealthrxEntityTest extends TestCase
                 return;
             }
         }
+        if (!empty($setup["live"]) && getenv('VOXGIG_GETONLY_GUARD') === "TRUE") {
+            fwrite(STDOUT, 'LIVE STEP {"id":"healthrx.create.0","state":"excluded","attempted":false,"reason":"GET-only live run: needs POST /api/healthrx/products/{product_id}/accounts/{account_id}/content"}' . "\n");
+        $client = $setup["client"];
+
+        // Bootstrap entity data from existing test data.
+        $healthrx_ref01_data_raw = Vs::items(Helpers::to_map(
+            Vs::getpath($setup["data"], "existing.healthrx")));
+        $healthrx_ref01_data = null;
+        if (count($healthrx_ref01_data_raw) > 0) {
+            $healthrx_ref01_data = Helpers::to_map($healthrx_ref01_data_raw[0][1]);
+        }
+
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
+        // LOAD
+        $healthrx_ref01_ent = $client->Healthrx(null);
+        $healthrx_ref01_match_dt0 = [];
+        $healthrx_ref01_data_dt0_loaded = $healthrx_ref01_ent->load($healthrx_ref01_match_dt0, null);
+        $this->assertNotNull($healthrx_ref01_data_dt0_loaded);
+
+            return;
+        }
+
         if (!empty($setup["live"])) {
             foreach (["product01"] as $_liveKey) {
                 if (!empty($setup["synthetic_only"]) || null === ($setup["idmap"][$_liveKey] ?? null)) {
@@ -61,6 +85,9 @@ class HealthrxEntityTest extends TestCase
         }
         $client = $setup["client"];
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // CREATE
         $healthrx_ref01_ent = $client->Healthrx(null);
         $healthrx_ref01_data = Helpers::to_map(Vs::getprop(
@@ -71,6 +98,9 @@ class HealthrxEntityTest extends TestCase
         $healthrx_ref01_data = Helpers::to_map(is_object($healthrx_ref01_data_result) && method_exists($healthrx_ref01_data_result, 'data_get') ? $healthrx_ref01_data_result->data_get() : $healthrx_ref01_data_result);
         $this->assertNotNull($healthrx_ref01_data);
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LOAD
         $healthrx_ref01_match_dt0 = [];
         $healthrx_ref01_data_dt0_loaded = $healthrx_ref01_ent->load($healthrx_ref01_match_dt0, null);

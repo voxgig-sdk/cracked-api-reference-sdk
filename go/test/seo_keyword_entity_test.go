@@ -212,6 +212,9 @@ func TestSeoKeywordEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = seoKeywordRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LIST
 		seoKeywordRef01Ent := client.SeoKeyword(nil)
 		seoKeywordRef01Match := map[string]any{}

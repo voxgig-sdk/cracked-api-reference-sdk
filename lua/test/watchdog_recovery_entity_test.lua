@@ -44,8 +44,36 @@ describe("WatchdogRecoveryEntity", function()
         return
       end
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" then
+      print("LIVE STEP {\"id\":\"watchdog_recovery.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/v1/watchdog/recovery-queue/resolve\"}")
     local client = setup.client
 
+    -- Bootstrap entity data from existing test data.
+    local watchdog_recovery_ref01_data_raw = vs.items(helpers.to_map(
+      vs.getpath(setup.data, "existing.watchdog_recovery")))
+    local watchdog_recovery_ref01_data = nil
+    if #watchdog_recovery_ref01_data_raw > 0 then
+      watchdog_recovery_ref01_data = helpers.to_map(watchdog_recovery_ref01_data_raw[1][2])
+    end
+
+    if setup.live then
+      runner.live_pace()
+    end
+    -- LOAD
+    local watchdog_recovery_ref01_ent = client:WatchdogRecovery(nil)
+    local watchdog_recovery_ref01_match_dt0 = {}
+    local watchdog_recovery_ref01_data_dt0_loaded, err = watchdog_recovery_ref01_ent:load(watchdog_recovery_ref01_match_dt0, nil)
+    assert.is_nil(err)
+    assert.is_not_nil(watchdog_recovery_ref01_data_dt0_loaded)
+
+      return
+    end
+
+    local client = setup.client
+
+    if setup.live then
+      runner.live_pace()
+    end
     -- CREATE
     local watchdog_recovery_ref01_ent = client:WatchdogRecovery(nil)
     local watchdog_recovery_ref01_data = helpers.to_map(vs.getprop(
@@ -56,6 +84,9 @@ describe("WatchdogRecoveryEntity", function()
     watchdog_recovery_ref01_data = helpers.to_map(type(watchdog_recovery_ref01_data_result) == 'table' and watchdog_recovery_ref01_data_result.data_get and watchdog_recovery_ref01_data_result:data_get() or watchdog_recovery_ref01_data_result)
     assert.is_not_nil(watchdog_recovery_ref01_data)
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LOAD
     local watchdog_recovery_ref01_match_dt0 = {}
     local watchdog_recovery_ref01_data_dt0_loaded, err = watchdog_recovery_ref01_ent:load(watchdog_recovery_ref01_match_dt0, nil)

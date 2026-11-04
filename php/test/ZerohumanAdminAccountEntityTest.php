@@ -229,6 +229,9 @@ class ZerohumanAdminAccountEntityTest extends TestCase
             $zerohuman_admin_account_ref01_data = Helpers::to_map($zerohuman_admin_account_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LIST
         $zerohuman_admin_account_ref01_ent = $client->ZerohumanAdminAccount(null);
         $zerohuman_admin_account_ref01_match = [];

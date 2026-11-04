@@ -1,6 +1,7 @@
 # SeoOverview direct test
 
 import json
+import os
 import pytest
 
 from crackedapireference_sdk.utility.voxgig_struct import voxgig_struct as vs
@@ -32,14 +33,18 @@ class TestSeoOverviewDirect:
         if _skip:
             pytest.skip(_reason or "skipped via sdk-test-control.json")
             return
+        if setup["live"]:
+            runner.live_pace()
         client = setup["client"]
 
         params = {}
+        query = {}
 
         result = client.direct({
             "path": "api/seo/overview",
             "method": "GET",
             "params": params,
+            "query": query,
         })
         if setup["live"]:
             if not _live_ok(result):

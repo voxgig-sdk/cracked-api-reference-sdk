@@ -212,6 +212,9 @@ func TestAgentAccessUserAgentEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = agentAccessUserAgentRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LIST
 		agentAccessUserAgentRef01Ent := client.AgentAccessUserAgent(nil)
 		agentAccessUserAgentRef01Match := map[string]any{}

@@ -31,6 +31,7 @@ class MicrohubPublicDirectTest < Minitest::Test
         end
       end
     end
+    Runner.live_pace if setup[:live]
     client = setup[:client]
 
     params = {}

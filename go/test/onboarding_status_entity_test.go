@@ -212,6 +212,9 @@ func TestOnboardingStatusEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = onboardingStatusRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LIST
 		onboardingStatusRef01Ent := client.OnboardingStatus(nil)
 		onboardingStatusRef01Match := map[string]any{}

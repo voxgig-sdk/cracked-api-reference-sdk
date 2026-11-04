@@ -58,6 +58,7 @@ class AdminGeneratedVideoEntityTest < Minitest::Test
       admin_generated_video_ref01_data = Helpers.to_map(admin_generated_video_ref01_data_raw[0][1])
     end
 
+    Runner.live_pace if setup[:live]
     # LIST
     admin_generated_video_ref01_ent = client.AdminGeneratedVideo(nil)
     admin_generated_video_ref01_match = {

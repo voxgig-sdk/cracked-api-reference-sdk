@@ -44,8 +44,17 @@ describe("VideoRemixerWorkerEntity", function()
         return
       end
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" then
+      print("LIVE STEP {\"id\":\"video_remixer_worker.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/admin/video-remixer/worker/jobs/{identifier}/fail\"}")
+      pending("Live coverage incomplete: video_remixer_worker.create.0 excluded (GET-only live run: needs POST /api/admin/video-remixer/worker/jobs/{identifier}/fail)")
+      return
+    end
+
     local client = setup.client
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- CREATE
     local video_remixer_worker_ref01_ent = client:VideoRemixerWorker(nil)
     local video_remixer_worker_ref01_data = helpers.to_map(vs.getprop(

@@ -24,6 +24,10 @@ class UserDirectTest < Minitest::Test
       skip(_reason || "skipped via sdk-test-control.json")
       return
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE" && setup[:idmap]["user01"].nil?
+      puts "LIVE STEP {\"id\":\"direct-load-user\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs user01, which only POST /api/admin/users/{user_id}/fix-auto-schedule-by-date gives\"}"
+      skip("Live coverage incomplete: direct-load-user excluded (GET-only live run: needs user01, which only POST /api/admin/users/{user_id}/fix-auto-schedule-by-date gives)")
+    end
     if setup[:live]
       ["user01"].each do |_live_key|
         if setup[:idmap][_live_key].nil?
@@ -31,6 +35,7 @@ class UserDirectTest < Minitest::Test
         end
       end
     end
+    Runner.live_pace if setup[:live]
     client = setup[:client]
 
     params = {}
@@ -42,7 +47,7 @@ class UserDirectTest < Minitest::Test
     end
 
     result = client.direct({
-      "path" => "api/upload-post-agents/user/{id}",
+      "path" => "api/admin/users/{id}/failed-videos",
       "method" => "GET",
       "params" => params,
       "query" => query,

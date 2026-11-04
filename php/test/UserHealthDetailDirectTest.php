@@ -33,22 +33,31 @@ class UserHealthDetailDirectTest extends TestCase
             $this->markTestSkipped($_reason ?? "skipped via sdk-test-control.json");
             return;
         }
+        if (!empty($setup["live"]) && getenv('VOXGIG_GETONLY_GUARD') === "TRUE" && null === ($setup["idmap"]['user01'] ?? null)) {
+            fwrite(STDOUT, 'LIVE STEP {"id":"direct-list-user_health_detail","state":"excluded","attempted":false,"reason":"GET-only live run: needs user01, which only POST /api/admin/users/{user_id}/fix-auto-schedule-by-date gives"}' . "\n");
+            $this->markTestSkipped('Live coverage incomplete: direct-list-user_health_detail excluded (GET-only live run: needs user01, which only POST /api/admin/users/{user_id}/fix-auto-schedule-by-date gives)');
+        }
         if ($setup["live"]) {
-            foreach (["user_health_detail01"] as $_liveKey) {
+            foreach (["user01"] as $_liveKey) {
                 if (null === ($setup["idmap"][$_liveKey] ?? null)) {
                     Runner::live_miss(self::LIVE_STRICT, "Live test blocked: needs " . $_liveKey . " via CRACKED_API_REFERENCE_TEST_USER_HEALTH_DETAIL_ENTID");
                 }
             }
         }
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         $client = $setup["client"];
 
         $params = [];
-        $params["id"] = $setup["live"] ? ($setup["idmap"]["user_health_detail01"] ?? null) : "direct01";
+        $query = [];
+        $params["user_id"] = $setup["live"] ? ($setup["idmap"]["user01"] ?? null) : "direct01";
 
         $result = $client->direct([
-            "path" => "api/admin/users/{id}/health-detail",
+            "path" => "api/admin/users/{user_id}/health-detail",
             "method" => "GET",
             "params" => $params,
+            "query" => $query,
         ]);
         if ($setup["live"]) {
             if (!self::liveOk($result)) {

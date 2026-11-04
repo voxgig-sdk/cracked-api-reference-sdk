@@ -229,6 +229,9 @@ class SeoBacklinkEntityTest extends TestCase
             $seo_backlink_ref01_data = Helpers::to_map($seo_backlink_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LIST
         $seo_backlink_ref01_ent = $client->SeoBacklink(null);
         $seo_backlink_ref01_match = [];

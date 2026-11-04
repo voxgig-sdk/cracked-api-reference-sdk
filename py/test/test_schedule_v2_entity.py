@@ -134,8 +134,16 @@ class TestScheduleV2Entity:
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
                 return
+        if setup["live"] and os.environ.get("VOXGIG_GETONLY_GUARD") == "TRUE":
+            print("LIVE STEP {\"id\":\"schedule_v2.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/schedule/queue/add\"}")
+            print("LIVE STEP {\"id\":\"schedule_v2.remove.3\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs DELETE /api/schedule/queue/{queue_id}\"}")
+            print("LIVE STEP {\"id\":\"schedule_v2.list.4\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: checks a removal this run does not make\"}")
+            return self._run_get_only_flow(setup)
+
         client = setup["client"]
 
+        if setup["live"]:
+            runner.live_pace()
         # CREATE
         schedule_v2_ref01_ent = client.ScheduleV2(None)
         schedule_v2_ref01_data = helpers.to_map(vs.getprop(
@@ -145,6 +153,8 @@ class TestScheduleV2Entity:
         assert schedule_v2_ref01_data is not None
         assert schedule_v2_ref01_data["id"] is not None
 
+        if setup["live"]:
+            runner.live_pace()
         # LIST
         schedule_v2_ref01_match = {}
 
@@ -156,6 +166,8 @@ class TestScheduleV2Entity:
             {"id": schedule_v2_ref01_data["id"]})
         assert not vs.isempty(found_item)
 
+        if setup["live"]:
+            runner.live_pace()
         # LOAD
         schedule_v2_ref01_match_dt0 = {
             "id": schedule_v2_ref01_data["id"],
@@ -163,7 +175,44 @@ class TestScheduleV2Entity:
         schedule_v2_ref01_data_dt0_loaded = schedule_v2_ref01_ent.load(schedule_v2_ref01_match_dt0, None)
         schedule_v2_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(schedule_v2_ref01_data_dt0_loaded))
         assert schedule_v2_ref01_data_dt0_load_result is not None
-        assert schedule_v2_ref01_data_dt0_load_result["id"] == schedule_v2_ref01_data["id"]
+        assert runner.live_same_id(schedule_v2_ref01_data_dt0_load_result.get("id"), schedule_v2_ref01_data["id"])
+
+
+    def _run_get_only_flow(self, setup):
+        client = setup["client"]
+        if setup["live"]:
+            _live_id = None if setup.get("synthetic_only") else setup["idmap"].get("schedule_v201")
+            runner.live_pace()
+            runner.live_existing(setup, LIVE_STRICT, "schedule_v2",
+                                 lambda: client.ScheduleV2(None).list({}, None),
+                                 "id", _live_id)
+
+        # Bootstrap entity data from existing test data.
+        schedule_v2_ref01_data_raw = vs.items(helpers.to_map(
+            vs.getpath(setup["data"], "existing.schedule_v2")))
+        schedule_v2_ref01_data = None
+        if len(schedule_v2_ref01_data_raw) > 0:
+            schedule_v2_ref01_data = helpers.to_map(schedule_v2_ref01_data_raw[0][1])
+
+        if setup["live"]:
+            runner.live_pace()
+        # LIST
+        schedule_v2_ref01_ent = client.ScheduleV2(None)
+        schedule_v2_ref01_match = {}
+
+        schedule_v2_ref01_list_result = schedule_v2_ref01_ent.list(schedule_v2_ref01_match, None)
+        assert isinstance(schedule_v2_ref01_list_result, list)
+
+        if setup["live"]:
+            runner.live_pace()
+        # LOAD
+        schedule_v2_ref01_match_dt0 = {
+            "id": schedule_v2_ref01_data["id"],
+        }
+        schedule_v2_ref01_data_dt0_loaded = schedule_v2_ref01_ent.load(schedule_v2_ref01_match_dt0, None)
+        schedule_v2_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(schedule_v2_ref01_data_dt0_loaded))
+        assert schedule_v2_ref01_data_dt0_load_result is not None
+        assert runner.live_same_id(schedule_v2_ref01_data_dt0_load_result.get("id"), schedule_v2_ref01_data["id"])
 
 
 

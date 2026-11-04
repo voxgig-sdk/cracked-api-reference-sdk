@@ -134,12 +134,21 @@ class TestProductEntity:
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
                 return
+        if setup["live"] and os.environ.get("VOXGIG_GETONLY_GUARD") == "TRUE":
+            print("LIVE STEP {\"id\":\"product.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/products/{product_id}/validate-social-handle\"}")
+            print("LIVE STEP {\"id\":\"product.update.2\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs PUT /api/enterprise/products/{product_id}\"}")
+            print("LIVE STEP {\"id\":\"product.remove.4\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs DELETE /api/enterprise/products/{product_id}\"}")
+            print("LIVE STEP {\"id\":\"product.list.5\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: checks a removal this run does not make\"}")
+            return self._run_get_only_flow(setup)
+
         if setup["live"]:
             for _live_key in ["user01"]:
                 if setup.get("synthetic_only") or setup["idmap"].get(_live_key) is None:
                     runner.live_miss(LIVE_STRICT, f"Live entity test blocked: needs {_live_key} via CRACKED_API_REFERENCE_TEST_PRODUCT_ENTID")
         client = setup["client"]
 
+        if setup["live"]:
+            runner.live_pace()
         # CREATE
         product_ref01_ent = client.Product(None)
         product_ref01_data = helpers.to_map(vs.getprop(
@@ -148,8 +157,10 @@ class TestProductEntity:
 
         product_ref01_data = helpers.to_map(runner.entity_data(product_ref01_ent.create(product_ref01_data, None)))
         assert product_ref01_data is not None
-        assert product_ref01_data["id"] is not None
+        assert product_ref01_data["product_id"] is not None
 
+        if setup["live"]:
+            runner.live_pace()
         # LIST
         product_ref01_match = {}
 
@@ -158,12 +169,14 @@ class TestProductEntity:
 
         found_item = vs.select(
             runner.entity_list_to_data(product_ref01_list_result),
-            {"id": product_ref01_data["id"]})
+            {"product_id": product_ref01_data["product_id"]})
         assert not vs.isempty(found_item)
 
+        if setup["live"]:
+            runner.live_pace()
         # UPDATE
         product_ref01_data_up0_up = {
-            "id": product_ref01_data["id"],
+            "id": product_ref01_data["product_id"],
         }
 
         product_ref01_markdef_up0_name = "description"
@@ -172,24 +185,30 @@ class TestProductEntity:
 
         product_ref01_resdata_up0 = helpers.to_map(runner.entity_data(product_ref01_ent.update(product_ref01_data_up0_up, None)))
         assert product_ref01_resdata_up0 is not None
-        assert product_ref01_resdata_up0["id"] == product_ref01_data_up0_up["id"]
+        assert runner.live_same_id(product_ref01_resdata_up0.get("product_id"), product_ref01_data_up0_up["id"])
         assert product_ref01_resdata_up0[product_ref01_markdef_up0_name] == product_ref01_markdef_up0_value
 
+        if setup["live"]:
+            runner.live_pace()
         # LOAD
         product_ref01_match_dt0 = {
-            "id": product_ref01_data["id"],
+            "id": product_ref01_data["product_id"],
         }
         product_ref01_data_dt0_loaded = product_ref01_ent.load(product_ref01_match_dt0, None)
         product_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(product_ref01_data_dt0_loaded))
         assert product_ref01_data_dt0_load_result is not None
-        assert product_ref01_data_dt0_load_result["id"] == product_ref01_data["id"]
+        assert runner.live_same_id(product_ref01_data_dt0_load_result.get("product_id"), product_ref01_data["product_id"])
 
+        if setup["live"]:
+            runner.live_pace()
         # REMOVE
         product_ref01_match_rm0 = {
-            "id": product_ref01_data["id"],
+            "id": product_ref01_data["product_id"],
         }
         product_ref01_ent.remove(product_ref01_match_rm0, None)
 
+        if setup["live"]:
+            runner.live_pace()
         # LIST
         product_ref01_match_rt0 = {}
 
@@ -198,8 +217,45 @@ class TestProductEntity:
 
         not_found_item = vs.select(
             runner.entity_list_to_data(product_ref01_list_rt0_result),
-            {"id": product_ref01_data["id"]})
+            {"product_id": product_ref01_data["product_id"]})
         assert vs.isempty(not_found_item)
+
+
+    def _run_get_only_flow(self, setup):
+        client = setup["client"]
+        if setup["live"]:
+            _live_id = None if setup.get("synthetic_only") else setup["idmap"].get("product01")
+            runner.live_pace()
+            runner.live_existing(setup, LIVE_STRICT, "product",
+                                 lambda: client.Product(None).list({}, None),
+                                 "product_id", _live_id)
+
+        # Bootstrap entity data from existing test data.
+        product_ref01_data_raw = vs.items(helpers.to_map(
+            vs.getpath(setup["data"], "existing.product")))
+        product_ref01_data = None
+        if len(product_ref01_data_raw) > 0:
+            product_ref01_data = helpers.to_map(product_ref01_data_raw[0][1])
+
+        if setup["live"]:
+            runner.live_pace()
+        # LIST
+        product_ref01_ent = client.Product(None)
+        product_ref01_match = {}
+
+        product_ref01_list_result = product_ref01_ent.list(product_ref01_match, None)
+        assert isinstance(product_ref01_list_result, list)
+
+        if setup["live"]:
+            runner.live_pace()
+        # LOAD
+        product_ref01_match_dt0 = {
+            "id": product_ref01_data["product_id"],
+        }
+        product_ref01_data_dt0_loaded = product_ref01_ent.load(product_ref01_match_dt0, None)
+        product_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(product_ref01_data_dt0_loaded))
+        assert product_ref01_data_dt0_load_result is not None
+        assert runner.live_same_id(product_ref01_data_dt0_load_result.get("product_id"), product_ref01_data["product_id"])
 
 
 
@@ -211,6 +267,10 @@ def _product_basic_setup(extra):
         entity_data_source = f.read()
 
     entity_data = json.loads(entity_data_source)
+
+    for rec in ((entity_data.get("existing") or {}).get("product") or {}).values():
+        if isinstance(rec, dict) and rec.get("id") is not None:
+            rec["product_id"] = rec["id"]
 
     options = {}
     options["entity"] = entity_data.get("existing")

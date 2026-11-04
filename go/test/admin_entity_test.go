@@ -199,6 +199,72 @@ func TestAdminEntity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" {
+			t.Log("LIVE STEP {\"id\":\"admin.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/admin/users/{user_id}/regenerate-video/{video_id}\"}")
+			t.Log("LIVE STEP {\"id\":\"admin.remove.3\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs DELETE /api/admin/users/{user_id}/agents/{agent_id}\"}")
+			t.Log("LIVE STEP {\"id\":\"admin.list.4\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: checks a removal this run does not make\"}")
+		client := setup.client
+		_ = client
+		if setup.live {
+			var _liveId any
+			if !setup.syntheticOnly {
+				_liveId = setup.idmap["admin01"]
+			}
+			livePace()
+			liveExisting(t, adminEntityLiveStrict, setup.data, "admin", "id", _liveId,
+				func() (any, error) {
+					return client.Admin(nil).List(map[string]any{}, nil)
+				})
+		}
+
+		// Bootstrap entity data from existing test data (no create step in flow).
+		adminRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.admin")))
+		var adminRef01Data map[string]any
+		if len(adminRef01DataRaw) > 0 {
+			adminRef01Data = core.ToMapAny(adminRef01DataRaw[0][1])
+		}
+		// Discard guards against Go's unused-var check when the flow's steps
+		// happen not to consume the bootstrap data (e.g. list-only flows).
+		_ = adminRef01Data
+
+		if setup.live {
+			livePace()
+		}
+		// LIST
+		adminRef01Ent := client.Admin(nil)
+		adminRef01Match := map[string]any{}
+
+		adminRef01ListResult, err := adminRef01Ent.List(adminRef01Match, nil)
+		if err != nil {
+			t.Fatalf("list failed: %v", err)
+		}
+		_, adminRef01ListOk := adminRef01ListResult.([]any)
+		if !adminRef01ListOk {
+			t.Fatalf("expected list result to be an array, got %T", adminRef01ListResult)
+		}
+
+		if setup.live {
+			livePace()
+		}
+		// LOAD
+		adminRef01MatchDt0 := map[string]any{
+			"id": adminRef01Data["id"],
+		}
+		adminRef01DataDt0Loaded, err := adminRef01Ent.Load(adminRef01MatchDt0, nil)
+		if err != nil {
+			t.Fatalf("load failed: %v", err)
+		}
+		adminRef01DataDt0LoadResult := core.ToMapAny(entityData(adminRef01DataDt0Loaded))
+		if adminRef01DataDt0LoadResult == nil {
+			t.Fatal("expected load result to be a map")
+		}
+		if !liveSameId(adminRef01DataDt0LoadResult["id"], adminRef01Data["id"]) {
+			t.Fatal("expected load result id to match")
+		}
+
+		return
+		}
+
 		if setup.live {
 			for _, _liveKey := range []string{"user01"} {
 				if setup.syntheticOnly || setup.idmap[_liveKey] == nil {
@@ -209,6 +275,9 @@ func TestAdminEntity(t *testing.T) {
 		client := setup.client
 		_ = client
 
+		if setup.live {
+			livePace()
+		}
 		// CREATE
 		adminRef01Ent := client.Admin(nil)
 		adminRef01Data := core.ToMapAny(vs.GetProp(
@@ -227,6 +296,9 @@ func TestAdminEntity(t *testing.T) {
 			t.Fatal("expected created entity to have an id")
 		}
 
+		if setup.live {
+			livePace()
+		}
 		// LIST
 		adminRef01Match := map[string]any{}
 
@@ -244,6 +316,9 @@ func TestAdminEntity(t *testing.T) {
 			t.Fatal("expected to find created entity in list")
 		}
 
+		if setup.live {
+			livePace()
+		}
 		// LOAD
 		adminRef01MatchDt0 := map[string]any{
 			"id": adminRef01Data["id"],
@@ -256,7 +331,7 @@ func TestAdminEntity(t *testing.T) {
 		if adminRef01DataDt0LoadResult == nil {
 			t.Fatal("expected load result to be a map")
 		}
-		if adminRef01DataDt0LoadResult["id"] != adminRef01Data["id"] {
+		if !liveSameId(adminRef01DataDt0LoadResult["id"], adminRef01Data["id"]) {
 			t.Fatal("expected load result id to match")
 		}
 
@@ -288,7 +363,7 @@ func adminBasicSetup(extra map[string]any) *entityTestSetup {
 
 	// Generate idmap via transform, matching TS pattern.
 	idmap, _ := vs.Transform(
-		[]any{"admin01", "admin02", "admin03", "user01", "user02", "user03", "agent01", "agent02", "agent03", "video01", "video02", "video03"},
+		[]any{"admin01", "admin02", "admin03", "user01", "user02", "user03", "agent01", "agent02", "agent03", "schedule_queue01", "schedule_queue02", "schedule_queue03", "video01", "video02", "video03"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
 				"`$KEY`": "`$COPY`",

@@ -153,6 +153,8 @@ class TestSeoBacklinkEntity:
         if len(seo_backlink_ref01_data_raw) > 0:
             seo_backlink_ref01_data = helpers.to_map(seo_backlink_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LIST
         seo_backlink_ref01_ent = client.SeoBacklink(None)
         seo_backlink_ref01_match = {}

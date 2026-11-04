@@ -134,6 +134,20 @@ class AdminMetricsSummaryEntityTest < Minitest::Test
     assert_operator hook.unexpected, :>, fired
   end
 
+  def test_validate_list_response
+    cfg = CrackedApiReferenceConfig.shared_config
+    unless cfg["feature"].is_a?(Hash) && cfg["feature"].key?("validate")
+      skip("feature not present in this SDK: validate")
+    end
+    opts = { "feature" => { "validate" => { "active" => true, "request" => false, "response" => true } } }
+    listed = CrackedApiReferenceSDK.test({ "entity" => { "admin_metrics_summary" => { "v1" => { "count" => 1, "level" => "x" } } } }, opts).AdminMetricsSummary(nil).list(nil, nil)
+    assert_equal ["v1"], listed.map { |ent| ent.data_get["id"] }
+    err = assert_raises(StandardError) do
+      CrackedApiReferenceSDK.test({ "entity" => { "admin_metrics_summary" => { "v1" => { "count" => "x", "level" => "x" } } } }, opts).AdminMetricsSummary(nil).list(nil, nil)
+    end
+    assert_equal "validate_failed", err.code
+  end
+
   def test_validate
     cfg = CrackedApiReferenceConfig.shared_config
     unless cfg["feature"].is_a?(Hash) && cfg["feature"].key?("validate")
@@ -167,6 +181,7 @@ class AdminMetricsSummaryEntityTest < Minitest::Test
       admin_metrics_summary_ref01_data = Helpers.to_map(admin_metrics_summary_ref01_data_raw[0][1])
     end
 
+    Runner.live_pace if setup[:live]
     # LIST
     admin_metrics_summary_ref01_ent = client.AdminMetricsSummary(nil)
     admin_metrics_summary_ref01_match = {}

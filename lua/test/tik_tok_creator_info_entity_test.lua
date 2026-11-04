@@ -164,6 +164,9 @@ describe("TikTokCreatorInfoEntity", function()
       tik_tok_creator_info_ref01_data = helpers.to_map(tik_tok_creator_info_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LIST
     local tik_tok_creator_info_ref01_ent = client:TikTokCreatorInfo(nil)
     local tik_tok_creator_info_ref01_match = {}

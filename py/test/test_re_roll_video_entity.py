@@ -51,8 +51,14 @@ class TestReRollVideoEntity:
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
                 return
+        if setup["live"] and os.environ.get("VOXGIG_GETONLY_GUARD") == "TRUE":
+            print("LIVE STEP {\"id\":\"re_roll_video.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/core/re-roll-video\"}")
+            pytest.skip("Live coverage incomplete: re_roll_video.create.0 excluded (GET-only live run: needs POST /api/core/re-roll-video)")
+
         client = setup["client"]
 
+        if setup["live"]:
+            runner.live_pace()
         # CREATE
         re_roll_video_ref01_ent = client.ReRollVideo(None)
         re_roll_video_ref01_data = helpers.to_map(vs.getprop(

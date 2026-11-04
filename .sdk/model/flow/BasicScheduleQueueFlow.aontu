@@ -1,0 +1,28 @@
+# BasicScheduleQueueFlow
+
+main: kit: flow: BasicScheduleQueueFlow:
+{
+  entity: "schedule_queue",
+  kind: "basic",
+  name: "BasicScheduleQueueFlow",
+  step: [
+    {
+      i: {
+        ref: "schedule_queue_ref01",
+        srcdatavar: "schedule_queue_ref01_data",
+        suffix: "_up0"
+      }
+
+      o: "update",
+      s: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-schedule_queue_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicScheduleQueueFlow"
+}

@@ -52,6 +52,30 @@ class RemixerClipperEntityTest extends TestCase
                 return;
             }
         }
+        if (!empty($setup["live"]) && getenv('VOXGIG_GETONLY_GUARD') === "TRUE") {
+            fwrite(STDOUT, 'LIVE STEP {"id":"remixer_clipper.create.0","state":"excluded","attempted":false,"reason":"GET-only live run: needs POST /api/remixer-clippers/jobs/{identifier}/download"}' . "\n");
+        $client = $setup["client"];
+
+        // Bootstrap entity data from existing test data.
+        $remixer_clipper_ref01_data_raw = Vs::items(Helpers::to_map(
+            Vs::getpath($setup["data"], "existing.remixer_clipper")));
+        $remixer_clipper_ref01_data = null;
+        if (count($remixer_clipper_ref01_data_raw) > 0) {
+            $remixer_clipper_ref01_data = Helpers::to_map($remixer_clipper_ref01_data_raw[0][1]);
+        }
+
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
+        // LOAD
+        $remixer_clipper_ref01_ent = $client->RemixerClipper(null);
+        $remixer_clipper_ref01_match_dt0 = [];
+        $remixer_clipper_ref01_data_dt0_loaded = $remixer_clipper_ref01_ent->load($remixer_clipper_ref01_match_dt0, null);
+        $this->assertNotNull($remixer_clipper_ref01_data_dt0_loaded);
+
+            return;
+        }
+
         if (!empty($setup["live"])) {
             foreach (["identifier01"] as $_liveKey) {
                 if (!empty($setup["synthetic_only"]) || null === ($setup["idmap"][$_liveKey] ?? null)) {
@@ -61,6 +85,9 @@ class RemixerClipperEntityTest extends TestCase
         }
         $client = $setup["client"];
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // CREATE
         $remixer_clipper_ref01_ent = $client->RemixerClipper(null);
         $remixer_clipper_ref01_data = Helpers::to_map(Vs::getprop(
@@ -71,6 +98,9 @@ class RemixerClipperEntityTest extends TestCase
         $remixer_clipper_ref01_data = Helpers::to_map(is_object($remixer_clipper_ref01_data_result) && method_exists($remixer_clipper_ref01_data_result, 'data_get') ? $remixer_clipper_ref01_data_result->data_get() : $remixer_clipper_ref01_data_result);
         $this->assertNotNull($remixer_clipper_ref01_data);
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LOAD
         $remixer_clipper_ref01_match_dt0 = [];
         $remixer_clipper_ref01_data_dt0_loaded = $remixer_clipper_ref01_ent->load($remixer_clipper_ref01_match_dt0, null);

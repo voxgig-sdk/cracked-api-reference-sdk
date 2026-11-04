@@ -153,6 +153,8 @@ class TestSeoOverviewEntity:
         if len(seo_overview_ref01_data_raw) > 0:
             seo_overview_ref01_data = helpers.to_map(seo_overview_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LIST
         seo_overview_ref01_ent = client.SeoOverview(None)
         seo_overview_ref01_match = {}

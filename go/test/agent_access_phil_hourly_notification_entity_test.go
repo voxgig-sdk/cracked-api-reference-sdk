@@ -62,6 +62,9 @@ func TestAgentAccessPhilHourlyNotificationEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = agentAccessPhilHourlyNotificationRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LOAD
 		agentAccessPhilHourlyNotificationRef01Ent := client.AgentAccessPhilHourlyNotification(nil)
 		agentAccessPhilHourlyNotificationRef01MatchDt0 := map[string]any{}

@@ -62,6 +62,9 @@ func TestScrapingStatusEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = scrapingStatusRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LOAD
 		scrapingStatusRef01Ent := client.ScrapingStatus(nil)
 		scrapingStatusRef01MatchDt0 := map[string]any{}

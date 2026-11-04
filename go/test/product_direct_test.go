@@ -33,6 +33,11 @@ func TestProductDirect(t *testing.T) {
 			t.Skip(_reason)
 			return
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" && setup.idmap["user01"] == nil {
+			t.Log("LIVE STEP {\"id\":\"direct-list-product\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs user01, which only POST /api/admin/users/{user_id}/fix-auto-schedule-by-date gives\"}")
+			t.Skip("Live coverage incomplete: direct-list-product excluded (GET-only live run: needs user01, which only POST /api/admin/users/{user_id}/fix-auto-schedule-by-date gives)")
+			return
+		}
 		if setup.live {
 			for _, _liveKey := range []string{"user01"} {
 				if v := setup.idmap[_liveKey]; v == nil {
@@ -41,9 +46,13 @@ func TestProductDirect(t *testing.T) {
 				}
 			}
 		}
+		if setup.live {
+			livePace()
+		}
 		client := setup.client
 
 		params := map[string]any{}
+		query := map[string]any{}
 		if setup.live {
 			params["user_id"] = setup.idmap["user01"]
 		} else {
@@ -54,6 +63,7 @@ func TestProductDirect(t *testing.T) {
 			"path":   "api/admin/users/{user_id}/products",
 			"method": "GET",
 			"params": params,
+			"query":  query,
 		})
 		if setup.live {
 			if err != nil {
@@ -116,6 +126,11 @@ func TestProductDirect(t *testing.T) {
 			t.Skip(_reason)
 			return
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" && setup.idmap["user01"] == nil {
+			t.Log("LIVE STEP {\"id\":\"direct-load-product\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs user01, which only POST /api/admin/users/{user_id}/fix-auto-schedule-by-date gives\"}")
+			t.Skip("Live coverage incomplete: direct-load-product excluded (GET-only live run: needs user01, which only POST /api/admin/users/{user_id}/fix-auto-schedule-by-date gives)")
+			return
+		}
 		if setup.live {
 			for _, _liveKey := range []string{"user01"} {
 				if v := setup.idmap[_liveKey]; v == nil {
@@ -123,6 +138,9 @@ func TestProductDirect(t *testing.T) {
 					return
 				}
 			}
+		}
+		if setup.live {
+			livePace()
 		}
 		client := setup.client
 
@@ -150,10 +168,10 @@ func TestProductDirect(t *testing.T) {
 				liveEmpty(t, "The account has no product record to load")
 			}
 			firstEnt := core.ToMapAny(listData[0])
-			if firstEnt["id"] == nil {
+			if firstEnt["product_id"] == nil {
 				liveMiss(t, productDirectLiveStrict, "Live load blocked: discovery returned no usable identity")
 			}
-			params["id"] = firstEnt["id"]
+			params["id"] = firstEnt["product_id"]
 		} else {
 			params["id"] = "direct01"
 		}

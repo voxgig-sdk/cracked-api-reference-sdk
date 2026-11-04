@@ -150,6 +150,8 @@ class TestStatEntity:
         if len(stat_ref01_data_raw) > 0:
             stat_ref01_data = helpers.to_map(stat_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LIST
         stat_ref01_ent = client.Stat(None)
         stat_ref01_match = {}

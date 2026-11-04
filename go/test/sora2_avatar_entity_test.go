@@ -200,9 +200,77 @@ func TestSora2AvatarEntity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" {
+			t.Log("LIVE STEP {\"id\":\"sora2_avatar.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/admin/sora2-avatars\"}")
+			t.Log("LIVE STEP {\"id\":\"sora2_avatar.update.2\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs PUT /api/admin/sora2-avatars/{avatar_id}\"}")
+		client := setup.client
+		_ = client
+		if setup.live {
+			var _liveId any
+			if !setup.syntheticOnly {
+				_liveId = setup.idmap["sora2_avatar01"]
+			}
+			livePace()
+			liveExisting(t, sora2_avatarEntityLiveStrict, setup.data, "sora2_avatar", "id", _liveId,
+				func() (any, error) {
+					return client.Sora2Avatar(nil).List(map[string]any{}, nil)
+				})
+		}
+
+		// Bootstrap entity data from existing test data (no create step in flow).
+		sora2AvatarRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.sora2_avatar")))
+		var sora2AvatarRef01Data map[string]any
+		if len(sora2AvatarRef01DataRaw) > 0 {
+			sora2AvatarRef01Data = core.ToMapAny(sora2AvatarRef01DataRaw[0][1])
+		}
+		// Discard guards against Go's unused-var check when the flow's steps
+		// happen not to consume the bootstrap data (e.g. list-only flows).
+		_ = sora2AvatarRef01Data
+
+		if setup.live {
+			livePace()
+		}
+		// LIST
+		sora2AvatarRef01Ent := client.Sora2Avatar(nil)
+		sora2AvatarRef01Match := map[string]any{}
+
+		sora2AvatarRef01ListResult, err := sora2AvatarRef01Ent.List(sora2AvatarRef01Match, nil)
+		if err != nil {
+			t.Fatalf("list failed: %v", err)
+		}
+		_, sora2AvatarRef01ListOk := sora2AvatarRef01ListResult.([]any)
+		if !sora2AvatarRef01ListOk {
+			t.Fatalf("expected list result to be an array, got %T", sora2AvatarRef01ListResult)
+		}
+
+		if setup.live {
+			livePace()
+		}
+		// LOAD
+		sora2AvatarRef01MatchDt0 := map[string]any{
+			"id": sora2AvatarRef01Data["id"],
+		}
+		sora2AvatarRef01DataDt0Loaded, err := sora2AvatarRef01Ent.Load(sora2AvatarRef01MatchDt0, nil)
+		if err != nil {
+			t.Fatalf("load failed: %v", err)
+		}
+		sora2AvatarRef01DataDt0LoadResult := core.ToMapAny(entityData(sora2AvatarRef01DataDt0Loaded))
+		if sora2AvatarRef01DataDt0LoadResult == nil {
+			t.Fatal("expected load result to be a map")
+		}
+		if !liveSameId(sora2AvatarRef01DataDt0LoadResult["id"], sora2AvatarRef01Data["id"]) {
+			t.Fatal("expected load result id to match")
+		}
+
+		return
+		}
+
 		client := setup.client
 		_ = client
 
+		if setup.live {
+			livePace()
+		}
 		// CREATE
 		sora2AvatarRef01Ent := client.Sora2Avatar(nil)
 		sora2AvatarRef01Data := core.ToMapAny(vs.GetProp(
@@ -220,6 +288,9 @@ func TestSora2AvatarEntity(t *testing.T) {
 			t.Fatal("expected created entity to have an id")
 		}
 
+		if setup.live {
+			livePace()
+		}
 		// LIST
 		sora2AvatarRef01Match := map[string]any{}
 
@@ -237,6 +308,9 @@ func TestSora2AvatarEntity(t *testing.T) {
 			t.Fatal("expected to find created entity in list")
 		}
 
+		if setup.live {
+			livePace()
+		}
 		// UPDATE
 		sora2AvatarRef01DataUp0Up := map[string]any{
 			"id": sora2AvatarRef01Data["id"],
@@ -254,13 +328,16 @@ func TestSora2AvatarEntity(t *testing.T) {
 		if sora2AvatarRef01ResdataUp0 == nil {
 			t.Fatal("expected update result to be a map")
 		}
-		if sora2AvatarRef01ResdataUp0["id"] != sora2AvatarRef01DataUp0Up["id"] {
+		if !liveSameId(sora2AvatarRef01ResdataUp0["id"], sora2AvatarRef01DataUp0Up["id"]) {
 			t.Fatal("expected update result id to match")
 		}
 		if sora2AvatarRef01ResdataUp0[sora2AvatarRef01MarkdefUp0Name] != sora2AvatarRef01MarkdefUp0Value {
 			t.Fatalf("expected %s to be updated, got %v", sora2AvatarRef01MarkdefUp0Name, sora2AvatarRef01ResdataUp0[sora2AvatarRef01MarkdefUp0Name])
 		}
 
+		if setup.live {
+			livePace()
+		}
 		// LOAD
 		sora2AvatarRef01MatchDt0 := map[string]any{
 			"id": sora2AvatarRef01Data["id"],
@@ -273,7 +350,7 @@ func TestSora2AvatarEntity(t *testing.T) {
 		if sora2AvatarRef01DataDt0LoadResult == nil {
 			t.Fatal("expected load result to be a map")
 		}
-		if sora2AvatarRef01DataDt0LoadResult["id"] != sora2AvatarRef01Data["id"] {
+		if !liveSameId(sora2AvatarRef01DataDt0LoadResult["id"], sora2AvatarRef01Data["id"]) {
 			t.Fatal("expected load result id to match")
 		}
 

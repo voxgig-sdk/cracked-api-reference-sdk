@@ -181,6 +181,7 @@ class AgentSummaryEntityTest < Minitest::Test
       agent_summary_ref01_data = Helpers.to_map(agent_summary_ref01_data_raw[0][1])
     end
 
+    Runner.live_pace if setup[:live]
     # LIST
     agent_summary_ref01_ent = client.AgentSummary(nil)
     agent_summary_ref01_match = {}

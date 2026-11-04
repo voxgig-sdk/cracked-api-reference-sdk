@@ -70,28 +70,23 @@ class ActiveOnboardingLoadMatch(TypedDict, total=False):
 
 
 class AdminRequired(TypedDict):
-    count: int
     created_at: str
     email: str
     id: str
-    video_type: str
+    product_id: str
 
 
 class Admin(AdminRequired, total=False):
     apply: bool
     date_from: Any
     date_to: Any
-    include_failed: bool
-    include_pending: bool
     include_records: bool
     issue_ids: Any
     only_active: bool
     platform: Any
     posting_method: Any
-    product_id: str
     query: Any
     reason: Any
-    regenerate: bool
     status: str
     user_membership: Any
     user_name: Any
@@ -110,14 +105,11 @@ class AdminLoadMatch(AdminLoadMatchRequired, total=False):
 
 class AdminListMatch(TypedDict, total=False):
     apply: bool
-    count: int
     created_at: str
     date_from: Any
     date_to: Any
     email: str
     id: str
-    include_failed: bool
-    include_pending: bool
     include_records: bool
     issue_ids: Any
     only_active: bool
@@ -126,30 +118,24 @@ class AdminListMatch(TypedDict, total=False):
     product_id: str
     query: Any
     reason: Any
-    regenerate: bool
     status: str
     user_membership: Any
     user_name: Any
     user_onboarding_step: Any
-    video_type: str
 
 
 class AdminCreateDataRequired(TypedDict):
     user_id: str
-    count: int
     created_at: str
     date_from: Any
     date_to: Any
     email: str
     id: str
     product_id: str
-    video_type: str
 
 
 class AdminCreateData(AdminCreateDataRequired, total=False):
     apply: bool
-    include_failed: bool
-    include_pending: bool
     include_records: bool
     issue_ids: Any
     only_active: bool
@@ -157,43 +143,10 @@ class AdminCreateData(AdminCreateDataRequired, total=False):
     posting_method: Any
     query: Any
     reason: Any
-    regenerate: bool
     status: str
     user_membership: Any
     user_name: Any
     user_onboarding_step: Any
-
-
-class AdminUpdateDataRequired(TypedDict):
-    agent_id: str
-
-
-class AdminUpdateData(AdminUpdateDataRequired, total=False):
-    agent_type: str
-    is_active: bool
-    apply: bool
-    count: int
-    created_at: str
-    date_from: Any
-    date_to: Any
-    email: str
-    id: str
-    include_failed: bool
-    include_pending: bool
-    include_records: bool
-    issue_ids: Any
-    only_active: bool
-    platform: Any
-    posting_method: Any
-    product_id: str
-    query: Any
-    reason: Any
-    regenerate: bool
-    status: str
-    user_membership: Any
-    user_name: Any
-    user_onboarding_step: Any
-    video_type: str
 
 
 class AdminRemoveMatch(TypedDict):
@@ -468,14 +421,29 @@ class AdminHealthrxUpdateData(TypedDict, total=False):
     schedule_enabled: bool
 
 
-class AdminInsight(TypedDict):
-    customer_success_cases: list
-    customers: list
-    generated_at: str
-    pfa_database: dict
-    recent_signups: list
-    summary: dict
-    vireel_database: dict
+class AdminInsightRequired(TypedDict):
+    active_agents: int
+    active_products: int
+    agents_count: int
+    auto_schedule_status: str
+    email: str
+    feature_impact: str
+    notification_count: int
+    notification_events: list
+    priority: str
+    severity: str
+    status_label: str
+    upcoming_posts: int
+    user_id: str
+
+
+class AdminInsight(AdminInsightRequired, total=False):
+    days_until_period_end: Any
+    last_notification_at: Any
+    membership: Any
+    name: str
+    subscription_current_period_end: Any
+    subscription_status: Any
 
 
 class AdminInsightLoadMatch(TypedDict, total=False):
@@ -486,13 +454,25 @@ class AdminInsightLoadMatch(TypedDict, total=False):
 
 
 class AdminInsightListMatch(TypedDict, total=False):
-    customer_success_cases: list
-    customers: list
-    generated_at: str
-    pfa_database: dict
-    recent_signups: list
-    summary: dict
-    vireel_database: dict
+    active_agents: int
+    active_products: int
+    agents_count: int
+    auto_schedule_status: str
+    days_until_period_end: Any
+    email: str
+    feature_impact: str
+    last_notification_at: Any
+    membership: Any
+    name: str
+    notification_count: int
+    notification_events: list
+    priority: str
+    severity: str
+    status_label: str
+    subscription_current_period_end: Any
+    subscription_status: Any
+    upcoming_posts: int
+    user_id: str
 
 
 class AdminLandingTask(TypedDict):
@@ -509,14 +489,8 @@ class AdminLandingTaskCreateData(AdminLandingTaskCreateDataRequired, total=False
 
 
 class AdminMetricsSummary(TypedDict):
-    paid_users_by_level: list
-    total_cancellations: int
-    total_previews_generated: int
-    total_signups: int
-    total_videos_generated: int
-    url_attempts: int
-    user_credits: list
-    user_gifted_credits: list
+    count: int
+    level: str
 
 
 class AdminMetricsSummaryListMatch(TypedDict, total=False):
@@ -1144,6 +1118,20 @@ class AgentListMatch(TypedDict, total=False):
     agent_type: Any
 
 
+class AgentUpdateDataRequired(TypedDict):
+    id: str
+
+
+class AgentUpdateData(AgentUpdateDataRequired, total=False):
+    is_active: bool
+    agent_type: str
+    active_connections: int
+    at_capacity: bool
+    name: str
+    tiktok_stats: Any
+    type: str
+
+
 class AgentAccessCustomersHealthRequired(TypedDict):
     agentQuota: int
     assignedAgentsByType: dict
@@ -1230,14 +1218,21 @@ class AgentAccessPhilVideoLoadMatch(TypedDict, total=False):
     date: Any
 
 
-class AgentAccessUserAgent(TypedDict):
-    agentQuota: int
-    agents: list
-    assignedByType: dict
-    assignedTotal: int
-    email: str
-    products: list
-    userId: str
+class AgentAccessUserAgentRequired(TypedDict):
+    id: str
+    name: str
+
+
+class AgentAccessUserAgent(AgentAccessUserAgentRequired, total=False):
+    avatar: Any
+    facebookUrl: Any
+    instagramUrl: Any
+    productId: Any
+    productName: Any
+    tiktokUrl: Any
+    type: Any
+    uploadPostPlatforms: Any
+    youtubeUrl: Any
 
 
 class AgentAccessUserAgentListMatch(TypedDict):
@@ -1381,23 +1376,13 @@ class AgentDetailUpdateData(AgentDetailUpdateDataRequired, total=False):
     role: Any
 
 
-class AgentHealthRequired(TypedDict):
-    daily: list
-    dates: list
-    generated_at: str
-    groups: list
-    latest: dict
-    phone_admin_generated_at: str
-    post_target: int
-    scope_prefixes: list
-    timezone: str
-    warmup_target: int
-
-
-class AgentHealth(AgentHealthRequired, total=False):
-    live_date: Any
-    platform: str
-    qa_managed_agent_ids: list
+class AgentHealth(TypedDict):
+    accounts: dict
+    date: str
+    overall: dict
+    posts: dict
+    views: dict
+    warmups: dict
 
 
 class AgentHealthListMatch(TypedDict, total=False):
@@ -1421,22 +1406,15 @@ class AgentHealthCustomerOptionListMatch(TypedDict, total=False):
 
 
 class AgentHealthDetailRequired(TypedDict):
-    date: str
-    generated_at: str
-    group_id: str
-    has_more: bool
-    issue_total: int
-    issues: list
-    limit: int
-    metric: str
-    offset: int
+    agent_id: str
+    category: str
+    connection_status: str
+    device_status: str
+    state: str
 
 
 class AgentHealthDetail(AgentHealthDetailRequired, total=False):
-    archived_issue_total: int
-    warmup_runs: list
-    warning_total: int
-    warnings: list
+    issue: Any
 
 
 class AgentHealthDetailListMatchRequired(TypedDict):
@@ -1470,7 +1448,7 @@ class AgentPost(TypedDict):
 
 
 class AgentPostListMatchRequired(TypedDict):
-    id: str
+    agent_id: str
 
 
 class AgentPostListMatch(AgentPostListMatchRequired, total=False):
@@ -1659,7 +1637,6 @@ class Carousel(CarouselRequired, total=False):
     formula_id: str
     formula_name: Any
     generation: dict
-    id: str
     image_prompt: Any
     likes: Any
     main_prompt: Any
@@ -1756,27 +1733,13 @@ class CarouselStatusRequired(TypedDict):
 
 class CarouselStatus(CarouselStatusRequired, total=False):
     error: Any
-    id: str
     image_model: Any
     image_provider: Any
     image_task_id: str
 
 
 class CarouselStatusListMatch(TypedDict):
-    id: str
-
-
-class Chat(TypedDict):
-    idempotencyKey: str
-    message: str
-    sessionId: str
-
-
-class ChatCreateData(TypedDict):
-    session_id: str
-    idempotencyKey: str
-    message: str
-    sessionId: str
+    carousel_id: str
 
 
 class ChatHistoryRequired(TypedDict):
@@ -1808,6 +1771,8 @@ class ChatHistoryCreateData(TypedDict):
 class ChatSessionRequired(TypedDict):
     chatSubVariant: str
     createdAt: str
+    idempotencyKey: str
+    message: str
     salesStage: str
     sessionId: str
     status: str
@@ -1824,6 +1789,9 @@ class ChatSession(ChatSessionRequired, total=False):
 
 class ChatSessionCreateDataRequired(TypedDict):
     session_id: str
+    idempotencyKey: str
+    message: str
+    sessionId: str
 
 
 class ChatSessionCreateData(ChatSessionCreateDataRequired, total=False):
@@ -2191,7 +2159,7 @@ class CustomerListMatch(TypedDict, total=False):
     is_migrated: bool
 
 
-class CustomerHealthRequired(TypedDict):
+class CustomerHealth(TypedDict):
     assigned_agents: dict
     available_dates: list
     date: str
@@ -2200,10 +2168,6 @@ class CustomerHealthRequired(TypedDict):
     performance_overview: dict
     platform_coverage_summary: dict
     user_id: str
-
-
-class CustomerHealth(CustomerHealthRequired, total=False):
-    id: str
 
 
 class CustomerHealthLoadMatchRequired(TypedDict):
@@ -2232,24 +2196,11 @@ class CustomerHealthAllCustomersItemListMatch(TypedDict, total=False):
     offset: int
 
 
-class CustomerHealthViewsSummaryRequired(TypedDict):
-    average_views_per_result: int
-    date: str
-    paid_users_count: int
+class CustomerHealthViewsSummary(TypedDict):
+    email: str
     posted_results: int
-    range: str
-    top_users: list
-    total_views: int
-    trend: list
-    trend_granularity: str
-    users_with_views: int
-
-
-class CustomerHealthViewsSummary(CustomerHealthViewsSummaryRequired, total=False):
-    end_date: Any
-    start_date: Any
-    user_email: Any
     user_id: str
+    views: int
 
 
 class CustomerHealthViewsSummaryListMatch(TypedDict, total=False):
@@ -2267,12 +2218,12 @@ class DailyCreateData(TypedDict):
     day: str
 
 
-class DailyStatus(TypedDict, total=False):
-    id: str
+class DailyStatus(TypedDict):
+    pass
 
 
 class DailyStatusLoadMatch(TypedDict):
-    id: str
+    daily_id: str
     day: str
 
 
@@ -2345,14 +2296,6 @@ class EnterpriseAgentCreateDataRequired(TypedDict):
 
 class EnterpriseAgentCreateData(EnterpriseAgentCreateDataRequired, total=False):
     count: int
-
-
-class EnterpriseProduct(TypedDict):
-    pass
-
-
-class EnterpriseProductLoadMatch(TypedDict):
-    product_id: str
 
 
 class ExactAvailability(TypedDict):
@@ -2573,25 +2516,6 @@ class InitResetProductV6CreateData(TypedDict, total=False):
     product_id: str
 
 
-class IriRequired(TypedDict):
-    idempotencyKey: str
-
-
-class Iri(IriRequired, total=False):
-    correlationId: Any
-    productId: Any
-
-
-class IriCreateDataRequired(TypedDict):
-    connector_id: str
-    idempotencyKey: str
-
-
-class IriCreateData(IriCreateDataRequired, total=False):
-    correlationId: Any
-    productId: Any
-
-
 class IrisCapabilityRequired(TypedDict):
     capability: str
     correlationId: str
@@ -2669,6 +2593,14 @@ class IrisConnectorListMatch(TypedDict, total=False):
     connectors: list
 
 
+class IrisConnectorCreateDataRequired(TypedDict):
+    connector_id: str
+
+
+class IrisConnectorCreateData(IrisConnectorCreateDataRequired, total=False):
+    connectors: list
+
+
 class IrisStatusRequired(TypedDict):
     status: dict
 
@@ -2684,6 +2616,7 @@ class IrisStatusListMatch(TypedDict, total=False):
 
 
 class IrisTaskRequired(TypedDict):
+    idempotencyKey: str
     title: str
 
 
@@ -2692,6 +2625,7 @@ class IrisTask(IrisTaskRequired, total=False):
     cadence: str
     capability: Any
     completed: list
+    correlationId: Any
     description: str
     discover: list
     productId: Any
@@ -2704,6 +2638,7 @@ class IrisTaskListMatch(TypedDict, total=False):
 
 
 class IrisTaskCreateDataRequired(TypedDict):
+    idempotencyKey: str
     title: str
 
 
@@ -2711,6 +2646,7 @@ class IrisTaskCreateData(IrisTaskCreateDataRequired, total=False):
     approvalRequired: bool
     cadence: str
     capability: Any
+    correlationId: Any
     description: str
     productId: Any
     requiredConnectors: list
@@ -3186,16 +3122,21 @@ class ProductRemoveMatch(TypedDict):
 
 
 class ProductDashboardRequired(TypedDict):
-    agents: list
-    date: str
-    pagination: dict
-    products: list
-    selected_product: Any
-    summary: dict
+    comments: int
+    failed_entries: int
+    id: str
+    likes: int
+    name: str
+    platforms: list
+    posted_entries: int
+    posting_entries: int
+    scheduled_entries: int
+    views: int
 
 
 class ProductDashboard(ProductDashboardRequired, total=False):
-    phone_admin_error: Any
+    has_tiktok_community_violation: bool
+    metrics_pending_count: int
 
 
 class ProductDashboardListMatch(TypedDict, total=False):
@@ -3251,6 +3192,7 @@ class ProductLandingRequired(TypedDict):
     productLinkSelection: str
     showLinkInFirstComment: bool
     slug: str
+    url: str
 
 
 class ProductLanding(ProductLandingRequired, total=False):
@@ -3263,6 +3205,7 @@ class ProductLanding(ProductLandingRequired, total=False):
     dmOngoingResponsePrompt: Any
     firstCommentTextBeforeLink: Any
     headerImageUrl: Any
+    icon: Any
     landingHtmlUrl: Any
     landingLastGeneratedAt: Any
     landingReferenceScreenshotUrl: Any
@@ -3365,14 +3308,6 @@ class ReRollVideoCreateData(ReRollVideoCreateDataRequired, total=False):
     skip_credit_check: bool
 
 
-class ReadRootGet(TypedDict):
-    pass
-
-
-class ReadRootGetLoadMatch(TypedDict):
-    pass
-
-
 class RecordDemoBookedRequired(TypedDict):
     message: dict
     session: dict
@@ -3454,6 +3389,14 @@ class RetryWebsiteScrapeCreateData(TypedDict):
     url: str
 
 
+class RootGet(TypedDict):
+    pass
+
+
+class RootGetLoadMatch(TypedDict):
+    pass
+
+
 class SaveSurveyRequired(TypedDict):
     onboarding_data_id: str
     success: bool
@@ -3529,6 +3472,18 @@ class ScanSocialsStatusLoadMatch(TypedDict, total=False):
     product_id: str
 
 
+class ScheduleQueue(TypedDict):
+    pass
+
+
+class ScheduleQueueUpdateDataRequired(TypedDict):
+    queue_id: str
+
+
+class ScheduleQueueUpdateData(ScheduleQueueUpdateDataRequired, total=False):
+    video_id: Any
+
+
 class ScheduleV2Required(TypedDict):
     created_at: str
     id: str
@@ -3601,14 +3556,6 @@ class ScheduleV2CreateData(ScheduleV2CreateDataRequired, total=False):
     youtube_posted_by: Any
     youtube_posted_url: Any
     youtube_scraped_social_post_id: str
-
-
-class ScheduleV2UpdateDataRequired(TypedDict):
-    queue_id: str
-
-
-class ScheduleV2UpdateData(ScheduleV2UpdateDataRequired, total=False):
-    video_id: str
 
 
 class ScheduleV2RemoveMatch(TypedDict):
@@ -3764,14 +3711,11 @@ class SeoOverviewListMatch(TypedDict, total=False):
 
 
 class SeoTraffic(TypedDict):
-    end_date: str
-    series: list
-    site_url: str
-    start_date: str
-    top_countries: list
-    top_pages: list
-    top_queries: list
-    totals: dict
+    clicks: float
+    ctr: float
+    date: str
+    impressions: float
+    position: float
 
 
 class SeoTrafficListMatch(TypedDict, total=False):
@@ -4115,26 +4059,27 @@ class StatsRefreshIssueListMatch(TypedDict, total=False):
 
 
 class StatsRefreshOverviewRequired(TypedDict):
-    aged_over_24h: int
-    backlog_preview: list
-    coverage_percent: float
-    customer_counts: dict
-    date: str
-    generated_at: str
-    method_counts: dict
-    platform_counts: dict
-    platform_units_resolved: int
-    platform_units_total: int
-    platform_units_unresolved: int
-    posted_entries: int
-    reason_counts: dict
-    sla_deadline_et: str
-    stale_after_sla: int
-    top_affected_customers: list
+    aged_over_24h: bool
+    is_resolved: bool
+    platform: str
+    posted_date_et: str
+    schedule_queue_id: str
+    scheduled_datetime_utc: str
+    stale_after_sla: bool
+    user_email: str
+    user_id: str
 
 
 class StatsRefreshOverview(StatsRefreshOverviewRequired, total=False):
-    active_run: Any
+    agent_id: str
+    agent_name: Any
+    last_refresh_completed_at: Any
+    latest_error_message: Any
+    post_method: Any
+    post_url: Any
+    product_id: str
+    product_name: Any
+    reason_code: Any
 
 
 class StatsRefreshOverviewListMatch(TypedDict, total=False):
@@ -4326,6 +4271,56 @@ class UserLoadMatch(UserLoadMatchRequired, total=False):
     product_id: str
 
 
+class UserCreateDataRequired(TypedDict):
+    id: str
+    agents: list
+    createdAt: str
+    email: str
+    name: str
+    totalCount: int
+    updatedAt: str
+    userId: str
+
+
+class UserCreateData(UserCreateDataRequired, total=False):
+    product_id: str
+    target_date: str
+    phone_admin_pc_name: Any
+    background: bool
+    accountType: Any
+    activatedByAdminAt: Any
+    activatedByAdminId: Any
+    agentsCount: Any
+    attribution: Any
+    avatarImageUrl: Any
+    avatarVoiceUrl: Any
+    credits: int
+    googleId: Any
+    hasSeenScheduleWelcome: bool
+    industry: Any
+    instagramId: Any
+    isActivatedByAdmin: bool
+    isAdmin: bool
+    isInternalUser: Any
+    isMigrated: Any
+    isResettingProduct: Any
+    membership: Any
+    partnerDirectLoginDisabled: bool
+    partnerExternalUserId: Any
+    partnerPolicyCode: Any
+    partnerSource: Any
+    picture: Any
+    stripeCustomerId: Any
+    stripeSubscriptionId: Any
+    subscriptionCurrentPeriodEnd: Any
+    subscriptionStatus: Any
+    count: Any
+    include_failed: Any
+    include_pending: Any
+    regenerate: Any
+    video_type: Any
+
+
 class UserUpdateData(TypedDict, total=False):
     accountType: Any
     activatedByAdminAt: Any
@@ -4362,6 +4357,8 @@ class UserUpdateData(TypedDict, total=False):
     totalCount: int
     updatedAt: str
     userId: str
+    posted_video_reuse_percent: Any
+    rebuild: Any
 
 
 class UserAgentRequired(TypedDict):
@@ -4373,11 +4370,10 @@ class UserAgentRequired(TypedDict):
 
 class UserAgent(UserAgentRequired, total=False):
     expires_at: Any
-    id: str
 
 
 class UserAgentListMatchRequired(TypedDict):
-    id: str
+    user_id: str
 
 
 class UserAgentListMatch(UserAgentListMatchRequired, total=False):
@@ -4387,7 +4383,7 @@ class UserAgentListMatch(UserAgentListMatchRequired, total=False):
 
 
 class UserAgentCreateDataRequired(TypedDict):
-    id: str
+    user_id: str
     agent: dict
     assigned_at: str
     assignment_id: str
@@ -4401,73 +4397,14 @@ class UserAgentCreateData(UserAgentCreateDataRequired, total=False):
     expires_at: Any
 
 
-class UserHealthDetailRequired(TypedDict):
-    account_type: Any
-    activated: bool
-    assigned_agents: list
-    assigned_agents_count: int
-    auto_schedule_enabled: bool
-    created_at: str
-    credits: int
-    effective_posted_video_reuse_percent: int
-    email: str
-    expected_agents_count: int
+class UserHealthDetail(TypedDict):
     id: str
-    is_activated_by_admin: bool
-    is_admin: bool
-    is_internal_user: bool
-    is_migrated: bool
-    membership: Any
     name: str
-    onboarding_flow: str
-    product_id: str
-    product_name: Any
-    product_url: Any
-    subscription_status: Any
-    today_failed: int
-    today_posted: int
-    today_scheduled: int
-    tomorrow_capacity: int
-    tomorrow_scheduled: int
-    videos_completed: int
-    videos_failed: int
-    videos_pending: int
-    videos_stale: int
-    videos_total: int
-    yesterday_failed: int
-    yesterday_failed_entries: list
-    yesterday_posted: int
-    yesterday_total: int
-
-
-class UserHealthDetail(UserHealthDetailRequired, total=False):
-    activated_by_admin_at: Any
-    activated_by_admin_id: str
-    admin_notes: Any
-    agents_count: int
-    assigned_agents_preview_limit: int
-    assigned_agents_truncated: bool
-    comments_expected_per_day: int
-    comments_fix_block_reason: Any
-    comments_fix_ready: bool
-    comments_today_failed: int
-    comments_today_posted: int
-    comments_today_scheduled: int
-    comments_yesterday_failed: int
-    comments_yesterday_posted: int
-    comments_yesterday_total: int
-    is_bookmarked: bool
-    landing_slug: Any
-    landing_status: Any
-    landing_url: Any
-    microhub_status: Any
-    microhub_url: Any
-    posted_video_reuse_percent: Any
-    survey_data: Any
+    type: str
 
 
 class UserHealthDetailListMatchRequired(TypedDict):
-    id: str
+    user_id: str
 
 
 class UserHealthDetailListMatch(UserHealthDetailListMatchRequired, total=False):

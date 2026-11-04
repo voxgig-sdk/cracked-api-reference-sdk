@@ -62,11 +62,29 @@ func TestUserEntity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" {
+			t.Log("LIVE STEP {\"id\":\"user.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/admin/users/{user_id}/fix-auto-schedule-by-date\"}")
+			t.Log("LIVE STEP {\"id\":\"user.update.1\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs PUT /api/admin/users/{user_id}/auto-schedule\"}")
+			t.Log("LIVE STEP {\"id\":\"user.load.2\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: reads a record only user.create.0 gives\"}")
+			t.Skip("Live coverage incomplete: user.create.0 excluded (GET-only live run: needs POST /api/admin/users/{user_id}/fix-auto-schedule-by-date); user.update.1 excluded (GET-only live run: needs PUT /api/admin/users/{user_id}/auto-schedule); user.load.2 excluded (GET-only live run: reads a record only user.create.0 gives)")
+			return
+		}
+
 		if setup.live {
-			liveMiss(t, userEntityLiveStrict, "Live entity test blocked: %s", "the flow loads a user record it has no list to find")
+			for _, _liveKey := range []string{"user01"} {
+				if setup.syntheticOnly || setup.idmap[_liveKey] == nil {
+					liveMiss(t, userEntityLiveStrict, "Live entity test blocked: needs %s via CRACKED_API_REFERENCE_TEST_USER_ENTID", _liveKey)
+				}
+			}
 		}
 		client := setup.client
 		_ = client
+		if setup.live {
+			liveExisting(t, userEntityLiveStrict, setup.data, "user", "userId", setup.idmap["user01"],
+				func() (any, error) {
+					return []any{map[string]any{"id": setup.idmap["user01"]}}, nil
+				})
+		}
 
 		// Bootstrap entity data from existing test data (no create step in flow).
 		userRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.user")))
@@ -78,10 +96,13 @@ func TestUserEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = userRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LOAD
 		userRef01Ent := client.User(nil)
 		userRef01MatchDt0 := map[string]any{
-			"id": userRef01Data["id"],
+			"id": userRef01Data["userId"],
 		}
 		userRef01DataDt0Loaded, err := userRef01Ent.Load(userRef01MatchDt0, nil)
 		if err != nil {
@@ -91,7 +112,7 @@ func TestUserEntity(t *testing.T) {
 		if userRef01DataDt0LoadResult == nil {
 			t.Fatal("expected load result to be a map")
 		}
-		if userRef01DataDt0LoadResult["id"] != userRef01Data["id"] {
+		if !liveSameId(userRef01DataDt0LoadResult["userId"], userRef01Data["userId"]) {
 			t.Fatal("expected load result id to match")
 		}
 
@@ -114,6 +135,12 @@ func userBasicSetup(extra map[string]any) *entityTestSetup {
 	var entityData map[string]any
 	if err := json.Unmarshal(entityDataSource, &entityData); err != nil {
 		panic("failed to parse user test data: " + err.Error())
+	}
+
+	for _, rec := range core.ToMapAny(vs.GetPath(entityData, "existing.user")) {
+		if recMap := core.ToMapAny(rec); recMap != nil && recMap["id"] != nil {
+			recMap["userId"] = recMap["id"]
+		}
 	}
 
 	options := map[string]any{}

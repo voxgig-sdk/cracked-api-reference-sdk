@@ -51,8 +51,14 @@ class TestEnterpriseAgentEntity:
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
                 return
+        if setup["live"] and os.environ.get("VOXGIG_GETONLY_GUARD") == "TRUE":
+            print("LIVE STEP {\"id\":\"enterprise_agent.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/enterprise/agents/assign\"}")
+            return self._run_get_only_flow(setup)
+
         client = setup["client"]
 
+        if setup["live"]:
+            runner.live_pace()
         # CREATE
         enterprise_agent_ref01_ent = client.EnterpriseAgent(None)
         enterprise_agent_ref01_data = helpers.to_map(vs.getprop(
@@ -61,7 +67,28 @@ class TestEnterpriseAgentEntity:
         enterprise_agent_ref01_data = helpers.to_map(runner.entity_data(enterprise_agent_ref01_ent.create(enterprise_agent_ref01_data, None)))
         assert enterprise_agent_ref01_data is not None
 
+        if setup["live"]:
+            runner.live_pace()
         # LOAD
+        enterprise_agent_ref01_match_dt0 = {}
+        enterprise_agent_ref01_data_dt0_loaded = enterprise_agent_ref01_ent.load(enterprise_agent_ref01_match_dt0, None)
+        assert enterprise_agent_ref01_data_dt0_loaded is not None
+
+
+    def _run_get_only_flow(self, setup):
+        client = setup["client"]
+
+        # Bootstrap entity data from existing test data.
+        enterprise_agent_ref01_data_raw = vs.items(helpers.to_map(
+            vs.getpath(setup["data"], "existing.enterprise_agent")))
+        enterprise_agent_ref01_data = None
+        if len(enterprise_agent_ref01_data_raw) > 0:
+            enterprise_agent_ref01_data = helpers.to_map(enterprise_agent_ref01_data_raw[0][1])
+
+        if setup["live"]:
+            runner.live_pace()
+        # LOAD
+        enterprise_agent_ref01_ent = client.EnterpriseAgent(None)
         enterprise_agent_ref01_match_dt0 = {}
         enterprise_agent_ref01_data_dt0_loaded = enterprise_agent_ref01_ent.load(enterprise_agent_ref01_match_dt0, None)
         assert enterprise_agent_ref01_data_dt0_loaded is not None

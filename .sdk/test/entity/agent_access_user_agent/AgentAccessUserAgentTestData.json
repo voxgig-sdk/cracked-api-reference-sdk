@@ -2,44 +2,59 @@
   "existing": {
     "agent_access_user_agent": {
       "AGENT_ACCESS_USER_AGENT00": {
-        "agentQuota": 70,
-        "agents": [],
-        "assignedByType": {},
-        "assignedTotal": 73,
-        "email": "s4a",
-        "products": [],
-        "userId": "s4c"
+        "avatar": "s6e",
+        "facebookUrl": "s6f",
+        "id": "AGENT_ACCESS_USER_AGENT00",
+        "instagramUrl": "s71",
+        "name": "s72",
+        "productId": "s73",
+        "productName": "s74",
+        "tiktokUrl": "s75",
+        "type": "s76",
+        "uploadPostPlatforms": "s77",
+        "youtubeUrl": "s78"
       },
       "AGENT_ACCESS_USER_AGENT01": {
-        "agentQuota": 140,
-        "agents": [],
-        "assignedByType": {},
-        "assignedTotal": 143,
-        "email": "s90",
-        "products": [],
-        "userId": "s92"
+        "avatar": "sdc",
+        "facebookUrl": "sdd",
+        "id": "AGENT_ACCESS_USER_AGENT01",
+        "instagramUrl": "sdf",
+        "name": "se0",
+        "productId": "se1",
+        "productName": "se2",
+        "tiktokUrl": "se3",
+        "type": "se4",
+        "uploadPostPlatforms": "se5",
+        "youtubeUrl": "se6"
       },
       "AGENT_ACCESS_USER_AGENT02": {
-        "agentQuota": 210,
-        "agents": [],
-        "assignedByType": {},
-        "assignedTotal": 213,
-        "email": "sd6",
-        "products": [],
-        "userId": "sd8"
+        "avatar": "s14a",
+        "facebookUrl": "s14b",
+        "id": "AGENT_ACCESS_USER_AGENT02",
+        "instagramUrl": "s14d",
+        "name": "s14e",
+        "productId": "s14f",
+        "productName": "s150",
+        "tiktokUrl": "s151",
+        "type": "s152",
+        "uploadPostPlatforms": "s153",
+        "youtubeUrl": "s154"
       }
     }
   },
   "new": {
     "agent_access_user_agent": {
       "agent_access_user_agent_ref01": {
-        "agentQuota": 280,
-        "agents": [],
-        "assignedByType": {},
-        "assignedTotal": 283,
-        "email": "s11c",
-        "products": [],
-        "userId": "s11e"
+        "avatar": "s1b8",
+        "facebookUrl": "s1b9",
+        "instagramUrl": "s1bb",
+        "name": "s1bc",
+        "productId": "s1bd",
+        "productName": "s1be",
+        "tiktokUrl": "s1bf",
+        "type": "s1c0",
+        "uploadPostPlatforms": "s1c1",
+        "youtubeUrl": "s1c2"
       }
     }
   },

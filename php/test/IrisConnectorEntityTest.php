@@ -184,18 +184,36 @@ class IrisConnectorEntityTest extends TestCase
         $this->assertSame(['v1'], array_map(fn($ent) => $ent->data_get()['id'] ?? null, $listed));
     }
 
+    public function test_validate(): void
+    {
+        $cfg = CrackedApiReferenceConfig::shared_config();
+        if (!isset($cfg["feature"]["validate"])) {
+            $this->markTestSkipped('feature not present in this SDK: validate');
+        }
+        $client = CrackedApiReferenceSDK::test(null, ["feature" => ["validate" => ["active" => true]]]);
+        $err = null;
+        try {
+            $client->IrisConnector(null)->create(["connector_id" => 1], null);
+        } catch (\Throwable $e) {
+            $err = $e;
+        }
+        $this->assertSame('validate_failed', $err->sdk_code ?? null);
+    }
+
     public function test_basic_flow(): void
     {
         $setup = iris_connector_basic_setup(null);
         // Per-op sdk-test-control.json skip.
         $_live = !empty($setup["live"]);
-        foreach (["list"] as $_op) {
+        foreach (["create", "list"] as $_op) {
             [$_shouldSkip, $_reason] = Runner::is_control_skipped("entityOp", "iris_connector." . $_op, $_live ? "live" : "unit");
             if ($_shouldSkip) {
                 $this->markTestSkipped($_reason ?? "skipped via sdk-test-control.json");
                 return;
             }
         }
+        if (!empty($setup["live"]) && getenv('VOXGIG_GETONLY_GUARD') === "TRUE") {
+            fwrite(STDOUT, 'LIVE STEP {"id":"iris_connector.create.0","state":"excluded","attempted":false,"reason":"GET-only live run: needs POST /api/iris/connectors/{connector_id}/start"}' . "\n");
         $client = $setup["client"];
 
         // Bootstrap entity data from existing test data.
@@ -206,8 +224,45 @@ class IrisConnectorEntityTest extends TestCase
             $iris_connector_ref01_data = Helpers::to_map($iris_connector_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LIST
         $iris_connector_ref01_ent = $client->IrisConnector(null);
+        $iris_connector_ref01_match = [];
+
+        $iris_connector_ref01_list_result = $iris_connector_ref01_ent->list($iris_connector_ref01_match, null);
+        $this->assertIsArray($iris_connector_ref01_list_result);
+
+            return;
+        }
+
+        if (!empty($setup["live"])) {
+            foreach (["connector01"] as $_liveKey) {
+                if (!empty($setup["synthetic_only"]) || null === ($setup["idmap"][$_liveKey] ?? null)) {
+                    Runner::live_miss(self::LIVE_STRICT, "Live entity test blocked: needs " . $_liveKey . " via CRACKED_API_REFERENCE_TEST_IRIS_CONNECTOR_ENTID");
+                }
+            }
+        }
+        $client = $setup["client"];
+
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
+        // CREATE
+        $iris_connector_ref01_ent = $client->IrisConnector(null);
+        $iris_connector_ref01_data = Helpers::to_map(Vs::getprop(
+            Vs::getpath($setup["data"], "new.iris_connector"), "iris_connector_ref01"));
+        $iris_connector_ref01_data["connector_id"] = $setup["idmap"]["connector01"];
+
+        $iris_connector_ref01_data_result = $iris_connector_ref01_ent->create($iris_connector_ref01_data, null);
+        $iris_connector_ref01_data = Helpers::to_map(is_object($iris_connector_ref01_data_result) && method_exists($iris_connector_ref01_data_result, 'data_get') ? $iris_connector_ref01_data_result->data_get() : $iris_connector_ref01_data_result);
+        $this->assertNotNull($iris_connector_ref01_data);
+
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
+        // LIST
         $iris_connector_ref01_match = [];
 
         $iris_connector_ref01_list_result = $iris_connector_ref01_ent->list($iris_connector_ref01_match, null);
@@ -231,7 +286,7 @@ function iris_connector_basic_setup($extra)
 
     // Generate idmap.
     $idmap = [];
-    foreach (["iris_connector01", "iris_connector02", "iris_connector03"] as $k) {
+    foreach (["iris_connector01", "iris_connector02", "iris_connector03", "connector01"] as $k) {
         $idmap[$k] = strtoupper($k);
     }
 

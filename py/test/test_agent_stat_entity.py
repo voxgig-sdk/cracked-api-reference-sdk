@@ -60,6 +60,8 @@ class TestAgentStatEntity:
         if len(agent_stat_ref01_data_raw) > 0:
             agent_stat_ref01_data = helpers.to_map(agent_stat_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LOAD
         agent_stat_ref01_ent = client.AgentStat(None)
         agent_stat_ref01_match_dt0 = {}

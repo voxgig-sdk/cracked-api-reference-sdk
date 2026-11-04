@@ -143,6 +143,8 @@ class TestAdminPostEntity:
         if len(admin_post_ref01_data_raw) > 0:
             admin_post_ref01_data = helpers.to_map(admin_post_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LIST
         admin_post_ref01_ent = client.AdminPost(None)
         admin_post_ref01_match = {}

@@ -211,6 +211,9 @@ class AdminCustomerEntityTest extends TestCase
             $admin_customer_ref01_data = Helpers::to_map($admin_customer_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LIST
         $admin_customer_ref01_ent = $client->AdminCustomer(null);
         $admin_customer_ref01_match = [];

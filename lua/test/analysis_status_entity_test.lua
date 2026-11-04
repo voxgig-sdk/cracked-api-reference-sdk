@@ -43,6 +43,9 @@ describe("AnalysisStatusEntity", function()
       analysis_status_ref01_data = helpers.to_map(analysis_status_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LOAD
     local analysis_status_ref01_ent = client:AnalysisStatus(nil)
     local analysis_status_ref01_match_dt0 = {}

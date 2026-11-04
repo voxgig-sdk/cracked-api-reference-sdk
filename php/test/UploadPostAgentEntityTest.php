@@ -36,8 +36,16 @@ class UploadPostAgentEntityTest extends TestCase
                 return;
             }
         }
+        if (!empty($setup["live"]) && getenv('VOXGIG_GETONLY_GUARD') === "TRUE") {
+            fwrite(STDOUT, 'LIVE STEP {"id":"upload_post_agent.create.0","state":"excluded","attempted":false,"reason":"GET-only live run: needs POST /api/upload-post-agents/sync-platforms"}' . "\n");
+            $this->markTestSkipped('Live coverage incomplete: upload_post_agent.create.0 excluded (GET-only live run: needs POST /api/upload-post-agents/sync-platforms)');
+        }
+
         $client = $setup["client"];
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // CREATE
         $upload_post_agent_ref01_ent = $client->UploadPostAgent(null);
         $upload_post_agent_ref01_data = Helpers::to_map(Vs::getprop(

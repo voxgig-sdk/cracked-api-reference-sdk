@@ -73,12 +73,12 @@ Every entity operation returns `(value, error)`. Check `err` before
 using the value — there is no exception to catch:
 
 ```go
-admininsights, err := client.AdminInsight(nil).List(nil, nil)
+agenthealths, err := client.AgentHealth(nil).List(nil, nil)
 if err != nil {
     // handle err
     return
 }
-_ = admininsights
+_ = agenthealths
 ```
 
 `Direct` follows the same `(value, error)` convention:
@@ -142,14 +142,14 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-adminInsights, err := client.AdminInsight(nil).List(
+agentHealths, err := client.AgentHealth(nil).List(
     nil, nil,
 )
 if err != nil {
     panic(err)
 }
 // A []any of entities, one per mock record.
-for _, item := range adminInsights.([]any) {
+for _, item := range agentHealths.([]any) {
     fmt.Println(item.(sdk.Entity).Data())
 }
 ```
@@ -230,181 +230,179 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `GetUtility` | `() *Utility` | Copy of the SDK utility object. |
 | `Prepare` | `(fetchargs map[string]any) (map[string]any, error)` | Build an HTTP request definition without sending. |
 | `Direct` | `(fetchargs map[string]any) (map[string]any, error)` | Build and send an HTTP request. |
-| `Activate` | `(data map[string]any) CrackedApiReferenceEntity` | Create an Activate entity instance. |
-| `ActivateUser` | `(data map[string]any) CrackedApiReferenceEntity` | Create an ActivateUser entity instance. |
-| `ActiveOnboarding` | `(data map[string]any) CrackedApiReferenceEntity` | Create an ActiveOnboarding entity instance. |
-| `Admin` | `(data map[string]any) CrackedApiReferenceEntity` | Create an Admin entity instance. |
-| `AdminAccountReset` | `(data map[string]any) CrackedApiReferenceEntity` | Create an AdminAccountReset entity instance. |
-| `AdminCarousel` | `(data map[string]any) CrackedApiReferenceEntity` | Create an AdminCarousel entity instance. |
-| `AdminCarouselDemoReview` | `(data map[string]any) CrackedApiReferenceEntity` | Create an AdminCarouselDemoReview entity instance. |
-| `AdminCustomer` | `(data map[string]any) CrackedApiReferenceEntity` | Create an AdminCustomer entity instance. |
-| `AdminCustomerSuccess` | `(data map[string]any) CrackedApiReferenceEntity` | Create an AdminCustomerSuccess entity instance. |
-| `AdminGeneratedVideo` | `(data map[string]any) CrackedApiReferenceEntity` | Create an AdminGeneratedVideo entity instance. |
-| `AdminHealthrx` | `(data map[string]any) CrackedApiReferenceEntity` | Create an AdminHealthrx entity instance. |
-| `AdminInsight` | `(data map[string]any) CrackedApiReferenceEntity` | Create an AdminInsight entity instance. |
-| `AdminLandingTask` | `(data map[string]any) CrackedApiReferenceEntity` | Create an AdminLandingTask entity instance. |
-| `AdminMetricsSummary` | `(data map[string]any) CrackedApiReferenceEntity` | Create an AdminMetricsSummary entity instance. |
-| `AdminPost` | `(data map[string]any) CrackedApiReferenceEntity` | Create an AdminPost entity instance. |
-| `AdminRecentSignup` | `(data map[string]any) CrackedApiReferenceEntity` | Create an AdminRecentSignup entity instance. |
-| `AdminSlideshowDiag` | `(data map[string]any) CrackedApiReferenceEntity` | Create an AdminSlideshowDiag entity instance. |
-| `AdminSlideshowImport` | `(data map[string]any) CrackedApiReferenceEntity` | Create an AdminSlideshowImport entity instance. |
-| `AdminUserView` | `(data map[string]any) CrackedApiReferenceEntity` | Create an AdminUserView entity instance. |
-| `AdminUsersTableItem` | `(data map[string]any) CrackedApiReferenceEntity` | Create an AdminUsersTableItem entity instance. |
-| `AdminVideoRemixer` | `(data map[string]any) CrackedApiReferenceEntity` | Create an AdminVideoRemixer entity instance. |
-| `AdvanceStep` | `(data map[string]any) CrackedApiReferenceEntity` | Create an AdvanceStep entity instance. |
-| `Agent` | `(data map[string]any) CrackedApiReferenceEntity` | Create an Agent entity instance. |
-| `AgentAccessCustomersHealth` | `(data map[string]any) CrackedApiReferenceEntity` | Create an AgentAccessCustomersHealth entity instance. |
-| `AgentAccessOverview` | `(data map[string]any) CrackedApiReferenceEntity` | Create an AgentAccessOverview entity instance. |
-| `AgentAccessPhilHourlyNotification` | `(data map[string]any) CrackedApiReferenceEntity` | Create an AgentAccessPhilHourlyNotification entity instance. |
-| `AgentAccessPhilStatsRefresh` | `(data map[string]any) CrackedApiReferenceEntity` | Create an AgentAccessPhilStatsRefresh entity instance. |
-| `AgentAccessPhilVideo` | `(data map[string]any) CrackedApiReferenceEntity` | Create an AgentAccessPhilVideo entity instance. |
-| `AgentAccessUserAgent` | `(data map[string]any) CrackedApiReferenceEntity` | Create an AgentAccessUserAgent entity instance. |
-| `AgentAccessUserPhoneFarm` | `(data map[string]any) CrackedApiReferenceEntity` | Create an AgentAccessUserPhoneFarm entity instance. |
-| `AgentAccessUserPost` | `(data map[string]any) CrackedApiReferenceEntity` | Create an AgentAccessUserPost entity instance. |
-| `AgentAccessUserSummary` | `(data map[string]any) CrackedApiReferenceEntity` | Create an AgentAccessUserSummary entity instance. |
-| `AgentAccessUserVideo` | `(data map[string]any) CrackedApiReferenceEntity` | Create an AgentAccessUserVideo entity instance. |
-| `AgentAccessUserWinningAd` | `(data map[string]any) CrackedApiReferenceEntity` | Create an AgentAccessUserWinningAd entity instance. |
-| `AgentAccessWinningAdsSummary` | `(data map[string]any) CrackedApiReferenceEntity` | Create an AgentAccessWinningAdsSummary entity instance. |
-| `AgentDetail` | `(data map[string]any) CrackedApiReferenceEntity` | Create an AgentDetail entity instance. |
-| `AgentHealth` | `(data map[string]any) CrackedApiReferenceEntity` | Create an AgentHealth entity instance. |
-| `AgentHealthCustomerOption` | `(data map[string]any) CrackedApiReferenceEntity` | Create an AgentHealthCustomerOption entity instance. |
-| `AgentHealthDetail` | `(data map[string]any) CrackedApiReferenceEntity` | Create an AgentHealthDetail entity instance. |
-| `AgentPost` | `(data map[string]any) CrackedApiReferenceEntity` | Create an AgentPost entity instance. |
-| `AgentStat` | `(data map[string]any) CrackedApiReferenceEntity` | Create an AgentStat entity instance. |
-| `AgentSummary` | `(data map[string]any) CrackedApiReferenceEntity` | Create an AgentSummary entity instance. |
-| `AgentsSummary` | `(data map[string]any) CrackedApiReferenceEntity` | Create an AgentsSummary entity instance. |
-| `AnalysisStatus` | `(data map[string]any) CrackedApiReferenceEntity` | Create an AnalysisStatus entity instance. |
-| `AnalyticsPost` | `(data map[string]any) CrackedApiReferenceEntity` | Create an AnalyticsPost entity instance. |
-| `AnalyzeProduct` | `(data map[string]any) CrackedApiReferenceEntity` | Create an AnalyzeProduct entity instance. |
-| `AssignAgent` | `(data map[string]any) CrackedApiReferenceEntity` | Create an AssignAgent entity instance. |
-| `Auth` | `(data map[string]any) CrackedApiReferenceEntity` | Create an Auth entity instance. |
-| `AutoScheduleSetting` | `(data map[string]any) CrackedApiReferenceEntity` | Create an AutoScheduleSetting entity instance. |
-| `BulkTikTokStatsUpdate` | `(data map[string]any) CrackedApiReferenceEntity` | Create a BulkTikTokStatsUpdate entity instance. |
-| `Carousel` | `(data map[string]any) CrackedApiReferenceEntity` | Create a Carousel entity instance. |
-| `CarouselAgentDetail` | `(data map[string]any) CrackedApiReferenceEntity` | Create a CarouselAgentDetail entity instance. |
-| `CarouselStatus` | `(data map[string]any) CrackedApiReferenceEntity` | Create a CarouselStatus entity instance. |
-| `Chat` | `(data map[string]any) CrackedApiReferenceEntity` | Create a Chat entity instance. |
-| `ChatHistory` | `(data map[string]any) CrackedApiReferenceEntity` | Create a ChatHistory entity instance. |
-| `ChatSession` | `(data map[string]any) CrackedApiReferenceEntity` | Create a ChatSession entity instance. |
-| `Comment` | `(data map[string]any) CrackedApiReferenceEntity` | Create a Comment entity instance. |
-| `CommentCampaign` | `(data map[string]any) CrackedApiReferenceEntity` | Create a CommentCampaign entity instance. |
-| `CompleteChatCheckout` | `(data map[string]any) CrackedApiReferenceEntity` | Create a CompleteChatCheckout entity instance. |
-| `CreateBlackoutSora2Video` | `(data map[string]any) CrackedApiReferenceEntity` | Create a CreateBlackoutSora2Video entity instance. |
-| `CreateCarousel` | `(data map[string]any) CrackedApiReferenceEntity` | Create a CreateCarousel entity instance. |
-| `CreateProduct` | `(data map[string]any) CrackedApiReferenceEntity` | Create a CreateProduct entity instance. |
-| `CreateResetProductV6` | `(data map[string]any) CrackedApiReferenceEntity` | Create a CreateResetProductV6 entity instance. |
-| `CreateSora2Video` | `(data map[string]any) CrackedApiReferenceEntity` | Create a CreateSora2Video entity instance. |
-| `CreateVariation` | `(data map[string]any) CrackedApiReferenceEntity` | Create a CreateVariation entity instance. |
-| `Customer` | `(data map[string]any) CrackedApiReferenceEntity` | Create a Customer entity instance. |
-| `CustomerHealth` | `(data map[string]any) CrackedApiReferenceEntity` | Create a CustomerHealth entity instance. |
-| `CustomerHealthAllCustomersItem` | `(data map[string]any) CrackedApiReferenceEntity` | Create a CustomerHealthAllCustomersItem entity instance. |
-| `CustomerHealthViewsSummary` | `(data map[string]any) CrackedApiReferenceEntity` | Create a CustomerHealthViewsSummary entity instance. |
-| `Daily` | `(data map[string]any) CrackedApiReferenceEntity` | Create a Daily entity instance. |
-| `DailyStatus` | `(data map[string]any) CrackedApiReferenceEntity` | Create a DailyStatus entity instance. |
-| `DedicatedAgentsDashboard` | `(data map[string]any) CrackedApiReferenceEntity` | Create a DedicatedAgentsDashboard entity instance. |
-| `EnterpriseAgent` | `(data map[string]any) CrackedApiReferenceEntity` | Create an EnterpriseAgent entity instance. |
-| `EnterpriseProduct` | `(data map[string]any) CrackedApiReferenceEntity` | Create an EnterpriseProduct entity instance. |
-| `ExactAvailability` | `(data map[string]any) CrackedApiReferenceEntity` | Create an ExactAvailability entity instance. |
-| `ExactFormula` | `(data map[string]any) CrackedApiReferenceEntity` | Create an ExactFormula entity instance. |
-| `ExtractV2` | `(data map[string]any) CrackedApiReferenceEntity` | Create an ExtractV2 entity instance. |
-| `FailedPost` | `(data map[string]any) CrackedApiReferenceEntity` | Create a FailedPost entity instance. |
-| `File` | `(data map[string]any) CrackedApiReferenceEntity` | Create a File entity instance. |
-| `GenerateBlackoutSora2Prompt` | `(data map[string]any) CrackedApiReferenceEntity` | Create a GenerateBlackoutSora2Prompt entity instance. |
-| `GeneratePomelliDemo` | `(data map[string]any) CrackedApiReferenceEntity` | Create a GeneratePomelliDemo entity instance. |
-| `GeneratePrompt` | `(data map[string]any) CrackedApiReferenceEntity` | Create a GeneratePrompt entity instance. |
-| `GenerateSora2Prompt` | `(data map[string]any) CrackedApiReferenceEntity` | Create a GenerateSora2Prompt entity instance. |
-| `Healthrx` | `(data map[string]any) CrackedApiReferenceEntity` | Create a Healthrx entity instance. |
-| `InitResetProductV6` | `(data map[string]any) CrackedApiReferenceEntity` | Create an InitResetProductV6 entity instance. |
-| `Iri` | `(data map[string]any) CrackedApiReferenceEntity` | Create an Iri entity instance. |
-| `IrisCapability` | `(data map[string]any) CrackedApiReferenceEntity` | Create an IrisCapability entity instance. |
-| `IrisChat` | `(data map[string]any) CrackedApiReferenceEntity` | Create an IrisChat entity instance. |
-| `IrisConnector` | `(data map[string]any) CrackedApiReferenceEntity` | Create an IrisConnector entity instance. |
-| `IrisStatus` | `(data map[string]any) CrackedApiReferenceEntity` | Create an IrisStatus entity instance. |
-| `IrisTask` | `(data map[string]any) CrackedApiReferenceEntity` | Create an IrisTask entity instance. |
-| `IrisUsage` | `(data map[string]any) CrackedApiReferenceEntity` | Create an IrisUsage entity instance. |
-| `Landing` | `(data map[string]any) CrackedApiReferenceEntity` | Create a Landing entity instance. |
-| `LandingStat` | `(data map[string]any) CrackedApiReferenceEntity` | Create a LandingStat entity instance. |
-| `LandingStatus` | `(data map[string]any) CrackedApiReferenceEntity` | Create a LandingStatus entity instance. |
-| `LinkInBio` | `(data map[string]any) CrackedApiReferenceEntity` | Create a LinkInBio entity instance. |
-| `LinkInDm` | `(data map[string]any) CrackedApiReferenceEntity` | Create a LinkInDm entity instance. |
-| `LinkInPost` | `(data map[string]any) CrackedApiReferenceEntity` | Create a LinkInPost entity instance. |
-| `LinkUser` | `(data map[string]any) CrackedApiReferenceEntity` | Create a LinkUser entity instance. |
-| `MediaAsset` | `(data map[string]any) CrackedApiReferenceEntity` | Create a MediaAsset entity instance. |
-| `Men` | `(data map[string]any) CrackedApiReferenceEntity` | Create a Men entity instance. |
-| `Microdrama` | `(data map[string]any) CrackedApiReferenceEntity` | Create a Microdrama entity instance. |
-| `MicrohubPublic` | `(data map[string]any) CrackedApiReferenceEntity` | Create a MicrohubPublic entity instance. |
-| `OnboardingStatus` | `(data map[string]any) CrackedApiReferenceEntity` | Create an OnboardingStatus entity instance. |
-| `OnboardingV6` | `(data map[string]any) CrackedApiReferenceEntity` | Create an OnboardingV6 entity instance. |
-| `PaidUser` | `(data map[string]any) CrackedApiReferenceEntity` | Create a PaidUser entity instance. |
-| `Pexel` | `(data map[string]any) CrackedApiReferenceEntity` | Create a Pexel entity instance. |
-| `PhoneAdminAvailableAgentSource` | `(data map[string]any) CrackedApiReferenceEntity` | Create a PhoneAdminAvailableAgentSource entity instance. |
-| `Product` | `(data map[string]any) CrackedApiReferenceEntity` | Create a Product entity instance. |
-| `ProductDashboard` | `(data map[string]any) CrackedApiReferenceEntity` | Create a ProductDashboard entity instance. |
-| `ProductDashboardView` | `(data map[string]any) CrackedApiReferenceEntity` | Create a ProductDashboardView entity instance. |
-| `ProductDemo` | `(data map[string]any) CrackedApiReferenceEntity` | Create a ProductDemo entity instance. |
-| `ProductLanding` | `(data map[string]any) CrackedApiReferenceEntity` | Create a ProductLanding entity instance. |
-| `PublicResumeStatus` | `(data map[string]any) CrackedApiReferenceEntity` | Create a PublicResumeStatus entity instance. |
-| `ReRollVideo` | `(data map[string]any) CrackedApiReferenceEntity` | Create a ReRollVideo entity instance. |
-| `ReadRootGet` | `(data map[string]any) CrackedApiReferenceEntity` | Create a ReadRootGet entity instance. |
-| `RecordDemoBooked` | `(data map[string]any) CrackedApiReferenceEntity` | Create a RecordDemoBooked entity instance. |
-| `RefreshStat` | `(data map[string]any) CrackedApiReferenceEntity` | Create a RefreshStat entity instance. |
-| `RemixerClipper` | `(data map[string]any) CrackedApiReferenceEntity` | Create a RemixerClipper entity instance. |
-| `ResetProduct` | `(data map[string]any) CrackedApiReferenceEntity` | Create a ResetProduct entity instance. |
-| `RetryWebsiteScrape` | `(data map[string]any) CrackedApiReferenceEntity` | Create a RetryWebsiteScrape entity instance. |
-| `SaveSurvey` | `(data map[string]any) CrackedApiReferenceEntity` | Create a SaveSurvey entity instance. |
-| `ScanSocial` | `(data map[string]any) CrackedApiReferenceEntity` | Create a ScanSocial entity instance. |
-| `ScanSocialsPublic` | `(data map[string]any) CrackedApiReferenceEntity` | Create a ScanSocialsPublic entity instance. |
-| `ScanSocialsStatus` | `(data map[string]any) CrackedApiReferenceEntity` | Create a ScanSocialsStatus entity instance. |
-| `ScheduleV2` | `(data map[string]any) CrackedApiReferenceEntity` | Create a ScheduleV2 entity instance. |
-| `Scrape` | `(data map[string]any) CrackedApiReferenceEntity` | Create a Scrape entity instance. |
-| `ScrapeWebsitePublic` | `(data map[string]any) CrackedApiReferenceEntity` | Create a ScrapeWebsitePublic entity instance. |
-| `ScrapedData` | `(data map[string]any) CrackedApiReferenceEntity` | Create a ScrapedData entity instance. |
-| `ScrapingStatus` | `(data map[string]any) CrackedApiReferenceEntity` | Create a ScrapingStatus entity instance. |
-| `SelfServeActivate` | `(data map[string]any) CrackedApiReferenceEntity` | Create a SelfServeActivate entity instance. |
-| `Seo` | `(data map[string]any) CrackedApiReferenceEntity` | Create a Seo entity instance. |
-| `SeoAiMention` | `(data map[string]any) CrackedApiReferenceEntity` | Create a SeoAiMention entity instance. |
-| `SeoBacklink` | `(data map[string]any) CrackedApiReferenceEntity` | Create a SeoBacklink entity instance. |
-| `SeoKeyword` | `(data map[string]any) CrackedApiReferenceEntity` | Create a SeoKeyword entity instance. |
-| `SeoOverview` | `(data map[string]any) CrackedApiReferenceEntity` | Create a SeoOverview entity instance. |
-| `SeoTraffic` | `(data map[string]any) CrackedApiReferenceEntity` | Create a SeoTraffic entity instance. |
-| `ShareAccessLink` | `(data map[string]any) CrackedApiReferenceEntity` | Create a ShareAccessLink entity instance. |
-| `Site` | `(data map[string]any) CrackedApiReferenceEntity` | Create a Site entity instance. |
-| `Slide` | `(data map[string]any) CrackedApiReferenceEntity` | Create a Slide entity instance. |
-| `SlugValidation` | `(data map[string]any) CrackedApiReferenceEntity` | Create a SlugValidation entity instance. |
-| `Social` | `(data map[string]any) CrackedApiReferenceEntity` | Create a Social entity instance. |
-| `SocialScanPreview` | `(data map[string]any) CrackedApiReferenceEntity` | Create a SocialScanPreview entity instance. |
-| `SocialScanProcess` | `(data map[string]any) CrackedApiReferenceEntity` | Create a SocialScanProcess entity instance. |
-| `SocialScanSave` | `(data map[string]any) CrackedApiReferenceEntity` | Create a SocialScanSave entity instance. |
-| `Sora2Avatar` | `(data map[string]any) CrackedApiReferenceEntity` | Create a Sora2Avatar entity instance. |
-| `Sora2AvatarAssetUpload` | `(data map[string]any) CrackedApiReferenceEntity` | Create a Sora2AvatarAssetUpload entity instance. |
-| `Sora2AvatarStat` | `(data map[string]any) CrackedApiReferenceEntity` | Create a Sora2AvatarStat entity instance. |
-| `Stat` | `(data map[string]any) CrackedApiReferenceEntity` | Create a Stat entity instance. |
-| `StatsRefreshBackfill` | `(data map[string]any) CrackedApiReferenceEntity` | Create a StatsRefreshBackfill entity instance. |
-| `StatsRefreshIssue` | `(data map[string]any) CrackedApiReferenceEntity` | Create a StatsRefreshIssue entity instance. |
-| `StatsRefreshOverview` | `(data map[string]any) CrackedApiReferenceEntity` | Create a StatsRefreshOverview entity instance. |
-| `StatsRefreshRunSummary` | `(data map[string]any) CrackedApiReferenceEntity` | Create a StatsRefreshRunSummary entity instance. |
-| `StatsRefreshTaskTrigger` | `(data map[string]any) CrackedApiReferenceEntity` | Create a StatsRefreshTaskTrigger entity instance. |
-| `Stripe` | `(data map[string]any) CrackedApiReferenceEntity` | Create a Stripe entity instance. |
-| `Style` | `(data map[string]any) CrackedApiReferenceEntity` | Create a Style entity instance. |
-| `Template` | `(data map[string]any) CrackedApiReferenceEntity` | Create a Template entity instance. |
-| `TikTokCreatorInfo` | `(data map[string]any) CrackedApiReferenceEntity` | Create a TikTokCreatorInfo entity instance. |
-| `TopPost` | `(data map[string]any) CrackedApiReferenceEntity` | Create a TopPost entity instance. |
-| `UploadPostAgent` | `(data map[string]any) CrackedApiReferenceEntity` | Create an UploadPostAgent entity instance. |
-| `User` | `(data map[string]any) CrackedApiReferenceEntity` | Create an User entity instance. |
-| `UserAgent` | `(data map[string]any) CrackedApiReferenceEntity` | Create an UserAgent entity instance. |
-| `UserHealthDetail` | `(data map[string]any) CrackedApiReferenceEntity` | Create an UserHealthDetail entity instance. |
-| `UserWithAvatarSubmission` | `(data map[string]any) CrackedApiReferenceEntity` | Create an UserWithAvatarSubmission entity instance. |
-| `UsersHealth` | `(data map[string]any) CrackedApiReferenceEntity` | Create an UsersHealth entity instance. |
-| `Video` | `(data map[string]any) CrackedApiReferenceEntity` | Create a Video entity instance. |
-| `VideoRemixerWorker` | `(data map[string]any) CrackedApiReferenceEntity` | Create a VideoRemixerWorker entity instance. |
-| `WatchdogRecovery` | `(data map[string]any) CrackedApiReferenceEntity` | Create a WatchdogRecovery entity instance. |
-| `WinningAd` | `(data map[string]any) CrackedApiReferenceEntity` | Create a WinningAd entity instance. |
-| `XAdaptation` | `(data map[string]any) CrackedApiReferenceEntity` | Create a XAdaptation entity instance. |
-| `ZerohumanAdminAccount` | `(data map[string]any) CrackedApiReferenceEntity` | Create a ZerohumanAdminAccount entity instance. |
+| `Activate` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an Activate entity instance. |
+| `ActivateUser` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an ActivateUser entity instance. |
+| `ActiveOnboarding` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an ActiveOnboarding entity instance. |
+| `Admin` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an Admin entity instance. |
+| `AdminAccountReset` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an AdminAccountReset entity instance. |
+| `AdminCarousel` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an AdminCarousel entity instance. |
+| `AdminCarouselDemoReview` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an AdminCarouselDemoReview entity instance. |
+| `AdminCustomer` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an AdminCustomer entity instance. |
+| `AdminCustomerSuccess` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an AdminCustomerSuccess entity instance. |
+| `AdminGeneratedVideo` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an AdminGeneratedVideo entity instance. |
+| `AdminHealthrx` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an AdminHealthrx entity instance. |
+| `AdminInsight` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an AdminInsight entity instance. |
+| `AdminLandingTask` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an AdminLandingTask entity instance. |
+| `AdminMetricsSummary` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an AdminMetricsSummary entity instance. |
+| `AdminPost` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an AdminPost entity instance. |
+| `AdminRecentSignup` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an AdminRecentSignup entity instance. |
+| `AdminSlideshowDiag` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an AdminSlideshowDiag entity instance. |
+| `AdminSlideshowImport` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an AdminSlideshowImport entity instance. |
+| `AdminUserView` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an AdminUserView entity instance. |
+| `AdminUsersTableItem` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an AdminUsersTableItem entity instance. |
+| `AdminVideoRemixer` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an AdminVideoRemixer entity instance. |
+| `AdvanceStep` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an AdvanceStep entity instance. |
+| `Agent` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an Agent entity instance. |
+| `AgentAccessCustomersHealth` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an AgentAccessCustomersHealth entity instance. |
+| `AgentAccessOverview` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an AgentAccessOverview entity instance. |
+| `AgentAccessPhilHourlyNotification` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an AgentAccessPhilHourlyNotification entity instance. |
+| `AgentAccessPhilStatsRefresh` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an AgentAccessPhilStatsRefresh entity instance. |
+| `AgentAccessPhilVideo` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an AgentAccessPhilVideo entity instance. |
+| `AgentAccessUserAgent` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an AgentAccessUserAgent entity instance. |
+| `AgentAccessUserPhoneFarm` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an AgentAccessUserPhoneFarm entity instance. |
+| `AgentAccessUserPost` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an AgentAccessUserPost entity instance. |
+| `AgentAccessUserSummary` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an AgentAccessUserSummary entity instance. |
+| `AgentAccessUserVideo` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an AgentAccessUserVideo entity instance. |
+| `AgentAccessUserWinningAd` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an AgentAccessUserWinningAd entity instance. |
+| `AgentAccessWinningAdsSummary` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an AgentAccessWinningAdsSummary entity instance. |
+| `AgentDetail` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an AgentDetail entity instance. |
+| `AgentHealth` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an AgentHealth entity instance. |
+| `AgentHealthCustomerOption` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an AgentHealthCustomerOption entity instance. |
+| `AgentHealthDetail` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an AgentHealthDetail entity instance. |
+| `AgentPost` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an AgentPost entity instance. |
+| `AgentStat` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an AgentStat entity instance. |
+| `AgentSummary` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an AgentSummary entity instance. |
+| `AgentsSummary` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an AgentsSummary entity instance. |
+| `AnalysisStatus` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an AnalysisStatus entity instance. |
+| `AnalyticsPost` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an AnalyticsPost entity instance. |
+| `AnalyzeProduct` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an AnalyzeProduct entity instance. |
+| `AssignAgent` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an AssignAgent entity instance. |
+| `Auth` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an Auth entity instance. |
+| `AutoScheduleSetting` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an AutoScheduleSetting entity instance. |
+| `BulkTikTokStatsUpdate` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a BulkTikTokStatsUpdate entity instance. |
+| `Carousel` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a Carousel entity instance. |
+| `CarouselAgentDetail` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a CarouselAgentDetail entity instance. |
+| `CarouselStatus` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a CarouselStatus entity instance. |
+| `ChatHistory` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a ChatHistory entity instance. |
+| `ChatSession` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a ChatSession entity instance. |
+| `Comment` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a Comment entity instance. |
+| `CommentCampaign` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a CommentCampaign entity instance. |
+| `CompleteChatCheckout` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a CompleteChatCheckout entity instance. |
+| `CreateBlackoutSora2Video` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a CreateBlackoutSora2Video entity instance. |
+| `CreateCarousel` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a CreateCarousel entity instance. |
+| `CreateProduct` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a CreateProduct entity instance. |
+| `CreateResetProductV6` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a CreateResetProductV6 entity instance. |
+| `CreateSora2Video` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a CreateSora2Video entity instance. |
+| `CreateVariation` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a CreateVariation entity instance. |
+| `Customer` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a Customer entity instance. |
+| `CustomerHealth` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a CustomerHealth entity instance. |
+| `CustomerHealthAllCustomersItem` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a CustomerHealthAllCustomersItem entity instance. |
+| `CustomerHealthViewsSummary` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a CustomerHealthViewsSummary entity instance. |
+| `Daily` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a Daily entity instance. |
+| `DailyStatus` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a DailyStatus entity instance. |
+| `DedicatedAgentsDashboard` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a DedicatedAgentsDashboard entity instance. |
+| `EnterpriseAgent` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an EnterpriseAgent entity instance. |
+| `ExactAvailability` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an ExactAvailability entity instance. |
+| `ExactFormula` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an ExactFormula entity instance. |
+| `ExtractV2` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an ExtractV2 entity instance. |
+| `FailedPost` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a FailedPost entity instance. |
+| `File` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a File entity instance. |
+| `GenerateBlackoutSora2Prompt` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a GenerateBlackoutSora2Prompt entity instance. |
+| `GeneratePomelliDemo` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a GeneratePomelliDemo entity instance. |
+| `GeneratePrompt` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a GeneratePrompt entity instance. |
+| `GenerateSora2Prompt` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a GenerateSora2Prompt entity instance. |
+| `Healthrx` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a Healthrx entity instance. |
+| `InitResetProductV6` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an InitResetProductV6 entity instance. |
+| `IrisCapability` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an IrisCapability entity instance. |
+| `IrisChat` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an IrisChat entity instance. |
+| `IrisConnector` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an IrisConnector entity instance. |
+| `IrisStatus` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an IrisStatus entity instance. |
+| `IrisTask` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an IrisTask entity instance. |
+| `IrisUsage` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an IrisUsage entity instance. |
+| `Landing` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a Landing entity instance. |
+| `LandingStat` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a LandingStat entity instance. |
+| `LandingStatus` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a LandingStatus entity instance. |
+| `LinkInBio` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a LinkInBio entity instance. |
+| `LinkInDm` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a LinkInDm entity instance. |
+| `LinkInPost` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a LinkInPost entity instance. |
+| `LinkUser` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a LinkUser entity instance. |
+| `MediaAsset` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a MediaAsset entity instance. |
+| `Men` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a Men entity instance. |
+| `Microdrama` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a Microdrama entity instance. |
+| `MicrohubPublic` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a MicrohubPublic entity instance. |
+| `OnboardingStatus` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an OnboardingStatus entity instance. |
+| `OnboardingV6` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an OnboardingV6 entity instance. |
+| `PaidUser` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a PaidUser entity instance. |
+| `Pexel` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a Pexel entity instance. |
+| `PhoneAdminAvailableAgentSource` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a PhoneAdminAvailableAgentSource entity instance. |
+| `Product` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a Product entity instance. |
+| `ProductDashboard` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a ProductDashboard entity instance. |
+| `ProductDashboardView` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a ProductDashboardView entity instance. |
+| `ProductDemo` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a ProductDemo entity instance. |
+| `ProductLanding` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a ProductLanding entity instance. |
+| `PublicResumeStatus` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a PublicResumeStatus entity instance. |
+| `ReRollVideo` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a ReRollVideo entity instance. |
+| `RecordDemoBooked` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a RecordDemoBooked entity instance. |
+| `RefreshStat` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a RefreshStat entity instance. |
+| `RemixerClipper` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a RemixerClipper entity instance. |
+| `ResetProduct` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a ResetProduct entity instance. |
+| `RetryWebsiteScrape` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a RetryWebsiteScrape entity instance. |
+| `RootGet` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a RootGet entity instance. |
+| `SaveSurvey` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a SaveSurvey entity instance. |
+| `ScanSocial` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a ScanSocial entity instance. |
+| `ScanSocialsPublic` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a ScanSocialsPublic entity instance. |
+| `ScanSocialsStatus` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a ScanSocialsStatus entity instance. |
+| `ScheduleQueue` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a ScheduleQueue entity instance. |
+| `ScheduleV2` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a ScheduleV2 entity instance. |
+| `Scrape` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a Scrape entity instance. |
+| `ScrapeWebsitePublic` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a ScrapeWebsitePublic entity instance. |
+| `ScrapedData` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a ScrapedData entity instance. |
+| `ScrapingStatus` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a ScrapingStatus entity instance. |
+| `SelfServeActivate` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a SelfServeActivate entity instance. |
+| `Seo` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a Seo entity instance. |
+| `SeoAiMention` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a SeoAiMention entity instance. |
+| `SeoBacklink` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a SeoBacklink entity instance. |
+| `SeoKeyword` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a SeoKeyword entity instance. |
+| `SeoOverview` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a SeoOverview entity instance. |
+| `SeoTraffic` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a SeoTraffic entity instance. |
+| `ShareAccessLink` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a ShareAccessLink entity instance. |
+| `Site` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a Site entity instance. |
+| `Slide` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a Slide entity instance. |
+| `SlugValidation` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a SlugValidation entity instance. |
+| `Social` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a Social entity instance. |
+| `SocialScanPreview` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a SocialScanPreview entity instance. |
+| `SocialScanProcess` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a SocialScanProcess entity instance. |
+| `SocialScanSave` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a SocialScanSave entity instance. |
+| `Sora2Avatar` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a Sora2Avatar entity instance. |
+| `Sora2AvatarAssetUpload` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a Sora2AvatarAssetUpload entity instance. |
+| `Sora2AvatarStat` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a Sora2AvatarStat entity instance. |
+| `Stat` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a Stat entity instance. |
+| `StatsRefreshBackfill` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a StatsRefreshBackfill entity instance. |
+| `StatsRefreshIssue` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a StatsRefreshIssue entity instance. |
+| `StatsRefreshOverview` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a StatsRefreshOverview entity instance. |
+| `StatsRefreshRunSummary` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a StatsRefreshRunSummary entity instance. |
+| `StatsRefreshTaskTrigger` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a StatsRefreshTaskTrigger entity instance. |
+| `Stripe` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a Stripe entity instance. |
+| `Style` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a Style entity instance. |
+| `Template` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a Template entity instance. |
+| `TikTokCreatorInfo` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a TikTokCreatorInfo entity instance. |
+| `TopPost` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a TopPost entity instance. |
+| `UploadPostAgent` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an UploadPostAgent entity instance. |
+| `User` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an User entity instance. |
+| `UserAgent` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an UserAgent entity instance. |
+| `UserHealthDetail` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an UserHealthDetail entity instance. |
+| `UserWithAvatarSubmission` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an UserWithAvatarSubmission entity instance. |
+| `UsersHealth` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create an UsersHealth entity instance. |
+| `Video` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a Video entity instance. |
+| `VideoRemixerWorker` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a VideoRemixerWorker entity instance. |
+| `WatchdogRecovery` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a WatchdogRecovery entity instance. |
+| `WinningAd` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a WinningAd entity instance. |
+| `XAdaptation` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a XAdaptation entity instance. |
+| `ZerohumanAdminAccount` | `(data map[string]any) CrackedApiReferenceEntityBase` | Create a ZerohumanAdminAccount entity instance. |
 
-### Entity interface (CrackedApiReferenceEntity)
+### Entity interface (CrackedApiReferenceEntityBase)
 
-All entities implement the `CrackedApiReferenceEntity` interface.
+All entities implement the `CrackedApiReferenceEntityBase` interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
@@ -483,14 +481,11 @@ API path: `/api/onboarding-v6/active-session`
 | Field | Description |
 | --- | --- |
 | `"apply"` | Apply safe canonical or clean-only URL updates |
-| `"count"` |  |
 | `"created_at"` |  |
 | `"date_from"` |  |
 | `"date_to"` |  |
 | `"email"` |  |
 | `"id"` |  |
-| `"include_failed"` |  |
-| `"include_pending"` |  |
 | `"include_records"` | Include full per-field audit records in the response |
 | `"issue_ids"` |  |
 | `"only_active"` | Limit the audit to active agents |
@@ -499,14 +494,12 @@ API path: `/api/onboarding-v6/active-session`
 | `"product_id"` |  |
 | `"query"` |  |
 | `"reason"` |  |
-| `"regenerate"` |  |
 | `"status"` |  |
 | `"user_membership"` |  |
 | `"user_name"` |  |
 | `"user_onboarding_step"` |  |
-| `"video_type"` |  |
 
-Operations: Create, List, Load, Remove, Update.
+Operations: Create, List, Load, Remove.
 
 API path: `/api/admin/users/{user_id}/regenerate-video/{video_id}`
 
@@ -660,13 +653,25 @@ API path: `/api/admin/healthrx/items/{kind}/{item_id}/decision`
 
 | Field | Description |
 | --- | --- |
-| `"customer_success_cases"` |  |
-| `"customers"` |  |
-| `"generated_at"` |  |
-| `"pfa_database"` |  |
-| `"recent_signups"` |  |
-| `"summary"` |  |
-| `"vireel_database"` |  |
+| `"active_agents"` |  |
+| `"active_products"` |  |
+| `"agents_count"` |  |
+| `"auto_schedule_status"` |  |
+| `"days_until_period_end"` |  |
+| `"email"` |  |
+| `"feature_impact"` |  |
+| `"last_notification_at"` |  |
+| `"membership"` |  |
+| `"name"` |  |
+| `"notification_count"` |  |
+| `"notification_events"` |  |
+| `"priority"` |  |
+| `"severity"` |  |
+| `"status_label"` |  |
+| `"subscription_current_period_end"` |  |
+| `"subscription_status"` |  |
+| `"upcoming_posts"` |  |
+| `"user_id"` |  |
 
 Operations: List, Load.
 
@@ -686,14 +691,8 @@ API path: `/api/admin/users/{user_id}/regenerate-landing`
 
 | Field | Description |
 | --- | --- |
-| `"paid_users_by_level"` |  |
-| `"total_cancellations"` |  |
-| `"total_previews_generated"` |  |
-| `"total_signups"` |  |
-| `"total_videos_generated"` |  |
-| `"url_attempts"` |  |
-| `"user_credits"` |  |
-| `"user_gifted_credits"` |  |
+| `"count"` |  |
+| `"level"` |  |
 
 Operations: List.
 
@@ -846,7 +845,7 @@ API path: `/api/admin/slideshow-import2/{batch_id}/state`
 
 Operations: Create, List, Remove, Update.
 
-API path: `/api/admin/users/{user_id}/fix-auto-schedule-by-date`
+API path: `/api/admin/users/{user_id}/convert-to-enterprise`
 
 #### AdminUsersTableItem
 
@@ -1012,7 +1011,7 @@ API path: `/api/onboarding-v6/advance-step`
 | `"tiktok_stats"` |  |
 | `"type"` |  |
 
-Operations: List.
+Operations: List, Update.
 
 API path: `/api/admin/agents`
 
@@ -1111,13 +1110,17 @@ API path: `/api/agent-access/phil-notifications/videos`
 
 | Field | Description |
 | --- | --- |
-| `"agentQuota"` |  |
-| `"agents"` |  |
-| `"assignedByType"` |  |
-| `"assignedTotal"` |  |
-| `"email"` |  |
-| `"products"` |  |
-| `"userId"` |  |
+| `"avatar"` |  |
+| `"facebookUrl"` |  |
+| `"id"` |  |
+| `"instagramUrl"` |  |
+| `"name"` |  |
+| `"productId"` |  |
+| `"productName"` |  |
+| `"tiktokUrl"` |  |
+| `"type"` |  |
+| `"uploadPostPlatforms"` |  |
+| `"youtubeUrl"` |  |
 
 Operations: List.
 
@@ -1244,19 +1247,12 @@ API path: `/api/upload-post-agents/all`
 
 | Field | Description |
 | --- | --- |
-| `"daily"` |  |
-| `"dates"` |  |
-| `"generated_at"` |  |
-| `"groups"` |  |
-| `"latest"` |  |
-| `"live_date"` |  |
-| `"phone_admin_generated_at"` |  |
-| `"platform"` |  |
-| `"post_target"` |  |
-| `"qa_managed_agent_ids"` |  |
-| `"scope_prefixes"` |  |
-| `"timezone"` |  |
-| `"warmup_target"` |  |
+| `"accounts"` |  |
+| `"date"` |  |
+| `"overall"` |  |
+| `"posts"` |  |
+| `"views"` |  |
+| `"warmups"` |  |
 
 Operations: List.
 
@@ -1278,19 +1274,12 @@ API path: `/api/admin/agent-health/customers`
 
 | Field | Description |
 | --- | --- |
-| `"archived_issue_total"` |  |
-| `"date"` |  |
-| `"generated_at"` |  |
-| `"group_id"` |  |
-| `"has_more"` |  |
-| `"issue_total"` |  |
-| `"issues"` |  |
-| `"limit"` |  |
-| `"metric"` |  |
-| `"offset"` |  |
-| `"warmup_runs"` |  |
-| `"warning_total"` |  |
-| `"warnings"` |  |
+| `"agent_id"` |  |
+| `"category"` |  |
+| `"connection_status"` |  |
+| `"device_status"` |  |
+| `"issue"` |  |
+| `"state"` |  |
 
 Operations: List.
 
@@ -1470,7 +1459,6 @@ API path: `/api/upload-post-agents/bulk/tiktok-stats`
 | `"formula_id"` |  |
 | `"formula_name"` |  |
 | `"generation"` |  |
-| `"id"` |  |
 | `"image_prompt"` |  |
 | `"likes"` |  |
 | `"main_prompt"` |  |
@@ -1524,7 +1512,6 @@ API path: `/api/admin/carousels/agents/{agent_id}`
 | --- | --- |
 | `"caption"` |  |
 | `"error"` |  |
-| `"id"` |  |
 | `"image_model"` |  |
 | `"image_provider"` |  |
 | `"image_task_id"` |  |
@@ -1536,18 +1523,6 @@ API path: `/api/admin/carousels/agents/{agent_id}`
 Operations: List.
 
 API path: `/api/carousel/{video_id}/status`
-
-#### Chat
-
-| Field | Description |
-| --- | --- |
-| `"idempotencyKey"` |  |
-| `"message"` |  |
-| `"sessionId"` |  |
-
-Operations: Create.
-
-API path: `/api/chat/sessions/{session_id}/messages`
 
 #### ChatHistory
 
@@ -1576,6 +1551,8 @@ API path: `/api/chat/sessions`
 | --- | --- |
 | `"chatSubVariant"` |  |
 | `"createdAt"` |  |
+| `"idempotencyKey"` |  |
+| `"message"` |  |
 | `"model"` |  |
 | `"plan"` |  |
 | `"route"` |  |
@@ -1803,7 +1780,6 @@ API path: `/api/admin/customer-health/customers`
 | `"date"` |  |
 | `"email"` |  |
 | `"entries"` |  |
-| `"id"` |  |
 | `"performance_overview"` |  |
 | `"platform_coverage_summary"` |  |
 | `"user_id"` |  |
@@ -1832,20 +1808,10 @@ API path: `/api/admin/customer-health/all-customers`
 
 | Field | Description |
 | --- | --- |
-| `"average_views_per_result"` |  |
-| `"date"` |  |
-| `"end_date"` |  |
-| `"paid_users_count"` |  |
+| `"email"` |  |
 | `"posted_results"` |  |
-| `"range"` |  |
-| `"start_date"` |  |
-| `"top_users"` |  |
-| `"total_views"` |  |
-| `"trend"` |  |
-| `"trend_granularity"` |  |
-| `"user_email"` |  |
 | `"user_id"` |  |
-| `"users_with_views"` |  |
+| `"views"` |  |
 
 Operations: List.
 
@@ -1865,7 +1831,6 @@ API path: `/api/carousel/daily/{product_id}/plan`
 
 | Field | Description |
 | --- | --- |
-| `"id"` |  |
 
 Operations: Load.
 
@@ -1911,15 +1876,6 @@ API path: `/api/admin/agents/dedicated-dashboard`
 Operations: Create, Load.
 
 API path: `/api/enterprise/agents/assign`
-
-#### EnterpriseProduct
-
-| Field | Description |
-| --- | --- |
-
-Operations: Load.
-
-API path: `/api/enterprise/products/{product_id}/status`
 
 #### ExactAvailability
 
@@ -2094,18 +2050,6 @@ Operations: Create.
 
 API path: `/api/reset-product/init-v6`
 
-#### Iri
-
-| Field | Description |
-| --- | --- |
-| `"correlationId"` |  |
-| `"idempotencyKey"` |  |
-| `"productId"` |  |
-
-Operations: Create.
-
-API path: `/api/iris/connectors/{connector_id}/start`
-
 #### IrisCapability
 
 | Field | Description |
@@ -2157,9 +2101,9 @@ API path: `/api/iris/chat`
 | --- | --- |
 | `"connectors"` |  |
 
-Operations: List.
+Operations: Create, List.
 
-API path: `/api/iris/connectors`
+API path: `/api/iris/connectors/{connector_id}/start`
 
 #### IrisStatus
 
@@ -2182,8 +2126,10 @@ API path: `/api/iris/status`
 | `"cadence"` |  |
 | `"capability"` |  |
 | `"completed"` |  |
+| `"correlationId"` |  |
 | `"description"` |  |
 | `"discover"` |  |
+| `"idempotencyKey"` |  |
 | `"productId"` |  |
 | `"recurring"` |  |
 | `"requiredConnectors"` |  |
@@ -2191,7 +2137,7 @@ API path: `/api/iris/status`
 
 Operations: Create, List.
 
-API path: `/api/iris/tasks`
+API path: `/api/iris/tasks/{task_id}/run`
 
 #### IrisUsage
 
@@ -2494,13 +2440,18 @@ API path: `/api/products/{product_id}/validate-social-handle`
 
 | Field | Description |
 | --- | --- |
-| `"agents"` |  |
-| `"date"` |  |
-| `"pagination"` |  |
-| `"phone_admin_error"` |  |
-| `"products"` |  |
-| `"selected_product"` |  |
-| `"summary"` |  |
+| `"comments"` |  |
+| `"failed_entries"` |  |
+| `"has_tiktok_community_violation"` |  |
+| `"id"` |  |
+| `"likes"` |  |
+| `"metrics_pending_count"` |  |
+| `"name"` |  |
+| `"platforms"` |  |
+| `"posted_entries"` |  |
+| `"posting_entries"` |  |
+| `"scheduled_entries"` |  |
+| `"views"` |  |
 
 Operations: List.
 
@@ -2548,6 +2499,7 @@ API path: `/api/video-variation/product-demos`
 | `"dmOngoingResponsePrompt"` |  |
 | `"firstCommentTextBeforeLink"` |  |
 | `"headerImageUrl"` |  |
+| `"icon"` |  |
 | `"id"` |  |
 | `"landingHtmlUrl"` |  |
 | `"landingLastGeneratedAt"` |  |
@@ -2586,6 +2538,7 @@ API path: `/api/video-variation/product-demos`
 | `"slug"` |  |
 | `"socialLinks"` |  |
 | `"testimonials"` |  |
+| `"url"` |  |
 
 Operations: List, Update.
 
@@ -2621,15 +2574,6 @@ API path: `/api/onboarding-v6/resume-status-public`
 Operations: Create.
 
 API path: `/api/core/re-roll-video`
-
-#### ReadRootGet
-
-| Field | Description |
-| --- | --- |
-
-Operations: Load.
-
-API path: `/`
 
 #### RecordDemoBooked
 
@@ -2693,6 +2637,15 @@ Operations: Create.
 
 API path: `/api/onboarding-v6/retry-scrape`
 
+#### RootGet
+
+| Field | Description |
+| --- | --- |
+
+Operations: Load.
+
+API path: `/`
+
 #### SaveSurvey
 
 | Field | Description |
@@ -2751,6 +2704,15 @@ Operations: Load.
 
 API path: `/api/video-variation/scan-socials/status`
 
+#### ScheduleQueue
+
+| Field | Description |
+| --- | --- |
+
+Operations: Update.
+
+API path: `/api/schedule/queue/{queue_id}/replace-video`
+
 #### ScheduleV2
 
 | Field | Description |
@@ -2779,7 +2741,7 @@ API path: `/api/video-variation/scan-socials/status`
 | `"youtube_posted_url"` |  |
 | `"youtube_scraped_social_post_id"` |  |
 
-Operations: Create, List, Load, Remove, Update.
+Operations: Create, List, Load, Remove.
 
 API path: `/api/schedule/queue/add`
 
@@ -2928,14 +2890,11 @@ API path: `/api/seo/overview`
 
 | Field | Description |
 | --- | --- |
-| `"end_date"` |  |
-| `"series"` |  |
-| `"site_url"` |  |
-| `"start_date"` |  |
-| `"top_countries"` |  |
-| `"top_pages"` |  |
-| `"top_queries"` |  |
-| `"totals"` |  |
+| `"clicks"` |  |
+| `"ctr"` |  |
+| `"date"` |  |
+| `"impressions"` |  |
+| `"position"` |  |
 
 Operations: List.
 
@@ -3159,23 +3118,24 @@ API path: `/api/admin/customer-health/issues`
 
 | Field | Description |
 | --- | --- |
-| `"active_run"` |  |
 | `"aged_over_24h"` |  |
-| `"backlog_preview"` |  |
-| `"coverage_percent"` |  |
-| `"customer_counts"` |  |
-| `"date"` |  |
-| `"generated_at"` |  |
-| `"method_counts"` |  |
-| `"platform_counts"` |  |
-| `"platform_units_resolved"` |  |
-| `"platform_units_total"` |  |
-| `"platform_units_unresolved"` |  |
-| `"posted_entries"` |  |
-| `"reason_counts"` |  |
-| `"sla_deadline_et"` |  |
+| `"agent_id"` |  |
+| `"agent_name"` |  |
+| `"is_resolved"` |  |
+| `"last_refresh_completed_at"` |  |
+| `"latest_error_message"` |  |
+| `"platform"` |  |
+| `"post_method"` |  |
+| `"post_url"` |  |
+| `"posted_date_et"` |  |
+| `"product_id"` |  |
+| `"product_name"` |  |
+| `"reason_code"` |  |
+| `"schedule_queue_id"` |  |
+| `"scheduled_datetime_utc"` |  |
 | `"stale_after_sla"` |  |
-| `"top_affected_customers"` |  |
+| `"user_email"` |  |
+| `"user_id"` |  |
 
 Operations: List.
 
@@ -3337,9 +3297,9 @@ API path: `/api/upload-post-agents/sync-platforms`
 | `"updatedAt"` |  |
 | `"userId"` |  |
 
-Operations: Load, Update.
+Operations: Create, Load, Update.
 
-API path: `/api/upload-post-agents/user/{user_id}`
+API path: `/api/admin/users/{user_id}/fix-auto-schedule-by-date`
 
 #### UserAgent
 
@@ -3349,7 +3309,6 @@ API path: `/api/upload-post-agents/user/{user_id}`
 | `"assigned_at"` |  |
 | `"assignment_id"` |  |
 | `"expires_at"` |  |
-| `"id"` |  |
 | `"status"` |  |
 
 Operations: Create, List.
@@ -3360,65 +3319,9 @@ API path: `/api/admin/users/{user_id}/agents`
 
 | Field | Description |
 | --- | --- |
-| `"account_type"` |  |
-| `"activated"` |  |
-| `"activated_by_admin_at"` |  |
-| `"activated_by_admin_id"` |  |
-| `"admin_notes"` |  |
-| `"agents_count"` |  |
-| `"assigned_agents"` |  |
-| `"assigned_agents_count"` |  |
-| `"assigned_agents_preview_limit"` |  |
-| `"assigned_agents_truncated"` |  |
-| `"auto_schedule_enabled"` |  |
-| `"comments_expected_per_day"` |  |
-| `"comments_fix_block_reason"` |  |
-| `"comments_fix_ready"` |  |
-| `"comments_today_failed"` |  |
-| `"comments_today_posted"` |  |
-| `"comments_today_scheduled"` |  |
-| `"comments_yesterday_failed"` |  |
-| `"comments_yesterday_posted"` |  |
-| `"comments_yesterday_total"` |  |
-| `"created_at"` |  |
-| `"credits"` |  |
-| `"effective_posted_video_reuse_percent"` |  |
-| `"email"` |  |
-| `"expected_agents_count"` |  |
 | `"id"` |  |
-| `"is_activated_by_admin"` |  |
-| `"is_admin"` |  |
-| `"is_bookmarked"` |  |
-| `"is_internal_user"` |  |
-| `"is_migrated"` |  |
-| `"landing_slug"` |  |
-| `"landing_status"` |  |
-| `"landing_url"` |  |
-| `"membership"` |  |
-| `"microhub_status"` |  |
-| `"microhub_url"` |  |
 | `"name"` |  |
-| `"onboarding_flow"` |  |
-| `"posted_video_reuse_percent"` |  |
-| `"product_id"` |  |
-| `"product_name"` |  |
-| `"product_url"` |  |
-| `"subscription_status"` |  |
-| `"survey_data"` |  |
-| `"today_failed"` |  |
-| `"today_posted"` |  |
-| `"today_scheduled"` |  |
-| `"tomorrow_capacity"` |  |
-| `"tomorrow_scheduled"` |  |
-| `"videos_completed"` |  |
-| `"videos_failed"` |  |
-| `"videos_pending"` |  |
-| `"videos_stale"` |  |
-| `"videos_total"` |  |
-| `"yesterday_failed"` |  |
-| `"yesterday_failed_entries"` |  |
-| `"yesterday_posted"` |  |
-| `"yesterday_total"` |  |
+| `"type"` |  |
 
 Operations: List.
 
@@ -3708,7 +3611,6 @@ Create an instance: `admin := client.Admin(nil)`
 | `List(match, ctrl)` | List entities matching the criteria. |
 | `Load(match, ctrl)` | Load a single entity by match criteria. |
 | `Create(data, ctrl)` | Create a new entity with the given data. |
-| `Update(data, ctrl)` | Update an existing entity. |
 | `Remove(match, ctrl)` | Remove the matching entity. |
 
 #### Fields
@@ -3716,14 +3618,11 @@ Create an instance: `admin := client.Admin(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `apply` | `bool` | Apply safe canonical or clean-only URL updates |
-| `count` | `int` |  |
 | `created_at` | `string` |  |
 | `date_from` | `any` |  |
 | `date_to` | `any` |  |
 | `email` | `string` |  |
 | `id` | `string` |  |
-| `include_failed` | `bool` |  |
-| `include_pending` | `bool` |  |
 | `include_records` | `bool` | Include full per-field audit records in the response |
 | `issue_ids` | `any` |  |
 | `only_active` | `bool` | Limit the audit to active agents |
@@ -3732,12 +3631,10 @@ Create an instance: `admin := client.Admin(nil)`
 | `product_id` | `string` |  |
 | `query` | `any` |  |
 | `reason` | `any` |  |
-| `regenerate` | `bool` |  |
 | `status` | `string` |  |
 | `user_membership` | `any` |  |
 | `user_name` | `any` |  |
 | `user_onboarding_step` | `any` |  |
-| `video_type` | `string` |  |
 
 #### Example: Load
 
@@ -3767,14 +3664,12 @@ for _, item := range admins.([]any) {
 ```go
 result, err := client.Admin(nil).Create(map[string]any{
     "user_id": "example_user_id",
-    "count": 1,
     "created_at": "example_created_at",
     "date_from": "example_date_from",
     "date_to": "example_date_to",
     "email": "example_email",
     "id": "example_id",
     "product_id": "example_product_id",
-    "video_type": "example_video_type",
 }, nil)
 if err != nil {
     panic(err)
@@ -4139,13 +4034,25 @@ Create an instance: `adminInsight := client.AdminInsight(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `customer_success_cases` | `[]any` |  |
-| `customers` | `[]any` |  |
-| `generated_at` | `string` |  |
-| `pfa_database` | `map[string]any` |  |
-| `recent_signups` | `[]any` |  |
-| `summary` | `map[string]any` |  |
-| `vireel_database` | `map[string]any` |  |
+| `active_agents` | `int` |  |
+| `active_products` | `int` |  |
+| `agents_count` | `int` |  |
+| `auto_schedule_status` | `string` |  |
+| `days_until_period_end` | `any` |  |
+| `email` | `string` |  |
+| `feature_impact` | `string` |  |
+| `last_notification_at` | `any` |  |
+| `membership` | `any` |  |
+| `name` | `string` |  |
+| `notification_count` | `int` |  |
+| `notification_events` | `[]any` |  |
+| `priority` | `string` |  |
+| `severity` | `string` |  |
+| `status_label` | `string` |  |
+| `subscription_current_period_end` | `any` |  |
+| `subscription_status` | `any` |  |
+| `upcoming_posts` | `int` |  |
+| `user_id` | `string` |  |
 
 #### Example: Load
 
@@ -4215,14 +4122,8 @@ Create an instance: `adminMetricsSummary := client.AdminMetricsSummary(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `paid_users_by_level` | `[]any` |  |
-| `total_cancellations` | `int` |  |
-| `total_previews_generated` | `int` |  |
-| `total_signups` | `int` |  |
-| `total_videos_generated` | `int` |  |
-| `url_attempts` | `int` |  |
-| `user_credits` | `[]any` |  |
-| `user_gifted_credits` | `[]any` |  |
+| `count` | `int` |  |
+| `level` | `string` |  |
 
 #### Example: List
 
@@ -5016,13 +4917,17 @@ Create an instance: `agentAccessUserAgent := client.AgentAccessUserAgent(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `agentQuota` | `int` |  |
-| `agents` | `[]any` |  |
-| `assignedByType` | `map[string]any` |  |
-| `assignedTotal` | `int` |  |
-| `email` | `string` |  |
-| `products` | `[]any` |  |
-| `userId` | `string` |  |
+| `avatar` | `any` |  |
+| `facebookUrl` | `any` |  |
+| `id` | `string` |  |
+| `instagramUrl` | `any` |  |
+| `name` | `string` |  |
+| `productId` | `any` |  |
+| `productName` | `any` |  |
+| `tiktokUrl` | `any` |  |
+| `type` | `any` |  |
+| `uploadPostPlatforms` | `any` |  |
+| `youtubeUrl` | `any` |  |
 
 #### Example: List
 
@@ -5307,19 +5212,12 @@ Create an instance: `agentHealth := client.AgentHealth(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `daily` | `[]any` |  |
-| `dates` | `[]any` |  |
-| `generated_at` | `string` |  |
-| `groups` | `[]any` |  |
-| `latest` | `map[string]any` |  |
-| `live_date` | `any` |  |
-| `phone_admin_generated_at` | `string` |  |
-| `platform` | `string` |  |
-| `post_target` | `int` |  |
-| `qa_managed_agent_ids` | `[]any` |  |
-| `scope_prefixes` | `[]any` |  |
-| `timezone` | `string` |  |
-| `warmup_target` | `int` |  |
+| `accounts` | `map[string]any` |  |
+| `date` | `string` |  |
+| `overall` | `map[string]any` |  |
+| `posts` | `map[string]any` |  |
+| `views` | `map[string]any` |  |
+| `warmups` | `map[string]any` |  |
 
 #### Example: List
 
@@ -5381,19 +5279,12 @@ Create an instance: `agentHealthDetail := client.AgentHealthDetail(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `archived_issue_total` | `int` |  |
-| `date` | `string` |  |
-| `generated_at` | `string` |  |
-| `group_id` | `string` |  |
-| `has_more` | `bool` |  |
-| `issue_total` | `int` |  |
-| `issues` | `[]any` |  |
-| `limit` | `int` |  |
-| `metric` | `string` |  |
-| `offset` | `int` |  |
-| `warmup_runs` | `[]any` |  |
-| `warning_total` | `int` |  |
-| `warnings` | `[]any` |  |
+| `agent_id` | `string` |  |
+| `category` | `string` |  |
+| `connection_status` | `string` |  |
+| `device_status` | `string` |  |
+| `issue` | `any` |  |
+| `state` | `string` |  |
 
 #### Example: List
 
@@ -5442,7 +5333,7 @@ Create an instance: `agentPost := client.AgentPost(nil)`
 #### Example: List
 
 ```go
-agentPosts, err := client.AgentPost(nil).List(map[string]any{"id": "example"}, nil)
+agentPosts, err := client.AgentPost(nil).List(map[string]any{"agent_id": "example"}, nil)
 if err != nil {
     panic(err)
 }
@@ -5760,7 +5651,6 @@ Create an instance: `carousel := client.Carousel(nil)`
 | `formula_id` | `string` |  |
 | `formula_name` | `any` |  |
 | `generation` | `map[string]any` |  |
-| `id` | `string` |  |
 | `image_prompt` | `any` |  |
 | `likes` | `any` |  |
 | `main_prompt` | `any` |  |
@@ -5884,7 +5774,6 @@ Create an instance: `carouselStatus := client.CarouselStatus(nil)`
 | --- | --- | --- |
 | `caption` | `any` |  |
 | `error` | `any` |  |
-| `id` | `string` |  |
 | `image_model` | `any` |  |
 | `image_provider` | `any` |  |
 | `image_task_id` | `string` |  |
@@ -5896,7 +5785,7 @@ Create an instance: `carouselStatus := client.CarouselStatus(nil)`
 #### Example: List
 
 ```go
-carouselStatuss, err := client.CarouselStatus(nil).List(map[string]any{"id": "example"}, nil)
+carouselStatuss, err := client.CarouselStatus(nil).List(map[string]any{"carousel_id": "example"}, nil)
 if err != nil {
     panic(err)
 }
@@ -5904,40 +5793,6 @@ if err != nil {
 for _, item := range carouselStatuss.([]any) {
     fmt.Println(item.(sdk.Entity).Data())
 }
-```
-
-
-### Chat
-
-Create an instance: `chat := client.Chat(nil)`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `Create(data, ctrl)` | Create a new entity with the given data. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `idempotencyKey` | `string` |  |
-| `message` | `string` |  |
-| `sessionId` | `string` |  |
-
-#### Example: Create
-
-```go
-result, err := client.Chat(nil).Create(map[string]any{
-    "session_id": "example_session_id",
-    "idempotencyKey": "example_idempotencyKey",
-    "message": "example_message",
-    "sessionId": "example_sessionId",
-}, nil)
-if err != nil {
-    panic(err)
-}
-fmt.Println(result.(sdk.Entity).Data()) // the created entity's record
 ```
 
 
@@ -6008,6 +5863,8 @@ Create an instance: `chatSession := client.ChatSession(nil)`
 | --- | --- | --- |
 | `chatSubVariant` | `string` |  |
 | `createdAt` | `string` |  |
+| `idempotencyKey` | `string` |  |
+| `message` | `string` |  |
 | `model` | `any` |  |
 | `plan` | `any` |  |
 | `route` | `any` |  |
@@ -6023,6 +5880,9 @@ Create an instance: `chatSession := client.ChatSession(nil)`
 ```go
 result, err := client.ChatSession(nil).Create(map[string]any{
     "session_id": "example_session_id",
+    "idempotencyKey": "example_idempotencyKey",
+    "message": "example_message",
+    "sessionId": "example_sessionId",
 }, nil)
 if err != nil {
     panic(err)
@@ -6459,7 +6319,6 @@ Create an instance: `customerHealth := client.CustomerHealth(nil)`
 | `date` | `string` |  |
 | `email` | `string` |  |
 | `entries` | `[]any` |  |
-| `id` | `string` |  |
 | `performance_overview` | `map[string]any` |  |
 | `platform_coverage_summary` | `map[string]any` |  |
 | `user_id` | `string` |  |
@@ -6525,20 +6384,10 @@ Create an instance: `customerHealthViewsSummary := client.CustomerHealthViewsSum
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `average_views_per_result` | `int` |  |
-| `date` | `string` |  |
-| `end_date` | `any` |  |
-| `paid_users_count` | `int` |  |
+| `email` | `string` |  |
 | `posted_results` | `int` |  |
-| `range` | `string` |  |
-| `start_date` | `any` |  |
-| `top_users` | `[]any` |  |
-| `total_views` | `int` |  |
-| `trend` | `[]any` |  |
-| `trend_granularity` | `string` |  |
-| `user_email` | `any` |  |
 | `user_id` | `string` |  |
-| `users_with_views` | `int` |  |
+| `views` | `int` |  |
 
 #### Example: List
 
@@ -6594,16 +6443,10 @@ Create an instance: `dailyStatus := client.DailyStatus(nil)`
 | --- | --- |
 | `Load(match, ctrl)` | Load a single entity by match criteria. |
 
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `id` | `string` |  |
-
 #### Example: Load
 
 ```go
-dailyStatus, err := client.DailyStatus(nil).Load(map[string]any{"id": "daily_status_id", "day": "day"}, nil)
+dailyStatus, err := client.DailyStatus(nil).Load(map[string]any{"daily_id": "daily_id", "day": "day"}, nil)
 if err != nil {
     panic(err)
 }
@@ -6701,27 +6544,6 @@ if err != nil {
     panic(err)
 }
 fmt.Println(result.(sdk.Entity).Data()) // the created entity's record
-```
-
-
-### EnterpriseProduct
-
-Create an instance: `enterpriseProduct := client.EnterpriseProduct(nil)`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `Load(match, ctrl)` | Load a single entity by match criteria. |
-
-#### Example: Load
-
-```go
-enterpriseProduct, err := client.EnterpriseProduct(nil).Load(map[string]any{"product_id": "product_id"}, nil)
-if err != nil {
-    panic(err)
-}
-fmt.Println(enterpriseProduct.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 
@@ -7126,38 +6948,6 @@ fmt.Println(result.(sdk.Entity).Data()) // the created entity's record
 ```
 
 
-### Iri
-
-Create an instance: `iri := client.Iri(nil)`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `Create(data, ctrl)` | Create a new entity with the given data. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `correlationId` | `any` |  |
-| `idempotencyKey` | `string` |  |
-| `productId` | `any` |  |
-
-#### Example: Create
-
-```go
-result, err := client.Iri(nil).Create(map[string]any{
-    "connector_id": "example_connector_id",
-    "idempotencyKey": "example_idempotencyKey",
-}, nil)
-if err != nil {
-    panic(err)
-}
-fmt.Println(result.(sdk.Entity).Data()) // the created entity's record
-```
-
-
 ### IrisCapability
 
 Create an instance: `irisCapability := client.IrisCapability(nil)`
@@ -7257,6 +7047,7 @@ Create an instance: `irisConnector := client.IrisConnector(nil)`
 | Method | Description |
 | --- | --- |
 | `List(match, ctrl)` | List entities matching the criteria. |
+| `Create(data, ctrl)` | Create a new entity with the given data. |
 
 #### Fields
 
@@ -7275,6 +7066,18 @@ if err != nil {
 for _, item := range irisConnectors.([]any) {
     fmt.Println(item.(sdk.Entity).Data())
 }
+```
+
+#### Example: Create
+
+```go
+result, err := client.IrisConnector(nil).Create(map[string]any{
+    "connector_id": "example_connector_id",
+}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result.(sdk.Entity).Data()) // the created entity's record
 ```
 
 
@@ -7330,8 +7133,10 @@ Create an instance: `irisTask := client.IrisTask(nil)`
 | `cadence` | `string` |  |
 | `capability` | `any` |  |
 | `completed` | `[]any` |  |
+| `correlationId` | `any` |  |
 | `description` | `string` |  |
 | `discover` | `[]any` |  |
+| `idempotencyKey` | `string` |  |
 | `productId` | `any` |  |
 | `recurring` | `[]any` |  |
 | `requiredConnectors` | `[]any` |  |
@@ -7354,6 +7159,7 @@ for _, item := range irisTasks.([]any) {
 
 ```go
 result, err := client.IrisTask(nil).Create(map[string]any{
+    "idempotencyKey": "example_idempotencyKey",
     "title": "example_title",
 }, nil)
 if err != nil {
@@ -8054,13 +7860,18 @@ Create an instance: `productDashboard := client.ProductDashboard(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `agents` | `[]any` |  |
-| `date` | `string` |  |
-| `pagination` | `map[string]any` |  |
-| `phone_admin_error` | `any` |  |
-| `products` | `[]any` |  |
-| `selected_product` | `any` |  |
-| `summary` | `map[string]any` |  |
+| `comments` | `int` |  |
+| `failed_entries` | `int` |  |
+| `has_tiktok_community_violation` | `bool` |  |
+| `id` | `string` |  |
+| `likes` | `int` |  |
+| `metrics_pending_count` | `int` |  |
+| `name` | `string` |  |
+| `platforms` | `[]any` |  |
+| `posted_entries` | `int` |  |
+| `posting_entries` | `int` |  |
+| `scheduled_entries` | `int` |  |
+| `views` | `int` |  |
 
 #### Example: List
 
@@ -8169,6 +7980,7 @@ Create an instance: `productLanding := client.ProductLanding(nil)`
 | `dmOngoingResponsePrompt` | `any` |  |
 | `firstCommentTextBeforeLink` | `any` |  |
 | `headerImageUrl` | `any` |  |
+| `icon` | `any` |  |
 | `id` | `string` |  |
 | `landingHtmlUrl` | `any` |  |
 | `landingLastGeneratedAt` | `any` |  |
@@ -8207,6 +8019,7 @@ Create an instance: `productLanding := client.ProductLanding(nil)`
 | `slug` | `string` |  |
 | `socialLinks` | `any` |  |
 | `testimonials` | `any` |  |
+| `url` | `string` |  |
 
 #### Example: List
 
@@ -8286,27 +8099,6 @@ if err != nil {
     panic(err)
 }
 fmt.Println(result.(sdk.Entity).Data()) // the created entity's record
-```
-
-
-### ReadRootGet
-
-Create an instance: `readRootGet := client.ReadRootGet(nil)`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `Load(match, ctrl)` | Load a single entity by match criteria. |
-
-#### Example: Load
-
-```go
-readRootGet, err := client.ReadRootGet(nil).Load(nil, nil)
-if err != nil {
-    panic(err)
-}
-fmt.Println(readRootGet.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 
@@ -8478,6 +8270,27 @@ fmt.Println(result.(sdk.Entity).Data()) // the created entity's record
 ```
 
 
+### RootGet
+
+Create an instance: `rootGet := client.RootGet(nil)`
+
+#### Operations
+
+| Method | Description |
+| --- | --- |
+| `Load(match, ctrl)` | Load a single entity by match criteria. |
+
+#### Example: Load
+
+```go
+rootGet, err := client.RootGet(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(rootGet.(sdk.Entity).Data()) // the loaded entity's record
+```
+
+
 ### SaveSurvey
 
 Create an instance: `saveSurvey := client.SaveSurvey(nil)`
@@ -8612,6 +8425,17 @@ fmt.Println(scanSocialsStatus.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 
+### ScheduleQueue
+
+Create an instance: `scheduleQueue := client.ScheduleQueue(nil)`
+
+#### Operations
+
+| Method | Description |
+| --- | --- |
+| `Update(data, ctrl)` | Update an existing entity. |
+
+
 ### ScheduleV2
 
 Create an instance: `scheduleV2 := client.ScheduleV2(nil)`
@@ -8623,7 +8447,6 @@ Create an instance: `scheduleV2 := client.ScheduleV2(nil)`
 | `List(match, ctrl)` | List entities matching the criteria. |
 | `Load(match, ctrl)` | Load a single entity by match criteria. |
 | `Create(data, ctrl)` | Create a new entity with the given data. |
-| `Update(data, ctrl)` | Update an existing entity. |
 | `Remove(match, ctrl)` | Remove the matching entity. |
 
 #### Fields
@@ -9032,14 +8855,11 @@ Create an instance: `seoTraffic := client.SeoTraffic(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `end_date` | `string` |  |
-| `series` | `[]any` |  |
-| `site_url` | `string` |  |
-| `start_date` | `string` |  |
-| `top_countries` | `[]any` |  |
-| `top_pages` | `[]any` |  |
-| `top_queries` | `[]any` |  |
-| `totals` | `map[string]any` |  |
+| `clicks` | `float64` |  |
+| `ctr` | `float64` |  |
+| `date` | `string` |  |
+| `impressions` | `float64` |  |
+| `position` | `float64` |  |
 
 #### Example: List
 
@@ -9598,23 +9418,24 @@ Create an instance: `statsRefreshOverview := client.StatsRefreshOverview(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `active_run` | `any` |  |
-| `aged_over_24h` | `int` |  |
-| `backlog_preview` | `[]any` |  |
-| `coverage_percent` | `float64` |  |
-| `customer_counts` | `map[string]any` |  |
-| `date` | `string` |  |
-| `generated_at` | `string` |  |
-| `method_counts` | `map[string]any` |  |
-| `platform_counts` | `map[string]any` |  |
-| `platform_units_resolved` | `int` |  |
-| `platform_units_total` | `int` |  |
-| `platform_units_unresolved` | `int` |  |
-| `posted_entries` | `int` |  |
-| `reason_counts` | `map[string]any` |  |
-| `sla_deadline_et` | `string` |  |
-| `stale_after_sla` | `int` |  |
-| `top_affected_customers` | `[]any` |  |
+| `aged_over_24h` | `bool` |  |
+| `agent_id` | `string` |  |
+| `agent_name` | `any` |  |
+| `is_resolved` | `bool` |  |
+| `last_refresh_completed_at` | `any` |  |
+| `latest_error_message` | `any` |  |
+| `platform` | `string` |  |
+| `post_method` | `any` |  |
+| `post_url` | `any` |  |
+| `posted_date_et` | `string` |  |
+| `product_id` | `string` |  |
+| `product_name` | `any` |  |
+| `reason_code` | `any` |  |
+| `schedule_queue_id` | `string` |  |
+| `scheduled_datetime_utc` | `string` |  |
+| `stale_after_sla` | `bool` |  |
+| `user_email` | `string` |  |
+| `user_id` | `string` |  |
 
 #### Example: List
 
@@ -9941,13 +9762,12 @@ Create an instance: `userAgent := client.UserAgent(nil)`
 | `assigned_at` | `string` |  |
 | `assignment_id` | `string` |  |
 | `expires_at` | `any` |  |
-| `id` | `string` |  |
 | `status` | `string` |  |
 
 #### Example: List
 
 ```go
-userAgents, err := client.UserAgent(nil).List(map[string]any{"id": "example"}, nil)
+userAgents, err := client.UserAgent(nil).List(map[string]any{"user_id": "example"}, nil)
 if err != nil {
     panic(err)
 }
@@ -9961,7 +9781,7 @@ for _, item := range userAgents.([]any) {
 
 ```go
 result, err := client.UserAgent(nil).Create(map[string]any{
-    "id": "example_id",
+    "user_id": "example_user_id",
     "agent": map[string]any{},
     "assigned_at": "example_assigned_at",
     "assignment_id": "example_assignment_id",
@@ -9988,70 +9808,14 @@ Create an instance: `userHealthDetail := client.UserHealthDetail(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `account_type` | `any` |  |
-| `activated` | `bool` |  |
-| `activated_by_admin_at` | `any` |  |
-| `activated_by_admin_id` | `string` |  |
-| `admin_notes` | `any` |  |
-| `agents_count` | `int` |  |
-| `assigned_agents` | `[]any` |  |
-| `assigned_agents_count` | `int` |  |
-| `assigned_agents_preview_limit` | `int` |  |
-| `assigned_agents_truncated` | `bool` |  |
-| `auto_schedule_enabled` | `bool` |  |
-| `comments_expected_per_day` | `int` |  |
-| `comments_fix_block_reason` | `any` |  |
-| `comments_fix_ready` | `bool` |  |
-| `comments_today_failed` | `int` |  |
-| `comments_today_posted` | `int` |  |
-| `comments_today_scheduled` | `int` |  |
-| `comments_yesterday_failed` | `int` |  |
-| `comments_yesterday_posted` | `int` |  |
-| `comments_yesterday_total` | `int` |  |
-| `created_at` | `string` |  |
-| `credits` | `int` |  |
-| `effective_posted_video_reuse_percent` | `int` |  |
-| `email` | `string` |  |
-| `expected_agents_count` | `int` |  |
 | `id` | `string` |  |
-| `is_activated_by_admin` | `bool` |  |
-| `is_admin` | `bool` |  |
-| `is_bookmarked` | `bool` |  |
-| `is_internal_user` | `bool` |  |
-| `is_migrated` | `bool` |  |
-| `landing_slug` | `any` |  |
-| `landing_status` | `any` |  |
-| `landing_url` | `any` |  |
-| `membership` | `any` |  |
-| `microhub_status` | `any` |  |
-| `microhub_url` | `any` |  |
 | `name` | `string` |  |
-| `onboarding_flow` | `string` |  |
-| `posted_video_reuse_percent` | `any` |  |
-| `product_id` | `string` |  |
-| `product_name` | `any` |  |
-| `product_url` | `any` |  |
-| `subscription_status` | `any` |  |
-| `survey_data` | `any` |  |
-| `today_failed` | `int` |  |
-| `today_posted` | `int` |  |
-| `today_scheduled` | `int` |  |
-| `tomorrow_capacity` | `int` |  |
-| `tomorrow_scheduled` | `int` |  |
-| `videos_completed` | `int` |  |
-| `videos_failed` | `int` |  |
-| `videos_pending` | `int` |  |
-| `videos_stale` | `int` |  |
-| `videos_total` | `int` |  |
-| `yesterday_failed` | `int` |  |
-| `yesterday_failed_entries` | `[]any` |  |
-| `yesterday_posted` | `int` |  |
-| `yesterday_total` | `int` |  |
+| `type` | `string` |  |
 
 #### Example: List
 
 ```go
-userHealthDetails, err := client.UserHealthDetail(nil).List(map[string]any{"id": "example"}, nil)
+userHealthDetails, err := client.UserHealthDetail(nil).List(map[string]any{"user_id": "example"}, nil)
 if err != nil {
     panic(err)
 }
@@ -10597,11 +10361,11 @@ Entity instances are stateful. After a successful `List`, the entity
 stores the returned data and match criteria internally.
 
 ```go
-admininsight := client.AdminInsight(nil)
-admininsight.List(nil, nil)
+agenthealth := client.AgentHealth(nil)
+agenthealth.List(nil, nil)
 
-// admininsight.Data() now returns the admininsight data from the last list
-// admininsight.Match() returns the last match criteria
+// agenthealth.Data() now returns the agenthealth data from the last list
+// agenthealth.Match() returns the last match criteria
 ```
 
 Call `Make()` to create a fresh instance with the same configuration

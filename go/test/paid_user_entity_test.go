@@ -212,6 +212,9 @@ func TestPaidUserEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = paidUserRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LIST
 		paidUserRef01Ent := client.PaidUser(nil)
 		paidUserRef01Match := map[string]any{}

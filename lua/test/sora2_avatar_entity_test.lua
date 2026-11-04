@@ -154,8 +154,61 @@ describe("Sora2AvatarEntity", function()
         return
       end
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" then
+      print("LIVE STEP {\"id\":\"sora2_avatar.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/admin/sora2-avatars\"}")
+      print("LIVE STEP {\"id\":\"sora2_avatar.update.2\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs PUT /api/admin/sora2-avatars/{avatar_id}\"}")
+    local client = setup.client
+    if setup.live then
+      local _live_id = nil
+      if not setup.synthetic_only then
+        _live_id = setup.idmap["sora2_avatar01"]
+      end
+      runner.live_pace()
+      runner.live_existing(pending, setup, LIVE_STRICT, "sora2_avatar", function()
+        return client:Sora2Avatar(nil):list({}, nil)
+      end, "id", _live_id)
+    end
+
+    -- Bootstrap entity data from existing test data.
+    local sora2_avatar_ref01_data_raw = vs.items(helpers.to_map(
+      vs.getpath(setup.data, "existing.sora2_avatar")))
+    local sora2_avatar_ref01_data = nil
+    if #sora2_avatar_ref01_data_raw > 0 then
+      sora2_avatar_ref01_data = helpers.to_map(sora2_avatar_ref01_data_raw[1][2])
+    end
+
+    if setup.live then
+      runner.live_pace()
+    end
+    -- LIST
+    local sora2_avatar_ref01_ent = client:Sora2Avatar(nil)
+    local sora2_avatar_ref01_match = {}
+
+    local sora2_avatar_ref01_list_result, err = sora2_avatar_ref01_ent:list(sora2_avatar_ref01_match, nil)
+    assert.is_nil(err)
+    assert.is_table(sora2_avatar_ref01_list_result)
+
+    if setup.live then
+      runner.live_pace()
+    end
+    -- LOAD
+    local sora2_avatar_ref01_match_dt0 = {
+      id = sora2_avatar_ref01_data["id"],
+    }
+    local sora2_avatar_ref01_data_dt0_loaded, err = sora2_avatar_ref01_ent:load(sora2_avatar_ref01_match_dt0, nil)
+    assert.is_nil(err)
+    local sora2_avatar_ref01_data_dt0_load_result = helpers.to_map(type(sora2_avatar_ref01_data_dt0_loaded) == 'table' and sora2_avatar_ref01_data_dt0_loaded.data_get and sora2_avatar_ref01_data_dt0_loaded:data_get() or sora2_avatar_ref01_data_dt0_loaded)
+    assert.is_not_nil(sora2_avatar_ref01_data_dt0_load_result)
+    assert.is_true(runner.live_same_id(sora2_avatar_ref01_data_dt0_load_result["id"], sora2_avatar_ref01_data["id"]))
+
+      return
+    end
+
     local client = setup.client
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- CREATE
     local sora2_avatar_ref01_ent = client:Sora2Avatar(nil)
     local sora2_avatar_ref01_data = helpers.to_map(vs.getprop(
@@ -167,6 +220,9 @@ describe("Sora2AvatarEntity", function()
     assert.is_not_nil(sora2_avatar_ref01_data)
     assert.is_not_nil(sora2_avatar_ref01_data["id"])
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LIST
     local sora2_avatar_ref01_match = {}
 
@@ -179,6 +235,9 @@ describe("Sora2AvatarEntity", function()
       { id = sora2_avatar_ref01_data["id"] })
     assert.is_false(vs.isempty(found_item))
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- UPDATE
     local sora2_avatar_ref01_data_up0_up = {
       id = sora2_avatar_ref01_data["id"],
@@ -192,9 +251,12 @@ describe("Sora2AvatarEntity", function()
     assert.is_nil(err)
     local sora2_avatar_ref01_resdata_up0 = helpers.to_map(type(sora2_avatar_ref01_resdata_up0_result) == 'table' and sora2_avatar_ref01_resdata_up0_result.data_get and sora2_avatar_ref01_resdata_up0_result:data_get() or sora2_avatar_ref01_resdata_up0_result)
     assert.is_not_nil(sora2_avatar_ref01_resdata_up0)
-    assert.are.equal(sora2_avatar_ref01_resdata_up0["id"], sora2_avatar_ref01_data_up0_up["id"])
+    assert.is_true(runner.live_same_id(sora2_avatar_ref01_resdata_up0["id"], sora2_avatar_ref01_data_up0_up["id"]))
     assert.are.equal(sora2_avatar_ref01_resdata_up0[sora2_avatar_ref01_markdef_up0_name], sora2_avatar_ref01_markdef_up0_value)
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LOAD
     local sora2_avatar_ref01_match_dt0 = {
       id = sora2_avatar_ref01_data["id"],
@@ -203,7 +265,7 @@ describe("Sora2AvatarEntity", function()
     assert.is_nil(err)
     local sora2_avatar_ref01_data_dt0_load_result = helpers.to_map(type(sora2_avatar_ref01_data_dt0_loaded) == 'table' and sora2_avatar_ref01_data_dt0_loaded.data_get and sora2_avatar_ref01_data_dt0_loaded:data_get() or sora2_avatar_ref01_data_dt0_loaded)
     assert.is_not_nil(sora2_avatar_ref01_data_dt0_load_result)
-    assert.are.equal(sora2_avatar_ref01_data_dt0_load_result["id"], sora2_avatar_ref01_data["id"])
+    assert.is_true(runner.live_same_id(sora2_avatar_ref01_data_dt0_load_result["id"], sora2_avatar_ref01_data["id"]))
 
   end)
 end)

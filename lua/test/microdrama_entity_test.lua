@@ -44,6 +44,18 @@ describe("MicrodramaEntity", function()
         return
       end
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" then
+      print("LIVE STEP {\"id\":\"microdrama.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/microdrama/episodes/{episode_id}/approve\"}")
+      print("LIVE STEP {\"id\":\"microdrama.update.1\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs PATCH /api/microdrama/episodes/{episode_id}\"}")
+      pending("Live coverage incomplete: microdrama.create.0 excluded (GET-only live run: needs POST /api/microdrama/episodes/{episode_id}/approve); microdrama.update.1 excluded (GET-only live run: needs PATCH /api/microdrama/episodes/{episode_id})")
+      return
+    end
+
+    if setup.live then
+      pending("Live coverage incomplete: the flow has no step to run")
+      return
+    end
+
     local client = setup.client
 
     -- Bootstrap entity data from existing test data.

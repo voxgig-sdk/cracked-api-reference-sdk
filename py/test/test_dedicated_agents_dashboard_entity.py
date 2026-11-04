@@ -143,6 +143,8 @@ class TestDedicatedAgentsDashboardEntity:
         if len(dedicated_agents_dashboard_ref01_data_raw) > 0:
             dedicated_agents_dashboard_ref01_data = helpers.to_map(dedicated_agents_dashboard_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LIST
         dedicated_agents_dashboard_ref01_ent = client.DedicatedAgentsDashboard(None)
         dedicated_agents_dashboard_ref01_match = {}

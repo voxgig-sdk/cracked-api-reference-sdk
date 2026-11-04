@@ -154,6 +154,35 @@ describe("AdminUserViewEntity", function()
         return
       end
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" then
+      print("LIVE STEP {\"id\":\"admin_user_view.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/admin/users/{user_id}/convert-to-enterprise\"}")
+      print("LIVE STEP {\"id\":\"admin_user_view.update.2\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs PUT /api/admin/users/{user_id}\"}")
+      print("LIVE STEP {\"id\":\"admin_user_view.remove.3\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs DELETE /api/admin/users/{user_id}\"}")
+      print("LIVE STEP {\"id\":\"admin_user_view.list.4\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: checks a removal this run does not make\"}")
+    local client = setup.client
+
+    -- Bootstrap entity data from existing test data.
+    local admin_user_view_ref01_data_raw = vs.items(helpers.to_map(
+      vs.getpath(setup.data, "existing.admin_user_view")))
+    local admin_user_view_ref01_data = nil
+    if #admin_user_view_ref01_data_raw > 0 then
+      admin_user_view_ref01_data = helpers.to_map(admin_user_view_ref01_data_raw[1][2])
+    end
+
+    if setup.live then
+      runner.live_pace()
+    end
+    -- LIST
+    local admin_user_view_ref01_ent = client:AdminUserView(nil)
+    local admin_user_view_ref01_match = {}
+
+    local admin_user_view_ref01_list_result, err = admin_user_view_ref01_ent:list(admin_user_view_ref01_match, nil)
+    assert.is_nil(err)
+    assert.is_table(admin_user_view_ref01_list_result)
+
+      return
+    end
+
     if setup.live then
       for _, _live_key in ipairs({"user01"}) do
         if setup.synthetic_only or setup.idmap[_live_key] == nil then
@@ -163,6 +192,9 @@ describe("AdminUserViewEntity", function()
     end
     local client = setup.client
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- CREATE
     local admin_user_view_ref01_ent = client:AdminUserView(nil)
     local admin_user_view_ref01_data = helpers.to_map(vs.getprop(
@@ -175,6 +207,9 @@ describe("AdminUserViewEntity", function()
     assert.is_not_nil(admin_user_view_ref01_data)
     assert.is_not_nil(admin_user_view_ref01_data["id"])
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LIST
     local admin_user_view_ref01_match = {}
 
@@ -187,6 +222,9 @@ describe("AdminUserViewEntity", function()
       { id = admin_user_view_ref01_data["id"] })
     assert.is_false(vs.isempty(found_item))
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- UPDATE
     local admin_user_view_ref01_data_up0_up = {
       id = admin_user_view_ref01_data["id"],
@@ -200,9 +238,12 @@ describe("AdminUserViewEntity", function()
     assert.is_nil(err)
     local admin_user_view_ref01_resdata_up0 = helpers.to_map(type(admin_user_view_ref01_resdata_up0_result) == 'table' and admin_user_view_ref01_resdata_up0_result.data_get and admin_user_view_ref01_resdata_up0_result:data_get() or admin_user_view_ref01_resdata_up0_result)
     assert.is_not_nil(admin_user_view_ref01_resdata_up0)
-    assert.are.equal(admin_user_view_ref01_resdata_up0["id"], admin_user_view_ref01_data_up0_up["id"])
+    assert.is_true(runner.live_same_id(admin_user_view_ref01_resdata_up0["id"], admin_user_view_ref01_data_up0_up["id"]))
     assert.are.equal(admin_user_view_ref01_resdata_up0[admin_user_view_ref01_markdef_up0_name], admin_user_view_ref01_markdef_up0_value)
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- REMOVE
     local admin_user_view_ref01_match_rm0 = {
       id = admin_user_view_ref01_data["id"],
@@ -210,6 +251,9 @@ describe("AdminUserViewEntity", function()
     local _, err = admin_user_view_ref01_ent:remove(admin_user_view_ref01_match_rm0, nil)
     assert.is_nil(err)
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LIST
     local admin_user_view_ref01_match_rt0 = {}
 

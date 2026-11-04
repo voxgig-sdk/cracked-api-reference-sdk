@@ -200,6 +200,43 @@ func TestAdminUserViewEntity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" {
+			t.Log("LIVE STEP {\"id\":\"admin_user_view.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/admin/users/{user_id}/convert-to-enterprise\"}")
+			t.Log("LIVE STEP {\"id\":\"admin_user_view.update.2\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs PUT /api/admin/users/{user_id}\"}")
+			t.Log("LIVE STEP {\"id\":\"admin_user_view.remove.3\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs DELETE /api/admin/users/{user_id}\"}")
+			t.Log("LIVE STEP {\"id\":\"admin_user_view.list.4\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: checks a removal this run does not make\"}")
+		client := setup.client
+		_ = client
+
+		// Bootstrap entity data from existing test data (no create step in flow).
+		adminUserViewRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.admin_user_view")))
+		var adminUserViewRef01Data map[string]any
+		if len(adminUserViewRef01DataRaw) > 0 {
+			adminUserViewRef01Data = core.ToMapAny(adminUserViewRef01DataRaw[0][1])
+		}
+		// Discard guards against Go's unused-var check when the flow's steps
+		// happen not to consume the bootstrap data (e.g. list-only flows).
+		_ = adminUserViewRef01Data
+
+		if setup.live {
+			livePace()
+		}
+		// LIST
+		adminUserViewRef01Ent := client.AdminUserView(nil)
+		adminUserViewRef01Match := map[string]any{}
+
+		adminUserViewRef01ListResult, err := adminUserViewRef01Ent.List(adminUserViewRef01Match, nil)
+		if err != nil {
+			t.Fatalf("list failed: %v", err)
+		}
+		_, adminUserViewRef01ListOk := adminUserViewRef01ListResult.([]any)
+		if !adminUserViewRef01ListOk {
+			t.Fatalf("expected list result to be an array, got %T", adminUserViewRef01ListResult)
+		}
+
+		return
+		}
+
 		if setup.live {
 			for _, _liveKey := range []string{"user01"} {
 				if setup.syntheticOnly || setup.idmap[_liveKey] == nil {
@@ -210,6 +247,9 @@ func TestAdminUserViewEntity(t *testing.T) {
 		client := setup.client
 		_ = client
 
+		if setup.live {
+			livePace()
+		}
 		// CREATE
 		adminUserViewRef01Ent := client.AdminUserView(nil)
 		adminUserViewRef01Data := core.ToMapAny(vs.GetProp(
@@ -228,6 +268,9 @@ func TestAdminUserViewEntity(t *testing.T) {
 			t.Fatal("expected created entity to have an id")
 		}
 
+		if setup.live {
+			livePace()
+		}
 		// LIST
 		adminUserViewRef01Match := map[string]any{}
 
@@ -245,6 +288,9 @@ func TestAdminUserViewEntity(t *testing.T) {
 			t.Fatal("expected to find created entity in list")
 		}
 
+		if setup.live {
+			livePace()
+		}
 		// UPDATE
 		adminUserViewRef01DataUp0Up := map[string]any{
 			"id": adminUserViewRef01Data["id"],
@@ -262,13 +308,16 @@ func TestAdminUserViewEntity(t *testing.T) {
 		if adminUserViewRef01ResdataUp0 == nil {
 			t.Fatal("expected update result to be a map")
 		}
-		if adminUserViewRef01ResdataUp0["id"] != adminUserViewRef01DataUp0Up["id"] {
+		if !liveSameId(adminUserViewRef01ResdataUp0["id"], adminUserViewRef01DataUp0Up["id"]) {
 			t.Fatal("expected update result id to match")
 		}
 		if adminUserViewRef01ResdataUp0[adminUserViewRef01MarkdefUp0Name] != adminUserViewRef01MarkdefUp0Value {
 			t.Fatalf("expected %s to be updated, got %v", adminUserViewRef01MarkdefUp0Name, adminUserViewRef01ResdataUp0[adminUserViewRef01MarkdefUp0Name])
 		}
 
+		if setup.live {
+			livePace()
+		}
 		// REMOVE
 		adminUserViewRef01MatchRm0 := map[string]any{
 			"id": adminUserViewRef01Data["id"],
@@ -278,6 +327,9 @@ func TestAdminUserViewEntity(t *testing.T) {
 			t.Fatalf("remove failed: %v", err)
 		}
 
+		if setup.live {
+			livePace()
+		}
 		// LIST
 		adminUserViewRef01MatchRt0 := map[string]any{}
 

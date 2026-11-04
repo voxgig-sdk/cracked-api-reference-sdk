@@ -164,6 +164,9 @@ describe("WinningAdEntity", function()
       winning_ad_ref01_data = helpers.to_map(winning_ad_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LIST
     local winning_ad_ref01_ent = client:WinningAd(nil)
     local winning_ad_ref01_match = {}

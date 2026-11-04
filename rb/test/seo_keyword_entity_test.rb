@@ -181,6 +181,7 @@ class SeoKeywordEntityTest < Minitest::Test
       seo_keyword_ref01_data = Helpers.to_map(seo_keyword_ref01_data_raw[0][1])
     end
 
+    Runner.live_pace if setup[:live]
     # LIST
     seo_keyword_ref01_ent = client.SeoKeyword(nil)
     seo_keyword_ref01_match = {}

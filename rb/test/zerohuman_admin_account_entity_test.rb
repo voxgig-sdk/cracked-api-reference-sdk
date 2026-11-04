@@ -181,6 +181,7 @@ class ZerohumanAdminAccountEntityTest < Minitest::Test
       zerohuman_admin_account_ref01_data = Helpers.to_map(zerohuman_admin_account_ref01_data_raw[0][1])
     end
 
+    Runner.live_pace if setup[:live]
     # LIST
     zerohuman_admin_account_ref01_ent = client.ZerohumanAdminAccount(nil)
     zerohuman_admin_account_ref01_match = {}

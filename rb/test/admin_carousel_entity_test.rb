@@ -41,8 +41,32 @@ class AdminCarouselEntityTest < Minitest::Test
         return
       end
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE"
+      puts "LIVE STEP {\"id\":\"admin_carousel.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/admin/carousels/slideshow-import/{batch_id}/state\"}"
+      puts "LIVE STEP {\"id\":\"admin_carousel.update.1\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs PUT /api/admin/carousels/production-prompts/{fmt}\"}"
     client = setup[:client]
 
+    # Bootstrap entity data from existing test data.
+    admin_carousel_ref01_data_raw = Vs.items(Helpers.to_map(
+      Vs.getpath(setup[:data], "existing.admin_carousel")))
+    admin_carousel_ref01_data = nil
+    if admin_carousel_ref01_data_raw.length > 0
+      admin_carousel_ref01_data = Helpers.to_map(admin_carousel_ref01_data_raw[0][1])
+    end
+
+    Runner.live_pace if setup[:live]
+    # LOAD
+    admin_carousel_ref01_ent = client.AdminCarousel(nil)
+    admin_carousel_ref01_match_dt0 = {}
+    admin_carousel_ref01_data_dt0_loaded = admin_carousel_ref01_ent.load(admin_carousel_ref01_match_dt0, nil)
+    assert !admin_carousel_ref01_data_dt0_loaded.nil?
+
+      return
+    end
+
+    client = setup[:client]
+
+    Runner.live_pace if setup[:live]
     # CREATE
     admin_carousel_ref01_ent = client.AdminCarousel(nil)
     admin_carousel_ref01_data = Helpers.to_map(Vs.getprop(
@@ -52,6 +76,7 @@ class AdminCarouselEntityTest < Minitest::Test
     admin_carousel_ref01_data = Helpers.to_map(admin_carousel_ref01_data_result.respond_to?(:data_get) ? admin_carousel_ref01_data_result.data_get : admin_carousel_ref01_data_result)
     assert !admin_carousel_ref01_data.nil?
 
+    Runner.live_pace if setup[:live]
     # UPDATE
     admin_carousel_ref01_data_up0_up = {
     }
@@ -65,6 +90,7 @@ class AdminCarouselEntityTest < Minitest::Test
     assert !admin_carousel_ref01_resdata_up0.nil?
     assert_equal admin_carousel_ref01_resdata_up0[admin_carousel_ref01_markdef_up0_name], admin_carousel_ref01_markdef_up0_value
 
+    Runner.live_pace if setup[:live]
     # LOAD
     admin_carousel_ref01_match_dt0 = {}
     admin_carousel_ref01_data_dt0_loaded = admin_carousel_ref01_ent.load(admin_carousel_ref01_match_dt0, nil)

@@ -42,6 +42,10 @@ class TestBulkTikTokStatsUpdateEntity:
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
                 return
+        if setup["live"] and os.environ.get("VOXGIG_GETONLY_GUARD") == "TRUE":
+            print("LIVE STEP {\"id\":\"bulk_tik_tok_stats_update.update.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs PATCH /api/upload-post-agents/bulk/tiktok-stats\"}")
+            pytest.skip("Live coverage incomplete: bulk_tik_tok_stats_update.update.0 excluded (GET-only live run: needs PATCH /api/upload-post-agents/bulk/tiktok-stats)")
+
         client = setup["client"]
 
         # Bootstrap entity data from existing test data.
@@ -51,6 +55,8 @@ class TestBulkTikTokStatsUpdateEntity:
         if len(bulk_tik_tok_stats_update_ref01_data_raw) > 0:
             bulk_tik_tok_stats_update_ref01_data = helpers.to_map(bulk_tik_tok_stats_update_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # UPDATE
         bulk_tik_tok_stats_update_ref01_ent = client.BulkTikTokStatsUpdate(None)
         bulk_tik_tok_stats_update_ref01_data_up0_up = {

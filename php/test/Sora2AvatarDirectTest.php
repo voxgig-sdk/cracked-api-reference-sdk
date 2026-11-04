@@ -33,14 +33,19 @@ class Sora2AvatarDirectTest extends TestCase
             $this->markTestSkipped($_reason ?? "skipped via sdk-test-control.json");
             return;
         }
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         $client = $setup["client"];
 
         $params = [];
+        $query = [];
 
         $result = $client->direct([
             "path" => "api/admin/sora2-avatars",
             "method" => "GET",
             "params" => $params,
+            "query" => $query,
         ]);
         if ($setup["live"]) {
             if (!self::liveOk($result)) {
@@ -68,6 +73,9 @@ class Sora2AvatarDirectTest extends TestCase
             $this->markTestSkipped($_reason ?? "skipped via sdk-test-control.json");
             return;
         }
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         $client = $setup["client"];
 
         $params = [];
@@ -89,7 +97,7 @@ class Sora2AvatarDirectTest extends TestCase
                 Runner::live_empty("The account has no sora2_avatar record to load");
             }
             $first = is_array($records[0]) ? $records[0] : [];
-            $found = $first["id"] ?? $first["id"] ?? null;
+            $found = $first["id"] ?? null;
             if (null === $found) {
                 Runner::live_miss(self::LIVE_STRICT, "Live load blocked: discovery returned no usable identity");
             }

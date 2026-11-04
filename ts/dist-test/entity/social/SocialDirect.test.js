@@ -32,30 +32,6 @@ const utility_1 = require("../../utility");
         const { client, calls } = setup;
         const params = {};
         const query = {};
-        if (setup.live) {
-            const listResult = await client.direct({
-                path: 'social/connections',
-                method: 'GET',
-                params: {},
-            });
-            if (!listResult.ok || listResult.status < 200 || listResult.status >= 300) {
-                return void (0, utility_1.liveMiss)(t, LIVE_STRICT, 'Live list discovery failed: ' + (0, utility_1.describeLive)(listResult));
-            }
-            const listArr = unwrapListData(listResult.data);
-            if (null == listArr) {
-                return void (0, utility_1.liveMiss)(t, LIVE_STRICT, 'Live list discovery returned no list: ' + (0, utility_1.describeLive)(listResult));
-            }
-            if (0 === listArr.length) {
-                return void (0, utility_1.liveEmpty)(t, 'The account has no social record to load');
-            }
-            const candidateId = listArr[0]?.id ?? listArr[0]?.id;
-            if (null == candidateId) {
-                return void (0, utility_1.liveMiss)(t, LIVE_STRICT, 'Live load blocked: discovery returned no usable identity');
-            }
-            params.id = candidateId;
-        }
-        else {
-        }
         const result = await client.direct({
             path: 'social/instagram/auth',
             method: 'GET',

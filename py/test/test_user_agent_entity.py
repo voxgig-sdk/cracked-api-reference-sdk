@@ -37,7 +37,7 @@ class TestUserAgentEntity:
         client = CrackedApiReferenceSDK.test(
             None, {"feature": {"validate": {"active": True}}})
         with pytest.raises(Exception) as err:
-            client.UserAgent(None).list({"id": 1}, None)
+            client.UserAgent(None).list({"user_id": 1}, None)
         assert "validate_failed" == getattr(err.value, "code", None)
 
     def test_should_run_basic_flow(self):
@@ -46,11 +46,48 @@ class TestUserAgentEntity:
         # multiple ops; skipping any one skips the whole flow (steps depend
         # on each other).
         _live = setup.get("live", False)
-        for _op in []:
+        for _op in ["create", "list"]:
             _skip, _reason = runner.is_control_skipped("entityOp", "user_agent." + _op, "live" if _live else "unit")
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
                 return
+        if setup["live"] and os.environ.get("VOXGIG_GETONLY_GUARD") == "TRUE":
+            print("LIVE STEP {\"id\":\"user_agent.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/admin/users/{user_id}/agents\"}")
+            return self._run_get_only_flow(setup)
+
+        if setup["live"]:
+            for _live_key in ["user01"]:
+                if setup.get("synthetic_only") or setup["idmap"].get(_live_key) is None:
+                    runner.live_miss(LIVE_STRICT, f"Live entity test blocked: needs {_live_key} via CRACKED_API_REFERENCE_TEST_USER_AGENT_ENTID")
+        client = setup["client"]
+
+        if setup["live"]:
+            runner.live_pace()
+        # CREATE
+        user_agent_ref01_ent = client.UserAgent(None)
+        user_agent_ref01_data = helpers.to_map(vs.getprop(
+            vs.getpath(setup["data"], "new.user_agent"), "user_agent_ref01"))
+        user_agent_ref01_data["user_id"] = setup["idmap"]["user01"]
+
+        user_agent_ref01_data = helpers.to_map(runner.entity_data(user_agent_ref01_ent.create(user_agent_ref01_data, None)))
+        assert user_agent_ref01_data is not None
+
+        if setup["live"]:
+            runner.live_pace()
+        # LIST
+        user_agent_ref01_match = {
+            "user_id": setup["idmap"]["user01"],
+        }
+
+        user_agent_ref01_list_result = user_agent_ref01_ent.list(user_agent_ref01_match, None)
+        assert isinstance(user_agent_ref01_list_result, list)
+
+
+    def _run_get_only_flow(self, setup):
+        if setup["live"]:
+            for _live_key in ["user01"]:
+                if setup.get("synthetic_only") or setup["idmap"].get(_live_key) is None:
+                    runner.live_miss(LIVE_STRICT, f"Live entity test blocked: needs {_live_key} via CRACKED_API_REFERENCE_TEST_USER_AGENT_ENTID")
         client = setup["client"]
 
         # Bootstrap entity data from existing test data.
@@ -59,6 +96,17 @@ class TestUserAgentEntity:
         user_agent_ref01_data = None
         if len(user_agent_ref01_data_raw) > 0:
             user_agent_ref01_data = helpers.to_map(user_agent_ref01_data_raw[0][1])
+
+        if setup["live"]:
+            runner.live_pace()
+        # LIST
+        user_agent_ref01_ent = client.UserAgent(None)
+        user_agent_ref01_match = {
+            "user_id": setup["idmap"]["user01"],
+        }
+
+        user_agent_ref01_list_result = user_agent_ref01_ent.list(user_agent_ref01_match, None)
+        assert isinstance(user_agent_ref01_list_result, list)
 
 
 
@@ -78,7 +126,7 @@ def _user_agent_basic_setup(extra):
 
     # Generate idmap via transform.
     idmap = vs.transform(
-        ["user_agent01", "user_agent02", "user_agent03"],
+        ["user_agent01", "user_agent02", "user_agent03", "user01", "user02", "user03"],
         {
             "`$PACK`": ["", {
                 "`$KEY`": "`$COPY`",

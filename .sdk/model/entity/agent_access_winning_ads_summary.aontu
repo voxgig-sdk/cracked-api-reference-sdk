@@ -125,7 +125,7 @@ main: kit: entity: agent_access_winning_ads_summary: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.customers`"
           }
         }
       ]

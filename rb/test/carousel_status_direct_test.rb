@@ -28,21 +28,24 @@ class CarouselStatusDirectTest < Minitest::Test
       return
     end
     if setup[:live]
-      ["carousel_status01"].each do |_live_key|
+      ["carousel01"].each do |_live_key|
         if setup[:idmap][_live_key].nil?
           Runner.live_miss(LIVE_STRICT, "Live test blocked: needs #{_live_key} via CRACKED_API_REFERENCE_TEST_CAROUSEL_STATUS_ENTID")
         end
       end
     end
+    Runner.live_pace if setup[:live]
     client = setup[:client]
 
     params = {}
-    params["id"] = setup[:live] ? setup[:idmap]["carousel_status01"] : "direct01"
+    query = {}
+    params["carousel_id"] = setup[:live] ? setup[:idmap]["carousel01"] : "direct01"
 
     result = client.direct({
-      "path" => "api/carousel/{id}/status",
+      "path" => "api/carousel/{carousel_id}/status",
       "method" => "GET",
       "params" => params,
+      "query" => query,
     })
     if setup[:live]
       unless live_ok(result)

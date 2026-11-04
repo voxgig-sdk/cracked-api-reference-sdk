@@ -51,9 +51,20 @@ class TestUserEntity:
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
                 return
+        if setup["live"] and os.environ.get("VOXGIG_GETONLY_GUARD") == "TRUE":
+            print("LIVE STEP {\"id\":\"user.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/admin/users/{user_id}/fix-auto-schedule-by-date\"}")
+            print("LIVE STEP {\"id\":\"user.update.1\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs PUT /api/admin/users/{user_id}/auto-schedule\"}")
+            print("LIVE STEP {\"id\":\"user.load.2\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: reads a record only user.create.0 gives\"}")
+            pytest.skip("Live coverage incomplete: user.create.0 excluded (GET-only live run: needs POST /api/admin/users/{user_id}/fix-auto-schedule-by-date); user.update.1 excluded (GET-only live run: needs PUT /api/admin/users/{user_id}/auto-schedule); user.load.2 excluded (GET-only live run: reads a record only user.create.0 gives)")
+
         if setup["live"]:
-            runner.live_miss(LIVE_STRICT, "Live entity test blocked: " + "the flow loads a user record it has no list to find")
+            for _live_key in ["user01"]:
+                if setup.get("synthetic_only") or setup["idmap"].get(_live_key) is None:
+                    runner.live_miss(LIVE_STRICT, f"Live entity test blocked: needs {_live_key} via CRACKED_API_REFERENCE_TEST_USER_ENTID")
         client = setup["client"]
+        if setup["live"]:
+            runner.live_existing(setup, LIVE_STRICT, "user",
+                                 lambda: [{"id": setup["idmap"].get("user01")}], "userId", setup["idmap"].get("user01"))
 
         # Bootstrap entity data from existing test data.
         user_ref01_data_raw = vs.items(helpers.to_map(
@@ -62,15 +73,17 @@ class TestUserEntity:
         if len(user_ref01_data_raw) > 0:
             user_ref01_data = helpers.to_map(user_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LOAD
         user_ref01_ent = client.User(None)
         user_ref01_match_dt0 = {
-            "id": user_ref01_data["id"],
+            "id": user_ref01_data["userId"],
         }
         user_ref01_data_dt0_loaded = user_ref01_ent.load(user_ref01_match_dt0, None)
         user_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(user_ref01_data_dt0_loaded))
         assert user_ref01_data_dt0_load_result is not None
-        assert user_ref01_data_dt0_load_result["id"] == user_ref01_data["id"]
+        assert runner.live_same_id(user_ref01_data_dt0_load_result.get("userId"), user_ref01_data["userId"])
 
 
 
@@ -82,6 +95,10 @@ def _user_basic_setup(extra):
         entity_data_source = f.read()
 
     entity_data = json.loads(entity_data_source)
+
+    for rec in ((entity_data.get("existing") or {}).get("user") or {}).values():
+        if isinstance(rec, dict) and rec.get("id") is not None:
+            rec["userId"] = rec["id"]
 
     options = {}
     options["entity"] = entity_data.get("existing")

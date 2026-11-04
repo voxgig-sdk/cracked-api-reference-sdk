@@ -167,6 +167,7 @@ class TopPostEntityTest < Minitest::Test
       top_post_ref01_data = Helpers.to_map(top_post_ref01_data_raw[0][1])
     end
 
+    Runner.live_pace if setup[:live]
     # LIST
     top_post_ref01_ent = client.TopPost(nil)
     top_post_ref01_match = {}

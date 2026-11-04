@@ -51,6 +51,7 @@ class GenerateSora2PromptEntityTest < Minitest::Test
       generate_sora2_prompt_ref01_data = Helpers.to_map(generate_sora2_prompt_ref01_data_raw[0][1])
     end
 
+    Runner.live_pace if setup[:live]
     # LOAD
     generate_sora2_prompt_ref01_ent = client.GenerateSora2Prompt(nil)
     generate_sora2_prompt_ref01_match_dt0 = {}

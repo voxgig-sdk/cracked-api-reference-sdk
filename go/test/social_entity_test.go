@@ -199,9 +199,78 @@ func TestSocialEntity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" {
+			t.Log("LIVE STEP {\"id\":\"social.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /social/instagram/exchange\"}")
+			t.Log("LIVE STEP {\"id\":\"social.remove.3\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs DELETE /social/connections/{platform}\"}")
+			t.Log("LIVE STEP {\"id\":\"social.list.4\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: checks a removal this run does not make\"}")
+		client := setup.client
+		_ = client
+		if setup.live {
+			var _liveId any
+			if !setup.syntheticOnly {
+				_liveId = setup.idmap["social01"]
+			}
+			livePace()
+			liveExisting(t, socialEntityLiveStrict, setup.data, "social", "id", _liveId,
+				func() (any, error) {
+					return client.Social(nil).List(map[string]any{}, nil)
+				})
+		}
+
+		// Bootstrap entity data from existing test data (no create step in flow).
+		socialRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.social")))
+		var socialRef01Data map[string]any
+		if len(socialRef01DataRaw) > 0 {
+			socialRef01Data = core.ToMapAny(socialRef01DataRaw[0][1])
+		}
+		// Discard guards against Go's unused-var check when the flow's steps
+		// happen not to consume the bootstrap data (e.g. list-only flows).
+		_ = socialRef01Data
+
+		if setup.live {
+			livePace()
+		}
+		// LIST
+		socialRef01Ent := client.Social(nil)
+		socialRef01Match := map[string]any{}
+
+		socialRef01ListResult, err := socialRef01Ent.List(socialRef01Match, nil)
+		if err != nil {
+			t.Fatalf("list failed: %v", err)
+		}
+		_, socialRef01ListOk := socialRef01ListResult.([]any)
+		if !socialRef01ListOk {
+			t.Fatalf("expected list result to be an array, got %T", socialRef01ListResult)
+		}
+
+		if setup.live {
+			livePace()
+		}
+		// LOAD
+		socialRef01MatchDt0 := map[string]any{
+			"id": socialRef01Data["id"],
+		}
+		socialRef01DataDt0Loaded, err := socialRef01Ent.Load(socialRef01MatchDt0, nil)
+		if err != nil {
+			t.Fatalf("load failed: %v", err)
+		}
+		socialRef01DataDt0LoadResult := core.ToMapAny(entityData(socialRef01DataDt0Loaded))
+		if socialRef01DataDt0LoadResult == nil {
+			t.Fatal("expected load result to be a map")
+		}
+		if !liveSameId(socialRef01DataDt0LoadResult["id"], socialRef01Data["id"]) {
+			t.Fatal("expected load result id to match")
+		}
+
+		return
+		}
+
 		client := setup.client
 		_ = client
 
+		if setup.live {
+			livePace()
+		}
 		// CREATE
 		socialRef01Ent := client.Social(nil)
 		socialRef01Data := core.ToMapAny(vs.GetProp(
@@ -219,6 +288,9 @@ func TestSocialEntity(t *testing.T) {
 			t.Fatal("expected created entity to have an id")
 		}
 
+		if setup.live {
+			livePace()
+		}
 		// LIST
 		socialRef01Match := map[string]any{}
 
@@ -236,6 +308,9 @@ func TestSocialEntity(t *testing.T) {
 			t.Fatal("expected to find created entity in list")
 		}
 
+		if setup.live {
+			livePace()
+		}
 		// LOAD
 		socialRef01MatchDt0 := map[string]any{
 			"id": socialRef01Data["id"],
@@ -248,10 +323,13 @@ func TestSocialEntity(t *testing.T) {
 		if socialRef01DataDt0LoadResult == nil {
 			t.Fatal("expected load result to be a map")
 		}
-		if socialRef01DataDt0LoadResult["id"] != socialRef01Data["id"] {
+		if !liveSameId(socialRef01DataDt0LoadResult["id"], socialRef01Data["id"]) {
 			t.Fatal("expected load result id to match")
 		}
 
+		if setup.live {
+			livePace()
+		}
 		// REMOVE
 		socialRef01MatchRm0 := map[string]any{
 			"id": socialRef01Data["id"],
@@ -261,6 +339,9 @@ func TestSocialEntity(t *testing.T) {
 			t.Fatalf("remove failed: %v", err)
 		}
 
+		if setup.live {
+			livePace()
+		}
 		// LIST
 		socialRef01MatchRt0 := map[string]any{}
 

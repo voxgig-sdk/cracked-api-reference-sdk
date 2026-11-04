@@ -31,6 +31,11 @@ describe("AdminGeneratedVideoDirect", function()
       pending(_reason or "skipped via sdk-test-control.json")
       return
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" and setup.idmap["user01"] == nil then
+      print("LIVE STEP {\"id\":\"direct-list-admin_generated_video\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs user01, which only POST /api/admin/users/{user_id}/fix-auto-schedule-by-date gives\"}")
+      pending("Live coverage incomplete: direct-list-admin_generated_video excluded (GET-only live run: needs user01, which only POST /api/admin/users/{user_id}/fix-auto-schedule-by-date gives)")
+      return
+    end
     if setup.live then
       for _, _live_key in ipairs({"user01"}) do
         if setup.idmap[_live_key] == nil then
@@ -38,9 +43,13 @@ describe("AdminGeneratedVideoDirect", function()
         end
       end
     end
+    if setup.live then
+      runner.live_pace()
+    end
     local client = setup.client
 
     local params = {}
+    local query = {}
     if setup.live then
       params["user_id"] = setup.idmap["user01"]
     else
@@ -51,6 +60,7 @@ describe("AdminGeneratedVideoDirect", function()
       path = "api/admin/users/{user_id}/generated-videos",
       method = "GET",
       params = params,
+      query = query,
     })
     if setup.live then
       if not live_ok(result, err) then

@@ -44,8 +44,17 @@ describe("RetryWebsiteScrapeEntity", function()
         return
       end
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" then
+      print("LIVE STEP {\"id\":\"retry_website_scrape.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/onboarding-v6/retry-scrape\"}")
+      pending("Live coverage incomplete: retry_website_scrape.create.0 excluded (GET-only live run: needs POST /api/onboarding-v6/retry-scrape)")
+      return
+    end
+
     local client = setup.client
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- CREATE
     local retry_website_scrape_ref01_ent = client:RetryWebsiteScrape(nil)
     local retry_website_scrape_ref01_data = helpers.to_map(vs.getprop(

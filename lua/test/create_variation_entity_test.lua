@@ -44,8 +44,17 @@ describe("CreateVariationEntity", function()
         return
       end
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" then
+      print("LIVE STEP {\"id\":\"create_variation.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/video-variation/create-hook\"}")
+      pending("Live coverage incomplete: create_variation.create.0 excluded (GET-only live run: needs POST /api/video-variation/create-hook)")
+      return
+    end
+
     local client = setup.client
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- CREATE
     local create_variation_ref01_ent = client:CreateVariation(nil)
     local create_variation_ref01_data = helpers.to_map(vs.getprop(

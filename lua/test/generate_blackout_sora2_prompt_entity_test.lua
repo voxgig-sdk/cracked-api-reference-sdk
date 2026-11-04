@@ -44,8 +44,17 @@ describe("GenerateBlackoutSora2PromptEntity", function()
         return
       end
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" then
+      print("LIVE STEP {\"id\":\"generate_blackout_sora2_prompt.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/core/generate-blackout-sora2-prompt\"}")
+      pending("Live coverage incomplete: generate_blackout_sora2_prompt.create.0 excluded (GET-only live run: needs POST /api/core/generate-blackout-sora2-prompt)")
+      return
+    end
+
     local client = setup.client
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- CREATE
     local generate_blackout_sora2_prompt_ref01_ent = client:GenerateBlackoutSora2Prompt(nil)
     local generate_blackout_sora2_prompt_ref01_data = helpers.to_map(vs.getprop(

@@ -143,6 +143,8 @@ class TestProductDashboardEntity:
         if len(product_dashboard_ref01_data_raw) > 0:
             product_dashboard_ref01_data = helpers.to_map(product_dashboard_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LIST
         product_dashboard_ref01_ent = client.ProductDashboard(None)
         product_dashboard_ref01_match = {}

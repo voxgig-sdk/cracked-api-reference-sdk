@@ -54,6 +54,9 @@ describe("LandingStatusEntity", function()
       landing_status_ref01_data = helpers.to_map(landing_status_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LOAD
     local landing_status_ref01_ent = client:LandingStatus(nil)
     local landing_status_ref01_match_dt0 = {}

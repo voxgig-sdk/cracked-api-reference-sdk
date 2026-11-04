@@ -30,12 +30,19 @@ class AdminCarouselDemoReviewDirectTest extends TestCase
             $this->markTestSkipped($_reason ?? "skipped via sdk-test-control.json");
             return;
         }
+        if (!empty($setup["live"]) && getenv('VOXGIG_GETONLY_GUARD') === "TRUE" && null === ($setup["idmap"]['admin_carousel_demo_review01'] ?? null)) {
+            fwrite(STDOUT, 'LIVE STEP {"id":"direct-load-admin_carousel_demo_review","state":"excluded","attempted":false,"reason":"GET-only live run: needs admin_carousel_demo_review01, which only POST /api/admin/carousels/demo-reviews/{formula_id}/decision gives"}' . "\n");
+            $this->markTestSkipped('Live coverage incomplete: direct-load-admin_carousel_demo_review excluded (GET-only live run: needs admin_carousel_demo_review01, which only POST /api/admin/carousels/demo-reviews/{formula_id}/decision gives)');
+        }
         if ($setup["live"]) {
             foreach (["admin_carousel_demo_review01"] as $_liveKey) {
                 if (null === ($setup["idmap"][$_liveKey] ?? null)) {
                     Runner::live_miss(self::LIVE_STRICT, "Live test blocked: needs " . $_liveKey . " via CRACKED_API_REFERENCE_TEST_ADMIN_CAROUSEL_DEMO_REVIEW_ENTID");
                 }
             }
+        }
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
         }
         $client = $setup["client"];
 

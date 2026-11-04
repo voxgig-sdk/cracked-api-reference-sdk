@@ -29,19 +29,19 @@ const utility_1 = require("../../utility");
         const setup = directSetup([{ id: 'direct01' }, { id: 'direct02' }]);
         if ((0, utility_1.maybeSkipControl)(t, 'direct', 'direct-list-agent_post', setup.live))
             return;
-        if ((0, utility_1.skipIfMissingIds)(t, setup, ["agent_post01"], LIVE_STRICT))
+        if ((0, utility_1.skipIfMissingIds)(t, setup, ["agent01"], LIVE_STRICT))
             return;
         const { client, calls } = setup;
         const params = {};
         const query = {};
         if (setup.live) {
-            params.id = setup.idmap['agent_post01'];
+            params.agent_id = setup.idmap['agent01'];
         }
         else {
-            params.id = 'direct01';
+            params.agent_id = 'direct01';
         }
         const result = await client.direct({
-            path: 'api/admin/agents/{id}/posts',
+            path: 'api/admin/agents/{agent_id}/posts',
             method: 'GET',
             params,
             query,

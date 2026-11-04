@@ -5,93 +5,93 @@ main: kit: entity: stats_refresh_overview: {
   alias: field: {}
 
   fields: {
-    active_run: {
-      h: "Active Run"
-      n: "active_run"
-      r: false
-      t: "`$ANY`"
-    }
     aged_over_24h: {
       h: "Aged Over 24h"
       n: "aged_over_24h"
       r: true
-      t: "`$INTEGER`"
+      t: "`$BOOLEAN`"
     }
-    backlog_preview: {
-      h: "Backlog Preview"
-      n: "backlog_preview"
+    agent_id: {
+      h: "Agent Id"
+      n: "agent_id"
+      r: false
+      t: "`$STRING`"
+    }
+    agent_name: {
+      h: "Agent Name"
+      n: "agent_name"
+      r: false
+      t: "`$ANY`"
+    }
+    is_resolved: {
+      h: "Is Resolved"
+      n: "is_resolved"
       r: true
-      t: "`$ARRAY`"
+      t: "`$BOOLEAN`"
     }
-    coverage_percent: {
-      h: "Coverage Percent"
-      n: "coverage_percent"
-      r: true
-      t: "`$NUMBER`"
+    last_refresh_completed_at: {
+      h: "Last Refresh Completed At"
+      n: "last_refresh_completed_at"
+      r: false
+      t: "`$ANY`"
     }
-    customer_counts: {
-      h: "Customer Counts"
-      n: "customer_counts"
-      r: true
-      t: "`$OBJECT`"
+    latest_error_message: {
+      h: "Latest Error Message"
+      n: "latest_error_message"
+      r: false
+      t: "`$ANY`"
     }
-    date: {
-      h: "Date"
-      n: "date"
+    platform: {
+      h: "Platform"
+      n: "platform"
       r: true
       t: "`$STRING`"
     }
-    generated_at: {
-      h: "Generated At"
-      n: "generated_at"
+    post_method: {
+      h: "Post Method"
+      n: "post_method"
+      r: false
+      t: "`$ANY`"
+    }
+    post_url: {
+      h: "Post Url"
+      n: "post_url"
+      r: false
+      t: "`$ANY`"
+    }
+    posted_date_et: {
+      h: "Posted Date Et"
+      n: "posted_date_et"
       r: true
       t: "`$STRING`"
     }
-    method_counts: {
-      h: "Method Counts"
-      n: "method_counts"
-      r: true
-      t: "`$OBJECT`"
+    product_id: {
+      h: "Product Id"
+      n: "product_id"
+      r: false
+      t: "`$STRING`"
     }
-    platform_counts: {
-      h: "Platform Counts"
-      n: "platform_counts"
-      r: true
-      t: "`$OBJECT`"
+    product_name: {
+      h: "Product Name"
+      n: "product_name"
+      r: false
+      t: "`$ANY`"
     }
-    platform_units_resolved: {
-      h: "Platform Units Resolved"
-      n: "platform_units_resolved"
-      r: true
-      t: "`$INTEGER`"
+    reason_code: {
+      h: "Reason Code"
+      n: "reason_code"
+      r: false
+      t: "`$ANY`"
     }
-    platform_units_total: {
-      h: "Platform Units Total"
-      n: "platform_units_total"
+    schedule_queue_id: {
+      h: "Schedule Queue Id"
+      n: "schedule_queue_id"
       r: true
-      t: "`$INTEGER`"
+      t: "`$STRING`"
     }
-    platform_units_unresolved: {
-      h: "Platform Units Unresolved"
-      n: "platform_units_unresolved"
-      r: true
-      t: "`$INTEGER`"
-    }
-    posted_entries: {
-      h: "Posted Entries"
-      n: "posted_entries"
-      r: true
-      t: "`$INTEGER`"
-    }
-    reason_counts: {
-      h: "Reason Counts"
-      n: "reason_counts"
-      r: true
-      t: "`$OBJECT`"
-    }
-    sla_deadline_et: {
-      h: "Sla Deadline Et"
-      n: "sla_deadline_et"
+    scheduled_datetime_utc: {
+      h: "Scheduled Datetime Utc"
+      n: "scheduled_datetime_utc"
       r: true
       t: "`$STRING`"
     }
@@ -99,13 +99,19 @@ main: kit: entity: stats_refresh_overview: {
       h: "Stale After Sla"
       n: "stale_after_sla"
       r: true
-      t: "`$INTEGER`"
+      t: "`$BOOLEAN`"
     }
-    top_affected_customers: {
-      h: "Top Affected Customers"
-      n: "top_affected_customers"
+    user_email: {
+      h: "User Email"
+      n: "user_email"
       r: true
-      t: "`$ARRAY`"
+      t: "`$STRING`"
+    }
+    user_id: {
+      h: "User Id"
+      n: "user_id"
+      r: true
+      t: "`$STRING`"
     }
   }
 
@@ -153,7 +159,7 @@ main: kit: entity: stats_refresh_overview: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.backlog_preview`"
           }
         }
       ]

@@ -44,8 +44,17 @@ describe("AdvanceStepEntity", function()
         return
       end
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" then
+      print("LIVE STEP {\"id\":\"advance_step.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/onboarding-v6/advance-step\"}")
+      pending("Live coverage incomplete: advance_step.create.0 excluded (GET-only live run: needs POST /api/onboarding-v6/advance-step)")
+      return
+    end
+
     local client = setup.client
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- CREATE
     local advance_step_ref01_ent = client:AdvanceStep(nil)
     local advance_step_ref01_data = helpers.to_map(vs.getprop(

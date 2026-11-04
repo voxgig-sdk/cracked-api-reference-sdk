@@ -33,7 +33,7 @@ class CarouselStatusEntityTest extends TestCase
         $client = CrackedApiReferenceSDK::test(null, ["feature" => ["validate" => ["active" => true]]]);
         $err = null;
         try {
-            $client->CarouselStatus(null)->list(["id" => 1], null);
+            $client->CarouselStatus(null)->list(["carousel_id" => 1], null);
         } catch (\Throwable $e) {
             $err = $e;
         }
@@ -45,11 +45,18 @@ class CarouselStatusEntityTest extends TestCase
         $setup = carousel_status_basic_setup(null);
         // Per-op sdk-test-control.json skip.
         $_live = !empty($setup["live"]);
-        foreach ([] as $_op) {
+        foreach (["list"] as $_op) {
             [$_shouldSkip, $_reason] = Runner::is_control_skipped("entityOp", "carousel_status." . $_op, $_live ? "live" : "unit");
             if ($_shouldSkip) {
                 $this->markTestSkipped($_reason ?? "skipped via sdk-test-control.json");
                 return;
+            }
+        }
+        if (!empty($setup["live"])) {
+            foreach (["carousel01"] as $_liveKey) {
+                if (!empty($setup["synthetic_only"]) || null === ($setup["idmap"][$_liveKey] ?? null)) {
+                    Runner::live_miss(self::LIVE_STRICT, "Live entity test blocked: needs " . $_liveKey . " via CRACKED_API_REFERENCE_TEST_CAROUSEL_STATUS_ENTID");
+                }
             }
         }
         $client = $setup["client"];
@@ -61,6 +68,18 @@ class CarouselStatusEntityTest extends TestCase
         if (count($carousel_status_ref01_data_raw) > 0) {
             $carousel_status_ref01_data = Helpers::to_map($carousel_status_ref01_data_raw[0][1]);
         }
+
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
+        // LIST
+        $carousel_status_ref01_ent = $client->CarouselStatus(null);
+        $carousel_status_ref01_match = [
+            "carousel_id" => $setup["idmap"]["carousel01"],
+        ];
+
+        $carousel_status_ref01_list_result = $carousel_status_ref01_ent->list($carousel_status_ref01_match, null);
+        $this->assertIsArray($carousel_status_ref01_list_result);
 
     }
 }
@@ -80,7 +99,7 @@ function carousel_status_basic_setup($extra)
 
     // Generate idmap.
     $idmap = [];
-    foreach (["carousel_status01", "carousel_status02", "carousel_status03"] as $k) {
+    foreach (["carousel_status01", "carousel_status02", "carousel_status03", "carousel01", "carousel02", "carousel03"] as $k) {
         $idmap[$k] = strtoupper($k);
     }
 

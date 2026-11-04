@@ -134,6 +134,20 @@ class AgentAccessUserAgentEntityTest < Minitest::Test
     assert_operator hook.unexpected, :>, fired
   end
 
+  def test_validate_list_response
+    cfg = CrackedApiReferenceConfig.shared_config
+    unless cfg["feature"].is_a?(Hash) && cfg["feature"].key?("validate")
+      skip("feature not present in this SDK: validate")
+    end
+    opts = { "feature" => { "validate" => { "active" => true, "request" => false, "response" => true } } }
+    listed = CrackedApiReferenceSDK.test({ "entity" => { "agent_access_user_agent" => { "v1" => { "avatar" => "x", "facebookUrl" => "x", "instagramUrl" => "x", "name" => "x", "productId" => "x", "productName" => "x", "tiktokUrl" => "x", "type" => "x", "uploadPostPlatforms" => "x", "youtubeUrl" => "x" } } } }, opts).AgentAccessUserAgent(nil).list(nil, nil)
+    assert_equal ["v1"], listed.map { |ent| ent.data_get["id"] }
+    err = assert_raises(StandardError) do
+      CrackedApiReferenceSDK.test({ "entity" => { "agent_access_user_agent" => { "v1" => { "avatar" => "x", "facebookUrl" => "x", "instagramUrl" => "x", "name" => 1, "productId" => "x", "productName" => "x", "tiktokUrl" => "x", "type" => "x", "uploadPostPlatforms" => "x", "youtubeUrl" => "x" } } } }, opts).AgentAccessUserAgent(nil).list(nil, nil)
+    end
+    assert_equal "validate_failed", err.code
+  end
+
   def test_validate
     cfg = CrackedApiReferenceConfig.shared_config
     unless cfg["feature"].is_a?(Hash) && cfg["feature"].key?("validate")
@@ -167,6 +181,7 @@ class AgentAccessUserAgentEntityTest < Minitest::Test
       agent_access_user_agent_ref01_data = Helpers.to_map(agent_access_user_agent_ref01_data_raw[0][1])
     end
 
+    Runner.live_pace if setup[:live]
     # LIST
     agent_access_user_agent_ref01_ent = client.AgentAccessUserAgent(nil)
     agent_access_user_agent_ref01_match = {}

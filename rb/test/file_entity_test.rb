@@ -41,8 +41,14 @@ class FileEntityTest < Minitest::Test
         return
       end
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE"
+      puts "LIVE STEP {\"id\":\"file.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/file-upload\"}"
+      skip("Live coverage incomplete: file.create.0 excluded (GET-only live run: needs POST /api/file-upload)")
+    end
+
     client = setup[:client]
 
+    Runner.live_pace if setup[:live]
     # CREATE
     file_ref01_ent = client.File(nil)
     file_ref01_data = Helpers.to_map(Vs.getprop(

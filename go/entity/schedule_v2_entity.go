@@ -402,43 +402,9 @@ func (e *ScheduleV2Entity) CreateTyped(reqdata ScheduleV2CreateData, ctrl map[st
 
 
 
-
-func (e *ScheduleV2Entity) Update(reqdata map[string]any, ctrl map[string]any) (any, error) {
-	utility := e.utility
-	ctx := utility.MakeContext(map[string]any{
-		"opname":  "update",
-		"ctrl":    ctrl,
-		"match":   e.match,
-		"data":    e.data,
-		"reqdata": reqdata,
-	}, e.entctx)
-
-	return e.runOp(ctx, func() {
-		if ctx.Result != nil {
-			if ctx.Result.Resmatch != nil {
-				e.match = ctx.Result.Resmatch
-			}
-			if ctx.Result.Resdata != nil {
-				e.data = map[string]any{}
-				if data := core.ToMapAny(vs.Clone(ctx.Result.Resdata)); data != nil {
-					e.data = data
-				}
-			}
-		}
-	})
+func (e *ScheduleV2Entity) Update(_ map[string]any, _ map[string]any) (any, error) {
+	return core.UnsupportedOp("update", e.name)
 }
-
-// UpdateTyped is the statically-typed variant of Update: it takes an
-// ScheduleV2UpdateData and returns an ScheduleV2. It delegates to the untyped
-// Update (identical runtime) and converts at the typed boundary.
-func (e *ScheduleV2Entity) UpdateTyped(reqdata ScheduleV2UpdateData, ctrl map[string]any) (ScheduleV2, error) {
-	res, err := e.Update(asMap(reqdata), ctrl)
-	if err != nil {
-		return ScheduleV2{}, err
-	}
-	return typedFrom[ScheduleV2](res), nil
-}
-
 
 
 func (e *ScheduleV2Entity) Patch(_ map[string]any, _ map[string]any) (any, error) {

@@ -29,7 +29,7 @@ describe("UserAgentEntity", function()
       return
     end
     local client = sdk.test(nil, { feature = { validate = { active = true } } })
-    local _, err = client:UserAgent(nil):list({ ["id"] = 1 }, nil)
+    local _, err = client:UserAgent(nil):list({ ["user_id"] = 1 }, nil)
     assert.are.equal("validate_failed", type(err) == "table" and err.code or nil)
   end)
 
@@ -37,11 +37,20 @@ describe("UserAgentEntity", function()
     local setup = user_agent_basic_setup(nil)
     -- Per-op sdk-test-control.json skip.
     local _live = setup.live or false
-    for _, _op in ipairs({}) do
+    for _, _op in ipairs({"create", "list"}) do
       local _should_skip, _reason = runner.is_control_skipped("entityOp", "user_agent." .. _op, _live and "live" or "unit")
       if _should_skip then
         pending(_reason or "skipped via sdk-test-control.json")
         return
+      end
+    end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" then
+      print("LIVE STEP {\"id\":\"user_agent.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/admin/users/{user_id}/agents\"}")
+    if setup.live then
+      for _, _live_key in ipairs({"user01"}) do
+        if setup.synthetic_only or setup.idmap[_live_key] == nil then
+          runner.live_miss(pending, LIVE_STRICT, "Live entity test blocked: needs " .. _live_key .. " via CRACKED_API_REFERENCE_TEST_USER_AGENT_ENTID")
+        end
       end
     end
     local client = setup.client
@@ -53,6 +62,57 @@ describe("UserAgentEntity", function()
     if #user_agent_ref01_data_raw > 0 then
       user_agent_ref01_data = helpers.to_map(user_agent_ref01_data_raw[1][2])
     end
+
+    if setup.live then
+      runner.live_pace()
+    end
+    -- LIST
+    local user_agent_ref01_ent = client:UserAgent(nil)
+    local user_agent_ref01_match = {
+      ["user_id"] = setup.idmap["user01"],
+    }
+
+    local user_agent_ref01_list_result, err = user_agent_ref01_ent:list(user_agent_ref01_match, nil)
+    assert.is_nil(err)
+    assert.is_table(user_agent_ref01_list_result)
+
+      return
+    end
+
+    if setup.live then
+      for _, _live_key in ipairs({"user01"}) do
+        if setup.synthetic_only or setup.idmap[_live_key] == nil then
+          runner.live_miss(pending, LIVE_STRICT, "Live entity test blocked: needs " .. _live_key .. " via CRACKED_API_REFERENCE_TEST_USER_AGENT_ENTID")
+        end
+      end
+    end
+    local client = setup.client
+
+    if setup.live then
+      runner.live_pace()
+    end
+    -- CREATE
+    local user_agent_ref01_ent = client:UserAgent(nil)
+    local user_agent_ref01_data = helpers.to_map(vs.getprop(
+      vs.getpath(setup.data, "new.user_agent"), "user_agent_ref01"))
+    user_agent_ref01_data["user_id"] = setup.idmap["user01"]
+
+    local user_agent_ref01_data_result, err = user_agent_ref01_ent:create(user_agent_ref01_data, nil)
+    assert.is_nil(err)
+    user_agent_ref01_data = helpers.to_map(type(user_agent_ref01_data_result) == 'table' and user_agent_ref01_data_result.data_get and user_agent_ref01_data_result:data_get() or user_agent_ref01_data_result)
+    assert.is_not_nil(user_agent_ref01_data)
+
+    if setup.live then
+      runner.live_pace()
+    end
+    -- LIST
+    local user_agent_ref01_match = {
+      ["user_id"] = setup.idmap["user01"],
+    }
+
+    local user_agent_ref01_list_result, err = user_agent_ref01_ent:list(user_agent_ref01_match, nil)
+    assert.is_nil(err)
+    assert.is_table(user_agent_ref01_list_result)
 
   end)
 end)
@@ -77,7 +137,7 @@ function user_agent_basic_setup(extra)
 
   -- Generate idmap via transform.
   local idmap = vs.transform(
-    { "user_agent01", "user_agent02", "user_agent03" },
+    { "user_agent01", "user_agent02", "user_agent03", "user01", "user02", "user03" },
     {
       ["`$PACK`"] = { "", {
         ["`$KEY`"] = "`$COPY`",

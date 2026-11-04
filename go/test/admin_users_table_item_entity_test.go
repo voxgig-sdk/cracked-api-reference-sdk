@@ -212,6 +212,9 @@ func TestAdminUsersTableItemEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = adminUsersTableItemRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LIST
 		adminUsersTableItemRef01Ent := client.AdminUsersTableItem(nil)
 		adminUsersTableItemRef01Match := map[string]any{}

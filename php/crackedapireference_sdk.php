@@ -190,6 +190,20 @@ class CrackedApiReferenceSDK implements \JsonSerializable
             }
         }
 
+        // A raw request has no point to declare its response type, so it asks
+        // for the JSON it reads: an API that negotiates on Accept otherwise
+        // answers in its own default format. A caller's own accept wins.
+        $has_accept = false;
+        foreach (array_keys($ctx->spec->headers) as $k) {
+            if (strtolower((string)$k) === 'accept') {
+                $has_accept = true;
+                break;
+            }
+        }
+        if (!$has_accept) {
+            $ctx->spec->headers['accept'] = 'application/json';
+        }
+
         [$_, $err] = ($utility->prepare_auth)($ctx);
         if ($err) {
             return ($utility->make_error)($ctx, $err);
@@ -1329,24 +1343,6 @@ class CrackedApiReferenceSDK implements \JsonSerializable
     }
 
 
-    private $_chat = null;
-
-    // Canonical facade: $client->Chat()->list() / ->load(["id" => ...]).
-    // PHP method names are case-insensitive, so lowercase $client->chat()
-    // resolves here too.
-    public function Chat($data = null)
-    {
-        require_once __DIR__ . '/entity/chat_entity.php';
-        if ($data === null) {
-            if ($this->_chat === null) {
-                $this->_chat = new ChatEntity($this, null);
-            }
-            return $this->_chat;
-        }
-        return new ChatEntity($this, $data);
-    }
-
-
     private $_chat_history = null;
 
     // Canonical facade: $client->ChatHistory()->list() / ->load(["id" => ...]).
@@ -1689,24 +1685,6 @@ class CrackedApiReferenceSDK implements \JsonSerializable
     }
 
 
-    private $_enterprise_product = null;
-
-    // Canonical facade: $client->EnterpriseProduct()->list() / ->load(["id" => ...]).
-    // PHP method names are case-insensitive, so lowercase $client->enterprise_product()
-    // resolves here too.
-    public function EnterpriseProduct($data = null)
-    {
-        require_once __DIR__ . '/entity/enterprise_product_entity.php';
-        if ($data === null) {
-            if ($this->_enterprise_product === null) {
-                $this->_enterprise_product = new EnterpriseProductEntity($this, null);
-            }
-            return $this->_enterprise_product;
-        }
-        return new EnterpriseProductEntity($this, $data);
-    }
-
-
     private $_exact_availability = null;
 
     // Canonical facade: $client->ExactAvailability()->list() / ->load(["id" => ...]).
@@ -1902,24 +1880,6 @@ class CrackedApiReferenceSDK implements \JsonSerializable
             return $this->_init_reset_product_v6;
         }
         return new InitResetProductV6Entity($this, $data);
-    }
-
-
-    private $_iri = null;
-
-    // Canonical facade: $client->Iri()->list() / ->load(["id" => ...]).
-    // PHP method names are case-insensitive, so lowercase $client->iri()
-    // resolves here too.
-    public function Iri($data = null)
-    {
-        require_once __DIR__ . '/entity/iri_entity.php';
-        if ($data === null) {
-            if ($this->_iri === null) {
-                $this->_iri = new IriEntity($this, null);
-            }
-            return $this->_iri;
-        }
-        return new IriEntity($this, $data);
     }
 
 
@@ -2445,24 +2405,6 @@ class CrackedApiReferenceSDK implements \JsonSerializable
     }
 
 
-    private $_read_root_get = null;
-
-    // Canonical facade: $client->ReadRootGet()->list() / ->load(["id" => ...]).
-    // PHP method names are case-insensitive, so lowercase $client->read_root_get()
-    // resolves here too.
-    public function ReadRootGet($data = null)
-    {
-        require_once __DIR__ . '/entity/read_root_get_entity.php';
-        if ($data === null) {
-            if ($this->_read_root_get === null) {
-                $this->_read_root_get = new ReadRootGetEntity($this, null);
-            }
-            return $this->_read_root_get;
-        }
-        return new ReadRootGetEntity($this, $data);
-    }
-
-
     private $_record_demo_booked = null;
 
     // Canonical facade: $client->RecordDemoBooked()->list() / ->load(["id" => ...]).
@@ -2553,6 +2495,24 @@ class CrackedApiReferenceSDK implements \JsonSerializable
     }
 
 
+    private $_root_get = null;
+
+    // Canonical facade: $client->RootGet()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->root_get()
+    // resolves here too.
+    public function RootGet($data = null)
+    {
+        require_once __DIR__ . '/entity/root_get_entity.php';
+        if ($data === null) {
+            if ($this->_root_get === null) {
+                $this->_root_get = new RootGetEntity($this, null);
+            }
+            return $this->_root_get;
+        }
+        return new RootGetEntity($this, $data);
+    }
+
+
     private $_save_survey = null;
 
     // Canonical facade: $client->SaveSurvey()->list() / ->load(["id" => ...]).
@@ -2622,6 +2582,24 @@ class CrackedApiReferenceSDK implements \JsonSerializable
             return $this->_scan_socials_status;
         }
         return new ScanSocialsStatusEntity($this, $data);
+    }
+
+
+    private $_schedule_queue = null;
+
+    // Canonical facade: $client->ScheduleQueue()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->schedule_queue()
+    // resolves here too.
+    public function ScheduleQueue($data = null)
+    {
+        require_once __DIR__ . '/entity/schedule_queue_entity.php';
+        if ($data === null) {
+            if ($this->_schedule_queue === null) {
+                $this->_schedule_queue = new ScheduleQueueEntity($this, null);
+            }
+            return $this->_schedule_queue;
+        }
+        return new ScheduleQueueEntity($this, $data);
     }
 
 

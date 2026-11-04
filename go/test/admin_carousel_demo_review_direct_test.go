@@ -30,6 +30,11 @@ func TestAdminCarouselDemoReviewDirect(t *testing.T) {
 			t.Skip(_reason)
 			return
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" && setup.idmap["admin_carousel_demo_review01"] == nil {
+			t.Log("LIVE STEP {\"id\":\"direct-load-admin_carousel_demo_review\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs admin_carousel_demo_review01, which only POST /api/admin/carousels/demo-reviews/{formula_id}/decision gives\"}")
+			t.Skip("Live coverage incomplete: direct-load-admin_carousel_demo_review excluded (GET-only live run: needs admin_carousel_demo_review01, which only POST /api/admin/carousels/demo-reviews/{formula_id}/decision gives)")
+			return
+		}
 		if setup.live {
 			for _, _liveKey := range []string{"admin_carousel_demo_review01"} {
 				if v := setup.idmap[_liveKey]; v == nil {
@@ -37,6 +42,9 @@ func TestAdminCarouselDemoReviewDirect(t *testing.T) {
 					return
 				}
 			}
+		}
+		if setup.live {
+			livePace()
 		}
 		client := setup.client
 

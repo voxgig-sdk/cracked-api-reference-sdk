@@ -164,6 +164,9 @@ describe("ProductDashboardViewEntity", function()
       product_dashboard_view_ref01_data = helpers.to_map(product_dashboard_view_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LIST
     local product_dashboard_view_ref01_ent = client:ProductDashboardView(nil)
     local product_dashboard_view_ref01_match = {}

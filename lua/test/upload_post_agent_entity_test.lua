@@ -33,8 +33,17 @@ describe("UploadPostAgentEntity", function()
         return
       end
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" then
+      print("LIVE STEP {\"id\":\"upload_post_agent.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/upload-post-agents/sync-platforms\"}")
+      pending("Live coverage incomplete: upload_post_agent.create.0 excluded (GET-only live run: needs POST /api/upload-post-agents/sync-platforms)")
+      return
+    end
+
     local client = setup.client
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- CREATE
     local upload_post_agent_ref01_ent = client:UploadPostAgent(nil)
     local upload_post_agent_ref01_data = helpers.to_map(vs.getprop(

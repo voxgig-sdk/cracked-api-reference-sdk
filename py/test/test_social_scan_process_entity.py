@@ -51,8 +51,14 @@ class TestSocialScanProcessEntity:
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
                 return
+        if setup["live"] and os.environ.get("VOXGIG_GETONLY_GUARD") == "TRUE":
+            print("LIVE STEP {\"id\":\"social_scan_process.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/social-scan/process\"}")
+            pytest.skip("Live coverage incomplete: social_scan_process.create.0 excluded (GET-only live run: needs POST /api/social-scan/process)")
+
         client = setup["client"]
 
+        if setup["live"]:
+            runner.live_pace()
         # CREATE
         social_scan_process_ref01_ent = client.SocialScanProcess(None)
         social_scan_process_ref01_data = helpers.to_map(vs.getprop(

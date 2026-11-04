@@ -168,6 +168,19 @@ func TestIrisConnectorEntity(t *testing.T) {
 		}
 	})
 
+	t.Run("validate", func(t *testing.T) {
+		if !fhHasFeature("validate") {
+			t.Skip("feature not present in this SDK: validate")
+		}
+		client := sdk.TestSDK(nil, map[string]any{
+			"feature": map[string]any{"validate": map[string]any{"active": true}},
+		})
+		_, err := client.IrisConnector(nil).Create(map[string]any{"connector_id": 1}, nil)
+		if sdkerr, ok := err.(*core.CrackedApiReferenceError); !ok || "validate_failed" != sdkerr.Code {
+			t.Fatalf("expected validate_failed, got %v", err)
+		}
+	})
+
 	t.Run("basic", func(tt *testing.T) {
 		var t testing.TB = tt
 		setup := iris_connectorBasicSetup(nil)
@@ -177,7 +190,7 @@ func TestIrisConnectorEntity(t *testing.T) {
 		if setup.live {
 			_mode = "live"
 		}
-		for _, _op := range []string{"list"} {
+		for _, _op := range []string{"create", "list"} {
 			if _shouldSkip, _reason := isControlSkipped("entityOp", "iris_connector." + _op, _mode); _shouldSkip {
 				if _reason == "" {
 					_reason = "skipped via sdk-test-control.json"
@@ -186,6 +199,8 @@ func TestIrisConnectorEntity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" {
+			t.Log("LIVE STEP {\"id\":\"iris_connector.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/iris/connectors/{connector_id}/start\"}")
 		client := setup.client
 		_ = client
 
@@ -199,8 +214,57 @@ func TestIrisConnectorEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = irisConnectorRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LIST
 		irisConnectorRef01Ent := client.IrisConnector(nil)
+		irisConnectorRef01Match := map[string]any{}
+
+		irisConnectorRef01ListResult, err := irisConnectorRef01Ent.List(irisConnectorRef01Match, nil)
+		if err != nil {
+			t.Fatalf("list failed: %v", err)
+		}
+		_, irisConnectorRef01ListOk := irisConnectorRef01ListResult.([]any)
+		if !irisConnectorRef01ListOk {
+			t.Fatalf("expected list result to be an array, got %T", irisConnectorRef01ListResult)
+		}
+
+		return
+		}
+
+		if setup.live {
+			for _, _liveKey := range []string{"connector01"} {
+				if setup.syntheticOnly || setup.idmap[_liveKey] == nil {
+					liveMiss(t, iris_connectorEntityLiveStrict, "Live entity test blocked: needs %s via CRACKED_API_REFERENCE_TEST_IRIS_CONNECTOR_ENTID", _liveKey)
+				}
+			}
+		}
+		client := setup.client
+		_ = client
+
+		if setup.live {
+			livePace()
+		}
+		// CREATE
+		irisConnectorRef01Ent := client.IrisConnector(nil)
+		irisConnectorRef01Data := core.ToMapAny(vs.GetProp(
+			vs.GetPath(setup.data, []any{"new", "iris_connector"}), "iris_connector_ref01"))
+		irisConnectorRef01Data["connector_id"] = setup.idmap["connector01"]
+
+		irisConnectorRef01DataResult, err := irisConnectorRef01Ent.Create(irisConnectorRef01Data, nil)
+		if err != nil {
+			t.Fatalf("create failed: %v", err)
+		}
+		irisConnectorRef01Data = core.ToMapAny(entityData(irisConnectorRef01DataResult))
+		if irisConnectorRef01Data == nil {
+			t.Fatal("expected create result to be a map")
+		}
+
+		if setup.live {
+			livePace()
+		}
+		// LIST
 		irisConnectorRef01Match := map[string]any{}
 
 		irisConnectorRef01ListResult, err := irisConnectorRef01Ent.List(irisConnectorRef01Match, nil)
@@ -240,7 +304,7 @@ func iris_connectorBasicSetup(extra map[string]any) *entityTestSetup {
 
 	// Generate idmap via transform, matching TS pattern.
 	idmap, _ := vs.Transform(
-		[]any{"iris_connector01", "iris_connector02", "iris_connector03"},
+		[]any{"iris_connector01", "iris_connector02", "iris_connector03", "connector01"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
 				"`$KEY`": "`$COPY`",

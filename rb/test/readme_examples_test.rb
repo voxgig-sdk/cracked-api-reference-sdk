@@ -96,7 +96,6 @@ class ReadmeExamplesTest < Minitest::Test
     "Carousel" => "carousel",
     "CarouselAgentDetail" => "carousel_agent_detail",
     "CarouselStatus" => "carousel_status",
-    "Chat" => "chat",
     "ChatHistory" => "chat_history",
     "ChatSession" => "chat_session",
     "Comment" => "comment",
@@ -116,7 +115,6 @@ class ReadmeExamplesTest < Minitest::Test
     "DailyStatus" => "daily_status",
     "DedicatedAgentsDashboard" => "dedicated_agents_dashboard",
     "EnterpriseAgent" => "enterprise_agent",
-    "EnterpriseProduct" => "enterprise_product",
     "ExactAvailability" => "exact_availability",
     "ExactFormula" => "exact_formula",
     "ExtractV2" => "extract_v2",
@@ -128,7 +126,6 @@ class ReadmeExamplesTest < Minitest::Test
     "GenerateSora2Prompt" => "generate_sora2_prompt",
     "Healthrx" => "healthrx",
     "InitResetProductV6" => "init_reset_product_v6",
-    "Iri" => "iri",
     "IrisCapability" => "iris_capability",
     "IrisChat" => "iris_chat",
     "IrisConnector" => "iris_connector",
@@ -158,16 +155,17 @@ class ReadmeExamplesTest < Minitest::Test
     "ProductLanding" => "product_landing",
     "PublicResumeStatus" => "public_resume_status",
     "ReRollVideo" => "re_roll_video",
-    "ReadRootGet" => "read_root_get",
     "RecordDemoBooked" => "record_demo_booked",
     "RefreshStat" => "refresh_stat",
     "RemixerClipper" => "remixer_clipper",
     "ResetProduct" => "reset_product",
     "RetryWebsiteScrape" => "retry_website_scrape",
+    "RootGet" => "root_get",
     "SaveSurvey" => "save_survey",
     "ScanSocial" => "scan_social",
     "ScanSocialsPublic" => "scan_socials_public",
     "ScanSocialsStatus" => "scan_socials_status",
+    "ScheduleQueue" => "schedule_queue",
     "ScheduleV2" => "schedule_v2",
     "Scrape" => "scrape",
     "ScrapeWebsitePublic" => "scrape_website_public",
@@ -214,6 +212,15 @@ class ReadmeExamplesTest < Minitest::Test
     "WinningAd" => "winning_ad",
     "XAdaptation" => "x_adaptation",
     "ZerohumanAdminAccount" => "zerohuman_admin_account",
+  }
+
+  # Fixture key => the entity's declared identity field, where it is not "id".
+  ID_FIELDS = {
+    "carousel" => "queue_id",
+    "customer_health" => "user_id",
+    "media_asset" => "product_id",
+    "product" => "product_id",
+    "user" => "userId",
   }
 
   # Documented SDK method names — used only to recognise the NARROW
@@ -315,7 +322,11 @@ class ReadmeExamplesTest < Minitest::Test
     refs = ENTITIES.select { |name, _| block =~ /#{CLIENT}\.#{Regexp.escape(name)}\b/ }
     refs = ENTITIES if refs.empty?
     entity = {}
-    refs.each_value { |storage| entity[storage] = { "test01" => { "id" => "test01" } } }
+    refs.each_value do |storage|
+      record = { "id" => "test01" }
+      record[ID_FIELDS[storage]] = "test01" if ID_FIELDS.key?(storage)
+      entity[storage] = { "test01" => record }
+    end
     { "entity" => entity }.inspect
   end
 

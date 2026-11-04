@@ -52,8 +52,16 @@ class ScanSocialsPublicEntityTest extends TestCase
                 return;
             }
         }
+        if (!empty($setup["live"]) && getenv('VOXGIG_GETONLY_GUARD') === "TRUE") {
+            fwrite(STDOUT, 'LIVE STEP {"id":"scan_socials_public.create.0","state":"excluded","attempted":false,"reason":"GET-only live run: needs POST /api/onboarding-v6/scan-socials-public"}' . "\n");
+            $this->markTestSkipped('Live coverage incomplete: scan_socials_public.create.0 excluded (GET-only live run: needs POST /api/onboarding-v6/scan-socials-public)');
+        }
+
         $client = $setup["client"];
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // CREATE
         $scan_socials_public_ref01_ent = $client->ScanSocialsPublic(null);
         $scan_socials_public_ref01_data = Helpers::to_map(Vs::getprop(

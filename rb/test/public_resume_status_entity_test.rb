@@ -51,6 +51,7 @@ class PublicResumeStatusEntityTest < Minitest::Test
       public_resume_status_ref01_data = Helpers.to_map(public_resume_status_ref01_data_raw[0][1])
     end
 
+    Runner.live_pace if setup[:live]
     # LOAD
     public_resume_status_ref01_ent = client.PublicResumeStatus(nil)
     public_resume_status_ref01_match_dt0 = {}

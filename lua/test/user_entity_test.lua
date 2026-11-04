@@ -44,10 +44,27 @@ describe("UserEntity", function()
         return
       end
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" then
+      print("LIVE STEP {\"id\":\"user.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/admin/users/{user_id}/fix-auto-schedule-by-date\"}")
+      print("LIVE STEP {\"id\":\"user.update.1\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs PUT /api/admin/users/{user_id}/auto-schedule\"}")
+      print("LIVE STEP {\"id\":\"user.load.2\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: reads a record only user.create.0 gives\"}")
+      pending("Live coverage incomplete: user.create.0 excluded (GET-only live run: needs POST /api/admin/users/{user_id}/fix-auto-schedule-by-date); user.update.1 excluded (GET-only live run: needs PUT /api/admin/users/{user_id}/auto-schedule); user.load.2 excluded (GET-only live run: reads a record only user.create.0 gives)")
+      return
+    end
+
     if setup.live then
-      runner.live_miss(pending, LIVE_STRICT, "Live entity test blocked: " .. "the flow loads a user record it has no list to find")
+      for _, _live_key in ipairs({"user01"}) do
+        if setup.synthetic_only or setup.idmap[_live_key] == nil then
+          runner.live_miss(pending, LIVE_STRICT, "Live entity test blocked: needs " .. _live_key .. " via CRACKED_API_REFERENCE_TEST_USER_ENTID")
+        end
+      end
     end
     local client = setup.client
+    if setup.live then
+      runner.live_existing(pending, setup, LIVE_STRICT, "user", function()
+        return { { id = setup.idmap["user01"] } }
+      end, "userId", setup.idmap["user01"])
+    end
 
     -- Bootstrap entity data from existing test data.
     local user_ref01_data_raw = vs.items(helpers.to_map(
@@ -57,16 +74,19 @@ describe("UserEntity", function()
       user_ref01_data = helpers.to_map(user_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LOAD
     local user_ref01_ent = client:User(nil)
     local user_ref01_match_dt0 = {
-      id = user_ref01_data["id"],
+      id = user_ref01_data["userId"],
     }
     local user_ref01_data_dt0_loaded, err = user_ref01_ent:load(user_ref01_match_dt0, nil)
     assert.is_nil(err)
     local user_ref01_data_dt0_load_result = helpers.to_map(type(user_ref01_data_dt0_loaded) == 'table' and user_ref01_data_dt0_loaded.data_get and user_ref01_data_dt0_loaded:data_get() or user_ref01_data_dt0_loaded)
     assert.is_not_nil(user_ref01_data_dt0_load_result)
-    assert.are.equal(user_ref01_data_dt0_load_result["id"], user_ref01_data["id"])
+    assert.is_true(runner.live_same_id(user_ref01_data_dt0_load_result["userId"], user_ref01_data["userId"]))
 
   end)
 end)
@@ -83,6 +103,12 @@ function user_basic_setup(extra)
   f:close()
 
   local entity_data = json.decode(entity_data_source)
+
+  for _, rec in pairs(((entity_data["existing"] or {})["user"]) or {}) do
+    if type(rec) == "table" and rec["id"] ~= nil then
+      rec["userId"] = rec["id"]
+    end
+  end
 
   local options = {}
   options["entity"] = entity_data["existing"]

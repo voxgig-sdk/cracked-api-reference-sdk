@@ -33,8 +33,36 @@ describe("ResetProductEntity", function()
         return
       end
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" then
+      print("LIVE STEP {\"id\":\"reset_product.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/reset-product/generate-videos-v6\"}")
     local client = setup.client
 
+    -- Bootstrap entity data from existing test data.
+    local reset_product_ref01_data_raw = vs.items(helpers.to_map(
+      vs.getpath(setup.data, "existing.reset_product")))
+    local reset_product_ref01_data = nil
+    if #reset_product_ref01_data_raw > 0 then
+      reset_product_ref01_data = helpers.to_map(reset_product_ref01_data_raw[1][2])
+    end
+
+    if setup.live then
+      runner.live_pace()
+    end
+    -- LOAD
+    local reset_product_ref01_ent = client:ResetProduct(nil)
+    local reset_product_ref01_match_dt0 = {}
+    local reset_product_ref01_data_dt0_loaded, err = reset_product_ref01_ent:load(reset_product_ref01_match_dt0, nil)
+    assert.is_nil(err)
+    assert.is_not_nil(reset_product_ref01_data_dt0_loaded)
+
+      return
+    end
+
+    local client = setup.client
+
+    if setup.live then
+      runner.live_pace()
+    end
     -- CREATE
     local reset_product_ref01_ent = client:ResetProduct(nil)
     local reset_product_ref01_data = helpers.to_map(vs.getprop(
@@ -45,6 +73,9 @@ describe("ResetProductEntity", function()
     reset_product_ref01_data = helpers.to_map(type(reset_product_ref01_data_result) == 'table' and reset_product_ref01_data_result.data_get and reset_product_ref01_data_result:data_get() or reset_product_ref01_data_result)
     assert.is_not_nil(reset_product_ref01_data)
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LOAD
     local reset_product_ref01_match_dt0 = {}
     local reset_product_ref01_data_dt0_loaded, err = reset_product_ref01_ent:load(reset_product_ref01_match_dt0, nil)

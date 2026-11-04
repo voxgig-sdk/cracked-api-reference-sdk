@@ -34,25 +34,6 @@ main: kit: flow: BasicAdminFlow:
       i: {
         ref: "admin_ref01",
         srcdatavar: "admin_ref01_data",
-        suffix: "_up0",
-        textfield: "created_at"
-      }
-
-      o: "update",
-      s: [
-        {
-          apply: "TextFieldMark",
-          def: {
-            mark: "Mark01-admin_ref01"
-          }
-        }
-      ]
-    }
-
-    {
-      i: {
-        ref: "admin_ref01",
-        srcdatavar: "admin_ref01_data",
         suffix: "_dt0"
       }
 

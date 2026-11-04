@@ -139,7 +139,7 @@ describe("AdminInsightEntity", function()
       return
     end
     local client = sdk.test(nil, { feature = { validate = { active = true } } })
-    local _, err = client:AdminInsight(nil):list({ ["generated_at"] = 1 }, nil)
+    local _, err = client:AdminInsight(nil):list({ ["active_agents"] = "x" }, nil)
     assert.are.equal("validate_failed", type(err) == "table" and err.code or nil)
   end)
 
@@ -164,6 +164,9 @@ describe("AdminInsightEntity", function()
       admin_insight_ref01_data = helpers.to_map(admin_insight_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LIST
     local admin_insight_ref01_ent = client:AdminInsight(nil)
     local admin_insight_ref01_match = {}
@@ -172,6 +175,9 @@ describe("AdminInsightEntity", function()
     assert.is_nil(err)
     assert.is_table(admin_insight_ref01_list_result)
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LOAD
     local admin_insight_ref01_match_dt0 = {}
     local admin_insight_ref01_data_dt0_loaded, err = admin_insight_ref01_ent:load(admin_insight_ref01_match_dt0, nil)

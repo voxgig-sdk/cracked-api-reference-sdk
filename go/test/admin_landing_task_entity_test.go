@@ -62,6 +62,12 @@ func TestAdminLandingTaskEntity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" {
+			t.Log("LIVE STEP {\"id\":\"admin_landing_task.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/admin/users/{user_id}/regenerate-landing\"}")
+			t.Skip("Live coverage incomplete: admin_landing_task.create.0 excluded (GET-only live run: needs POST /api/admin/users/{user_id}/regenerate-landing)")
+			return
+		}
+
 		if setup.live {
 			for _, _liveKey := range []string{"user01"} {
 				if setup.syntheticOnly || setup.idmap[_liveKey] == nil {
@@ -72,6 +78,9 @@ func TestAdminLandingTaskEntity(t *testing.T) {
 		client := setup.client
 		_ = client
 
+		if setup.live {
+			livePace()
+		}
 		// CREATE
 		adminLandingTaskRef01Ent := client.AdminLandingTask(nil)
 		adminLandingTaskRef01Data := core.ToMapAny(vs.GetProp(

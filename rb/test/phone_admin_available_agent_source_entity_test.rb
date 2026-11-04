@@ -181,6 +181,7 @@ class PhoneAdminAvailableAgentSourceEntityTest < Minitest::Test
       phone_admin_available_agent_source_ref01_data = Helpers.to_map(phone_admin_available_agent_source_ref01_data_raw[0][1])
     end
 
+    Runner.live_pace if setup[:live]
     # LIST
     phone_admin_available_agent_source_ref01_ent = client.PhoneAdminAvailableAgentSource(nil)
     phone_admin_available_agent_source_ref01_match = {}

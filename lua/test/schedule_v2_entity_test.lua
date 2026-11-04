@@ -154,8 +154,62 @@ describe("ScheduleV2Entity", function()
         return
       end
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" then
+      print("LIVE STEP {\"id\":\"schedule_v2.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/schedule/queue/add\"}")
+      print("LIVE STEP {\"id\":\"schedule_v2.remove.3\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs DELETE /api/schedule/queue/{queue_id}\"}")
+      print("LIVE STEP {\"id\":\"schedule_v2.list.4\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: checks a removal this run does not make\"}")
+    local client = setup.client
+    if setup.live then
+      local _live_id = nil
+      if not setup.synthetic_only then
+        _live_id = setup.idmap["schedule_v201"]
+      end
+      runner.live_pace()
+      runner.live_existing(pending, setup, LIVE_STRICT, "schedule_v2", function()
+        return client:ScheduleV2(nil):list({}, nil)
+      end, "id", _live_id)
+    end
+
+    -- Bootstrap entity data from existing test data.
+    local schedule_v2_ref01_data_raw = vs.items(helpers.to_map(
+      vs.getpath(setup.data, "existing.schedule_v2")))
+    local schedule_v2_ref01_data = nil
+    if #schedule_v2_ref01_data_raw > 0 then
+      schedule_v2_ref01_data = helpers.to_map(schedule_v2_ref01_data_raw[1][2])
+    end
+
+    if setup.live then
+      runner.live_pace()
+    end
+    -- LIST
+    local schedule_v2_ref01_ent = client:ScheduleV2(nil)
+    local schedule_v2_ref01_match = {}
+
+    local schedule_v2_ref01_list_result, err = schedule_v2_ref01_ent:list(schedule_v2_ref01_match, nil)
+    assert.is_nil(err)
+    assert.is_table(schedule_v2_ref01_list_result)
+
+    if setup.live then
+      runner.live_pace()
+    end
+    -- LOAD
+    local schedule_v2_ref01_match_dt0 = {
+      id = schedule_v2_ref01_data["id"],
+    }
+    local schedule_v2_ref01_data_dt0_loaded, err = schedule_v2_ref01_ent:load(schedule_v2_ref01_match_dt0, nil)
+    assert.is_nil(err)
+    local schedule_v2_ref01_data_dt0_load_result = helpers.to_map(type(schedule_v2_ref01_data_dt0_loaded) == 'table' and schedule_v2_ref01_data_dt0_loaded.data_get and schedule_v2_ref01_data_dt0_loaded:data_get() or schedule_v2_ref01_data_dt0_loaded)
+    assert.is_not_nil(schedule_v2_ref01_data_dt0_load_result)
+    assert.is_true(runner.live_same_id(schedule_v2_ref01_data_dt0_load_result["id"], schedule_v2_ref01_data["id"]))
+
+      return
+    end
+
     local client = setup.client
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- CREATE
     local schedule_v2_ref01_ent = client:ScheduleV2(nil)
     local schedule_v2_ref01_data = helpers.to_map(vs.getprop(
@@ -167,6 +221,9 @@ describe("ScheduleV2Entity", function()
     assert.is_not_nil(schedule_v2_ref01_data)
     assert.is_not_nil(schedule_v2_ref01_data["id"])
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LIST
     local schedule_v2_ref01_match = {}
 
@@ -179,6 +236,9 @@ describe("ScheduleV2Entity", function()
       { id = schedule_v2_ref01_data["id"] })
     assert.is_false(vs.isempty(found_item))
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LOAD
     local schedule_v2_ref01_match_dt0 = {
       id = schedule_v2_ref01_data["id"],
@@ -187,7 +247,7 @@ describe("ScheduleV2Entity", function()
     assert.is_nil(err)
     local schedule_v2_ref01_data_dt0_load_result = helpers.to_map(type(schedule_v2_ref01_data_dt0_loaded) == 'table' and schedule_v2_ref01_data_dt0_loaded.data_get and schedule_v2_ref01_data_dt0_loaded:data_get() or schedule_v2_ref01_data_dt0_loaded)
     assert.is_not_nil(schedule_v2_ref01_data_dt0_load_result)
-    assert.are.equal(schedule_v2_ref01_data_dt0_load_result["id"], schedule_v2_ref01_data["id"])
+    assert.is_true(runner.live_same_id(schedule_v2_ref01_data_dt0_load_result["id"], schedule_v2_ref01_data["id"]))
 
   end)
 end)

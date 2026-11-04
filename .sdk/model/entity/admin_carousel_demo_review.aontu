@@ -9,6 +9,7 @@ main: kit: entity: admin_carousel_demo_review: {
       h: "Id"
       n: "id"
       r: false
+      syn: true
       t: "`$STRING`"
     }
     items: {

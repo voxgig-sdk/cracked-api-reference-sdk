@@ -109,7 +109,7 @@ main: kit: entity: media_asset: {
   }
 
   id: {
-    field: "id"
+    field: "product_id"
     name: "id"
   }
 

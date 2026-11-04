@@ -63,9 +63,46 @@ func TestAdminVideoRemixerEntity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" {
+			t.Log("LIVE STEP {\"id\":\"admin_video_remixer.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/admin/video-remixer/clips/{clip_id}/media\"}")
+			t.Log("LIVE STEP {\"id\":\"admin_video_remixer.update.1\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs PUT /api/admin/video-remixer/audits/{identifier}/answer\"}")
+			t.Log("LIVE STEP {\"id\":\"admin_video_remixer.remove.3\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs DELETE /api/admin/video-remixer/runs/{identifier}\"}")
 		client := setup.client
 		_ = client
 
+		// Bootstrap entity data from existing test data (no create step in flow).
+		adminVideoRemixerRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.admin_video_remixer")))
+		var adminVideoRemixerRef01Data map[string]any
+		if len(adminVideoRemixerRef01DataRaw) > 0 {
+			adminVideoRemixerRef01Data = core.ToMapAny(adminVideoRemixerRef01DataRaw[0][1])
+		}
+		// Discard guards against Go's unused-var check when the flow's steps
+		// happen not to consume the bootstrap data (e.g. list-only flows).
+		_ = adminVideoRemixerRef01Data
+
+		if setup.live {
+			livePace()
+		}
+		// LOAD
+		adminVideoRemixerRef01Ent := client.AdminVideoRemixer(nil)
+		adminVideoRemixerRef01MatchDt0 := map[string]any{}
+		adminVideoRemixerRef01DataDt0Loaded, err := adminVideoRemixerRef01Ent.Load(adminVideoRemixerRef01MatchDt0, nil)
+		if err != nil {
+			t.Fatalf("load failed: %v", err)
+		}
+		if adminVideoRemixerRef01DataDt0Loaded == nil {
+			t.Fatal("expected load result to be non-nil")
+		}
+
+		return
+		}
+
+		client := setup.client
+		_ = client
+
+		if setup.live {
+			livePace()
+		}
 		// CREATE
 		adminVideoRemixerRef01Ent := client.AdminVideoRemixer(nil)
 		adminVideoRemixerRef01Data := core.ToMapAny(vs.GetProp(
@@ -80,6 +117,9 @@ func TestAdminVideoRemixerEntity(t *testing.T) {
 			t.Fatal("expected create result to be a map")
 		}
 
+		if setup.live {
+			livePace()
+		}
 		// UPDATE
 		adminVideoRemixerRef01DataUp0Up := map[string]any{
 		}
@@ -100,6 +140,9 @@ func TestAdminVideoRemixerEntity(t *testing.T) {
 			t.Fatalf("expected %s to be updated, got %v", adminVideoRemixerRef01MarkdefUp0Name, adminVideoRemixerRef01ResdataUp0[adminVideoRemixerRef01MarkdefUp0Name])
 		}
 
+		if setup.live {
+			livePace()
+		}
 		// LOAD
 		adminVideoRemixerRef01MatchDt0 := map[string]any{}
 		adminVideoRemixerRef01DataDt0Loaded, err := adminVideoRemixerRef01Ent.Load(adminVideoRemixerRef01MatchDt0, nil)

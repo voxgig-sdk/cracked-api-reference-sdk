@@ -162,7 +162,7 @@ main: kit: entity: agent_access_customers_health: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.customers`"
           }
         }
         {
@@ -242,7 +242,7 @@ main: kit: entity: agent_access_customers_health: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.customers`"
           }
         }
       ]

@@ -38,7 +38,7 @@ func TestDailyStatusEntity(t *testing.T) {
 		client := sdk.TestSDK(nil, map[string]any{
 			"feature": map[string]any{"validate": map[string]any{"active": true}},
 		})
-		_, err := client.DailyStatus(nil).Load(map[string]any{"id": 1, "day": "x"}, nil)
+		_, err := client.DailyStatus(nil).Load(map[string]any{"daily_id": 1, "day": "x"}, nil)
 		if sdkerr, ok := err.(*core.CrackedApiReferenceError); !ok || "validate_failed" != sdkerr.Code {
 			t.Fatalf("expected validate_failed, got %v", err)
 		}
@@ -53,7 +53,7 @@ func TestDailyStatusEntity(t *testing.T) {
 		if setup.live {
 			_mode = "live"
 		}
-		for _, _op := range []string{"load"} {
+		for _, _op := range []string{} {
 			if _shouldSkip, _reason := isControlSkipped("entityOp", "daily_status." + _op, _mode); _shouldSkip {
 				if _reason == "" {
 					_reason = "skipped via sdk-test-control.json"
@@ -63,10 +63,9 @@ func TestDailyStatusEntity(t *testing.T) {
 			}
 		}
 		if setup.live {
-			liveMiss(t, daily_statusEntityLiveStrict, "Live entity test blocked: %s", "the flow loads a daily_status record it has no list to find")
+			t.Skip("Live coverage incomplete: the flow has no step to run")
+			return
 		}
-		client := setup.client
-		_ = client
 
 		// Bootstrap entity data from existing test data (no create step in flow).
 		dailyStatusRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.daily_status")))
@@ -77,23 +76,6 @@ func TestDailyStatusEntity(t *testing.T) {
 		// Discard guards against Go's unused-var check when the flow's steps
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = dailyStatusRef01Data
-
-		// LOAD
-		dailyStatusRef01Ent := client.DailyStatus(nil)
-		dailyStatusRef01MatchDt0 := map[string]any{
-			"id": dailyStatusRef01Data["id"],
-		}
-		dailyStatusRef01DataDt0Loaded, err := dailyStatusRef01Ent.Load(dailyStatusRef01MatchDt0, nil)
-		if err != nil {
-			t.Fatalf("load failed: %v", err)
-		}
-		dailyStatusRef01DataDt0LoadResult := core.ToMapAny(entityData(dailyStatusRef01DataDt0Loaded))
-		if dailyStatusRef01DataDt0LoadResult == nil {
-			t.Fatal("expected load result to be a map")
-		}
-		if dailyStatusRef01DataDt0LoadResult["id"] != dailyStatusRef01Data["id"] {
-			t.Fatal("expected load result id to match")
-		}
 
 	})
 }
@@ -123,7 +105,7 @@ func daily_statusBasicSetup(extra map[string]any) *entityTestSetup {
 
 	// Generate idmap via transform, matching TS pattern.
 	idmap, _ := vs.Transform(
-		[]any{"daily_status01", "daily_status02", "daily_status03"},
+		[]any{"daily_status01", "daily_status02", "daily_status03", "daily01", "daily02", "daily03"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
 				"`$KEY`": "`$COPY`",

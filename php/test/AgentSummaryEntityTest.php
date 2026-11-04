@@ -229,6 +229,9 @@ class AgentSummaryEntityTest extends TestCase
             $agent_summary_ref01_data = Helpers::to_map($agent_summary_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LIST
         $agent_summary_ref01_ent = $client->AgentSummary(null);
         $agent_summary_ref01_match = [];

@@ -54,6 +54,9 @@ describe("AgentAccessOverviewEntity", function()
       agent_access_overview_ref01_data = helpers.to_map(agent_access_overview_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LOAD
     local agent_access_overview_ref01_ent = client:AgentAccessOverview(nil)
     local agent_access_overview_ref01_match_dt0 = {}

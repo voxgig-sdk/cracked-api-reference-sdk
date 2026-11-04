@@ -29,19 +29,19 @@ const utility_1 = require("../../utility");
         const setup = directSetup([{ id: 'direct01' }, { id: 'direct02' }]);
         if ((0, utility_1.maybeSkipControl)(t, 'direct', 'direct-list-carousel_status', setup.live))
             return;
-        if ((0, utility_1.skipIfMissingIds)(t, setup, ["carousel_status01"], LIVE_STRICT))
+        if ((0, utility_1.skipIfMissingIds)(t, setup, ["carousel01"], LIVE_STRICT))
             return;
         const { client, calls } = setup;
         const params = {};
         const query = {};
         if (setup.live) {
-            params.id = setup.idmap['carousel_status01'];
+            params.carousel_id = setup.idmap['carousel01'];
         }
         else {
-            params.id = 'direct01';
+            params.carousel_id = 'direct01';
         }
         const result = await client.direct({
-            path: 'api/carousel/{id}/status',
+            path: 'api/carousel/{carousel_id}/status',
             method: 'GET',
             params,
             query,

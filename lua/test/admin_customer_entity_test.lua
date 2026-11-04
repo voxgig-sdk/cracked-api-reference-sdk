@@ -164,6 +164,9 @@ describe("AdminCustomerEntity", function()
       admin_customer_ref01_data = helpers.to_map(admin_customer_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LIST
     local admin_customer_ref01_ent = client:AdminCustomer(nil)
     local admin_customer_ref01_match = {}

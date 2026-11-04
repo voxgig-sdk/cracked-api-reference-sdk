@@ -118,10 +118,10 @@ class TestIrisTaskEntity:
         if "validate" not in (shared_config().get("feature") or {}):
             pytest.skip("feature not present in this SDK: validate")
         opts = {"feature": {"validate": {"active": True, "request": False, "response": True}}}
-        listed = CrackedApiReferenceSDK.test({"entity": {"iris_task": {"v1": {"capability": "x", "productId": "x", "title": "x"}}}}, opts).IrisTask(None).list(None, None)
+        listed = CrackedApiReferenceSDK.test({"entity": {"iris_task": {"v1": {"capability": "x", "correlationId": "x", "idempotencyKey": "x", "productId": "x", "title": "x"}}}}, opts).IrisTask(None).list(None, None)
         assert ["v1"] == [ent.data_get().get("id") for ent in listed]
         with pytest.raises(Exception) as err:
-            CrackedApiReferenceSDK.test({"entity": {"iris_task": {"v1": {"capability": "x", "productId": "x", "title": "x", "cadence": 1}}}}, opts).IrisTask(None).list(None, None)
+            CrackedApiReferenceSDK.test({"entity": {"iris_task": {"v1": {"capability": "x", "correlationId": "x", "idempotencyKey": "x", "productId": "x", "title": "x", "cadence": 1}}}}, opts).IrisTask(None).list(None, None)
         assert "validate_failed" == getattr(err.value, "code", None)
 
     def test_should_refuse_an_invalid_request(self):
@@ -144,8 +144,14 @@ class TestIrisTaskEntity:
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
                 return
+        if setup["live"] and os.environ.get("VOXGIG_GETONLY_GUARD") == "TRUE":
+            print("LIVE STEP {\"id\":\"iris_task.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/iris/tasks/{task_id}/run\"}")
+            return self._run_get_only_flow(setup)
+
         client = setup["client"]
 
+        if setup["live"]:
+            runner.live_pace()
         # CREATE
         iris_task_ref01_ent = client.IrisTask(None)
         iris_task_ref01_data = helpers.to_map(vs.getprop(
@@ -154,7 +160,29 @@ class TestIrisTaskEntity:
         iris_task_ref01_data = helpers.to_map(runner.entity_data(iris_task_ref01_ent.create(iris_task_ref01_data, None)))
         assert iris_task_ref01_data is not None
 
+        if setup["live"]:
+            runner.live_pace()
         # LIST
+        iris_task_ref01_match = {}
+
+        iris_task_ref01_list_result = iris_task_ref01_ent.list(iris_task_ref01_match, None)
+        assert isinstance(iris_task_ref01_list_result, list)
+
+
+    def _run_get_only_flow(self, setup):
+        client = setup["client"]
+
+        # Bootstrap entity data from existing test data.
+        iris_task_ref01_data_raw = vs.items(helpers.to_map(
+            vs.getpath(setup["data"], "existing.iris_task")))
+        iris_task_ref01_data = None
+        if len(iris_task_ref01_data_raw) > 0:
+            iris_task_ref01_data = helpers.to_map(iris_task_ref01_data_raw[0][1])
+
+        if setup["live"]:
+            runner.live_pace()
+        # LIST
+        iris_task_ref01_ent = client.IrisTask(None)
         iris_task_ref01_match = {}
 
         iris_task_ref01_list_result = iris_task_ref01_ent.list(iris_task_ref01_match, None)

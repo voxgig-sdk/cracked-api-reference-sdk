@@ -28,12 +28,20 @@ describe("MediaAssetDirect", function()
       pending(_reason or "skipped via sdk-test-control.json")
       return
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" and setup.idmap["media_asset01"] == nil then
+      print("LIVE STEP {\"id\":\"direct-load-media_asset\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs media_asset01, which only POST /api/media-assets/{media_asset_id}/exclude-copycat gives\"}")
+      pending("Live coverage incomplete: direct-load-media_asset excluded (GET-only live run: needs media_asset01, which only POST /api/media-assets/{media_asset_id}/exclude-copycat gives)")
+      return
+    end
     if setup.live then
       for _, _live_key in ipairs({"media_asset01"}) do
         if setup.idmap[_live_key] == nil then
           runner.live_miss(pending, LIVE_STRICT, "Live test blocked: needs " .. _live_key .. " via CRACKED_API_REFERENCE_TEST_MEDIA_ASSET_ENTID")
         end
       end
+    end
+    if setup.live then
+      runner.live_pace()
     end
     local client = setup.client
 

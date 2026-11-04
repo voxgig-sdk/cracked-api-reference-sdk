@@ -42,6 +42,13 @@ class TestStripeEntity:
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
                 return
+        if setup["live"] and os.environ.get("VOXGIG_GETONLY_GUARD") == "TRUE":
+            print("LIVE STEP {\"id\":\"stripe.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/stripe/associate-guest-checkout\"}")
+            pytest.skip("Live coverage incomplete: stripe.create.0 excluded (GET-only live run: needs POST /api/stripe/associate-guest-checkout)")
+
+        if setup["live"]:
+            pytest.skip("Live coverage incomplete: the flow has no step to run")
+
         client = setup["client"]
 
         # Bootstrap entity data from existing test data.

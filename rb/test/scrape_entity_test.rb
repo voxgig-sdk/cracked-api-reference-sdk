@@ -41,8 +41,14 @@ class ScrapeEntityTest < Minitest::Test
         return
       end
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE"
+      puts "LIVE STEP {\"id\":\"scrape.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/reset-product/scrape\"}"
+      skip("Live coverage incomplete: scrape.create.0 excluded (GET-only live run: needs POST /api/reset-product/scrape)")
+    end
+
     client = setup[:client]
 
+    Runner.live_pace if setup[:live]
     # CREATE
     scrape_ref01_ent = client.Scrape(nil)
     scrape_ref01_data = Helpers.to_map(Vs.getprop(

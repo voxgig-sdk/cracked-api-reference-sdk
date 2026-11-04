@@ -173,6 +173,24 @@ class SeoTrafficEntityTest extends TestCase
         $this->assertSame(2, $client->_cost["total"]["attempts"]);
     }
 
+    public function test_validate_list_response(): void
+    {
+        $cfg = CrackedApiReferenceConfig::shared_config();
+        if (!isset($cfg["feature"]["validate"])) {
+            $this->markTestSkipped('feature not present in this SDK: validate');
+        }
+        $opts = ["feature" => ["validate" => ["active" => true, "request" => false, "response" => true]]];
+        $listed = CrackedApiReferenceSDK::test(['entity' => ['seo_traffic' => ['v1' => ['clicks' => 1, 'ctr' => 1, 'date' => 'x', 'impressions' => 1, 'position' => 1]]]], $opts)->SeoTraffic(null)->list(null, null);
+        $this->assertSame(['v1'], array_map(fn($ent) => $ent->data_get()['id'] ?? null, $listed));
+        $err = null;
+        try {
+            CrackedApiReferenceSDK::test(['entity' => ['seo_traffic' => ['v1' => ['clicks' => 'x', 'ctr' => 1, 'date' => 'x', 'impressions' => 1, 'position' => 1]]]], $opts)->SeoTraffic(null)->list(null, null);
+        } catch (\Throwable $e) {
+            $err = $e;
+        }
+        $this->assertSame('validate_failed', $err->sdk_code ?? null);
+    }
+
     public function test_validate(): void
     {
         $cfg = CrackedApiReferenceConfig::shared_config();
@@ -211,6 +229,9 @@ class SeoTrafficEntityTest extends TestCase
             $seo_traffic_ref01_data = Helpers::to_map($seo_traffic_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LIST
         $seo_traffic_ref01_ent = $client->SeoTraffic(null);
         $seo_traffic_ref01_match = [];

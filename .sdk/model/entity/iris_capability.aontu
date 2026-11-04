@@ -40,6 +40,7 @@ main: kit: entity: iris_capability: {
       h: "Id"
       n: "id"
       r: false
+      syn: true
       t: "`$STRING`"
     }
     idempotencyKey: {
@@ -140,15 +141,6 @@ main: kit: entity: iris_capability: {
             version: 2
           }
           g: {
-            header: [
-              {
-                k: "header"
-                n: "authorization"
-                or: "authorization"
-                r: false
-                t: "`$ANY`"
-              }
-            ]
             params: [
               {
                 k: "param"

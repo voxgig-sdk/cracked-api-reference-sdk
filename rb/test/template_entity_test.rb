@@ -39,6 +39,7 @@ class TemplateEntityTest < Minitest::Test
       template_ref01_data = Helpers.to_map(template_ref01_data_raw[0][1])
     end
 
+    Runner.live_pace if setup[:live]
     # LOAD
     template_ref01_ent = client.Template(nil)
     template_ref01_match_dt0 = {}

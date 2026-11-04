@@ -185,6 +185,8 @@ class AgentEntityTest extends TestCase
                 return;
             }
         }
+        if (!empty($setup["live"]) && getenv('VOXGIG_GETONLY_GUARD') === "TRUE") {
+            fwrite(STDOUT, 'LIVE STEP {"id":"agent.update.1","state":"excluded","attempted":false,"reason":"GET-only live run: needs PUT /api/admin/agents/{agent_id}/active"}' . "\n");
         $client = $setup["client"];
 
         // Bootstrap entity data from existing test data.
@@ -195,6 +197,32 @@ class AgentEntityTest extends TestCase
             $agent_ref01_data = Helpers::to_map($agent_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
+        // LIST
+        $agent_ref01_ent = $client->Agent(null);
+        $agent_ref01_match = [];
+
+        $agent_ref01_list_result = $agent_ref01_ent->list($agent_ref01_match, null);
+        $this->assertIsArray($agent_ref01_list_result);
+
+            return;
+        }
+
+        $client = $setup["client"];
+
+        // Bootstrap entity data from existing test data.
+        $agent_ref01_data_raw = Vs::items(Helpers::to_map(
+            Vs::getpath($setup["data"], "existing.agent")));
+        $agent_ref01_data = null;
+        if (count($agent_ref01_data_raw) > 0) {
+            $agent_ref01_data = Helpers::to_map($agent_ref01_data_raw[0][1]);
+        }
+
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LIST
         $agent_ref01_ent = $client->Agent(null);
         $agent_ref01_match = [];

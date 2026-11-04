@@ -3,41 +3,50 @@
     "iris_task": {
       "IRIS_TASK00": {
         "approvalRequired": true,
-        "cadence": "s65",
-        "capability": "s66",
+        "cadence": "s79",
+        "capability": "s7a",
         "completed": [],
-        "description": "s68",
+        "correlationId": "s7c",
+        "description": "s7d",
         "discover": [],
-        "productId": "s6a",
+        "idempotencyKey": "s7f",
+        "productId": "s80",
         "recurring": [],
         "requiredConnectors": [],
-        "title": "s6d",
+        "title": "s83",
+        "task_id": "TASK01",
         "id": "IRIS_TASK00"
       },
       "IRIS_TASK01": {
         "approvalRequired": true,
-        "cadence": "sc9",
-        "capability": "sca",
+        "cadence": "sf1",
+        "capability": "sf2",
         "completed": [],
-        "description": "scc",
+        "correlationId": "sf4",
+        "description": "sf5",
         "discover": [],
-        "productId": "sce",
+        "idempotencyKey": "sf7",
+        "productId": "sf8",
         "recurring": [],
         "requiredConnectors": [],
-        "title": "sd1",
+        "title": "sfb",
+        "task_id": "TASK01",
         "id": "IRIS_TASK01"
       },
       "IRIS_TASK02": {
         "approvalRequired": true,
-        "cadence": "s12d",
-        "capability": "s12e",
+        "cadence": "s169",
+        "capability": "s16a",
         "completed": [],
-        "description": "s130",
+        "correlationId": "s16c",
+        "description": "s16d",
         "discover": [],
-        "productId": "s132",
+        "idempotencyKey": "s16f",
+        "productId": "s170",
         "recurring": [],
         "requiredConnectors": [],
-        "title": "s135",
+        "title": "s173",
+        "task_id": "TASK01",
         "id": "IRIS_TASK02"
       }
     }
@@ -46,19 +55,26 @@
     "iris_task": {
       "iris_task_ref01": {
         "approvalRequired": true,
-        "cadence": "s191",
-        "capability": "s192",
+        "cadence": "s1e1",
+        "capability": "s1e2",
         "completed": [],
-        "description": "s194",
+        "correlationId": "s1e4",
+        "description": "s1e5",
         "discover": [],
-        "productId": "s196",
+        "idempotencyKey": "s1e7",
+        "productId": "s1e8",
         "recurring": [],
         "requiredConnectors": [],
-        "title": "s199"
+        "title": "s1eb"
       }
     }
   },
   "requests": {
+    "POST /api/iris/tasks/{task_id}/run": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
     "POST /api/iris/tasks": {
       "provenance": "operation-contract",
       "version": 2,

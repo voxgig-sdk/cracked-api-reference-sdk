@@ -52,8 +52,16 @@ class StatsRefreshTaskTriggerEntityTest extends TestCase
                 return;
             }
         }
+        if (!empty($setup["live"]) && getenv('VOXGIG_GETONLY_GUARD') === "TRUE") {
+            fwrite(STDOUT, 'LIVE STEP {"id":"stats_refresh_task_trigger.create.0","state":"excluded","attempted":false,"reason":"GET-only live run: needs POST /api/admin/customer-health/manual-refresh"}' . "\n");
+            $this->markTestSkipped('Live coverage incomplete: stats_refresh_task_trigger.create.0 excluded (GET-only live run: needs POST /api/admin/customer-health/manual-refresh)');
+        }
+
         $client = $setup["client"];
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // CREATE
         $stats_refresh_task_trigger_ref01_ent = $client->StatsRefreshTaskTrigger(null);
         $stats_refresh_task_trigger_ref01_data = Helpers::to_map(Vs::getprop(

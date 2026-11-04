@@ -164,6 +164,9 @@ describe("SeoBacklinkEntity", function()
       seo_backlink_ref01_data = helpers.to_map(seo_backlink_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LIST
     local seo_backlink_ref01_ent = client:SeoBacklink(nil)
     local seo_backlink_ref01_match = {}

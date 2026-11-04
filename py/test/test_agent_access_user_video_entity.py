@@ -60,6 +60,8 @@ class TestAgentAccessUserVideoEntity:
         if len(agent_access_user_video_ref01_data_raw) > 0:
             agent_access_user_video_ref01_data = helpers.to_map(agent_access_user_video_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LOAD
         agent_access_user_video_ref01_ent = client.AgentAccessUserVideo(None)
         agent_access_user_video_ref01_match_dt0 = {}

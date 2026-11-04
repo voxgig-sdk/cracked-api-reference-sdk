@@ -229,6 +229,9 @@ class AgentAccessWinningAdsSummaryEntityTest extends TestCase
             $agent_access_winning_ads_summary_ref01_data = Helpers::to_map($agent_access_winning_ads_summary_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LIST
         $agent_access_winning_ads_summary_ref01_ent = $client->AgentAccessWinningAdsSummary(null);
         $agent_access_winning_ads_summary_ref01_match = [];

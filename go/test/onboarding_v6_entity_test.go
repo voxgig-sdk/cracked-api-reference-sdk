@@ -62,6 +62,11 @@ func TestOnboardingV6Entity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live {
+			t.Skip("Live coverage incomplete: the flow has no step to run")
+			return
+		}
+
 		// Bootstrap entity data from existing test data (no create step in flow).
 		onboardingV6Ref01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.onboarding_v6")))
 		var onboardingV6Ref01Data map[string]any

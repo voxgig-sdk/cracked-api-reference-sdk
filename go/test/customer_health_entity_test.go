@@ -63,10 +63,20 @@ func TestCustomerHealthEntity(t *testing.T) {
 			}
 		}
 		if setup.live {
-			liveMiss(t, customer_healthEntityLiveStrict, "Live entity test blocked: %s", "the flow loads a customer_health record it has no list to find")
+			for _, _liveKey := range []string{"customer_health01"} {
+				if setup.syntheticOnly || setup.idmap[_liveKey] == nil {
+					liveMiss(t, customer_healthEntityLiveStrict, "Live entity test blocked: needs %s via CRACKED_API_REFERENCE_TEST_CUSTOMER_HEALTH_ENTID", _liveKey)
+				}
+			}
 		}
 		client := setup.client
 		_ = client
+		if setup.live {
+			liveExisting(t, customer_healthEntityLiveStrict, setup.data, "customer_health", "user_id", setup.idmap["customer_health01"],
+				func() (any, error) {
+					return []any{map[string]any{"id": setup.idmap["customer_health01"]}}, nil
+				})
+		}
 
 		// Bootstrap entity data from existing test data (no create step in flow).
 		customerHealthRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.customer_health")))
@@ -78,10 +88,13 @@ func TestCustomerHealthEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = customerHealthRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LOAD
 		customerHealthRef01Ent := client.CustomerHealth(nil)
 		customerHealthRef01MatchDt0 := map[string]any{
-			"id": customerHealthRef01Data["id"],
+			"id": customerHealthRef01Data["user_id"],
 		}
 		customerHealthRef01DataDt0Loaded, err := customerHealthRef01Ent.Load(customerHealthRef01MatchDt0, nil)
 		if err != nil {
@@ -91,7 +104,7 @@ func TestCustomerHealthEntity(t *testing.T) {
 		if customerHealthRef01DataDt0LoadResult == nil {
 			t.Fatal("expected load result to be a map")
 		}
-		if customerHealthRef01DataDt0LoadResult["id"] != customerHealthRef01Data["id"] {
+		if !liveSameId(customerHealthRef01DataDt0LoadResult["user_id"], customerHealthRef01Data["user_id"]) {
 			t.Fatal("expected load result id to match")
 		}
 
@@ -114,6 +127,12 @@ func customer_healthBasicSetup(extra map[string]any) *entityTestSetup {
 	var entityData map[string]any
 	if err := json.Unmarshal(entityDataSource, &entityData); err != nil {
 		panic("failed to parse customer_health test data: " + err.Error())
+	}
+
+	for _, rec := range core.ToMapAny(vs.GetPath(entityData, "existing.customer_health")) {
+		if recMap := core.ToMapAny(rec); recMap != nil && recMap["id"] != nil {
+			recMap["user_id"] = recMap["id"]
+		}
 	}
 
 	options := map[string]any{}

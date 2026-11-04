@@ -52,6 +52,31 @@ class CommentCampaignEntityTest extends TestCase
                 return;
             }
         }
+        if (!empty($setup["live"]) && getenv('VOXGIG_GETONLY_GUARD') === "TRUE") {
+            fwrite(STDOUT, 'LIVE STEP {"id":"comment_campaign.create.0","state":"excluded","attempted":false,"reason":"GET-only live run: needs POST /api/comments/products/{product_id}/campaign/sources/{source_id}/resolve"}' . "\n");
+            fwrite(STDOUT, 'LIVE STEP {"id":"comment_campaign.update.1","state":"excluded","attempted":false,"reason":"GET-only live run: needs PUT /api/comments/products/{product_id}/campaign"}' . "\n");
+        $client = $setup["client"];
+
+        // Bootstrap entity data from existing test data.
+        $comment_campaign_ref01_data_raw = Vs::items(Helpers::to_map(
+            Vs::getpath($setup["data"], "existing.comment_campaign")));
+        $comment_campaign_ref01_data = null;
+        if (count($comment_campaign_ref01_data_raw) > 0) {
+            $comment_campaign_ref01_data = Helpers::to_map($comment_campaign_ref01_data_raw[0][1]);
+        }
+
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
+        // LOAD
+        $comment_campaign_ref01_ent = $client->CommentCampaign(null);
+        $comment_campaign_ref01_match_dt0 = [];
+        $comment_campaign_ref01_data_dt0_loaded = $comment_campaign_ref01_ent->load($comment_campaign_ref01_match_dt0, null);
+        $this->assertNotNull($comment_campaign_ref01_data_dt0_loaded);
+
+            return;
+        }
+
         if (!empty($setup["live"])) {
             foreach (["product01"] as $_liveKey) {
                 if (!empty($setup["synthetic_only"]) || null === ($setup["idmap"][$_liveKey] ?? null)) {
@@ -61,6 +86,9 @@ class CommentCampaignEntityTest extends TestCase
         }
         $client = $setup["client"];
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // CREATE
         $comment_campaign_ref01_ent = $client->CommentCampaign(null);
         $comment_campaign_ref01_data = Helpers::to_map(Vs::getprop(
@@ -71,6 +99,9 @@ class CommentCampaignEntityTest extends TestCase
         $comment_campaign_ref01_data = Helpers::to_map(is_object($comment_campaign_ref01_data_result) && method_exists($comment_campaign_ref01_data_result, 'data_get') ? $comment_campaign_ref01_data_result->data_get() : $comment_campaign_ref01_data_result);
         $this->assertNotNull($comment_campaign_ref01_data);
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // UPDATE
         $comment_campaign_ref01_data_up0_up = [
         ];
@@ -84,6 +115,9 @@ class CommentCampaignEntityTest extends TestCase
         $this->assertNotNull($comment_campaign_ref01_resdata_up0);
         $this->assertEquals($comment_campaign_ref01_resdata_up0[$comment_campaign_ref01_markdef_up0_name], $comment_campaign_ref01_markdef_up0_value);
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LOAD
         $comment_campaign_ref01_match_dt0 = [];
         $comment_campaign_ref01_data_dt0_loaded = $comment_campaign_ref01_ent->load($comment_campaign_ref01_match_dt0, null);

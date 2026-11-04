@@ -52,8 +52,16 @@ class CreateResetProductV6EntityTest extends TestCase
                 return;
             }
         }
+        if (!empty($setup["live"]) && getenv('VOXGIG_GETONLY_GUARD') === "TRUE") {
+            fwrite(STDOUT, 'LIVE STEP {"id":"create_reset_product_v6.create.0","state":"excluded","attempted":false,"reason":"GET-only live run: needs POST /api/reset-product/create-v6"}' . "\n");
+            $this->markTestSkipped('Live coverage incomplete: create_reset_product_v6.create.0 excluded (GET-only live run: needs POST /api/reset-product/create-v6)');
+        }
+
         $client = $setup["client"];
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // CREATE
         $create_reset_product_v6_ref01_ent = $client->CreateResetProductV6(null);
         $create_reset_product_v6_ref01_data = Helpers::to_map(Vs::getprop(

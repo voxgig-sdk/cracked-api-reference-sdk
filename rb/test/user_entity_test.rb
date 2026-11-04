@@ -41,10 +41,26 @@ class UserEntityTest < Minitest::Test
         return
       end
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE"
+      puts "LIVE STEP {\"id\":\"user.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/admin/users/{user_id}/fix-auto-schedule-by-date\"}"
+      puts "LIVE STEP {\"id\":\"user.update.1\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs PUT /api/admin/users/{user_id}/auto-schedule\"}"
+      puts "LIVE STEP {\"id\":\"user.load.2\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: reads a record only user.create.0 gives\"}"
+      skip("Live coverage incomplete: user.create.0 excluded (GET-only live run: needs POST /api/admin/users/{user_id}/fix-auto-schedule-by-date); user.update.1 excluded (GET-only live run: needs PUT /api/admin/users/{user_id}/auto-schedule); user.load.2 excluded (GET-only live run: reads a record only user.create.0 gives)")
+    end
+
     if setup[:live]
-      Runner.live_miss(LIVE_STRICT, "Live entity test blocked: " + "the flow loads a user record it has no list to find")
+      ["user01"].each do |_live_key|
+        if setup[:synthetic_only] || setup[:idmap][_live_key].nil?
+          Runner.live_miss(LIVE_STRICT, "Live entity test blocked: needs #{_live_key} via CRACKED_API_REFERENCE_TEST_USER_ENTID")
+        end
+      end
     end
     client = setup[:client]
+    if setup[:live]
+      Runner.live_existing(setup, LIVE_STRICT, "user", "userId", setup[:idmap]["user01"]) do
+        [{ "id" => setup[:idmap]["user01"] }]
+      end
+    end
 
     # Bootstrap entity data from existing test data.
     user_ref01_data_raw = Vs.items(Helpers.to_map(
@@ -54,15 +70,16 @@ class UserEntityTest < Minitest::Test
       user_ref01_data = Helpers.to_map(user_ref01_data_raw[0][1])
     end
 
+    Runner.live_pace if setup[:live]
     # LOAD
     user_ref01_ent = client.User(nil)
     user_ref01_match_dt0 = {
-      "id" => user_ref01_data["id"],
+      "id" => user_ref01_data["userId"],
     }
     user_ref01_data_dt0_loaded = user_ref01_ent.load(user_ref01_match_dt0, nil)
     user_ref01_data_dt0_load_result = Helpers.to_map(user_ref01_data_dt0_loaded.respond_to?(:data_get) ? user_ref01_data_dt0_loaded.data_get : user_ref01_data_dt0_loaded)
     assert !user_ref01_data_dt0_load_result.nil?
-    assert_equal user_ref01_data_dt0_load_result["id"], user_ref01_data["id"]
+    assert Runner.live_same_id(user_ref01_data_dt0_load_result["userId"], user_ref01_data["userId"])
 
   end
 end
@@ -73,6 +90,10 @@ def user_basic_setup(extra)
   entity_data_file = File.join(__dir__, "..", "..", ".sdk", "test", "entity", "user", "UserTestData.json")
   entity_data_source = File.read(entity_data_file, encoding: "UTF-8")
   entity_data = JSON.parse(entity_data_source)
+
+  ((entity_data["existing"] || {})["user"] || {}).each_value do |rec|
+    rec["userId"] = rec["id"] if rec.is_a?(Hash) && !rec["id"].nil?
+  end
 
   options = {}
   options["entity"] = entity_data["existing"]

@@ -5,55 +5,36 @@ main: kit: entity: seo_traffic: {
   alias: field: {}
 
   fields: {
-    end_date: {
+    clicks: {
+      h: "Clicks"
+      n: "clicks"
+      r: true
+      t: "`$NUMBER`"
+    }
+    ctr: {
+      h: "Ctr"
+      n: "ctr"
+      r: true
+      t: "`$NUMBER`"
+    }
+    date: {
       fo: "date"
-      h: "End Date"
-      n: "end_date"
+      h: "Date"
+      n: "date"
       r: true
       t: "`$STRING`"
     }
-    series: {
-      h: "Series"
-      n: "series"
+    impressions: {
+      h: "Impressions"
+      n: "impressions"
       r: true
-      t: "`$ARRAY`"
+      t: "`$NUMBER`"
     }
-    site_url: {
-      h: "Site Url"
-      n: "site_url"
+    position: {
+      h: "Position"
+      n: "position"
       r: true
-      t: "`$STRING`"
-    }
-    start_date: {
-      fo: "date"
-      h: "Start Date"
-      n: "start_date"
-      r: true
-      t: "`$STRING`"
-    }
-    top_countries: {
-      h: "Top Countries"
-      n: "top_countries"
-      r: true
-      t: "`$ARRAY`"
-    }
-    top_pages: {
-      h: "Top Pages"
-      n: "top_pages"
-      r: true
-      t: "`$ARRAY`"
-    }
-    top_queries: {
-      h: "Top Queries"
-      n: "top_queries"
-      r: true
-      t: "`$ARRAY`"
-    }
-    totals: {
-      h: "Totals"
-      n: "totals"
-      r: true
-      t: "`$OBJECT`"
+      t: "`$NUMBER`"
     }
   }
 
@@ -114,7 +95,7 @@ main: kit: entity: seo_traffic: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.series`"
           }
         }
       ]

@@ -62,9 +62,18 @@ func TestAdvanceStepEntity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" {
+			t.Log("LIVE STEP {\"id\":\"advance_step.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/onboarding-v6/advance-step\"}")
+			t.Skip("Live coverage incomplete: advance_step.create.0 excluded (GET-only live run: needs POST /api/onboarding-v6/advance-step)")
+			return
+		}
+
 		client := setup.client
 		_ = client
 
+		if setup.live {
+			livePace()
+		}
 		// CREATE
 		advanceStepRef01Ent := client.AdvanceStep(nil)
 		advanceStepRef01Data := core.ToMapAny(vs.GetProp(

@@ -35,6 +35,9 @@ describe("AdminHealthrxDirect", function()
         end
       end
     end
+    if setup.live then
+      runner.live_pace()
+    end
     local client = setup.client
 
     local params = {}
@@ -106,6 +109,15 @@ function admin_healthrx_direct_setup(mockres)
     end
     local client = sdk.new(merged_opts)
     local idmap = env["CRACKED_API_REFERENCE_TEST_ADMIN_HEALTHRX_ENTID"]
+    if type(idmap) ~= "table" then
+      idmap = {}
+    end
+    -- A path parameter's example stands in for an id *_ENTID does not give.
+    for _k, _v in pairs({["kind01"] = "comments"}) do
+      if idmap[_k] == nil then
+        idmap[_k] = _v
+      end
+    end
     return {
       client = client,
       calls = calls,

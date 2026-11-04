@@ -62,6 +62,9 @@ func TestAnalysisStatusEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = analysisStatusRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LOAD
 		analysisStatusRef01Ent := client.AnalysisStatus(nil)
 		analysisStatusRef01MatchDt0 := map[string]any{}

@@ -21,6 +21,7 @@ main: kit: entity: admin_healthrx: {
       h: "Id"
       n: "id"
       r: false
+      syn: true
       t: "`$STRING`"
     }
     option_id: {

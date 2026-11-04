@@ -75,6 +75,9 @@ func TestActiveOnboardingEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = activeOnboardingRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LOAD
 		activeOnboardingRef01Ent := client.ActiveOnboarding(nil)
 		activeOnboardingRef01MatchDt0 := map[string]any{}

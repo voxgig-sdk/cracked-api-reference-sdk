@@ -62,9 +62,18 @@ func TestCreateBlackoutSora2VideoEntity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" {
+			t.Log("LIVE STEP {\"id\":\"create_blackout_sora2_video.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/core/create-blackout-sora2-video\"}")
+			t.Skip("Live coverage incomplete: create_blackout_sora2_video.create.0 excluded (GET-only live run: needs POST /api/core/create-blackout-sora2-video)")
+			return
+		}
+
 		client := setup.client
 		_ = client
 
+		if setup.live {
+			livePace()
+		}
 		// CREATE
 		createBlackoutSora2VideoRef01Ent := client.CreateBlackoutSora2Video(nil)
 		createBlackoutSora2VideoRef01Data := core.ToMapAny(vs.GetProp(

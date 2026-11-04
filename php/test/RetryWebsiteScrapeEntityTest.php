@@ -52,8 +52,16 @@ class RetryWebsiteScrapeEntityTest extends TestCase
                 return;
             }
         }
+        if (!empty($setup["live"]) && getenv('VOXGIG_GETONLY_GUARD') === "TRUE") {
+            fwrite(STDOUT, 'LIVE STEP {"id":"retry_website_scrape.create.0","state":"excluded","attempted":false,"reason":"GET-only live run: needs POST /api/onboarding-v6/retry-scrape"}' . "\n");
+            $this->markTestSkipped('Live coverage incomplete: retry_website_scrape.create.0 excluded (GET-only live run: needs POST /api/onboarding-v6/retry-scrape)');
+        }
+
         $client = $setup["client"];
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // CREATE
         $retry_website_scrape_ref01_ent = $client->RetryWebsiteScrape(null);
         $retry_website_scrape_ref01_data = Helpers::to_map(Vs::getprop(

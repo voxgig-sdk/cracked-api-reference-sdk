@@ -41,8 +41,31 @@ class AdminSlideshowImportEntityTest < Minitest::Test
         return
       end
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE"
+      puts "LIVE STEP {\"id\":\"admin_slideshow_import.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/admin/slideshow-import2/{batch_id}/state\"}"
     client = setup[:client]
 
+    # Bootstrap entity data from existing test data.
+    admin_slideshow_import_ref01_data_raw = Vs.items(Helpers.to_map(
+      Vs.getpath(setup[:data], "existing.admin_slideshow_import")))
+    admin_slideshow_import_ref01_data = nil
+    if admin_slideshow_import_ref01_data_raw.length > 0
+      admin_slideshow_import_ref01_data = Helpers.to_map(admin_slideshow_import_ref01_data_raw[0][1])
+    end
+
+    Runner.live_pace if setup[:live]
+    # LOAD
+    admin_slideshow_import_ref01_ent = client.AdminSlideshowImport(nil)
+    admin_slideshow_import_ref01_match_dt0 = {}
+    admin_slideshow_import_ref01_data_dt0_loaded = admin_slideshow_import_ref01_ent.load(admin_slideshow_import_ref01_match_dt0, nil)
+    assert !admin_slideshow_import_ref01_data_dt0_loaded.nil?
+
+      return
+    end
+
+    client = setup[:client]
+
+    Runner.live_pace if setup[:live]
     # CREATE
     admin_slideshow_import_ref01_ent = client.AdminSlideshowImport(nil)
     admin_slideshow_import_ref01_data = Helpers.to_map(Vs.getprop(
@@ -52,6 +75,7 @@ class AdminSlideshowImportEntityTest < Minitest::Test
     admin_slideshow_import_ref01_data = Helpers.to_map(admin_slideshow_import_ref01_data_result.respond_to?(:data_get) ? admin_slideshow_import_ref01_data_result.data_get : admin_slideshow_import_ref01_data_result)
     assert !admin_slideshow_import_ref01_data.nil?
 
+    Runner.live_pace if setup[:live]
     # LOAD
     admin_slideshow_import_ref01_match_dt0 = {}
     admin_slideshow_import_ref01_data_dt0_loaded = admin_slideshow_import_ref01_ent.load(admin_slideshow_import_ref01_match_dt0, nil)

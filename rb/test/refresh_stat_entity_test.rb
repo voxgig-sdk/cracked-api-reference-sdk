@@ -41,8 +41,14 @@ class RefreshStatEntityTest < Minitest::Test
         return
       end
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE"
+      puts "LIVE STEP {\"id\":\"refresh_stat.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/analytics/refresh-stats\"}"
+      skip("Live coverage incomplete: refresh_stat.create.0 excluded (GET-only live run: needs POST /api/analytics/refresh-stats)")
+    end
+
     client = setup[:client]
 
+    Runner.live_pace if setup[:live]
     # CREATE
     refresh_stat_ref01_ent = client.RefreshStat(nil)
     refresh_stat_ref01_data = Helpers.to_map(Vs.getprop(

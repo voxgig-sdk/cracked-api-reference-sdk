@@ -164,6 +164,9 @@ describe("UsersHealthEntity", function()
       users_health_ref01_data = helpers.to_map(users_health_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LIST
     local users_health_ref01_ent = client:UsersHealth(nil)
     local users_health_ref01_match = {}

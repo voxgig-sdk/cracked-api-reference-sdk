@@ -114,6 +114,16 @@ class TestAgentAccessUserAgentEntity:
         assert client.AgentAccessUserAgent(None).list(None, {"throw": False}) is None
         assert fired < hook.unexpected
 
+    def test_should_validate_each_listed_record(self):
+        if "validate" not in (shared_config().get("feature") or {}):
+            pytest.skip("feature not present in this SDK: validate")
+        opts = {"feature": {"validate": {"active": True, "request": False, "response": True}}}
+        listed = CrackedApiReferenceSDK.test({"entity": {"agent_access_user_agent": {"v1": {"avatar": "x", "facebookUrl": "x", "instagramUrl": "x", "name": "x", "productId": "x", "productName": "x", "tiktokUrl": "x", "type": "x", "uploadPostPlatforms": "x", "youtubeUrl": "x"}}}}, opts).AgentAccessUserAgent(None).list(None, None)
+        assert ["v1"] == [ent.data_get().get("id") for ent in listed]
+        with pytest.raises(Exception) as err:
+            CrackedApiReferenceSDK.test({"entity": {"agent_access_user_agent": {"v1": {"avatar": "x", "facebookUrl": "x", "instagramUrl": "x", "name": 1, "productId": "x", "productName": "x", "tiktokUrl": "x", "type": "x", "uploadPostPlatforms": "x", "youtubeUrl": "x"}}}}, opts).AgentAccessUserAgent(None).list(None, None)
+        assert "validate_failed" == getattr(err.value, "code", None)
+
     def test_should_refuse_an_invalid_request(self):
         if "validate" not in (shared_config().get("feature") or {}):
             pytest.skip("feature not present in this SDK: validate")
@@ -143,6 +153,8 @@ class TestAgentAccessUserAgentEntity:
         if len(agent_access_user_agent_ref01_data_raw) > 0:
             agent_access_user_agent_ref01_data = helpers.to_map(agent_access_user_agent_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LIST
         agent_access_user_agent_ref01_ent = client.AgentAccessUserAgent(None)
         agent_access_user_agent_ref01_match = {}

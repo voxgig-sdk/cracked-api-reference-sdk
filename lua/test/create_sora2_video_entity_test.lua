@@ -44,8 +44,17 @@ describe("CreateSora2VideoEntity", function()
         return
       end
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" then
+      print("LIVE STEP {\"id\":\"create_sora2_video.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/core/create-sora2-video\"}")
+      pending("Live coverage incomplete: create_sora2_video.create.0 excluded (GET-only live run: needs POST /api/core/create-sora2-video)")
+      return
+    end
+
     local client = setup.client
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- CREATE
     local create_sora2_video_ref01_ent = client:CreateSora2Video(nil)
     local create_sora2_video_ref01_data = helpers.to_map(vs.getprop(

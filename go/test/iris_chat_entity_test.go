@@ -62,9 +62,18 @@ func TestIrisChatEntity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" {
+			t.Log("LIVE STEP {\"id\":\"iris_chat.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/iris/chat\"}")
+			t.Skip("Live coverage incomplete: iris_chat.create.0 excluded (GET-only live run: needs POST /api/iris/chat)")
+			return
+		}
+
 		client := setup.client
 		_ = client
 
+		if setup.live {
+			livePace()
+		}
 		// CREATE
 		irisChatRef01Ent := client.IrisChat(nil)
 		irisChatRef01Data := core.ToMapAny(vs.GetProp(

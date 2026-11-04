@@ -153,6 +153,8 @@ class TestAnalyticsPostEntity:
         if len(analytics_post_ref01_data_raw) > 0:
             analytics_post_ref01_data = helpers.to_map(analytics_post_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LIST
         analytics_post_ref01_ent = client.AnalyticsPost(None)
         analytics_post_ref01_match = {}

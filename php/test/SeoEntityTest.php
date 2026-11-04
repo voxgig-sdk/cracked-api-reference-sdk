@@ -46,6 +46,9 @@ class SeoEntityTest extends TestCase
             $seo_ref01_data = Helpers::to_map($seo_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LOAD
         $seo_ref01_ent = $client->Seo(null);
         $seo_ref01_match_dt0 = [];

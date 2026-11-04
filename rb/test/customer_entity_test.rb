@@ -181,6 +181,7 @@ class CustomerEntityTest < Minitest::Test
       customer_ref01_data = Helpers.to_map(customer_ref01_data_raw[0][1])
     end
 
+    Runner.live_pace if setup[:live]
     # LIST
     customer_ref01_ent = client.Customer(nil)
     customer_ref01_match = {}

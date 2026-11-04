@@ -1,6 +1,7 @@
 # AgentPost direct test
 
 import json
+import os
 import pytest
 
 from crackedapireference_sdk.utility.voxgig_struct import voxgig_struct as vs
@@ -33,22 +34,26 @@ class TestAgentPostDirect:
             pytest.skip(_reason or "skipped via sdk-test-control.json")
             return
         if setup["live"]:
-            for _live_key in ["agent_post01"]:
+            for _live_key in ["agent01"]:
                 if setup["idmap"].get(_live_key) is None:
                     runner.live_miss(LIVE_STRICT, f"Live test blocked: needs {_live_key} via CRACKED_API_REFERENCE_TEST_AGENT_POST_ENTID")
 
+        if setup["live"]:
+            runner.live_pace()
         client = setup["client"]
 
         params = {}
+        query = {}
         if setup["live"]:
-            params["id"] = setup["idmap"].get("agent_post01")
+            params["agent_id"] = setup["idmap"].get("agent01")
         else:
-            params["id"] = "direct01"
+            params["agent_id"] = "direct01"
 
         result = client.direct({
-            "path": "api/admin/agents/{id}/posts",
+            "path": "api/admin/agents/{agent_id}/posts",
             "method": "GET",
             "params": params,
+            "query": query,
         })
         if setup["live"]:
             if not _live_ok(result):

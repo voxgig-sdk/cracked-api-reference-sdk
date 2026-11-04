@@ -42,8 +42,14 @@ class TestUploadPostAgentEntity:
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
                 return
+        if setup["live"] and os.environ.get("VOXGIG_GETONLY_GUARD") == "TRUE":
+            print("LIVE STEP {\"id\":\"upload_post_agent.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/upload-post-agents/sync-platforms\"}")
+            pytest.skip("Live coverage incomplete: upload_post_agent.create.0 excluded (GET-only live run: needs POST /api/upload-post-agents/sync-platforms)")
+
         client = setup["client"]
 
+        if setup["live"]:
+            runner.live_pace()
         # CREATE
         upload_post_agent_ref01_ent = client.UploadPostAgent(None)
         upload_post_agent_ref01_data = helpers.to_map(vs.getprop(

@@ -17,6 +17,25 @@ main: kit: flow: BasicAgentFlow:
         }
       ]
     }
+
+    {
+      i: {
+        ref: "agent_ref01",
+        srcdatavar: "agent_ref01_data",
+        suffix: "_up0",
+        textfield: "name"
+      }
+
+      o: "update",
+      s: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-agent_ref01"
+          }
+        }
+      ]
+    }
   ],
   "key$": "BasicAgentFlow"
 }

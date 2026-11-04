@@ -34,21 +34,26 @@ class CarouselStatusDirectTest extends TestCase
             return;
         }
         if ($setup["live"]) {
-            foreach (["carousel_status01"] as $_liveKey) {
+            foreach (["carousel01"] as $_liveKey) {
                 if (null === ($setup["idmap"][$_liveKey] ?? null)) {
                     Runner::live_miss(self::LIVE_STRICT, "Live test blocked: needs " . $_liveKey . " via CRACKED_API_REFERENCE_TEST_CAROUSEL_STATUS_ENTID");
                 }
             }
         }
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         $client = $setup["client"];
 
         $params = [];
-        $params["id"] = $setup["live"] ? ($setup["idmap"]["carousel_status01"] ?? null) : "direct01";
+        $query = [];
+        $params["carousel_id"] = $setup["live"] ? ($setup["idmap"]["carousel01"] ?? null) : "direct01";
 
         $result = $client->direct([
-            "path" => "api/carousel/{id}/status",
+            "path" => "api/carousel/{carousel_id}/status",
             "method" => "GET",
             "params" => $params,
+            "query" => $query,
         ]);
         if ($setup["live"]) {
             if (!self::liveOk($result)) {

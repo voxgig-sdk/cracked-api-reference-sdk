@@ -7,6 +7,18 @@ main: kit: flow: BasicIrisConnectorFlow:
   name: "BasicIrisConnectorFlow",
   step: [
     {
+      i: {
+        ref: "iris_connector_ref01"
+      }
+
+      m: {
+        connector_id: "connector01"
+      }
+
+      o: "create"
+    }
+
+    {
       o: "list",
       v: [
         {

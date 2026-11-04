@@ -43,6 +43,9 @@ describe("AgentAccessPhilHourlyNotificationEntity", function()
       agent_access_phil_hourly_notification_ref01_data = helpers.to_map(agent_access_phil_hourly_notification_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LOAD
     local agent_access_phil_hourly_notification_ref01_ent = client:AgentAccessPhilHourlyNotification(nil)
     local agent_access_phil_hourly_notification_ref01_match_dt0 = {}

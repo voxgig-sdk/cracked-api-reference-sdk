@@ -60,6 +60,8 @@ class TestCommentEntity:
         if len(comment_ref01_data_raw) > 0:
             comment_ref01_data = helpers.to_map(comment_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LOAD
         comment_ref01_ent = client.Comment(None)
         comment_ref01_match_dt0 = {}

@@ -54,6 +54,9 @@ describe("ScanSocialsStatusEntity", function()
       scan_socials_status_ref01_data = helpers.to_map(scan_socials_status_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LOAD
     local scan_socials_status_ref01_ent = client:ScanSocialsStatus(nil)
     local scan_socials_status_ref01_match_dt0 = {}

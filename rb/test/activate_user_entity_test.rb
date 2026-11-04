@@ -41,6 +41,11 @@ class ActivateUserEntityTest < Minitest::Test
         return
       end
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE"
+      puts "LIVE STEP {\"id\":\"activate_user.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/admin/users/{user_id}/activate-and-complete-onboarding\"}"
+      skip("Live coverage incomplete: activate_user.create.0 excluded (GET-only live run: needs POST /api/admin/users/{user_id}/activate-and-complete-onboarding)")
+    end
+
     if setup[:live]
       ["user01"].each do |_live_key|
         if setup[:synthetic_only] || setup[:idmap][_live_key].nil?
@@ -50,6 +55,7 @@ class ActivateUserEntityTest < Minitest::Test
     end
     client = setup[:client]
 
+    Runner.live_pace if setup[:live]
     # CREATE
     activate_user_ref01_ent = client.ActivateUser(nil)
     activate_user_ref01_data = Helpers.to_map(Vs.getprop(

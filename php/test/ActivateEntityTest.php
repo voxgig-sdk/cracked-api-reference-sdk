@@ -52,6 +52,11 @@ class ActivateEntityTest extends TestCase
                 return;
             }
         }
+        if (!empty($setup["live"]) && getenv('VOXGIG_GETONLY_GUARD') === "TRUE") {
+            fwrite(STDOUT, 'LIVE STEP {"id":"activate.create.0","state":"excluded","attempted":false,"reason":"GET-only live run: needs POST /api/admin/users/{user_id}/activate"}' . "\n");
+            $this->markTestSkipped('Live coverage incomplete: activate.create.0 excluded (GET-only live run: needs POST /api/admin/users/{user_id}/activate)');
+        }
+
         if (!empty($setup["live"])) {
             foreach (["user01"] as $_liveKey) {
                 if (!empty($setup["synthetic_only"]) || null === ($setup["idmap"][$_liveKey] ?? null)) {
@@ -61,6 +66,9 @@ class ActivateEntityTest extends TestCase
         }
         $client = $setup["client"];
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // CREATE
         $activate_ref01_ent = $client->Activate(null);
         $activate_ref01_data = Helpers::to_map(Vs::getprop(

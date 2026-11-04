@@ -29,6 +29,12 @@ main: kit: entity: iris_task: {
       r: false
       t: "`$ARRAY`"
     }
+    correlationId: {
+      h: "Correlation Id"
+      n: "correlationId"
+      r: false
+      t: "`$ANY`"
+    }
     description: {
       h: "Description"
       n: "description"
@@ -40,6 +46,12 @@ main: kit: entity: iris_task: {
       n: "discover"
       r: false
       t: "`$ARRAY`"
+    }
+    idempotencyKey: {
+      h: "Idempotency Key"
+      n: "idempotencyKey"
+      r: true
+      t: "`$STRING`"
     }
     productId: {
       h: "Product Id"
@@ -72,6 +84,61 @@ main: kit: entity: iris_task: {
     create: {
       name: "create"
       points: [
+        {
+          bf: [
+            "correlationId"
+            "idempotencyKey"
+            "productId"
+          ]
+          co: {
+            id: "POST /api/iris/tasks/{task_id}/run"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "task_id"
+                or: "task_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/api/iris/tasks/{task_id}/run"
+          q: {
+            exist: [
+              "task_id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "iris"
+            }
+            {
+              lit: "tasks"
+            }
+            {
+              var: "task_id"
+            }
+            {
+              lit: "run"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
         {
           bf: [
             "approvalRequired"
@@ -150,7 +217,7 @@ main: kit: entity: iris_task: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.completed`"
           }
         }
       ]

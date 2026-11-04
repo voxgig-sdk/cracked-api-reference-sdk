@@ -52,6 +52,8 @@ class AutoScheduleSettingEntityTest extends TestCase
                 return;
             }
         }
+        if (!empty($setup["live"]) && getenv('VOXGIG_GETONLY_GUARD') === "TRUE") {
+            fwrite(STDOUT, 'LIVE STEP {"id":"auto_schedule_setting.update.0","state":"excluded","attempted":false,"reason":"GET-only live run: needs PUT /api/schedule/settings"}' . "\n");
         $client = $setup["client"];
 
         // Bootstrap entity data from existing test data.
@@ -62,6 +64,31 @@ class AutoScheduleSettingEntityTest extends TestCase
             $auto_schedule_setting_ref01_data = Helpers::to_map($auto_schedule_setting_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
+        // LOAD
+        $auto_schedule_setting_ref01_ent = $client->AutoScheduleSetting(null);
+        $auto_schedule_setting_ref01_match_dt0 = [];
+        $auto_schedule_setting_ref01_data_dt0_loaded = $auto_schedule_setting_ref01_ent->load($auto_schedule_setting_ref01_match_dt0, null);
+        $this->assertNotNull($auto_schedule_setting_ref01_data_dt0_loaded);
+
+            return;
+        }
+
+        $client = $setup["client"];
+
+        // Bootstrap entity data from existing test data.
+        $auto_schedule_setting_ref01_data_raw = Vs::items(Helpers::to_map(
+            Vs::getpath($setup["data"], "existing.auto_schedule_setting")));
+        $auto_schedule_setting_ref01_data = null;
+        if (count($auto_schedule_setting_ref01_data_raw) > 0) {
+            $auto_schedule_setting_ref01_data = Helpers::to_map($auto_schedule_setting_ref01_data_raw[0][1]);
+        }
+
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // UPDATE
         $auto_schedule_setting_ref01_ent = $client->AutoScheduleSetting(null);
         $auto_schedule_setting_ref01_data_up0_up = [
@@ -76,6 +103,9 @@ class AutoScheduleSettingEntityTest extends TestCase
         $this->assertNotNull($auto_schedule_setting_ref01_resdata_up0);
         $this->assertEquals($auto_schedule_setting_ref01_resdata_up0[$auto_schedule_setting_ref01_markdef_up0_name], $auto_schedule_setting_ref01_markdef_up0_value);
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LOAD
         $auto_schedule_setting_ref01_match_dt0 = [];
         $auto_schedule_setting_ref01_data_dt0_loaded = $auto_schedule_setting_ref01_ent->load($auto_schedule_setting_ref01_match_dt0, null);

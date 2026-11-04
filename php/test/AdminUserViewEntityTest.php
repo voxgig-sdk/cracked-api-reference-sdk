@@ -201,6 +201,34 @@ class AdminUserViewEntityTest extends TestCase
                 return;
             }
         }
+        if (!empty($setup["live"]) && getenv('VOXGIG_GETONLY_GUARD') === "TRUE") {
+            fwrite(STDOUT, 'LIVE STEP {"id":"admin_user_view.create.0","state":"excluded","attempted":false,"reason":"GET-only live run: needs POST /api/admin/users/{user_id}/convert-to-enterprise"}' . "\n");
+            fwrite(STDOUT, 'LIVE STEP {"id":"admin_user_view.update.2","state":"excluded","attempted":false,"reason":"GET-only live run: needs PUT /api/admin/users/{user_id}"}' . "\n");
+            fwrite(STDOUT, 'LIVE STEP {"id":"admin_user_view.remove.3","state":"excluded","attempted":false,"reason":"GET-only live run: needs DELETE /api/admin/users/{user_id}"}' . "\n");
+            fwrite(STDOUT, 'LIVE STEP {"id":"admin_user_view.list.4","state":"excluded","attempted":false,"reason":"GET-only live run: checks a removal this run does not make"}' . "\n");
+        $client = $setup["client"];
+
+        // Bootstrap entity data from existing test data.
+        $admin_user_view_ref01_data_raw = Vs::items(Helpers::to_map(
+            Vs::getpath($setup["data"], "existing.admin_user_view")));
+        $admin_user_view_ref01_data = null;
+        if (count($admin_user_view_ref01_data_raw) > 0) {
+            $admin_user_view_ref01_data = Helpers::to_map($admin_user_view_ref01_data_raw[0][1]);
+        }
+
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
+        // LIST
+        $admin_user_view_ref01_ent = $client->AdminUserView(null);
+        $admin_user_view_ref01_match = [];
+
+        $admin_user_view_ref01_list_result = $admin_user_view_ref01_ent->list($admin_user_view_ref01_match, null);
+        $this->assertIsArray($admin_user_view_ref01_list_result);
+
+            return;
+        }
+
         if (!empty($setup["live"])) {
             foreach (["user01"] as $_liveKey) {
                 if (!empty($setup["synthetic_only"]) || null === ($setup["idmap"][$_liveKey] ?? null)) {
@@ -210,6 +238,9 @@ class AdminUserViewEntityTest extends TestCase
         }
         $client = $setup["client"];
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // CREATE
         $admin_user_view_ref01_ent = $client->AdminUserView(null);
         $admin_user_view_ref01_data = Helpers::to_map(Vs::getprop(
@@ -221,6 +252,9 @@ class AdminUserViewEntityTest extends TestCase
         $this->assertNotNull($admin_user_view_ref01_data);
         $this->assertNotNull($admin_user_view_ref01_data["id"]);
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LIST
         $admin_user_view_ref01_match = [];
 
@@ -232,6 +266,9 @@ class AdminUserViewEntityTest extends TestCase
             ["id" => $admin_user_view_ref01_data["id"]]);
         $this->assertNotEmpty($found_item);
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // UPDATE
         $admin_user_view_ref01_data_up0_up = [
             "id" => $admin_user_view_ref01_data["id"],
@@ -244,15 +281,21 @@ class AdminUserViewEntityTest extends TestCase
         $admin_user_view_ref01_resdata_up0_result = $admin_user_view_ref01_ent->update($admin_user_view_ref01_data_up0_up, null);
         $admin_user_view_ref01_resdata_up0 = Helpers::to_map(is_object($admin_user_view_ref01_resdata_up0_result) && method_exists($admin_user_view_ref01_resdata_up0_result, 'data_get') ? $admin_user_view_ref01_resdata_up0_result->data_get() : $admin_user_view_ref01_resdata_up0_result);
         $this->assertNotNull($admin_user_view_ref01_resdata_up0);
-        $this->assertEquals($admin_user_view_ref01_resdata_up0["id"], $admin_user_view_ref01_data_up0_up["id"]);
+        $this->assertTrue(Runner::live_same_id($admin_user_view_ref01_resdata_up0["id"] ?? null, $admin_user_view_ref01_data_up0_up["id"]));
         $this->assertEquals($admin_user_view_ref01_resdata_up0[$admin_user_view_ref01_markdef_up0_name], $admin_user_view_ref01_markdef_up0_value);
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // REMOVE
         $admin_user_view_ref01_match_rm0 = [
             "id" => $admin_user_view_ref01_data["id"],
         ];
         $admin_user_view_ref01_ent->remove($admin_user_view_ref01_match_rm0, null);
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LIST
         $admin_user_view_ref01_match_rt0 = [];
 

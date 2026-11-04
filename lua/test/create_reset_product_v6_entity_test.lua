@@ -44,8 +44,17 @@ describe("CreateResetProductV6Entity", function()
         return
       end
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" then
+      print("LIVE STEP {\"id\":\"create_reset_product_v6.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/reset-product/create-v6\"}")
+      pending("Live coverage incomplete: create_reset_product_v6.create.0 excluded (GET-only live run: needs POST /api/reset-product/create-v6)")
+      return
+    end
+
     local client = setup.client
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- CREATE
     local create_reset_product_v6_ref01_ent = client:CreateResetProductV6(nil)
     local create_reset_product_v6_ref01_data = helpers.to_map(vs.getprop(

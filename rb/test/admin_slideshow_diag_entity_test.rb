@@ -41,6 +41,15 @@ class AdminSlideshowDiagEntityTest < Minitest::Test
         return
       end
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE"
+      puts "LIVE STEP {\"id\":\"admin_slideshow_diag.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/admin/slideshow-diag/{stage}\"}"
+      skip("Live coverage incomplete: admin_slideshow_diag.create.0 excluded (GET-only live run: needs POST /api/admin/slideshow-diag/{stage})")
+    end
+
+    if setup[:live]
+      skip("Live coverage incomplete: the flow has no step to run")
+    end
+
     client = setup[:client]
 
     # Bootstrap entity data from existing test data.

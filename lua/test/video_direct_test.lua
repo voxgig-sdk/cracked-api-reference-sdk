@@ -28,12 +28,20 @@ describe("VideoDirect", function()
       pending(_reason or "skipped via sdk-test-control.json")
       return
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" and setup.idmap["video01"] == nil then
+      print("LIVE STEP {\"id\":\"direct-load-video\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs video01, which only POST /videos/{video_id}/retry-video gives\"}")
+      pending("Live coverage incomplete: direct-load-video excluded (GET-only live run: needs video01, which only POST /videos/{video_id}/retry-video gives)")
+      return
+    end
     if setup.live then
       for _, _live_key in ipairs({"video01"}) do
         if setup.idmap[_live_key] == nil then
           runner.live_miss(pending, LIVE_STRICT, "Live test blocked: needs " .. _live_key .. " via CRACKED_API_REFERENCE_TEST_VIDEO_ENTID")
         end
       end
+    end
+    if setup.live then
+      runner.live_pace()
     end
     local client = setup.client
 

@@ -153,6 +153,8 @@ class TestPhoneAdminAvailableAgentSourceEntity:
         if len(phone_admin_available_agent_source_ref01_data_raw) > 0:
             phone_admin_available_agent_source_ref01_data = helpers.to_map(phone_admin_available_agent_source_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LIST
         phone_admin_available_agent_source_ref01_ent = client.PhoneAdminAvailableAgentSource(None)
         phone_admin_available_agent_source_ref01_match = {}

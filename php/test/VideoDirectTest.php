@@ -30,12 +30,19 @@ class VideoDirectTest extends TestCase
             $this->markTestSkipped($_reason ?? "skipped via sdk-test-control.json");
             return;
         }
+        if (!empty($setup["live"]) && getenv('VOXGIG_GETONLY_GUARD') === "TRUE" && null === ($setup["idmap"]['video01'] ?? null)) {
+            fwrite(STDOUT, 'LIVE STEP {"id":"direct-load-video","state":"excluded","attempted":false,"reason":"GET-only live run: needs video01, which only POST /videos/{video_id}/retry-video gives"}' . "\n");
+            $this->markTestSkipped('Live coverage incomplete: direct-load-video excluded (GET-only live run: needs video01, which only POST /videos/{video_id}/retry-video gives)');
+        }
         if ($setup["live"]) {
             foreach (["video01"] as $_liveKey) {
                 if (null === ($setup["idmap"][$_liveKey] ?? null)) {
                     Runner::live_miss(self::LIVE_STRICT, "Live test blocked: needs " . $_liveKey . " via CRACKED_API_REFERENCE_TEST_VIDEO_ENTID");
                 }
             }
+        }
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
         }
         $client = $setup["client"];
 

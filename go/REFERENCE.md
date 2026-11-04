@@ -48,687 +48,679 @@ client := sdk.TestSDK(testopts, sdkopts)
 
 ### Instance Methods
 
-#### `Activate(data map[string]any) CrackedApiReferenceEntity`
+#### `Activate(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `Activate` entity instance. Pass `nil` for no initial data.
 
-#### `ActivateUser(data map[string]any) CrackedApiReferenceEntity`
+#### `ActivateUser(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `ActivateUser` entity instance. Pass `nil` for no initial data.
 
-#### `ActiveOnboarding(data map[string]any) CrackedApiReferenceEntity`
+#### `ActiveOnboarding(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `ActiveOnboarding` entity instance. Pass `nil` for no initial data.
 
-#### `Admin(data map[string]any) CrackedApiReferenceEntity`
+#### `Admin(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `Admin` entity instance. Pass `nil` for no initial data.
 
-#### `AdminAccountReset(data map[string]any) CrackedApiReferenceEntity`
+#### `AdminAccountReset(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `AdminAccountReset` entity instance. Pass `nil` for no initial data.
 
-#### `AdminCarousel(data map[string]any) CrackedApiReferenceEntity`
+#### `AdminCarousel(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `AdminCarousel` entity instance. Pass `nil` for no initial data.
 
-#### `AdminCarouselDemoReview(data map[string]any) CrackedApiReferenceEntity`
+#### `AdminCarouselDemoReview(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `AdminCarouselDemoReview` entity instance. Pass `nil` for no initial data.
 
-#### `AdminCustomer(data map[string]any) CrackedApiReferenceEntity`
+#### `AdminCustomer(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `AdminCustomer` entity instance. Pass `nil` for no initial data.
 
-#### `AdminCustomerSuccess(data map[string]any) CrackedApiReferenceEntity`
+#### `AdminCustomerSuccess(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `AdminCustomerSuccess` entity instance. Pass `nil` for no initial data.
 
-#### `AdminGeneratedVideo(data map[string]any) CrackedApiReferenceEntity`
+#### `AdminGeneratedVideo(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `AdminGeneratedVideo` entity instance. Pass `nil` for no initial data.
 
-#### `AdminHealthrx(data map[string]any) CrackedApiReferenceEntity`
+#### `AdminHealthrx(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `AdminHealthrx` entity instance. Pass `nil` for no initial data.
 
-#### `AdminInsight(data map[string]any) CrackedApiReferenceEntity`
+#### `AdminInsight(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `AdminInsight` entity instance. Pass `nil` for no initial data.
 
-#### `AdminLandingTask(data map[string]any) CrackedApiReferenceEntity`
+#### `AdminLandingTask(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `AdminLandingTask` entity instance. Pass `nil` for no initial data.
 
-#### `AdminMetricsSummary(data map[string]any) CrackedApiReferenceEntity`
+#### `AdminMetricsSummary(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `AdminMetricsSummary` entity instance. Pass `nil` for no initial data.
 
-#### `AdminPost(data map[string]any) CrackedApiReferenceEntity`
+#### `AdminPost(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `AdminPost` entity instance. Pass `nil` for no initial data.
 
-#### `AdminRecentSignup(data map[string]any) CrackedApiReferenceEntity`
+#### `AdminRecentSignup(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `AdminRecentSignup` entity instance. Pass `nil` for no initial data.
 
-#### `AdminSlideshowDiag(data map[string]any) CrackedApiReferenceEntity`
+#### `AdminSlideshowDiag(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `AdminSlideshowDiag` entity instance. Pass `nil` for no initial data.
 
-#### `AdminSlideshowImport(data map[string]any) CrackedApiReferenceEntity`
+#### `AdminSlideshowImport(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `AdminSlideshowImport` entity instance. Pass `nil` for no initial data.
 
-#### `AdminUserView(data map[string]any) CrackedApiReferenceEntity`
+#### `AdminUserView(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `AdminUserView` entity instance. Pass `nil` for no initial data.
 
-#### `AdminUsersTableItem(data map[string]any) CrackedApiReferenceEntity`
+#### `AdminUsersTableItem(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `AdminUsersTableItem` entity instance. Pass `nil` for no initial data.
 
-#### `AdminVideoRemixer(data map[string]any) CrackedApiReferenceEntity`
+#### `AdminVideoRemixer(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `AdminVideoRemixer` entity instance. Pass `nil` for no initial data.
 
-#### `AdvanceStep(data map[string]any) CrackedApiReferenceEntity`
+#### `AdvanceStep(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `AdvanceStep` entity instance. Pass `nil` for no initial data.
 
-#### `Agent(data map[string]any) CrackedApiReferenceEntity`
+#### `Agent(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `Agent` entity instance. Pass `nil` for no initial data.
 
-#### `AgentAccessCustomersHealth(data map[string]any) CrackedApiReferenceEntity`
+#### `AgentAccessCustomersHealth(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `AgentAccessCustomersHealth` entity instance. Pass `nil` for no initial data.
 
-#### `AgentAccessOverview(data map[string]any) CrackedApiReferenceEntity`
+#### `AgentAccessOverview(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `AgentAccessOverview` entity instance. Pass `nil` for no initial data.
 
-#### `AgentAccessPhilHourlyNotification(data map[string]any) CrackedApiReferenceEntity`
+#### `AgentAccessPhilHourlyNotification(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `AgentAccessPhilHourlyNotification` entity instance. Pass `nil` for no initial data.
 
-#### `AgentAccessPhilStatsRefresh(data map[string]any) CrackedApiReferenceEntity`
+#### `AgentAccessPhilStatsRefresh(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `AgentAccessPhilStatsRefresh` entity instance. Pass `nil` for no initial data.
 
-#### `AgentAccessPhilVideo(data map[string]any) CrackedApiReferenceEntity`
+#### `AgentAccessPhilVideo(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `AgentAccessPhilVideo` entity instance. Pass `nil` for no initial data.
 
-#### `AgentAccessUserAgent(data map[string]any) CrackedApiReferenceEntity`
+#### `AgentAccessUserAgent(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `AgentAccessUserAgent` entity instance. Pass `nil` for no initial data.
 
-#### `AgentAccessUserPhoneFarm(data map[string]any) CrackedApiReferenceEntity`
+#### `AgentAccessUserPhoneFarm(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `AgentAccessUserPhoneFarm` entity instance. Pass `nil` for no initial data.
 
-#### `AgentAccessUserPost(data map[string]any) CrackedApiReferenceEntity`
+#### `AgentAccessUserPost(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `AgentAccessUserPost` entity instance. Pass `nil` for no initial data.
 
-#### `AgentAccessUserSummary(data map[string]any) CrackedApiReferenceEntity`
+#### `AgentAccessUserSummary(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `AgentAccessUserSummary` entity instance. Pass `nil` for no initial data.
 
-#### `AgentAccessUserVideo(data map[string]any) CrackedApiReferenceEntity`
+#### `AgentAccessUserVideo(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `AgentAccessUserVideo` entity instance. Pass `nil` for no initial data.
 
-#### `AgentAccessUserWinningAd(data map[string]any) CrackedApiReferenceEntity`
+#### `AgentAccessUserWinningAd(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `AgentAccessUserWinningAd` entity instance. Pass `nil` for no initial data.
 
-#### `AgentAccessWinningAdsSummary(data map[string]any) CrackedApiReferenceEntity`
+#### `AgentAccessWinningAdsSummary(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `AgentAccessWinningAdsSummary` entity instance. Pass `nil` for no initial data.
 
-#### `AgentDetail(data map[string]any) CrackedApiReferenceEntity`
+#### `AgentDetail(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `AgentDetail` entity instance. Pass `nil` for no initial data.
 
-#### `AgentHealth(data map[string]any) CrackedApiReferenceEntity`
+#### `AgentHealth(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `AgentHealth` entity instance. Pass `nil` for no initial data.
 
-#### `AgentHealthCustomerOption(data map[string]any) CrackedApiReferenceEntity`
+#### `AgentHealthCustomerOption(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `AgentHealthCustomerOption` entity instance. Pass `nil` for no initial data.
 
-#### `AgentHealthDetail(data map[string]any) CrackedApiReferenceEntity`
+#### `AgentHealthDetail(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `AgentHealthDetail` entity instance. Pass `nil` for no initial data.
 
-#### `AgentPost(data map[string]any) CrackedApiReferenceEntity`
+#### `AgentPost(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `AgentPost` entity instance. Pass `nil` for no initial data.
 
-#### `AgentStat(data map[string]any) CrackedApiReferenceEntity`
+#### `AgentStat(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `AgentStat` entity instance. Pass `nil` for no initial data.
 
-#### `AgentSummary(data map[string]any) CrackedApiReferenceEntity`
+#### `AgentSummary(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `AgentSummary` entity instance. Pass `nil` for no initial data.
 
-#### `AgentsSummary(data map[string]any) CrackedApiReferenceEntity`
+#### `AgentsSummary(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `AgentsSummary` entity instance. Pass `nil` for no initial data.
 
-#### `AnalysisStatus(data map[string]any) CrackedApiReferenceEntity`
+#### `AnalysisStatus(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `AnalysisStatus` entity instance. Pass `nil` for no initial data.
 
-#### `AnalyticsPost(data map[string]any) CrackedApiReferenceEntity`
+#### `AnalyticsPost(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `AnalyticsPost` entity instance. Pass `nil` for no initial data.
 
-#### `AnalyzeProduct(data map[string]any) CrackedApiReferenceEntity`
+#### `AnalyzeProduct(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `AnalyzeProduct` entity instance. Pass `nil` for no initial data.
 
-#### `AssignAgent(data map[string]any) CrackedApiReferenceEntity`
+#### `AssignAgent(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `AssignAgent` entity instance. Pass `nil` for no initial data.
 
-#### `Auth(data map[string]any) CrackedApiReferenceEntity`
+#### `Auth(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `Auth` entity instance. Pass `nil` for no initial data.
 
-#### `AutoScheduleSetting(data map[string]any) CrackedApiReferenceEntity`
+#### `AutoScheduleSetting(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `AutoScheduleSetting` entity instance. Pass `nil` for no initial data.
 
-#### `BulkTikTokStatsUpdate(data map[string]any) CrackedApiReferenceEntity`
+#### `BulkTikTokStatsUpdate(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `BulkTikTokStatsUpdate` entity instance. Pass `nil` for no initial data.
 
-#### `Carousel(data map[string]any) CrackedApiReferenceEntity`
+#### `Carousel(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `Carousel` entity instance. Pass `nil` for no initial data.
 
-#### `CarouselAgentDetail(data map[string]any) CrackedApiReferenceEntity`
+#### `CarouselAgentDetail(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `CarouselAgentDetail` entity instance. Pass `nil` for no initial data.
 
-#### `CarouselStatus(data map[string]any) CrackedApiReferenceEntity`
+#### `CarouselStatus(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `CarouselStatus` entity instance. Pass `nil` for no initial data.
 
-#### `Chat(data map[string]any) CrackedApiReferenceEntity`
-
-Create a new `Chat` entity instance. Pass `nil` for no initial data.
-
-#### `ChatHistory(data map[string]any) CrackedApiReferenceEntity`
+#### `ChatHistory(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `ChatHistory` entity instance. Pass `nil` for no initial data.
 
-#### `ChatSession(data map[string]any) CrackedApiReferenceEntity`
+#### `ChatSession(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `ChatSession` entity instance. Pass `nil` for no initial data.
 
-#### `Comment(data map[string]any) CrackedApiReferenceEntity`
+#### `Comment(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `Comment` entity instance. Pass `nil` for no initial data.
 
-#### `CommentCampaign(data map[string]any) CrackedApiReferenceEntity`
+#### `CommentCampaign(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `CommentCampaign` entity instance. Pass `nil` for no initial data.
 
-#### `CompleteChatCheckout(data map[string]any) CrackedApiReferenceEntity`
+#### `CompleteChatCheckout(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `CompleteChatCheckout` entity instance. Pass `nil` for no initial data.
 
-#### `CreateBlackoutSora2Video(data map[string]any) CrackedApiReferenceEntity`
+#### `CreateBlackoutSora2Video(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `CreateBlackoutSora2Video` entity instance. Pass `nil` for no initial data.
 
-#### `CreateCarousel(data map[string]any) CrackedApiReferenceEntity`
+#### `CreateCarousel(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `CreateCarousel` entity instance. Pass `nil` for no initial data.
 
-#### `CreateProduct(data map[string]any) CrackedApiReferenceEntity`
+#### `CreateProduct(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `CreateProduct` entity instance. Pass `nil` for no initial data.
 
-#### `CreateResetProductV6(data map[string]any) CrackedApiReferenceEntity`
+#### `CreateResetProductV6(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `CreateResetProductV6` entity instance. Pass `nil` for no initial data.
 
-#### `CreateSora2Video(data map[string]any) CrackedApiReferenceEntity`
+#### `CreateSora2Video(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `CreateSora2Video` entity instance. Pass `nil` for no initial data.
 
-#### `CreateVariation(data map[string]any) CrackedApiReferenceEntity`
+#### `CreateVariation(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `CreateVariation` entity instance. Pass `nil` for no initial data.
 
-#### `Customer(data map[string]any) CrackedApiReferenceEntity`
+#### `Customer(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `Customer` entity instance. Pass `nil` for no initial data.
 
-#### `CustomerHealth(data map[string]any) CrackedApiReferenceEntity`
+#### `CustomerHealth(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `CustomerHealth` entity instance. Pass `nil` for no initial data.
 
-#### `CustomerHealthAllCustomersItem(data map[string]any) CrackedApiReferenceEntity`
+#### `CustomerHealthAllCustomersItem(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `CustomerHealthAllCustomersItem` entity instance. Pass `nil` for no initial data.
 
-#### `CustomerHealthViewsSummary(data map[string]any) CrackedApiReferenceEntity`
+#### `CustomerHealthViewsSummary(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `CustomerHealthViewsSummary` entity instance. Pass `nil` for no initial data.
 
-#### `Daily(data map[string]any) CrackedApiReferenceEntity`
+#### `Daily(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `Daily` entity instance. Pass `nil` for no initial data.
 
-#### `DailyStatus(data map[string]any) CrackedApiReferenceEntity`
+#### `DailyStatus(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `DailyStatus` entity instance. Pass `nil` for no initial data.
 
-#### `DedicatedAgentsDashboard(data map[string]any) CrackedApiReferenceEntity`
+#### `DedicatedAgentsDashboard(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `DedicatedAgentsDashboard` entity instance. Pass `nil` for no initial data.
 
-#### `EnterpriseAgent(data map[string]any) CrackedApiReferenceEntity`
+#### `EnterpriseAgent(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `EnterpriseAgent` entity instance. Pass `nil` for no initial data.
 
-#### `EnterpriseProduct(data map[string]any) CrackedApiReferenceEntity`
-
-Create a new `EnterpriseProduct` entity instance. Pass `nil` for no initial data.
-
-#### `ExactAvailability(data map[string]any) CrackedApiReferenceEntity`
+#### `ExactAvailability(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `ExactAvailability` entity instance. Pass `nil` for no initial data.
 
-#### `ExactFormula(data map[string]any) CrackedApiReferenceEntity`
+#### `ExactFormula(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `ExactFormula` entity instance. Pass `nil` for no initial data.
 
-#### `ExtractV2(data map[string]any) CrackedApiReferenceEntity`
+#### `ExtractV2(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `ExtractV2` entity instance. Pass `nil` for no initial data.
 
-#### `FailedPost(data map[string]any) CrackedApiReferenceEntity`
+#### `FailedPost(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `FailedPost` entity instance. Pass `nil` for no initial data.
 
-#### `File(data map[string]any) CrackedApiReferenceEntity`
+#### `File(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `File` entity instance. Pass `nil` for no initial data.
 
-#### `GenerateBlackoutSora2Prompt(data map[string]any) CrackedApiReferenceEntity`
+#### `GenerateBlackoutSora2Prompt(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `GenerateBlackoutSora2Prompt` entity instance. Pass `nil` for no initial data.
 
-#### `GeneratePomelliDemo(data map[string]any) CrackedApiReferenceEntity`
+#### `GeneratePomelliDemo(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `GeneratePomelliDemo` entity instance. Pass `nil` for no initial data.
 
-#### `GeneratePrompt(data map[string]any) CrackedApiReferenceEntity`
+#### `GeneratePrompt(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `GeneratePrompt` entity instance. Pass `nil` for no initial data.
 
-#### `GenerateSora2Prompt(data map[string]any) CrackedApiReferenceEntity`
+#### `GenerateSora2Prompt(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `GenerateSora2Prompt` entity instance. Pass `nil` for no initial data.
 
-#### `Healthrx(data map[string]any) CrackedApiReferenceEntity`
+#### `Healthrx(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `Healthrx` entity instance. Pass `nil` for no initial data.
 
-#### `InitResetProductV6(data map[string]any) CrackedApiReferenceEntity`
+#### `InitResetProductV6(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `InitResetProductV6` entity instance. Pass `nil` for no initial data.
 
-#### `Iri(data map[string]any) CrackedApiReferenceEntity`
-
-Create a new `Iri` entity instance. Pass `nil` for no initial data.
-
-#### `IrisCapability(data map[string]any) CrackedApiReferenceEntity`
+#### `IrisCapability(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `IrisCapability` entity instance. Pass `nil` for no initial data.
 
-#### `IrisChat(data map[string]any) CrackedApiReferenceEntity`
+#### `IrisChat(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `IrisChat` entity instance. Pass `nil` for no initial data.
 
-#### `IrisConnector(data map[string]any) CrackedApiReferenceEntity`
+#### `IrisConnector(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `IrisConnector` entity instance. Pass `nil` for no initial data.
 
-#### `IrisStatus(data map[string]any) CrackedApiReferenceEntity`
+#### `IrisStatus(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `IrisStatus` entity instance. Pass `nil` for no initial data.
 
-#### `IrisTask(data map[string]any) CrackedApiReferenceEntity`
+#### `IrisTask(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `IrisTask` entity instance. Pass `nil` for no initial data.
 
-#### `IrisUsage(data map[string]any) CrackedApiReferenceEntity`
+#### `IrisUsage(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `IrisUsage` entity instance. Pass `nil` for no initial data.
 
-#### `Landing(data map[string]any) CrackedApiReferenceEntity`
+#### `Landing(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `Landing` entity instance. Pass `nil` for no initial data.
 
-#### `LandingStat(data map[string]any) CrackedApiReferenceEntity`
+#### `LandingStat(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `LandingStat` entity instance. Pass `nil` for no initial data.
 
-#### `LandingStatus(data map[string]any) CrackedApiReferenceEntity`
+#### `LandingStatus(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `LandingStatus` entity instance. Pass `nil` for no initial data.
 
-#### `LinkInBio(data map[string]any) CrackedApiReferenceEntity`
+#### `LinkInBio(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `LinkInBio` entity instance. Pass `nil` for no initial data.
 
-#### `LinkInDm(data map[string]any) CrackedApiReferenceEntity`
+#### `LinkInDm(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `LinkInDm` entity instance. Pass `nil` for no initial data.
 
-#### `LinkInPost(data map[string]any) CrackedApiReferenceEntity`
+#### `LinkInPost(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `LinkInPost` entity instance. Pass `nil` for no initial data.
 
-#### `LinkUser(data map[string]any) CrackedApiReferenceEntity`
+#### `LinkUser(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `LinkUser` entity instance. Pass `nil` for no initial data.
 
-#### `MediaAsset(data map[string]any) CrackedApiReferenceEntity`
+#### `MediaAsset(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `MediaAsset` entity instance. Pass `nil` for no initial data.
 
-#### `Men(data map[string]any) CrackedApiReferenceEntity`
+#### `Men(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `Men` entity instance. Pass `nil` for no initial data.
 
-#### `Microdrama(data map[string]any) CrackedApiReferenceEntity`
+#### `Microdrama(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `Microdrama` entity instance. Pass `nil` for no initial data.
 
-#### `MicrohubPublic(data map[string]any) CrackedApiReferenceEntity`
+#### `MicrohubPublic(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `MicrohubPublic` entity instance. Pass `nil` for no initial data.
 
-#### `OnboardingStatus(data map[string]any) CrackedApiReferenceEntity`
+#### `OnboardingStatus(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `OnboardingStatus` entity instance. Pass `nil` for no initial data.
 
-#### `OnboardingV6(data map[string]any) CrackedApiReferenceEntity`
+#### `OnboardingV6(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `OnboardingV6` entity instance. Pass `nil` for no initial data.
 
-#### `PaidUser(data map[string]any) CrackedApiReferenceEntity`
+#### `PaidUser(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `PaidUser` entity instance. Pass `nil` for no initial data.
 
-#### `Pexel(data map[string]any) CrackedApiReferenceEntity`
+#### `Pexel(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `Pexel` entity instance. Pass `nil` for no initial data.
 
-#### `PhoneAdminAvailableAgentSource(data map[string]any) CrackedApiReferenceEntity`
+#### `PhoneAdminAvailableAgentSource(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `PhoneAdminAvailableAgentSource` entity instance. Pass `nil` for no initial data.
 
-#### `Product(data map[string]any) CrackedApiReferenceEntity`
+#### `Product(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `Product` entity instance. Pass `nil` for no initial data.
 
-#### `ProductDashboard(data map[string]any) CrackedApiReferenceEntity`
+#### `ProductDashboard(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `ProductDashboard` entity instance. Pass `nil` for no initial data.
 
-#### `ProductDashboardView(data map[string]any) CrackedApiReferenceEntity`
+#### `ProductDashboardView(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `ProductDashboardView` entity instance. Pass `nil` for no initial data.
 
-#### `ProductDemo(data map[string]any) CrackedApiReferenceEntity`
+#### `ProductDemo(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `ProductDemo` entity instance. Pass `nil` for no initial data.
 
-#### `ProductLanding(data map[string]any) CrackedApiReferenceEntity`
+#### `ProductLanding(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `ProductLanding` entity instance. Pass `nil` for no initial data.
 
-#### `PublicResumeStatus(data map[string]any) CrackedApiReferenceEntity`
+#### `PublicResumeStatus(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `PublicResumeStatus` entity instance. Pass `nil` for no initial data.
 
-#### `ReRollVideo(data map[string]any) CrackedApiReferenceEntity`
+#### `ReRollVideo(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `ReRollVideo` entity instance. Pass `nil` for no initial data.
 
-#### `ReadRootGet(data map[string]any) CrackedApiReferenceEntity`
-
-Create a new `ReadRootGet` entity instance. Pass `nil` for no initial data.
-
-#### `RecordDemoBooked(data map[string]any) CrackedApiReferenceEntity`
+#### `RecordDemoBooked(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `RecordDemoBooked` entity instance. Pass `nil` for no initial data.
 
-#### `RefreshStat(data map[string]any) CrackedApiReferenceEntity`
+#### `RefreshStat(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `RefreshStat` entity instance. Pass `nil` for no initial data.
 
-#### `RemixerClipper(data map[string]any) CrackedApiReferenceEntity`
+#### `RemixerClipper(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `RemixerClipper` entity instance. Pass `nil` for no initial data.
 
-#### `ResetProduct(data map[string]any) CrackedApiReferenceEntity`
+#### `ResetProduct(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `ResetProduct` entity instance. Pass `nil` for no initial data.
 
-#### `RetryWebsiteScrape(data map[string]any) CrackedApiReferenceEntity`
+#### `RetryWebsiteScrape(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `RetryWebsiteScrape` entity instance. Pass `nil` for no initial data.
 
-#### `SaveSurvey(data map[string]any) CrackedApiReferenceEntity`
+#### `RootGet(data map[string]any) CrackedApiReferenceEntityBase`
+
+Create a new `RootGet` entity instance. Pass `nil` for no initial data.
+
+#### `SaveSurvey(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `SaveSurvey` entity instance. Pass `nil` for no initial data.
 
-#### `ScanSocial(data map[string]any) CrackedApiReferenceEntity`
+#### `ScanSocial(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `ScanSocial` entity instance. Pass `nil` for no initial data.
 
-#### `ScanSocialsPublic(data map[string]any) CrackedApiReferenceEntity`
+#### `ScanSocialsPublic(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `ScanSocialsPublic` entity instance. Pass `nil` for no initial data.
 
-#### `ScanSocialsStatus(data map[string]any) CrackedApiReferenceEntity`
+#### `ScanSocialsStatus(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `ScanSocialsStatus` entity instance. Pass `nil` for no initial data.
 
-#### `ScheduleV2(data map[string]any) CrackedApiReferenceEntity`
+#### `ScheduleQueue(data map[string]any) CrackedApiReferenceEntityBase`
+
+Create a new `ScheduleQueue` entity instance. Pass `nil` for no initial data.
+
+#### `ScheduleV2(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `ScheduleV2` entity instance. Pass `nil` for no initial data.
 
-#### `Scrape(data map[string]any) CrackedApiReferenceEntity`
+#### `Scrape(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `Scrape` entity instance. Pass `nil` for no initial data.
 
-#### `ScrapeWebsitePublic(data map[string]any) CrackedApiReferenceEntity`
+#### `ScrapeWebsitePublic(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `ScrapeWebsitePublic` entity instance. Pass `nil` for no initial data.
 
-#### `ScrapedData(data map[string]any) CrackedApiReferenceEntity`
+#### `ScrapedData(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `ScrapedData` entity instance. Pass `nil` for no initial data.
 
-#### `ScrapingStatus(data map[string]any) CrackedApiReferenceEntity`
+#### `ScrapingStatus(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `ScrapingStatus` entity instance. Pass `nil` for no initial data.
 
-#### `SelfServeActivate(data map[string]any) CrackedApiReferenceEntity`
+#### `SelfServeActivate(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `SelfServeActivate` entity instance. Pass `nil` for no initial data.
 
-#### `Seo(data map[string]any) CrackedApiReferenceEntity`
+#### `Seo(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `Seo` entity instance. Pass `nil` for no initial data.
 
-#### `SeoAiMention(data map[string]any) CrackedApiReferenceEntity`
+#### `SeoAiMention(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `SeoAiMention` entity instance. Pass `nil` for no initial data.
 
-#### `SeoBacklink(data map[string]any) CrackedApiReferenceEntity`
+#### `SeoBacklink(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `SeoBacklink` entity instance. Pass `nil` for no initial data.
 
-#### `SeoKeyword(data map[string]any) CrackedApiReferenceEntity`
+#### `SeoKeyword(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `SeoKeyword` entity instance. Pass `nil` for no initial data.
 
-#### `SeoOverview(data map[string]any) CrackedApiReferenceEntity`
+#### `SeoOverview(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `SeoOverview` entity instance. Pass `nil` for no initial data.
 
-#### `SeoTraffic(data map[string]any) CrackedApiReferenceEntity`
+#### `SeoTraffic(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `SeoTraffic` entity instance. Pass `nil` for no initial data.
 
-#### `ShareAccessLink(data map[string]any) CrackedApiReferenceEntity`
+#### `ShareAccessLink(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `ShareAccessLink` entity instance. Pass `nil` for no initial data.
 
-#### `Site(data map[string]any) CrackedApiReferenceEntity`
+#### `Site(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `Site` entity instance. Pass `nil` for no initial data.
 
-#### `Slide(data map[string]any) CrackedApiReferenceEntity`
+#### `Slide(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `Slide` entity instance. Pass `nil` for no initial data.
 
-#### `SlugValidation(data map[string]any) CrackedApiReferenceEntity`
+#### `SlugValidation(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `SlugValidation` entity instance. Pass `nil` for no initial data.
 
-#### `Social(data map[string]any) CrackedApiReferenceEntity`
+#### `Social(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `Social` entity instance. Pass `nil` for no initial data.
 
-#### `SocialScanPreview(data map[string]any) CrackedApiReferenceEntity`
+#### `SocialScanPreview(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `SocialScanPreview` entity instance. Pass `nil` for no initial data.
 
-#### `SocialScanProcess(data map[string]any) CrackedApiReferenceEntity`
+#### `SocialScanProcess(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `SocialScanProcess` entity instance. Pass `nil` for no initial data.
 
-#### `SocialScanSave(data map[string]any) CrackedApiReferenceEntity`
+#### `SocialScanSave(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `SocialScanSave` entity instance. Pass `nil` for no initial data.
 
-#### `Sora2Avatar(data map[string]any) CrackedApiReferenceEntity`
+#### `Sora2Avatar(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `Sora2Avatar` entity instance. Pass `nil` for no initial data.
 
-#### `Sora2AvatarAssetUpload(data map[string]any) CrackedApiReferenceEntity`
+#### `Sora2AvatarAssetUpload(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `Sora2AvatarAssetUpload` entity instance. Pass `nil` for no initial data.
 
-#### `Sora2AvatarStat(data map[string]any) CrackedApiReferenceEntity`
+#### `Sora2AvatarStat(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `Sora2AvatarStat` entity instance. Pass `nil` for no initial data.
 
-#### `Stat(data map[string]any) CrackedApiReferenceEntity`
+#### `Stat(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `Stat` entity instance. Pass `nil` for no initial data.
 
-#### `StatsRefreshBackfill(data map[string]any) CrackedApiReferenceEntity`
+#### `StatsRefreshBackfill(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `StatsRefreshBackfill` entity instance. Pass `nil` for no initial data.
 
-#### `StatsRefreshIssue(data map[string]any) CrackedApiReferenceEntity`
+#### `StatsRefreshIssue(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `StatsRefreshIssue` entity instance. Pass `nil` for no initial data.
 
-#### `StatsRefreshOverview(data map[string]any) CrackedApiReferenceEntity`
+#### `StatsRefreshOverview(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `StatsRefreshOverview` entity instance. Pass `nil` for no initial data.
 
-#### `StatsRefreshRunSummary(data map[string]any) CrackedApiReferenceEntity`
+#### `StatsRefreshRunSummary(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `StatsRefreshRunSummary` entity instance. Pass `nil` for no initial data.
 
-#### `StatsRefreshTaskTrigger(data map[string]any) CrackedApiReferenceEntity`
+#### `StatsRefreshTaskTrigger(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `StatsRefreshTaskTrigger` entity instance. Pass `nil` for no initial data.
 
-#### `Stripe(data map[string]any) CrackedApiReferenceEntity`
+#### `Stripe(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `Stripe` entity instance. Pass `nil` for no initial data.
 
-#### `Style(data map[string]any) CrackedApiReferenceEntity`
+#### `Style(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `Style` entity instance. Pass `nil` for no initial data.
 
-#### `Template(data map[string]any) CrackedApiReferenceEntity`
+#### `Template(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `Template` entity instance. Pass `nil` for no initial data.
 
-#### `TikTokCreatorInfo(data map[string]any) CrackedApiReferenceEntity`
+#### `TikTokCreatorInfo(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `TikTokCreatorInfo` entity instance. Pass `nil` for no initial data.
 
-#### `TopPost(data map[string]any) CrackedApiReferenceEntity`
+#### `TopPost(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `TopPost` entity instance. Pass `nil` for no initial data.
 
-#### `UploadPostAgent(data map[string]any) CrackedApiReferenceEntity`
+#### `UploadPostAgent(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `UploadPostAgent` entity instance. Pass `nil` for no initial data.
 
-#### `User(data map[string]any) CrackedApiReferenceEntity`
+#### `User(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `User` entity instance. Pass `nil` for no initial data.
 
-#### `UserAgent(data map[string]any) CrackedApiReferenceEntity`
+#### `UserAgent(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `UserAgent` entity instance. Pass `nil` for no initial data.
 
-#### `UserHealthDetail(data map[string]any) CrackedApiReferenceEntity`
+#### `UserHealthDetail(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `UserHealthDetail` entity instance. Pass `nil` for no initial data.
 
-#### `UserWithAvatarSubmission(data map[string]any) CrackedApiReferenceEntity`
+#### `UserWithAvatarSubmission(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `UserWithAvatarSubmission` entity instance. Pass `nil` for no initial data.
 
-#### `UsersHealth(data map[string]any) CrackedApiReferenceEntity`
+#### `UsersHealth(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `UsersHealth` entity instance. Pass `nil` for no initial data.
 
-#### `Video(data map[string]any) CrackedApiReferenceEntity`
+#### `Video(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `Video` entity instance. Pass `nil` for no initial data.
 
-#### `VideoRemixerWorker(data map[string]any) CrackedApiReferenceEntity`
+#### `VideoRemixerWorker(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `VideoRemixerWorker` entity instance. Pass `nil` for no initial data.
 
-#### `WatchdogRecovery(data map[string]any) CrackedApiReferenceEntity`
+#### `WatchdogRecovery(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `WatchdogRecovery` entity instance. Pass `nil` for no initial data.
 
-#### `WinningAd(data map[string]any) CrackedApiReferenceEntity`
+#### `WinningAd(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `WinningAd` entity instance. Pass `nil` for no initial data.
 
-#### `XAdaptation(data map[string]any) CrackedApiReferenceEntity`
+#### `XAdaptation(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `XAdaptation` entity instance. Pass `nil` for no initial data.
 
-#### `ZerohumanAdminAccount(data map[string]any) CrackedApiReferenceEntity`
+#### `ZerohumanAdminAccount(data map[string]any) CrackedApiReferenceEntityBase`
 
 Create a new `ZerohumanAdminAccount` entity instance. Pass `nil` for no initial data.
 
@@ -971,56 +963,46 @@ fmt.Println(admin.GetName()) // "admin"
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `apply` | `bool` | No | Apply safe canonical or clean-only URL updates |
-| `count` | `int` | Yes |  |
 | `created_at` | `string` | Yes |  |
 | `date_from` | `any` | No |  |
 | `date_to` | `any` | No |  |
 | `email` | `string` | Yes |  |
 | `id` | `string` | Yes |  |
-| `include_failed` | `bool` | No |  |
-| `include_pending` | `bool` | No |  |
 | `include_records` | `bool` | No | Include full per-field audit records in the response |
 | `issue_ids` | `any` | No |  |
 | `only_active` | `bool` | No | Limit the audit to active agents |
 | `platform` | `any` | No |  |
 | `posting_method` | `any` | No |  |
-| `product_id` | `string` | No |  |
+| `product_id` | `string` | Yes |  |
 | `query` | `any` | No |  |
 | `reason` | `any` | No |  |
-| `regenerate` | `bool` | No |  |
 | `status` | `string` | No |  |
 | `user_membership` | `any` | No |  |
 | `user_name` | `any` | No |  |
 | `user_onboarding_step` | `any` | No |  |
-| `video_type` | `string` | Yes |  |
 
 ### Field Usage by Operation
 
-| Field | load | list | create | update | remove |
-| --- | --- | --- | --- | --- | --- |
-| `apply` | - | - | - | - | - |
-| `count` | - | - | - | - | - |
-| `created_at` | - | - | - | - | - |
-| `date_from` | - | - | Yes | - | - |
-| `date_to` | - | - | Yes | - | - |
-| `email` | - | - | - | - | - |
-| `id` | - | - | - | - | - |
-| `include_failed` | - | - | - | - | - |
-| `include_pending` | - | - | - | - | - |
-| `include_records` | - | - | - | - | - |
-| `issue_ids` | - | - | - | - | - |
-| `only_active` | - | - | - | - | - |
-| `platform` | - | - | - | - | - |
-| `posting_method` | - | - | - | - | - |
-| `product_id` | - | - | Yes | - | - |
-| `query` | - | - | - | - | - |
-| `reason` | - | - | - | - | - |
-| `regenerate` | - | - | - | - | - |
-| `status` | - | - | - | - | - |
-| `user_membership` | - | - | - | - | - |
-| `user_name` | - | - | - | - | - |
-| `user_onboarding_step` | - | - | - | - | - |
-| `video_type` | - | - | - | - | - |
+| Field | load | list | create | remove |
+| --- | --- | --- | --- | --- |
+| `apply` | - | - | - | - |
+| `created_at` | - | - | - | - |
+| `date_from` | - | - | Yes | - |
+| `date_to` | - | - | Yes | - |
+| `email` | - | - | - | - |
+| `id` | - | - | - | - |
+| `include_records` | - | - | - | - |
+| `issue_ids` | - | - | - | - |
+| `only_active` | - | - | - | - |
+| `platform` | - | - | - | - |
+| `posting_method` | - | - | - | - |
+| `product_id` | - | - | - | - |
+| `query` | - | - | - | - |
+| `reason` | - | - | - | - |
+| `status` | - | - | - | - |
+| `user_membership` | - | - | - | - |
+| `user_name` | - | - | - | - |
+| `user_onboarding_step` | - | - | - | - |
 
 ### Operations
 
@@ -1057,29 +1039,12 @@ Create a new entity with the given data. Returns the created entity; `err` is no
 ```go
 result, err := client.Admin(nil).Create(map[string]any{
     "user_id": "example_user_id",
-    "count": 1,
     "created_at": "example_created_at",
     "date_from": "example_date_from",
     "date_to": "example_date_to",
     "email": "example_email",
     "id": "example_id",
     "product_id": "example_product_id",
-    "video_type": "example_video_type",
-}, nil)
-if err != nil {
-    panic(err)
-}
-fmt.Println(result.(sdk.Entity).Data())
-```
-
-#### `Update(reqdata, ctrl map[string]any) (any, error)`
-
-Update an existing entity. The data must include the entity `id`. Returns the updated entity; `err` is non-nil on failure.
-
-```go
-result, err := client.Admin(nil).Update(map[string]any{
-    "agent_id": "agent_id",
-    // Fields to update
 }, nil)
 if err != nil {
     panic(err)
@@ -1768,13 +1733,25 @@ fmt.Println(adminInsight.GetName()) // "admin_insight"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `customer_success_cases` | `[]any` | Yes |  |
-| `customers` | `[]any` | Yes |  |
-| `generated_at` | `string` | Yes |  |
-| `pfa_database` | `map[string]any` | Yes |  |
-| `recent_signups` | `[]any` | Yes |  |
-| `summary` | `map[string]any` | Yes |  |
-| `vireel_database` | `map[string]any` | Yes |  |
+| `active_agents` | `int` | Yes |  |
+| `active_products` | `int` | Yes |  |
+| `agents_count` | `int` | Yes |  |
+| `auto_schedule_status` | `string` | Yes |  |
+| `days_until_period_end` | `any` | No |  |
+| `email` | `string` | Yes |  |
+| `feature_impact` | `string` | Yes |  |
+| `last_notification_at` | `any` | No |  |
+| `membership` | `any` | No |  |
+| `name` | `string` | No |  |
+| `notification_count` | `int` | Yes |  |
+| `notification_events` | `[]any` | Yes |  |
+| `priority` | `string` | Yes |  |
+| `severity` | `string` | Yes |  |
+| `status_label` | `string` | Yes |  |
+| `subscription_current_period_end` | `any` | No |  |
+| `subscription_status` | `any` | No |  |
+| `upcoming_posts` | `int` | Yes |  |
+| `user_id` | `string` | Yes |  |
 
 ### Operations
 
@@ -1909,14 +1886,8 @@ fmt.Println(adminMetricsSummary.GetName()) // "admin_metrics_summary"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `paid_users_by_level` | `[]any` | Yes |  |
-| `total_cancellations` | `int` | Yes |  |
-| `total_previews_generated` | `int` | Yes |  |
-| `total_signups` | `int` | Yes |  |
-| `total_videos_generated` | `int` | Yes |  |
-| `url_attempts` | `int` | Yes |  |
-| `user_credits` | `[]any` | Yes |  |
-| `user_gifted_credits` | `[]any` | Yes |  |
+| `count` | `int` | Yes |  |
+| `level` | `string` | Yes |  |
 
 ### Operations
 
@@ -3391,13 +3362,17 @@ fmt.Println(agentAccessUserAgent.GetName()) // "agent_access_user_agent"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `agentQuota` | `int` | Yes |  |
-| `agents` | `[]any` | Yes |  |
-| `assignedByType` | `map[string]any` | Yes |  |
-| `assignedTotal` | `int` | Yes |  |
-| `email` | `string` | Yes |  |
-| `products` | `[]any` | Yes |  |
-| `userId` | `string` | Yes |  |
+| `avatar` | `any` | No |  |
+| `facebookUrl` | `any` | No |  |
+| `id` | `string` | Yes |  |
+| `instagramUrl` | `any` | No |  |
+| `name` | `string` | Yes |  |
+| `productId` | `any` | No |  |
+| `productName` | `any` | No |  |
+| `tiktokUrl` | `any` | No |  |
+| `type` | `any` | No |  |
+| `uploadPostPlatforms` | `any` | No |  |
+| `youtubeUrl` | `any` | No |  |
 
 ### Operations
 
@@ -3945,19 +3920,12 @@ fmt.Println(agentHealth.GetName()) // "agent_health"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `daily` | `[]any` | Yes |  |
-| `dates` | `[]any` | Yes |  |
-| `generated_at` | `string` | Yes |  |
-| `groups` | `[]any` | Yes |  |
-| `latest` | `map[string]any` | Yes |  |
-| `live_date` | `any` | No |  |
-| `phone_admin_generated_at` | `string` | Yes |  |
-| `platform` | `string` | No |  |
-| `post_target` | `int` | Yes |  |
-| `qa_managed_agent_ids` | `[]any` | No |  |
-| `scope_prefixes` | `[]any` | Yes |  |
-| `timezone` | `string` | Yes |  |
-| `warmup_target` | `int` | Yes |  |
+| `accounts` | `map[string]any` | Yes |  |
+| `date` | `string` | Yes |  |
+| `overall` | `map[string]any` | Yes |  |
+| `posts` | `map[string]any` | Yes |  |
+| `views` | `map[string]any` | Yes |  |
+| `warmups` | `map[string]any` | Yes |  |
 
 ### Operations
 
@@ -4081,19 +4049,12 @@ fmt.Println(agentHealthDetail.GetName()) // "agent_health_detail"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `archived_issue_total` | `int` | No |  |
-| `date` | `string` | Yes |  |
-| `generated_at` | `string` | Yes |  |
-| `group_id` | `string` | Yes |  |
-| `has_more` | `bool` | Yes |  |
-| `issue_total` | `int` | Yes |  |
-| `issues` | `[]any` | Yes |  |
-| `limit` | `int` | Yes |  |
-| `metric` | `string` | Yes |  |
-| `offset` | `int` | Yes |  |
-| `warmup_runs` | `[]any` | No |  |
-| `warning_total` | `int` | No |  |
-| `warnings` | `[]any` | No |  |
+| `agent_id` | `string` | Yes |  |
+| `category` | `string` | Yes |  |
+| `connection_status` | `string` | Yes |  |
+| `device_status` | `string` | Yes |  |
+| `issue` | `any` | No |  |
+| `state` | `string` | Yes |  |
 
 ### Operations
 
@@ -4177,7 +4138,7 @@ fmt.Println(agentPost.GetName()) // "agent_post"
 List entities matching the given criteria. Returns a `[]any` of entities, one per record; `err` is non-nil on failure.
 
 ```go
-results, err := client.AgentPost(nil).List(map[string]any{"id": "example"}, nil)
+results, err := client.AgentPost(nil).List(map[string]any{"agent_id": "example"}, nil)
 if err != nil {
     panic(err)
 }
@@ -4880,7 +4841,6 @@ fmt.Println(carousel.GetName()) // "carousel"
 | `formula_id` | `string` | No |  |
 | `formula_name` | `any` | No |  |
 | `generation` | `map[string]any` | No |  |
-| `id` | `string` | No |  |
 | `image_prompt` | `any` | No |  |
 | `likes` | `any` | No |  |
 | `main_prompt` | `any` | No |  |
@@ -5071,7 +5031,6 @@ fmt.Println(carouselStatus.GetName()) // "carousel_status"
 | --- | --- | --- | --- |
 | `caption` | `any` | Yes |  |
 | `error` | `any` | No |  |
-| `id` | `string` | No |  |
 | `image_model` | `any` | No |  |
 | `image_provider` | `any` | No |  |
 | `image_task_id` | `string` | No |  |
@@ -5087,7 +5046,7 @@ fmt.Println(carouselStatus.GetName()) // "carousel_status"
 List entities matching the given criteria. Returns a `[]any` of entities, one per record; `err` is non-nil on failure.
 
 ```go
-results, err := client.CarouselStatus(nil).List(map[string]any{"id": "example"}, nil)
+results, err := client.CarouselStatus(nil).List(map[string]any{"carousel_id": "example"}, nil)
 if err != nil {
     panic(err)
 }
@@ -5111,72 +5070,6 @@ Get or set the entity match criteria. Works the same as `Data()`.
 #### `Make() Entity`
 
 Create a new `CarouselStatusEntity` instance with the same client and
-options.
-
-#### `Stream(action string, args map[string]any, callopts map[string]any) <-chan StreamItem`
-
-Run an operation through the pipeline and send its result items on the
-returned channel, which closes when the stream ends. A `StreamItem` holds
-one item in `Item`, or in `Err` the error that ended the stream: the
-error the operation itself would return, sent as the last value. Under
-`throw: false` in `callopts["ctrl"]`, no error is sent.
-
-#### `GetName() string`
-
-Return the entity name.
-
-
----
-
-## ChatEntity
-
-```go
-chat := client.Chat(nil)
-fmt.Println(chat.GetName()) // "chat"
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `idempotencyKey` | `string` | Yes |  |
-| `message` | `string` | Yes |  |
-| `sessionId` | `string` | Yes |  |
-
-### Operations
-
-#### `Create(reqdata, ctrl map[string]any) (any, error)`
-
-Create a new entity with the given data. Returns the created entity; `err` is non-nil on failure.
-
-```go
-result, err := client.Chat(nil).Create(map[string]any{
-    "session_id": "example_session_id",
-    "idempotencyKey": "example_idempotencyKey",
-    "message": "example_message",
-    "sessionId": "example_sessionId",
-}, nil)
-if err != nil {
-    panic(err)
-}
-fmt.Println(result.(sdk.Entity).Data())
-```
-
-### Common Methods
-
-#### `Data(args ...any) any`
-
-Get or set the entity data. When called with data, sets the entity's
-internal data and returns the current data. When called without
-arguments, returns a copy of the current data.
-
-#### `Match(args ...any) any`
-
-Get or set the entity match criteria. Works the same as `Data()`.
-
-#### `Make() Entity`
-
-Create a new `ChatEntity` instance with the same client and
 options.
 
 #### `Stream(action string, args map[string]any, callopts map[string]any) <-chan StreamItem`
@@ -5291,6 +5184,8 @@ fmt.Println(chatSession.GetName()) // "chat_session"
 | --- | --- | --- | --- |
 | `chatSubVariant` | `string` | Yes |  |
 | `createdAt` | `string` | Yes |  |
+| `idempotencyKey` | `string` | Yes |  |
+| `message` | `string` | Yes |  |
 | `model` | `any` | No |  |
 | `plan` | `any` | No |  |
 | `route` | `any` | No |  |
@@ -5310,6 +5205,9 @@ Create a new entity with the given data. Returns the created entity; `err` is no
 ```go
 result, err := client.ChatSession(nil).Create(map[string]any{
     "session_id": "example_session_id",
+    "idempotencyKey": "example_idempotencyKey",
+    "message": "example_message",
+    "sessionId": "example_sessionId",
 }, nil)
 if err != nil {
     panic(err)
@@ -6108,7 +6006,6 @@ fmt.Println(customerHealth.GetName()) // "customer_health"
 | `date` | `string` | Yes |  |
 | `email` | `string` | Yes |  |
 | `entries` | `[]any` | Yes |  |
-| `id` | `string` | No |  |
 | `performance_overview` | `map[string]any` | Yes |  |
 | `platform_coverage_summary` | `map[string]any` | Yes |  |
 | `user_id` | `string` | Yes |  |
@@ -6237,20 +6134,10 @@ fmt.Println(customerHealthViewsSummary.GetName()) // "customer_health_views_summ
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `average_views_per_result` | `int` | Yes |  |
-| `date` | `string` | Yes |  |
-| `end_date` | `any` | No |  |
-| `paid_users_count` | `int` | Yes |  |
+| `email` | `string` | Yes |  |
 | `posted_results` | `int` | Yes |  |
-| `range` | `string` | Yes |  |
-| `start_date` | `any` | No |  |
-| `top_users` | `[]any` | Yes |  |
-| `total_views` | `int` | Yes |  |
-| `trend` | `[]any` | Yes |  |
-| `trend_granularity` | `string` | Yes |  |
-| `user_email` | `any` | No |  |
-| `user_id` | `string` | No |  |
-| `users_with_views` | `int` | Yes |  |
+| `user_id` | `string` | Yes |  |
+| `views` | `int` | Yes |  |
 
 ### Operations
 
@@ -6369,12 +6256,6 @@ dailyStatus := client.DailyStatus(nil)
 fmt.Println(dailyStatus.GetName()) // "daily_status"
 ```
 
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `id` | `string` | No |  |
-
 ### Operations
 
 #### `Load(reqmatch, ctrl map[string]any) (any, error)`
@@ -6382,7 +6263,7 @@ fmt.Println(dailyStatus.GetName()) // "daily_status"
 Load a single entity matching the given criteria. Returns the entity, whose record `Data()` reads; `err` is non-nil on failure.
 
 ```go
-result, err := client.DailyStatus(nil).Load(map[string]any{"id": "daily_status_id", "day": "day"}, nil)
+result, err := client.DailyStatus(nil).Load(map[string]any{"daily_id": "daily_id", "day": "day"}, nil)
 if err != nil {
     panic(err)
 }
@@ -6570,59 +6451,6 @@ Get or set the entity match criteria. Works the same as `Data()`.
 #### `Make() Entity`
 
 Create a new `EnterpriseAgentEntity` instance with the same client and
-options.
-
-#### `Stream(action string, args map[string]any, callopts map[string]any) <-chan StreamItem`
-
-Run an operation through the pipeline and send its result items on the
-returned channel, which closes when the stream ends. A `StreamItem` holds
-one item in `Item`, or in `Err` the error that ended the stream: the
-error the operation itself would return, sent as the last value. Under
-`throw: false` in `callopts["ctrl"]`, no error is sent.
-
-#### `GetName() string`
-
-Return the entity name.
-
-
----
-
-## EnterpriseProductEntity
-
-```go
-enterpriseProduct := client.EnterpriseProduct(nil)
-fmt.Println(enterpriseProduct.GetName()) // "enterprise_product"
-```
-
-### Operations
-
-#### `Load(reqmatch, ctrl map[string]any) (any, error)`
-
-Load a single entity matching the given criteria. Returns the entity, whose record `Data()` reads; `err` is non-nil on failure.
-
-```go
-result, err := client.EnterpriseProduct(nil).Load(map[string]any{"product_id": "product_id"}, nil)
-if err != nil {
-    panic(err)
-}
-fmt.Println(result.(sdk.Entity).Data())
-```
-
-### Common Methods
-
-#### `Data(args ...any) any`
-
-Get or set the entity data. When called with data, sets the entity's
-internal data and returns the current data. When called without
-arguments, returns a copy of the current data.
-
-#### `Match(args ...any) any`
-
-Get or set the entity match criteria. Works the same as `Data()`.
-
-#### `Make() Entity`
-
-Create a new `EnterpriseProductEntity` instance with the same client and
 options.
 
 #### `Stream(action string, args map[string]any, callopts map[string]any) <-chan StreamItem`
@@ -7395,70 +7223,6 @@ Return the entity name.
 
 ---
 
-## IriEntity
-
-```go
-iri := client.Iri(nil)
-fmt.Println(iri.GetName()) // "iri"
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `correlationId` | `any` | No |  |
-| `idempotencyKey` | `string` | Yes |  |
-| `productId` | `any` | No |  |
-
-### Operations
-
-#### `Create(reqdata, ctrl map[string]any) (any, error)`
-
-Create a new entity with the given data. Returns the created entity; `err` is non-nil on failure.
-
-```go
-result, err := client.Iri(nil).Create(map[string]any{
-    "connector_id": "example_connector_id",
-    "idempotencyKey": "example_idempotencyKey",
-}, nil)
-if err != nil {
-    panic(err)
-}
-fmt.Println(result.(sdk.Entity).Data())
-```
-
-### Common Methods
-
-#### `Data(args ...any) any`
-
-Get or set the entity data. When called with data, sets the entity's
-internal data and returns the current data. When called without
-arguments, returns a copy of the current data.
-
-#### `Match(args ...any) any`
-
-Get or set the entity match criteria. Works the same as `Data()`.
-
-#### `Make() Entity`
-
-Create a new `IriEntity` instance with the same client and
-options.
-
-#### `Stream(action string, args map[string]any, callopts map[string]any) <-chan StreamItem`
-
-Run an operation through the pipeline and send its result items on the
-returned channel, which closes when the stream ends. A `StreamItem` holds
-one item in `Item`, or in `Err` the error that ended the stream: the
-error the operation itself would return, sent as the last value. Under
-`throw: false` in `callopts["ctrl"]`, no error is sent.
-
-#### `GetName() string`
-
-Return the entity name.
-
-
----
-
 ## IrisCapabilityEntity
 
 ```go
@@ -7642,6 +7406,20 @@ for _, item := range results.([]any) {
 }
 ```
 
+#### `Create(reqdata, ctrl map[string]any) (any, error)`
+
+Create a new entity with the given data. Returns the created entity; `err` is non-nil on failure.
+
+```go
+result, err := client.IrisConnector(nil).Create(map[string]any{
+    "connector_id": "example_connector_id",
+}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result.(sdk.Entity).Data())
+```
+
 ### Common Methods
 
 #### `Data(args ...any) any`
@@ -7753,8 +7531,10 @@ fmt.Println(irisTask.GetName()) // "iris_task"
 | `cadence` | `string` | No |  |
 | `capability` | `any` | No |  |
 | `completed` | `[]any` | No |  |
+| `correlationId` | `any` | No |  |
 | `description` | `string` | No |  |
 | `discover` | `[]any` | No |  |
+| `idempotencyKey` | `string` | Yes |  |
 | `productId` | `any` | No |  |
 | `recurring` | `[]any` | No |  |
 | `requiredConnectors` | `[]any` | No |  |
@@ -7782,6 +7562,7 @@ Create a new entity with the given data. Returns the created entity; `err` is no
 
 ```go
 result, err := client.IrisTask(nil).Create(map[string]any{
+    "idempotencyKey": "example_idempotencyKey",
     "title": "example_title",
 }, nil)
 if err != nil {
@@ -9190,13 +8971,18 @@ fmt.Println(productDashboard.GetName()) // "product_dashboard"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `agents` | `[]any` | Yes |  |
-| `date` | `string` | Yes |  |
-| `pagination` | `map[string]any` | Yes |  |
-| `phone_admin_error` | `any` | No |  |
-| `products` | `[]any` | Yes |  |
-| `selected_product` | `any` | Yes |  |
-| `summary` | `map[string]any` | Yes |  |
+| `comments` | `int` | Yes |  |
+| `failed_entries` | `int` | Yes |  |
+| `has_tiktok_community_violation` | `bool` | No |  |
+| `id` | `string` | Yes |  |
+| `likes` | `int` | Yes |  |
+| `metrics_pending_count` | `int` | No |  |
+| `name` | `string` | Yes |  |
+| `platforms` | `[]any` | Yes |  |
+| `posted_entries` | `int` | Yes |  |
+| `posting_entries` | `int` | Yes |  |
+| `scheduled_entries` | `int` | Yes |  |
+| `views` | `int` | Yes |  |
 
 ### Operations
 
@@ -9397,6 +9183,7 @@ fmt.Println(productLanding.GetName()) // "product_landing"
 | `dmOngoingResponsePrompt` | `any` | No |  |
 | `firstCommentTextBeforeLink` | `any` | No |  |
 | `headerImageUrl` | `any` | No |  |
+| `icon` | `any` | No |  |
 | `id` | `string` | Yes |  |
 | `landingHtmlUrl` | `any` | No |  |
 | `landingLastGeneratedAt` | `any` | No |  |
@@ -9435,6 +9222,7 @@ fmt.Println(productLanding.GetName()) // "product_landing"
 | `slug` | `string` | Yes |  |
 | `socialLinks` | `any` | No |  |
 | `testimonials` | `any` | No |  |
+| `url` | `string` | Yes |  |
 
 ### Field Usage by Operation
 
@@ -9452,6 +9240,7 @@ fmt.Println(productLanding.GetName()) // "product_landing"
 | `dmOngoingResponsePrompt` | - | - |
 | `firstCommentTextBeforeLink` | - | - |
 | `headerImageUrl` | - | - |
+| `icon` | - | - |
 | `id` | - | - |
 | `landingHtmlUrl` | - | - |
 | `landingLastGeneratedAt` | - | - |
@@ -9478,7 +9267,7 @@ fmt.Println(productLanding.GetName()) // "product_landing"
 | `microhubTestimonials` | - | - |
 | `microhubUrl` | - | - |
 | `myPostsStylePrompt` | - | - |
-| `name` | - | - |
+| `name` | Yes | - |
 | `othersStylePrompt` | - | - |
 | `othersTargetMarketPrompt` | - | - |
 | `productLinkSelection` | - | Yes |
@@ -9490,6 +9279,7 @@ fmt.Println(productLanding.GetName()) // "product_landing"
 | `slug` | - | Yes |
 | `socialLinks` | - | - |
 | `testimonials` | - | - |
+| `url` | - | - |
 
 ### Operations
 
@@ -9667,59 +9457,6 @@ Get or set the entity match criteria. Works the same as `Data()`.
 #### `Make() Entity`
 
 Create a new `ReRollVideoEntity` instance with the same client and
-options.
-
-#### `Stream(action string, args map[string]any, callopts map[string]any) <-chan StreamItem`
-
-Run an operation through the pipeline and send its result items on the
-returned channel, which closes when the stream ends. A `StreamItem` holds
-one item in `Item`, or in `Err` the error that ended the stream: the
-error the operation itself would return, sent as the last value. Under
-`throw: false` in `callopts["ctrl"]`, no error is sent.
-
-#### `GetName() string`
-
-Return the entity name.
-
-
----
-
-## ReadRootGetEntity
-
-```go
-readRootGet := client.ReadRootGet(nil)
-fmt.Println(readRootGet.GetName()) // "read_root_get"
-```
-
-### Operations
-
-#### `Load(reqmatch, ctrl map[string]any) (any, error)`
-
-Load a single entity matching the given criteria. Returns the entity, whose record `Data()` reads; `err` is non-nil on failure.
-
-```go
-result, err := client.ReadRootGet(nil).Load(nil, nil)
-if err != nil {
-    panic(err)
-}
-fmt.Println(result.(sdk.Entity).Data())
-```
-
-### Common Methods
-
-#### `Data(args ...any) any`
-
-Get or set the entity data. When called with data, sets the entity's
-internal data and returns the current data. When called without
-arguments, returns a copy of the current data.
-
-#### `Match(args ...any) any`
-
-Get or set the entity match criteria. Works the same as `Data()`.
-
-#### `Make() Entity`
-
-Create a new `ReadRootGetEntity` instance with the same client and
 options.
 
 #### `Stream(action string, args map[string]any, callopts map[string]any) <-chan StreamItem`
@@ -10079,6 +9816,59 @@ Return the entity name.
 
 ---
 
+## RootGetEntity
+
+```go
+rootGet := client.RootGet(nil)
+fmt.Println(rootGet.GetName()) // "root_get"
+```
+
+### Operations
+
+#### `Load(reqmatch, ctrl map[string]any) (any, error)`
+
+Load a single entity matching the given criteria. Returns the entity, whose record `Data()` reads; `err` is non-nil on failure.
+
+```go
+result, err := client.RootGet(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result.(sdk.Entity).Data())
+```
+
+### Common Methods
+
+#### `Data(args ...any) any`
+
+Get or set the entity data. When called with data, sets the entity's
+internal data and returns the current data. When called without
+arguments, returns a copy of the current data.
+
+#### `Match(args ...any) any`
+
+Get or set the entity match criteria. Works the same as `Data()`.
+
+#### `Make() Entity`
+
+Create a new `RootGetEntity` instance with the same client and
+options.
+
+#### `Stream(action string, args map[string]any, callopts map[string]any) <-chan StreamItem`
+
+Run an operation through the pipeline and send its result items on the
+returned channel, which closes when the stream ends. A `StreamItem` holds
+one item in `Item`, or in `Err` the error that ended the stream: the
+error the operation itself would return, sent as the last value. Under
+`throw: false` in `callopts["ctrl"]`, no error is sent.
+
+#### `GetName() string`
+
+Return the entity name.
+
+
+---
+
 ## SaveSurveyEntity
 
 ```go
@@ -10353,6 +10143,62 @@ Return the entity name.
 
 ---
 
+## ScheduleQueueEntity
+
+```go
+scheduleQueue := client.ScheduleQueue(nil)
+fmt.Println(scheduleQueue.GetName()) // "schedule_queue"
+```
+
+### Operations
+
+#### `Update(reqdata, ctrl map[string]any) (any, error)`
+
+Update an existing entity. The data must include the entity `id`. Returns the updated entity; `err` is non-nil on failure.
+
+```go
+result, err := client.ScheduleQueue(nil).Update(map[string]any{
+    "queue_id": "queue_id",
+    // Fields to update
+}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result.(sdk.Entity).Data())
+```
+
+### Common Methods
+
+#### `Data(args ...any) any`
+
+Get or set the entity data. When called with data, sets the entity's
+internal data and returns the current data. When called without
+arguments, returns a copy of the current data.
+
+#### `Match(args ...any) any`
+
+Get or set the entity match criteria. Works the same as `Data()`.
+
+#### `Make() Entity`
+
+Create a new `ScheduleQueueEntity` instance with the same client and
+options.
+
+#### `Stream(action string, args map[string]any, callopts map[string]any) <-chan StreamItem`
+
+Run an operation through the pipeline and send its result items on the
+returned channel, which closes when the stream ends. A `StreamItem` holds
+one item in `Item`, or in `Err` the error that ended the stream: the
+error the operation itself would return, sent as the last value. Under
+`throw: false` in `callopts["ctrl"]`, no error is sent.
+
+#### `GetName() string`
+
+Return the entity name.
+
+
+---
+
 ## ScheduleV2Entity
 
 ```go
@@ -10429,21 +10275,6 @@ result, err := client.ScheduleV2(nil).Create(map[string]any{
     "source_type": "example_source_type",
     "status": "example_status",
     "video_id": "example_video_id",
-}, nil)
-if err != nil {
-    panic(err)
-}
-fmt.Println(result.(sdk.Entity).Data())
-```
-
-#### `Update(reqdata, ctrl map[string]any) (any, error)`
-
-Update an existing entity. The data must include the entity `id`. Returns the updated entity; `err` is non-nil on failure.
-
-```go
-result, err := client.ScheduleV2(nil).Update(map[string]any{
-    "queue_id": "queue_id",
-    // Fields to update
 }, nil)
 if err != nil {
     panic(err)
@@ -11144,14 +10975,11 @@ fmt.Println(seoTraffic.GetName()) // "seo_traffic"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `end_date` | `string` | Yes |  |
-| `series` | `[]any` | Yes |  |
-| `site_url` | `string` | Yes |  |
-| `start_date` | `string` | Yes |  |
-| `top_countries` | `[]any` | Yes |  |
-| `top_pages` | `[]any` | Yes |  |
-| `top_queries` | `[]any` | Yes |  |
-| `totals` | `map[string]any` | Yes |  |
+| `clicks` | `float64` | Yes |  |
+| `ctr` | `float64` | Yes |  |
+| `date` | `string` | Yes |  |
+| `impressions` | `float64` | Yes |  |
+| `position` | `float64` | Yes |  |
 
 ### Operations
 
@@ -12255,23 +12083,24 @@ fmt.Println(statsRefreshOverview.GetName()) // "stats_refresh_overview"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `active_run` | `any` | No |  |
-| `aged_over_24h` | `int` | Yes |  |
-| `backlog_preview` | `[]any` | Yes |  |
-| `coverage_percent` | `float64` | Yes |  |
-| `customer_counts` | `map[string]any` | Yes |  |
-| `date` | `string` | Yes |  |
-| `generated_at` | `string` | Yes |  |
-| `method_counts` | `map[string]any` | Yes |  |
-| `platform_counts` | `map[string]any` | Yes |  |
-| `platform_units_resolved` | `int` | Yes |  |
-| `platform_units_total` | `int` | Yes |  |
-| `platform_units_unresolved` | `int` | Yes |  |
-| `posted_entries` | `int` | Yes |  |
-| `reason_counts` | `map[string]any` | Yes |  |
-| `sla_deadline_et` | `string` | Yes |  |
-| `stale_after_sla` | `int` | Yes |  |
-| `top_affected_customers` | `[]any` | Yes |  |
+| `aged_over_24h` | `bool` | Yes |  |
+| `agent_id` | `string` | No |  |
+| `agent_name` | `any` | No |  |
+| `is_resolved` | `bool` | Yes |  |
+| `last_refresh_completed_at` | `any` | No |  |
+| `latest_error_message` | `any` | No |  |
+| `platform` | `string` | Yes |  |
+| `post_method` | `any` | No |  |
+| `post_url` | `any` | No |  |
+| `posted_date_et` | `string` | Yes |  |
+| `product_id` | `string` | No |  |
+| `product_name` | `any` | No |  |
+| `reason_code` | `any` | No |  |
+| `schedule_queue_id` | `string` | Yes |  |
+| `scheduled_datetime_utc` | `string` | Yes |  |
+| `stale_after_sla` | `bool` | Yes |  |
+| `user_email` | `string` | Yes |  |
+| `user_id` | `string` | Yes |  |
 
 ### Operations
 
@@ -12915,7 +12744,6 @@ fmt.Println(userAgent.GetName()) // "user_agent"
 | `assigned_at` | `string` | Yes |  |
 | `assignment_id` | `string` | Yes |  |
 | `expires_at` | `any` | No |  |
-| `id` | `string` | No |  |
 | `status` | `string` | Yes |  |
 
 ### Operations
@@ -12925,7 +12753,7 @@ fmt.Println(userAgent.GetName()) // "user_agent"
 List entities matching the given criteria. Returns a `[]any` of entities, one per record; `err` is non-nil on failure.
 
 ```go
-results, err := client.UserAgent(nil).List(map[string]any{"id": "example"}, nil)
+results, err := client.UserAgent(nil).List(map[string]any{"user_id": "example"}, nil)
 if err != nil {
     panic(err)
 }
@@ -12940,7 +12768,7 @@ Create a new entity with the given data. Returns the created entity; `err` is no
 
 ```go
 result, err := client.UserAgent(nil).Create(map[string]any{
-    "id": "example_id",
+    "user_id": "example_user_id",
     "agent": map[string]any{},
     "assigned_at": "example_assigned_at",
     "assignment_id": "example_assignment_id",
@@ -12995,65 +12823,9 @@ fmt.Println(userHealthDetail.GetName()) // "user_health_detail"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `account_type` | `any` | Yes |  |
-| `activated` | `bool` | Yes |  |
-| `activated_by_admin_at` | `any` | No |  |
-| `activated_by_admin_id` | `string` | No |  |
-| `admin_notes` | `any` | No |  |
-| `agents_count` | `int` | No |  |
-| `assigned_agents` | `[]any` | Yes |  |
-| `assigned_agents_count` | `int` | Yes |  |
-| `assigned_agents_preview_limit` | `int` | No |  |
-| `assigned_agents_truncated` | `bool` | No |  |
-| `auto_schedule_enabled` | `bool` | Yes |  |
-| `comments_expected_per_day` | `int` | No |  |
-| `comments_fix_block_reason` | `any` | No |  |
-| `comments_fix_ready` | `bool` | No |  |
-| `comments_today_failed` | `int` | No |  |
-| `comments_today_posted` | `int` | No |  |
-| `comments_today_scheduled` | `int` | No |  |
-| `comments_yesterday_failed` | `int` | No |  |
-| `comments_yesterday_posted` | `int` | No |  |
-| `comments_yesterday_total` | `int` | No |  |
-| `created_at` | `string` | Yes |  |
-| `credits` | `int` | Yes |  |
-| `effective_posted_video_reuse_percent` | `int` | Yes |  |
-| `email` | `string` | Yes |  |
-| `expected_agents_count` | `int` | Yes |  |
 | `id` | `string` | Yes |  |
-| `is_activated_by_admin` | `bool` | Yes |  |
-| `is_admin` | `bool` | Yes |  |
-| `is_bookmarked` | `bool` | No |  |
-| `is_internal_user` | `bool` | Yes |  |
-| `is_migrated` | `bool` | Yes |  |
-| `landing_slug` | `any` | No |  |
-| `landing_status` | `any` | No |  |
-| `landing_url` | `any` | No |  |
-| `membership` | `any` | Yes |  |
-| `microhub_status` | `any` | No |  |
-| `microhub_url` | `any` | No |  |
 | `name` | `string` | Yes |  |
-| `onboarding_flow` | `string` | Yes |  |
-| `posted_video_reuse_percent` | `any` | No |  |
-| `product_id` | `string` | Yes |  |
-| `product_name` | `any` | Yes |  |
-| `product_url` | `any` | Yes |  |
-| `subscription_status` | `any` | Yes |  |
-| `survey_data` | `any` | No |  |
-| `today_failed` | `int` | Yes |  |
-| `today_posted` | `int` | Yes |  |
-| `today_scheduled` | `int` | Yes |  |
-| `tomorrow_capacity` | `int` | Yes |  |
-| `tomorrow_scheduled` | `int` | Yes |  |
-| `videos_completed` | `int` | Yes |  |
-| `videos_failed` | `int` | Yes |  |
-| `videos_pending` | `int` | Yes |  |
-| `videos_stale` | `int` | Yes |  |
-| `videos_total` | `int` | Yes |  |
-| `yesterday_failed` | `int` | Yes |  |
-| `yesterday_failed_entries` | `[]any` | Yes |  |
-| `yesterday_posted` | `int` | Yes |  |
-| `yesterday_total` | `int` | Yes |  |
+| `type` | `string` | Yes |  |
 
 ### Operations
 
@@ -13062,7 +12834,7 @@ fmt.Println(userHealthDetail.GetName()) // "user_health_detail"
 List entities matching the given criteria. Returns a `[]any` of entities, one per record; `err` is non-nil on failure.
 
 ```go
-results, err := client.UserHealthDetail(nil).List(map[string]any{"id": "example"}, nil)
+results, err := client.UserHealthDetail(nil).List(map[string]any{"user_id": "example"}, nil)
 if err != nil {
     panic(err)
 }

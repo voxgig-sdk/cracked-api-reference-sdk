@@ -177,6 +177,7 @@ class PexelEntityTest < Minitest::Test
       pexel_ref01_data = Helpers.to_map(pexel_ref01_data_raw[0][1])
     end
 
+    Runner.live_pace if setup[:live]
     # LIST
     pexel_ref01_ent = client.Pexel(nil)
     pexel_ref01_match = {}

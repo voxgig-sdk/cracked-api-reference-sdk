@@ -34,21 +34,26 @@ class AgentPostDirectTest extends TestCase
             return;
         }
         if ($setup["live"]) {
-            foreach (["agent_post01"] as $_liveKey) {
+            foreach (["agent01"] as $_liveKey) {
                 if (null === ($setup["idmap"][$_liveKey] ?? null)) {
                     Runner::live_miss(self::LIVE_STRICT, "Live test blocked: needs " . $_liveKey . " via CRACKED_API_REFERENCE_TEST_AGENT_POST_ENTID");
                 }
             }
         }
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         $client = $setup["client"];
 
         $params = [];
-        $params["id"] = $setup["live"] ? ($setup["idmap"]["agent_post01"] ?? null) : "direct01";
+        $query = [];
+        $params["agent_id"] = $setup["live"] ? ($setup["idmap"]["agent01"] ?? null) : "direct01";
 
         $result = $client->direct([
-            "path" => "api/admin/agents/{id}/posts",
+            "path" => "api/admin/agents/{agent_id}/posts",
             "method" => "GET",
             "params" => $params,
+            "query" => $query,
         ]);
         if ($setup["live"]) {
             if (!self::liveOk($result)) {

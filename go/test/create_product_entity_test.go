@@ -62,9 +62,18 @@ func TestCreateProductEntity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" {
+			t.Log("LIVE STEP {\"id\":\"create_product.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/onboarding-v6/create-product\"}")
+			t.Skip("Live coverage incomplete: create_product.create.0 excluded (GET-only live run: needs POST /api/onboarding-v6/create-product)")
+			return
+		}
+
 		client := setup.client
 		_ = client
 
+		if setup.live {
+			livePace()
+		}
 		// CREATE
 		createProductRef01Ent := client.CreateProduct(nil)
 		createProductRef01Data := core.ToMapAny(vs.GetProp(

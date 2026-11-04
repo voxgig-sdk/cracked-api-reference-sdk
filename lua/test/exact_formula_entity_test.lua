@@ -43,6 +43,9 @@ describe("ExactFormulaEntity", function()
       exact_formula_ref01_data = helpers.to_map(exact_formula_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LOAD
     local exact_formula_ref01_ent = client:ExactFormula(nil)
     local exact_formula_ref01_match_dt0 = {}

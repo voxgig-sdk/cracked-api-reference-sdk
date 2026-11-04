@@ -212,6 +212,9 @@ func TestAdminRecentSignupEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = adminRecentSignupRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LIST
 		adminRecentSignupRef01Ent := client.AdminRecentSignup(nil)
 		adminRecentSignupRef01Match := map[string]any{}

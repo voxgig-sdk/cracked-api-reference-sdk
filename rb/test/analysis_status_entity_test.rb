@@ -39,6 +39,7 @@ class AnalysisStatusEntityTest < Minitest::Test
       analysis_status_ref01_data = Helpers.to_map(analysis_status_ref01_data_raw[0][1])
     end
 
+    Runner.live_pace if setup[:live]
     # LOAD
     analysis_status_ref01_ent = client.AnalysisStatus(nil)
     analysis_status_ref01_match_dt0 = {}

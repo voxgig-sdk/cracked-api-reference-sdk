@@ -17,12 +17,6 @@ main: kit: entity: carousel_status: {
       r: false
       t: "`$ANY`"
     }
-    id: {
-      h: "Id"
-      n: "id"
-      r: false
-      t: "`$STRING`"
-    }
     image_model: {
       h: "Image Model"
       n: "image_model"
@@ -67,11 +61,6 @@ main: kit: entity: carousel_status: {
     }
   }
 
-  id: {
-    field: "id"
-    name: "id"
-  }
-
   name: "carousel_status"
   op: {
     list: {
@@ -87,7 +76,7 @@ main: kit: entity: carousel_status: {
             params: [
               {
                 k: "param"
-                n: "id"
+                n: "carousel_id"
                 or: "video_id"
                 r: true
                 t: "`$STRING`"
@@ -98,12 +87,12 @@ main: kit: entity: carousel_status: {
           o: "/api/carousel/{video_id}/status"
           q: {
             exist: [
-              "id"
+              "carousel_id"
             ]
           }
           r: {
             param: {
-              video_id: "id"
+              video_id: "carousel_id"
             }
           }
           rs: {
@@ -118,7 +107,7 @@ main: kit: entity: carousel_status: {
               lit: "carousel"
             }
             {
-              var: "id"
+              var: "carousel_id"
             }
             {
               lit: "status"
@@ -126,7 +115,7 @@ main: kit: entity: carousel_status: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.slides`"
           }
         }
       ]
@@ -134,5 +123,8 @@ main: kit: entity: carousel_status: {
   }
 
 
+  relations: ancestors: [
+    [path("$.main.kit.entity.carousel")]
+  ]
 
 }

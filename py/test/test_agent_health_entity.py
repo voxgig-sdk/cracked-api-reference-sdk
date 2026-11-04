@@ -143,6 +143,8 @@ class TestAgentHealthEntity:
         if len(agent_health_ref01_data_raw) > 0:
             agent_health_ref01_data = helpers.to_map(agent_health_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LIST
         agent_health_ref01_ent = client.AgentHealth(None)
         agent_health_ref01_match = {}

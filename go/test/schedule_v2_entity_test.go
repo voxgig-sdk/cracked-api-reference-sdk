@@ -199,9 +199,78 @@ func TestScheduleV2Entity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" {
+			t.Log("LIVE STEP {\"id\":\"schedule_v2.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/schedule/queue/add\"}")
+			t.Log("LIVE STEP {\"id\":\"schedule_v2.remove.3\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs DELETE /api/schedule/queue/{queue_id}\"}")
+			t.Log("LIVE STEP {\"id\":\"schedule_v2.list.4\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: checks a removal this run does not make\"}")
+		client := setup.client
+		_ = client
+		if setup.live {
+			var _liveId any
+			if !setup.syntheticOnly {
+				_liveId = setup.idmap["schedule_v201"]
+			}
+			livePace()
+			liveExisting(t, schedule_v2EntityLiveStrict, setup.data, "schedule_v2", "id", _liveId,
+				func() (any, error) {
+					return client.ScheduleV2(nil).List(map[string]any{}, nil)
+				})
+		}
+
+		// Bootstrap entity data from existing test data (no create step in flow).
+		scheduleV2Ref01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.schedule_v2")))
+		var scheduleV2Ref01Data map[string]any
+		if len(scheduleV2Ref01DataRaw) > 0 {
+			scheduleV2Ref01Data = core.ToMapAny(scheduleV2Ref01DataRaw[0][1])
+		}
+		// Discard guards against Go's unused-var check when the flow's steps
+		// happen not to consume the bootstrap data (e.g. list-only flows).
+		_ = scheduleV2Ref01Data
+
+		if setup.live {
+			livePace()
+		}
+		// LIST
+		scheduleV2Ref01Ent := client.ScheduleV2(nil)
+		scheduleV2Ref01Match := map[string]any{}
+
+		scheduleV2Ref01ListResult, err := scheduleV2Ref01Ent.List(scheduleV2Ref01Match, nil)
+		if err != nil {
+			t.Fatalf("list failed: %v", err)
+		}
+		_, scheduleV2Ref01ListOk := scheduleV2Ref01ListResult.([]any)
+		if !scheduleV2Ref01ListOk {
+			t.Fatalf("expected list result to be an array, got %T", scheduleV2Ref01ListResult)
+		}
+
+		if setup.live {
+			livePace()
+		}
+		// LOAD
+		scheduleV2Ref01MatchDt0 := map[string]any{
+			"id": scheduleV2Ref01Data["id"],
+		}
+		scheduleV2Ref01DataDt0Loaded, err := scheduleV2Ref01Ent.Load(scheduleV2Ref01MatchDt0, nil)
+		if err != nil {
+			t.Fatalf("load failed: %v", err)
+		}
+		scheduleV2Ref01DataDt0LoadResult := core.ToMapAny(entityData(scheduleV2Ref01DataDt0Loaded))
+		if scheduleV2Ref01DataDt0LoadResult == nil {
+			t.Fatal("expected load result to be a map")
+		}
+		if !liveSameId(scheduleV2Ref01DataDt0LoadResult["id"], scheduleV2Ref01Data["id"]) {
+			t.Fatal("expected load result id to match")
+		}
+
+		return
+		}
+
 		client := setup.client
 		_ = client
 
+		if setup.live {
+			livePace()
+		}
 		// CREATE
 		scheduleV2Ref01Ent := client.ScheduleV2(nil)
 		scheduleV2Ref01Data := core.ToMapAny(vs.GetProp(
@@ -219,6 +288,9 @@ func TestScheduleV2Entity(t *testing.T) {
 			t.Fatal("expected created entity to have an id")
 		}
 
+		if setup.live {
+			livePace()
+		}
 		// LIST
 		scheduleV2Ref01Match := map[string]any{}
 
@@ -236,6 +308,9 @@ func TestScheduleV2Entity(t *testing.T) {
 			t.Fatal("expected to find created entity in list")
 		}
 
+		if setup.live {
+			livePace()
+		}
 		// LOAD
 		scheduleV2Ref01MatchDt0 := map[string]any{
 			"id": scheduleV2Ref01Data["id"],
@@ -248,7 +323,7 @@ func TestScheduleV2Entity(t *testing.T) {
 		if scheduleV2Ref01DataDt0LoadResult == nil {
 			t.Fatal("expected load result to be a map")
 		}
-		if scheduleV2Ref01DataDt0LoadResult["id"] != scheduleV2Ref01Data["id"] {
+		if !liveSameId(scheduleV2Ref01DataDt0LoadResult["id"], scheduleV2Ref01Data["id"]) {
 			t.Fatal("expected load result id to match")
 		}
 

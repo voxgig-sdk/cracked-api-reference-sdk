@@ -62,9 +62,18 @@ func TestRefreshStatEntity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" {
+			t.Log("LIVE STEP {\"id\":\"refresh_stat.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/analytics/refresh-stats\"}")
+			t.Skip("Live coverage incomplete: refresh_stat.create.0 excluded (GET-only live run: needs POST /api/analytics/refresh-stats)")
+			return
+		}
+
 		client := setup.client
 		_ = client
 
+		if setup.live {
+			livePace()
+		}
 		// CREATE
 		refreshStatRef01Ent := client.RefreshStat(nil)
 		refreshStatRef01Data := core.ToMapAny(vs.GetProp(

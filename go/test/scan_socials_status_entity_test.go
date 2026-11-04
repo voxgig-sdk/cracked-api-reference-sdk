@@ -75,6 +75,9 @@ func TestScanSocialsStatusEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = scanSocialsStatusRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LOAD
 		scanSocialsStatusRef01Ent := client.ScanSocialsStatus(nil)
 		scanSocialsStatusRef01MatchDt0 := map[string]any{}

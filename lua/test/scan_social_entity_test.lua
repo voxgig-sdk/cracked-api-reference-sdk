@@ -44,8 +44,17 @@ describe("ScanSocialEntity", function()
         return
       end
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" then
+      print("LIVE STEP {\"id\":\"scan_social.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/reset-product/scan-socials\"}")
+      pending("Live coverage incomplete: scan_social.create.0 excluded (GET-only live run: needs POST /api/reset-product/scan-socials)")
+      return
+    end
+
     local client = setup.client
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- CREATE
     local scan_social_ref01_ent = client:ScanSocial(nil)
     local scan_social_ref01_data = helpers.to_map(vs.getprop(

@@ -49,6 +49,17 @@ func TestAuthEntity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" {
+			t.Log("LIVE STEP {\"id\":\"auth.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /auth/magic-link\"}")
+			t.Skip("Live coverage incomplete: auth.create.0 excluded (GET-only live run: needs POST /auth/magic-link)")
+			return
+		}
+
+		if setup.live {
+			t.Skip("Live coverage incomplete: the flow has no step to run")
+			return
+		}
+
 		// Bootstrap entity data from existing test data (no create step in flow).
 		authRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.auth")))
 		var authRef01Data map[string]any

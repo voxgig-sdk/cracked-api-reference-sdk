@@ -51,6 +51,8 @@ class TestSiteEntity:
         if len(site_ref01_data_raw) > 0:
             site_ref01_data = helpers.to_map(site_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LOAD
         site_ref01_ent = client.Site(None)
         site_ref01_match_dt0 = {}

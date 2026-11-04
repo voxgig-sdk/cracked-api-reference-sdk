@@ -212,6 +212,9 @@ func TestAnalyticsPostEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = analyticsPostRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LIST
 		analyticsPostRef01Ent := client.AnalyticsPost(nil)
 		analyticsPostRef01Match := map[string]any{}

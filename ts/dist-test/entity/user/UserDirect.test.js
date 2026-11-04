@@ -29,6 +29,11 @@ const utility_1 = require("../../utility");
         const setup = directSetup({ id: 'direct01' });
         if ((0, utility_1.maybeSkipControl)(t, 'direct', 'direct-load-user', setup.live))
             return;
+        if (setup.live && 'TRUE' === process.env.VOXGIG_GETONLY_GUARD && null == setup.idmap?.["user01"]) {
+            console.log("LIVE STEP {\"id\":\"direct-load-user\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs user01, which only POST /api/admin/users/{user_id}/fix-auto-schedule-by-date gives\"}");
+            t.skip("Live coverage incomplete: direct-load-user excluded (GET-only live run: needs user01, which only POST /api/admin/users/{user_id}/fix-auto-schedule-by-date gives)");
+            return;
+        }
         if ((0, utility_1.skipIfMissingIds)(t, setup, ["user01"], LIVE_STRICT))
             return;
         const { client, calls } = setup;
@@ -41,7 +46,7 @@ const utility_1 = require("../../utility");
             params.id = 'direct01';
         }
         const result = await client.direct({
-            path: 'api/upload-post-agents/user/{id}',
+            path: 'api/admin/users/{id}/failed-videos',
             method: 'GET',
             params,
             query,

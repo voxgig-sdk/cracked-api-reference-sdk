@@ -182,7 +182,7 @@ class AdminInsightEntityTest extends TestCase
         $client = CrackedApiReferenceSDK::test(null, ["feature" => ["validate" => ["active" => true]]]);
         $err = null;
         try {
-            $client->AdminInsight(null)->list(["generated_at" => 1], null);
+            $client->AdminInsight(null)->list(["active_agents" => 'x'], null);
         } catch (\Throwable $e) {
             $err = $e;
         }
@@ -211,6 +211,9 @@ class AdminInsightEntityTest extends TestCase
             $admin_insight_ref01_data = Helpers::to_map($admin_insight_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LIST
         $admin_insight_ref01_ent = $client->AdminInsight(null);
         $admin_insight_ref01_match = [];
@@ -218,6 +221,9 @@ class AdminInsightEntityTest extends TestCase
         $admin_insight_ref01_list_result = $admin_insight_ref01_ent->list($admin_insight_ref01_match, null);
         $this->assertIsArray($admin_insight_ref01_list_result);
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LOAD
         $admin_insight_ref01_match_dt0 = [];
         $admin_insight_ref01_data_dt0_loaded = $admin_insight_ref01_ent->load($admin_insight_ref01_match_dt0, null);

@@ -1,6 +1,7 @@
 # Product direct test
 
 import json
+import os
 import pytest
 
 from crackedapireference_sdk.utility.voxgig_struct import voxgig_struct as vs
@@ -32,14 +33,21 @@ class TestProductDirect:
         if _skip:
             pytest.skip(_reason or "skipped via sdk-test-control.json")
             return
+        if setup["live"] and os.environ.get("VOXGIG_GETONLY_GUARD") == "TRUE" and setup["idmap"].get("user01") is None:
+            print("LIVE STEP {\"id\":\"direct-list-product\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs user01, which only POST /api/admin/users/{user_id}/fix-auto-schedule-by-date gives\"}")
+            pytest.skip("Live coverage incomplete: direct-list-product excluded (GET-only live run: needs user01, which only POST /api/admin/users/{user_id}/fix-auto-schedule-by-date gives)")
+
         if setup["live"]:
             for _live_key in ["user01"]:
                 if setup["idmap"].get(_live_key) is None:
                     runner.live_miss(LIVE_STRICT, f"Live test blocked: needs {_live_key} via CRACKED_API_REFERENCE_TEST_PRODUCT_ENTID")
 
+        if setup["live"]:
+            runner.live_pace()
         client = setup["client"]
 
         params = {}
+        query = {}
         if setup["live"]:
             params["user_id"] = setup["idmap"].get("user01")
         else:
@@ -49,6 +57,7 @@ class TestProductDirect:
             "path": "api/admin/users/{user_id}/products",
             "method": "GET",
             "params": params,
+            "query": query,
         })
         if setup["live"]:
             if not _live_ok(result):
@@ -68,11 +77,17 @@ class TestProductDirect:
         if _skip:
             pytest.skip(_reason or "skipped via sdk-test-control.json")
             return
+        if setup["live"] and os.environ.get("VOXGIG_GETONLY_GUARD") == "TRUE" and setup["idmap"].get("user01") is None:
+            print("LIVE STEP {\"id\":\"direct-load-product\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs user01, which only POST /api/admin/users/{user_id}/fix-auto-schedule-by-date gives\"}")
+            pytest.skip("Live coverage incomplete: direct-load-product excluded (GET-only live run: needs user01, which only POST /api/admin/users/{user_id}/fix-auto-schedule-by-date gives)")
+
         if setup["live"]:
             for _live_key in ["user01"]:
                 if setup["idmap"].get(_live_key) is None:
                     runner.live_miss(LIVE_STRICT, f"Live test blocked: needs {_live_key} via CRACKED_API_REFERENCE_TEST_PRODUCT_ENTID")
 
+        if setup["live"]:
+            runner.live_pace()
         client = setup["client"]
 
         params = {}
@@ -91,9 +106,9 @@ class TestProductDirect:
             if 0 == len(records):
                 runner.live_empty("The account has no product record to load")
             first = records[0] if isinstance(records[0], dict) else {}
-            if first.get("id", first.get("id")) is None:
+            if first.get("product_id") is None:
                 runner.live_miss(LIVE_STRICT, "Live load blocked: discovery returned no usable identity")
-            params["id"] = first.get("id", first.get("id"))
+            params["id"] = first.get("product_id")
             pass
         else:
             params["id"] = "direct01"

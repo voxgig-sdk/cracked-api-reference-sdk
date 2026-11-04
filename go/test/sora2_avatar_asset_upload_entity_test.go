@@ -62,9 +62,18 @@ func TestSora2AvatarAssetUploadEntity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" {
+			t.Log("LIVE STEP {\"id\":\"sora2_avatar_asset_upload.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/admin/sora2-avatars/upload-asset\"}")
+			t.Skip("Live coverage incomplete: sora2_avatar_asset_upload.create.0 excluded (GET-only live run: needs POST /api/admin/sora2-avatars/upload-asset)")
+			return
+		}
+
 		client := setup.client
 		_ = client
 
+		if setup.live {
+			livePace()
+		}
 		// CREATE
 		sora2AvatarAssetUploadRef01Ent := client.Sora2AvatarAssetUpload(nil)
 		sora2AvatarAssetUploadRef01Data := core.ToMapAny(vs.GetProp(

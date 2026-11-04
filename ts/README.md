@@ -78,8 +78,8 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 
 ```ts
 try {
-  const admininsights = await client.AdminInsight().list()
-  console.log(admininsights.map((item) => item.data()))
+  const agenthealths = await client.AgentHealth().list()
+  console.log(agenthealths.map((item) => item.data()))
 } catch (err) {
   console.error('list failed:', err)
 }
@@ -143,9 +143,9 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = CrackedApiReferenceSDK.test()
 
-const admininsights = await client.AdminInsight().list()
-// admininsights is an array of AdminInsight entities, one per mock record
-console.log(admininsights.map((admininsight) => admininsight.data()))
+const agenthealths = await client.AgentHealth().list()
+// agenthealths is an array of AgentHealth entities, one per mock record
+console.log(agenthealths.map((agenthealth) => agenthealth.data()))
 ```
 
 You can also use the instance method:
@@ -160,7 +160,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.AdminInsight()
+const entity = client.AgentHealth()
 
 // First call runs the operation and stores its result
 await entity.list()
@@ -302,7 +302,6 @@ new CrackedApiReferenceSDK(options?: {
 | `Carousel(data?)` | `CarouselEntity` | Create a Carousel entity instance. |
 | `CarouselAgentDetail(data?)` | `CarouselAgentDetailEntity` | Create a CarouselAgentDetail entity instance. |
 | `CarouselStatus(data?)` | `CarouselStatusEntity` | Create a CarouselStatus entity instance. |
-| `Chat(data?)` | `ChatEntity` | Create a Chat entity instance. |
 | `ChatHistory(data?)` | `ChatHistoryEntity` | Create a ChatHistory entity instance. |
 | `ChatSession(data?)` | `ChatSessionEntity` | Create a ChatSession entity instance. |
 | `Comment(data?)` | `CommentEntity` | Create a Comment entity instance. |
@@ -322,7 +321,6 @@ new CrackedApiReferenceSDK(options?: {
 | `DailyStatus(data?)` | `DailyStatusEntity` | Create a DailyStatus entity instance. |
 | `DedicatedAgentsDashboard(data?)` | `DedicatedAgentsDashboardEntity` | Create a DedicatedAgentsDashboard entity instance. |
 | `EnterpriseAgent(data?)` | `EnterpriseAgentEntity` | Create an EnterpriseAgent entity instance. |
-| `EnterpriseProduct(data?)` | `EnterpriseProductEntity` | Create an EnterpriseProduct entity instance. |
 | `ExactAvailability(data?)` | `ExactAvailabilityEntity` | Create an ExactAvailability entity instance. |
 | `ExactFormula(data?)` | `ExactFormulaEntity` | Create an ExactFormula entity instance. |
 | `ExtractV2(data?)` | `ExtractV2Entity` | Create an ExtractV2 entity instance. |
@@ -334,7 +332,6 @@ new CrackedApiReferenceSDK(options?: {
 | `GenerateSora2Prompt(data?)` | `GenerateSora2PromptEntity` | Create a GenerateSora2Prompt entity instance. |
 | `Healthrx(data?)` | `HealthrxEntity` | Create a Healthrx entity instance. |
 | `InitResetProductV6(data?)` | `InitResetProductV6Entity` | Create an InitResetProductV6 entity instance. |
-| `Iri(data?)` | `IriEntity` | Create an Iri entity instance. |
 | `IrisCapability(data?)` | `IrisCapabilityEntity` | Create an IrisCapability entity instance. |
 | `IrisChat(data?)` | `IrisChatEntity` | Create an IrisChat entity instance. |
 | `IrisConnector(data?)` | `IrisConnectorEntity` | Create an IrisConnector entity instance. |
@@ -364,16 +361,17 @@ new CrackedApiReferenceSDK(options?: {
 | `ProductLanding(data?)` | `ProductLandingEntity` | Create a ProductLanding entity instance. |
 | `PublicResumeStatus(data?)` | `PublicResumeStatusEntity` | Create a PublicResumeStatus entity instance. |
 | `ReRollVideo(data?)` | `ReRollVideoEntity` | Create a ReRollVideo entity instance. |
-| `ReadRootGet(data?)` | `ReadRootGetEntity` | Create a ReadRootGet entity instance. |
 | `RecordDemoBooked(data?)` | `RecordDemoBookedEntity` | Create a RecordDemoBooked entity instance. |
 | `RefreshStat(data?)` | `RefreshStatEntity` | Create a RefreshStat entity instance. |
 | `RemixerClipper(data?)` | `RemixerClipperEntity` | Create a RemixerClipper entity instance. |
 | `ResetProduct(data?)` | `ResetProductEntity` | Create a ResetProduct entity instance. |
 | `RetryWebsiteScrape(data?)` | `RetryWebsiteScrapeEntity` | Create a RetryWebsiteScrape entity instance. |
+| `RootGet(data?)` | `RootGetEntity` | Create a RootGet entity instance. |
 | `SaveSurvey(data?)` | `SaveSurveyEntity` | Create a SaveSurvey entity instance. |
 | `ScanSocial(data?)` | `ScanSocialEntity` | Create a ScanSocial entity instance. |
 | `ScanSocialsPublic(data?)` | `ScanSocialsPublicEntity` | Create a ScanSocialsPublic entity instance. |
 | `ScanSocialsStatus(data?)` | `ScanSocialsStatusEntity` | Create a ScanSocialsStatus entity instance. |
+| `ScheduleQueue(data?)` | `ScheduleQueueEntity` | Create a ScheduleQueue entity instance. |
 | `ScheduleV2(data?)` | `ScheduleV2Entity` | Create a ScheduleV2 entity instance. |
 | `Scrape(data?)` | `ScrapeEntity` | Create a Scrape entity instance. |
 | `ScrapeWebsitePublic(data?)` | `ScrapeWebsitePublicEntity` | Create a ScrapeWebsitePublic entity instance. |
@@ -533,14 +531,11 @@ API path: `/api/onboarding-v6/active-session`
 | Field | Description |
 | --- | --- |
 | `apply` | Apply safe canonical or clean-only URL updates |
-| `count` |  |
 | `created_at` |  |
 | `date_from` |  |
 | `date_to` |  |
 | `email` |  |
 | `id` |  |
-| `include_failed` |  |
-| `include_pending` |  |
 | `include_records` | Include full per-field audit records in the response |
 | `issue_ids` |  |
 | `only_active` | Limit the audit to active agents |
@@ -549,14 +544,12 @@ API path: `/api/onboarding-v6/active-session`
 | `product_id` |  |
 | `query` |  |
 | `reason` |  |
-| `regenerate` |  |
 | `status` |  |
 | `user_membership` |  |
 | `user_name` |  |
 | `user_onboarding_step` |  |
-| `video_type` |  |
 
-Operations: create, list, load, remove, update.
+Operations: create, list, load, remove.
 
 API path: `/api/admin/users/{user_id}/regenerate-video/{video_id}`
 
@@ -710,13 +703,25 @@ API path: `/api/admin/healthrx/items/{kind}/{item_id}/decision`
 
 | Field | Description |
 | --- | --- |
-| `customer_success_cases` |  |
-| `customers` |  |
-| `generated_at` |  |
-| `pfa_database` |  |
-| `recent_signups` |  |
-| `summary` |  |
-| `vireel_database` |  |
+| `active_agents` |  |
+| `active_products` |  |
+| `agents_count` |  |
+| `auto_schedule_status` |  |
+| `days_until_period_end` |  |
+| `email` |  |
+| `feature_impact` |  |
+| `last_notification_at` |  |
+| `membership` |  |
+| `name` |  |
+| `notification_count` |  |
+| `notification_events` |  |
+| `priority` |  |
+| `severity` |  |
+| `status_label` |  |
+| `subscription_current_period_end` |  |
+| `subscription_status` |  |
+| `upcoming_posts` |  |
+| `user_id` |  |
 
 Operations: list, load.
 
@@ -736,14 +741,8 @@ API path: `/api/admin/users/{user_id}/regenerate-landing`
 
 | Field | Description |
 | --- | --- |
-| `paid_users_by_level` |  |
-| `total_cancellations` |  |
-| `total_previews_generated` |  |
-| `total_signups` |  |
-| `total_videos_generated` |  |
-| `url_attempts` |  |
-| `user_credits` |  |
-| `user_gifted_credits` |  |
+| `count` |  |
+| `level` |  |
 
 Operations: list.
 
@@ -896,7 +895,7 @@ API path: `/api/admin/slideshow-import2/{batch_id}/state`
 
 Operations: create, list, remove, update.
 
-API path: `/api/admin/users/{user_id}/fix-auto-schedule-by-date`
+API path: `/api/admin/users/{user_id}/convert-to-enterprise`
 
 #### AdminUsersTableItem
 
@@ -1062,7 +1061,7 @@ API path: `/api/onboarding-v6/advance-step`
 | `tiktok_stats` |  |
 | `type` |  |
 
-Operations: list.
+Operations: list, update.
 
 API path: `/api/admin/agents`
 
@@ -1161,13 +1160,17 @@ API path: `/api/agent-access/phil-notifications/videos`
 
 | Field | Description |
 | --- | --- |
-| `agentQuota` |  |
-| `agents` |  |
-| `assignedByType` |  |
-| `assignedTotal` |  |
-| `email` |  |
-| `products` |  |
-| `userId` |  |
+| `avatar` |  |
+| `facebookUrl` |  |
+| `id` |  |
+| `instagramUrl` |  |
+| `name` |  |
+| `productId` |  |
+| `productName` |  |
+| `tiktokUrl` |  |
+| `type` |  |
+| `uploadPostPlatforms` |  |
+| `youtubeUrl` |  |
 
 Operations: list.
 
@@ -1294,19 +1297,12 @@ API path: `/api/upload-post-agents/all`
 
 | Field | Description |
 | --- | --- |
-| `daily` |  |
-| `dates` |  |
-| `generated_at` |  |
-| `groups` |  |
-| `latest` |  |
-| `live_date` |  |
-| `phone_admin_generated_at` |  |
-| `platform` |  |
-| `post_target` |  |
-| `qa_managed_agent_ids` |  |
-| `scope_prefixes` |  |
-| `timezone` |  |
-| `warmup_target` |  |
+| `accounts` |  |
+| `date` |  |
+| `overall` |  |
+| `posts` |  |
+| `views` |  |
+| `warmups` |  |
 
 Operations: list.
 
@@ -1328,19 +1324,12 @@ API path: `/api/admin/agent-health/customers`
 
 | Field | Description |
 | --- | --- |
-| `archived_issue_total` |  |
-| `date` |  |
-| `generated_at` |  |
-| `group_id` |  |
-| `has_more` |  |
-| `issue_total` |  |
-| `issues` |  |
-| `limit` |  |
-| `metric` |  |
-| `offset` |  |
-| `warmup_runs` |  |
-| `warning_total` |  |
-| `warnings` |  |
+| `agent_id` |  |
+| `category` |  |
+| `connection_status` |  |
+| `device_status` |  |
+| `issue` |  |
+| `state` |  |
 
 Operations: list.
 
@@ -1520,7 +1509,6 @@ API path: `/api/upload-post-agents/bulk/tiktok-stats`
 | `formula_id` |  |
 | `formula_name` |  |
 | `generation` |  |
-| `id` |  |
 | `image_prompt` |  |
 | `likes` |  |
 | `main_prompt` |  |
@@ -1574,7 +1562,6 @@ API path: `/api/admin/carousels/agents/{agent_id}`
 | --- | --- |
 | `caption` |  |
 | `error` |  |
-| `id` |  |
 | `image_model` |  |
 | `image_provider` |  |
 | `image_task_id` |  |
@@ -1586,18 +1573,6 @@ API path: `/api/admin/carousels/agents/{agent_id}`
 Operations: list.
 
 API path: `/api/carousel/{video_id}/status`
-
-#### Chat
-
-| Field | Description |
-| --- | --- |
-| `idempotencyKey` |  |
-| `message` |  |
-| `sessionId` |  |
-
-Operations: create.
-
-API path: `/api/chat/sessions/{session_id}/messages`
 
 #### ChatHistory
 
@@ -1626,6 +1601,8 @@ API path: `/api/chat/sessions`
 | --- | --- |
 | `chatSubVariant` |  |
 | `createdAt` |  |
+| `idempotencyKey` |  |
+| `message` |  |
 | `model` |  |
 | `plan` |  |
 | `route` |  |
@@ -1853,7 +1830,6 @@ API path: `/api/admin/customer-health/customers`
 | `date` |  |
 | `email` |  |
 | `entries` |  |
-| `id` |  |
 | `performance_overview` |  |
 | `platform_coverage_summary` |  |
 | `user_id` |  |
@@ -1882,20 +1858,10 @@ API path: `/api/admin/customer-health/all-customers`
 
 | Field | Description |
 | --- | --- |
-| `average_views_per_result` |  |
-| `date` |  |
-| `end_date` |  |
-| `paid_users_count` |  |
+| `email` |  |
 | `posted_results` |  |
-| `range` |  |
-| `start_date` |  |
-| `top_users` |  |
-| `total_views` |  |
-| `trend` |  |
-| `trend_granularity` |  |
-| `user_email` |  |
 | `user_id` |  |
-| `users_with_views` |  |
+| `views` |  |
 
 Operations: list.
 
@@ -1915,7 +1881,6 @@ API path: `/api/carousel/daily/{product_id}/plan`
 
 | Field | Description |
 | --- | --- |
-| `id` |  |
 
 Operations: load.
 
@@ -1961,15 +1926,6 @@ API path: `/api/admin/agents/dedicated-dashboard`
 Operations: create, load.
 
 API path: `/api/enterprise/agents/assign`
-
-#### EnterpriseProduct
-
-| Field | Description |
-| --- | --- |
-
-Operations: load.
-
-API path: `/api/enterprise/products/{product_id}/status`
 
 #### ExactAvailability
 
@@ -2144,18 +2100,6 @@ Operations: create.
 
 API path: `/api/reset-product/init-v6`
 
-#### Iri
-
-| Field | Description |
-| --- | --- |
-| `correlationId` |  |
-| `idempotencyKey` |  |
-| `productId` |  |
-
-Operations: create.
-
-API path: `/api/iris/connectors/{connector_id}/start`
-
 #### IrisCapability
 
 | Field | Description |
@@ -2207,9 +2151,9 @@ API path: `/api/iris/chat`
 | --- | --- |
 | `connectors` |  |
 
-Operations: list.
+Operations: create, list.
 
-API path: `/api/iris/connectors`
+API path: `/api/iris/connectors/{connector_id}/start`
 
 #### IrisStatus
 
@@ -2232,8 +2176,10 @@ API path: `/api/iris/status`
 | `cadence` |  |
 | `capability` |  |
 | `completed` |  |
+| `correlationId` |  |
 | `description` |  |
 | `discover` |  |
+| `idempotencyKey` |  |
 | `productId` |  |
 | `recurring` |  |
 | `requiredConnectors` |  |
@@ -2241,7 +2187,7 @@ API path: `/api/iris/status`
 
 Operations: create, list.
 
-API path: `/api/iris/tasks`
+API path: `/api/iris/tasks/{task_id}/run`
 
 #### IrisUsage
 
@@ -2544,13 +2490,18 @@ API path: `/api/products/{product_id}/validate-social-handle`
 
 | Field | Description |
 | --- | --- |
-| `agents` |  |
-| `date` |  |
-| `pagination` |  |
-| `phone_admin_error` |  |
-| `products` |  |
-| `selected_product` |  |
-| `summary` |  |
+| `comments` |  |
+| `failed_entries` |  |
+| `has_tiktok_community_violation` |  |
+| `id` |  |
+| `likes` |  |
+| `metrics_pending_count` |  |
+| `name` |  |
+| `platforms` |  |
+| `posted_entries` |  |
+| `posting_entries` |  |
+| `scheduled_entries` |  |
+| `views` |  |
 
 Operations: list.
 
@@ -2598,6 +2549,7 @@ API path: `/api/video-variation/product-demos`
 | `dmOngoingResponsePrompt` |  |
 | `firstCommentTextBeforeLink` |  |
 | `headerImageUrl` |  |
+| `icon` |  |
 | `id` |  |
 | `landingHtmlUrl` |  |
 | `landingLastGeneratedAt` |  |
@@ -2636,6 +2588,7 @@ API path: `/api/video-variation/product-demos`
 | `slug` |  |
 | `socialLinks` |  |
 | `testimonials` |  |
+| `url` |  |
 
 Operations: list, update.
 
@@ -2671,15 +2624,6 @@ API path: `/api/onboarding-v6/resume-status-public`
 Operations: create.
 
 API path: `/api/core/re-roll-video`
-
-#### ReadRootGet
-
-| Field | Description |
-| --- | --- |
-
-Operations: load.
-
-API path: `/`
 
 #### RecordDemoBooked
 
@@ -2743,6 +2687,15 @@ Operations: create.
 
 API path: `/api/onboarding-v6/retry-scrape`
 
+#### RootGet
+
+| Field | Description |
+| --- | --- |
+
+Operations: load.
+
+API path: `/`
+
 #### SaveSurvey
 
 | Field | Description |
@@ -2801,6 +2754,15 @@ Operations: load.
 
 API path: `/api/video-variation/scan-socials/status`
 
+#### ScheduleQueue
+
+| Field | Description |
+| --- | --- |
+
+Operations: update.
+
+API path: `/api/schedule/queue/{queue_id}/replace-video`
+
 #### ScheduleV2
 
 | Field | Description |
@@ -2829,7 +2791,7 @@ API path: `/api/video-variation/scan-socials/status`
 | `youtube_posted_url` |  |
 | `youtube_scraped_social_post_id` |  |
 
-Operations: create, list, load, remove, update.
+Operations: create, list, load, remove.
 
 API path: `/api/schedule/queue/add`
 
@@ -2978,14 +2940,11 @@ API path: `/api/seo/overview`
 
 | Field | Description |
 | --- | --- |
-| `end_date` |  |
-| `series` |  |
-| `site_url` |  |
-| `start_date` |  |
-| `top_countries` |  |
-| `top_pages` |  |
-| `top_queries` |  |
-| `totals` |  |
+| `clicks` |  |
+| `ctr` |  |
+| `date` |  |
+| `impressions` |  |
+| `position` |  |
 
 Operations: list.
 
@@ -3209,23 +3168,24 @@ API path: `/api/admin/customer-health/issues`
 
 | Field | Description |
 | --- | --- |
-| `active_run` |  |
 | `aged_over_24h` |  |
-| `backlog_preview` |  |
-| `coverage_percent` |  |
-| `customer_counts` |  |
-| `date` |  |
-| `generated_at` |  |
-| `method_counts` |  |
-| `platform_counts` |  |
-| `platform_units_resolved` |  |
-| `platform_units_total` |  |
-| `platform_units_unresolved` |  |
-| `posted_entries` |  |
-| `reason_counts` |  |
-| `sla_deadline_et` |  |
+| `agent_id` |  |
+| `agent_name` |  |
+| `is_resolved` |  |
+| `last_refresh_completed_at` |  |
+| `latest_error_message` |  |
+| `platform` |  |
+| `post_method` |  |
+| `post_url` |  |
+| `posted_date_et` |  |
+| `product_id` |  |
+| `product_name` |  |
+| `reason_code` |  |
+| `schedule_queue_id` |  |
+| `scheduled_datetime_utc` |  |
 | `stale_after_sla` |  |
-| `top_affected_customers` |  |
+| `user_email` |  |
+| `user_id` |  |
 
 Operations: list.
 
@@ -3387,9 +3347,9 @@ API path: `/api/upload-post-agents/sync-platforms`
 | `updatedAt` |  |
 | `userId` |  |
 
-Operations: load, update.
+Operations: create, load, update.
 
-API path: `/api/upload-post-agents/user/{user_id}`
+API path: `/api/admin/users/{user_id}/fix-auto-schedule-by-date`
 
 #### UserAgent
 
@@ -3399,7 +3359,6 @@ API path: `/api/upload-post-agents/user/{user_id}`
 | `assigned_at` |  |
 | `assignment_id` |  |
 | `expires_at` |  |
-| `id` |  |
 | `status` |  |
 
 Operations: create, list.
@@ -3410,65 +3369,9 @@ API path: `/api/admin/users/{user_id}/agents`
 
 | Field | Description |
 | --- | --- |
-| `account_type` |  |
-| `activated` |  |
-| `activated_by_admin_at` |  |
-| `activated_by_admin_id` |  |
-| `admin_notes` |  |
-| `agents_count` |  |
-| `assigned_agents` |  |
-| `assigned_agents_count` |  |
-| `assigned_agents_preview_limit` |  |
-| `assigned_agents_truncated` |  |
-| `auto_schedule_enabled` |  |
-| `comments_expected_per_day` |  |
-| `comments_fix_block_reason` |  |
-| `comments_fix_ready` |  |
-| `comments_today_failed` |  |
-| `comments_today_posted` |  |
-| `comments_today_scheduled` |  |
-| `comments_yesterday_failed` |  |
-| `comments_yesterday_posted` |  |
-| `comments_yesterday_total` |  |
-| `created_at` |  |
-| `credits` |  |
-| `effective_posted_video_reuse_percent` |  |
-| `email` |  |
-| `expected_agents_count` |  |
 | `id` |  |
-| `is_activated_by_admin` |  |
-| `is_admin` |  |
-| `is_bookmarked` |  |
-| `is_internal_user` |  |
-| `is_migrated` |  |
-| `landing_slug` |  |
-| `landing_status` |  |
-| `landing_url` |  |
-| `membership` |  |
-| `microhub_status` |  |
-| `microhub_url` |  |
 | `name` |  |
-| `onboarding_flow` |  |
-| `posted_video_reuse_percent` |  |
-| `product_id` |  |
-| `product_name` |  |
-| `product_url` |  |
-| `subscription_status` |  |
-| `survey_data` |  |
-| `today_failed` |  |
-| `today_posted` |  |
-| `today_scheduled` |  |
-| `tomorrow_capacity` |  |
-| `tomorrow_scheduled` |  |
-| `videos_completed` |  |
-| `videos_failed` |  |
-| `videos_pending` |  |
-| `videos_stale` |  |
-| `videos_total` |  |
-| `yesterday_failed` |  |
-| `yesterday_failed_entries` |  |
-| `yesterday_posted` |  |
-| `yesterday_total` |  |
+| `type` |  |
 
 Operations: list.
 
@@ -3747,21 +3650,17 @@ Create an instance: `const admin = client.Admin()`
 | `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 | `remove(match)` | Remove the matching entity. |
-| `update(data)` | Update an existing entity. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
 | `apply` | `boolean` | Apply safe canonical or clean-only URL updates |
-| `count` | `number` |  |
 | `created_at` | `string` |  |
 | `date_from` | `any` |  |
 | `date_to` | `any` |  |
 | `email` | `string` |  |
 | `id` | `string` |  |
-| `include_failed` | `boolean` |  |
-| `include_pending` | `boolean` |  |
 | `include_records` | `boolean` | Include full per-field audit records in the response |
 | `issue_ids` | `any` |  |
 | `only_active` | `boolean` | Limit the audit to active agents |
@@ -3770,12 +3669,10 @@ Create an instance: `const admin = client.Admin()`
 | `product_id` | `string` |  |
 | `query` | `any` |  |
 | `reason` | `any` |  |
-| `regenerate` | `boolean` |  |
 | `status` | `string` |  |
 | `user_membership` | `any` |  |
 | `user_name` | `any` |  |
 | `user_onboarding_step` | `any` |  |
-| `video_type` | `string` |  |
 
 #### Example: Load
 
@@ -3794,14 +3691,12 @@ const admins = await client.Admin().list()
 ```ts
 const admin = await client.Admin().create({
   user_id: 'example_user_id',
-  count: 1,
   created_at: 'example_created_at',
   date_from: 'example_date_from',
   date_to: 'example_date_to',
   email: 'example_email',
   id: 'example_id',
   product_id: 'example_product_id',
-  video_type: 'example_video_type',
 })
 ```
 
@@ -4113,13 +4008,25 @@ Create an instance: `const admin_insight = client.AdminInsight()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `customer_success_cases` | `any[]` |  |
-| `customers` | `any[]` |  |
-| `generated_at` | `string` |  |
-| `pfa_database` | `Record<string, any>` |  |
-| `recent_signups` | `any[]` |  |
-| `summary` | `Record<string, any>` |  |
-| `vireel_database` | `Record<string, any>` |  |
+| `active_agents` | `number` |  |
+| `active_products` | `number` |  |
+| `agents_count` | `number` |  |
+| `auto_schedule_status` | `string` |  |
+| `days_until_period_end` | `any` |  |
+| `email` | `string` |  |
+| `feature_impact` | `string` |  |
+| `last_notification_at` | `any` |  |
+| `membership` | `any` |  |
+| `name` | `string` |  |
+| `notification_count` | `number` |  |
+| `notification_events` | `any[]` |  |
+| `priority` | `string` |  |
+| `severity` | `string` |  |
+| `status_label` | `string` |  |
+| `subscription_current_period_end` | `any` |  |
+| `subscription_status` | `any` |  |
+| `upcoming_posts` | `number` |  |
+| `user_id` | `string` |  |
 
 #### Example: Load
 
@@ -4174,14 +4081,8 @@ Create an instance: `const admin_metrics_summary = client.AdminMetricsSummary()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `paid_users_by_level` | `any[]` |  |
-| `total_cancellations` | `number` |  |
-| `total_previews_generated` | `number` |  |
-| `total_signups` | `number` |  |
-| `total_videos_generated` | `number` |  |
-| `url_attempts` | `number` |  |
-| `user_credits` | `any[]` |  |
-| `user_gifted_credits` | `any[]` |  |
+| `count` | `number` |  |
+| `level` | `string` |  |
 
 #### Example: List
 
@@ -4692,6 +4593,7 @@ Create an instance: `const agent = client.Agent()`
 | Method | Description |
 | --- | --- |
 | `list(match)` | List entities matching the criteria. |
+| `update(data)` | Update an existing entity. |
 
 #### Fields
 
@@ -4882,13 +4784,17 @@ Create an instance: `const agent_access_user_agent = client.AgentAccessUserAgent
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `agentQuota` | `number` |  |
-| `agents` | `any[]` |  |
-| `assignedByType` | `Record<string, any>` |  |
-| `assignedTotal` | `number` |  |
-| `email` | `string` |  |
-| `products` | `any[]` |  |
-| `userId` | `string` |  |
+| `avatar` | `any` |  |
+| `facebookUrl` | `any` |  |
+| `id` | `string` |  |
+| `instagramUrl` | `any` |  |
+| `name` | `string` |  |
+| `productId` | `any` |  |
+| `productName` | `any` |  |
+| `tiktokUrl` | `any` |  |
+| `type` | `any` |  |
+| `uploadPostPlatforms` | `any` |  |
+| `youtubeUrl` | `any` |  |
 
 #### Example: List
 
@@ -5120,19 +5026,12 @@ Create an instance: `const agent_health = client.AgentHealth()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `daily` | `any[]` |  |
-| `dates` | `any[]` |  |
-| `generated_at` | `string` |  |
-| `groups` | `any[]` |  |
-| `latest` | `Record<string, any>` |  |
-| `live_date` | `any` |  |
-| `phone_admin_generated_at` | `string` |  |
-| `platform` | `string` |  |
-| `post_target` | `number` |  |
-| `qa_managed_agent_ids` | `any[]` |  |
-| `scope_prefixes` | `any[]` |  |
-| `timezone` | `string` |  |
-| `warmup_target` | `number` |  |
+| `accounts` | `Record<string, any>` |  |
+| `date` | `string` |  |
+| `overall` | `Record<string, any>` |  |
+| `posts` | `Record<string, any>` |  |
+| `views` | `Record<string, any>` |  |
+| `warmups` | `Record<string, any>` |  |
 
 #### Example: List
 
@@ -5180,19 +5079,12 @@ Create an instance: `const agent_health_detail = client.AgentHealthDetail()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `archived_issue_total` | `number` |  |
-| `date` | `string` |  |
-| `generated_at` | `string` |  |
-| `group_id` | `string` |  |
-| `has_more` | `boolean` |  |
-| `issue_total` | `number` |  |
-| `issues` | `any[]` |  |
-| `limit` | `number` |  |
-| `metric` | `string` |  |
-| `offset` | `number` |  |
-| `warmup_runs` | `any[]` |  |
-| `warning_total` | `number` |  |
-| `warnings` | `any[]` |  |
+| `agent_id` | `string` |  |
+| `category` | `string` |  |
+| `connection_status` | `string` |  |
+| `device_status` | `string` |  |
+| `issue` | `any` |  |
+| `state` | `string` |  |
 
 #### Example: List
 
@@ -5234,7 +5126,7 @@ Create an instance: `const agent_post = client.AgentPost()`
 #### Example: List
 
 ```ts
-const agent_posts = await client.AgentPost().list({ id: "example" })
+const agent_posts = await client.AgentPost().list({ agent_id: "example" })
 ```
 
 
@@ -5513,7 +5405,6 @@ Create an instance: `const carousel = client.Carousel()`
 | `formula_id` | `string` |  |
 | `formula_name` | `any` |  |
 | `generation` | `Record<string, any>` |  |
-| `id` | `string` |  |
 | `image_prompt` | `any` |  |
 | `likes` | `any` |  |
 | `main_prompt` | `any` |  |
@@ -5618,7 +5509,6 @@ Create an instance: `const carousel_status = client.CarouselStatus()`
 | --- | --- | --- |
 | `caption` | `any` |  |
 | `error` | `any` |  |
-| `id` | `string` |  |
 | `image_model` | `any` |  |
 | `image_provider` | `any` |  |
 | `image_task_id` | `string` |  |
@@ -5630,37 +5520,7 @@ Create an instance: `const carousel_status = client.CarouselStatus()`
 #### Example: List
 
 ```ts
-const carousel_statuss = await client.CarouselStatus().list({ id: "example" })
-```
-
-
-### Chat
-
-Create an instance: `const chat = client.Chat()`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `create(data)` | Create a new entity with the given data. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `idempotencyKey` | `string` |  |
-| `message` | `string` |  |
-| `sessionId` | `string` |  |
-
-#### Example: Create
-
-```ts
-const chat = await client.Chat().create({
-  session_id: 'example_session_id',
-  idempotencyKey: 'example_idempotencyKey',
-  message: 'example_message',
-  sessionId: 'example_sessionId',
-})
+const carousel_statuss = await client.CarouselStatus().list({ carousel_id: "example" })
 ```
 
 
@@ -5723,6 +5583,8 @@ Create an instance: `const chat_session = client.ChatSession()`
 | --- | --- | --- |
 | `chatSubVariant` | `string` |  |
 | `createdAt` | `string` |  |
+| `idempotencyKey` | `string` |  |
+| `message` | `string` |  |
 | `model` | `any` |  |
 | `plan` | `any` |  |
 | `route` | `any` |  |
@@ -5738,6 +5600,9 @@ Create an instance: `const chat_session = client.ChatSession()`
 ```ts
 const chat_session = await client.ChatSession().create({
   session_id: 'example_session_id',
+  idempotencyKey: 'example_idempotencyKey',
+  message: 'example_message',
+  sessionId: 'example_sessionId',
 })
 ```
 
@@ -6123,7 +5988,6 @@ Create an instance: `const customer_health = client.CustomerHealth()`
 | `date` | `string` |  |
 | `email` | `string` |  |
 | `entries` | `any[]` |  |
-| `id` | `string` |  |
 | `performance_overview` | `Record<string, any>` |  |
 | `platform_coverage_summary` | `Record<string, any>` |  |
 | `user_id` | `string` |  |
@@ -6178,20 +6042,10 @@ Create an instance: `const customer_health_views_summary = client.CustomerHealth
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `average_views_per_result` | `number` |  |
-| `date` | `string` |  |
-| `end_date` | `any` |  |
-| `paid_users_count` | `number` |  |
+| `email` | `string` |  |
 | `posted_results` | `number` |  |
-| `range` | `string` |  |
-| `start_date` | `any` |  |
-| `top_users` | `any[]` |  |
-| `total_views` | `number` |  |
-| `trend` | `any[]` |  |
-| `trend_granularity` | `string` |  |
-| `user_email` | `any` |  |
 | `user_id` | `string` |  |
-| `users_with_views` | `number` |  |
+| `views` | `number` |  |
 
 #### Example: List
 
@@ -6236,16 +6090,10 @@ Create an instance: `const daily_status = client.DailyStatus()`
 | --- | --- |
 | `load(match)` | Load a single entity by match criteria. |
 
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `id` | `string` |  |
-
 #### Example: Load
 
 ```ts
-const daily_status = await client.DailyStatus().load({ id: 'daily_status_id', day: 'day' })
+const daily_status = await client.DailyStatus().load({ daily_id: 'daily_id', day: 'day' })
 ```
 
 
@@ -6324,23 +6172,6 @@ const enterprise_agent = await client.EnterpriseAgent().create({
   source_product_id: 'example_source_product_id',
   target_product_id: 'example_target_product_id',
 })
-```
-
-
-### EnterpriseProduct
-
-Create an instance: `const enterprise_product = client.EnterpriseProduct()`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `load(match)` | Load a single entity by match criteria. |
-
-#### Example: Load
-
-```ts
-const enterprise_product = await client.EnterpriseProduct().load({ product_id: 'product_id' })
 ```
 
 
@@ -6694,34 +6525,6 @@ const init_reset_product_v6 = await client.InitResetProductV6().create({
 ```
 
 
-### Iri
-
-Create an instance: `const iri = client.Iri()`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `create(data)` | Create a new entity with the given data. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `correlationId` | `any` |  |
-| `idempotencyKey` | `string` |  |
-| `productId` | `any` |  |
-
-#### Example: Create
-
-```ts
-const iri = await client.Iri().create({
-  connector_id: 'example_connector_id',
-  idempotencyKey: 'example_idempotencyKey',
-})
-```
-
-
 ### IrisCapability
 
 Create an instance: `const iris_capability = client.IrisCapability()`
@@ -6812,6 +6615,7 @@ Create an instance: `const iris_connector = client.IrisConnector()`
 
 | Method | Description |
 | --- | --- |
+| `create(data)` | Create a new entity with the given data. |
 | `list(match)` | List entities matching the criteria. |
 
 #### Fields
@@ -6824,6 +6628,14 @@ Create an instance: `const iris_connector = client.IrisConnector()`
 
 ```ts
 const iris_connectors = await client.IrisConnector().list()
+```
+
+#### Example: Create
+
+```ts
+const iris_connector = await client.IrisConnector().create({
+  connector_id: 'example_connector_id',
+})
 ```
 
 
@@ -6872,8 +6684,10 @@ Create an instance: `const iris_task = client.IrisTask()`
 | `cadence` | `string` |  |
 | `capability` | `any` |  |
 | `completed` | `any[]` |  |
+| `correlationId` | `any` |  |
 | `description` | `string` |  |
 | `discover` | `any[]` |  |
+| `idempotencyKey` | `string` |  |
 | `productId` | `any` |  |
 | `recurring` | `any[]` |  |
 | `requiredConnectors` | `any[]` |  |
@@ -6889,6 +6703,7 @@ const iris_tasks = await client.IrisTask().list()
 
 ```ts
 const iris_task = await client.IrisTask().create({
+  idempotencyKey: 'example_idempotencyKey',
   title: 'example_title',
 })
 ```
@@ -7480,13 +7295,18 @@ Create an instance: `const product_dashboard = client.ProductDashboard()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `agents` | `any[]` |  |
-| `date` | `string` |  |
-| `pagination` | `Record<string, any>` |  |
-| `phone_admin_error` | `any` |  |
-| `products` | `any[]` |  |
-| `selected_product` | `any` |  |
-| `summary` | `Record<string, any>` |  |
+| `comments` | `number` |  |
+| `failed_entries` | `number` |  |
+| `has_tiktok_community_violation` | `boolean` |  |
+| `id` | `string` |  |
+| `likes` | `number` |  |
+| `metrics_pending_count` | `number` |  |
+| `name` | `string` |  |
+| `platforms` | `any[]` |  |
+| `posted_entries` | `number` |  |
+| `posting_entries` | `number` |  |
+| `scheduled_entries` | `number` |  |
+| `views` | `number` |  |
 
 #### Example: List
 
@@ -7574,6 +7394,7 @@ Create an instance: `const product_landing = client.ProductLanding()`
 | `dmOngoingResponsePrompt` | `any` |  |
 | `firstCommentTextBeforeLink` | `any` |  |
 | `headerImageUrl` | `any` |  |
+| `icon` | `any` |  |
 | `id` | `string` |  |
 | `landingHtmlUrl` | `any` |  |
 | `landingLastGeneratedAt` | `any` |  |
@@ -7612,6 +7433,7 @@ Create an instance: `const product_landing = client.ProductLanding()`
 | `slug` | `string` |  |
 | `socialLinks` | `any` |  |
 | `testimonials` | `any` |  |
+| `url` | `string` |  |
 
 #### Example: List
 
@@ -7676,23 +7498,6 @@ Create an instance: `const re_roll_video = client.ReRollVideo()`
 const re_roll_video = await client.ReRollVideo().create({
   queue_id: 'example_queue_id',
 })
-```
-
-
-### ReadRootGet
-
-Create an instance: `const read_root_get = client.ReadRootGet()`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `load(match)` | Load a single entity by match criteria. |
-
-#### Example: Load
-
-```ts
-const read_root_get = await client.ReadRootGet().load()
 ```
 
 
@@ -7836,6 +7641,23 @@ const retry_website_scrape = await client.RetryWebsiteScrape().create({
 ```
 
 
+### RootGet
+
+Create an instance: `const root_get = client.RootGet()`
+
+#### Operations
+
+| Method | Description |
+| --- | --- |
+| `load(match)` | Load a single entity by match criteria. |
+
+#### Example: Load
+
+```ts
+const root_get = await client.RootGet().load()
+```
+
+
 ### SaveSurvey
 
 Create an instance: `const save_survey = client.SaveSurvey()`
@@ -7954,6 +7776,17 @@ const scan_socials_status = await client.ScanSocialsStatus().load()
 ```
 
 
+### ScheduleQueue
+
+Create an instance: `const schedule_queue = client.ScheduleQueue()`
+
+#### Operations
+
+| Method | Description |
+| --- | --- |
+| `update(data)` | Update an existing entity. |
+
+
 ### ScheduleV2
 
 Create an instance: `const schedule_v2 = client.ScheduleV2()`
@@ -7966,7 +7799,6 @@ Create an instance: `const schedule_v2 = client.ScheduleV2()`
 | `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 | `remove(match)` | Remove the matching entity. |
-| `update(data)` | Update an existing entity. |
 
 #### Fields
 
@@ -8307,14 +8139,11 @@ Create an instance: `const seo_traffic = client.SeoTraffic()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `end_date` | `string` |  |
-| `series` | `any[]` |  |
-| `site_url` | `string` |  |
-| `start_date` | `string` |  |
-| `top_countries` | `any[]` |  |
-| `top_pages` | `any[]` |  |
-| `top_queries` | `any[]` |  |
-| `totals` | `Record<string, any>` |  |
+| `clicks` | `number` |  |
+| `ctr` | `number` |  |
+| `date` | `string` |  |
+| `impressions` | `number` |  |
+| `position` | `number` |  |
 
 #### Example: List
 
@@ -8782,23 +8611,24 @@ Create an instance: `const stats_refresh_overview = client.StatsRefreshOverview(
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `active_run` | `any` |  |
-| `aged_over_24h` | `number` |  |
-| `backlog_preview` | `any[]` |  |
-| `coverage_percent` | `number` |  |
-| `customer_counts` | `Record<string, any>` |  |
-| `date` | `string` |  |
-| `generated_at` | `string` |  |
-| `method_counts` | `Record<string, any>` |  |
-| `platform_counts` | `Record<string, any>` |  |
-| `platform_units_resolved` | `number` |  |
-| `platform_units_total` | `number` |  |
-| `platform_units_unresolved` | `number` |  |
-| `posted_entries` | `number` |  |
-| `reason_counts` | `Record<string, any>` |  |
-| `sla_deadline_et` | `string` |  |
-| `stale_after_sla` | `number` |  |
-| `top_affected_customers` | `any[]` |  |
+| `aged_over_24h` | `boolean` |  |
+| `agent_id` | `string` |  |
+| `agent_name` | `any` |  |
+| `is_resolved` | `boolean` |  |
+| `last_refresh_completed_at` | `any` |  |
+| `latest_error_message` | `any` |  |
+| `platform` | `string` |  |
+| `post_method` | `any` |  |
+| `post_url` | `any` |  |
+| `posted_date_et` | `string` |  |
+| `product_id` | `string` |  |
+| `product_name` | `any` |  |
+| `reason_code` | `any` |  |
+| `schedule_queue_id` | `string` |  |
+| `scheduled_datetime_utc` | `string` |  |
+| `stale_after_sla` | `boolean` |  |
+| `user_email` | `string` |  |
+| `user_id` | `string` |  |
 
 #### Example: List
 
@@ -9015,6 +8845,7 @@ Create an instance: `const user = client.User()`
 
 | Method | Description |
 | --- | --- |
+| `create(data)` | Create a new entity with the given data. |
 | `load(match)` | Load a single entity by match criteria. |
 | `update(data)` | Update an existing entity. |
 
@@ -9084,20 +8915,19 @@ Create an instance: `const user_agent = client.UserAgent()`
 | `assigned_at` | `string` |  |
 | `assignment_id` | `string` |  |
 | `expires_at` | `any` |  |
-| `id` | `string` |  |
 | `status` | `string` |  |
 
 #### Example: List
 
 ```ts
-const user_agents = await client.UserAgent().list({ id: "example" })
+const user_agents = await client.UserAgent().list({ user_id: "example" })
 ```
 
 #### Example: Create
 
 ```ts
 const user_agent = await client.UserAgent().create({
-  id: 'example_id',
+  user_id: 'example_user_id',
   agent: {},
   assigned_at: 'example_assigned_at',
   assignment_id: 'example_assignment_id',
@@ -9120,70 +8950,14 @@ Create an instance: `const user_health_detail = client.UserHealthDetail()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `account_type` | `any` |  |
-| `activated` | `boolean` |  |
-| `activated_by_admin_at` | `any` |  |
-| `activated_by_admin_id` | `string` |  |
-| `admin_notes` | `any` |  |
-| `agents_count` | `number` |  |
-| `assigned_agents` | `any[]` |  |
-| `assigned_agents_count` | `number` |  |
-| `assigned_agents_preview_limit` | `number` |  |
-| `assigned_agents_truncated` | `boolean` |  |
-| `auto_schedule_enabled` | `boolean` |  |
-| `comments_expected_per_day` | `number` |  |
-| `comments_fix_block_reason` | `any` |  |
-| `comments_fix_ready` | `boolean` |  |
-| `comments_today_failed` | `number` |  |
-| `comments_today_posted` | `number` |  |
-| `comments_today_scheduled` | `number` |  |
-| `comments_yesterday_failed` | `number` |  |
-| `comments_yesterday_posted` | `number` |  |
-| `comments_yesterday_total` | `number` |  |
-| `created_at` | `string` |  |
-| `credits` | `number` |  |
-| `effective_posted_video_reuse_percent` | `number` |  |
-| `email` | `string` |  |
-| `expected_agents_count` | `number` |  |
 | `id` | `string` |  |
-| `is_activated_by_admin` | `boolean` |  |
-| `is_admin` | `boolean` |  |
-| `is_bookmarked` | `boolean` |  |
-| `is_internal_user` | `boolean` |  |
-| `is_migrated` | `boolean` |  |
-| `landing_slug` | `any` |  |
-| `landing_status` | `any` |  |
-| `landing_url` | `any` |  |
-| `membership` | `any` |  |
-| `microhub_status` | `any` |  |
-| `microhub_url` | `any` |  |
 | `name` | `string` |  |
-| `onboarding_flow` | `string` |  |
-| `posted_video_reuse_percent` | `any` |  |
-| `product_id` | `string` |  |
-| `product_name` | `any` |  |
-| `product_url` | `any` |  |
-| `subscription_status` | `any` |  |
-| `survey_data` | `any` |  |
-| `today_failed` | `number` |  |
-| `today_posted` | `number` |  |
-| `today_scheduled` | `number` |  |
-| `tomorrow_capacity` | `number` |  |
-| `tomorrow_scheduled` | `number` |  |
-| `videos_completed` | `number` |  |
-| `videos_failed` | `number` |  |
-| `videos_pending` | `number` |  |
-| `videos_stale` | `number` |  |
-| `videos_total` | `number` |  |
-| `yesterday_failed` | `number` |  |
-| `yesterday_failed_entries` | `any[]` |  |
-| `yesterday_posted` | `number` |  |
-| `yesterday_total` | `number` |  |
+| `type` | `string` |  |
 
 #### Example: List
 
 ```ts
-const user_health_details = await client.UserHealthDetail().list({ id: "example" })
+const user_health_details = await client.UserHealthDetail().list({ user_id: "example" })
 ```
 
 
@@ -9664,11 +9438,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const admininsight = client.AdminInsight()
-await admininsight.list()
+const agenthealth = client.AgentHealth()
+await agenthealth.list()
 
-// admininsight.data() now returns the admininsight data from the last `list`
-// admininsight.match() returns the last match criteria
+// agenthealth.data() now returns the agenthealth data from the last `list`
+// agenthealth.match() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

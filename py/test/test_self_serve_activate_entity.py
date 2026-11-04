@@ -51,8 +51,14 @@ class TestSelfServeActivateEntity:
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
                 return
+        if setup["live"] and os.environ.get("VOXGIG_GETONLY_GUARD") == "TRUE":
+            print("LIVE STEP {\"id\":\"self_serve_activate.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/onboarding-v6/self-serve-activate\"}")
+            pytest.skip("Live coverage incomplete: self_serve_activate.create.0 excluded (GET-only live run: needs POST /api/onboarding-v6/self-serve-activate)")
+
         client = setup["client"]
 
+        if setup["live"]:
+            runner.live_pace()
         # CREATE
         self_serve_activate_ref01_ent = client.SelfServeActivate(None)
         self_serve_activate_ref01_data = helpers.to_map(vs.getprop(

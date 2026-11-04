@@ -52,8 +52,16 @@ class CreateSora2VideoEntityTest extends TestCase
                 return;
             }
         }
+        if (!empty($setup["live"]) && getenv('VOXGIG_GETONLY_GUARD') === "TRUE") {
+            fwrite(STDOUT, 'LIVE STEP {"id":"create_sora2_video.create.0","state":"excluded","attempted":false,"reason":"GET-only live run: needs POST /api/core/create-sora2-video"}' . "\n");
+            $this->markTestSkipped('Live coverage incomplete: create_sora2_video.create.0 excluded (GET-only live run: needs POST /api/core/create-sora2-video)');
+        }
+
         $client = $setup["client"];
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // CREATE
         $create_sora2_video_ref01_ent = $client->CreateSora2Video(null);
         $create_sora2_video_ref01_data = Helpers::to_map(Vs::getprop(

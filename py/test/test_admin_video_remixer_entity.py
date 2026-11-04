@@ -51,8 +51,16 @@ class TestAdminVideoRemixerEntity:
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
                 return
+        if setup["live"] and os.environ.get("VOXGIG_GETONLY_GUARD") == "TRUE":
+            print("LIVE STEP {\"id\":\"admin_video_remixer.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/admin/video-remixer/clips/{clip_id}/media\"}")
+            print("LIVE STEP {\"id\":\"admin_video_remixer.update.1\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs PUT /api/admin/video-remixer/audits/{identifier}/answer\"}")
+            print("LIVE STEP {\"id\":\"admin_video_remixer.remove.3\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs DELETE /api/admin/video-remixer/runs/{identifier}\"}")
+            return self._run_get_only_flow(setup)
+
         client = setup["client"]
 
+        if setup["live"]:
+            runner.live_pace()
         # CREATE
         admin_video_remixer_ref01_ent = client.AdminVideoRemixer(None)
         admin_video_remixer_ref01_data = helpers.to_map(vs.getprop(
@@ -61,6 +69,8 @@ class TestAdminVideoRemixerEntity:
         admin_video_remixer_ref01_data = helpers.to_map(runner.entity_data(admin_video_remixer_ref01_ent.create(admin_video_remixer_ref01_data, None)))
         assert admin_video_remixer_ref01_data is not None
 
+        if setup["live"]:
+            runner.live_pace()
         # UPDATE
         admin_video_remixer_ref01_data_up0_up = {
         }
@@ -73,7 +83,28 @@ class TestAdminVideoRemixerEntity:
         assert admin_video_remixer_ref01_resdata_up0 is not None
         assert admin_video_remixer_ref01_resdata_up0[admin_video_remixer_ref01_markdef_up0_name] == admin_video_remixer_ref01_markdef_up0_value
 
+        if setup["live"]:
+            runner.live_pace()
         # LOAD
+        admin_video_remixer_ref01_match_dt0 = {}
+        admin_video_remixer_ref01_data_dt0_loaded = admin_video_remixer_ref01_ent.load(admin_video_remixer_ref01_match_dt0, None)
+        assert admin_video_remixer_ref01_data_dt0_loaded is not None
+
+
+    def _run_get_only_flow(self, setup):
+        client = setup["client"]
+
+        # Bootstrap entity data from existing test data.
+        admin_video_remixer_ref01_data_raw = vs.items(helpers.to_map(
+            vs.getpath(setup["data"], "existing.admin_video_remixer")))
+        admin_video_remixer_ref01_data = None
+        if len(admin_video_remixer_ref01_data_raw) > 0:
+            admin_video_remixer_ref01_data = helpers.to_map(admin_video_remixer_ref01_data_raw[0][1])
+
+        if setup["live"]:
+            runner.live_pace()
+        # LOAD
+        admin_video_remixer_ref01_ent = client.AdminVideoRemixer(None)
         admin_video_remixer_ref01_match_dt0 = {}
         admin_video_remixer_ref01_data_dt0_loaded = admin_video_remixer_ref01_ent.load(admin_video_remixer_ref01_match_dt0, None)
         assert admin_video_remixer_ref01_data_dt0_loaded is not None

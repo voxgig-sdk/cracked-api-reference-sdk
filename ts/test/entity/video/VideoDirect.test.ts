@@ -43,6 +43,11 @@ describe('VideoDirect', async () => {
     if (liveScenariosActive()) { t.skip('Covered by live operation scenarios'); return }
     const setup = directSetup({ id: 'direct01' })
     if (maybeSkipControl(t, 'direct', 'direct-load-video', setup.live)) return
+    if (setup.live && 'TRUE' === process.env.VOXGIG_GETONLY_GUARD && null == setup.idmap?.["video01"]) {
+      console.log("LIVE STEP {\"id\":\"direct-load-video\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs video01, which only POST /videos/{video_id}/retry-video gives\"}")
+      t.skip("Live coverage incomplete: direct-load-video excluded (GET-only live run: needs video01, which only POST /videos/{video_id}/retry-video gives)")
+      return
+    }
     if (skipIfMissingIds(t, setup, ["video01"], LIVE_STRICT)) return
     const { client, calls } = setup
 

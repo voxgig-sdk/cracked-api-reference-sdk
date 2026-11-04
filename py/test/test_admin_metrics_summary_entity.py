@@ -114,6 +114,16 @@ class TestAdminMetricsSummaryEntity:
         assert client.AdminMetricsSummary(None).list(None, {"throw": False}) is None
         assert fired < hook.unexpected
 
+    def test_should_validate_each_listed_record(self):
+        if "validate" not in (shared_config().get("feature") or {}):
+            pytest.skip("feature not present in this SDK: validate")
+        opts = {"feature": {"validate": {"active": True, "request": False, "response": True}}}
+        listed = CrackedApiReferenceSDK.test({"entity": {"admin_metrics_summary": {"v1": {"count": 1, "level": "x"}}}}, opts).AdminMetricsSummary(None).list(None, None)
+        assert ["v1"] == [ent.data_get().get("id") for ent in listed]
+        with pytest.raises(Exception) as err:
+            CrackedApiReferenceSDK.test({"entity": {"admin_metrics_summary": {"v1": {"count": "x", "level": "x"}}}}, opts).AdminMetricsSummary(None).list(None, None)
+        assert "validate_failed" == getattr(err.value, "code", None)
+
     def test_should_refuse_an_invalid_request(self):
         if "validate" not in (shared_config().get("feature") or {}):
             pytest.skip("feature not present in this SDK: validate")
@@ -143,6 +153,8 @@ class TestAdminMetricsSummaryEntity:
         if len(admin_metrics_summary_ref01_data_raw) > 0:
             admin_metrics_summary_ref01_data = helpers.to_map(admin_metrics_summary_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LIST
         admin_metrics_summary_ref01_ent = client.AdminMetricsSummary(None)
         admin_metrics_summary_ref01_match = {}

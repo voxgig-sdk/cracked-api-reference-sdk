@@ -33,7 +33,7 @@ class UserAgentEntityTest extends TestCase
         $client = CrackedApiReferenceSDK::test(null, ["feature" => ["validate" => ["active" => true]]]);
         $err = null;
         try {
-            $client->UserAgent(null)->list(["id" => 1], null);
+            $client->UserAgent(null)->list(["user_id" => 1], null);
         } catch (\Throwable $e) {
             $err = $e;
         }
@@ -45,11 +45,20 @@ class UserAgentEntityTest extends TestCase
         $setup = user_agent_basic_setup(null);
         // Per-op sdk-test-control.json skip.
         $_live = !empty($setup["live"]);
-        foreach ([] as $_op) {
+        foreach (["create", "list"] as $_op) {
             [$_shouldSkip, $_reason] = Runner::is_control_skipped("entityOp", "user_agent." . $_op, $_live ? "live" : "unit");
             if ($_shouldSkip) {
                 $this->markTestSkipped($_reason ?? "skipped via sdk-test-control.json");
                 return;
+            }
+        }
+        if (!empty($setup["live"]) && getenv('VOXGIG_GETONLY_GUARD') === "TRUE") {
+            fwrite(STDOUT, 'LIVE STEP {"id":"user_agent.create.0","state":"excluded","attempted":false,"reason":"GET-only live run: needs POST /api/admin/users/{user_id}/agents"}' . "\n");
+        if (!empty($setup["live"])) {
+            foreach (["user01"] as $_liveKey) {
+                if (!empty($setup["synthetic_only"]) || null === ($setup["idmap"][$_liveKey] ?? null)) {
+                    Runner::live_miss(self::LIVE_STRICT, "Live entity test blocked: needs " . $_liveKey . " via CRACKED_API_REFERENCE_TEST_USER_AGENT_ENTID");
+                }
             }
         }
         $client = $setup["client"];
@@ -61,6 +70,54 @@ class UserAgentEntityTest extends TestCase
         if (count($user_agent_ref01_data_raw) > 0) {
             $user_agent_ref01_data = Helpers::to_map($user_agent_ref01_data_raw[0][1]);
         }
+
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
+        // LIST
+        $user_agent_ref01_ent = $client->UserAgent(null);
+        $user_agent_ref01_match = [
+            "user_id" => $setup["idmap"]["user01"],
+        ];
+
+        $user_agent_ref01_list_result = $user_agent_ref01_ent->list($user_agent_ref01_match, null);
+        $this->assertIsArray($user_agent_ref01_list_result);
+
+            return;
+        }
+
+        if (!empty($setup["live"])) {
+            foreach (["user01"] as $_liveKey) {
+                if (!empty($setup["synthetic_only"]) || null === ($setup["idmap"][$_liveKey] ?? null)) {
+                    Runner::live_miss(self::LIVE_STRICT, "Live entity test blocked: needs " . $_liveKey . " via CRACKED_API_REFERENCE_TEST_USER_AGENT_ENTID");
+                }
+            }
+        }
+        $client = $setup["client"];
+
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
+        // CREATE
+        $user_agent_ref01_ent = $client->UserAgent(null);
+        $user_agent_ref01_data = Helpers::to_map(Vs::getprop(
+            Vs::getpath($setup["data"], "new.user_agent"), "user_agent_ref01"));
+        $user_agent_ref01_data["user_id"] = $setup["idmap"]["user01"];
+
+        $user_agent_ref01_data_result = $user_agent_ref01_ent->create($user_agent_ref01_data, null);
+        $user_agent_ref01_data = Helpers::to_map(is_object($user_agent_ref01_data_result) && method_exists($user_agent_ref01_data_result, 'data_get') ? $user_agent_ref01_data_result->data_get() : $user_agent_ref01_data_result);
+        $this->assertNotNull($user_agent_ref01_data);
+
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
+        // LIST
+        $user_agent_ref01_match = [
+            "user_id" => $setup["idmap"]["user01"],
+        ];
+
+        $user_agent_ref01_list_result = $user_agent_ref01_ent->list($user_agent_ref01_match, null);
+        $this->assertIsArray($user_agent_ref01_list_result);
 
     }
 }
@@ -80,7 +137,7 @@ function user_agent_basic_setup($extra)
 
     // Generate idmap.
     $idmap = [];
-    foreach (["user_agent01", "user_agent02", "user_agent03"] as $k) {
+    foreach (["user_agent01", "user_agent02", "user_agent03", "user01", "user02", "user03"] as $k) {
         $idmap[$k] = strtoupper($k);
     }
 

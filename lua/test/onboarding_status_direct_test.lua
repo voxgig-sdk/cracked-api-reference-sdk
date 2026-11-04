@@ -31,14 +31,19 @@ describe("OnboardingStatusDirect", function()
       pending(_reason or "skipped via sdk-test-control.json")
       return
     end
+    if setup.live then
+      runner.live_pace()
+    end
     local client = setup.client
 
     local params = {}
+    local query = {}
 
     local result, err = client:direct({
       path = "api/onboarding-v6/status",
       method = "GET",
       params = params,
+      query = query,
     })
     if setup.live then
       if not live_ok(result, err) then

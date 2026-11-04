@@ -3,27 +3,30 @@
     "user_agent": {
       "USER_AGENT00": {
         "agent": {},
-        "assigned_at": "s3d",
+        "assigned_at": "s33",
         "assignment_id": "ASSIGNMENT01",
-        "expires_at": "s3f",
-        "id": "USER_AGENT00",
-        "status": "s41"
+        "expires_at": "s35",
+        "status": "s36",
+        "user_id": "USER01",
+        "id": "USER_AGENT00"
       },
       "USER_AGENT01": {
         "agent": {},
-        "assigned_at": "s79",
+        "assigned_at": "s65",
         "assignment_id": "ASSIGNMENT01",
-        "expires_at": "s7b",
-        "id": "USER_AGENT01",
-        "status": "s7d"
+        "expires_at": "s67",
+        "status": "s68",
+        "user_id": "USER01",
+        "id": "USER_AGENT01"
       },
       "USER_AGENT02": {
         "agent": {},
-        "assigned_at": "sb5",
+        "assigned_at": "s97",
         "assignment_id": "ASSIGNMENT01",
-        "expires_at": "sb7",
-        "id": "USER_AGENT02",
-        "status": "sb9"
+        "expires_at": "s99",
+        "status": "s9a",
+        "user_id": "USER01",
+        "id": "USER_AGENT02"
       }
     }
   },
@@ -31,10 +34,10 @@
     "user_agent": {
       "user_agent_ref01": {
         "agent": {},
-        "assigned_at": "sf1",
+        "assigned_at": "sc9",
         "assignment_id": "ASSIGNMENT01",
-        "expires_at": "sf3",
-        "status": "sf5"
+        "expires_at": "scb",
+        "status": "scc"
       }
     }
   },

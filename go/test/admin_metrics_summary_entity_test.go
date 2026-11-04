@@ -212,6 +212,9 @@ func TestAdminMetricsSummaryEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = adminMetricsSummaryRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LIST
 		adminMetricsSummaryRef01Ent := client.AdminMetricsSummary(nil)
 		adminMetricsSummaryRef01Match := map[string]any{}

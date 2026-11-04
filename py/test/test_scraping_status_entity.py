@@ -51,6 +51,8 @@ class TestScrapingStatusEntity:
         if len(scraping_status_ref01_data_raw) > 0:
             scraping_status_ref01_data = helpers.to_map(scraping_status_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LOAD
         scraping_status_ref01_ent = client.ScrapingStatus(None)
         scraping_status_ref01_match_dt0 = {}

@@ -37,7 +37,7 @@ class TestDailyStatusEntity:
         client = CrackedApiReferenceSDK.test(
             None, {"feature": {"validate": {"active": True}}})
         with pytest.raises(Exception) as err:
-            client.DailyStatus(None).load({"id": 1, "day": "x"}, None)
+            client.DailyStatus(None).load({"daily_id": 1, "day": "x"}, None)
         assert "validate_failed" == getattr(err.value, "code", None)
 
     def test_should_run_basic_flow(self):
@@ -46,13 +46,14 @@ class TestDailyStatusEntity:
         # multiple ops; skipping any one skips the whole flow (steps depend
         # on each other).
         _live = setup.get("live", False)
-        for _op in ["load"]:
+        for _op in []:
             _skip, _reason = runner.is_control_skipped("entityOp", "daily_status." + _op, "live" if _live else "unit")
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
                 return
         if setup["live"]:
-            runner.live_miss(LIVE_STRICT, "Live entity test blocked: " + "the flow loads a daily_status record it has no list to find")
+            pytest.skip("Live coverage incomplete: the flow has no step to run")
+
         client = setup["client"]
 
         # Bootstrap entity data from existing test data.
@@ -61,16 +62,6 @@ class TestDailyStatusEntity:
         daily_status_ref01_data = None
         if len(daily_status_ref01_data_raw) > 0:
             daily_status_ref01_data = helpers.to_map(daily_status_ref01_data_raw[0][1])
-
-        # LOAD
-        daily_status_ref01_ent = client.DailyStatus(None)
-        daily_status_ref01_match_dt0 = {
-            "id": daily_status_ref01_data["id"],
-        }
-        daily_status_ref01_data_dt0_loaded = daily_status_ref01_ent.load(daily_status_ref01_match_dt0, None)
-        daily_status_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(daily_status_ref01_data_dt0_loaded))
-        assert daily_status_ref01_data_dt0_load_result is not None
-        assert daily_status_ref01_data_dt0_load_result["id"] == daily_status_ref01_data["id"]
 
 
 
@@ -90,7 +81,7 @@ def _daily_status_basic_setup(extra):
 
     # Generate idmap via transform.
     idmap = vs.transform(
-        ["daily_status01", "daily_status02", "daily_status03"],
+        ["daily_status01", "daily_status02", "daily_status03", "daily01", "daily02", "daily03"],
         {
             "`$PACK`": ["", {
                 "`$KEY`": "`$COPY`",

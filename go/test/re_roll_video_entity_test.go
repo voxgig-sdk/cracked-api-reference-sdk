@@ -62,9 +62,18 @@ func TestReRollVideoEntity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" {
+			t.Log("LIVE STEP {\"id\":\"re_roll_video.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/core/re-roll-video\"}")
+			t.Skip("Live coverage incomplete: re_roll_video.create.0 excluded (GET-only live run: needs POST /api/core/re-roll-video)")
+			return
+		}
+
 		client := setup.client
 		_ = client
 
+		if setup.live {
+			livePace()
+		}
 		// CREATE
 		reRollVideoRef01Ent := client.ReRollVideo(nil)
 		reRollVideoRef01Data := core.ToMapAny(vs.GetProp(

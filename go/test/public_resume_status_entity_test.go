@@ -75,6 +75,9 @@ func TestPublicResumeStatusEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = publicResumeStatusRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LOAD
 		publicResumeStatusRef01Ent := client.PublicResumeStatus(nil)
 		publicResumeStatusRef01MatchDt0 := map[string]any{}

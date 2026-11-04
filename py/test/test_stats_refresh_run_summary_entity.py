@@ -153,6 +153,8 @@ class TestStatsRefreshRunSummaryEntity:
         if len(stats_refresh_run_summary_ref01_data_raw) > 0:
             stats_refresh_run_summary_ref01_data = helpers.to_map(stats_refresh_run_summary_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LIST
         stats_refresh_run_summary_ref01_ent = client.StatsRefreshRunSummary(None)
         stats_refresh_run_summary_ref01_match = {}

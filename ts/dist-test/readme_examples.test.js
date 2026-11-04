@@ -73,7 +73,7 @@ const SDK_NAME = 'CrackedApiReferenceSDK';
 const SDK_ROOT = Path.join(__dirname, '..').split(Path.sep).join('/');
 // A fixture for every entity, so list()/load() resolve offline with no
 // network. Snippet client construction is rewritten to seed this.
-const TEST_SEED = { "entity": { "activate": { "test01": { "id": "test01" } }, "activate_user": { "test01": { "id": "test01" } }, "active_onboarding": { "test01": { "id": "test01" } }, "admin": { "test01": { "id": "test01" } }, "admin_account_reset": { "test01": { "id": "test01" } }, "admin_carousel": { "test01": { "id": "test01" } }, "admin_carousel_demo_review": { "test01": { "id": "test01" } }, "admin_customer": { "test01": { "id": "test01" } }, "admin_customer_success": { "test01": { "id": "test01" } }, "admin_generated_video": { "test01": { "id": "test01" } }, "admin_healthrx": { "test01": { "id": "test01" } }, "admin_insight": { "test01": { "id": "test01" } }, "admin_landing_task": { "test01": { "id": "test01" } }, "admin_metrics_summary": { "test01": { "id": "test01" } }, "admin_post": { "test01": { "id": "test01" } }, "admin_recent_signup": { "test01": { "id": "test01" } }, "admin_slideshow_diag": { "test01": { "id": "test01" } }, "admin_slideshow_import": { "test01": { "id": "test01" } }, "admin_user_view": { "test01": { "id": "test01" } }, "admin_users_table_item": { "test01": { "id": "test01" } }, "admin_video_remixer": { "test01": { "id": "test01" } }, "advance_step": { "test01": { "id": "test01" } }, "agent": { "test01": { "id": "test01" } }, "agent_access_customers_health": { "test01": { "id": "test01" } }, "agent_access_overview": { "test01": { "id": "test01" } }, "agent_access_phil_hourly_notification": { "test01": { "id": "test01" } }, "agent_access_phil_stats_refresh": { "test01": { "id": "test01" } }, "agent_access_phil_video": { "test01": { "id": "test01" } }, "agent_access_user_agent": { "test01": { "id": "test01" } }, "agent_access_user_phone_farm": { "test01": { "id": "test01" } }, "agent_access_user_post": { "test01": { "id": "test01" } }, "agent_access_user_summary": { "test01": { "id": "test01" } }, "agent_access_user_video": { "test01": { "id": "test01" } }, "agent_access_user_winning_ad": { "test01": { "id": "test01" } }, "agent_access_winning_ads_summary": { "test01": { "id": "test01" } }, "agent_detail": { "test01": { "id": "test01" } }, "agent_health": { "test01": { "id": "test01" } }, "agent_health_customer_option": { "test01": { "id": "test01" } }, "agent_health_detail": { "test01": { "id": "test01" } }, "agent_post": { "test01": { "id": "test01" } }, "agent_stat": { "test01": { "id": "test01" } }, "agent_summary": { "test01": { "id": "test01" } }, "agents_summary": { "test01": { "id": "test01" } }, "analysis_status": { "test01": { "id": "test01" } }, "analytics_post": { "test01": { "id": "test01" } }, "analyze_product": { "test01": { "id": "test01" } }, "assign_agent": { "test01": { "id": "test01" } }, "auth": { "test01": { "id": "test01" } }, "auto_schedule_setting": { "test01": { "id": "test01" } }, "bulk_tik_tok_stats_update": { "test01": { "id": "test01" } }, "carousel": { "test01": { "id": "test01" } }, "carousel_agent_detail": { "test01": { "id": "test01" } }, "carousel_status": { "test01": { "id": "test01" } }, "chat": { "test01": { "id": "test01" } }, "chat_history": { "test01": { "id": "test01" } }, "chat_session": { "test01": { "id": "test01" } }, "comment": { "test01": { "id": "test01" } }, "comment_campaign": { "test01": { "id": "test01" } }, "complete_chat_checkout": { "test01": { "id": "test01" } }, "create_blackout_sora2_video": { "test01": { "id": "test01" } }, "create_carousel": { "test01": { "id": "test01" } }, "create_product": { "test01": { "id": "test01" } }, "create_reset_product_v6": { "test01": { "id": "test01" } }, "create_sora2_video": { "test01": { "id": "test01" } }, "create_variation": { "test01": { "id": "test01" } }, "customer": { "test01": { "id": "test01" } }, "customer_health": { "test01": { "id": "test01" } }, "customer_health_all_customers_item": { "test01": { "id": "test01" } }, "customer_health_views_summary": { "test01": { "id": "test01" } }, "daily": { "test01": { "id": "test01" } }, "daily_status": { "test01": { "id": "test01" } }, "dedicated_agents_dashboard": { "test01": { "id": "test01" } }, "enterprise_agent": { "test01": { "id": "test01" } }, "enterprise_product": { "test01": { "id": "test01" } }, "exact_availability": { "test01": { "id": "test01" } }, "exact_formula": { "test01": { "id": "test01" } }, "extract_v2": { "test01": { "id": "test01" } }, "failed_post": { "test01": { "id": "test01" } }, "file": { "test01": { "id": "test01" } }, "generate_blackout_sora2_prompt": { "test01": { "id": "test01" } }, "generate_pomelli_demo": { "test01": { "id": "test01" } }, "generate_prompt": { "test01": { "id": "test01" } }, "generate_sora2_prompt": { "test01": { "id": "test01" } }, "healthrx": { "test01": { "id": "test01" } }, "init_reset_product_v6": { "test01": { "id": "test01" } }, "iri": { "test01": { "id": "test01" } }, "iris_capability": { "test01": { "id": "test01" } }, "iris_chat": { "test01": { "id": "test01" } }, "iris_connector": { "test01": { "id": "test01" } }, "iris_status": { "test01": { "id": "test01" } }, "iris_task": { "test01": { "id": "test01" } }, "iris_usage": { "test01": { "id": "test01" } }, "landing": { "test01": { "id": "test01" } }, "landing_stat": { "test01": { "id": "test01" } }, "landing_status": { "test01": { "id": "test01" } }, "link_in_bio": { "test01": { "id": "test01" } }, "link_in_dm": { "test01": { "id": "test01" } }, "link_in_post": { "test01": { "id": "test01" } }, "link_user": { "test01": { "id": "test01" } }, "media_asset": { "test01": { "id": "test01" } }, "men": { "test01": { "id": "test01" } }, "microdrama": { "test01": { "id": "test01" } }, "microhub_public": { "test01": { "id": "test01" } }, "onboarding_status": { "test01": { "id": "test01" } }, "onboarding_v6": { "test01": { "id": "test01" } }, "paid_user": { "test01": { "id": "test01" } }, "pexel": { "test01": { "id": "test01" } }, "phone_admin_available_agent_source": { "test01": { "id": "test01" } }, "product": { "test01": { "id": "test01" } }, "product_dashboard": { "test01": { "id": "test01" } }, "product_dashboard_view": { "test01": { "id": "test01" } }, "product_demo": { "test01": { "id": "test01" } }, "product_landing": { "test01": { "id": "test01" } }, "public_resume_status": { "test01": { "id": "test01" } }, "re_roll_video": { "test01": { "id": "test01" } }, "read_root_get": { "test01": { "id": "test01" } }, "record_demo_booked": { "test01": { "id": "test01" } }, "refresh_stat": { "test01": { "id": "test01" } }, "remixer_clipper": { "test01": { "id": "test01" } }, "reset_product": { "test01": { "id": "test01" } }, "retry_website_scrape": { "test01": { "id": "test01" } }, "save_survey": { "test01": { "id": "test01" } }, "scan_social": { "test01": { "id": "test01" } }, "scan_socials_public": { "test01": { "id": "test01" } }, "scan_socials_status": { "test01": { "id": "test01" } }, "schedule_v2": { "test01": { "id": "test01" } }, "scrape": { "test01": { "id": "test01" } }, "scrape_website_public": { "test01": { "id": "test01" } }, "scraped_data": { "test01": { "id": "test01" } }, "scraping_status": { "test01": { "id": "test01" } }, "self_serve_activate": { "test01": { "id": "test01" } }, "seo": { "test01": { "id": "test01" } }, "seo_ai_mention": { "test01": { "id": "test01" } }, "seo_backlink": { "test01": { "id": "test01" } }, "seo_keyword": { "test01": { "id": "test01" } }, "seo_overview": { "test01": { "id": "test01" } }, "seo_traffic": { "test01": { "id": "test01" } }, "share_access_link": { "test01": { "id": "test01" } }, "site": { "test01": { "id": "test01" } }, "slide": { "test01": { "id": "test01" } }, "slug_validation": { "test01": { "id": "test01" } }, "social": { "test01": { "id": "test01" } }, "social_scan_preview": { "test01": { "id": "test01" } }, "social_scan_process": { "test01": { "id": "test01" } }, "social_scan_save": { "test01": { "id": "test01" } }, "sora2_avatar": { "test01": { "id": "test01" } }, "sora2_avatar_asset_upload": { "test01": { "id": "test01" } }, "sora2_avatar_stat": { "test01": { "id": "test01" } }, "stat": { "test01": { "id": "test01" } }, "stats_refresh_backfill": { "test01": { "id": "test01" } }, "stats_refresh_issue": { "test01": { "id": "test01" } }, "stats_refresh_overview": { "test01": { "id": "test01" } }, "stats_refresh_run_summary": { "test01": { "id": "test01" } }, "stats_refresh_task_trigger": { "test01": { "id": "test01" } }, "stripe": { "test01": { "id": "test01" } }, "style": { "test01": { "id": "test01" } }, "template": { "test01": { "id": "test01" } }, "tik_tok_creator_info": { "test01": { "id": "test01" } }, "top_post": { "test01": { "id": "test01" } }, "upload_post_agent": { "test01": { "id": "test01" } }, "user": { "test01": { "id": "test01" } }, "user_agent": { "test01": { "id": "test01" } }, "user_health_detail": { "test01": { "id": "test01" } }, "user_with_avatar_submission": { "test01": { "id": "test01" } }, "users_health": { "test01": { "id": "test01" } }, "video": { "test01": { "id": "test01" } }, "video_remixer_worker": { "test01": { "id": "test01" } }, "watchdog_recovery": { "test01": { "id": "test01" } }, "winning_ad": { "test01": { "id": "test01" } }, "x_adaptation": { "test01": { "id": "test01" } }, "zerohuman_admin_account": { "test01": { "id": "test01" } } } };
+const TEST_SEED = { "entity": { "activate": { "test01": { "id": "test01" } }, "activate_user": { "test01": { "id": "test01" } }, "active_onboarding": { "test01": { "id": "test01" } }, "admin": { "test01": { "id": "test01" } }, "admin_account_reset": { "test01": { "id": "test01" } }, "admin_carousel": { "test01": { "id": "test01" } }, "admin_carousel_demo_review": { "test01": { "id": "test01" } }, "admin_customer": { "test01": { "id": "test01" } }, "admin_customer_success": { "test01": { "id": "test01" } }, "admin_generated_video": { "test01": { "id": "test01" } }, "admin_healthrx": { "test01": { "id": "test01" } }, "admin_insight": { "test01": { "id": "test01" } }, "admin_landing_task": { "test01": { "id": "test01" } }, "admin_metrics_summary": { "test01": { "id": "test01" } }, "admin_post": { "test01": { "id": "test01" } }, "admin_recent_signup": { "test01": { "id": "test01" } }, "admin_slideshow_diag": { "test01": { "id": "test01" } }, "admin_slideshow_import": { "test01": { "id": "test01" } }, "admin_user_view": { "test01": { "id": "test01" } }, "admin_users_table_item": { "test01": { "id": "test01" } }, "admin_video_remixer": { "test01": { "id": "test01" } }, "advance_step": { "test01": { "id": "test01" } }, "agent": { "test01": { "id": "test01" } }, "agent_access_customers_health": { "test01": { "id": "test01" } }, "agent_access_overview": { "test01": { "id": "test01" } }, "agent_access_phil_hourly_notification": { "test01": { "id": "test01" } }, "agent_access_phil_stats_refresh": { "test01": { "id": "test01" } }, "agent_access_phil_video": { "test01": { "id": "test01" } }, "agent_access_user_agent": { "test01": { "id": "test01" } }, "agent_access_user_phone_farm": { "test01": { "id": "test01" } }, "agent_access_user_post": { "test01": { "id": "test01" } }, "agent_access_user_summary": { "test01": { "id": "test01" } }, "agent_access_user_video": { "test01": { "id": "test01" } }, "agent_access_user_winning_ad": { "test01": { "id": "test01" } }, "agent_access_winning_ads_summary": { "test01": { "id": "test01" } }, "agent_detail": { "test01": { "id": "test01" } }, "agent_health": { "test01": { "id": "test01" } }, "agent_health_customer_option": { "test01": { "id": "test01" } }, "agent_health_detail": { "test01": { "id": "test01" } }, "agent_post": { "test01": { "id": "test01" } }, "agent_stat": { "test01": { "id": "test01" } }, "agent_summary": { "test01": { "id": "test01" } }, "agents_summary": { "test01": { "id": "test01" } }, "analysis_status": { "test01": { "id": "test01" } }, "analytics_post": { "test01": { "id": "test01" } }, "analyze_product": { "test01": { "id": "test01" } }, "assign_agent": { "test01": { "id": "test01" } }, "auth": { "test01": { "id": "test01" } }, "auto_schedule_setting": { "test01": { "id": "test01" } }, "bulk_tik_tok_stats_update": { "test01": { "id": "test01" } }, "carousel": { "test01": { "id": "test01", "queue_id": "test01" } }, "carousel_agent_detail": { "test01": { "id": "test01" } }, "carousel_status": { "test01": { "id": "test01" } }, "chat_history": { "test01": { "id": "test01" } }, "chat_session": { "test01": { "id": "test01" } }, "comment": { "test01": { "id": "test01" } }, "comment_campaign": { "test01": { "id": "test01" } }, "complete_chat_checkout": { "test01": { "id": "test01" } }, "create_blackout_sora2_video": { "test01": { "id": "test01" } }, "create_carousel": { "test01": { "id": "test01" } }, "create_product": { "test01": { "id": "test01" } }, "create_reset_product_v6": { "test01": { "id": "test01" } }, "create_sora2_video": { "test01": { "id": "test01" } }, "create_variation": { "test01": { "id": "test01" } }, "customer": { "test01": { "id": "test01" } }, "customer_health": { "test01": { "id": "test01", "user_id": "test01" } }, "customer_health_all_customers_item": { "test01": { "id": "test01" } }, "customer_health_views_summary": { "test01": { "id": "test01" } }, "daily": { "test01": { "id": "test01" } }, "daily_status": { "test01": { "id": "test01" } }, "dedicated_agents_dashboard": { "test01": { "id": "test01" } }, "enterprise_agent": { "test01": { "id": "test01" } }, "exact_availability": { "test01": { "id": "test01" } }, "exact_formula": { "test01": { "id": "test01" } }, "extract_v2": { "test01": { "id": "test01" } }, "failed_post": { "test01": { "id": "test01" } }, "file": { "test01": { "id": "test01" } }, "generate_blackout_sora2_prompt": { "test01": { "id": "test01" } }, "generate_pomelli_demo": { "test01": { "id": "test01" } }, "generate_prompt": { "test01": { "id": "test01" } }, "generate_sora2_prompt": { "test01": { "id": "test01" } }, "healthrx": { "test01": { "id": "test01" } }, "init_reset_product_v6": { "test01": { "id": "test01" } }, "iris_capability": { "test01": { "id": "test01" } }, "iris_chat": { "test01": { "id": "test01" } }, "iris_connector": { "test01": { "id": "test01" } }, "iris_status": { "test01": { "id": "test01" } }, "iris_task": { "test01": { "id": "test01" } }, "iris_usage": { "test01": { "id": "test01" } }, "landing": { "test01": { "id": "test01" } }, "landing_stat": { "test01": { "id": "test01" } }, "landing_status": { "test01": { "id": "test01" } }, "link_in_bio": { "test01": { "id": "test01" } }, "link_in_dm": { "test01": { "id": "test01" } }, "link_in_post": { "test01": { "id": "test01" } }, "link_user": { "test01": { "id": "test01" } }, "media_asset": { "test01": { "id": "test01", "product_id": "test01" } }, "men": { "test01": { "id": "test01" } }, "microdrama": { "test01": { "id": "test01" } }, "microhub_public": { "test01": { "id": "test01" } }, "onboarding_status": { "test01": { "id": "test01" } }, "onboarding_v6": { "test01": { "id": "test01" } }, "paid_user": { "test01": { "id": "test01" } }, "pexel": { "test01": { "id": "test01" } }, "phone_admin_available_agent_source": { "test01": { "id": "test01" } }, "product": { "test01": { "id": "test01", "product_id": "test01" } }, "product_dashboard": { "test01": { "id": "test01" } }, "product_dashboard_view": { "test01": { "id": "test01" } }, "product_demo": { "test01": { "id": "test01" } }, "product_landing": { "test01": { "id": "test01" } }, "public_resume_status": { "test01": { "id": "test01" } }, "re_roll_video": { "test01": { "id": "test01" } }, "record_demo_booked": { "test01": { "id": "test01" } }, "refresh_stat": { "test01": { "id": "test01" } }, "remixer_clipper": { "test01": { "id": "test01" } }, "reset_product": { "test01": { "id": "test01" } }, "retry_website_scrape": { "test01": { "id": "test01" } }, "root_get": { "test01": { "id": "test01" } }, "save_survey": { "test01": { "id": "test01" } }, "scan_social": { "test01": { "id": "test01" } }, "scan_socials_public": { "test01": { "id": "test01" } }, "scan_socials_status": { "test01": { "id": "test01" } }, "schedule_queue": { "test01": { "id": "test01" } }, "schedule_v2": { "test01": { "id": "test01" } }, "scrape": { "test01": { "id": "test01" } }, "scrape_website_public": { "test01": { "id": "test01" } }, "scraped_data": { "test01": { "id": "test01" } }, "scraping_status": { "test01": { "id": "test01" } }, "self_serve_activate": { "test01": { "id": "test01" } }, "seo": { "test01": { "id": "test01" } }, "seo_ai_mention": { "test01": { "id": "test01" } }, "seo_backlink": { "test01": { "id": "test01" } }, "seo_keyword": { "test01": { "id": "test01" } }, "seo_overview": { "test01": { "id": "test01" } }, "seo_traffic": { "test01": { "id": "test01" } }, "share_access_link": { "test01": { "id": "test01" } }, "site": { "test01": { "id": "test01" } }, "slide": { "test01": { "id": "test01" } }, "slug_validation": { "test01": { "id": "test01" } }, "social": { "test01": { "id": "test01" } }, "social_scan_preview": { "test01": { "id": "test01" } }, "social_scan_process": { "test01": { "id": "test01" } }, "social_scan_save": { "test01": { "id": "test01" } }, "sora2_avatar": { "test01": { "id": "test01" } }, "sora2_avatar_asset_upload": { "test01": { "id": "test01" } }, "sora2_avatar_stat": { "test01": { "id": "test01" } }, "stat": { "test01": { "id": "test01" } }, "stats_refresh_backfill": { "test01": { "id": "test01" } }, "stats_refresh_issue": { "test01": { "id": "test01" } }, "stats_refresh_overview": { "test01": { "id": "test01" } }, "stats_refresh_run_summary": { "test01": { "id": "test01" } }, "stats_refresh_task_trigger": { "test01": { "id": "test01" } }, "stripe": { "test01": { "id": "test01" } }, "style": { "test01": { "id": "test01" } }, "template": { "test01": { "id": "test01" } }, "tik_tok_creator_info": { "test01": { "id": "test01" } }, "top_post": { "test01": { "id": "test01" } }, "upload_post_agent": { "test01": { "id": "test01" } }, "user": { "test01": { "id": "test01", "userId": "test01" } }, "user_agent": { "test01": { "id": "test01" } }, "user_health_detail": { "test01": { "id": "test01" } }, "user_with_avatar_submission": { "test01": { "id": "test01" } }, "users_health": { "test01": { "id": "test01" } }, "video": { "test01": { "id": "test01" } }, "video_remixer_worker": { "test01": { "id": "test01" } }, "watchdog_recovery": { "test01": { "id": "test01" } }, "winning_ad": { "test01": { "id": "test01" } }, "x_adaptation": { "test01": { "id": "test01" } }, "zerohuman_admin_account": { "test01": { "id": "test01" } } } };
 const SEED_ARG = JSON.stringify(TEST_SEED);
 const SEEDED_CTOR = SDK_NAME + '.test(' + SEED_ARG + ')';
 // The client VARIABLE, not the word: a package name carries the word between
@@ -138,23 +138,34 @@ function isRunnable(code) {
 }
 // Wrap ONE block as a self-contained temp module: the block goes in its own
 // scope inside an async function with a shared seeded `client`.
+const SNIPPET_HEAD = [
+    'import { ' + SDK_NAME + ' } from ' + JSON.stringify(SDK_ROOT),
+    '',
+    'async function __ex() {',
+    // Shared client for snippets that reference `client` without constructing
+    // one (e.g. the direct() example).
+    '  const client = ' + SDK_NAME + '.test()',
+    '  void client',
+    '  {',
+];
+const SNIPPET_INDENT = '    ';
 function buildSnippetModule(block) {
-    const inner = stripImports(block).split('\n').map((l) => '    ' + l).join('\n');
+    const inner = stripImports(block).split('\n').map((l) => SNIPPET_INDENT + l).join('\n');
     return [
-        'import { ' + SDK_NAME + ' } from ' + JSON.stringify(SDK_ROOT),
-        '',
-        'async function __ex() {',
-        // Shared client for snippets that reference `client` without constructing
-        // one (e.g. the direct() example).
-        '  const client = ' + SDK_NAME + '.test()',
-        '  void client',
-        '  {',
+        ...SNIPPET_HEAD,
         inner,
         '  }',
         '}',
         'void __ex',
         '',
     ].join('\n');
+}
+// A tsc position in a wrapped module, as a line and column of the block itself.
+function blockPosition(line, col) {
+    const at = line - SNIPPET_HEAD.length;
+    return 0 < at
+        ? 'line ' + at + ', col ' + Math.max(1, col - SNIPPET_INDENT.length)
+        : 'wrapper line ' + line + ', col ' + col;
 }
 // Compile a batch of blocks in ONE tsc pass — one temp file per block, so
 // each is an isolated program entry — and return which snippet indices
@@ -195,22 +206,34 @@ function compileBatch(indices, blocks, key) {
         ], { cwd: tsDir, encoding: 'utf8' });
         const raw = ((res.stdout || '') + (res.stderr || '')).trim();
         const errored = new Set();
+        // Each snippet's own diagnostics, so a report quotes only those of the
+        // blocks it names; tsc's indented follow-on lines stay with theirs.
+        const diagnostics = new Map();
+        let current = null;
         let unattributed = false;
         if (0 !== res.status) {
             for (const line of raw.split('\n')) {
-                const m = /_snippet(\d+)\.gen\.cts\(\d+,\d+\):\s*error/.exec(line);
+                const m = /_snippet(\d+)\.gen\.cts\((\d+),(\d+)\):\s*(error[\s\S]*)$/.exec(line);
                 if (null == m) {
                     // A genuine error diagnostic not attributable to a snippet file
                     // (e.g. inside the SDK itself) is an anomaly.
                     if (/:\s*error\s+TS\d+/.test(line)) {
                         unattributed = true;
+                        current = null;
+                    }
+                    else if (null != current && /^\s/.test(line)) {
+                        current.push(line);
                     }
                     continue;
                 }
-                errored.add(parseInt(m[1], 10));
+                const i = parseInt(m[1], 10);
+                errored.add(i);
+                current = diagnostics.get(i) || [];
+                diagnostics.set(i, current);
+                current.push(blockPosition(parseInt(m[2], 10), parseInt(m[3], 10)) + ': ' + m[4]);
             }
         }
-        return { errored, raw, unattributed };
+        return { errored, diagnostics, raw, unattributed };
     }
     finally {
         Fs.rmSync(dir, { recursive: true, force: true });
@@ -225,13 +248,16 @@ function compileBatch(indices, blocks, key) {
 // verbatim by the caller.
 function typeCheckBlocks(blocks, key) {
     const failing = new Set();
+    const diagnostics = new Map();
     const raws = [];
     let globalError = false;
     let remaining = blocks.map((_b, i) => i);
     // Guard: at most one pass per block plus a final clean pass.
     for (let pass = 0; pass <= blocks.length && 0 < remaining.length; pass++) {
-        const { errored, raw, unattributed } = compileBatch(remaining, blocks, key);
+        const batch = compileBatch(remaining, blocks, key);
+        const { errored, raw, unattributed } = batch;
         raws.push(raw);
+        batch.diagnostics.forEach((lines, i) => diagnostics.set(i, lines));
         if (unattributed) {
             globalError = true;
         }
@@ -243,7 +269,7 @@ function typeCheckBlocks(blocks, key) {
         }
         remaining = remaining.filter((i) => !errored.has(i));
     }
-    return { failing, raw: raws.filter(Boolean).join('\n'), globalError };
+    return { failing, diagnostics, raw: raws.filter(Boolean).join('\n'), globalError };
 }
 // Turn a documented snippet into an offline-runnable one: strip imports,
 // rewrite real client construction (`new <Sdk>SDK(...)` and any
@@ -330,7 +356,7 @@ function indentBlock(code) {
             const md = Fs.readFileSync(doc.path, 'utf8');
             const blocks = extractTsBlocks(md);
             (0, node_assert_1.default)(blocks.length > 0, 'No TypeScript code blocks found in ' + doc.label);
-            const { failing, raw, globalError } = typeCheckBlocks(blocks, doc.key);
+            const { failing, diagnostics, raw, globalError } = typeCheckBlocks(blocks, doc.key);
             (0, node_assert_1.default)(!globalError, 'tsc reported an error outside any snippet in ' + doc.label +
                 ' — the harness could not attribute it:\n\n' + raw + '\n');
             let executed = 0;
@@ -345,7 +371,8 @@ function indentBlock(code) {
                     illustration++;
                 }
                 else if (!typechecks && !shape) {
-                    unrecognized.push('  snippet ' + i + ':\n' + indentBlock(b));
+                    unrecognized.push('  snippet ' + i + ':\n' + indentBlock(b) + '\n\n  tsc:\n' +
+                        indentBlock((diagnostics.get(i) || []).join('\n')));
                 }
                 else if (typechecks && runnable) {
                     executed++;
@@ -362,7 +389,7 @@ function indentBlock(code) {
             node_assert_1.default.strictEqual(unrecognized.length, 0, 'These ' + doc.label + ' ```ts blocks neither type-check nor match the ' +
                 'illustration allowlist. Fix the snippet (or the SDK), or — if it is ' +
                 'genuinely illustrative — reshape it to the allowlist:\n\n' +
-                unrecognized.join('\n\n') + '\n\ntsc output:\n' + raw + '\n');
+                unrecognized.join('\n\n') + '\n');
             node_assert_1.default.strictEqual(blocks.length, executed + typecheckedOnly + illustration, 'completeness partition mismatch for ' + doc.label + ': ' + blocks.length +
                 ' total != ' + executed + ' executed + ' + typecheckedOnly +
                 ' typechecked + ' + illustration + ' illustration');

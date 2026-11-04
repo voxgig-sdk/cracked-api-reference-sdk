@@ -28,25 +28,33 @@ describe("DailyStatusDirect", function()
       pending(_reason or "skipped via sdk-test-control.json")
       return
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" and setup.idmap["daily01"] == nil then
+      print("LIVE STEP {\"id\":\"direct-load-daily_status\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs daily01, which only POST /api/carousel/daily/{product_id}/plan gives\"}")
+      pending("Live coverage incomplete: direct-load-daily_status excluded (GET-only live run: needs daily01, which only POST /api/carousel/daily/{product_id}/plan gives)")
+      return
+    end
     if setup.live then
-      for _, _live_key in ipairs({"daily_status01"}) do
+      for _, _live_key in ipairs({"daily01"}) do
         if setup.idmap[_live_key] == nil then
           runner.live_miss(pending, LIVE_STRICT, "Live test blocked: needs " .. _live_key .. " via CRACKED_API_REFERENCE_TEST_DAILY_STATUS_ENTID")
         end
       end
+    end
+    if setup.live then
+      runner.live_pace()
     end
     local client = setup.client
 
     local params = {}
     local query = {}
     if setup.live then
-      params["id"] = setup.idmap["daily_status01"]
+      params["daily_id"] = setup.idmap["daily01"]
     else
-      params["id"] = "direct01"
+      params["daily_id"] = "direct01"
     end
 
     local result, err = client:direct({
-      path = "api/carousel/daily/{id}/status",
+      path = "api/carousel/daily/{daily_id}/status",
       method = "GET",
       params = params,
       query = query,

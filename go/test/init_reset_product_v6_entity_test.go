@@ -62,9 +62,18 @@ func TestInitResetProductV6Entity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" {
+			t.Log("LIVE STEP {\"id\":\"init_reset_product_v6.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/reset-product/init-v6\"}")
+			t.Skip("Live coverage incomplete: init_reset_product_v6.create.0 excluded (GET-only live run: needs POST /api/reset-product/init-v6)")
+			return
+		}
+
 		client := setup.client
 		_ = client
 
+		if setup.live {
+			livePace()
+		}
 		// CREATE
 		initResetProductV6Ref01Ent := client.InitResetProductV6(nil)
 		initResetProductV6Ref01Data := core.ToMapAny(vs.GetProp(

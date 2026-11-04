@@ -62,9 +62,18 @@ func TestSocialScanProcessEntity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" {
+			t.Log("LIVE STEP {\"id\":\"social_scan_process.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/social-scan/process\"}")
+			t.Skip("Live coverage incomplete: social_scan_process.create.0 excluded (GET-only live run: needs POST /api/social-scan/process)")
+			return
+		}
+
 		client := setup.client
 		_ = client
 
+		if setup.live {
+			livePace()
+		}
 		// CREATE
 		socialScanProcessRef01Ent := client.SocialScanProcess(nil)
 		socialScanProcessRef01Data := core.ToMapAny(vs.GetProp(

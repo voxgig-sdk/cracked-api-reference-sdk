@@ -53,7 +53,6 @@ import { BulkTikTokStatsUpdateEntity } from './entity/BulkTikTokStatsUpdateEntit
 import { CarouselEntity } from './entity/CarouselEntity'
 import { CarouselAgentDetailEntity } from './entity/CarouselAgentDetailEntity'
 import { CarouselStatusEntity } from './entity/CarouselStatusEntity'
-import { ChatEntity } from './entity/ChatEntity'
 import { ChatHistoryEntity } from './entity/ChatHistoryEntity'
 import { ChatSessionEntity } from './entity/ChatSessionEntity'
 import { CommentEntity } from './entity/CommentEntity'
@@ -73,7 +72,6 @@ import { DailyEntity } from './entity/DailyEntity'
 import { DailyStatusEntity } from './entity/DailyStatusEntity'
 import { DedicatedAgentsDashboardEntity } from './entity/DedicatedAgentsDashboardEntity'
 import { EnterpriseAgentEntity } from './entity/EnterpriseAgentEntity'
-import { EnterpriseProductEntity } from './entity/EnterpriseProductEntity'
 import { ExactAvailabilityEntity } from './entity/ExactAvailabilityEntity'
 import { ExactFormulaEntity } from './entity/ExactFormulaEntity'
 import { ExtractV2Entity } from './entity/ExtractV2Entity'
@@ -85,7 +83,6 @@ import { GeneratePromptEntity } from './entity/GeneratePromptEntity'
 import { GenerateSora2PromptEntity } from './entity/GenerateSora2PromptEntity'
 import { HealthrxEntity } from './entity/HealthrxEntity'
 import { InitResetProductV6Entity } from './entity/InitResetProductV6Entity'
-import { IriEntity } from './entity/IriEntity'
 import { IrisCapabilityEntity } from './entity/IrisCapabilityEntity'
 import { IrisChatEntity } from './entity/IrisChatEntity'
 import { IrisConnectorEntity } from './entity/IrisConnectorEntity'
@@ -115,16 +112,17 @@ import { ProductDemoEntity } from './entity/ProductDemoEntity'
 import { ProductLandingEntity } from './entity/ProductLandingEntity'
 import { PublicResumeStatusEntity } from './entity/PublicResumeStatusEntity'
 import { ReRollVideoEntity } from './entity/ReRollVideoEntity'
-import { ReadRootGetEntity } from './entity/ReadRootGetEntity'
 import { RecordDemoBookedEntity } from './entity/RecordDemoBookedEntity'
 import { RefreshStatEntity } from './entity/RefreshStatEntity'
 import { RemixerClipperEntity } from './entity/RemixerClipperEntity'
 import { ResetProductEntity } from './entity/ResetProductEntity'
 import { RetryWebsiteScrapeEntity } from './entity/RetryWebsiteScrapeEntity'
+import { RootGetEntity } from './entity/RootGetEntity'
 import { SaveSurveyEntity } from './entity/SaveSurveyEntity'
 import { ScanSocialEntity } from './entity/ScanSocialEntity'
 import { ScanSocialsPublicEntity } from './entity/ScanSocialsPublicEntity'
 import { ScanSocialsStatusEntity } from './entity/ScanSocialsStatusEntity'
+import { ScheduleQueueEntity } from './entity/ScheduleQueueEntity'
 import { ScheduleV2Entity } from './entity/ScheduleV2Entity'
 import { ScrapeEntity } from './entity/ScrapeEntity'
 import { ScrapeWebsitePublicEntity } from './entity/ScrapeWebsitePublicEntity'
@@ -336,6 +334,13 @@ class CrackedApiReferenceSDK {
       for (let key in uheaders) {
         spec.headers[key] = uheaders[key]
       }
+    }
+
+    // A raw request has no point to declare its response type, so it asks
+    // for the JSON it reads: an API that negotiates on Accept otherwise
+    // answers in its own default format. A caller's own accept wins.
+    if (!Object.keys(spec.headers).some((key) => 'accept' === key.toLowerCase())) {
+      spec.headers.accept = 'application/json'
     }
 
     
@@ -966,15 +971,6 @@ class CrackedApiReferenceSDK {
   }
 
 
-  // Entity access: `client.Chat().list()` / `client.Chat().load({ id })`.
-  // The argument is the entity OPTIONS object (passed to the entity
-  // constructor as entopts), not initial entity data.
-  Chat(entopts?: Record<string, any>) {
-    const self = this
-    return new ChatEntity(self, entopts)
-  }
-
-
   // Entity access: `client.ChatHistory().list()` / `client.ChatHistory().load({ id })`.
   // The argument is the entity OPTIONS object (passed to the entity
   // constructor as entopts), not initial entity data.
@@ -1146,15 +1142,6 @@ class CrackedApiReferenceSDK {
   }
 
 
-  // Entity access: `client.EnterpriseProduct().list()` / `client.EnterpriseProduct().load({ id })`.
-  // The argument is the entity OPTIONS object (passed to the entity
-  // constructor as entopts), not initial entity data.
-  EnterpriseProduct(entopts?: Record<string, any>) {
-    const self = this
-    return new EnterpriseProductEntity(self, entopts)
-  }
-
-
   // Entity access: `client.ExactAvailability().list()` / `client.ExactAvailability().load({ id })`.
   // The argument is the entity OPTIONS object (passed to the entity
   // constructor as entopts), not initial entity data.
@@ -1251,15 +1238,6 @@ class CrackedApiReferenceSDK {
   InitResetProductV6(entopts?: Record<string, any>) {
     const self = this
     return new InitResetProductV6Entity(self, entopts)
-  }
-
-
-  // Entity access: `client.Iri().list()` / `client.Iri().load({ id })`.
-  // The argument is the entity OPTIONS object (passed to the entity
-  // constructor as entopts), not initial entity data.
-  Iri(entopts?: Record<string, any>) {
-    const self = this
-    return new IriEntity(self, entopts)
   }
 
 
@@ -1524,15 +1502,6 @@ class CrackedApiReferenceSDK {
   }
 
 
-  // Entity access: `client.ReadRootGet().list()` / `client.ReadRootGet().load({ id })`.
-  // The argument is the entity OPTIONS object (passed to the entity
-  // constructor as entopts), not initial entity data.
-  ReadRootGet(entopts?: Record<string, any>) {
-    const self = this
-    return new ReadRootGetEntity(self, entopts)
-  }
-
-
   // Entity access: `client.RecordDemoBooked().list()` / `client.RecordDemoBooked().load({ id })`.
   // The argument is the entity OPTIONS object (passed to the entity
   // constructor as entopts), not initial entity data.
@@ -1578,6 +1547,15 @@ class CrackedApiReferenceSDK {
   }
 
 
+  // Entity access: `client.RootGet().list()` / `client.RootGet().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  RootGet(entopts?: Record<string, any>) {
+    const self = this
+    return new RootGetEntity(self, entopts)
+  }
+
+
   // Entity access: `client.SaveSurvey().list()` / `client.SaveSurvey().load({ id })`.
   // The argument is the entity OPTIONS object (passed to the entity
   // constructor as entopts), not initial entity data.
@@ -1611,6 +1589,15 @@ class CrackedApiReferenceSDK {
   ScanSocialsStatus(entopts?: Record<string, any>) {
     const self = this
     return new ScanSocialsStatusEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.ScheduleQueue().list()` / `client.ScheduleQueue().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  ScheduleQueue(entopts?: Record<string, any>) {
+    const self = this
+    return new ScheduleQueueEntity(self, entopts)
   }
 
 

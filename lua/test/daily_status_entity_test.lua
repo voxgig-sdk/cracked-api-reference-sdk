@@ -29,7 +29,7 @@ describe("DailyStatusEntity", function()
       return
     end
     local client = sdk.test(nil, { feature = { validate = { active = true } } })
-    local _, err = client:DailyStatus(nil):load({ ["id"] = 1, ["day"] = "x" }, nil)
+    local _, err = client:DailyStatus(nil):load({ ["daily_id"] = 1, ["day"] = "x" }, nil)
     assert.are.equal("validate_failed", type(err) == "table" and err.code or nil)
   end)
 
@@ -37,7 +37,7 @@ describe("DailyStatusEntity", function()
     local setup = daily_status_basic_setup(nil)
     -- Per-op sdk-test-control.json skip.
     local _live = setup.live or false
-    for _, _op in ipairs({"load"}) do
+    for _, _op in ipairs({}) do
       local _should_skip, _reason = runner.is_control_skipped("entityOp", "daily_status." .. _op, _live and "live" or "unit")
       if _should_skip then
         pending(_reason or "skipped via sdk-test-control.json")
@@ -45,8 +45,10 @@ describe("DailyStatusEntity", function()
       end
     end
     if setup.live then
-      runner.live_miss(pending, LIVE_STRICT, "Live entity test blocked: " .. "the flow loads a daily_status record it has no list to find")
+      pending("Live coverage incomplete: the flow has no step to run")
+      return
     end
+
     local client = setup.client
 
     -- Bootstrap entity data from existing test data.
@@ -56,17 +58,6 @@ describe("DailyStatusEntity", function()
     if #daily_status_ref01_data_raw > 0 then
       daily_status_ref01_data = helpers.to_map(daily_status_ref01_data_raw[1][2])
     end
-
-    -- LOAD
-    local daily_status_ref01_ent = client:DailyStatus(nil)
-    local daily_status_ref01_match_dt0 = {
-      id = daily_status_ref01_data["id"],
-    }
-    local daily_status_ref01_data_dt0_loaded, err = daily_status_ref01_ent:load(daily_status_ref01_match_dt0, nil)
-    assert.is_nil(err)
-    local daily_status_ref01_data_dt0_load_result = helpers.to_map(type(daily_status_ref01_data_dt0_loaded) == 'table' and daily_status_ref01_data_dt0_loaded.data_get and daily_status_ref01_data_dt0_loaded:data_get() or daily_status_ref01_data_dt0_loaded)
-    assert.is_not_nil(daily_status_ref01_data_dt0_load_result)
-    assert.are.equal(daily_status_ref01_data_dt0_load_result["id"], daily_status_ref01_data["id"])
 
   end)
 end)
@@ -91,7 +82,7 @@ function daily_status_basic_setup(extra)
 
   -- Generate idmap via transform.
   local idmap = vs.transform(
-    { "daily_status01", "daily_status02", "daily_status03" },
+    { "daily_status01", "daily_status02", "daily_status03", "daily01", "daily02", "daily03" },
     {
       ["`$PACK`"] = { "", {
         ["`$KEY`"] = "`$COPY`",

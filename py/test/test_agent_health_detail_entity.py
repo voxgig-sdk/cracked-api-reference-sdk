@@ -114,6 +114,16 @@ class TestAgentHealthDetailEntity:
         assert client.AgentHealthDetail(None).list(None, {"throw": False}) is None
         assert fired < hook.unexpected
 
+    def test_should_validate_each_listed_record(self):
+        if "validate" not in (shared_config().get("feature") or {}):
+            pytest.skip("feature not present in this SDK: validate")
+        opts = {"feature": {"validate": {"active": True, "request": False, "response": True}}}
+        listed = CrackedApiReferenceSDK.test({"entity": {"agent_health_detail": {"v1": {"agent_id": "x", "category": "x", "connection_status": "x", "device_status": "x", "issue": "x", "state": "x"}}}}, opts).AgentHealthDetail(None).list(None, None)
+        assert ["v1"] == [ent.data_get().get("id") for ent in listed]
+        with pytest.raises(Exception) as err:
+            CrackedApiReferenceSDK.test({"entity": {"agent_health_detail": {"v1": {"agent_id": 1, "category": "x", "connection_status": "x", "device_status": "x", "issue": "x", "state": "x"}}}}, opts).AgentHealthDetail(None).list(None, None)
+        assert "validate_failed" == getattr(err.value, "code", None)
+
     def test_should_refuse_an_invalid_request(self):
         if "validate" not in (shared_config().get("feature") or {}):
             pytest.skip("feature not present in this SDK: validate")
@@ -143,6 +153,8 @@ class TestAgentHealthDetailEntity:
         if len(agent_health_detail_ref01_data_raw) > 0:
             agent_health_detail_ref01_data = helpers.to_map(agent_health_detail_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LIST
         agent_health_detail_ref01_ent = client.AgentHealthDetail(None)
         agent_health_detail_ref01_match = {}

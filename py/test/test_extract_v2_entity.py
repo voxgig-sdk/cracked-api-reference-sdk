@@ -51,8 +51,14 @@ class TestExtractV2Entity:
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
                 return
+        if setup["live"] and os.environ.get("VOXGIG_GETONLY_GUARD") == "TRUE":
+            print("LIVE STEP {\"id\":\"extract_v2.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/scraper/extract_v2\"}")
+            pytest.skip("Live coverage incomplete: extract_v2.create.0 excluded (GET-only live run: needs POST /api/scraper/extract_v2)")
+
         client = setup["client"]
 
+        if setup["live"]:
+            runner.live_pace()
         # CREATE
         extract_v2_ref01_ent = client.ExtractV2(None)
         extract_v2_ref01_data = helpers.to_map(vs.getprop(

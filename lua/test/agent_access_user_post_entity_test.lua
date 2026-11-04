@@ -164,6 +164,9 @@ describe("AgentAccessUserPostEntity", function()
       agent_access_user_post_ref01_data = helpers.to_map(agent_access_user_post_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LIST
     local agent_access_user_post_ref01_ent = client:AgentAccessUserPost(nil)
     local agent_access_user_post_ref01_match = {}

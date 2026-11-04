@@ -29,6 +29,11 @@ const utility_1 = require("../../utility");
         const setup = directSetup({ id: 'direct01' });
         if ((0, utility_1.maybeSkipControl)(t, 'direct', 'direct-load-media_asset', setup.live))
             return;
+        if (setup.live && 'TRUE' === process.env.VOXGIG_GETONLY_GUARD && null == setup.idmap?.["media_asset01"]) {
+            console.log("LIVE STEP {\"id\":\"direct-load-media_asset\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs media_asset01, which only POST /api/media-assets/{media_asset_id}/exclude-copycat gives\"}");
+            t.skip("Live coverage incomplete: direct-load-media_asset excluded (GET-only live run: needs media_asset01, which only POST /api/media-assets/{media_asset_id}/exclude-copycat gives)");
+            return;
+        }
         if ((0, utility_1.skipIfMissingIds)(t, setup, ["media_asset01"], LIVE_STRICT))
             return;
         const { client, calls } = setup;

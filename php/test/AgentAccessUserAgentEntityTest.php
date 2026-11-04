@@ -173,6 +173,24 @@ class AgentAccessUserAgentEntityTest extends TestCase
         $this->assertSame(2, $client->_cost["total"]["attempts"]);
     }
 
+    public function test_validate_list_response(): void
+    {
+        $cfg = CrackedApiReferenceConfig::shared_config();
+        if (!isset($cfg["feature"]["validate"])) {
+            $this->markTestSkipped('feature not present in this SDK: validate');
+        }
+        $opts = ["feature" => ["validate" => ["active" => true, "request" => false, "response" => true]]];
+        $listed = CrackedApiReferenceSDK::test(['entity' => ['agent_access_user_agent' => ['v1' => ['avatar' => 'x', 'facebookUrl' => 'x', 'instagramUrl' => 'x', 'name' => 'x', 'productId' => 'x', 'productName' => 'x', 'tiktokUrl' => 'x', 'type' => 'x', 'uploadPostPlatforms' => 'x', 'youtubeUrl' => 'x']]]], $opts)->AgentAccessUserAgent(null)->list(null, null);
+        $this->assertSame(['v1'], array_map(fn($ent) => $ent->data_get()['id'] ?? null, $listed));
+        $err = null;
+        try {
+            CrackedApiReferenceSDK::test(['entity' => ['agent_access_user_agent' => ['v1' => ['avatar' => 'x', 'facebookUrl' => 'x', 'instagramUrl' => 'x', 'name' => 1, 'productId' => 'x', 'productName' => 'x', 'tiktokUrl' => 'x', 'type' => 'x', 'uploadPostPlatforms' => 'x', 'youtubeUrl' => 'x']]]], $opts)->AgentAccessUserAgent(null)->list(null, null);
+        } catch (\Throwable $e) {
+            $err = $e;
+        }
+        $this->assertSame('validate_failed', $err->sdk_code ?? null);
+    }
+
     public function test_validate(): void
     {
         $cfg = CrackedApiReferenceConfig::shared_config();
@@ -211,6 +229,9 @@ class AgentAccessUserAgentEntityTest extends TestCase
             $agent_access_user_agent_ref01_data = Helpers::to_map($agent_access_user_agent_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LIST
         $agent_access_user_agent_ref01_ent = $client->AgentAccessUserAgent(null);
         $agent_access_user_agent_ref01_match = [];

@@ -43,6 +43,9 @@ describe("ExactAvailabilityEntity", function()
       exact_availability_ref01_data = helpers.to_map(exact_availability_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LOAD
     local exact_availability_ref01_ent = client:ExactAvailability(nil)
     local exact_availability_ref01_match_dt0 = {}

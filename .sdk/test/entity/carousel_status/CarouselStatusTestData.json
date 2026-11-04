@@ -2,55 +2,55 @@
   "existing": {
     "carousel_status": {
       "CAROUSEL_STATUS00": {
-        "caption": "s64",
-        "error": "s65",
-        "id": "CAROUSEL_STATUS00",
-        "image_model": "s67",
-        "image_provider": "s68",
+        "caption": "s5a",
+        "error": "s5b",
+        "image_model": "s5c",
+        "image_provider": "s5d",
         "image_task_id": "IMAGE_TASK01",
-        "image_url": "s6a",
-        "index": 107,
-        "prompt": "s6c",
-        "status": "s6d"
+        "image_url": "s5f",
+        "index": 96,
+        "prompt": "s61",
+        "status": "s62",
+        "carousel_id": "CAROUSEL01"
       },
       "CAROUSEL_STATUS01": {
-        "caption": "sc8",
-        "error": "sc9",
-        "id": "CAROUSEL_STATUS01",
-        "image_model": "scb",
-        "image_provider": "scc",
+        "caption": "sb4",
+        "error": "sb5",
+        "image_model": "sb6",
+        "image_provider": "sb7",
         "image_task_id": "IMAGE_TASK01",
-        "image_url": "sce",
-        "index": 207,
-        "prompt": "sd0",
-        "status": "sd1"
+        "image_url": "sb9",
+        "index": 186,
+        "prompt": "sbb",
+        "status": "sbc",
+        "carousel_id": "CAROUSEL01"
       },
       "CAROUSEL_STATUS02": {
-        "caption": "s12c",
-        "error": "s12d",
-        "id": "CAROUSEL_STATUS02",
-        "image_model": "s12f",
-        "image_provider": "s130",
+        "caption": "s10e",
+        "error": "s10f",
+        "image_model": "s110",
+        "image_provider": "s111",
         "image_task_id": "IMAGE_TASK01",
-        "image_url": "s132",
-        "index": 307,
-        "prompt": "s134",
-        "status": "s135"
+        "image_url": "s113",
+        "index": 276,
+        "prompt": "s115",
+        "status": "s116",
+        "carousel_id": "CAROUSEL01"
       }
     }
   },
   "new": {
     "carousel_status": {
       "carousel_status_ref01": {
-        "caption": "s190",
-        "error": "s191",
-        "image_model": "s193",
-        "image_provider": "s194",
+        "caption": "s168",
+        "error": "s169",
+        "image_model": "s16a",
+        "image_provider": "s16b",
         "image_task_id": "IMAGE_TASK01",
-        "image_url": "s196",
-        "index": 407,
-        "prompt": "s198",
-        "status": "s199"
+        "image_url": "s16d",
+        "index": 366,
+        "prompt": "s16f",
+        "status": "s170"
       }
     }
   },

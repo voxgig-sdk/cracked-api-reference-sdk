@@ -24,25 +24,30 @@ class DailyStatusDirectTest < Minitest::Test
       skip(_reason || "skipped via sdk-test-control.json")
       return
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE" && setup[:idmap]["daily01"].nil?
+      puts "LIVE STEP {\"id\":\"direct-load-daily_status\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs daily01, which only POST /api/carousel/daily/{product_id}/plan gives\"}"
+      skip("Live coverage incomplete: direct-load-daily_status excluded (GET-only live run: needs daily01, which only POST /api/carousel/daily/{product_id}/plan gives)")
+    end
     if setup[:live]
-      ["daily_status01"].each do |_live_key|
+      ["daily01"].each do |_live_key|
         if setup[:idmap][_live_key].nil?
           Runner.live_miss(LIVE_STRICT, "Live test blocked: needs #{_live_key} via CRACKED_API_REFERENCE_TEST_DAILY_STATUS_ENTID")
         end
       end
     end
+    Runner.live_pace if setup[:live]
     client = setup[:client]
 
     params = {}
     query = {}
     if setup[:live]
-      params["id"] = setup[:idmap]["daily_status01"]
+      params["daily_id"] = setup[:idmap]["daily01"]
     else
-      params["id"] = "direct01"
+      params["daily_id"] = "direct01"
     end
 
     result = client.direct({
-      "path" => "api/carousel/daily/{id}/status",
+      "path" => "api/carousel/daily/{daily_id}/status",
       "method" => "GET",
       "params" => params,
       "query" => query,

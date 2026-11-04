@@ -29,6 +29,11 @@ const utility_1 = require("../../utility");
         const setup = directSetup({ id: 'direct01' });
         if ((0, utility_1.maybeSkipControl)(t, 'direct', 'direct-load-admin_carousel_demo_review', setup.live))
             return;
+        if (setup.live && 'TRUE' === process.env.VOXGIG_GETONLY_GUARD && null == setup.idmap?.["admin_carousel_demo_review01"]) {
+            console.log("LIVE STEP {\"id\":\"direct-load-admin_carousel_demo_review\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs admin_carousel_demo_review01, which only POST /api/admin/carousels/demo-reviews/{formula_id}/decision gives\"}");
+            t.skip("Live coverage incomplete: direct-load-admin_carousel_demo_review excluded (GET-only live run: needs admin_carousel_demo_review01, which only POST /api/admin/carousels/demo-reviews/{formula_id}/decision gives)");
+            return;
+        }
         if ((0, utility_1.skipIfMissingIds)(t, setup, ["admin_carousel_demo_review01"], LIVE_STRICT))
             return;
         const { client, calls } = setup;

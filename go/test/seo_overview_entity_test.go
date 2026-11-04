@@ -212,6 +212,9 @@ func TestSeoOverviewEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = seoOverviewRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LIST
 		seoOverviewRef01Ent := client.SeoOverview(nil)
 		seoOverviewRef01Match := map[string]any{}

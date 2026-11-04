@@ -181,6 +181,7 @@ class WinningAdEntityTest < Minitest::Test
       winning_ad_ref01_data = Helpers.to_map(winning_ad_ref01_data_raw[0][1])
     end
 
+    Runner.live_pace if setup[:live]
     # LIST
     winning_ad_ref01_ent = client.WinningAd(nil)
     winning_ad_ref01_match = {}

@@ -64,7 +64,7 @@ Entity operations return `(value, err)`. Check `err` before using
 the value:
 
 ```lua
-local admininsights, err = client:AdminInsight():list()
+local agenthealths, err = client:AgentHealth():list()
 if err then error(err) end
 ```
 
@@ -122,9 +122,21 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:AdminInsight():list()
+local result, err = client:AgentHealth():list()
 -- result is an array of entities, one per mock record; err is set on failure
 ```
+
+### Verify the server over HTTPS
+
+An `https://` request goes through LuaSocket and LuaSec, and the SDK checks
+the server itself before any of the request is sent: its certificate against
+the system's trust store, and its name against the host (an address against
+the certificate's addresses). Nothing turns that off. `SSL_CERT_FILE` or
+`SSL_CERT_DIR` names the trust store, as for OpenSSL; with neither set and no
+system store found, an `https://` request fails rather than going unverified.
+`CRACKED_API_REFERENCE_CA_BUNDLE` names a PEM file of roots added to the store,
+for a local service with its own certificate authority or a self-signed
+certificate. A different policy is a custom fetch function, described next.
 
 ### Use a custom fetch function
 
@@ -256,7 +268,6 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `Carousel` | `(data) -> CarouselEntity` | Create a Carousel entity instance. |
 | `CarouselAgentDetail` | `(data) -> CarouselAgentDetailEntity` | Create a CarouselAgentDetail entity instance. |
 | `CarouselStatus` | `(data) -> CarouselStatusEntity` | Create a CarouselStatus entity instance. |
-| `Chat` | `(data) -> ChatEntity` | Create a Chat entity instance. |
 | `ChatHistory` | `(data) -> ChatHistoryEntity` | Create a ChatHistory entity instance. |
 | `ChatSession` | `(data) -> ChatSessionEntity` | Create a ChatSession entity instance. |
 | `Comment` | `(data) -> CommentEntity` | Create a Comment entity instance. |
@@ -276,7 +287,6 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `DailyStatus` | `(data) -> DailyStatusEntity` | Create a DailyStatus entity instance. |
 | `DedicatedAgentsDashboard` | `(data) -> DedicatedAgentsDashboardEntity` | Create a DedicatedAgentsDashboard entity instance. |
 | `EnterpriseAgent` | `(data) -> EnterpriseAgentEntity` | Create an EnterpriseAgent entity instance. |
-| `EnterpriseProduct` | `(data) -> EnterpriseProductEntity` | Create an EnterpriseProduct entity instance. |
 | `ExactAvailability` | `(data) -> ExactAvailabilityEntity` | Create an ExactAvailability entity instance. |
 | `ExactFormula` | `(data) -> ExactFormulaEntity` | Create an ExactFormula entity instance. |
 | `ExtractV2` | `(data) -> ExtractV2Entity` | Create an ExtractV2 entity instance. |
@@ -288,7 +298,6 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `GenerateSora2Prompt` | `(data) -> GenerateSora2PromptEntity` | Create a GenerateSora2Prompt entity instance. |
 | `Healthrx` | `(data) -> HealthrxEntity` | Create a Healthrx entity instance. |
 | `InitResetProductV6` | `(data) -> InitResetProductV6Entity` | Create an InitResetProductV6 entity instance. |
-| `Iri` | `(data) -> IriEntity` | Create an Iri entity instance. |
 | `IrisCapability` | `(data) -> IrisCapabilityEntity` | Create an IrisCapability entity instance. |
 | `IrisChat` | `(data) -> IrisChatEntity` | Create an IrisChat entity instance. |
 | `IrisConnector` | `(data) -> IrisConnectorEntity` | Create an IrisConnector entity instance. |
@@ -318,16 +327,17 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `ProductLanding` | `(data) -> ProductLandingEntity` | Create a ProductLanding entity instance. |
 | `PublicResumeStatus` | `(data) -> PublicResumeStatusEntity` | Create a PublicResumeStatus entity instance. |
 | `ReRollVideo` | `(data) -> ReRollVideoEntity` | Create a ReRollVideo entity instance. |
-| `ReadRootGet` | `(data) -> ReadRootGetEntity` | Create a ReadRootGet entity instance. |
 | `RecordDemoBooked` | `(data) -> RecordDemoBookedEntity` | Create a RecordDemoBooked entity instance. |
 | `RefreshStat` | `(data) -> RefreshStatEntity` | Create a RefreshStat entity instance. |
 | `RemixerClipper` | `(data) -> RemixerClipperEntity` | Create a RemixerClipper entity instance. |
 | `ResetProduct` | `(data) -> ResetProductEntity` | Create a ResetProduct entity instance. |
 | `RetryWebsiteScrape` | `(data) -> RetryWebsiteScrapeEntity` | Create a RetryWebsiteScrape entity instance. |
+| `RootGet` | `(data) -> RootGetEntity` | Create a RootGet entity instance. |
 | `SaveSurvey` | `(data) -> SaveSurveyEntity` | Create a SaveSurvey entity instance. |
 | `ScanSocial` | `(data) -> ScanSocialEntity` | Create a ScanSocial entity instance. |
 | `ScanSocialsPublic` | `(data) -> ScanSocialsPublicEntity` | Create a ScanSocialsPublic entity instance. |
 | `ScanSocialsStatus` | `(data) -> ScanSocialsStatusEntity` | Create a ScanSocialsStatus entity instance. |
+| `ScheduleQueue` | `(data) -> ScheduleQueueEntity` | Create a ScheduleQueue entity instance. |
 | `ScheduleV2` | `(data) -> ScheduleV2Entity` | Create a ScheduleV2 entity instance. |
 | `Scrape` | `(data) -> ScrapeEntity` | Create a Scrape entity instance. |
 | `ScrapeWebsitePublic` | `(data) -> ScrapeWebsitePublicEntity` | Create a ScrapeWebsitePublic entity instance. |
@@ -456,14 +466,11 @@ API path: `/api/onboarding-v6/active-session`
 | Field | Description |
 | --- | --- |
 | `apply` | Apply safe canonical or clean-only URL updates |
-| `count` |  |
 | `created_at` |  |
 | `date_from` |  |
 | `date_to` |  |
 | `email` |  |
 | `id` |  |
-| `include_failed` |  |
-| `include_pending` |  |
 | `include_records` | Include full per-field audit records in the response |
 | `issue_ids` |  |
 | `only_active` | Limit the audit to active agents |
@@ -472,14 +479,12 @@ API path: `/api/onboarding-v6/active-session`
 | `product_id` |  |
 | `query` |  |
 | `reason` |  |
-| `regenerate` |  |
 | `status` |  |
 | `user_membership` |  |
 | `user_name` |  |
 | `user_onboarding_step` |  |
-| `video_type` |  |
 
-Operations: Create, List, Load, Remove, Update.
+Operations: Create, List, Load, Remove.
 
 API path: `/api/admin/users/{user_id}/regenerate-video/{video_id}`
 
@@ -633,13 +638,25 @@ API path: `/api/admin/healthrx/items/{kind}/{item_id}/decision`
 
 | Field | Description |
 | --- | --- |
-| `customer_success_cases` |  |
-| `customers` |  |
-| `generated_at` |  |
-| `pfa_database` |  |
-| `recent_signups` |  |
-| `summary` |  |
-| `vireel_database` |  |
+| `active_agents` |  |
+| `active_products` |  |
+| `agents_count` |  |
+| `auto_schedule_status` |  |
+| `days_until_period_end` |  |
+| `email` |  |
+| `feature_impact` |  |
+| `last_notification_at` |  |
+| `membership` |  |
+| `name` |  |
+| `notification_count` |  |
+| `notification_events` |  |
+| `priority` |  |
+| `severity` |  |
+| `status_label` |  |
+| `subscription_current_period_end` |  |
+| `subscription_status` |  |
+| `upcoming_posts` |  |
+| `user_id` |  |
 
 Operations: List, Load.
 
@@ -659,14 +676,8 @@ API path: `/api/admin/users/{user_id}/regenerate-landing`
 
 | Field | Description |
 | --- | --- |
-| `paid_users_by_level` |  |
-| `total_cancellations` |  |
-| `total_previews_generated` |  |
-| `total_signups` |  |
-| `total_videos_generated` |  |
-| `url_attempts` |  |
-| `user_credits` |  |
-| `user_gifted_credits` |  |
+| `count` |  |
+| `level` |  |
 
 Operations: List.
 
@@ -819,7 +830,7 @@ API path: `/api/admin/slideshow-import2/{batch_id}/state`
 
 Operations: Create, List, Remove, Update.
 
-API path: `/api/admin/users/{user_id}/fix-auto-schedule-by-date`
+API path: `/api/admin/users/{user_id}/convert-to-enterprise`
 
 #### AdminUsersTableItem
 
@@ -985,7 +996,7 @@ API path: `/api/onboarding-v6/advance-step`
 | `tiktok_stats` |  |
 | `type` |  |
 
-Operations: List.
+Operations: List, Update.
 
 API path: `/api/admin/agents`
 
@@ -1084,13 +1095,17 @@ API path: `/api/agent-access/phil-notifications/videos`
 
 | Field | Description |
 | --- | --- |
-| `agentQuota` |  |
-| `agents` |  |
-| `assignedByType` |  |
-| `assignedTotal` |  |
-| `email` |  |
-| `products` |  |
-| `userId` |  |
+| `avatar` |  |
+| `facebookUrl` |  |
+| `id` |  |
+| `instagramUrl` |  |
+| `name` |  |
+| `productId` |  |
+| `productName` |  |
+| `tiktokUrl` |  |
+| `type` |  |
+| `uploadPostPlatforms` |  |
+| `youtubeUrl` |  |
 
 Operations: List.
 
@@ -1217,19 +1232,12 @@ API path: `/api/upload-post-agents/all`
 
 | Field | Description |
 | --- | --- |
-| `daily` |  |
-| `dates` |  |
-| `generated_at` |  |
-| `groups` |  |
-| `latest` |  |
-| `live_date` |  |
-| `phone_admin_generated_at` |  |
-| `platform` |  |
-| `post_target` |  |
-| `qa_managed_agent_ids` |  |
-| `scope_prefixes` |  |
-| `timezone` |  |
-| `warmup_target` |  |
+| `accounts` |  |
+| `date` |  |
+| `overall` |  |
+| `posts` |  |
+| `views` |  |
+| `warmups` |  |
 
 Operations: List.
 
@@ -1251,19 +1259,12 @@ API path: `/api/admin/agent-health/customers`
 
 | Field | Description |
 | --- | --- |
-| `archived_issue_total` |  |
-| `date` |  |
-| `generated_at` |  |
-| `group_id` |  |
-| `has_more` |  |
-| `issue_total` |  |
-| `issues` |  |
-| `limit` |  |
-| `metric` |  |
-| `offset` |  |
-| `warmup_runs` |  |
-| `warning_total` |  |
-| `warnings` |  |
+| `agent_id` |  |
+| `category` |  |
+| `connection_status` |  |
+| `device_status` |  |
+| `issue` |  |
+| `state` |  |
 
 Operations: List.
 
@@ -1443,7 +1444,6 @@ API path: `/api/upload-post-agents/bulk/tiktok-stats`
 | `formula_id` |  |
 | `formula_name` |  |
 | `generation` |  |
-| `id` |  |
 | `image_prompt` |  |
 | `likes` |  |
 | `main_prompt` |  |
@@ -1497,7 +1497,6 @@ API path: `/api/admin/carousels/agents/{agent_id}`
 | --- | --- |
 | `caption` |  |
 | `error` |  |
-| `id` |  |
 | `image_model` |  |
 | `image_provider` |  |
 | `image_task_id` |  |
@@ -1509,18 +1508,6 @@ API path: `/api/admin/carousels/agents/{agent_id}`
 Operations: List.
 
 API path: `/api/carousel/{video_id}/status`
-
-#### Chat
-
-| Field | Description |
-| --- | --- |
-| `idempotencyKey` |  |
-| `message` |  |
-| `sessionId` |  |
-
-Operations: Create.
-
-API path: `/api/chat/sessions/{session_id}/messages`
 
 #### ChatHistory
 
@@ -1549,6 +1536,8 @@ API path: `/api/chat/sessions`
 | --- | --- |
 | `chatSubVariant` |  |
 | `createdAt` |  |
+| `idempotencyKey` |  |
+| `message` |  |
 | `model` |  |
 | `plan` |  |
 | `route` |  |
@@ -1776,7 +1765,6 @@ API path: `/api/admin/customer-health/customers`
 | `date` |  |
 | `email` |  |
 | `entries` |  |
-| `id` |  |
 | `performance_overview` |  |
 | `platform_coverage_summary` |  |
 | `user_id` |  |
@@ -1805,20 +1793,10 @@ API path: `/api/admin/customer-health/all-customers`
 
 | Field | Description |
 | --- | --- |
-| `average_views_per_result` |  |
-| `date` |  |
-| `end_date` |  |
-| `paid_users_count` |  |
+| `email` |  |
 | `posted_results` |  |
-| `range` |  |
-| `start_date` |  |
-| `top_users` |  |
-| `total_views` |  |
-| `trend` |  |
-| `trend_granularity` |  |
-| `user_email` |  |
 | `user_id` |  |
-| `users_with_views` |  |
+| `views` |  |
 
 Operations: List.
 
@@ -1838,7 +1816,6 @@ API path: `/api/carousel/daily/{product_id}/plan`
 
 | Field | Description |
 | --- | --- |
-| `id` |  |
 
 Operations: Load.
 
@@ -1884,15 +1861,6 @@ API path: `/api/admin/agents/dedicated-dashboard`
 Operations: Create, Load.
 
 API path: `/api/enterprise/agents/assign`
-
-#### EnterpriseProduct
-
-| Field | Description |
-| --- | --- |
-
-Operations: Load.
-
-API path: `/api/enterprise/products/{product_id}/status`
 
 #### ExactAvailability
 
@@ -2067,18 +2035,6 @@ Operations: Create.
 
 API path: `/api/reset-product/init-v6`
 
-#### Iri
-
-| Field | Description |
-| --- | --- |
-| `correlationId` |  |
-| `idempotencyKey` |  |
-| `productId` |  |
-
-Operations: Create.
-
-API path: `/api/iris/connectors/{connector_id}/start`
-
 #### IrisCapability
 
 | Field | Description |
@@ -2130,9 +2086,9 @@ API path: `/api/iris/chat`
 | --- | --- |
 | `connectors` |  |
 
-Operations: List.
+Operations: Create, List.
 
-API path: `/api/iris/connectors`
+API path: `/api/iris/connectors/{connector_id}/start`
 
 #### IrisStatus
 
@@ -2155,8 +2111,10 @@ API path: `/api/iris/status`
 | `cadence` |  |
 | `capability` |  |
 | `completed` |  |
+| `correlationId` |  |
 | `description` |  |
 | `discover` |  |
+| `idempotencyKey` |  |
 | `productId` |  |
 | `recurring` |  |
 | `requiredConnectors` |  |
@@ -2164,7 +2122,7 @@ API path: `/api/iris/status`
 
 Operations: Create, List.
 
-API path: `/api/iris/tasks`
+API path: `/api/iris/tasks/{task_id}/run`
 
 #### IrisUsage
 
@@ -2467,13 +2425,18 @@ API path: `/api/products/{product_id}/validate-social-handle`
 
 | Field | Description |
 | --- | --- |
-| `agents` |  |
-| `date` |  |
-| `pagination` |  |
-| `phone_admin_error` |  |
-| `products` |  |
-| `selected_product` |  |
-| `summary` |  |
+| `comments` |  |
+| `failed_entries` |  |
+| `has_tiktok_community_violation` |  |
+| `id` |  |
+| `likes` |  |
+| `metrics_pending_count` |  |
+| `name` |  |
+| `platforms` |  |
+| `posted_entries` |  |
+| `posting_entries` |  |
+| `scheduled_entries` |  |
+| `views` |  |
 
 Operations: List.
 
@@ -2521,6 +2484,7 @@ API path: `/api/video-variation/product-demos`
 | `dmOngoingResponsePrompt` |  |
 | `firstCommentTextBeforeLink` |  |
 | `headerImageUrl` |  |
+| `icon` |  |
 | `id` |  |
 | `landingHtmlUrl` |  |
 | `landingLastGeneratedAt` |  |
@@ -2559,6 +2523,7 @@ API path: `/api/video-variation/product-demos`
 | `slug` |  |
 | `socialLinks` |  |
 | `testimonials` |  |
+| `url` |  |
 
 Operations: List, Update.
 
@@ -2594,15 +2559,6 @@ API path: `/api/onboarding-v6/resume-status-public`
 Operations: Create.
 
 API path: `/api/core/re-roll-video`
-
-#### ReadRootGet
-
-| Field | Description |
-| --- | --- |
-
-Operations: Load.
-
-API path: `/`
 
 #### RecordDemoBooked
 
@@ -2666,6 +2622,15 @@ Operations: Create.
 
 API path: `/api/onboarding-v6/retry-scrape`
 
+#### RootGet
+
+| Field | Description |
+| --- | --- |
+
+Operations: Load.
+
+API path: `/`
+
 #### SaveSurvey
 
 | Field | Description |
@@ -2724,6 +2689,15 @@ Operations: Load.
 
 API path: `/api/video-variation/scan-socials/status`
 
+#### ScheduleQueue
+
+| Field | Description |
+| --- | --- |
+
+Operations: Update.
+
+API path: `/api/schedule/queue/{queue_id}/replace-video`
+
 #### ScheduleV2
 
 | Field | Description |
@@ -2752,7 +2726,7 @@ API path: `/api/video-variation/scan-socials/status`
 | `youtube_posted_url` |  |
 | `youtube_scraped_social_post_id` |  |
 
-Operations: Create, List, Load, Remove, Update.
+Operations: Create, List, Load, Remove.
 
 API path: `/api/schedule/queue/add`
 
@@ -2901,14 +2875,11 @@ API path: `/api/seo/overview`
 
 | Field | Description |
 | --- | --- |
-| `end_date` |  |
-| `series` |  |
-| `site_url` |  |
-| `start_date` |  |
-| `top_countries` |  |
-| `top_pages` |  |
-| `top_queries` |  |
-| `totals` |  |
+| `clicks` |  |
+| `ctr` |  |
+| `date` |  |
+| `impressions` |  |
+| `position` |  |
 
 Operations: List.
 
@@ -3132,23 +3103,24 @@ API path: `/api/admin/customer-health/issues`
 
 | Field | Description |
 | --- | --- |
-| `active_run` |  |
 | `aged_over_24h` |  |
-| `backlog_preview` |  |
-| `coverage_percent` |  |
-| `customer_counts` |  |
-| `date` |  |
-| `generated_at` |  |
-| `method_counts` |  |
-| `platform_counts` |  |
-| `platform_units_resolved` |  |
-| `platform_units_total` |  |
-| `platform_units_unresolved` |  |
-| `posted_entries` |  |
-| `reason_counts` |  |
-| `sla_deadline_et` |  |
+| `agent_id` |  |
+| `agent_name` |  |
+| `is_resolved` |  |
+| `last_refresh_completed_at` |  |
+| `latest_error_message` |  |
+| `platform` |  |
+| `post_method` |  |
+| `post_url` |  |
+| `posted_date_et` |  |
+| `product_id` |  |
+| `product_name` |  |
+| `reason_code` |  |
+| `schedule_queue_id` |  |
+| `scheduled_datetime_utc` |  |
 | `stale_after_sla` |  |
-| `top_affected_customers` |  |
+| `user_email` |  |
+| `user_id` |  |
 
 Operations: List.
 
@@ -3310,9 +3282,9 @@ API path: `/api/upload-post-agents/sync-platforms`
 | `updatedAt` |  |
 | `userId` |  |
 
-Operations: Load, Update.
+Operations: Create, Load, Update.
 
-API path: `/api/upload-post-agents/user/{user_id}`
+API path: `/api/admin/users/{user_id}/fix-auto-schedule-by-date`
 
 #### UserAgent
 
@@ -3322,7 +3294,6 @@ API path: `/api/upload-post-agents/user/{user_id}`
 | `assigned_at` |  |
 | `assignment_id` |  |
 | `expires_at` |  |
-| `id` |  |
 | `status` |  |
 
 Operations: Create, List.
@@ -3333,65 +3304,9 @@ API path: `/api/admin/users/{user_id}/agents`
 
 | Field | Description |
 | --- | --- |
-| `account_type` |  |
-| `activated` |  |
-| `activated_by_admin_at` |  |
-| `activated_by_admin_id` |  |
-| `admin_notes` |  |
-| `agents_count` |  |
-| `assigned_agents` |  |
-| `assigned_agents_count` |  |
-| `assigned_agents_preview_limit` |  |
-| `assigned_agents_truncated` |  |
-| `auto_schedule_enabled` |  |
-| `comments_expected_per_day` |  |
-| `comments_fix_block_reason` |  |
-| `comments_fix_ready` |  |
-| `comments_today_failed` |  |
-| `comments_today_posted` |  |
-| `comments_today_scheduled` |  |
-| `comments_yesterday_failed` |  |
-| `comments_yesterday_posted` |  |
-| `comments_yesterday_total` |  |
-| `created_at` |  |
-| `credits` |  |
-| `effective_posted_video_reuse_percent` |  |
-| `email` |  |
-| `expected_agents_count` |  |
 | `id` |  |
-| `is_activated_by_admin` |  |
-| `is_admin` |  |
-| `is_bookmarked` |  |
-| `is_internal_user` |  |
-| `is_migrated` |  |
-| `landing_slug` |  |
-| `landing_status` |  |
-| `landing_url` |  |
-| `membership` |  |
-| `microhub_status` |  |
-| `microhub_url` |  |
 | `name` |  |
-| `onboarding_flow` |  |
-| `posted_video_reuse_percent` |  |
-| `product_id` |  |
-| `product_name` |  |
-| `product_url` |  |
-| `subscription_status` |  |
-| `survey_data` |  |
-| `today_failed` |  |
-| `today_posted` |  |
-| `today_scheduled` |  |
-| `tomorrow_capacity` |  |
-| `tomorrow_scheduled` |  |
-| `videos_completed` |  |
-| `videos_failed` |  |
-| `videos_pending` |  |
-| `videos_stale` |  |
-| `videos_total` |  |
-| `yesterday_failed` |  |
-| `yesterday_failed_entries` |  |
-| `yesterday_posted` |  |
-| `yesterday_total` |  |
+| `type` |  |
 
 Operations: List.
 
@@ -3670,21 +3585,17 @@ Create an instance: `local admin = client:Admin(nil)`
 | `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 | `remove(match)` | Remove the matching entity. |
-| `update(data)` | Update an existing entity. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
 | `apply` | `boolean` | Apply safe canonical or clean-only URL updates |
-| `count` | `number` |  |
 | `created_at` | `string` |  |
 | `date_from` | `any` |  |
 | `date_to` | `any` |  |
 | `email` | `string` |  |
 | `id` | `string` |  |
-| `include_failed` | `boolean` |  |
-| `include_pending` | `boolean` |  |
 | `include_records` | `boolean` | Include full per-field audit records in the response |
 | `issue_ids` | `any` |  |
 | `only_active` | `boolean` | Limit the audit to active agents |
@@ -3693,12 +3604,10 @@ Create an instance: `local admin = client:Admin(nil)`
 | `product_id` | `string` |  |
 | `query` | `any` |  |
 | `reason` | `any` |  |
-| `regenerate` | `boolean` |  |
 | `status` | `string` |  |
 | `user_membership` | `any` |  |
 | `user_name` | `any` |  |
 | `user_onboarding_step` | `any` |  |
-| `video_type` | `string` |  |
 
 #### Example: Load
 
@@ -3717,14 +3626,12 @@ local admins, err = client:Admin():list()
 ```lua
 local admin, err = client:Admin():create({
   user_id = "example_user_id", -- string
-  count = 1, -- number
   created_at = "example_created_at", -- string
   date_from = "example_date_from", -- any
   date_to = "example_date_to", -- any
   email = "example_email", -- string
   id = "example_id", -- string
   product_id = "example_product_id", -- string
-  video_type = "example_video_type", -- string
 })
 ```
 
@@ -4036,13 +3943,25 @@ Create an instance: `local admin_insight = client:AdminInsight(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `customer_success_cases` | `table` |  |
-| `customers` | `table` |  |
-| `generated_at` | `string` |  |
-| `pfa_database` | `table` |  |
-| `recent_signups` | `table` |  |
-| `summary` | `table` |  |
-| `vireel_database` | `table` |  |
+| `active_agents` | `number` |  |
+| `active_products` | `number` |  |
+| `agents_count` | `number` |  |
+| `auto_schedule_status` | `string` |  |
+| `days_until_period_end` | `any` |  |
+| `email` | `string` |  |
+| `feature_impact` | `string` |  |
+| `last_notification_at` | `any` |  |
+| `membership` | `any` |  |
+| `name` | `string` |  |
+| `notification_count` | `number` |  |
+| `notification_events` | `table` |  |
+| `priority` | `string` |  |
+| `severity` | `string` |  |
+| `status_label` | `string` |  |
+| `subscription_current_period_end` | `any` |  |
+| `subscription_status` | `any` |  |
+| `upcoming_posts` | `number` |  |
+| `user_id` | `string` |  |
 
 #### Example: Load
 
@@ -4097,14 +4016,8 @@ Create an instance: `local admin_metrics_summary = client:AdminMetricsSummary(ni
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `paid_users_by_level` | `table` |  |
-| `total_cancellations` | `number` |  |
-| `total_previews_generated` | `number` |  |
-| `total_signups` | `number` |  |
-| `total_videos_generated` | `number` |  |
-| `url_attempts` | `number` |  |
-| `user_credits` | `table` |  |
-| `user_gifted_credits` | `table` |  |
+| `count` | `number` |  |
+| `level` | `string` |  |
 
 #### Example: List
 
@@ -4615,6 +4528,7 @@ Create an instance: `local agent = client:Agent(nil)`
 | Method | Description |
 | --- | --- |
 | `list(match)` | List entities matching the criteria. |
+| `update(data)` | Update an existing entity. |
 
 #### Fields
 
@@ -4805,13 +4719,17 @@ Create an instance: `local agent_access_user_agent = client:AgentAccessUserAgent
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `agentQuota` | `number` |  |
-| `agents` | `table` |  |
-| `assignedByType` | `table` |  |
-| `assignedTotal` | `number` |  |
-| `email` | `string` |  |
-| `products` | `table` |  |
-| `userId` | `string` |  |
+| `avatar` | `any` |  |
+| `facebookUrl` | `any` |  |
+| `id` | `string` |  |
+| `instagramUrl` | `any` |  |
+| `name` | `string` |  |
+| `productId` | `any` |  |
+| `productName` | `any` |  |
+| `tiktokUrl` | `any` |  |
+| `type` | `any` |  |
+| `uploadPostPlatforms` | `any` |  |
+| `youtubeUrl` | `any` |  |
 
 #### Example: List
 
@@ -5043,19 +4961,12 @@ Create an instance: `local agent_health = client:AgentHealth(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `daily` | `table` |  |
-| `dates` | `table` |  |
-| `generated_at` | `string` |  |
-| `groups` | `table` |  |
-| `latest` | `table` |  |
-| `live_date` | `any` |  |
-| `phone_admin_generated_at` | `string` |  |
-| `platform` | `string` |  |
-| `post_target` | `number` |  |
-| `qa_managed_agent_ids` | `table` |  |
-| `scope_prefixes` | `table` |  |
-| `timezone` | `string` |  |
-| `warmup_target` | `number` |  |
+| `accounts` | `table` |  |
+| `date` | `string` |  |
+| `overall` | `table` |  |
+| `posts` | `table` |  |
+| `views` | `table` |  |
+| `warmups` | `table` |  |
 
 #### Example: List
 
@@ -5103,19 +5014,12 @@ Create an instance: `local agent_health_detail = client:AgentHealthDetail(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `archived_issue_total` | `number` |  |
-| `date` | `string` |  |
-| `generated_at` | `string` |  |
-| `group_id` | `string` |  |
-| `has_more` | `boolean` |  |
-| `issue_total` | `number` |  |
-| `issues` | `table` |  |
-| `limit` | `number` |  |
-| `metric` | `string` |  |
-| `offset` | `number` |  |
-| `warmup_runs` | `table` |  |
-| `warning_total` | `number` |  |
-| `warnings` | `table` |  |
+| `agent_id` | `string` |  |
+| `category` | `string` |  |
+| `connection_status` | `string` |  |
+| `device_status` | `string` |  |
+| `issue` | `any` |  |
+| `state` | `string` |  |
 
 #### Example: List
 
@@ -5157,7 +5061,7 @@ Create an instance: `local agent_post = client:AgentPost(nil)`
 #### Example: List
 
 ```lua
-local agent_posts, err = client:AgentPost():list({ id = "example" })
+local agent_posts, err = client:AgentPost():list({ agent_id = "example" })
 ```
 
 
@@ -5436,7 +5340,6 @@ Create an instance: `local carousel = client:Carousel(nil)`
 | `formula_id` | `string` |  |
 | `formula_name` | `any` |  |
 | `generation` | `table` |  |
-| `id` | `string` |  |
 | `image_prompt` | `any` |  |
 | `likes` | `any` |  |
 | `main_prompt` | `any` |  |
@@ -5541,7 +5444,6 @@ Create an instance: `local carousel_status = client:CarouselStatus(nil)`
 | --- | --- | --- |
 | `caption` | `any` |  |
 | `error` | `any` |  |
-| `id` | `string` |  |
 | `image_model` | `any` |  |
 | `image_provider` | `any` |  |
 | `image_task_id` | `string` |  |
@@ -5553,37 +5455,7 @@ Create an instance: `local carousel_status = client:CarouselStatus(nil)`
 #### Example: List
 
 ```lua
-local carousel_statuss, err = client:CarouselStatus():list({ id = "example" })
-```
-
-
-### Chat
-
-Create an instance: `local chat = client:Chat(nil)`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `create(data)` | Create a new entity with the given data. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `idempotencyKey` | `string` |  |
-| `message` | `string` |  |
-| `sessionId` | `string` |  |
-
-#### Example: Create
-
-```lua
-local chat, err = client:Chat():create({
-  session_id = "example_session_id", -- string
-  idempotencyKey = "example_idempotencyKey", -- string
-  message = "example_message", -- string
-  sessionId = "example_sessionId", -- string
-})
+local carousel_statuss, err = client:CarouselStatus():list({ carousel_id = "example" })
 ```
 
 
@@ -5646,6 +5518,8 @@ Create an instance: `local chat_session = client:ChatSession(nil)`
 | --- | --- | --- |
 | `chatSubVariant` | `string` |  |
 | `createdAt` | `string` |  |
+| `idempotencyKey` | `string` |  |
+| `message` | `string` |  |
 | `model` | `any` |  |
 | `plan` | `any` |  |
 | `route` | `any` |  |
@@ -5661,6 +5535,9 @@ Create an instance: `local chat_session = client:ChatSession(nil)`
 ```lua
 local chat_session, err = client:ChatSession():create({
   session_id = "example_session_id", -- string
+  idempotencyKey = "example_idempotencyKey", -- string
+  message = "example_message", -- string
+  sessionId = "example_sessionId", -- string
 })
 ```
 
@@ -6046,7 +5923,6 @@ Create an instance: `local customer_health = client:CustomerHealth(nil)`
 | `date` | `string` |  |
 | `email` | `string` |  |
 | `entries` | `table` |  |
-| `id` | `string` |  |
 | `performance_overview` | `table` |  |
 | `platform_coverage_summary` | `table` |  |
 | `user_id` | `string` |  |
@@ -6101,20 +5977,10 @@ Create an instance: `local customer_health_views_summary = client:CustomerHealth
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `average_views_per_result` | `number` |  |
-| `date` | `string` |  |
-| `end_date` | `any` |  |
-| `paid_users_count` | `number` |  |
+| `email` | `string` |  |
 | `posted_results` | `number` |  |
-| `range` | `string` |  |
-| `start_date` | `any` |  |
-| `top_users` | `table` |  |
-| `total_views` | `number` |  |
-| `trend` | `table` |  |
-| `trend_granularity` | `string` |  |
-| `user_email` | `any` |  |
 | `user_id` | `string` |  |
-| `users_with_views` | `number` |  |
+| `views` | `number` |  |
 
 #### Example: List
 
@@ -6159,16 +6025,10 @@ Create an instance: `local daily_status = client:DailyStatus(nil)`
 | --- | --- |
 | `load(match)` | Load a single entity by match criteria. |
 
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `id` | `string` |  |
-
 #### Example: Load
 
 ```lua
-local daily_status, err = client:DailyStatus():load({ id = "daily_status_id", day = "day" })
+local daily_status, err = client:DailyStatus():load({ daily_id = "daily_id", day = "day" })
 ```
 
 
@@ -6247,23 +6107,6 @@ local enterprise_agent, err = client:EnterpriseAgent():create({
   source_product_id = "example_source_product_id", -- string
   target_product_id = "example_target_product_id", -- string
 })
-```
-
-
-### EnterpriseProduct
-
-Create an instance: `local enterprise_product = client:EnterpriseProduct(nil)`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `load(match)` | Load a single entity by match criteria. |
-
-#### Example: Load
-
-```lua
-local enterprise_product, err = client:EnterpriseProduct():load({ product_id = "product_id" })
 ```
 
 
@@ -6617,34 +6460,6 @@ local init_reset_product_v6, err = client:InitResetProductV6():create({
 ```
 
 
-### Iri
-
-Create an instance: `local iri = client:Iri(nil)`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `create(data)` | Create a new entity with the given data. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `correlationId` | `any` |  |
-| `idempotencyKey` | `string` |  |
-| `productId` | `any` |  |
-
-#### Example: Create
-
-```lua
-local iri, err = client:Iri():create({
-  connector_id = "example_connector_id", -- string
-  idempotencyKey = "example_idempotencyKey", -- string
-})
-```
-
-
 ### IrisCapability
 
 Create an instance: `local iris_capability = client:IrisCapability(nil)`
@@ -6735,6 +6550,7 @@ Create an instance: `local iris_connector = client:IrisConnector(nil)`
 
 | Method | Description |
 | --- | --- |
+| `create(data)` | Create a new entity with the given data. |
 | `list(match)` | List entities matching the criteria. |
 
 #### Fields
@@ -6747,6 +6563,14 @@ Create an instance: `local iris_connector = client:IrisConnector(nil)`
 
 ```lua
 local iris_connectors, err = client:IrisConnector():list()
+```
+
+#### Example: Create
+
+```lua
+local iris_connector, err = client:IrisConnector():create({
+  connector_id = "example_connector_id", -- string
+})
 ```
 
 
@@ -6795,8 +6619,10 @@ Create an instance: `local iris_task = client:IrisTask(nil)`
 | `cadence` | `string` |  |
 | `capability` | `any` |  |
 | `completed` | `table` |  |
+| `correlationId` | `any` |  |
 | `description` | `string` |  |
 | `discover` | `table` |  |
+| `idempotencyKey` | `string` |  |
 | `productId` | `any` |  |
 | `recurring` | `table` |  |
 | `requiredConnectors` | `table` |  |
@@ -6812,6 +6638,7 @@ local iris_tasks, err = client:IrisTask():list()
 
 ```lua
 local iris_task, err = client:IrisTask():create({
+  idempotencyKey = "example_idempotencyKey", -- string
   title = "example_title", -- string
 })
 ```
@@ -7403,13 +7230,18 @@ Create an instance: `local product_dashboard = client:ProductDashboard(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `agents` | `table` |  |
-| `date` | `string` |  |
-| `pagination` | `table` |  |
-| `phone_admin_error` | `any` |  |
-| `products` | `table` |  |
-| `selected_product` | `any` |  |
-| `summary` | `table` |  |
+| `comments` | `number` |  |
+| `failed_entries` | `number` |  |
+| `has_tiktok_community_violation` | `boolean` |  |
+| `id` | `string` |  |
+| `likes` | `number` |  |
+| `metrics_pending_count` | `number` |  |
+| `name` | `string` |  |
+| `platforms` | `table` |  |
+| `posted_entries` | `number` |  |
+| `posting_entries` | `number` |  |
+| `scheduled_entries` | `number` |  |
+| `views` | `number` |  |
 
 #### Example: List
 
@@ -7497,6 +7329,7 @@ Create an instance: `local product_landing = client:ProductLanding(nil)`
 | `dmOngoingResponsePrompt` | `any` |  |
 | `firstCommentTextBeforeLink` | `any` |  |
 | `headerImageUrl` | `any` |  |
+| `icon` | `any` |  |
 | `id` | `string` |  |
 | `landingHtmlUrl` | `any` |  |
 | `landingLastGeneratedAt` | `any` |  |
@@ -7535,6 +7368,7 @@ Create an instance: `local product_landing = client:ProductLanding(nil)`
 | `slug` | `string` |  |
 | `socialLinks` | `any` |  |
 | `testimonials` | `any` |  |
+| `url` | `string` |  |
 
 #### Example: List
 
@@ -7599,23 +7433,6 @@ Create an instance: `local re_roll_video = client:ReRollVideo(nil)`
 local re_roll_video, err = client:ReRollVideo():create({
   queue_id = "example_queue_id", -- string
 })
-```
-
-
-### ReadRootGet
-
-Create an instance: `local read_root_get = client:ReadRootGet(nil)`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `load(match)` | Load a single entity by match criteria. |
-
-#### Example: Load
-
-```lua
-local read_root_get, err = client:ReadRootGet():load()
 ```
 
 
@@ -7759,6 +7576,23 @@ local retry_website_scrape, err = client:RetryWebsiteScrape():create({
 ```
 
 
+### RootGet
+
+Create an instance: `local root_get = client:RootGet(nil)`
+
+#### Operations
+
+| Method | Description |
+| --- | --- |
+| `load(match)` | Load a single entity by match criteria. |
+
+#### Example: Load
+
+```lua
+local root_get, err = client:RootGet():load()
+```
+
+
 ### SaveSurvey
 
 Create an instance: `local save_survey = client:SaveSurvey(nil)`
@@ -7877,6 +7711,17 @@ local scan_socials_status, err = client:ScanSocialsStatus():load()
 ```
 
 
+### ScheduleQueue
+
+Create an instance: `local schedule_queue = client:ScheduleQueue(nil)`
+
+#### Operations
+
+| Method | Description |
+| --- | --- |
+| `update(data)` | Update an existing entity. |
+
+
 ### ScheduleV2
 
 Create an instance: `local schedule_v2 = client:ScheduleV2(nil)`
@@ -7889,7 +7734,6 @@ Create an instance: `local schedule_v2 = client:ScheduleV2(nil)`
 | `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 | `remove(match)` | Remove the matching entity. |
-| `update(data)` | Update an existing entity. |
 
 #### Fields
 
@@ -8230,14 +8074,11 @@ Create an instance: `local seo_traffic = client:SeoTraffic(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `end_date` | `string` |  |
-| `series` | `table` |  |
-| `site_url` | `string` |  |
-| `start_date` | `string` |  |
-| `top_countries` | `table` |  |
-| `top_pages` | `table` |  |
-| `top_queries` | `table` |  |
-| `totals` | `table` |  |
+| `clicks` | `number` |  |
+| `ctr` | `number` |  |
+| `date` | `string` |  |
+| `impressions` | `number` |  |
+| `position` | `number` |  |
 
 #### Example: List
 
@@ -8705,23 +8546,24 @@ Create an instance: `local stats_refresh_overview = client:StatsRefreshOverview(
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `active_run` | `any` |  |
-| `aged_over_24h` | `number` |  |
-| `backlog_preview` | `table` |  |
-| `coverage_percent` | `number` |  |
-| `customer_counts` | `table` |  |
-| `date` | `string` |  |
-| `generated_at` | `string` |  |
-| `method_counts` | `table` |  |
-| `platform_counts` | `table` |  |
-| `platform_units_resolved` | `number` |  |
-| `platform_units_total` | `number` |  |
-| `platform_units_unresolved` | `number` |  |
-| `posted_entries` | `number` |  |
-| `reason_counts` | `table` |  |
-| `sla_deadline_et` | `string` |  |
-| `stale_after_sla` | `number` |  |
-| `top_affected_customers` | `table` |  |
+| `aged_over_24h` | `boolean` |  |
+| `agent_id` | `string` |  |
+| `agent_name` | `any` |  |
+| `is_resolved` | `boolean` |  |
+| `last_refresh_completed_at` | `any` |  |
+| `latest_error_message` | `any` |  |
+| `platform` | `string` |  |
+| `post_method` | `any` |  |
+| `post_url` | `any` |  |
+| `posted_date_et` | `string` |  |
+| `product_id` | `string` |  |
+| `product_name` | `any` |  |
+| `reason_code` | `any` |  |
+| `schedule_queue_id` | `string` |  |
+| `scheduled_datetime_utc` | `string` |  |
+| `stale_after_sla` | `boolean` |  |
+| `user_email` | `string` |  |
+| `user_id` | `string` |  |
 
 #### Example: List
 
@@ -8938,6 +8780,7 @@ Create an instance: `local user = client:User(nil)`
 
 | Method | Description |
 | --- | --- |
+| `create(data)` | Create a new entity with the given data. |
 | `load(match)` | Load a single entity by match criteria. |
 | `update(data)` | Update an existing entity. |
 
@@ -9007,20 +8850,19 @@ Create an instance: `local user_agent = client:UserAgent(nil)`
 | `assigned_at` | `string` |  |
 | `assignment_id` | `string` |  |
 | `expires_at` | `any` |  |
-| `id` | `string` |  |
 | `status` | `string` |  |
 
 #### Example: List
 
 ```lua
-local user_agents, err = client:UserAgent():list({ id = "example" })
+local user_agents, err = client:UserAgent():list({ user_id = "example" })
 ```
 
 #### Example: Create
 
 ```lua
 local user_agent, err = client:UserAgent():create({
-  id = "example_id", -- string
+  user_id = "example_user_id", -- string
   agent = {}, -- table
   assigned_at = "example_assigned_at", -- string
   assignment_id = "example_assignment_id", -- string
@@ -9043,70 +8885,14 @@ Create an instance: `local user_health_detail = client:UserHealthDetail(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `account_type` | `any` |  |
-| `activated` | `boolean` |  |
-| `activated_by_admin_at` | `any` |  |
-| `activated_by_admin_id` | `string` |  |
-| `admin_notes` | `any` |  |
-| `agents_count` | `number` |  |
-| `assigned_agents` | `table` |  |
-| `assigned_agents_count` | `number` |  |
-| `assigned_agents_preview_limit` | `number` |  |
-| `assigned_agents_truncated` | `boolean` |  |
-| `auto_schedule_enabled` | `boolean` |  |
-| `comments_expected_per_day` | `number` |  |
-| `comments_fix_block_reason` | `any` |  |
-| `comments_fix_ready` | `boolean` |  |
-| `comments_today_failed` | `number` |  |
-| `comments_today_posted` | `number` |  |
-| `comments_today_scheduled` | `number` |  |
-| `comments_yesterday_failed` | `number` |  |
-| `comments_yesterday_posted` | `number` |  |
-| `comments_yesterday_total` | `number` |  |
-| `created_at` | `string` |  |
-| `credits` | `number` |  |
-| `effective_posted_video_reuse_percent` | `number` |  |
-| `email` | `string` |  |
-| `expected_agents_count` | `number` |  |
 | `id` | `string` |  |
-| `is_activated_by_admin` | `boolean` |  |
-| `is_admin` | `boolean` |  |
-| `is_bookmarked` | `boolean` |  |
-| `is_internal_user` | `boolean` |  |
-| `is_migrated` | `boolean` |  |
-| `landing_slug` | `any` |  |
-| `landing_status` | `any` |  |
-| `landing_url` | `any` |  |
-| `membership` | `any` |  |
-| `microhub_status` | `any` |  |
-| `microhub_url` | `any` |  |
 | `name` | `string` |  |
-| `onboarding_flow` | `string` |  |
-| `posted_video_reuse_percent` | `any` |  |
-| `product_id` | `string` |  |
-| `product_name` | `any` |  |
-| `product_url` | `any` |  |
-| `subscription_status` | `any` |  |
-| `survey_data` | `any` |  |
-| `today_failed` | `number` |  |
-| `today_posted` | `number` |  |
-| `today_scheduled` | `number` |  |
-| `tomorrow_capacity` | `number` |  |
-| `tomorrow_scheduled` | `number` |  |
-| `videos_completed` | `number` |  |
-| `videos_failed` | `number` |  |
-| `videos_pending` | `number` |  |
-| `videos_stale` | `number` |  |
-| `videos_total` | `number` |  |
-| `yesterday_failed` | `number` |  |
-| `yesterday_failed_entries` | `table` |  |
-| `yesterday_posted` | `number` |  |
-| `yesterday_total` | `number` |  |
+| `type` | `string` |  |
 
 #### Example: List
 
 ```lua
-local user_health_details, err = client:UserHealthDetail():list({ id = "example" })
+local user_health_details, err = client:UserHealthDetail():list({ user_id = "example" })
 ```
 
 
@@ -9595,11 +9381,11 @@ Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local admininsight = client:AdminInsight()
-admininsight:list()
+local agenthealth = client:AgentHealth()
+agenthealth:list()
 
--- admininsight:data_get() now returns the admininsight data from the last list
--- admininsight:match_get() returns the last match criteria
+-- agenthealth:data_get() now returns the agenthealth data from the last list
+-- agenthealth:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

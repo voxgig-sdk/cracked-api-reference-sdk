@@ -181,6 +181,7 @@ class TikTokCreatorInfoEntityTest < Minitest::Test
       tik_tok_creator_info_ref01_data = Helpers.to_map(tik_tok_creator_info_ref01_data_raw[0][1])
     end
 
+    Runner.live_pace if setup[:live]
     # LIST
     tik_tok_creator_info_ref01_ent = client.TikTokCreatorInfo(nil)
     tik_tok_creator_info_ref01_match = {}

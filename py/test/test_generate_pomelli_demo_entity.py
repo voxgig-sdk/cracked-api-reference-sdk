@@ -51,8 +51,14 @@ class TestGeneratePomelliDemoEntity:
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
                 return
+        if setup["live"] and os.environ.get("VOXGIG_GETONLY_GUARD") == "TRUE":
+            print("LIVE STEP {\"id\":\"generate_pomelli_demo.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/onboarding-v6/generate-pomelli-demo\"}")
+            pytest.skip("Live coverage incomplete: generate_pomelli_demo.create.0 excluded (GET-only live run: needs POST /api/onboarding-v6/generate-pomelli-demo)")
+
         client = setup["client"]
 
+        if setup["live"]:
+            runner.live_pace()
         # CREATE
         generate_pomelli_demo_ref01_ent = client.GeneratePomelliDemo(None)
         generate_pomelli_demo_ref01_data = helpers.to_map(vs.getprop(

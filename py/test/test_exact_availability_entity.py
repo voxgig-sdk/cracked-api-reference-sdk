@@ -51,6 +51,8 @@ class TestExactAvailabilityEntity:
         if len(exact_availability_ref01_data_raw) > 0:
             exact_availability_ref01_data = helpers.to_map(exact_availability_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LOAD
         exact_availability_ref01_ent = client.ExactAvailability(None)
         exact_availability_ref01_match_dt0 = {}

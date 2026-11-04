@@ -38,6 +38,9 @@ func TestAdminHealthrxDirect(t *testing.T) {
 				}
 			}
 		}
+		if setup.live {
+			livePace()
+		}
 		client := setup.client
 
 		params := map[string]any{}
@@ -154,6 +157,12 @@ func admin_healthrxDirectSetup(mockres any) *admin_healthrxDirectSetupResult {
 				json.Unmarshal([]byte(entidStr), &idmap)
 			} else if entidMap, ok := entidRaw.(map[string]any); ok {
 				idmap = entidMap
+			}
+		}
+		// A path parameter's example stands in for an id *_ENTID does not give.
+		for k, v := range map[string]any{"kind01": "comments"} {
+			if idmap[k] == nil {
+				idmap[k] = v
 			}
 		}
 

@@ -30,12 +30,19 @@ class MediaAssetDirectTest extends TestCase
             $this->markTestSkipped($_reason ?? "skipped via sdk-test-control.json");
             return;
         }
+        if (!empty($setup["live"]) && getenv('VOXGIG_GETONLY_GUARD') === "TRUE" && null === ($setup["idmap"]['media_asset01'] ?? null)) {
+            fwrite(STDOUT, 'LIVE STEP {"id":"direct-load-media_asset","state":"excluded","attempted":false,"reason":"GET-only live run: needs media_asset01, which only POST /api/media-assets/{media_asset_id}/exclude-copycat gives"}' . "\n");
+            $this->markTestSkipped('Live coverage incomplete: direct-load-media_asset excluded (GET-only live run: needs media_asset01, which only POST /api/media-assets/{media_asset_id}/exclude-copycat gives)');
+        }
         if ($setup["live"]) {
             foreach (["media_asset01"] as $_liveKey) {
                 if (null === ($setup["idmap"][$_liveKey] ?? null)) {
                     Runner::live_miss(self::LIVE_STRICT, "Live test blocked: needs " . $_liveKey . " via CRACKED_API_REFERENCE_TEST_MEDIA_ASSET_ENTID");
                 }
             }
+        }
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
         }
         $client = $setup["client"];
 

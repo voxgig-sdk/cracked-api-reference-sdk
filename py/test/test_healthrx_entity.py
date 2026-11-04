@@ -51,12 +51,18 @@ class TestHealthrxEntity:
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
                 return
+        if setup["live"] and os.environ.get("VOXGIG_GETONLY_GUARD") == "TRUE":
+            print("LIVE STEP {\"id\":\"healthrx.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/healthrx/products/{product_id}/accounts/{account_id}/content\"}")
+            return self._run_get_only_flow(setup)
+
         if setup["live"]:
             for _live_key in ["product01"]:
                 if setup.get("synthetic_only") or setup["idmap"].get(_live_key) is None:
                     runner.live_miss(LIVE_STRICT, f"Live entity test blocked: needs {_live_key} via CRACKED_API_REFERENCE_TEST_HEALTHRX_ENTID")
         client = setup["client"]
 
+        if setup["live"]:
+            runner.live_pace()
         # CREATE
         healthrx_ref01_ent = client.Healthrx(None)
         healthrx_ref01_data = helpers.to_map(vs.getprop(
@@ -66,7 +72,28 @@ class TestHealthrxEntity:
         healthrx_ref01_data = helpers.to_map(runner.entity_data(healthrx_ref01_ent.create(healthrx_ref01_data, None)))
         assert healthrx_ref01_data is not None
 
+        if setup["live"]:
+            runner.live_pace()
         # LOAD
+        healthrx_ref01_match_dt0 = {}
+        healthrx_ref01_data_dt0_loaded = healthrx_ref01_ent.load(healthrx_ref01_match_dt0, None)
+        assert healthrx_ref01_data_dt0_loaded is not None
+
+
+    def _run_get_only_flow(self, setup):
+        client = setup["client"]
+
+        # Bootstrap entity data from existing test data.
+        healthrx_ref01_data_raw = vs.items(helpers.to_map(
+            vs.getpath(setup["data"], "existing.healthrx")))
+        healthrx_ref01_data = None
+        if len(healthrx_ref01_data_raw) > 0:
+            healthrx_ref01_data = helpers.to_map(healthrx_ref01_data_raw[0][1])
+
+        if setup["live"]:
+            runner.live_pace()
+        # LOAD
+        healthrx_ref01_ent = client.Healthrx(None)
         healthrx_ref01_match_dt0 = {}
         healthrx_ref01_data_dt0_loaded = healthrx_ref01_ent.load(healthrx_ref01_match_dt0, None)
         assert healthrx_ref01_data_dt0_loaded is not None

@@ -40,28 +40,23 @@
 
 ---@class Admin
 ---@field apply? boolean
----@field count number
 ---@field created_at string
 ---@field date_from? any
 ---@field date_to? any
 ---@field email string
 ---@field id string
----@field include_failed? boolean
----@field include_pending? boolean
 ---@field include_records? boolean
 ---@field issue_ids? any
 ---@field only_active? boolean
 ---@field platform? any
 ---@field posting_method? any
----@field product_id? string
+---@field product_id string
 ---@field query? any
 ---@field reason? any
----@field regenerate? boolean
 ---@field status? string
 ---@field user_membership? any
 ---@field user_name? any
 ---@field user_onboarding_step? any
----@field video_type string
 
 ---@class AdminLoadMatch
 ---@field date string
@@ -71,14 +66,11 @@
 
 ---@class AdminListMatch
 ---@field apply? boolean
----@field count? number
 ---@field created_at? string
 ---@field date_from? any
 ---@field date_to? any
 ---@field email? string
 ---@field id? string
----@field include_failed? boolean
----@field include_pending? boolean
 ---@field include_records? boolean
 ---@field issue_ids? any
 ---@field only_active? boolean
@@ -87,24 +79,19 @@
 ---@field product_id? string
 ---@field query? any
 ---@field reason? any
----@field regenerate? boolean
 ---@field status? string
 ---@field user_membership? any
 ---@field user_name? any
 ---@field user_onboarding_step? any
----@field video_type? string
 
 ---@class AdminCreateData
 ---@field user_id string
 ---@field apply? boolean
----@field count number
 ---@field created_at string
 ---@field date_from any
 ---@field date_to any
 ---@field email string
 ---@field id string
----@field include_failed? boolean
----@field include_pending? boolean
 ---@field include_records? boolean
 ---@field issue_ids? any
 ---@field only_active? boolean
@@ -113,40 +100,10 @@
 ---@field product_id string
 ---@field query? any
 ---@field reason? any
----@field regenerate? boolean
 ---@field status? string
 ---@field user_membership? any
 ---@field user_name? any
 ---@field user_onboarding_step? any
----@field video_type string
-
----@class AdminUpdateData
----@field agent_id string
----@field agent_type? string
----@field is_active? boolean
----@field apply? boolean
----@field count? number
----@field created_at? string
----@field date_from? any
----@field date_to? any
----@field email? string
----@field id? string
----@field include_failed? boolean
----@field include_pending? boolean
----@field include_records? boolean
----@field issue_ids? any
----@field only_active? boolean
----@field platform? any
----@field posting_method? any
----@field product_id? string
----@field query? any
----@field reason? any
----@field regenerate? boolean
----@field status? string
----@field user_membership? any
----@field user_name? any
----@field user_onboarding_step? any
----@field video_type? string
 
 ---@class AdminRemoveMatch
 ---@field tester_id string
@@ -361,13 +318,25 @@
 ---@field schedule_enabled? boolean
 
 ---@class AdminInsight
----@field customer_success_cases table
----@field customers table
----@field generated_at string
----@field pfa_database table
----@field recent_signups table
----@field summary table
----@field vireel_database table
+---@field active_agents number
+---@field active_products number
+---@field agents_count number
+---@field auto_schedule_status string
+---@field days_until_period_end? any
+---@field email string
+---@field feature_impact string
+---@field last_notification_at? any
+---@field membership? any
+---@field name? string
+---@field notification_count number
+---@field notification_events table
+---@field priority string
+---@field severity string
+---@field status_label string
+---@field subscription_current_period_end? any
+---@field subscription_status? any
+---@field upcoming_posts number
+---@field user_id string
 
 ---@class AdminInsightLoadMatch
 ---@field customer_email? any
@@ -376,13 +345,25 @@
 ---@field page? number
 
 ---@class AdminInsightListMatch
----@field customer_success_cases? table
----@field customers? table
----@field generated_at? string
----@field pfa_database? table
----@field recent_signups? table
----@field summary? table
----@field vireel_database? table
+---@field active_agents? number
+---@field active_products? number
+---@field agents_count? number
+---@field auto_schedule_status? string
+---@field days_until_period_end? any
+---@field email? string
+---@field feature_impact? string
+---@field last_notification_at? any
+---@field membership? any
+---@field name? string
+---@field notification_count? number
+---@field notification_events? table
+---@field priority? string
+---@field severity? string
+---@field status_label? string
+---@field subscription_current_period_end? any
+---@field subscription_status? any
+---@field upcoming_posts? number
+---@field user_id? string
 
 ---@class AdminLandingTask
 ---@field task_id string
@@ -393,14 +374,8 @@
 ---@field task_id string
 
 ---@class AdminMetricsSummary
----@field paid_users_by_level table
----@field total_cancellations number
----@field total_previews_generated number
----@field total_signups number
----@field total_videos_generated number
----@field url_attempts number
----@field user_credits table
----@field user_gifted_credits table
+---@field count number
+---@field level string
 
 ---@class AdminMetricsSummaryListMatch
 ---@field date_filter? string
@@ -964,6 +939,16 @@
 ---@class AgentListMatch
 ---@field agent_type? any
 
+---@class AgentUpdateData
+---@field id string
+---@field is_active? boolean
+---@field agent_type? string
+---@field active_connections? number
+---@field at_capacity? boolean
+---@field name? string
+---@field tiktok_stats? any
+---@field type? string
+
 ---@class AgentAccessCustomersHealth
 ---@field accountType? any
 ---@field agentQuota number
@@ -1038,13 +1023,17 @@
 ---@field date? any
 
 ---@class AgentAccessUserAgent
----@field agentQuota number
----@field agents table
----@field assignedByType table
----@field assignedTotal number
----@field email string
----@field products table
----@field userId string
+---@field avatar? any
+---@field facebookUrl? any
+---@field id string
+---@field instagramUrl? any
+---@field name string
+---@field productId? any
+---@field productName? any
+---@field tiktokUrl? any
+---@field type? any
+---@field uploadPostPlatforms? any
+---@field youtubeUrl? any
 
 ---@class AgentAccessUserAgentListMatch
 ---@field email string
@@ -1151,19 +1140,12 @@
 ---@field role? any
 
 ---@class AgentHealth
----@field daily table
----@field dates table
----@field generated_at string
----@field groups table
----@field latest table
----@field live_date? any
----@field phone_admin_generated_at string
----@field platform? string
----@field post_target number
----@field qa_managed_agent_ids? table
----@field scope_prefixes table
----@field timezone string
----@field warmup_target number
+---@field accounts table
+---@field date string
+---@field overall table
+---@field posts table
+---@field views table
+---@field warmups table
 
 ---@class AgentHealthListMatch
 ---@field date_to? any
@@ -1183,19 +1165,12 @@
 ---@field user_id? string
 
 ---@class AgentHealthDetail
----@field archived_issue_total? number
----@field date string
----@field generated_at string
----@field group_id string
----@field has_more boolean
----@field issue_total number
----@field issues table
----@field limit number
----@field metric string
----@field offset number
----@field warmup_runs? table
----@field warning_total? number
----@field warnings? table
+---@field agent_id string
+---@field category string
+---@field connection_status string
+---@field device_status string
+---@field issue? any
+---@field state string
 
 ---@class AgentHealthDetailListMatch
 ---@field date string
@@ -1223,7 +1198,7 @@
 ---@field views number
 
 ---@class AgentPostListMatch
----@field id string
+---@field agent_id string
 ---@field day? string
 
 ---@class AgentStat
@@ -1355,7 +1330,6 @@
 ---@field formula_id? string
 ---@field formula_name? any
 ---@field generation? table
----@field id? string
 ---@field image_prompt? any
 ---@field likes? any
 ---@field main_prompt? any
@@ -1441,7 +1415,6 @@
 ---@class CarouselStatus
 ---@field caption any
 ---@field error? any
----@field id? string
 ---@field image_model? any
 ---@field image_provider? any
 ---@field image_task_id? string
@@ -1451,18 +1424,7 @@
 ---@field status string
 
 ---@class CarouselStatusListMatch
----@field id string
-
----@class Chat
----@field idempotencyKey string
----@field message string
----@field sessionId string
-
----@class ChatCreateData
----@field session_id string
----@field idempotencyKey string
----@field message string
----@field sessionId string
+---@field carousel_id string
 
 ---@class ChatHistory
 ---@field chatSubVariant string
@@ -1487,6 +1449,8 @@
 ---@class ChatSession
 ---@field chatSubVariant string
 ---@field createdAt string
+---@field idempotencyKey string
+---@field message string
 ---@field model? any
 ---@field plan? any
 ---@field route? any
@@ -1499,8 +1463,11 @@
 
 ---@class ChatSessionCreateData
 ---@field session_id string
+---@field idempotencyKey string
+---@field message string
 ---@field plan? any
 ---@field route? any
+---@field sessionId string
 
 ---@class Comment
 
@@ -1809,7 +1776,6 @@
 ---@field date string
 ---@field email string
 ---@field entries table
----@field id? string
 ---@field performance_overview table
 ---@field platform_coverage_summary table
 ---@field user_id string
@@ -1832,20 +1798,10 @@
 ---@field offset? number
 
 ---@class CustomerHealthViewsSummary
----@field average_views_per_result number
----@field date string
----@field end_date? any
----@field paid_users_count number
+---@field email string
 ---@field posted_results number
----@field range string
----@field start_date? any
----@field top_users table
----@field total_views number
----@field trend table
----@field trend_granularity string
----@field user_email? any
----@field user_id? string
----@field users_with_views number
+---@field user_id string
+---@field views number
 
 ---@class CustomerHealthViewsSummaryListMatch
 ---@field date? any
@@ -1860,10 +1816,9 @@
 ---@field day string
 
 ---@class DailyStatus
----@field id? string
 
 ---@class DailyStatusLoadMatch
----@field id string
+---@field daily_id string
 ---@field day string
 
 ---@class DedicatedAgentsDashboard
@@ -1925,11 +1880,6 @@
 ---@field product_id string
 ---@field source_product_id string
 ---@field target_product_id string
-
----@class EnterpriseProduct
-
----@class EnterpriseProductLoadMatch
----@field product_id string
 
 ---@class ExactAvailability
 
@@ -2101,17 +2051,6 @@
 ---@class InitResetProductV6CreateData
 ---@field product_id? string
 
----@class Iri
----@field correlationId? any
----@field idempotencyKey string
----@field productId? any
-
----@class IriCreateData
----@field connector_id string
----@field correlationId? any
----@field idempotencyKey string
----@field productId? any
-
 ---@class IrisCapability
 ---@field capability string
 ---@field correlationId string
@@ -2171,6 +2110,10 @@
 ---@class IrisConnectorListMatch
 ---@field connectors? table
 
+---@class IrisConnectorCreateData
+---@field connector_id string
+---@field connectors? table
+
 ---@class IrisStatus
 ---@field connectorsPreview? table
 ---@field product? any
@@ -2185,8 +2128,10 @@
 ---@field cadence? string
 ---@field capability? any
 ---@field completed? table
+---@field correlationId? any
 ---@field description? string
 ---@field discover? table
+---@field idempotencyKey string
 ---@field productId? any
 ---@field recurring? table
 ---@field requiredConnectors? table
@@ -2199,7 +2144,9 @@
 ---@field approvalRequired? boolean
 ---@field cadence? string
 ---@field capability? any
+---@field correlationId? any
 ---@field description? string
+---@field idempotencyKey string
 ---@field productId? any
 ---@field requiredConnectors? table
 ---@field title string
@@ -2580,13 +2527,18 @@
 ---@field id string
 
 ---@class ProductDashboard
----@field agents table
----@field date string
----@field pagination table
----@field phone_admin_error? any
----@field products table
----@field selected_product any
----@field summary table
+---@field comments number
+---@field failed_entries number
+---@field has_tiktok_community_violation? boolean
+---@field id string
+---@field likes number
+---@field metrics_pending_count? number
+---@field name string
+---@field platforms table
+---@field posted_entries number
+---@field posting_entries number
+---@field scheduled_entries number
+---@field views number
 
 ---@class ProductDashboardListMatch
 ---@field date? any
@@ -2628,6 +2580,7 @@
 ---@field dmOngoingResponsePrompt? any
 ---@field firstCommentTextBeforeLink? any
 ---@field headerImageUrl? any
+---@field icon? any
 ---@field id string
 ---@field landingHtmlUrl? any
 ---@field landingLastGeneratedAt? any
@@ -2666,6 +2619,7 @@
 ---@field slug string
 ---@field socialLinks? any
 ---@field testimonials? any
+---@field url string
 
 ---@class ProductLandingListMatch
 ---@field product_id? string
@@ -2725,10 +2679,6 @@
 ---@field queue_id string
 ---@field skip_credit_check? boolean
 
----@class ReadRootGet
-
----@class ReadRootGetLoadMatch
-
 ---@class RecordDemoBooked
 ---@field calendlyEventUri? any
 ---@field calendlyInviteeUri? any
@@ -2781,6 +2731,10 @@
 ---@field onboarding_data_id string
 ---@field url string
 
+---@class RootGet
+
+---@class RootGetLoadMatch
+
 ---@class SaveSurvey
 ---@field email_sent? boolean
 ---@field onboarding_data_id string
@@ -2829,6 +2783,12 @@
 ---@class ScanSocialsStatusLoadMatch
 ---@field onboarding_data_id? string
 ---@field product_id? string
+
+---@class ScheduleQueue
+
+---@class ScheduleQueueUpdateData
+---@field queue_id string
+---@field video_id? any
 
 ---@class ScheduleV2
 ---@field agent? any
@@ -2893,10 +2853,6 @@
 ---@field youtube_posted_by? any
 ---@field youtube_posted_url? any
 ---@field youtube_scraped_social_post_id? string
-
----@class ScheduleV2UpdateData
----@field queue_id string
----@field video_id? string
 
 ---@class ScheduleV2RemoveMatch
 ---@field queue_id string
@@ -3011,14 +2967,11 @@
 ---@field product_id? string
 
 ---@class SeoTraffic
----@field end_date string
----@field series table
----@field site_url string
----@field start_date string
----@field top_countries table
----@field top_pages table
----@field top_queries table
----@field totals table
+---@field clicks number
+---@field ctr number
+---@field date string
+---@field impressions number
+---@field position number
 
 ---@class SeoTrafficListMatch
 ---@field day? number
@@ -3283,23 +3236,24 @@
 ---@field status? string
 
 ---@class StatsRefreshOverview
----@field active_run? any
----@field aged_over_24h number
----@field backlog_preview table
----@field coverage_percent number
----@field customer_counts table
----@field date string
----@field generated_at string
----@field method_counts table
----@field platform_counts table
----@field platform_units_resolved number
----@field platform_units_total number
----@field platform_units_unresolved number
----@field posted_entries number
----@field reason_counts table
----@field sla_deadline_et string
----@field stale_after_sla number
----@field top_affected_customers table
+---@field aged_over_24h boolean
+---@field agent_id? string
+---@field agent_name? any
+---@field is_resolved boolean
+---@field last_refresh_completed_at? any
+---@field latest_error_message? any
+---@field platform string
+---@field post_method? any
+---@field post_url? any
+---@field posted_date_et string
+---@field product_id? string
+---@field product_name? any
+---@field reason_code? any
+---@field schedule_queue_id string
+---@field scheduled_datetime_utc string
+---@field stale_after_sla boolean
+---@field user_email string
+---@field user_id string
 
 ---@class StatsRefreshOverviewListMatch
 ---@field date? any
@@ -3449,6 +3403,52 @@
 ---@field id string
 ---@field product_id? string
 
+---@class UserCreateData
+---@field id string
+---@field product_id? string
+---@field target_date? string
+---@field phone_admin_pc_name? any
+---@field background? boolean
+---@field accountType? any
+---@field activatedByAdminAt? any
+---@field activatedByAdminId? any
+---@field agents table
+---@field agentsCount? any
+---@field attribution? any
+---@field avatarImageUrl? any
+---@field avatarVoiceUrl? any
+---@field createdAt string
+---@field credits? number
+---@field email string
+---@field googleId? any
+---@field hasSeenScheduleWelcome? boolean
+---@field industry? any
+---@field instagramId? any
+---@field isActivatedByAdmin? boolean
+---@field isAdmin? boolean
+---@field isInternalUser? any
+---@field isMigrated? any
+---@field isResettingProduct? any
+---@field membership? any
+---@field name string
+---@field partnerDirectLoginDisabled? boolean
+---@field partnerExternalUserId? any
+---@field partnerPolicyCode? any
+---@field partnerSource? any
+---@field picture? any
+---@field stripeCustomerId? any
+---@field stripeSubscriptionId? any
+---@field subscriptionCurrentPeriodEnd? any
+---@field subscriptionStatus? any
+---@field totalCount number
+---@field updatedAt string
+---@field userId string
+---@field count? any
+---@field include_failed? any
+---@field include_pending? any
+---@field regenerate? any
+---@field video_type? any
+
 ---@class UserUpdateData
 ---@field accountType? any
 ---@field activatedByAdminAt? any
@@ -3485,23 +3485,24 @@
 ---@field totalCount? number
 ---@field updatedAt? string
 ---@field userId? string
+---@field posted_video_reuse_percent? any
+---@field rebuild? any
 
 ---@class UserAgent
 ---@field agent table
 ---@field assigned_at string
 ---@field assignment_id string
 ---@field expires_at? any
----@field id? string
 ---@field status string
 
 ---@class UserAgentListMatch
----@field id string
+---@field user_id string
 ---@field limit? number
 ---@field offset? number
 ---@field product_id? string
 
 ---@class UserAgentCreateData
----@field id string
+---@field user_id string
 ---@field agent_id? string
 ---@field phone_admin_pc_name? any
 ---@field product_id? string
@@ -3512,68 +3513,12 @@
 ---@field status string
 
 ---@class UserHealthDetail
----@field account_type any
----@field activated boolean
----@field activated_by_admin_at? any
----@field activated_by_admin_id? string
----@field admin_notes? any
----@field agents_count? number
----@field assigned_agents table
----@field assigned_agents_count number
----@field assigned_agents_preview_limit? number
----@field assigned_agents_truncated? boolean
----@field auto_schedule_enabled boolean
----@field comments_expected_per_day? number
----@field comments_fix_block_reason? any
----@field comments_fix_ready? boolean
----@field comments_today_failed? number
----@field comments_today_posted? number
----@field comments_today_scheduled? number
----@field comments_yesterday_failed? number
----@field comments_yesterday_posted? number
----@field comments_yesterday_total? number
----@field created_at string
----@field credits number
----@field effective_posted_video_reuse_percent number
----@field email string
----@field expected_agents_count number
 ---@field id string
----@field is_activated_by_admin boolean
----@field is_admin boolean
----@field is_bookmarked? boolean
----@field is_internal_user boolean
----@field is_migrated boolean
----@field landing_slug? any
----@field landing_status? any
----@field landing_url? any
----@field membership any
----@field microhub_status? any
----@field microhub_url? any
 ---@field name string
----@field onboarding_flow string
----@field posted_video_reuse_percent? any
----@field product_id string
----@field product_name any
----@field product_url any
----@field subscription_status any
----@field survey_data? any
----@field today_failed number
----@field today_posted number
----@field today_scheduled number
----@field tomorrow_capacity number
----@field tomorrow_scheduled number
----@field videos_completed number
----@field videos_failed number
----@field videos_pending number
----@field videos_stale number
----@field videos_total number
----@field yesterday_failed number
----@field yesterday_failed_entries table
----@field yesterday_posted number
----@field yesterday_total number
+---@field type string
 
 ---@class UserHealthDetailListMatch
----@field id string
+---@field user_id string
 ---@field assigned_agents_preview_limit? number
 ---@field product_id? string
 

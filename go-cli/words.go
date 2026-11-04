@@ -75,7 +75,7 @@ func runOp(client *sdk.CrackedApiReferenceSDK, op string, query *eng.Value, enti
 
 // entityFor dispatches on the lowercase entity name. The generator
 // emits one `case "<name>":` per entity defined in the SDK model.
-func entityFor(client *sdk.CrackedApiReferenceSDK, name string) (sdk.CrackedApiReferenceEntity, error) {
+func entityFor(client *sdk.CrackedApiReferenceSDK, name string) (sdk.CrackedApiReferenceEntityBase, error) {
 	switch strings.ToLower(name) {
 	case "activate":
 		return client.Activate(nil), nil
@@ -183,8 +183,6 @@ func entityFor(client *sdk.CrackedApiReferenceSDK, name string) (sdk.CrackedApiR
 		return client.CarouselAgentDetail(nil), nil
 	case "carousel_status":
 		return client.CarouselStatus(nil), nil
-	case "chat":
-		return client.Chat(nil), nil
 	case "chat_history":
 		return client.ChatHistory(nil), nil
 	case "chat_session":
@@ -223,8 +221,6 @@ func entityFor(client *sdk.CrackedApiReferenceSDK, name string) (sdk.CrackedApiR
 		return client.DedicatedAgentsDashboard(nil), nil
 	case "enterprise_agent":
 		return client.EnterpriseAgent(nil), nil
-	case "enterprise_product":
-		return client.EnterpriseProduct(nil), nil
 	case "exact_availability":
 		return client.ExactAvailability(nil), nil
 	case "exact_formula":
@@ -247,8 +243,6 @@ func entityFor(client *sdk.CrackedApiReferenceSDK, name string) (sdk.CrackedApiR
 		return client.Healthrx(nil), nil
 	case "init_reset_product_v6":
 		return client.InitResetProductV6(nil), nil
-	case "iri":
-		return client.Iri(nil), nil
 	case "iris_capability":
 		return client.IrisCapability(nil), nil
 	case "iris_chat":
@@ -307,8 +301,6 @@ func entityFor(client *sdk.CrackedApiReferenceSDK, name string) (sdk.CrackedApiR
 		return client.PublicResumeStatus(nil), nil
 	case "re_roll_video":
 		return client.ReRollVideo(nil), nil
-	case "read_root_get":
-		return client.ReadRootGet(nil), nil
 	case "record_demo_booked":
 		return client.RecordDemoBooked(nil), nil
 	case "refresh_stat":
@@ -319,6 +311,8 @@ func entityFor(client *sdk.CrackedApiReferenceSDK, name string) (sdk.CrackedApiR
 		return client.ResetProduct(nil), nil
 	case "retry_website_scrape":
 		return client.RetryWebsiteScrape(nil), nil
+	case "root_get":
+		return client.RootGet(nil), nil
 	case "save_survey":
 		return client.SaveSurvey(nil), nil
 	case "scan_social":
@@ -327,6 +321,8 @@ func entityFor(client *sdk.CrackedApiReferenceSDK, name string) (sdk.CrackedApiR
 		return client.ScanSocialsPublic(nil), nil
 	case "scan_socials_status":
 		return client.ScanSocialsStatus(nil), nil
+	case "schedule_queue":
+		return client.ScheduleQueue(nil), nil
 	case "schedule_v2":
 		return client.ScheduleV2(nil), nil
 	case "scrape":

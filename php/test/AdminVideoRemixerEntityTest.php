@@ -52,8 +52,37 @@ class AdminVideoRemixerEntityTest extends TestCase
                 return;
             }
         }
+        if (!empty($setup["live"]) && getenv('VOXGIG_GETONLY_GUARD') === "TRUE") {
+            fwrite(STDOUT, 'LIVE STEP {"id":"admin_video_remixer.create.0","state":"excluded","attempted":false,"reason":"GET-only live run: needs POST /api/admin/video-remixer/clips/{clip_id}/media"}' . "\n");
+            fwrite(STDOUT, 'LIVE STEP {"id":"admin_video_remixer.update.1","state":"excluded","attempted":false,"reason":"GET-only live run: needs PUT /api/admin/video-remixer/audits/{identifier}/answer"}' . "\n");
+            fwrite(STDOUT, 'LIVE STEP {"id":"admin_video_remixer.remove.3","state":"excluded","attempted":false,"reason":"GET-only live run: needs DELETE /api/admin/video-remixer/runs/{identifier}"}' . "\n");
         $client = $setup["client"];
 
+        // Bootstrap entity data from existing test data.
+        $admin_video_remixer_ref01_data_raw = Vs::items(Helpers::to_map(
+            Vs::getpath($setup["data"], "existing.admin_video_remixer")));
+        $admin_video_remixer_ref01_data = null;
+        if (count($admin_video_remixer_ref01_data_raw) > 0) {
+            $admin_video_remixer_ref01_data = Helpers::to_map($admin_video_remixer_ref01_data_raw[0][1]);
+        }
+
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
+        // LOAD
+        $admin_video_remixer_ref01_ent = $client->AdminVideoRemixer(null);
+        $admin_video_remixer_ref01_match_dt0 = [];
+        $admin_video_remixer_ref01_data_dt0_loaded = $admin_video_remixer_ref01_ent->load($admin_video_remixer_ref01_match_dt0, null);
+        $this->assertNotNull($admin_video_remixer_ref01_data_dt0_loaded);
+
+            return;
+        }
+
+        $client = $setup["client"];
+
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // CREATE
         $admin_video_remixer_ref01_ent = $client->AdminVideoRemixer(null);
         $admin_video_remixer_ref01_data = Helpers::to_map(Vs::getprop(
@@ -63,6 +92,9 @@ class AdminVideoRemixerEntityTest extends TestCase
         $admin_video_remixer_ref01_data = Helpers::to_map(is_object($admin_video_remixer_ref01_data_result) && method_exists($admin_video_remixer_ref01_data_result, 'data_get') ? $admin_video_remixer_ref01_data_result->data_get() : $admin_video_remixer_ref01_data_result);
         $this->assertNotNull($admin_video_remixer_ref01_data);
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // UPDATE
         $admin_video_remixer_ref01_data_up0_up = [
         ];
@@ -76,6 +108,9 @@ class AdminVideoRemixerEntityTest extends TestCase
         $this->assertNotNull($admin_video_remixer_ref01_resdata_up0);
         $this->assertEquals($admin_video_remixer_ref01_resdata_up0[$admin_video_remixer_ref01_markdef_up0_name], $admin_video_remixer_ref01_markdef_up0_value);
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LOAD
         $admin_video_remixer_ref01_match_dt0 = [];
         $admin_video_remixer_ref01_data_dt0_loaded = $admin_video_remixer_ref01_ent->load($admin_video_remixer_ref01_match_dt0, null);

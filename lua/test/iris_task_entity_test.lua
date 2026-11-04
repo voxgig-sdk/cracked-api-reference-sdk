@@ -154,8 +154,37 @@ describe("IrisTaskEntity", function()
         return
       end
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" then
+      print("LIVE STEP {\"id\":\"iris_task.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/iris/tasks/{task_id}/run\"}")
     local client = setup.client
 
+    -- Bootstrap entity data from existing test data.
+    local iris_task_ref01_data_raw = vs.items(helpers.to_map(
+      vs.getpath(setup.data, "existing.iris_task")))
+    local iris_task_ref01_data = nil
+    if #iris_task_ref01_data_raw > 0 then
+      iris_task_ref01_data = helpers.to_map(iris_task_ref01_data_raw[1][2])
+    end
+
+    if setup.live then
+      runner.live_pace()
+    end
+    -- LIST
+    local iris_task_ref01_ent = client:IrisTask(nil)
+    local iris_task_ref01_match = {}
+
+    local iris_task_ref01_list_result, err = iris_task_ref01_ent:list(iris_task_ref01_match, nil)
+    assert.is_nil(err)
+    assert.is_table(iris_task_ref01_list_result)
+
+      return
+    end
+
+    local client = setup.client
+
+    if setup.live then
+      runner.live_pace()
+    end
     -- CREATE
     local iris_task_ref01_ent = client:IrisTask(nil)
     local iris_task_ref01_data = helpers.to_map(vs.getprop(
@@ -166,6 +195,9 @@ describe("IrisTaskEntity", function()
     iris_task_ref01_data = helpers.to_map(type(iris_task_ref01_data_result) == 'table' and iris_task_ref01_data_result.data_get and iris_task_ref01_data_result:data_get() or iris_task_ref01_data_result)
     assert.is_not_nil(iris_task_ref01_data)
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LIST
     local iris_task_ref01_match = {}
 

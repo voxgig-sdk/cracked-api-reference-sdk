@@ -39,6 +39,7 @@ class SeoEntityTest < Minitest::Test
       seo_ref01_data = Helpers.to_map(seo_ref01_data_raw[0][1])
     end
 
+    Runner.live_pace if setup[:live]
     # LOAD
     seo_ref01_ent = client.Seo(nil)
     seo_ref01_match_dt0 = {}

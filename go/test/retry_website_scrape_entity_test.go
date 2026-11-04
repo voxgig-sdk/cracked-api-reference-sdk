@@ -62,9 +62,18 @@ func TestRetryWebsiteScrapeEntity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" {
+			t.Log("LIVE STEP {\"id\":\"retry_website_scrape.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/onboarding-v6/retry-scrape\"}")
+			t.Skip("Live coverage incomplete: retry_website_scrape.create.0 excluded (GET-only live run: needs POST /api/onboarding-v6/retry-scrape)")
+			return
+		}
+
 		client := setup.client
 		_ = client
 
+		if setup.live {
+			livePace()
+		}
 		// CREATE
 		retryWebsiteScrapeRef01Ent := client.RetryWebsiteScrape(nil)
 		retryWebsiteScrapeRef01Data := core.ToMapAny(vs.GetProp(

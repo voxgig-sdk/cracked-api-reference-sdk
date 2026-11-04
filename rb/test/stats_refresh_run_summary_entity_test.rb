@@ -181,6 +181,7 @@ class StatsRefreshRunSummaryEntityTest < Minitest::Test
       stats_refresh_run_summary_ref01_data = Helpers.to_map(stats_refresh_run_summary_ref01_data_raw[0][1])
     end
 
+    Runner.live_pace if setup[:live]
     # LIST
     stats_refresh_run_summary_ref01_ent = client.StatsRefreshRunSummary(nil)
     stats_refresh_run_summary_ref01_match = {}

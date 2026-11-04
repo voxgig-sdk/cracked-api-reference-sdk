@@ -52,8 +52,16 @@ class VideoRemixerWorkerEntityTest extends TestCase
                 return;
             }
         }
+        if (!empty($setup["live"]) && getenv('VOXGIG_GETONLY_GUARD') === "TRUE") {
+            fwrite(STDOUT, 'LIVE STEP {"id":"video_remixer_worker.create.0","state":"excluded","attempted":false,"reason":"GET-only live run: needs POST /api/admin/video-remixer/worker/jobs/{identifier}/fail"}' . "\n");
+            $this->markTestSkipped('Live coverage incomplete: video_remixer_worker.create.0 excluded (GET-only live run: needs POST /api/admin/video-remixer/worker/jobs/{identifier}/fail)');
+        }
+
         $client = $setup["client"];
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // CREATE
         $video_remixer_worker_ref01_ent = $client->VideoRemixerWorker(null);
         $video_remixer_worker_ref01_data = Helpers::to_map(Vs::getprop(

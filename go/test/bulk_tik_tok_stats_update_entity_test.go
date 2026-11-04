@@ -49,6 +49,12 @@ func TestBulkTikTokStatsUpdateEntity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" {
+			t.Log("LIVE STEP {\"id\":\"bulk_tik_tok_stats_update.update.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs PATCH /api/upload-post-agents/bulk/tiktok-stats\"}")
+			t.Skip("Live coverage incomplete: bulk_tik_tok_stats_update.update.0 excluded (GET-only live run: needs PATCH /api/upload-post-agents/bulk/tiktok-stats)")
+			return
+		}
+
 		client := setup.client
 		_ = client
 
@@ -62,6 +68,9 @@ func TestBulkTikTokStatsUpdateEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = bulkTikTokStatsUpdateRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// UPDATE
 		bulkTikTokStatsUpdateRef01Ent := client.BulkTikTokStatsUpdate(nil)
 		bulkTikTokStatsUpdateRef01DataUp0Up := map[string]any{

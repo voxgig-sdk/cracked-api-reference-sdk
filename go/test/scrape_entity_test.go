@@ -62,9 +62,18 @@ func TestScrapeEntity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" {
+			t.Log("LIVE STEP {\"id\":\"scrape.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/reset-product/scrape\"}")
+			t.Skip("Live coverage incomplete: scrape.create.0 excluded (GET-only live run: needs POST /api/reset-product/scrape)")
+			return
+		}
+
 		client := setup.client
 		_ = client
 
+		if setup.live {
+			livePace()
+		}
 		// CREATE
 		scrapeRef01Ent := client.Scrape(nil)
 		scrapeRef01Data := core.ToMapAny(vs.GetProp(

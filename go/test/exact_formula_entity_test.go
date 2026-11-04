@@ -62,6 +62,9 @@ func TestExactFormulaEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = exactFormulaRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LOAD
 		exactFormulaRef01Ent := client.ExactFormula(nil)
 		exactFormulaRef01MatchDt0 := map[string]any{}

@@ -54,6 +54,9 @@ describe("GenerateSora2PromptEntity", function()
       generate_sora2_prompt_ref01_data = helpers.to_map(generate_sora2_prompt_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LOAD
     local generate_sora2_prompt_ref01_ent = client:GenerateSora2Prompt(nil)
     local generate_sora2_prompt_ref01_match_dt0 = {}

@@ -1,6 +1,7 @@
 # AdminCarouselDemoReview direct test
 
 import json
+import os
 import pytest
 
 from crackedapireference_sdk.utility.voxgig_struct import voxgig_struct as vs
@@ -29,11 +30,17 @@ class TestAdminCarouselDemoReviewDirect:
         if _skip:
             pytest.skip(_reason or "skipped via sdk-test-control.json")
             return
+        if setup["live"] and os.environ.get("VOXGIG_GETONLY_GUARD") == "TRUE" and setup["idmap"].get("admin_carousel_demo_review01") is None:
+            print("LIVE STEP {\"id\":\"direct-load-admin_carousel_demo_review\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs admin_carousel_demo_review01, which only POST /api/admin/carousels/demo-reviews/{formula_id}/decision gives\"}")
+            pytest.skip("Live coverage incomplete: direct-load-admin_carousel_demo_review excluded (GET-only live run: needs admin_carousel_demo_review01, which only POST /api/admin/carousels/demo-reviews/{formula_id}/decision gives)")
+
         if setup["live"]:
             for _live_key in ["admin_carousel_demo_review01"]:
                 if setup["idmap"].get(_live_key) is None:
                     runner.live_miss(LIVE_STRICT, f"Live test blocked: needs {_live_key} via CRACKED_API_REFERENCE_TEST_ADMIN_CAROUSEL_DEMO_REVIEW_ENTID")
 
+        if setup["live"]:
+            runner.live_pace()
         client = setup["client"]
 
         params = {}

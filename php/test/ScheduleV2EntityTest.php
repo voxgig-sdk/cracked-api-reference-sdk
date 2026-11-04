@@ -201,8 +201,56 @@ class ScheduleV2EntityTest extends TestCase
                 return;
             }
         }
+        if (!empty($setup["live"]) && getenv('VOXGIG_GETONLY_GUARD') === "TRUE") {
+            fwrite(STDOUT, 'LIVE STEP {"id":"schedule_v2.create.0","state":"excluded","attempted":false,"reason":"GET-only live run: needs POST /api/schedule/queue/add"}' . "\n");
+            fwrite(STDOUT, 'LIVE STEP {"id":"schedule_v2.remove.3","state":"excluded","attempted":false,"reason":"GET-only live run: needs DELETE /api/schedule/queue/{queue_id}"}' . "\n");
+            fwrite(STDOUT, 'LIVE STEP {"id":"schedule_v2.list.4","state":"excluded","attempted":false,"reason":"GET-only live run: checks a removal this run does not make"}' . "\n");
+        $client = $setup["client"];
+        if (!empty($setup["live"])) {
+            $_liveId = empty($setup["synthetic_only"]) ? ($setup["idmap"]["schedule_v201"] ?? null) : null;
+            Runner::live_pace();
+            Runner::live_existing($setup, self::LIVE_STRICT, "schedule_v2",
+                fn() => $client->ScheduleV2(null)->list([], null), "id", $_liveId);
+        }
+
+        // Bootstrap entity data from existing test data.
+        $schedule_v2_ref01_data_raw = Vs::items(Helpers::to_map(
+            Vs::getpath($setup["data"], "existing.schedule_v2")));
+        $schedule_v2_ref01_data = null;
+        if (count($schedule_v2_ref01_data_raw) > 0) {
+            $schedule_v2_ref01_data = Helpers::to_map($schedule_v2_ref01_data_raw[0][1]);
+        }
+
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
+        // LIST
+        $schedule_v2_ref01_ent = $client->ScheduleV2(null);
+        $schedule_v2_ref01_match = [];
+
+        $schedule_v2_ref01_list_result = $schedule_v2_ref01_ent->list($schedule_v2_ref01_match, null);
+        $this->assertIsArray($schedule_v2_ref01_list_result);
+
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
+        // LOAD
+        $schedule_v2_ref01_match_dt0 = [
+            "id" => $schedule_v2_ref01_data["id"],
+        ];
+        $schedule_v2_ref01_data_dt0_loaded = $schedule_v2_ref01_ent->load($schedule_v2_ref01_match_dt0, null);
+        $schedule_v2_ref01_data_dt0_load_result = Helpers::to_map(is_object($schedule_v2_ref01_data_dt0_loaded) && method_exists($schedule_v2_ref01_data_dt0_loaded, 'data_get') ? $schedule_v2_ref01_data_dt0_loaded->data_get() : $schedule_v2_ref01_data_dt0_loaded);
+        $this->assertNotNull($schedule_v2_ref01_data_dt0_load_result);
+        $this->assertTrue(Runner::live_same_id($schedule_v2_ref01_data_dt0_load_result["id"] ?? null, $schedule_v2_ref01_data["id"]));
+
+            return;
+        }
+
         $client = $setup["client"];
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // CREATE
         $schedule_v2_ref01_ent = $client->ScheduleV2(null);
         $schedule_v2_ref01_data = Helpers::to_map(Vs::getprop(
@@ -213,6 +261,9 @@ class ScheduleV2EntityTest extends TestCase
         $this->assertNotNull($schedule_v2_ref01_data);
         $this->assertNotNull($schedule_v2_ref01_data["id"]);
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LIST
         $schedule_v2_ref01_match = [];
 
@@ -224,6 +275,9 @@ class ScheduleV2EntityTest extends TestCase
             ["id" => $schedule_v2_ref01_data["id"]]);
         $this->assertNotEmpty($found_item);
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LOAD
         $schedule_v2_ref01_match_dt0 = [
             "id" => $schedule_v2_ref01_data["id"],
@@ -231,7 +285,7 @@ class ScheduleV2EntityTest extends TestCase
         $schedule_v2_ref01_data_dt0_loaded = $schedule_v2_ref01_ent->load($schedule_v2_ref01_match_dt0, null);
         $schedule_v2_ref01_data_dt0_load_result = Helpers::to_map(is_object($schedule_v2_ref01_data_dt0_loaded) && method_exists($schedule_v2_ref01_data_dt0_loaded, 'data_get') ? $schedule_v2_ref01_data_dt0_loaded->data_get() : $schedule_v2_ref01_data_dt0_loaded);
         $this->assertNotNull($schedule_v2_ref01_data_dt0_load_result);
-        $this->assertEquals($schedule_v2_ref01_data_dt0_load_result["id"], $schedule_v2_ref01_data["id"]);
+        $this->assertTrue(Runner::live_same_id($schedule_v2_ref01_data_dt0_load_result["id"] ?? null, $schedule_v2_ref01_data["id"]));
 
     }
 }

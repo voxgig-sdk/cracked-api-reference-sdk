@@ -164,6 +164,9 @@ describe("UserWithAvatarSubmissionEntity", function()
       user_with_avatar_submission_ref01_data = helpers.to_map(user_with_avatar_submission_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LIST
     local user_with_avatar_submission_ref01_ent = client:UserWithAvatarSubmission(nil)
     local user_with_avatar_submission_ref01_match = {}

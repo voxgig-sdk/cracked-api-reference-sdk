@@ -121,17 +121,57 @@ class TestIrisConnectorEntity:
         listed = CrackedApiReferenceSDK.test({"entity": {"iris_connector": {"v1": {}}}}, opts).IrisConnector(None).list(None, None)
         assert ["v1"] == [ent.data_get().get("id") for ent in listed]
 
+    def test_should_refuse_an_invalid_request(self):
+        if "validate" not in (shared_config().get("feature") or {}):
+            pytest.skip("feature not present in this SDK: validate")
+        client = CrackedApiReferenceSDK.test(
+            None, {"feature": {"validate": {"active": True}}})
+        with pytest.raises(Exception) as err:
+            client.IrisConnector(None).create({"connector_id": 1}, None)
+        assert "validate_failed" == getattr(err.value, "code", None)
+
     def test_should_run_basic_flow(self):
         setup = _iris_connector_basic_setup(None)
         # Per-op sdk-test-control.json skip — basic test exercises a flow with
         # multiple ops; skipping any one skips the whole flow (steps depend
         # on each other).
         _live = setup.get("live", False)
-        for _op in ["list"]:
+        for _op in ["create", "list"]:
             _skip, _reason = runner.is_control_skipped("entityOp", "iris_connector." + _op, "live" if _live else "unit")
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
                 return
+        if setup["live"] and os.environ.get("VOXGIG_GETONLY_GUARD") == "TRUE":
+            print("LIVE STEP {\"id\":\"iris_connector.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/iris/connectors/{connector_id}/start\"}")
+            return self._run_get_only_flow(setup)
+
+        if setup["live"]:
+            for _live_key in ["connector01"]:
+                if setup.get("synthetic_only") or setup["idmap"].get(_live_key) is None:
+                    runner.live_miss(LIVE_STRICT, f"Live entity test blocked: needs {_live_key} via CRACKED_API_REFERENCE_TEST_IRIS_CONNECTOR_ENTID")
+        client = setup["client"]
+
+        if setup["live"]:
+            runner.live_pace()
+        # CREATE
+        iris_connector_ref01_ent = client.IrisConnector(None)
+        iris_connector_ref01_data = helpers.to_map(vs.getprop(
+            vs.getpath(setup["data"], "new.iris_connector"), "iris_connector_ref01"))
+        iris_connector_ref01_data["connector_id"] = setup["idmap"]["connector01"]
+
+        iris_connector_ref01_data = helpers.to_map(runner.entity_data(iris_connector_ref01_ent.create(iris_connector_ref01_data, None)))
+        assert iris_connector_ref01_data is not None
+
+        if setup["live"]:
+            runner.live_pace()
+        # LIST
+        iris_connector_ref01_match = {}
+
+        iris_connector_ref01_list_result = iris_connector_ref01_ent.list(iris_connector_ref01_match, None)
+        assert isinstance(iris_connector_ref01_list_result, list)
+
+
+    def _run_get_only_flow(self, setup):
         client = setup["client"]
 
         # Bootstrap entity data from existing test data.
@@ -141,6 +181,8 @@ class TestIrisConnectorEntity:
         if len(iris_connector_ref01_data_raw) > 0:
             iris_connector_ref01_data = helpers.to_map(iris_connector_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LIST
         iris_connector_ref01_ent = client.IrisConnector(None)
         iris_connector_ref01_match = {}
@@ -166,7 +208,7 @@ def _iris_connector_basic_setup(extra):
 
     # Generate idmap via transform.
     idmap = vs.transform(
-        ["iris_connector01", "iris_connector02", "iris_connector03"],
+        ["iris_connector01", "iris_connector02", "iris_connector03", "connector01"],
         {
             "`$PACK`": ["", {
                 "`$KEY`": "`$COPY`",

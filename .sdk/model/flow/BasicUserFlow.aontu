@@ -8,6 +8,18 @@ main: kit: flow: BasicUserFlow:
   step: [
     {
       i: {
+        ref: "user_ref01"
+      }
+
+      m: {
+        user_id: "user01"
+      }
+
+      o: "create"
+    }
+
+    {
+      i: {
         ref: "user_ref01",
         srcdatavar: "user_ref01_data",
         suffix: "_up0",

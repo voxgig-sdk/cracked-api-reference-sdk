@@ -29,6 +29,11 @@ const utility_1 = require("../../utility");
         const setup = directSetup({ id: 'direct01' });
         if ((0, utility_1.maybeSkipControl)(t, 'direct', 'direct-load-video', setup.live))
             return;
+        if (setup.live && 'TRUE' === process.env.VOXGIG_GETONLY_GUARD && null == setup.idmap?.["video01"]) {
+            console.log("LIVE STEP {\"id\":\"direct-load-video\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs video01, which only POST /videos/{video_id}/retry-video gives\"}");
+            t.skip("Live coverage incomplete: direct-load-video excluded (GET-only live run: needs video01, which only POST /videos/{video_id}/retry-video gives)");
+            return;
+        }
         if ((0, utility_1.skipIfMissingIds)(t, setup, ["video01"], LIVE_STRICT))
             return;
         const { client, calls } = setup;

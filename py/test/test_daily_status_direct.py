@@ -1,6 +1,7 @@
 # DailyStatus direct test
 
 import json
+import os
 import pytest
 
 from crackedapireference_sdk.utility.voxgig_struct import voxgig_struct as vs
@@ -29,24 +30,30 @@ class TestDailyStatusDirect:
         if _skip:
             pytest.skip(_reason or "skipped via sdk-test-control.json")
             return
+        if setup["live"] and os.environ.get("VOXGIG_GETONLY_GUARD") == "TRUE" and setup["idmap"].get("daily01") is None:
+            print("LIVE STEP {\"id\":\"direct-load-daily_status\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs daily01, which only POST /api/carousel/daily/{product_id}/plan gives\"}")
+            pytest.skip("Live coverage incomplete: direct-load-daily_status excluded (GET-only live run: needs daily01, which only POST /api/carousel/daily/{product_id}/plan gives)")
+
         if setup["live"]:
-            for _live_key in ["daily_status01"]:
+            for _live_key in ["daily01"]:
                 if setup["idmap"].get(_live_key) is None:
                     runner.live_miss(LIVE_STRICT, f"Live test blocked: needs {_live_key} via CRACKED_API_REFERENCE_TEST_DAILY_STATUS_ENTID")
 
+        if setup["live"]:
+            runner.live_pace()
         client = setup["client"]
 
         params = {}
         query = {}
         if setup["live"]:
-            params["id"] = setup["idmap"].get("daily_status01")
+            params["daily_id"] = setup["idmap"].get("daily01")
             pass
         else:
-            params["id"] = "direct01"
+            params["daily_id"] = "direct01"
             pass
 
         result = client.direct({
-            "path": "api/carousel/daily/{id}/status",
+            "path": "api/carousel/daily/{daily_id}/status",
             "method": "GET",
             "params": params,
             "query": query,

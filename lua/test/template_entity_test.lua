@@ -43,6 +43,9 @@ describe("TemplateEntity", function()
       template_ref01_data = helpers.to_map(template_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LOAD
     local template_ref01_ent = client:Template(nil)
     local template_ref01_match_dt0 = {}

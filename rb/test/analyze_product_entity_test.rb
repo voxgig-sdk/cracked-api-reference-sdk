@@ -41,8 +41,14 @@ class AnalyzeProductEntityTest < Minitest::Test
         return
       end
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE"
+      puts "LIVE STEP {\"id\":\"analyze_product.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/scraper/analyze-product\"}"
+      skip("Live coverage incomplete: analyze_product.create.0 excluded (GET-only live run: needs POST /api/scraper/analyze-product)")
+    end
+
     client = setup[:client]
 
+    Runner.live_pace if setup[:live]
     # CREATE
     analyze_product_ref01_ent = client.AnalyzeProduct(nil)
     analyze_product_ref01_data = Helpers.to_map(Vs.getprop(

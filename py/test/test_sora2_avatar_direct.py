@@ -1,6 +1,7 @@
 # Sora2Avatar direct test
 
 import json
+import os
 import pytest
 
 from crackedapireference_sdk.utility.voxgig_struct import voxgig_struct as vs
@@ -32,14 +33,18 @@ class TestSora2AvatarDirect:
         if _skip:
             pytest.skip(_reason or "skipped via sdk-test-control.json")
             return
+        if setup["live"]:
+            runner.live_pace()
         client = setup["client"]
 
         params = {}
+        query = {}
 
         result = client.direct({
             "path": "api/admin/sora2-avatars",
             "method": "GET",
             "params": params,
+            "query": query,
         })
         if setup["live"]:
             if not _live_ok(result):
@@ -59,6 +64,8 @@ class TestSora2AvatarDirect:
         if _skip:
             pytest.skip(_reason or "skipped via sdk-test-control.json")
             return
+        if setup["live"]:
+            runner.live_pace()
         client = setup["client"]
 
         params = {}
@@ -77,9 +84,9 @@ class TestSora2AvatarDirect:
             if 0 == len(records):
                 runner.live_empty("The account has no sora2_avatar record to load")
             first = records[0] if isinstance(records[0], dict) else {}
-            if first.get("id", first.get("id")) is None:
+            if first.get("id") is None:
                 runner.live_miss(LIVE_STRICT, "Live load blocked: discovery returned no usable identity")
-            params["id"] = first.get("id", first.get("id"))
+            params["id"] = first.get("id")
             pass
         else:
             params["id"] = "direct01"

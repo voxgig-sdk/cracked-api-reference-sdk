@@ -43,6 +43,9 @@ describe("Sora2AvatarStatEntity", function()
       sora2_avatar_stat_ref01_data = helpers.to_map(sora2_avatar_stat_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LOAD
     local sora2_avatar_stat_ref01_ent = client:Sora2AvatarStat(nil)
     local sora2_avatar_stat_ref01_match_dt0 = {}

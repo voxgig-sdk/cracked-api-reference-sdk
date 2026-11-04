@@ -154,6 +154,32 @@ describe("ProductLandingEntity", function()
         return
       end
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" then
+      print("LIVE STEP {\"id\":\"product_landing.update.1\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs PUT /api/landings/microhub\"}")
+    local client = setup.client
+
+    -- Bootstrap entity data from existing test data.
+    local product_landing_ref01_data_raw = vs.items(helpers.to_map(
+      vs.getpath(setup.data, "existing.product_landing")))
+    local product_landing_ref01_data = nil
+    if #product_landing_ref01_data_raw > 0 then
+      product_landing_ref01_data = helpers.to_map(product_landing_ref01_data_raw[1][2])
+    end
+
+    if setup.live then
+      runner.live_pace()
+    end
+    -- LIST
+    local product_landing_ref01_ent = client:ProductLanding(nil)
+    local product_landing_ref01_match = {}
+
+    local product_landing_ref01_list_result, err = product_landing_ref01_ent:list(product_landing_ref01_match, nil)
+    assert.is_nil(err)
+    assert.is_table(product_landing_ref01_list_result)
+
+      return
+    end
+
     if setup.live then
       runner.live_miss(pending, LIVE_STRICT, "Live entity test blocked: " .. "the flow updates a product_landing record it did not create")
     end
@@ -167,6 +193,9 @@ describe("ProductLandingEntity", function()
       product_landing_ref01_data = helpers.to_map(product_landing_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LIST
     local product_landing_ref01_ent = client:ProductLanding(nil)
     local product_landing_ref01_match = {}
@@ -175,6 +204,9 @@ describe("ProductLandingEntity", function()
     assert.is_nil(err)
     assert.is_table(product_landing_ref01_list_result)
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- UPDATE
     local product_landing_ref01_data_up0_up = {
       id = product_landing_ref01_data["id"],
@@ -188,7 +220,7 @@ describe("ProductLandingEntity", function()
     assert.is_nil(err)
     local product_landing_ref01_resdata_up0 = helpers.to_map(type(product_landing_ref01_resdata_up0_result) == 'table' and product_landing_ref01_resdata_up0_result.data_get and product_landing_ref01_resdata_up0_result:data_get() or product_landing_ref01_resdata_up0_result)
     assert.is_not_nil(product_landing_ref01_resdata_up0)
-    assert.are.equal(product_landing_ref01_resdata_up0["id"], product_landing_ref01_data_up0_up["id"])
+    assert.is_true(runner.live_same_id(product_landing_ref01_resdata_up0["id"], product_landing_ref01_data_up0_up["id"]))
     assert.are.equal(product_landing_ref01_resdata_up0[product_landing_ref01_markdef_up0_name], product_landing_ref01_markdef_up0_value)
 
   end)

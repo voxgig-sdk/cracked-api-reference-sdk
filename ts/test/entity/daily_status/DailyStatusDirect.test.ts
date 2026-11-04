@@ -43,19 +43,24 @@ describe('DailyStatusDirect', async () => {
     if (liveScenariosActive()) { t.skip('Covered by live operation scenarios'); return }
     const setup = directSetup({ id: 'direct01' })
     if (maybeSkipControl(t, 'direct', 'direct-load-daily_status', setup.live)) return
-    if (skipIfMissingIds(t, setup, ["daily_status01"], LIVE_STRICT)) return
+    if (setup.live && 'TRUE' === process.env.VOXGIG_GETONLY_GUARD && null == setup.idmap?.["daily01"]) {
+      console.log("LIVE STEP {\"id\":\"direct-load-daily_status\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs daily01, which only POST /api/carousel/daily/{product_id}/plan gives\"}")
+      t.skip("Live coverage incomplete: direct-load-daily_status excluded (GET-only live run: needs daily01, which only POST /api/carousel/daily/{product_id}/plan gives)")
+      return
+    }
+    if (skipIfMissingIds(t, setup, ["daily01"], LIVE_STRICT)) return
     const { client, calls } = setup
 
     const params: any = {}
     const query: any = {}
     if (setup.live) {
-      params.id = setup.idmap['daily_status01']
+      params.daily_id = setup.idmap['daily01']
     } else {
-      params.id = 'direct01'
+      params.daily_id = 'direct01'
     }
 
     const result: any = await client.direct({
-      path: 'api/carousel/daily/{id}/status',
+      path: 'api/carousel/daily/{daily_id}/status',
       method: 'GET',
       params,
       query,

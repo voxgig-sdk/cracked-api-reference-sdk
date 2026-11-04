@@ -41,8 +41,14 @@ class ShareAccessLinkEntityTest < Minitest::Test
         return
       end
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE"
+      puts "LIVE STEP {\"id\":\"share_access_link.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /auth/share-access-link\"}"
+      skip("Live coverage incomplete: share_access_link.create.0 excluded (GET-only live run: needs POST /auth/share-access-link)")
+    end
+
     client = setup[:client]
 
+    Runner.live_pace if setup[:live]
     # CREATE
     share_access_link_ref01_ent = client.ShareAccessLink(nil)
     share_access_link_ref01_data = Helpers.to_map(Vs.getprop(

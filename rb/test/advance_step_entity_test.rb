@@ -41,8 +41,14 @@ class AdvanceStepEntityTest < Minitest::Test
         return
       end
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE"
+      puts "LIVE STEP {\"id\":\"advance_step.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/onboarding-v6/advance-step\"}"
+      skip("Live coverage incomplete: advance_step.create.0 excluded (GET-only live run: needs POST /api/onboarding-v6/advance-step)")
+    end
+
     client = setup[:client]
 
+    Runner.live_pace if setup[:live]
     # CREATE
     advance_step_ref01_ent = client.AdvanceStep(nil)
     advance_step_ref01_data = Helpers.to_map(Vs.getprop(

@@ -5,48 +5,120 @@ main: kit: entity: admin_insight: {
   alias: field: {}
 
   fields: {
-    customer_success_cases: {
-      h: "Customer Success Cases"
-      n: "customer_success_cases"
+    active_agents: {
+      h: "Active Agents"
+      n: "active_agents"
       r: true
-      t: "`$ARRAY`"
+      t: "`$INTEGER`"
     }
-    customers: {
-      h: "Customers"
-      n: "customers"
+    active_products: {
+      h: "Active Products"
+      n: "active_products"
       r: true
-      t: "`$ARRAY`"
+      t: "`$INTEGER`"
     }
-    generated_at: {
-      fo: "date-time"
-      h: "Generated At"
-      n: "generated_at"
+    agents_count: {
+      h: "Agents Count"
+      n: "agents_count"
+      r: true
+      t: "`$INTEGER`"
+    }
+    auto_schedule_status: {
+      h: "Auto Schedule Status"
+      n: "auto_schedule_status"
       r: true
       t: "`$STRING`"
     }
-    pfa_database: {
-      h: "Pfa Database"
-      n: "pfa_database"
-      r: true
-      t: "`$OBJECT`"
+    days_until_period_end: {
+      h: "Days Until Period End"
+      n: "days_until_period_end"
+      r: false
+      t: "`$ANY`"
     }
-    recent_signups: {
-      h: "Recent Signups"
-      n: "recent_signups"
+    email: {
+      h: "Email"
+      n: "email"
+      r: true
+      t: "`$STRING`"
+    }
+    feature_impact: {
+      h: "Feature Impact"
+      n: "feature_impact"
+      r: true
+      t: "`$STRING`"
+    }
+    last_notification_at: {
+      h: "Last Notification At"
+      n: "last_notification_at"
+      r: false
+      t: "`$ANY`"
+    }
+    membership: {
+      h: "Membership"
+      n: "membership"
+      r: false
+      t: "`$ANY`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: false
+      t: "`$STRING`"
+    }
+    notification_count: {
+      h: "Notification Count"
+      n: "notification_count"
+      r: true
+      t: "`$INTEGER`"
+    }
+    notification_events: {
+      h: "Notification Events"
+      n: "notification_events"
       r: true
       t: "`$ARRAY`"
     }
-    summary: {
-      h: "Summary"
-      n: "summary"
+    priority: {
+      h: "Priority"
+      n: "priority"
       r: true
-      t: "`$OBJECT`"
+      t: "`$STRING`"
     }
-    vireel_database: {
-      h: "Vireel Database"
-      n: "vireel_database"
+    severity: {
+      h: "Severity"
+      n: "severity"
       r: true
-      t: "`$OBJECT`"
+      t: "`$STRING`"
+    }
+    status_label: {
+      h: "Status Label"
+      n: "status_label"
+      r: true
+      t: "`$STRING`"
+    }
+    subscription_current_period_end: {
+      h: "Subscription Current Period End"
+      n: "subscription_current_period_end"
+      r: false
+      t: "`$ANY`"
+    }
+    subscription_status: {
+      h: "Subscription Status"
+      n: "subscription_status"
+      r: false
+      t: "`$ANY`"
+    }
+    upcoming_posts: {
+      h: "Upcoming Posts"
+      n: "upcoming_posts"
+      r: true
+      t: "`$INTEGER`"
+    }
+    user_id: {
+      fo: "uuid"
+      h: "User Id"
+      n: "user_id"
+      r: true
+      t: "`$STRING`"
     }
   }
 
@@ -80,7 +152,7 @@ main: kit: entity: admin_insight: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.customer_success_cases`"
           }
         }
       ]

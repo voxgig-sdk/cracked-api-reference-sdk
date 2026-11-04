@@ -52,8 +52,16 @@ class SocialScanSaveEntityTest extends TestCase
                 return;
             }
         }
+        if (!empty($setup["live"]) && getenv('VOXGIG_GETONLY_GUARD') === "TRUE") {
+            fwrite(STDOUT, 'LIVE STEP {"id":"social_scan_save.create.0","state":"excluded","attempted":false,"reason":"GET-only live run: needs POST /api/social-scan/save"}' . "\n");
+            $this->markTestSkipped('Live coverage incomplete: social_scan_save.create.0 excluded (GET-only live run: needs POST /api/social-scan/save)');
+        }
+
         $client = $setup["client"];
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // CREATE
         $social_scan_save_ref01_ent = $client->SocialScanSave(null);
         $social_scan_save_ref01_data = Helpers::to_map(Vs::getprop(

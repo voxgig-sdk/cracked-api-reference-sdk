@@ -52,8 +52,16 @@ class ReRollVideoEntityTest extends TestCase
                 return;
             }
         }
+        if (!empty($setup["live"]) && getenv('VOXGIG_GETONLY_GUARD') === "TRUE") {
+            fwrite(STDOUT, 'LIVE STEP {"id":"re_roll_video.create.0","state":"excluded","attempted":false,"reason":"GET-only live run: needs POST /api/core/re-roll-video"}' . "\n");
+            $this->markTestSkipped('Live coverage incomplete: re_roll_video.create.0 excluded (GET-only live run: needs POST /api/core/re-roll-video)');
+        }
+
         $client = $setup["client"];
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // CREATE
         $re_roll_video_ref01_ent = $client->ReRollVideo(null);
         $re_roll_video_ref01_data = Helpers::to_map(Vs::getprop(

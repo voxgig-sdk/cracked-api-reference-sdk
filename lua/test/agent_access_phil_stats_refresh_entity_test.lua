@@ -43,6 +43,9 @@ describe("AgentAccessPhilStatsRefreshEntity", function()
       agent_access_phil_stats_refresh_ref01_data = helpers.to_map(agent_access_phil_stats_refresh_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LOAD
     local agent_access_phil_stats_refresh_ref01_ent = client:AgentAccessPhilStatsRefresh(nil)
     local agent_access_phil_stats_refresh_ref01_match_dt0 = {}

@@ -132,17 +132,30 @@ describe("IrisConnectorEntity", function()
     assert.is_true(hook.unexpected > fired)
   end)
 
+  it("should refuse an invalid request", function()
+    local config = require("config_shared")()
+    if type(config.feature) ~= "table" or config.feature.validate == nil then
+      pending("feature not present in this SDK: validate")
+      return
+    end
+    local client = sdk.test(nil, { feature = { validate = { active = true } } })
+    local _, err = client:IrisConnector(nil):create({ ["connector_id"] = 1 }, nil)
+    assert.are.equal("validate_failed", type(err) == "table" and err.code or nil)
+  end)
+
   it("should run basic flow", function()
     local setup = iris_connector_basic_setup(nil)
     -- Per-op sdk-test-control.json skip.
     local _live = setup.live or false
-    for _, _op in ipairs({"list"}) do
+    for _, _op in ipairs({"create", "list"}) do
       local _should_skip, _reason = runner.is_control_skipped("entityOp", "iris_connector." .. _op, _live and "live" or "unit")
       if _should_skip then
         pending(_reason or "skipped via sdk-test-control.json")
         return
       end
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" then
+      print("LIVE STEP {\"id\":\"iris_connector.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/iris/connectors/{connector_id}/start\"}")
     local client = setup.client
 
     -- Bootstrap entity data from existing test data.
@@ -153,8 +166,47 @@ describe("IrisConnectorEntity", function()
       iris_connector_ref01_data = helpers.to_map(iris_connector_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LIST
     local iris_connector_ref01_ent = client:IrisConnector(nil)
+    local iris_connector_ref01_match = {}
+
+    local iris_connector_ref01_list_result, err = iris_connector_ref01_ent:list(iris_connector_ref01_match, nil)
+    assert.is_nil(err)
+    assert.is_table(iris_connector_ref01_list_result)
+
+      return
+    end
+
+    if setup.live then
+      for _, _live_key in ipairs({"connector01"}) do
+        if setup.synthetic_only or setup.idmap[_live_key] == nil then
+          runner.live_miss(pending, LIVE_STRICT, "Live entity test blocked: needs " .. _live_key .. " via CRACKED_API_REFERENCE_TEST_IRIS_CONNECTOR_ENTID")
+        end
+      end
+    end
+    local client = setup.client
+
+    if setup.live then
+      runner.live_pace()
+    end
+    -- CREATE
+    local iris_connector_ref01_ent = client:IrisConnector(nil)
+    local iris_connector_ref01_data = helpers.to_map(vs.getprop(
+      vs.getpath(setup.data, "new.iris_connector"), "iris_connector_ref01"))
+    iris_connector_ref01_data["connector_id"] = setup.idmap["connector01"]
+
+    local iris_connector_ref01_data_result, err = iris_connector_ref01_ent:create(iris_connector_ref01_data, nil)
+    assert.is_nil(err)
+    iris_connector_ref01_data = helpers.to_map(type(iris_connector_ref01_data_result) == 'table' and iris_connector_ref01_data_result.data_get and iris_connector_ref01_data_result:data_get() or iris_connector_ref01_data_result)
+    assert.is_not_nil(iris_connector_ref01_data)
+
+    if setup.live then
+      runner.live_pace()
+    end
+    -- LIST
     local iris_connector_ref01_match = {}
 
     local iris_connector_ref01_list_result, err = iris_connector_ref01_ent:list(iris_connector_ref01_match, nil)
@@ -184,7 +236,7 @@ function iris_connector_basic_setup(extra)
 
   -- Generate idmap via transform.
   local idmap = vs.transform(
-    { "iris_connector01", "iris_connector02", "iris_connector03" },
+    { "iris_connector01", "iris_connector02", "iris_connector03", "connector01" },
     {
       ["`$PACK`"] = { "", {
         ["`$KEY`"] = "`$COPY`",

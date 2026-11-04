@@ -51,12 +51,18 @@ class TestRecordDemoBookedEntity:
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
                 return
+        if setup["live"] and os.environ.get("VOXGIG_GETONLY_GUARD") == "TRUE":
+            print("LIVE STEP {\"id\":\"record_demo_booked.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/chat/sessions/{session_id}/demo-booked\"}")
+            pytest.skip("Live coverage incomplete: record_demo_booked.create.0 excluded (GET-only live run: needs POST /api/chat/sessions/{session_id}/demo-booked)")
+
         if setup["live"]:
             for _live_key in ["session01"]:
                 if setup.get("synthetic_only") or setup["idmap"].get(_live_key) is None:
                     runner.live_miss(LIVE_STRICT, f"Live entity test blocked: needs {_live_key} via CRACKED_API_REFERENCE_TEST_RECORD_DEMO_BOOKED_ENTID")
         client = setup["client"]
 
+        if setup["live"]:
+            runner.live_pace()
         # CREATE
         record_demo_booked_ref01_ent = client.RecordDemoBooked(None)
         record_demo_booked_ref01_data = helpers.to_map(vs.getprop(

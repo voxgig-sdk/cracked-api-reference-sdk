@@ -134,6 +134,10 @@ class TestProductLandingEntity:
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
                 return
+        if setup["live"] and os.environ.get("VOXGIG_GETONLY_GUARD") == "TRUE":
+            print("LIVE STEP {\"id\":\"product_landing.update.1\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs PUT /api/landings/microhub\"}")
+            return self._run_get_only_flow(setup)
+
         if setup["live"]:
             runner.live_miss(LIVE_STRICT, "Live entity test blocked: " + "the flow updates a product_landing record it did not create")
         client = setup["client"]
@@ -145,6 +149,8 @@ class TestProductLandingEntity:
         if len(product_landing_ref01_data_raw) > 0:
             product_landing_ref01_data = helpers.to_map(product_landing_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LIST
         product_landing_ref01_ent = client.ProductLanding(None)
         product_landing_ref01_match = {}
@@ -152,6 +158,8 @@ class TestProductLandingEntity:
         product_landing_ref01_list_result = product_landing_ref01_ent.list(product_landing_ref01_match, None)
         assert isinstance(product_landing_ref01_list_result, list)
 
+        if setup["live"]:
+            runner.live_pace()
         # UPDATE
         product_landing_ref01_data_up0_up = {
             "id": product_landing_ref01_data["id"],
@@ -163,8 +171,28 @@ class TestProductLandingEntity:
 
         product_landing_ref01_resdata_up0 = helpers.to_map(runner.entity_data(product_landing_ref01_ent.update(product_landing_ref01_data_up0_up, None)))
         assert product_landing_ref01_resdata_up0 is not None
-        assert product_landing_ref01_resdata_up0["id"] == product_landing_ref01_data_up0_up["id"]
+        assert runner.live_same_id(product_landing_ref01_resdata_up0.get("id"), product_landing_ref01_data_up0_up["id"])
         assert product_landing_ref01_resdata_up0[product_landing_ref01_markdef_up0_name] == product_landing_ref01_markdef_up0_value
+
+
+    def _run_get_only_flow(self, setup):
+        client = setup["client"]
+
+        # Bootstrap entity data from existing test data.
+        product_landing_ref01_data_raw = vs.items(helpers.to_map(
+            vs.getpath(setup["data"], "existing.product_landing")))
+        product_landing_ref01_data = None
+        if len(product_landing_ref01_data_raw) > 0:
+            product_landing_ref01_data = helpers.to_map(product_landing_ref01_data_raw[0][1])
+
+        if setup["live"]:
+            runner.live_pace()
+        # LIST
+        product_landing_ref01_ent = client.ProductLanding(None)
+        product_landing_ref01_match = {}
+
+        product_landing_ref01_list_result = product_landing_ref01_ent.list(product_landing_ref01_match, None)
+        assert isinstance(product_landing_ref01_list_result, list)
 
 
 

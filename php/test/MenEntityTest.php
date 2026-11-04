@@ -222,6 +222,9 @@ class MenEntityTest extends TestCase
             $men_ref01_data = Helpers::to_map($men_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LIST
         $men_ref01_ent = $client->Men(null);
         $men_ref01_match = [];

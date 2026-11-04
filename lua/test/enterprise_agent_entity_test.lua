@@ -44,8 +44,36 @@ describe("EnterpriseAgentEntity", function()
         return
       end
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" then
+      print("LIVE STEP {\"id\":\"enterprise_agent.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/enterprise/agents/assign\"}")
     local client = setup.client
 
+    -- Bootstrap entity data from existing test data.
+    local enterprise_agent_ref01_data_raw = vs.items(helpers.to_map(
+      vs.getpath(setup.data, "existing.enterprise_agent")))
+    local enterprise_agent_ref01_data = nil
+    if #enterprise_agent_ref01_data_raw > 0 then
+      enterprise_agent_ref01_data = helpers.to_map(enterprise_agent_ref01_data_raw[1][2])
+    end
+
+    if setup.live then
+      runner.live_pace()
+    end
+    -- LOAD
+    local enterprise_agent_ref01_ent = client:EnterpriseAgent(nil)
+    local enterprise_agent_ref01_match_dt0 = {}
+    local enterprise_agent_ref01_data_dt0_loaded, err = enterprise_agent_ref01_ent:load(enterprise_agent_ref01_match_dt0, nil)
+    assert.is_nil(err)
+    assert.is_not_nil(enterprise_agent_ref01_data_dt0_loaded)
+
+      return
+    end
+
+    local client = setup.client
+
+    if setup.live then
+      runner.live_pace()
+    end
     -- CREATE
     local enterprise_agent_ref01_ent = client:EnterpriseAgent(nil)
     local enterprise_agent_ref01_data = helpers.to_map(vs.getprop(
@@ -56,6 +84,9 @@ describe("EnterpriseAgentEntity", function()
     enterprise_agent_ref01_data = helpers.to_map(type(enterprise_agent_ref01_data_result) == 'table' and enterprise_agent_ref01_data_result.data_get and enterprise_agent_ref01_data_result:data_get() or enterprise_agent_ref01_data_result)
     assert.is_not_nil(enterprise_agent_ref01_data)
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LOAD
     local enterprise_agent_ref01_match_dt0 = {}
     local enterprise_agent_ref01_data_dt0_loaded, err = enterprise_agent_ref01_ent:load(enterprise_agent_ref01_match_dt0, nil)

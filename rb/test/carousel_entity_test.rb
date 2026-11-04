@@ -157,9 +157,13 @@ class CarouselEntityTest < Minitest::Test
         return
       end
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE"
+      puts "LIVE STEP {\"id\":\"carousel.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/carousel/{video_id}/finalize\"}"
     client = setup[:client]
     if setup[:live]
-      Runner.live_existing(setup, LIVE_STRICT, "carousel") do
+      _live_id = setup[:synthetic_only] ? nil : setup[:idmap]["carousel01"]
+      Runner.live_pace
+      Runner.live_existing(setup, LIVE_STRICT, "carousel", "queue_id", _live_id) do
         client.Carousel(nil).list({}, nil)
       end
     end
@@ -172,6 +176,7 @@ class CarouselEntityTest < Minitest::Test
       carousel_ref01_data = Helpers.to_map(carousel_ref01_data_raw[0][1])
     end
 
+    Runner.live_pace if setup[:live]
     # LIST
     carousel_ref01_ent = client.Carousel(nil)
     carousel_ref01_match = {}
@@ -179,14 +184,53 @@ class CarouselEntityTest < Minitest::Test
     carousel_ref01_list_result = carousel_ref01_ent.list(carousel_ref01_match, nil)
     assert carousel_ref01_list_result.is_a?(Array)
 
+    Runner.live_pace if setup[:live]
     # LOAD
     carousel_ref01_match_dt0 = {
-      "id" => carousel_ref01_data["id"],
+      "id" => carousel_ref01_data["queue_id"],
     }
     carousel_ref01_data_dt0_loaded = carousel_ref01_ent.load(carousel_ref01_match_dt0, nil)
     carousel_ref01_data_dt0_load_result = Helpers.to_map(carousel_ref01_data_dt0_loaded.respond_to?(:data_get) ? carousel_ref01_data_dt0_loaded.data_get : carousel_ref01_data_dt0_loaded)
     assert !carousel_ref01_data_dt0_load_result.nil?
-    assert_equal carousel_ref01_data_dt0_load_result["id"], carousel_ref01_data["id"]
+    assert Runner.live_same_id(carousel_ref01_data_dt0_load_result["queue_id"], carousel_ref01_data["queue_id"])
+
+      return
+    end
+
+    client = setup[:client]
+    if setup[:live]
+      _live_id = setup[:synthetic_only] ? nil : setup[:idmap]["carousel01"]
+      Runner.live_pace
+      Runner.live_existing(setup, LIVE_STRICT, "carousel", "queue_id", _live_id) do
+        client.Carousel(nil).list({}, nil)
+      end
+    end
+
+    # Bootstrap entity data from existing test data.
+    carousel_ref01_data_raw = Vs.items(Helpers.to_map(
+      Vs.getpath(setup[:data], "existing.carousel")))
+    carousel_ref01_data = nil
+    if carousel_ref01_data_raw.length > 0
+      carousel_ref01_data = Helpers.to_map(carousel_ref01_data_raw[0][1])
+    end
+
+    Runner.live_pace if setup[:live]
+    # LIST
+    carousel_ref01_ent = client.Carousel(nil)
+    carousel_ref01_match = {}
+
+    carousel_ref01_list_result = carousel_ref01_ent.list(carousel_ref01_match, nil)
+    assert carousel_ref01_list_result.is_a?(Array)
+
+    Runner.live_pace if setup[:live]
+    # LOAD
+    carousel_ref01_match_dt0 = {
+      "id" => carousel_ref01_data["queue_id"],
+    }
+    carousel_ref01_data_dt0_loaded = carousel_ref01_ent.load(carousel_ref01_match_dt0, nil)
+    carousel_ref01_data_dt0_load_result = Helpers.to_map(carousel_ref01_data_dt0_loaded.respond_to?(:data_get) ? carousel_ref01_data_dt0_loaded.data_get : carousel_ref01_data_dt0_loaded)
+    assert !carousel_ref01_data_dt0_load_result.nil?
+    assert Runner.live_same_id(carousel_ref01_data_dt0_load_result["queue_id"], carousel_ref01_data["queue_id"])
 
   end
 end
@@ -197,6 +241,10 @@ def carousel_basic_setup(extra)
   entity_data_file = File.join(__dir__, "..", "..", ".sdk", "test", "entity", "carousel", "CarouselTestData.json")
   entity_data_source = File.read(entity_data_file, encoding: "UTF-8")
   entity_data = JSON.parse(entity_data_source)
+
+  ((entity_data["existing"] || {})["carousel"] || {}).each_value do |rec|
+    rec["queue_id"] = rec["id"] if rec.is_a?(Hash) && !rec["id"].nil?
+  end
 
   options = {}
   options["entity"] = entity_data["existing"]

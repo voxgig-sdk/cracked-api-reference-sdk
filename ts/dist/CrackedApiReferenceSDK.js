@@ -55,7 +55,6 @@ const BulkTikTokStatsUpdateEntity_1 = require("./entity/BulkTikTokStatsUpdateEnt
 const CarouselEntity_1 = require("./entity/CarouselEntity");
 const CarouselAgentDetailEntity_1 = require("./entity/CarouselAgentDetailEntity");
 const CarouselStatusEntity_1 = require("./entity/CarouselStatusEntity");
-const ChatEntity_1 = require("./entity/ChatEntity");
 const ChatHistoryEntity_1 = require("./entity/ChatHistoryEntity");
 const ChatSessionEntity_1 = require("./entity/ChatSessionEntity");
 const CommentEntity_1 = require("./entity/CommentEntity");
@@ -75,7 +74,6 @@ const DailyEntity_1 = require("./entity/DailyEntity");
 const DailyStatusEntity_1 = require("./entity/DailyStatusEntity");
 const DedicatedAgentsDashboardEntity_1 = require("./entity/DedicatedAgentsDashboardEntity");
 const EnterpriseAgentEntity_1 = require("./entity/EnterpriseAgentEntity");
-const EnterpriseProductEntity_1 = require("./entity/EnterpriseProductEntity");
 const ExactAvailabilityEntity_1 = require("./entity/ExactAvailabilityEntity");
 const ExactFormulaEntity_1 = require("./entity/ExactFormulaEntity");
 const ExtractV2Entity_1 = require("./entity/ExtractV2Entity");
@@ -87,7 +85,6 @@ const GeneratePromptEntity_1 = require("./entity/GeneratePromptEntity");
 const GenerateSora2PromptEntity_1 = require("./entity/GenerateSora2PromptEntity");
 const HealthrxEntity_1 = require("./entity/HealthrxEntity");
 const InitResetProductV6Entity_1 = require("./entity/InitResetProductV6Entity");
-const IriEntity_1 = require("./entity/IriEntity");
 const IrisCapabilityEntity_1 = require("./entity/IrisCapabilityEntity");
 const IrisChatEntity_1 = require("./entity/IrisChatEntity");
 const IrisConnectorEntity_1 = require("./entity/IrisConnectorEntity");
@@ -117,16 +114,17 @@ const ProductDemoEntity_1 = require("./entity/ProductDemoEntity");
 const ProductLandingEntity_1 = require("./entity/ProductLandingEntity");
 const PublicResumeStatusEntity_1 = require("./entity/PublicResumeStatusEntity");
 const ReRollVideoEntity_1 = require("./entity/ReRollVideoEntity");
-const ReadRootGetEntity_1 = require("./entity/ReadRootGetEntity");
 const RecordDemoBookedEntity_1 = require("./entity/RecordDemoBookedEntity");
 const RefreshStatEntity_1 = require("./entity/RefreshStatEntity");
 const RemixerClipperEntity_1 = require("./entity/RemixerClipperEntity");
 const ResetProductEntity_1 = require("./entity/ResetProductEntity");
 const RetryWebsiteScrapeEntity_1 = require("./entity/RetryWebsiteScrapeEntity");
+const RootGetEntity_1 = require("./entity/RootGetEntity");
 const SaveSurveyEntity_1 = require("./entity/SaveSurveyEntity");
 const ScanSocialEntity_1 = require("./entity/ScanSocialEntity");
 const ScanSocialsPublicEntity_1 = require("./entity/ScanSocialsPublicEntity");
 const ScanSocialsStatusEntity_1 = require("./entity/ScanSocialsStatusEntity");
+const ScheduleQueueEntity_1 = require("./entity/ScheduleQueueEntity");
 const ScheduleV2Entity_1 = require("./entity/ScheduleV2Entity");
 const ScrapeEntity_1 = require("./entity/ScrapeEntity");
 const ScrapeWebsitePublicEntity_1 = require("./entity/ScrapeWebsitePublicEntity");
@@ -285,6 +283,12 @@ class CrackedApiReferenceSDK {
             for (let key in uheaders) {
                 spec.headers[key] = uheaders[key];
             }
+        }
+        // A raw request has no point to declare its response type, so it asks
+        // for the JSON it reads: an API that negotiates on Accept otherwise
+        // answers in its own default format. A caller's own accept wins.
+        if (!Object.keys(spec.headers).some((key) => 'accept' === key.toLowerCase())) {
+            spec.headers.accept = 'application/json';
         }
         const authResult = prepareAuth(ctx);
         if (authResult instanceof Error) {
@@ -779,13 +783,6 @@ class CrackedApiReferenceSDK {
         const self = this;
         return new CarouselStatusEntity_1.CarouselStatusEntity(self, entopts);
     }
-    // Entity access: `client.Chat().list()` / `client.Chat().load({ id })`.
-    // The argument is the entity OPTIONS object (passed to the entity
-    // constructor as entopts), not initial entity data.
-    Chat(entopts) {
-        const self = this;
-        return new ChatEntity_1.ChatEntity(self, entopts);
-    }
     // Entity access: `client.ChatHistory().list()` / `client.ChatHistory().load({ id })`.
     // The argument is the entity OPTIONS object (passed to the entity
     // constructor as entopts), not initial entity data.
@@ -919,13 +916,6 @@ class CrackedApiReferenceSDK {
         const self = this;
         return new EnterpriseAgentEntity_1.EnterpriseAgentEntity(self, entopts);
     }
-    // Entity access: `client.EnterpriseProduct().list()` / `client.EnterpriseProduct().load({ id })`.
-    // The argument is the entity OPTIONS object (passed to the entity
-    // constructor as entopts), not initial entity data.
-    EnterpriseProduct(entopts) {
-        const self = this;
-        return new EnterpriseProductEntity_1.EnterpriseProductEntity(self, entopts);
-    }
     // Entity access: `client.ExactAvailability().list()` / `client.ExactAvailability().load({ id })`.
     // The argument is the entity OPTIONS object (passed to the entity
     // constructor as entopts), not initial entity data.
@@ -1002,13 +992,6 @@ class CrackedApiReferenceSDK {
     InitResetProductV6(entopts) {
         const self = this;
         return new InitResetProductV6Entity_1.InitResetProductV6Entity(self, entopts);
-    }
-    // Entity access: `client.Iri().list()` / `client.Iri().load({ id })`.
-    // The argument is the entity OPTIONS object (passed to the entity
-    // constructor as entopts), not initial entity data.
-    Iri(entopts) {
-        const self = this;
-        return new IriEntity_1.IriEntity(self, entopts);
     }
     // Entity access: `client.IrisCapability().list()` / `client.IrisCapability().load({ id })`.
     // The argument is the entity OPTIONS object (passed to the entity
@@ -1213,13 +1196,6 @@ class CrackedApiReferenceSDK {
         const self = this;
         return new ReRollVideoEntity_1.ReRollVideoEntity(self, entopts);
     }
-    // Entity access: `client.ReadRootGet().list()` / `client.ReadRootGet().load({ id })`.
-    // The argument is the entity OPTIONS object (passed to the entity
-    // constructor as entopts), not initial entity data.
-    ReadRootGet(entopts) {
-        const self = this;
-        return new ReadRootGetEntity_1.ReadRootGetEntity(self, entopts);
-    }
     // Entity access: `client.RecordDemoBooked().list()` / `client.RecordDemoBooked().load({ id })`.
     // The argument is the entity OPTIONS object (passed to the entity
     // constructor as entopts), not initial entity data.
@@ -1255,6 +1231,13 @@ class CrackedApiReferenceSDK {
         const self = this;
         return new RetryWebsiteScrapeEntity_1.RetryWebsiteScrapeEntity(self, entopts);
     }
+    // Entity access: `client.RootGet().list()` / `client.RootGet().load({ id })`.
+    // The argument is the entity OPTIONS object (passed to the entity
+    // constructor as entopts), not initial entity data.
+    RootGet(entopts) {
+        const self = this;
+        return new RootGetEntity_1.RootGetEntity(self, entopts);
+    }
     // Entity access: `client.SaveSurvey().list()` / `client.SaveSurvey().load({ id })`.
     // The argument is the entity OPTIONS object (passed to the entity
     // constructor as entopts), not initial entity data.
@@ -1282,6 +1265,13 @@ class CrackedApiReferenceSDK {
     ScanSocialsStatus(entopts) {
         const self = this;
         return new ScanSocialsStatusEntity_1.ScanSocialsStatusEntity(self, entopts);
+    }
+    // Entity access: `client.ScheduleQueue().list()` / `client.ScheduleQueue().load({ id })`.
+    // The argument is the entity OPTIONS object (passed to the entity
+    // constructor as entopts), not initial entity data.
+    ScheduleQueue(entopts) {
+        const self = this;
+        return new ScheduleQueueEntity_1.ScheduleQueueEntity(self, entopts);
     }
     // Entity access: `client.ScheduleV2().list()` / `client.ScheduleV2().load({ id })`.
     // The argument is the entity OPTIONS object (passed to the entity

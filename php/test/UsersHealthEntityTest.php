@@ -211,6 +211,9 @@ class UsersHealthEntityTest extends TestCase
             $users_health_ref01_data = Helpers::to_map($users_health_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LIST
         $users_health_ref01_ent = $client->UsersHealth(null);
         $users_health_ref01_match = [];

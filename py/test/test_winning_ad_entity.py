@@ -153,6 +153,8 @@ class TestWinningAdEntity:
         if len(winning_ad_ref01_data_raw) > 0:
             winning_ad_ref01_data = helpers.to_map(winning_ad_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LIST
         winning_ad_ref01_ent = client.WinningAd(None)
         winning_ad_ref01_match = {}

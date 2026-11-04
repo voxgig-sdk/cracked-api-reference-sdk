@@ -44,8 +44,36 @@ describe("AdminSlideshowImportEntity", function()
         return
       end
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" then
+      print("LIVE STEP {\"id\":\"admin_slideshow_import.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/admin/slideshow-import2/{batch_id}/state\"}")
     local client = setup.client
 
+    -- Bootstrap entity data from existing test data.
+    local admin_slideshow_import_ref01_data_raw = vs.items(helpers.to_map(
+      vs.getpath(setup.data, "existing.admin_slideshow_import")))
+    local admin_slideshow_import_ref01_data = nil
+    if #admin_slideshow_import_ref01_data_raw > 0 then
+      admin_slideshow_import_ref01_data = helpers.to_map(admin_slideshow_import_ref01_data_raw[1][2])
+    end
+
+    if setup.live then
+      runner.live_pace()
+    end
+    -- LOAD
+    local admin_slideshow_import_ref01_ent = client:AdminSlideshowImport(nil)
+    local admin_slideshow_import_ref01_match_dt0 = {}
+    local admin_slideshow_import_ref01_data_dt0_loaded, err = admin_slideshow_import_ref01_ent:load(admin_slideshow_import_ref01_match_dt0, nil)
+    assert.is_nil(err)
+    assert.is_not_nil(admin_slideshow_import_ref01_data_dt0_loaded)
+
+      return
+    end
+
+    local client = setup.client
+
+    if setup.live then
+      runner.live_pace()
+    end
     -- CREATE
     local admin_slideshow_import_ref01_ent = client:AdminSlideshowImport(nil)
     local admin_slideshow_import_ref01_data = helpers.to_map(vs.getprop(
@@ -56,6 +84,9 @@ describe("AdminSlideshowImportEntity", function()
     admin_slideshow_import_ref01_data = helpers.to_map(type(admin_slideshow_import_ref01_data_result) == 'table' and admin_slideshow_import_ref01_data_result.data_get and admin_slideshow_import_ref01_data_result:data_get() or admin_slideshow_import_ref01_data_result)
     assert.is_not_nil(admin_slideshow_import_ref01_data)
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LOAD
     local admin_slideshow_import_ref01_match_dt0 = {}
     local admin_slideshow_import_ref01_data_dt0_loaded, err = admin_slideshow_import_ref01_ent:load(admin_slideshow_import_ref01_match_dt0, nil)

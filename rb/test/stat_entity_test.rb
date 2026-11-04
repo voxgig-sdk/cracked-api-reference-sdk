@@ -177,6 +177,7 @@ class StatEntityTest < Minitest::Test
       stat_ref01_data = Helpers.to_map(stat_ref01_data_raw[0][1])
     end
 
+    Runner.live_pace if setup[:live]
     # LIST
     stat_ref01_ent = client.Stat(nil)
     stat_ref01_match = {}

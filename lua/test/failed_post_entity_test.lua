@@ -164,6 +164,9 @@ describe("FailedPostEntity", function()
       failed_post_ref01_data = helpers.to_map(failed_post_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LIST
     local failed_post_ref01_ent = client:FailedPost(nil)
     local failed_post_ref01_match = {}

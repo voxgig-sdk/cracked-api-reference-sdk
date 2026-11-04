@@ -120,7 +120,7 @@ class TestAdminInsightEntity:
         client = CrackedApiReferenceSDK.test(
             None, {"feature": {"validate": {"active": True}}})
         with pytest.raises(Exception) as err:
-            client.AdminInsight(None).list({"generated_at": 1}, None)
+            client.AdminInsight(None).list({"active_agents": "x"}, None)
         assert "validate_failed" == getattr(err.value, "code", None)
 
     def test_should_run_basic_flow(self):
@@ -143,6 +143,8 @@ class TestAdminInsightEntity:
         if len(admin_insight_ref01_data_raw) > 0:
             admin_insight_ref01_data = helpers.to_map(admin_insight_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LIST
         admin_insight_ref01_ent = client.AdminInsight(None)
         admin_insight_ref01_match = {}
@@ -150,6 +152,8 @@ class TestAdminInsightEntity:
         admin_insight_ref01_list_result = admin_insight_ref01_ent.list(admin_insight_ref01_match, None)
         assert isinstance(admin_insight_ref01_list_result, list)
 
+        if setup["live"]:
+            runner.live_pace()
         # LOAD
         admin_insight_ref01_match_dt0 = {}
         admin_insight_ref01_data_dt0_loaded = admin_insight_ref01_ent.load(admin_insight_ref01_match_dt0, None)

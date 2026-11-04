@@ -36,6 +36,11 @@ class BulkTikTokStatsUpdateEntityTest extends TestCase
                 return;
             }
         }
+        if (!empty($setup["live"]) && getenv('VOXGIG_GETONLY_GUARD') === "TRUE") {
+            fwrite(STDOUT, 'LIVE STEP {"id":"bulk_tik_tok_stats_update.update.0","state":"excluded","attempted":false,"reason":"GET-only live run: needs PATCH /api/upload-post-agents/bulk/tiktok-stats"}' . "\n");
+            $this->markTestSkipped('Live coverage incomplete: bulk_tik_tok_stats_update.update.0 excluded (GET-only live run: needs PATCH /api/upload-post-agents/bulk/tiktok-stats)');
+        }
+
         $client = $setup["client"];
 
         // Bootstrap entity data from existing test data.
@@ -46,6 +51,9 @@ class BulkTikTokStatsUpdateEntityTest extends TestCase
             $bulk_tik_tok_stats_update_ref01_data = Helpers::to_map($bulk_tik_tok_stats_update_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // UPDATE
         $bulk_tik_tok_stats_update_ref01_ent = $client->BulkTikTokStatsUpdate(null);
         $bulk_tik_tok_stats_update_ref01_data_up0_up = [

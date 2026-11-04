@@ -62,6 +62,11 @@ func TestLinkInPostEntity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live {
+			t.Skip("Live coverage incomplete: the flow has no step to run")
+			return
+		}
+
 		// Bootstrap entity data from existing test data (no create step in flow).
 		linkInPostRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.link_in_post")))
 		var linkInPostRef01Data map[string]any

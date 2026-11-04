@@ -41,8 +41,14 @@ class StatsRefreshBackfillEntityTest < Minitest::Test
         return
       end
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE"
+      puts "LIVE STEP {\"id\":\"stats_refresh_backfill.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/admin/customer-health/backfill\"}"
+      skip("Live coverage incomplete: stats_refresh_backfill.create.0 excluded (GET-only live run: needs POST /api/admin/customer-health/backfill)")
+    end
+
     client = setup[:client]
 
+    Runner.live_pace if setup[:live]
     # CREATE
     stats_refresh_backfill_ref01_ent = client.StatsRefreshBackfill(nil)
     stats_refresh_backfill_ref01_data = Helpers.to_map(Vs.getprop(

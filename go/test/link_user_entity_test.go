@@ -62,9 +62,18 @@ func TestLinkUserEntity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" {
+			t.Log("LIVE STEP {\"id\":\"link_user.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/onboarding-v6/link-user\"}")
+			t.Skip("Live coverage incomplete: link_user.create.0 excluded (GET-only live run: needs POST /api/onboarding-v6/link-user)")
+			return
+		}
+
 		client := setup.client
 		_ = client
 
+		if setup.live {
+			livePace()
+		}
 		// CREATE
 		linkUserRef01Ent := client.LinkUser(nil)
 		linkUserRef01Data := core.ToMapAny(vs.GetProp(

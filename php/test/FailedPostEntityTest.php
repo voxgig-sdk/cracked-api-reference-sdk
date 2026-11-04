@@ -229,6 +229,9 @@ class FailedPostEntityTest extends TestCase
             $failed_post_ref01_data = Helpers::to_map($failed_post_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LIST
         $failed_post_ref01_ent = $client->FailedPost(null);
         $failed_post_ref01_match = [];

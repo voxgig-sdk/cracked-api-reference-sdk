@@ -64,6 +64,8 @@ class TestAdminGeneratedVideoEntity:
         if len(admin_generated_video_ref01_data_raw) > 0:
             admin_generated_video_ref01_data = helpers.to_map(admin_generated_video_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LIST
         admin_generated_video_ref01_ent = client.AdminGeneratedVideo(None)
         admin_generated_video_ref01_match = {

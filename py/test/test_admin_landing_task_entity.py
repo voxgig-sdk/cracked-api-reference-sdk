@@ -51,12 +51,18 @@ class TestAdminLandingTaskEntity:
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
                 return
+        if setup["live"] and os.environ.get("VOXGIG_GETONLY_GUARD") == "TRUE":
+            print("LIVE STEP {\"id\":\"admin_landing_task.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/admin/users/{user_id}/regenerate-landing\"}")
+            pytest.skip("Live coverage incomplete: admin_landing_task.create.0 excluded (GET-only live run: needs POST /api/admin/users/{user_id}/regenerate-landing)")
+
         if setup["live"]:
             for _live_key in ["user01"]:
                 if setup.get("synthetic_only") or setup["idmap"].get(_live_key) is None:
                     runner.live_miss(LIVE_STRICT, f"Live entity test blocked: needs {_live_key} via CRACKED_API_REFERENCE_TEST_ADMIN_LANDING_TASK_ENTID")
         client = setup["client"]
 
+        if setup["live"]:
+            runner.live_pace()
         # CREATE
         admin_landing_task_ref01_ent = client.AdminLandingTask(None)
         admin_landing_task_ref01_data = helpers.to_map(vs.getprop(

@@ -46,6 +46,9 @@ class StyleEntityTest extends TestCase
             $style_ref01_data = Helpers::to_map($style_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LOAD
         $style_ref01_ent = $client->Style(null);
         $style_ref01_match_dt0 = [];

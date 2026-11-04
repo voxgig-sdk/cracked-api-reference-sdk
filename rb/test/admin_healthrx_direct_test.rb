@@ -31,6 +31,7 @@ class AdminHealthrxDirectTest < Minitest::Test
         end
       end
     end
+    Runner.live_pace if setup[:live]
     client = setup[:client]
 
     params = {}
@@ -97,6 +98,9 @@ def admin_healthrx_direct_setup(mockres)
     })
     client = CrackedApiReferenceSDK.new(merged_opts)
     idmap = env["CRACKED_API_REFERENCE_TEST_ADMIN_HEALTHRX_ENTID"]
+    # A path parameter's example stands in for an id *_ENTID does not give.
+    idmap = { "kind01" => "comments" }
+      .merge(idmap.is_a?(Hash) ? idmap : {})
     return {
       client: client,
       calls: calls,

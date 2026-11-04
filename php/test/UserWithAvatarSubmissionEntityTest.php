@@ -229,6 +229,9 @@ class UserWithAvatarSubmissionEntityTest extends TestCase
             $user_with_avatar_submission_ref01_data = Helpers::to_map($user_with_avatar_submission_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LIST
         $user_with_avatar_submission_ref01_ent = $client->UserWithAvatarSubmission(null);
         $user_with_avatar_submission_ref01_match = [];

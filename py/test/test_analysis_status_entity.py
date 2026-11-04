@@ -51,6 +51,8 @@ class TestAnalysisStatusEntity:
         if len(analysis_status_ref01_data_raw) > 0:
             analysis_status_ref01_data = helpers.to_map(analysis_status_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LOAD
         analysis_status_ref01_ent = client.AnalysisStatus(None)
         analysis_status_ref01_match_dt0 = {}

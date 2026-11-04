@@ -186,6 +186,12 @@ class CrackedApiReferenceSDK:
             for k, v in uh.items():
                 ctx.spec.headers[k] = v
 
+        # A raw request has no point to declare its response type, so it asks
+        # for the JSON it reads: an API that negotiates on Accept otherwise
+        # answers in its own default format. A caller's own accept wins.
+        if not any(str(k).lower() == "accept" for k in ctx.spec.headers):
+            ctx.spec.headers["accept"] = "application/json"
+
         _, err = utility.prepare_auth(ctx)
         if err is not None:
             raise err
@@ -659,12 +665,6 @@ class CrackedApiReferenceSDK:
         return CarouselStatusEntity(self, data)
 
 
-    def Chat(self, data=None) -> "ChatEntity":
-        """Entity factory: client.Chat().list() / client.Chat().load({"id": ...})."""
-        from crackedapireference_sdk.entity.chat_entity import ChatEntity
-        return ChatEntity(self, data)
-
-
     def ChatHistory(self, data=None) -> "ChatHistoryEntity":
         """Entity factory: client.ChatHistory().list() / client.ChatHistory().load({"id": ...})."""
         from crackedapireference_sdk.entity.chat_history_entity import ChatHistoryEntity
@@ -779,12 +779,6 @@ class CrackedApiReferenceSDK:
         return EnterpriseAgentEntity(self, data)
 
 
-    def EnterpriseProduct(self, data=None) -> "EnterpriseProductEntity":
-        """Entity factory: client.EnterpriseProduct().list() / client.EnterpriseProduct().load({"id": ...})."""
-        from crackedapireference_sdk.entity.enterprise_product_entity import EnterpriseProductEntity
-        return EnterpriseProductEntity(self, data)
-
-
     def ExactAvailability(self, data=None) -> "ExactAvailabilityEntity":
         """Entity factory: client.ExactAvailability().list() / client.ExactAvailability().load({"id": ...})."""
         from crackedapireference_sdk.entity.exact_availability_entity import ExactAvailabilityEntity
@@ -849,12 +843,6 @@ class CrackedApiReferenceSDK:
         """Entity factory: client.InitResetProductV6().list() / client.InitResetProductV6().load({"id": ...})."""
         from crackedapireference_sdk.entity.init_reset_product_v6_entity import InitResetProductV6Entity
         return InitResetProductV6Entity(self, data)
-
-
-    def Iri(self, data=None) -> "IriEntity":
-        """Entity factory: client.Iri().list() / client.Iri().load({"id": ...})."""
-        from crackedapireference_sdk.entity.iri_entity import IriEntity
-        return IriEntity(self, data)
 
 
     def IrisCapability(self, data=None) -> "IrisCapabilityEntity":
@@ -1031,12 +1019,6 @@ class CrackedApiReferenceSDK:
         return ReRollVideoEntity(self, data)
 
 
-    def ReadRootGet(self, data=None) -> "ReadRootGetEntity":
-        """Entity factory: client.ReadRootGet().list() / client.ReadRootGet().load({"id": ...})."""
-        from crackedapireference_sdk.entity.read_root_get_entity import ReadRootGetEntity
-        return ReadRootGetEntity(self, data)
-
-
     def RecordDemoBooked(self, data=None) -> "RecordDemoBookedEntity":
         """Entity factory: client.RecordDemoBooked().list() / client.RecordDemoBooked().load({"id": ...})."""
         from crackedapireference_sdk.entity.record_demo_booked_entity import RecordDemoBookedEntity
@@ -1067,6 +1049,12 @@ class CrackedApiReferenceSDK:
         return RetryWebsiteScrapeEntity(self, data)
 
 
+    def RootGet(self, data=None) -> "RootGetEntity":
+        """Entity factory: client.RootGet().list() / client.RootGet().load({"id": ...})."""
+        from crackedapireference_sdk.entity.root_get_entity import RootGetEntity
+        return RootGetEntity(self, data)
+
+
     def SaveSurvey(self, data=None) -> "SaveSurveyEntity":
         """Entity factory: client.SaveSurvey().list() / client.SaveSurvey().load({"id": ...})."""
         from crackedapireference_sdk.entity.save_survey_entity import SaveSurveyEntity
@@ -1089,6 +1077,12 @@ class CrackedApiReferenceSDK:
         """Entity factory: client.ScanSocialsStatus().list() / client.ScanSocialsStatus().load({"id": ...})."""
         from crackedapireference_sdk.entity.scan_socials_status_entity import ScanSocialsStatusEntity
         return ScanSocialsStatusEntity(self, data)
+
+
+    def ScheduleQueue(self, data=None) -> "ScheduleQueueEntity":
+        """Entity factory: client.ScheduleQueue().list() / client.ScheduleQueue().load({"id": ...})."""
+        from crackedapireference_sdk.entity.schedule_queue_entity import ScheduleQueueEntity
+        return ScheduleQueueEntity(self, data)
 
 
     def ScheduleV2(self, data=None) -> "ScheduleV2Entity":
@@ -1447,7 +1441,6 @@ if TYPE_CHECKING:
     from crackedapireference_sdk.entity.carousel_entity import CarouselEntity
     from crackedapireference_sdk.entity.carousel_agent_detail_entity import CarouselAgentDetailEntity
     from crackedapireference_sdk.entity.carousel_status_entity import CarouselStatusEntity
-    from crackedapireference_sdk.entity.chat_entity import ChatEntity
     from crackedapireference_sdk.entity.chat_history_entity import ChatHistoryEntity
     from crackedapireference_sdk.entity.chat_session_entity import ChatSessionEntity
     from crackedapireference_sdk.entity.comment_entity import CommentEntity
@@ -1467,7 +1460,6 @@ if TYPE_CHECKING:
     from crackedapireference_sdk.entity.daily_status_entity import DailyStatusEntity
     from crackedapireference_sdk.entity.dedicated_agents_dashboard_entity import DedicatedAgentsDashboardEntity
     from crackedapireference_sdk.entity.enterprise_agent_entity import EnterpriseAgentEntity
-    from crackedapireference_sdk.entity.enterprise_product_entity import EnterpriseProductEntity
     from crackedapireference_sdk.entity.exact_availability_entity import ExactAvailabilityEntity
     from crackedapireference_sdk.entity.exact_formula_entity import ExactFormulaEntity
     from crackedapireference_sdk.entity.extract_v2_entity import ExtractV2Entity
@@ -1479,7 +1471,6 @@ if TYPE_CHECKING:
     from crackedapireference_sdk.entity.generate_sora2_prompt_entity import GenerateSora2PromptEntity
     from crackedapireference_sdk.entity.healthrx_entity import HealthrxEntity
     from crackedapireference_sdk.entity.init_reset_product_v6_entity import InitResetProductV6Entity
-    from crackedapireference_sdk.entity.iri_entity import IriEntity
     from crackedapireference_sdk.entity.iris_capability_entity import IrisCapabilityEntity
     from crackedapireference_sdk.entity.iris_chat_entity import IrisChatEntity
     from crackedapireference_sdk.entity.iris_connector_entity import IrisConnectorEntity
@@ -1509,16 +1500,17 @@ if TYPE_CHECKING:
     from crackedapireference_sdk.entity.product_landing_entity import ProductLandingEntity
     from crackedapireference_sdk.entity.public_resume_status_entity import PublicResumeStatusEntity
     from crackedapireference_sdk.entity.re_roll_video_entity import ReRollVideoEntity
-    from crackedapireference_sdk.entity.read_root_get_entity import ReadRootGetEntity
     from crackedapireference_sdk.entity.record_demo_booked_entity import RecordDemoBookedEntity
     from crackedapireference_sdk.entity.refresh_stat_entity import RefreshStatEntity
     from crackedapireference_sdk.entity.remixer_clipper_entity import RemixerClipperEntity
     from crackedapireference_sdk.entity.reset_product_entity import ResetProductEntity
     from crackedapireference_sdk.entity.retry_website_scrape_entity import RetryWebsiteScrapeEntity
+    from crackedapireference_sdk.entity.root_get_entity import RootGetEntity
     from crackedapireference_sdk.entity.save_survey_entity import SaveSurveyEntity
     from crackedapireference_sdk.entity.scan_social_entity import ScanSocialEntity
     from crackedapireference_sdk.entity.scan_socials_public_entity import ScanSocialsPublicEntity
     from crackedapireference_sdk.entity.scan_socials_status_entity import ScanSocialsStatusEntity
+    from crackedapireference_sdk.entity.schedule_queue_entity import ScheduleQueueEntity
     from crackedapireference_sdk.entity.schedule_v2_entity import ScheduleV2Entity
     from crackedapireference_sdk.entity.scrape_entity import ScrapeEntity
     from crackedapireference_sdk.entity.scrape_website_public_entity import ScrapeWebsitePublicEntity

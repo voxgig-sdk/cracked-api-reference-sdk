@@ -37,6 +37,9 @@ class AdminHealthrxDirectTest extends TestCase
                 }
             }
         }
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         $client = $setup["client"];
 
         $params = [];
@@ -104,6 +107,9 @@ function admin_healthrx_direct_setup($mockres)
         ]);
         $client = new CrackedApiReferenceSDK($merged_opts);
         $idmap = $env["CRACKED_API_REFERENCE_TEST_ADMIN_HEALTHRX_ENTID"] ?? [];
+        // A path parameter's example stands in for an id *_ENTID does not give.
+        $idmap = array_merge(["kind01" => 'comments'],
+            is_array($idmap) ? $idmap : []);
         return [
             "client" => $client,
             "calls" => $calls,

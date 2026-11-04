@@ -157,8 +157,51 @@ class ScheduleV2EntityTest < Minitest::Test
         return
       end
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE"
+      puts "LIVE STEP {\"id\":\"schedule_v2.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/schedule/queue/add\"}"
+      puts "LIVE STEP {\"id\":\"schedule_v2.remove.3\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs DELETE /api/schedule/queue/{queue_id}\"}"
+      puts "LIVE STEP {\"id\":\"schedule_v2.list.4\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: checks a removal this run does not make\"}"
+    client = setup[:client]
+    if setup[:live]
+      _live_id = setup[:synthetic_only] ? nil : setup[:idmap]["schedule_v201"]
+      Runner.live_pace
+      Runner.live_existing(setup, LIVE_STRICT, "schedule_v2", "id", _live_id) do
+        client.ScheduleV2(nil).list({}, nil)
+      end
+    end
+
+    # Bootstrap entity data from existing test data.
+    schedule_v2_ref01_data_raw = Vs.items(Helpers.to_map(
+      Vs.getpath(setup[:data], "existing.schedule_v2")))
+    schedule_v2_ref01_data = nil
+    if schedule_v2_ref01_data_raw.length > 0
+      schedule_v2_ref01_data = Helpers.to_map(schedule_v2_ref01_data_raw[0][1])
+    end
+
+    Runner.live_pace if setup[:live]
+    # LIST
+    schedule_v2_ref01_ent = client.ScheduleV2(nil)
+    schedule_v2_ref01_match = {}
+
+    schedule_v2_ref01_list_result = schedule_v2_ref01_ent.list(schedule_v2_ref01_match, nil)
+    assert schedule_v2_ref01_list_result.is_a?(Array)
+
+    Runner.live_pace if setup[:live]
+    # LOAD
+    schedule_v2_ref01_match_dt0 = {
+      "id" => schedule_v2_ref01_data["id"],
+    }
+    schedule_v2_ref01_data_dt0_loaded = schedule_v2_ref01_ent.load(schedule_v2_ref01_match_dt0, nil)
+    schedule_v2_ref01_data_dt0_load_result = Helpers.to_map(schedule_v2_ref01_data_dt0_loaded.respond_to?(:data_get) ? schedule_v2_ref01_data_dt0_loaded.data_get : schedule_v2_ref01_data_dt0_loaded)
+    assert !schedule_v2_ref01_data_dt0_load_result.nil?
+    assert Runner.live_same_id(schedule_v2_ref01_data_dt0_load_result["id"], schedule_v2_ref01_data["id"])
+
+      return
+    end
+
     client = setup[:client]
 
+    Runner.live_pace if setup[:live]
     # CREATE
     schedule_v2_ref01_ent = client.ScheduleV2(nil)
     schedule_v2_ref01_data = Helpers.to_map(Vs.getprop(
@@ -169,6 +212,7 @@ class ScheduleV2EntityTest < Minitest::Test
     assert !schedule_v2_ref01_data.nil?
     assert !schedule_v2_ref01_data["id"].nil?
 
+    Runner.live_pace if setup[:live]
     # LIST
     schedule_v2_ref01_match = {}
 
@@ -180,6 +224,7 @@ class ScheduleV2EntityTest < Minitest::Test
       { "id" => schedule_v2_ref01_data["id"] })
     assert !Vs.isempty(found_item)
 
+    Runner.live_pace if setup[:live]
     # LOAD
     schedule_v2_ref01_match_dt0 = {
       "id" => schedule_v2_ref01_data["id"],
@@ -187,7 +232,7 @@ class ScheduleV2EntityTest < Minitest::Test
     schedule_v2_ref01_data_dt0_loaded = schedule_v2_ref01_ent.load(schedule_v2_ref01_match_dt0, nil)
     schedule_v2_ref01_data_dt0_load_result = Helpers.to_map(schedule_v2_ref01_data_dt0_loaded.respond_to?(:data_get) ? schedule_v2_ref01_data_dt0_loaded.data_get : schedule_v2_ref01_data_dt0_loaded)
     assert !schedule_v2_ref01_data_dt0_load_result.nil?
-    assert_equal schedule_v2_ref01_data_dt0_load_result["id"], schedule_v2_ref01_data["id"]
+    assert Runner.live_same_id(schedule_v2_ref01_data_dt0_load_result["id"], schedule_v2_ref01_data["id"])
 
   end
 end

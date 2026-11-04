@@ -201,10 +201,14 @@ class CarouselEntityTest extends TestCase
                 return;
             }
         }
+        if (!empty($setup["live"]) && getenv('VOXGIG_GETONLY_GUARD') === "TRUE") {
+            fwrite(STDOUT, 'LIVE STEP {"id":"carousel.create.0","state":"excluded","attempted":false,"reason":"GET-only live run: needs POST /api/carousel/{video_id}/finalize"}' . "\n");
         $client = $setup["client"];
         if (!empty($setup["live"])) {
+            $_liveId = empty($setup["synthetic_only"]) ? ($setup["idmap"]["carousel01"] ?? null) : null;
+            Runner::live_pace();
             Runner::live_existing($setup, self::LIVE_STRICT, "carousel",
-                fn() => $client->Carousel(null)->list([], null));
+                fn() => $client->Carousel(null)->list([], null), "queue_id", $_liveId);
         }
 
         // Bootstrap entity data from existing test data.
@@ -215,6 +219,9 @@ class CarouselEntityTest extends TestCase
             $carousel_ref01_data = Helpers::to_map($carousel_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LIST
         $carousel_ref01_ent = $client->Carousel(null);
         $carousel_ref01_match = [];
@@ -222,14 +229,58 @@ class CarouselEntityTest extends TestCase
         $carousel_ref01_list_result = $carousel_ref01_ent->list($carousel_ref01_match, null);
         $this->assertIsArray($carousel_ref01_list_result);
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LOAD
         $carousel_ref01_match_dt0 = [
-            "id" => $carousel_ref01_data["id"],
+            "id" => $carousel_ref01_data["queue_id"],
         ];
         $carousel_ref01_data_dt0_loaded = $carousel_ref01_ent->load($carousel_ref01_match_dt0, null);
         $carousel_ref01_data_dt0_load_result = Helpers::to_map(is_object($carousel_ref01_data_dt0_loaded) && method_exists($carousel_ref01_data_dt0_loaded, 'data_get') ? $carousel_ref01_data_dt0_loaded->data_get() : $carousel_ref01_data_dt0_loaded);
         $this->assertNotNull($carousel_ref01_data_dt0_load_result);
-        $this->assertEquals($carousel_ref01_data_dt0_load_result["id"], $carousel_ref01_data["id"]);
+        $this->assertTrue(Runner::live_same_id($carousel_ref01_data_dt0_load_result["queue_id"] ?? null, $carousel_ref01_data["queue_id"]));
+
+            return;
+        }
+
+        $client = $setup["client"];
+        if (!empty($setup["live"])) {
+            $_liveId = empty($setup["synthetic_only"]) ? ($setup["idmap"]["carousel01"] ?? null) : null;
+            Runner::live_pace();
+            Runner::live_existing($setup, self::LIVE_STRICT, "carousel",
+                fn() => $client->Carousel(null)->list([], null), "queue_id", $_liveId);
+        }
+
+        // Bootstrap entity data from existing test data.
+        $carousel_ref01_data_raw = Vs::items(Helpers::to_map(
+            Vs::getpath($setup["data"], "existing.carousel")));
+        $carousel_ref01_data = null;
+        if (count($carousel_ref01_data_raw) > 0) {
+            $carousel_ref01_data = Helpers::to_map($carousel_ref01_data_raw[0][1]);
+        }
+
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
+        // LIST
+        $carousel_ref01_ent = $client->Carousel(null);
+        $carousel_ref01_match = [];
+
+        $carousel_ref01_list_result = $carousel_ref01_ent->list($carousel_ref01_match, null);
+        $this->assertIsArray($carousel_ref01_list_result);
+
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
+        // LOAD
+        $carousel_ref01_match_dt0 = [
+            "id" => $carousel_ref01_data["queue_id"],
+        ];
+        $carousel_ref01_data_dt0_loaded = $carousel_ref01_ent->load($carousel_ref01_match_dt0, null);
+        $carousel_ref01_data_dt0_load_result = Helpers::to_map(is_object($carousel_ref01_data_dt0_loaded) && method_exists($carousel_ref01_data_dt0_loaded, 'data_get') ? $carousel_ref01_data_dt0_loaded->data_get() : $carousel_ref01_data_dt0_loaded);
+        $this->assertNotNull($carousel_ref01_data_dt0_load_result);
+        $this->assertTrue(Runner::live_same_id($carousel_ref01_data_dt0_load_result["queue_id"] ?? null, $carousel_ref01_data["queue_id"]));
 
     }
 }
@@ -241,6 +292,12 @@ function carousel_basic_setup($extra)
     $entity_data_file = __DIR__ . '/../../.sdk/test/entity/carousel/CarouselTestData.json';
     $entity_data_source = file_get_contents($entity_data_file);
     $entity_data = json_decode($entity_data_source, true);
+
+    foreach (($entity_data["existing"]["carousel"] ?? []) as $rec_key => $rec) {
+        if (is_array($rec) && isset($rec["id"])) {
+            $entity_data["existing"]["carousel"][$rec_key]["queue_id"] = $rec["id"];
+        }
+    }
 
     $options = [];
     $options["entity"] = $entity_data["existing"];

@@ -191,7 +191,7 @@ main: kit: entity: analytics_post: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.entries`"
           }
         }
       ]

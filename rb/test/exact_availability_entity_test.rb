@@ -39,6 +39,7 @@ class ExactAvailabilityEntityTest < Minitest::Test
       exact_availability_ref01_data = Helpers.to_map(exact_availability_ref01_data_raw[0][1])
     end
 
+    Runner.live_pace if setup[:live]
     # LOAD
     exact_availability_ref01_ent = client.ExactAvailability(nil)
     exact_availability_ref01_match_dt0 = {}

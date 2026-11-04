@@ -39,6 +39,7 @@ class StyleEntityTest < Minitest::Test
       style_ref01_data = Helpers.to_map(style_ref01_data_raw[0][1])
     end
 
+    Runner.live_pace if setup[:live]
     # LOAD
     style_ref01_ent = client.Style(nil)
     style_ref01_match_dt0 = {}

@@ -107,7 +107,7 @@ main: kit: entity: onboarding_status: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.social_posts`"
           }
         }
       ]

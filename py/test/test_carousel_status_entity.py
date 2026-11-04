@@ -37,7 +37,7 @@ class TestCarouselStatusEntity:
         client = CrackedApiReferenceSDK.test(
             None, {"feature": {"validate": {"active": True}}})
         with pytest.raises(Exception) as err:
-            client.CarouselStatus(None).list({"id": 1}, None)
+            client.CarouselStatus(None).list({"carousel_id": 1}, None)
         assert "validate_failed" == getattr(err.value, "code", None)
 
     def test_should_run_basic_flow(self):
@@ -46,11 +46,15 @@ class TestCarouselStatusEntity:
         # multiple ops; skipping any one skips the whole flow (steps depend
         # on each other).
         _live = setup.get("live", False)
-        for _op in []:
+        for _op in ["list"]:
             _skip, _reason = runner.is_control_skipped("entityOp", "carousel_status." + _op, "live" if _live else "unit")
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
                 return
+        if setup["live"]:
+            for _live_key in ["carousel01"]:
+                if setup.get("synthetic_only") or setup["idmap"].get(_live_key) is None:
+                    runner.live_miss(LIVE_STRICT, f"Live entity test blocked: needs {_live_key} via CRACKED_API_REFERENCE_TEST_CAROUSEL_STATUS_ENTID")
         client = setup["client"]
 
         # Bootstrap entity data from existing test data.
@@ -59,6 +63,17 @@ class TestCarouselStatusEntity:
         carousel_status_ref01_data = None
         if len(carousel_status_ref01_data_raw) > 0:
             carousel_status_ref01_data = helpers.to_map(carousel_status_ref01_data_raw[0][1])
+
+        if setup["live"]:
+            runner.live_pace()
+        # LIST
+        carousel_status_ref01_ent = client.CarouselStatus(None)
+        carousel_status_ref01_match = {
+            "carousel_id": setup["idmap"]["carousel01"],
+        }
+
+        carousel_status_ref01_list_result = carousel_status_ref01_ent.list(carousel_status_ref01_match, None)
+        assert isinstance(carousel_status_ref01_list_result, list)
 
 
 
@@ -78,7 +93,7 @@ def _carousel_status_basic_setup(extra):
 
     # Generate idmap via transform.
     idmap = vs.transform(
-        ["carousel_status01", "carousel_status02", "carousel_status03"],
+        ["carousel_status01", "carousel_status02", "carousel_status03", "carousel01", "carousel02", "carousel03"],
         {
             "`$PACK`": ["", {
                 "`$KEY`": "`$COPY`",

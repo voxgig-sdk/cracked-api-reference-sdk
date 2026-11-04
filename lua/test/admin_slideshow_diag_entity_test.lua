@@ -44,6 +44,17 @@ describe("AdminSlideshowDiagEntity", function()
         return
       end
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" then
+      print("LIVE STEP {\"id\":\"admin_slideshow_diag.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/admin/slideshow-diag/{stage}\"}")
+      pending("Live coverage incomplete: admin_slideshow_diag.create.0 excluded (GET-only live run: needs POST /api/admin/slideshow-diag/{stage})")
+      return
+    end
+
+    if setup.live then
+      pending("Live coverage incomplete: the flow has no step to run")
+      return
+    end
+
     local client = setup.client
 
     -- Bootstrap entity data from existing test data.

@@ -44,8 +44,17 @@ describe("IrisChatEntity", function()
         return
       end
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" then
+      print("LIVE STEP {\"id\":\"iris_chat.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/iris/chat\"}")
+      pending("Live coverage incomplete: iris_chat.create.0 excluded (GET-only live run: needs POST /api/iris/chat)")
+      return
+    end
+
     local client = setup.client
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- CREATE
     local iris_chat_ref01_ent = client:IrisChat(nil)
     local iris_chat_ref01_data = helpers.to_map(vs.getprop(

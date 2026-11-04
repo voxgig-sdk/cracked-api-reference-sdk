@@ -52,10 +52,25 @@ class UserEntityTest extends TestCase
                 return;
             }
         }
+        if (!empty($setup["live"]) && getenv('VOXGIG_GETONLY_GUARD') === "TRUE") {
+            fwrite(STDOUT, 'LIVE STEP {"id":"user.create.0","state":"excluded","attempted":false,"reason":"GET-only live run: needs POST /api/admin/users/{user_id}/fix-auto-schedule-by-date"}' . "\n");
+            fwrite(STDOUT, 'LIVE STEP {"id":"user.update.1","state":"excluded","attempted":false,"reason":"GET-only live run: needs PUT /api/admin/users/{user_id}/auto-schedule"}' . "\n");
+            fwrite(STDOUT, 'LIVE STEP {"id":"user.load.2","state":"excluded","attempted":false,"reason":"GET-only live run: reads a record only user.create.0 gives"}' . "\n");
+            $this->markTestSkipped('Live coverage incomplete: user.create.0 excluded (GET-only live run: needs POST /api/admin/users/{user_id}/fix-auto-schedule-by-date); user.update.1 excluded (GET-only live run: needs PUT /api/admin/users/{user_id}/auto-schedule); user.load.2 excluded (GET-only live run: reads a record only user.create.0 gives)');
+        }
+
         if (!empty($setup["live"])) {
-            Runner::live_miss(self::LIVE_STRICT, "Live entity test blocked: " . "the flow loads a user record it has no list to find");
+            foreach (["user01"] as $_liveKey) {
+                if (!empty($setup["synthetic_only"]) || null === ($setup["idmap"][$_liveKey] ?? null)) {
+                    Runner::live_miss(self::LIVE_STRICT, "Live entity test blocked: needs " . $_liveKey . " via CRACKED_API_REFERENCE_TEST_USER_ENTID");
+                }
+            }
         }
         $client = $setup["client"];
+        if (!empty($setup["live"])) {
+            Runner::live_existing($setup, self::LIVE_STRICT, "user",
+                fn() => [["id" => $setup["idmap"]["user01"] ?? null]], "userId", $setup["idmap"]["user01"] ?? null);
+        }
 
         // Bootstrap entity data from existing test data.
         $user_ref01_data_raw = Vs::items(Helpers::to_map(
@@ -65,15 +80,18 @@ class UserEntityTest extends TestCase
             $user_ref01_data = Helpers::to_map($user_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LOAD
         $user_ref01_ent = $client->User(null);
         $user_ref01_match_dt0 = [
-            "id" => $user_ref01_data["id"],
+            "id" => $user_ref01_data["userId"],
         ];
         $user_ref01_data_dt0_loaded = $user_ref01_ent->load($user_ref01_match_dt0, null);
         $user_ref01_data_dt0_load_result = Helpers::to_map(is_object($user_ref01_data_dt0_loaded) && method_exists($user_ref01_data_dt0_loaded, 'data_get') ? $user_ref01_data_dt0_loaded->data_get() : $user_ref01_data_dt0_loaded);
         $this->assertNotNull($user_ref01_data_dt0_load_result);
-        $this->assertEquals($user_ref01_data_dt0_load_result["id"], $user_ref01_data["id"]);
+        $this->assertTrue(Runner::live_same_id($user_ref01_data_dt0_load_result["userId"] ?? null, $user_ref01_data["userId"]));
 
     }
 }
@@ -85,6 +103,12 @@ function user_basic_setup($extra)
     $entity_data_file = __DIR__ . '/../../.sdk/test/entity/user/UserTestData.json';
     $entity_data_source = file_get_contents($entity_data_file);
     $entity_data = json_decode($entity_data_source, true);
+
+    foreach (($entity_data["existing"]["user"] ?? []) as $rec_key => $rec) {
+        if (is_array($rec) && isset($rec["id"])) {
+            $entity_data["existing"]["user"][$rec_key]["userId"] = $rec["id"];
+        }
+    }
 
     $options = [];
     $options["entity"] = $entity_data["existing"];

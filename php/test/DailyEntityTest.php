@@ -52,6 +52,15 @@ class DailyEntityTest extends TestCase
                 return;
             }
         }
+        if (!empty($setup["live"]) && getenv('VOXGIG_GETONLY_GUARD') === "TRUE") {
+            fwrite(STDOUT, 'LIVE STEP {"id":"daily.create.0","state":"excluded","attempted":false,"reason":"GET-only live run: needs POST /api/carousel/daily/{product_id}/plan"}' . "\n");
+            $this->markTestSkipped('Live coverage incomplete: daily.create.0 excluded (GET-only live run: needs POST /api/carousel/daily/{product_id}/plan)');
+        }
+
+        if (!empty($setup["live"])) {
+            $this->markTestSkipped('Live coverage incomplete: the flow has no step to run');
+        }
+
         $client = $setup["client"];
 
         // Bootstrap entity data from existing test data.

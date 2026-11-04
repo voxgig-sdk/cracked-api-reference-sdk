@@ -52,8 +52,35 @@ class AdminSlideshowImportEntityTest extends TestCase
                 return;
             }
         }
+        if (!empty($setup["live"]) && getenv('VOXGIG_GETONLY_GUARD') === "TRUE") {
+            fwrite(STDOUT, 'LIVE STEP {"id":"admin_slideshow_import.create.0","state":"excluded","attempted":false,"reason":"GET-only live run: needs POST /api/admin/slideshow-import2/{batch_id}/state"}' . "\n");
         $client = $setup["client"];
 
+        // Bootstrap entity data from existing test data.
+        $admin_slideshow_import_ref01_data_raw = Vs::items(Helpers::to_map(
+            Vs::getpath($setup["data"], "existing.admin_slideshow_import")));
+        $admin_slideshow_import_ref01_data = null;
+        if (count($admin_slideshow_import_ref01_data_raw) > 0) {
+            $admin_slideshow_import_ref01_data = Helpers::to_map($admin_slideshow_import_ref01_data_raw[0][1]);
+        }
+
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
+        // LOAD
+        $admin_slideshow_import_ref01_ent = $client->AdminSlideshowImport(null);
+        $admin_slideshow_import_ref01_match_dt0 = [];
+        $admin_slideshow_import_ref01_data_dt0_loaded = $admin_slideshow_import_ref01_ent->load($admin_slideshow_import_ref01_match_dt0, null);
+        $this->assertNotNull($admin_slideshow_import_ref01_data_dt0_loaded);
+
+            return;
+        }
+
+        $client = $setup["client"];
+
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // CREATE
         $admin_slideshow_import_ref01_ent = $client->AdminSlideshowImport(null);
         $admin_slideshow_import_ref01_data = Helpers::to_map(Vs::getprop(
@@ -63,6 +90,9 @@ class AdminSlideshowImportEntityTest extends TestCase
         $admin_slideshow_import_ref01_data = Helpers::to_map(is_object($admin_slideshow_import_ref01_data_result) && method_exists($admin_slideshow_import_ref01_data_result, 'data_get') ? $admin_slideshow_import_ref01_data_result->data_get() : $admin_slideshow_import_ref01_data_result);
         $this->assertNotNull($admin_slideshow_import_ref01_data);
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LOAD
         $admin_slideshow_import_ref01_match_dt0 = [];
         $admin_slideshow_import_ref01_data_dt0_loaded = $admin_slideshow_import_ref01_ent->load($admin_slideshow_import_ref01_match_dt0, null);

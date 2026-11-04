@@ -38,7 +38,7 @@ func TestChatSessionEntity(t *testing.T) {
 		client := sdk.TestSDK(nil, map[string]any{
 			"feature": map[string]any{"validate": map[string]any{"active": true}},
 		})
-		_, err := client.ChatSession(nil).Create(map[string]any{"session_id": 1}, nil)
+		_, err := client.ChatSession(nil).Create(map[string]any{"session_id": 1, "idempotencyKey": "x", "message": "x", "sessionId": "x"}, nil)
 		if sdkerr, ok := err.(*core.CrackedApiReferenceError); !ok || "validate_failed" != sdkerr.Code {
 			t.Fatalf("expected validate_failed, got %v", err)
 		}
@@ -62,6 +62,12 @@ func TestChatSessionEntity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" {
+			t.Log("LIVE STEP {\"id\":\"chat_session.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/chat/sessions/{session_id}/complete\"}")
+			t.Skip("Live coverage incomplete: chat_session.create.0 excluded (GET-only live run: needs POST /api/chat/sessions/{session_id}/complete)")
+			return
+		}
+
 		if setup.live {
 			for _, _liveKey := range []string{"session01"} {
 				if setup.syntheticOnly || setup.idmap[_liveKey] == nil {
@@ -72,6 +78,9 @@ func TestChatSessionEntity(t *testing.T) {
 		client := setup.client
 		_ = client
 
+		if setup.live {
+			livePace()
+		}
 		// CREATE
 		chatSessionRef01Ent := client.ChatSession(nil)
 		chatSessionRef01Data := core.ToMapAny(vs.GetProp(

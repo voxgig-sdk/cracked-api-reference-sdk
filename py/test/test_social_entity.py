@@ -144,8 +144,16 @@ class TestSocialEntity:
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
                 return
+        if setup["live"] and os.environ.get("VOXGIG_GETONLY_GUARD") == "TRUE":
+            print("LIVE STEP {\"id\":\"social.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /social/instagram/exchange\"}")
+            print("LIVE STEP {\"id\":\"social.remove.3\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs DELETE /social/connections/{platform}\"}")
+            print("LIVE STEP {\"id\":\"social.list.4\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: checks a removal this run does not make\"}")
+            return self._run_get_only_flow(setup)
+
         client = setup["client"]
 
+        if setup["live"]:
+            runner.live_pace()
         # CREATE
         social_ref01_ent = client.Social(None)
         social_ref01_data = helpers.to_map(vs.getprop(
@@ -155,6 +163,8 @@ class TestSocialEntity:
         assert social_ref01_data is not None
         assert social_ref01_data["id"] is not None
 
+        if setup["live"]:
+            runner.live_pace()
         # LIST
         social_ref01_match = {}
 
@@ -166,6 +176,8 @@ class TestSocialEntity:
             {"id": social_ref01_data["id"]})
         assert not vs.isempty(found_item)
 
+        if setup["live"]:
+            runner.live_pace()
         # LOAD
         social_ref01_match_dt0 = {
             "id": social_ref01_data["id"],
@@ -173,14 +185,18 @@ class TestSocialEntity:
         social_ref01_data_dt0_loaded = social_ref01_ent.load(social_ref01_match_dt0, None)
         social_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(social_ref01_data_dt0_loaded))
         assert social_ref01_data_dt0_load_result is not None
-        assert social_ref01_data_dt0_load_result["id"] == social_ref01_data["id"]
+        assert runner.live_same_id(social_ref01_data_dt0_load_result.get("id"), social_ref01_data["id"])
 
+        if setup["live"]:
+            runner.live_pace()
         # REMOVE
         social_ref01_match_rm0 = {
             "id": social_ref01_data["id"],
         }
         social_ref01_ent.remove(social_ref01_match_rm0, None)
 
+        if setup["live"]:
+            runner.live_pace()
         # LIST
         social_ref01_match_rt0 = {}
 
@@ -191,6 +207,43 @@ class TestSocialEntity:
             runner.entity_list_to_data(social_ref01_list_rt0_result),
             {"id": social_ref01_data["id"]})
         assert vs.isempty(not_found_item)
+
+
+    def _run_get_only_flow(self, setup):
+        client = setup["client"]
+        if setup["live"]:
+            _live_id = None if setup.get("synthetic_only") else setup["idmap"].get("social01")
+            runner.live_pace()
+            runner.live_existing(setup, LIVE_STRICT, "social",
+                                 lambda: client.Social(None).list({}, None),
+                                 "id", _live_id)
+
+        # Bootstrap entity data from existing test data.
+        social_ref01_data_raw = vs.items(helpers.to_map(
+            vs.getpath(setup["data"], "existing.social")))
+        social_ref01_data = None
+        if len(social_ref01_data_raw) > 0:
+            social_ref01_data = helpers.to_map(social_ref01_data_raw[0][1])
+
+        if setup["live"]:
+            runner.live_pace()
+        # LIST
+        social_ref01_ent = client.Social(None)
+        social_ref01_match = {}
+
+        social_ref01_list_result = social_ref01_ent.list(social_ref01_match, None)
+        assert isinstance(social_ref01_list_result, list)
+
+        if setup["live"]:
+            runner.live_pace()
+        # LOAD
+        social_ref01_match_dt0 = {
+            "id": social_ref01_data["id"],
+        }
+        social_ref01_data_dt0_loaded = social_ref01_ent.load(social_ref01_match_dt0, None)
+        social_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(social_ref01_data_dt0_loaded))
+        assert social_ref01_data_dt0_load_result is not None
+        assert runner.live_same_id(social_ref01_data_dt0_load_result.get("id"), social_ref01_data["id"])
 
 
 

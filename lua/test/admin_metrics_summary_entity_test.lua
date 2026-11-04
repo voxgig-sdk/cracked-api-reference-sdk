@@ -164,6 +164,9 @@ describe("AdminMetricsSummaryEntity", function()
       admin_metrics_summary_ref01_data = helpers.to_map(admin_metrics_summary_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LIST
     local admin_metrics_summary_ref01_ent = client:AdminMetricsSummary(nil)
     local admin_metrics_summary_ref01_match = {}

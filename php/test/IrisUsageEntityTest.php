@@ -229,6 +229,9 @@ class IrisUsageEntityTest extends TestCase
             $iris_usage_ref01_data = Helpers::to_map($iris_usage_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LIST
         $iris_usage_ref01_ent = $client->IrisUsage(null);
         $iris_usage_ref01_match = [];

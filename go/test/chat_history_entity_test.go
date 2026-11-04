@@ -62,9 +62,18 @@ func TestChatHistoryEntity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" {
+			t.Log("LIVE STEP {\"id\":\"chat_history.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/chat/sessions\"}")
+			t.Skip("Live coverage incomplete: chat_history.create.0 excluded (GET-only live run: needs POST /api/chat/sessions)")
+			return
+		}
+
 		client := setup.client
 		_ = client
 
+		if setup.live {
+			livePace()
+		}
 		// CREATE
 		chatHistoryRef01Ent := client.ChatHistory(nil)
 		chatHistoryRef01Data := core.ToMapAny(vs.GetProp(

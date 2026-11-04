@@ -153,6 +153,8 @@ class TestOnboardingStatusEntity:
         if len(onboarding_status_ref01_data_raw) > 0:
             onboarding_status_ref01_data = helpers.to_map(onboarding_status_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LIST
         onboarding_status_ref01_ent = client.OnboardingStatus(None)
         onboarding_status_ref01_match = {}

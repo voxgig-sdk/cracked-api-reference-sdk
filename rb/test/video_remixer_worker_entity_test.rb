@@ -41,8 +41,14 @@ class VideoRemixerWorkerEntityTest < Minitest::Test
         return
       end
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE"
+      puts "LIVE STEP {\"id\":\"video_remixer_worker.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/admin/video-remixer/worker/jobs/{identifier}/fail\"}"
+      skip("Live coverage incomplete: video_remixer_worker.create.0 excluded (GET-only live run: needs POST /api/admin/video-remixer/worker/jobs/{identifier}/fail)")
+    end
+
     client = setup[:client]
 
+    Runner.live_pace if setup[:live]
     # CREATE
     video_remixer_worker_ref01_ent = client.VideoRemixerWorker(nil)
     video_remixer_worker_ref01_data = Helpers.to_map(Vs.getprop(

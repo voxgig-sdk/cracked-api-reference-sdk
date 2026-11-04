@@ -43,6 +43,9 @@ describe("SeoEntity", function()
       seo_ref01_data = helpers.to_map(seo_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LOAD
     local seo_ref01_ent = client:Seo(nil)
     local seo_ref01_match_dt0 = {}

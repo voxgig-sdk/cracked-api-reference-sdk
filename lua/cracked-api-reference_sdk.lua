@@ -241,6 +241,20 @@ function CrackedApiReferenceSDK:prepare(fetchargs)
     end
   end
 
+  -- A raw request has no point to declare its response type, so it asks
+  -- for the JSON it reads: an API that negotiates on Accept otherwise
+  -- answers in its own default format. A caller's own accept wins.
+  local has_accept = false
+  for k, _ in pairs(ctx.spec.headers) do
+    if string.lower(tostring(k)) == "accept" then
+      has_accept = true
+      break
+    end
+  end
+  if not has_accept then
+    ctx.spec.headers["accept"] = "application/json"
+  end
+
   local _, err = utility.prepare_auth(ctx)
   if err ~= nil then
     return nil, err
@@ -1160,20 +1174,6 @@ function CrackedApiReferenceSDK:CarouselStatus(data)
 end
 
 
--- Idiomatic facade: client:Chat():list() / client:Chat():load({ id = ... })
--- Entity access is capitalised (PascalCase) for parity with the other SDKs.
-function CrackedApiReferenceSDK:Chat(data)
-  local EntityMod = require("entity.chat_entity")
-  if data == nil then
-    if self._chat == nil then
-      self._chat = EntityMod.new(self, nil)
-    end
-    return self._chat
-  end
-  return EntityMod.new(self, data)
-end
-
-
 -- Idiomatic facade: client:ChatHistory():list() / client:ChatHistory():load({ id = ... })
 -- Entity access is capitalised (PascalCase) for parity with the other SDKs.
 function CrackedApiReferenceSDK:ChatHistory(data)
@@ -1440,20 +1440,6 @@ function CrackedApiReferenceSDK:EnterpriseAgent(data)
 end
 
 
--- Idiomatic facade: client:EnterpriseProduct():list() / client:EnterpriseProduct():load({ id = ... })
--- Entity access is capitalised (PascalCase) for parity with the other SDKs.
-function CrackedApiReferenceSDK:EnterpriseProduct(data)
-  local EntityMod = require("entity.enterprise_product_entity")
-  if data == nil then
-    if self._enterprise_product == nil then
-      self._enterprise_product = EntityMod.new(self, nil)
-    end
-    return self._enterprise_product
-  end
-  return EntityMod.new(self, data)
-end
-
-
 -- Idiomatic facade: client:ExactAvailability():list() / client:ExactAvailability():load({ id = ... })
 -- Entity access is capitalised (PascalCase) for parity with the other SDKs.
 function CrackedApiReferenceSDK:ExactAvailability(data)
@@ -1603,20 +1589,6 @@ function CrackedApiReferenceSDK:InitResetProductV6(data)
       self._init_reset_product_v6 = EntityMod.new(self, nil)
     end
     return self._init_reset_product_v6
-  end
-  return EntityMod.new(self, data)
-end
-
-
--- Idiomatic facade: client:Iri():list() / client:Iri():load({ id = ... })
--- Entity access is capitalised (PascalCase) for parity with the other SDKs.
-function CrackedApiReferenceSDK:Iri(data)
-  local EntityMod = require("entity.iri_entity")
-  if data == nil then
-    if self._iri == nil then
-      self._iri = EntityMod.new(self, nil)
-    end
-    return self._iri
   end
   return EntityMod.new(self, data)
 end
@@ -2028,20 +2000,6 @@ function CrackedApiReferenceSDK:ReRollVideo(data)
 end
 
 
--- Idiomatic facade: client:ReadRootGet():list() / client:ReadRootGet():load({ id = ... })
--- Entity access is capitalised (PascalCase) for parity with the other SDKs.
-function CrackedApiReferenceSDK:ReadRootGet(data)
-  local EntityMod = require("entity.read_root_get_entity")
-  if data == nil then
-    if self._read_root_get == nil then
-      self._read_root_get = EntityMod.new(self, nil)
-    end
-    return self._read_root_get
-  end
-  return EntityMod.new(self, data)
-end
-
-
 -- Idiomatic facade: client:RecordDemoBooked():list() / client:RecordDemoBooked():load({ id = ... })
 -- Entity access is capitalised (PascalCase) for parity with the other SDKs.
 function CrackedApiReferenceSDK:RecordDemoBooked(data)
@@ -2112,6 +2070,20 @@ function CrackedApiReferenceSDK:RetryWebsiteScrape(data)
 end
 
 
+-- Idiomatic facade: client:RootGet():list() / client:RootGet():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function CrackedApiReferenceSDK:RootGet(data)
+  local EntityMod = require("entity.root_get_entity")
+  if data == nil then
+    if self._root_get == nil then
+      self._root_get = EntityMod.new(self, nil)
+    end
+    return self._root_get
+  end
+  return EntityMod.new(self, data)
+end
+
+
 -- Idiomatic facade: client:SaveSurvey():list() / client:SaveSurvey():load({ id = ... })
 -- Entity access is capitalised (PascalCase) for parity with the other SDKs.
 function CrackedApiReferenceSDK:SaveSurvey(data)
@@ -2163,6 +2135,20 @@ function CrackedApiReferenceSDK:ScanSocialsStatus(data)
       self._scan_socials_status = EntityMod.new(self, nil)
     end
     return self._scan_socials_status
+  end
+  return EntityMod.new(self, data)
+end
+
+
+-- Idiomatic facade: client:ScheduleQueue():list() / client:ScheduleQueue():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function CrackedApiReferenceSDK:ScheduleQueue(data)
+  local EntityMod = require("entity.schedule_queue_entity")
+  if data == nil then
+    if self._schedule_queue == nil then
+      self._schedule_queue = EntityMod.new(self, nil)
+    end
+    return self._schedule_queue
   end
   return EntityMod.new(self, data)
 end

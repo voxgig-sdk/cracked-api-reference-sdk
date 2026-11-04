@@ -41,8 +41,14 @@ class LinkUserEntityTest < Minitest::Test
         return
       end
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE"
+      puts "LIVE STEP {\"id\":\"link_user.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/onboarding-v6/link-user\"}"
+      skip("Live coverage incomplete: link_user.create.0 excluded (GET-only live run: needs POST /api/onboarding-v6/link-user)")
+    end
+
     client = setup[:client]
 
+    Runner.live_pace if setup[:live]
     # CREATE
     link_user_ref01_ent = client.LinkUser(nil)
     link_user_ref01_data = Helpers.to_map(Vs.getprop(

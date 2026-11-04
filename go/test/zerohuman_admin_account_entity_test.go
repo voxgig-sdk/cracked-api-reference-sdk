@@ -212,6 +212,9 @@ func TestZerohumanAdminAccountEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = zerohumanAdminAccountRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LIST
 		zerohumanAdminAccountRef01Ent := client.ZerohumanAdminAccount(nil)
 		zerohumanAdminAccountRef01Match := map[string]any{}

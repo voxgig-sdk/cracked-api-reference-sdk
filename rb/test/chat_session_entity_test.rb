@@ -25,7 +25,7 @@ class ChatSessionEntityTest < Minitest::Test
     end
     client = CrackedApiReferenceSDK.test(nil, { "feature" => { "validate" => { "active" => true } } })
     err = assert_raises(StandardError) do
-      client.ChatSession(nil).create({ "session_id" => 1 }, nil)
+      client.ChatSession(nil).create({ "session_id" => 1, "idempotencyKey" => "x", "message" => "x", "sessionId" => "x" }, nil)
     end
     assert_equal "validate_failed", err.code
   end
@@ -41,6 +41,11 @@ class ChatSessionEntityTest < Minitest::Test
         return
       end
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE"
+      puts "LIVE STEP {\"id\":\"chat_session.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/chat/sessions/{session_id}/complete\"}"
+      skip("Live coverage incomplete: chat_session.create.0 excluded (GET-only live run: needs POST /api/chat/sessions/{session_id}/complete)")
+    end
+
     if setup[:live]
       ["session01"].each do |_live_key|
         if setup[:synthetic_only] || setup[:idmap][_live_key].nil?
@@ -50,6 +55,7 @@ class ChatSessionEntityTest < Minitest::Test
     end
     client = setup[:client]
 
+    Runner.live_pace if setup[:live]
     # CREATE
     chat_session_ref01_ent = client.ChatSession(nil)
     chat_session_ref01_data = Helpers.to_map(Vs.getprop(

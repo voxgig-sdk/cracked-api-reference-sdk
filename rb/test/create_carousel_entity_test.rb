@@ -41,8 +41,14 @@ class CreateCarouselEntityTest < Minitest::Test
         return
       end
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE"
+      puts "LIVE STEP {\"id\":\"create_carousel.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/carousel/create-from-exact\"}"
+      skip("Live coverage incomplete: create_carousel.create.0 excluded (GET-only live run: needs POST /api/carousel/create-from-exact)")
+    end
+
     client = setup[:client]
 
+    Runner.live_pace if setup[:live]
     # CREATE
     create_carousel_ref01_ent = client.CreateCarousel(nil)
     create_carousel_ref01_data = Helpers.to_map(Vs.getprop(

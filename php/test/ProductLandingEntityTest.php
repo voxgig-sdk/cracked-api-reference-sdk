@@ -201,6 +201,31 @@ class ProductLandingEntityTest extends TestCase
                 return;
             }
         }
+        if (!empty($setup["live"]) && getenv('VOXGIG_GETONLY_GUARD') === "TRUE") {
+            fwrite(STDOUT, 'LIVE STEP {"id":"product_landing.update.1","state":"excluded","attempted":false,"reason":"GET-only live run: needs PUT /api/landings/microhub"}' . "\n");
+        $client = $setup["client"];
+
+        // Bootstrap entity data from existing test data.
+        $product_landing_ref01_data_raw = Vs::items(Helpers::to_map(
+            Vs::getpath($setup["data"], "existing.product_landing")));
+        $product_landing_ref01_data = null;
+        if (count($product_landing_ref01_data_raw) > 0) {
+            $product_landing_ref01_data = Helpers::to_map($product_landing_ref01_data_raw[0][1]);
+        }
+
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
+        // LIST
+        $product_landing_ref01_ent = $client->ProductLanding(null);
+        $product_landing_ref01_match = [];
+
+        $product_landing_ref01_list_result = $product_landing_ref01_ent->list($product_landing_ref01_match, null);
+        $this->assertIsArray($product_landing_ref01_list_result);
+
+            return;
+        }
+
         if (!empty($setup["live"])) {
             Runner::live_miss(self::LIVE_STRICT, "Live entity test blocked: " . "the flow updates a product_landing record it did not create");
         }
@@ -214,6 +239,9 @@ class ProductLandingEntityTest extends TestCase
             $product_landing_ref01_data = Helpers::to_map($product_landing_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LIST
         $product_landing_ref01_ent = $client->ProductLanding(null);
         $product_landing_ref01_match = [];
@@ -221,6 +249,9 @@ class ProductLandingEntityTest extends TestCase
         $product_landing_ref01_list_result = $product_landing_ref01_ent->list($product_landing_ref01_match, null);
         $this->assertIsArray($product_landing_ref01_list_result);
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // UPDATE
         $product_landing_ref01_data_up0_up = [
             "id" => $product_landing_ref01_data["id"],
@@ -233,7 +264,7 @@ class ProductLandingEntityTest extends TestCase
         $product_landing_ref01_resdata_up0_result = $product_landing_ref01_ent->update($product_landing_ref01_data_up0_up, null);
         $product_landing_ref01_resdata_up0 = Helpers::to_map(is_object($product_landing_ref01_resdata_up0_result) && method_exists($product_landing_ref01_resdata_up0_result, 'data_get') ? $product_landing_ref01_resdata_up0_result->data_get() : $product_landing_ref01_resdata_up0_result);
         $this->assertNotNull($product_landing_ref01_resdata_up0);
-        $this->assertEquals($product_landing_ref01_resdata_up0["id"], $product_landing_ref01_data_up0_up["id"]);
+        $this->assertTrue(Runner::live_same_id($product_landing_ref01_resdata_up0["id"] ?? null, $product_landing_ref01_data_up0_up["id"]));
         $this->assertEquals($product_landing_ref01_resdata_up0[$product_landing_ref01_markdef_up0_name], $product_landing_ref01_markdef_up0_value);
 
     }

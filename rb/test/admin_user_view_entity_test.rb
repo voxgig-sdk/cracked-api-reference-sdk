@@ -157,6 +157,32 @@ class AdminUserViewEntityTest < Minitest::Test
         return
       end
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE"
+      puts "LIVE STEP {\"id\":\"admin_user_view.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/admin/users/{user_id}/convert-to-enterprise\"}"
+      puts "LIVE STEP {\"id\":\"admin_user_view.update.2\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs PUT /api/admin/users/{user_id}\"}"
+      puts "LIVE STEP {\"id\":\"admin_user_view.remove.3\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs DELETE /api/admin/users/{user_id}\"}"
+      puts "LIVE STEP {\"id\":\"admin_user_view.list.4\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: checks a removal this run does not make\"}"
+    client = setup[:client]
+
+    # Bootstrap entity data from existing test data.
+    admin_user_view_ref01_data_raw = Vs.items(Helpers.to_map(
+      Vs.getpath(setup[:data], "existing.admin_user_view")))
+    admin_user_view_ref01_data = nil
+    if admin_user_view_ref01_data_raw.length > 0
+      admin_user_view_ref01_data = Helpers.to_map(admin_user_view_ref01_data_raw[0][1])
+    end
+
+    Runner.live_pace if setup[:live]
+    # LIST
+    admin_user_view_ref01_ent = client.AdminUserView(nil)
+    admin_user_view_ref01_match = {}
+
+    admin_user_view_ref01_list_result = admin_user_view_ref01_ent.list(admin_user_view_ref01_match, nil)
+    assert admin_user_view_ref01_list_result.is_a?(Array)
+
+      return
+    end
+
     if setup[:live]
       ["user01"].each do |_live_key|
         if setup[:synthetic_only] || setup[:idmap][_live_key].nil?
@@ -166,6 +192,7 @@ class AdminUserViewEntityTest < Minitest::Test
     end
     client = setup[:client]
 
+    Runner.live_pace if setup[:live]
     # CREATE
     admin_user_view_ref01_ent = client.AdminUserView(nil)
     admin_user_view_ref01_data = Helpers.to_map(Vs.getprop(
@@ -177,6 +204,7 @@ class AdminUserViewEntityTest < Minitest::Test
     assert !admin_user_view_ref01_data.nil?
     assert !admin_user_view_ref01_data["id"].nil?
 
+    Runner.live_pace if setup[:live]
     # LIST
     admin_user_view_ref01_match = {}
 
@@ -188,6 +216,7 @@ class AdminUserViewEntityTest < Minitest::Test
       { "id" => admin_user_view_ref01_data["id"] })
     assert !Vs.isempty(found_item)
 
+    Runner.live_pace if setup[:live]
     # UPDATE
     admin_user_view_ref01_data_up0_up = {
       "id" => admin_user_view_ref01_data["id"],
@@ -200,15 +229,17 @@ class AdminUserViewEntityTest < Minitest::Test
     admin_user_view_ref01_resdata_up0_result = admin_user_view_ref01_ent.update(admin_user_view_ref01_data_up0_up, nil)
     admin_user_view_ref01_resdata_up0 = Helpers.to_map(admin_user_view_ref01_resdata_up0_result.respond_to?(:data_get) ? admin_user_view_ref01_resdata_up0_result.data_get : admin_user_view_ref01_resdata_up0_result)
     assert !admin_user_view_ref01_resdata_up0.nil?
-    assert_equal admin_user_view_ref01_resdata_up0["id"], admin_user_view_ref01_data_up0_up["id"]
+    assert Runner.live_same_id(admin_user_view_ref01_resdata_up0["id"], admin_user_view_ref01_data_up0_up["id"])
     assert_equal admin_user_view_ref01_resdata_up0[admin_user_view_ref01_markdef_up0_name], admin_user_view_ref01_markdef_up0_value
 
+    Runner.live_pace if setup[:live]
     # REMOVE
     admin_user_view_ref01_match_rm0 = {
       "id" => admin_user_view_ref01_data["id"],
     }
     admin_user_view_ref01_ent.remove(admin_user_view_ref01_match_rm0, nil)
 
+    Runner.live_pace if setup[:live]
     # LIST
     admin_user_view_ref01_match_rt0 = {}
 

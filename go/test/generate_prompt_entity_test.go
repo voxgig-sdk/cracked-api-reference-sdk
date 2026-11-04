@@ -62,9 +62,18 @@ func TestGeneratePromptEntity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" {
+			t.Log("LIVE STEP {\"id\":\"generate_prompt.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/video-variation/generate-prompt\"}")
+			t.Skip("Live coverage incomplete: generate_prompt.create.0 excluded (GET-only live run: needs POST /api/video-variation/generate-prompt)")
+			return
+		}
+
 		client := setup.client
 		_ = client
 
+		if setup.live {
+			livePace()
+		}
 		// CREATE
 		generatePromptRef01Ent := client.GeneratePrompt(nil)
 		generatePromptRef01Data := core.ToMapAny(vs.GetProp(

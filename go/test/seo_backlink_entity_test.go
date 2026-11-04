@@ -212,6 +212,9 @@ func TestSeoBacklinkEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = seoBacklinkRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LIST
 		seoBacklinkRef01Ent := client.SeoBacklink(nil)
 		seoBacklinkRef01Match := map[string]any{}

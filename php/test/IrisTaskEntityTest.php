@@ -180,11 +180,11 @@ class IrisTaskEntityTest extends TestCase
             $this->markTestSkipped('feature not present in this SDK: validate');
         }
         $opts = ["feature" => ["validate" => ["active" => true, "request" => false, "response" => true]]];
-        $listed = CrackedApiReferenceSDK::test(['entity' => ['iris_task' => ['v1' => ['capability' => 'x', 'productId' => 'x', 'title' => 'x']]]], $opts)->IrisTask(null)->list(null, null);
+        $listed = CrackedApiReferenceSDK::test(['entity' => ['iris_task' => ['v1' => ['capability' => 'x', 'correlationId' => 'x', 'idempotencyKey' => 'x', 'productId' => 'x', 'title' => 'x']]]], $opts)->IrisTask(null)->list(null, null);
         $this->assertSame(['v1'], array_map(fn($ent) => $ent->data_get()['id'] ?? null, $listed));
         $err = null;
         try {
-            CrackedApiReferenceSDK::test(['entity' => ['iris_task' => ['v1' => ['capability' => 'x', 'productId' => 'x', 'title' => 'x', 'cadence' => 1]]]], $opts)->IrisTask(null)->list(null, null);
+            CrackedApiReferenceSDK::test(['entity' => ['iris_task' => ['v1' => ['capability' => 'x', 'correlationId' => 'x', 'idempotencyKey' => 'x', 'productId' => 'x', 'title' => 'x', 'cadence' => 1]]]], $opts)->IrisTask(null)->list(null, null);
         } catch (\Throwable $e) {
             $err = $e;
         }
@@ -219,8 +219,36 @@ class IrisTaskEntityTest extends TestCase
                 return;
             }
         }
+        if (!empty($setup["live"]) && getenv('VOXGIG_GETONLY_GUARD') === "TRUE") {
+            fwrite(STDOUT, 'LIVE STEP {"id":"iris_task.create.0","state":"excluded","attempted":false,"reason":"GET-only live run: needs POST /api/iris/tasks/{task_id}/run"}' . "\n");
         $client = $setup["client"];
 
+        // Bootstrap entity data from existing test data.
+        $iris_task_ref01_data_raw = Vs::items(Helpers::to_map(
+            Vs::getpath($setup["data"], "existing.iris_task")));
+        $iris_task_ref01_data = null;
+        if (count($iris_task_ref01_data_raw) > 0) {
+            $iris_task_ref01_data = Helpers::to_map($iris_task_ref01_data_raw[0][1]);
+        }
+
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
+        // LIST
+        $iris_task_ref01_ent = $client->IrisTask(null);
+        $iris_task_ref01_match = [];
+
+        $iris_task_ref01_list_result = $iris_task_ref01_ent->list($iris_task_ref01_match, null);
+        $this->assertIsArray($iris_task_ref01_list_result);
+
+            return;
+        }
+
+        $client = $setup["client"];
+
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // CREATE
         $iris_task_ref01_ent = $client->IrisTask(null);
         $iris_task_ref01_data = Helpers::to_map(Vs::getprop(
@@ -230,6 +258,9 @@ class IrisTaskEntityTest extends TestCase
         $iris_task_ref01_data = Helpers::to_map(is_object($iris_task_ref01_data_result) && method_exists($iris_task_ref01_data_result, 'data_get') ? $iris_task_ref01_data_result->data_get() : $iris_task_ref01_data_result);
         $this->assertNotNull($iris_task_ref01_data);
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LIST
         $iris_task_ref01_match = [];
 

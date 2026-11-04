@@ -212,6 +212,9 @@ func TestCustomerEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = customerRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LIST
 		customerRef01Ent := client.Customer(nil)
 		customerRef01Match := map[string]any{}

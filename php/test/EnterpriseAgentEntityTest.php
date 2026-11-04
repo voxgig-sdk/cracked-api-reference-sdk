@@ -52,8 +52,35 @@ class EnterpriseAgentEntityTest extends TestCase
                 return;
             }
         }
+        if (!empty($setup["live"]) && getenv('VOXGIG_GETONLY_GUARD') === "TRUE") {
+            fwrite(STDOUT, 'LIVE STEP {"id":"enterprise_agent.create.0","state":"excluded","attempted":false,"reason":"GET-only live run: needs POST /api/enterprise/agents/assign"}' . "\n");
         $client = $setup["client"];
 
+        // Bootstrap entity data from existing test data.
+        $enterprise_agent_ref01_data_raw = Vs::items(Helpers::to_map(
+            Vs::getpath($setup["data"], "existing.enterprise_agent")));
+        $enterprise_agent_ref01_data = null;
+        if (count($enterprise_agent_ref01_data_raw) > 0) {
+            $enterprise_agent_ref01_data = Helpers::to_map($enterprise_agent_ref01_data_raw[0][1]);
+        }
+
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
+        // LOAD
+        $enterprise_agent_ref01_ent = $client->EnterpriseAgent(null);
+        $enterprise_agent_ref01_match_dt0 = [];
+        $enterprise_agent_ref01_data_dt0_loaded = $enterprise_agent_ref01_ent->load($enterprise_agent_ref01_match_dt0, null);
+        $this->assertNotNull($enterprise_agent_ref01_data_dt0_loaded);
+
+            return;
+        }
+
+        $client = $setup["client"];
+
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // CREATE
         $enterprise_agent_ref01_ent = $client->EnterpriseAgent(null);
         $enterprise_agent_ref01_data = Helpers::to_map(Vs::getprop(
@@ -63,6 +90,9 @@ class EnterpriseAgentEntityTest extends TestCase
         $enterprise_agent_ref01_data = Helpers::to_map(is_object($enterprise_agent_ref01_data_result) && method_exists($enterprise_agent_ref01_data_result, 'data_get') ? $enterprise_agent_ref01_data_result->data_get() : $enterprise_agent_ref01_data_result);
         $this->assertNotNull($enterprise_agent_ref01_data);
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LOAD
         $enterprise_agent_ref01_match_dt0 = [];
         $enterprise_agent_ref01_data_dt0_loaded = $enterprise_agent_ref01_ent->load($enterprise_agent_ref01_match_dt0, null);

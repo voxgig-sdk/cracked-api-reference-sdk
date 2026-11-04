@@ -62,6 +62,9 @@ class AgentStatEntityTest extends TestCase
             $agent_stat_ref01_data = Helpers::to_map($agent_stat_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LOAD
         $agent_stat_ref01_ent = $client->AgentStat(null);
         $agent_stat_ref01_match_dt0 = [];

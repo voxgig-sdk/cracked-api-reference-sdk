@@ -222,6 +222,9 @@ class PexelEntityTest extends TestCase
             $pexel_ref01_data = Helpers::to_map($pexel_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LIST
         $pexel_ref01_ent = $client->Pexel(null);
         $pexel_ref01_match = [];

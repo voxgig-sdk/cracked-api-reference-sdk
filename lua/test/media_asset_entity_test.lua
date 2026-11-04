@@ -44,8 +44,18 @@ describe("MediaAssetEntity", function()
         return
       end
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" then
+      print("LIVE STEP {\"id\":\"media_asset.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/media-assets/{media_asset_id}/exclude-copycat\"}")
+      print("LIVE STEP {\"id\":\"media_asset.load.1\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: reads a record only media_asset.create.0 gives\"}")
+      pending("Live coverage incomplete: media_asset.create.0 excluded (GET-only live run: needs POST /api/media-assets/{media_asset_id}/exclude-copycat); media_asset.load.1 excluded (GET-only live run: reads a record only media_asset.create.0 gives)")
+      return
+    end
+
     local client = setup.client
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- CREATE
     local media_asset_ref01_ent = client:MediaAsset(nil)
     local media_asset_ref01_data = helpers.to_map(vs.getprop(
@@ -55,17 +65,20 @@ describe("MediaAssetEntity", function()
     assert.is_nil(err)
     media_asset_ref01_data = helpers.to_map(type(media_asset_ref01_data_result) == 'table' and media_asset_ref01_data_result.data_get and media_asset_ref01_data_result:data_get() or media_asset_ref01_data_result)
     assert.is_not_nil(media_asset_ref01_data)
-    assert.is_not_nil(media_asset_ref01_data["id"])
+    assert.is_not_nil(media_asset_ref01_data["product_id"])
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LOAD
     local media_asset_ref01_match_dt0 = {
-      id = media_asset_ref01_data["id"],
+      id = media_asset_ref01_data["product_id"],
     }
     local media_asset_ref01_data_dt0_loaded, err = media_asset_ref01_ent:load(media_asset_ref01_match_dt0, nil)
     assert.is_nil(err)
     local media_asset_ref01_data_dt0_load_result = helpers.to_map(type(media_asset_ref01_data_dt0_loaded) == 'table' and media_asset_ref01_data_dt0_loaded.data_get and media_asset_ref01_data_dt0_loaded:data_get() or media_asset_ref01_data_dt0_loaded)
     assert.is_not_nil(media_asset_ref01_data_dt0_load_result)
-    assert.are.equal(media_asset_ref01_data_dt0_load_result["id"], media_asset_ref01_data["id"])
+    assert.is_true(runner.live_same_id(media_asset_ref01_data_dt0_load_result["product_id"], media_asset_ref01_data["product_id"]))
 
   end)
 end)
@@ -82,6 +95,12 @@ function media_asset_basic_setup(extra)
   f:close()
 
   local entity_data = json.decode(entity_data_source)
+
+  for _, rec in pairs(((entity_data["existing"] or {})["media_asset"]) or {}) do
+    if type(rec) == "table" and rec["id"] ~= nil then
+      rec["product_id"] = rec["id"]
+    end
+  end
 
   local options = {}
   options["entity"] = entity_data["existing"]

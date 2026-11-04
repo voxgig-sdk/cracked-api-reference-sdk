@@ -62,6 +62,9 @@ func TestSora2AvatarStatEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = sora2AvatarStatRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LOAD
 		sora2AvatarStatRef01Ent := client.Sora2AvatarStat(nil)
 		sora2AvatarStatRef01MatchDt0 := map[string]any{}

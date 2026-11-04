@@ -212,6 +212,9 @@ func TestPhoneAdminAvailableAgentSourceEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = phoneAdminAvailableAgentSourceRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LIST
 		phoneAdminAvailableAgentSourceRef01Ent := client.PhoneAdminAvailableAgentSource(nil)
 		phoneAdminAvailableAgentSourceRef01Match := map[string]any{}

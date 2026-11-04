@@ -140,10 +140,10 @@ class AdminEntityTest < Minitest::Test
       skip("feature not present in this SDK: validate")
     end
     opts = { "feature" => { "validate" => { "active" => true, "request" => false, "response" => true } } }
-    listed = CrackedApiReferenceSDK.test({ "entity" => { "admin" => { "v1" => { "count" => 1, "created_at" => "x", "date_from" => "x", "date_to" => "x", "email" => "x", "issue_ids" => "x", "platform" => "x", "posting_method" => "x", "query" => "x", "reason" => "x", "user_membership" => "x", "user_name" => "x", "user_onboarding_step" => "x", "video_type" => "x" } } } }, opts).Admin(nil).list(nil, nil)
+    listed = CrackedApiReferenceSDK.test({ "entity" => { "admin" => { "v1" => { "created_at" => "x", "date_from" => "x", "date_to" => "x", "email" => "x", "issue_ids" => "x", "platform" => "x", "posting_method" => "x", "product_id" => "x", "query" => "x", "reason" => "x", "user_membership" => "x", "user_name" => "x", "user_onboarding_step" => "x" } } } }, opts).Admin(nil).list(nil, nil)
     assert_equal ["v1"], listed.map { |ent| ent.data_get["id"] }
     err = assert_raises(StandardError) do
-      CrackedApiReferenceSDK.test({ "entity" => { "admin" => { "v1" => { "count" => "x", "created_at" => "x", "date_from" => "x", "date_to" => "x", "email" => "x", "issue_ids" => "x", "platform" => "x", "posting_method" => "x", "query" => "x", "reason" => "x", "user_membership" => "x", "user_name" => "x", "user_onboarding_step" => "x", "video_type" => "x" } } } }, opts).Admin(nil).list(nil, nil)
+      CrackedApiReferenceSDK.test({ "entity" => { "admin" => { "v1" => { "created_at" => 1, "date_from" => "x", "date_to" => "x", "email" => "x", "issue_ids" => "x", "platform" => "x", "posting_method" => "x", "product_id" => "x", "query" => "x", "reason" => "x", "user_membership" => "x", "user_name" => "x", "user_onboarding_step" => "x" } } } }, opts).Admin(nil).list(nil, nil)
     end
     assert_equal "validate_failed", err.code
   end
@@ -171,6 +171,48 @@ class AdminEntityTest < Minitest::Test
         return
       end
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE"
+      puts "LIVE STEP {\"id\":\"admin.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/admin/users/{user_id}/regenerate-video/{video_id}\"}"
+      puts "LIVE STEP {\"id\":\"admin.remove.3\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs DELETE /api/admin/users/{user_id}/agents/{agent_id}\"}"
+      puts "LIVE STEP {\"id\":\"admin.list.4\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: checks a removal this run does not make\"}"
+    client = setup[:client]
+    if setup[:live]
+      _live_id = setup[:synthetic_only] ? nil : setup[:idmap]["admin01"]
+      Runner.live_pace
+      Runner.live_existing(setup, LIVE_STRICT, "admin", "id", _live_id) do
+        client.Admin(nil).list({}, nil)
+      end
+    end
+
+    # Bootstrap entity data from existing test data.
+    admin_ref01_data_raw = Vs.items(Helpers.to_map(
+      Vs.getpath(setup[:data], "existing.admin")))
+    admin_ref01_data = nil
+    if admin_ref01_data_raw.length > 0
+      admin_ref01_data = Helpers.to_map(admin_ref01_data_raw[0][1])
+    end
+
+    Runner.live_pace if setup[:live]
+    # LIST
+    admin_ref01_ent = client.Admin(nil)
+    admin_ref01_match = {}
+
+    admin_ref01_list_result = admin_ref01_ent.list(admin_ref01_match, nil)
+    assert admin_ref01_list_result.is_a?(Array)
+
+    Runner.live_pace if setup[:live]
+    # LOAD
+    admin_ref01_match_dt0 = {
+      "id" => admin_ref01_data["id"],
+    }
+    admin_ref01_data_dt0_loaded = admin_ref01_ent.load(admin_ref01_match_dt0, nil)
+    admin_ref01_data_dt0_load_result = Helpers.to_map(admin_ref01_data_dt0_loaded.respond_to?(:data_get) ? admin_ref01_data_dt0_loaded.data_get : admin_ref01_data_dt0_loaded)
+    assert !admin_ref01_data_dt0_load_result.nil?
+    assert Runner.live_same_id(admin_ref01_data_dt0_load_result["id"], admin_ref01_data["id"])
+
+      return
+    end
+
     if setup[:live]
       ["user01"].each do |_live_key|
         if setup[:synthetic_only] || setup[:idmap][_live_key].nil?
@@ -180,6 +222,7 @@ class AdminEntityTest < Minitest::Test
     end
     client = setup[:client]
 
+    Runner.live_pace if setup[:live]
     # CREATE
     admin_ref01_ent = client.Admin(nil)
     admin_ref01_data = Helpers.to_map(Vs.getprop(
@@ -191,6 +234,7 @@ class AdminEntityTest < Minitest::Test
     assert !admin_ref01_data.nil?
     assert !admin_ref01_data["id"].nil?
 
+    Runner.live_pace if setup[:live]
     # LIST
     admin_ref01_match = {}
 
@@ -202,6 +246,7 @@ class AdminEntityTest < Minitest::Test
       { "id" => admin_ref01_data["id"] })
     assert !Vs.isempty(found_item)
 
+    Runner.live_pace if setup[:live]
     # LOAD
     admin_ref01_match_dt0 = {
       "id" => admin_ref01_data["id"],
@@ -209,7 +254,7 @@ class AdminEntityTest < Minitest::Test
     admin_ref01_data_dt0_loaded = admin_ref01_ent.load(admin_ref01_match_dt0, nil)
     admin_ref01_data_dt0_load_result = Helpers.to_map(admin_ref01_data_dt0_loaded.respond_to?(:data_get) ? admin_ref01_data_dt0_loaded.data_get : admin_ref01_data_dt0_loaded)
     assert !admin_ref01_data_dt0_load_result.nil?
-    assert_equal admin_ref01_data_dt0_load_result["id"], admin_ref01_data["id"]
+    assert Runner.live_same_id(admin_ref01_data_dt0_load_result["id"], admin_ref01_data["id"])
 
   end
 end
@@ -228,7 +273,7 @@ def admin_basic_setup(extra)
 
   # Generate idmap via transform.
   idmap = Vs.transform(
-    ["admin01", "admin02", "admin03", "user01", "user02", "user03", "agent01", "agent02", "agent03", "video01", "video02", "video03"],
+    ["admin01", "admin02", "admin03", "user01", "user02", "user03", "agent01", "agent02", "agent03", "schedule_queue01", "schedule_queue02", "schedule_queue03", "video01", "video02", "video03"],
     {
       "`$PACK`" => ["", {
         "`$KEY`" => "`$COPY`",

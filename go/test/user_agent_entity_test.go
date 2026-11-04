@@ -38,7 +38,7 @@ func TestUserAgentEntity(t *testing.T) {
 		client := sdk.TestSDK(nil, map[string]any{
 			"feature": map[string]any{"validate": map[string]any{"active": true}},
 		})
-		_, err := client.UserAgent(nil).List(map[string]any{"id": 1}, nil)
+		_, err := client.UserAgent(nil).List(map[string]any{"user_id": 1}, nil)
 		if sdkerr, ok := err.(*core.CrackedApiReferenceError); !ok || "validate_failed" != sdkerr.Code {
 			t.Fatalf("expected validate_failed, got %v", err)
 		}
@@ -53,7 +53,7 @@ func TestUserAgentEntity(t *testing.T) {
 		if setup.live {
 			_mode = "live"
 		}
-		for _, _op := range []string{} {
+		for _, _op := range []string{"create", "list"} {
 			if _shouldSkip, _reason := isControlSkipped("entityOp", "user_agent." + _op, _mode); _shouldSkip {
 				if _reason == "" {
 					_reason = "skipped via sdk-test-control.json"
@@ -62,6 +62,18 @@ func TestUserAgentEntity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" {
+			t.Log("LIVE STEP {\"id\":\"user_agent.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/admin/users/{user_id}/agents\"}")
+		if setup.live {
+			for _, _liveKey := range []string{"user01"} {
+				if setup.syntheticOnly || setup.idmap[_liveKey] == nil {
+					liveMiss(t, user_agentEntityLiveStrict, "Live entity test blocked: needs %s via CRACKED_API_REFERENCE_TEST_USER_AGENT_ENTID", _liveKey)
+				}
+			}
+		}
+		client := setup.client
+		_ = client
+
 		// Bootstrap entity data from existing test data (no create step in flow).
 		userAgentRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.user_agent")))
 		var userAgentRef01Data map[string]any
@@ -71,6 +83,72 @@ func TestUserAgentEntity(t *testing.T) {
 		// Discard guards against Go's unused-var check when the flow's steps
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = userAgentRef01Data
+
+		if setup.live {
+			livePace()
+		}
+		// LIST
+		userAgentRef01Ent := client.UserAgent(nil)
+		userAgentRef01Match := map[string]any{
+			"user_id": setup.idmap["user01"],
+		}
+
+		userAgentRef01ListResult, err := userAgentRef01Ent.List(userAgentRef01Match, nil)
+		if err != nil {
+			t.Fatalf("list failed: %v", err)
+		}
+		_, userAgentRef01ListOk := userAgentRef01ListResult.([]any)
+		if !userAgentRef01ListOk {
+			t.Fatalf("expected list result to be an array, got %T", userAgentRef01ListResult)
+		}
+
+		return
+		}
+
+		if setup.live {
+			for _, _liveKey := range []string{"user01"} {
+				if setup.syntheticOnly || setup.idmap[_liveKey] == nil {
+					liveMiss(t, user_agentEntityLiveStrict, "Live entity test blocked: needs %s via CRACKED_API_REFERENCE_TEST_USER_AGENT_ENTID", _liveKey)
+				}
+			}
+		}
+		client := setup.client
+		_ = client
+
+		if setup.live {
+			livePace()
+		}
+		// CREATE
+		userAgentRef01Ent := client.UserAgent(nil)
+		userAgentRef01Data := core.ToMapAny(vs.GetProp(
+			vs.GetPath(setup.data, []any{"new", "user_agent"}), "user_agent_ref01"))
+		userAgentRef01Data["user_id"] = setup.idmap["user01"]
+
+		userAgentRef01DataResult, err := userAgentRef01Ent.Create(userAgentRef01Data, nil)
+		if err != nil {
+			t.Fatalf("create failed: %v", err)
+		}
+		userAgentRef01Data = core.ToMapAny(entityData(userAgentRef01DataResult))
+		if userAgentRef01Data == nil {
+			t.Fatal("expected create result to be a map")
+		}
+
+		if setup.live {
+			livePace()
+		}
+		// LIST
+		userAgentRef01Match := map[string]any{
+			"user_id": setup.idmap["user01"],
+		}
+
+		userAgentRef01ListResult, err := userAgentRef01Ent.List(userAgentRef01Match, nil)
+		if err != nil {
+			t.Fatalf("list failed: %v", err)
+		}
+		_, userAgentRef01ListOk := userAgentRef01ListResult.([]any)
+		if !userAgentRef01ListOk {
+			t.Fatalf("expected list result to be an array, got %T", userAgentRef01ListResult)
+		}
 
 	})
 }
@@ -100,7 +178,7 @@ func user_agentBasicSetup(extra map[string]any) *entityTestSetup {
 
 	// Generate idmap via transform, matching TS pattern.
 	idmap, _ := vs.Transform(
-		[]any{"user_agent01", "user_agent02", "user_agent03"},
+		[]any{"user_agent01", "user_agent02", "user_agent03", "user01", "user02", "user03"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
 				"`$KEY`": "`$COPY`",

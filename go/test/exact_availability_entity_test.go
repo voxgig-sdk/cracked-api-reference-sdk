@@ -62,6 +62,9 @@ func TestExactAvailabilityEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = exactAvailabilityRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LOAD
 		exactAvailabilityRef01Ent := client.ExactAvailability(nil)
 		exactAvailabilityRef01MatchDt0 := map[string]any{}

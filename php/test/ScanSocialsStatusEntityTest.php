@@ -62,6 +62,9 @@ class ScanSocialsStatusEntityTest extends TestCase
             $scan_socials_status_ref01_data = Helpers::to_map($scan_socials_status_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LOAD
         $scan_socials_status_ref01_ent = $client->ScanSocialsStatus(null);
         $scan_socials_status_ref01_match_dt0 = [];

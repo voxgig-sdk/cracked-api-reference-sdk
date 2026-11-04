@@ -143,6 +143,8 @@ class TestAdminCustomerEntity:
         if len(admin_customer_ref01_data_raw) > 0:
             admin_customer_ref01_data = helpers.to_map(admin_customer_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LIST
         admin_customer_ref01_ent = client.AdminCustomer(None)
         admin_customer_ref01_match = {}

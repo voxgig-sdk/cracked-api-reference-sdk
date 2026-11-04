@@ -29,8 +29,31 @@ class ResetProductEntityTest < Minitest::Test
         return
       end
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE"
+      puts "LIVE STEP {\"id\":\"reset_product.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/reset-product/generate-videos-v6\"}"
     client = setup[:client]
 
+    # Bootstrap entity data from existing test data.
+    reset_product_ref01_data_raw = Vs.items(Helpers.to_map(
+      Vs.getpath(setup[:data], "existing.reset_product")))
+    reset_product_ref01_data = nil
+    if reset_product_ref01_data_raw.length > 0
+      reset_product_ref01_data = Helpers.to_map(reset_product_ref01_data_raw[0][1])
+    end
+
+    Runner.live_pace if setup[:live]
+    # LOAD
+    reset_product_ref01_ent = client.ResetProduct(nil)
+    reset_product_ref01_match_dt0 = {}
+    reset_product_ref01_data_dt0_loaded = reset_product_ref01_ent.load(reset_product_ref01_match_dt0, nil)
+    assert !reset_product_ref01_data_dt0_loaded.nil?
+
+      return
+    end
+
+    client = setup[:client]
+
+    Runner.live_pace if setup[:live]
     # CREATE
     reset_product_ref01_ent = client.ResetProduct(nil)
     reset_product_ref01_data = Helpers.to_map(Vs.getprop(
@@ -40,6 +63,7 @@ class ResetProductEntityTest < Minitest::Test
     reset_product_ref01_data = Helpers.to_map(reset_product_ref01_data_result.respond_to?(:data_get) ? reset_product_ref01_data_result.data_get : reset_product_ref01_data_result)
     assert !reset_product_ref01_data.nil?
 
+    Runner.live_pace if setup[:live]
     # LOAD
     reset_product_ref01_match_dt0 = {}
     reset_product_ref01_data_dt0_loaded = reset_product_ref01_ent.load(reset_product_ref01_match_dt0, nil)

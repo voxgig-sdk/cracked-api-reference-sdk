@@ -181,6 +181,7 @@ class PaidUserEntityTest < Minitest::Test
       paid_user_ref01_data = Helpers.to_map(paid_user_ref01_data_raw[0][1])
     end
 
+    Runner.live_pace if setup[:live]
     # LIST
     paid_user_ref01_ent = client.PaidUser(nil)
     paid_user_ref01_match = {}

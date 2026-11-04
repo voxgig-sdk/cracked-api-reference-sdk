@@ -39,6 +39,7 @@ class Sora2AvatarStatEntityTest < Minitest::Test
       sora2_avatar_stat_ref01_data = Helpers.to_map(sora2_avatar_stat_ref01_data_raw[0][1])
     end
 
+    Runner.live_pace if setup[:live]
     # LOAD
     sora2_avatar_stat_ref01_ent = client.Sora2AvatarStat(nil)
     sora2_avatar_stat_ref01_match_dt0 = {}

@@ -154,8 +154,62 @@ describe("SocialEntity", function()
         return
       end
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" then
+      print("LIVE STEP {\"id\":\"social.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /social/instagram/exchange\"}")
+      print("LIVE STEP {\"id\":\"social.remove.3\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs DELETE /social/connections/{platform}\"}")
+      print("LIVE STEP {\"id\":\"social.list.4\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: checks a removal this run does not make\"}")
+    local client = setup.client
+    if setup.live then
+      local _live_id = nil
+      if not setup.synthetic_only then
+        _live_id = setup.idmap["social01"]
+      end
+      runner.live_pace()
+      runner.live_existing(pending, setup, LIVE_STRICT, "social", function()
+        return client:Social(nil):list({}, nil)
+      end, "id", _live_id)
+    end
+
+    -- Bootstrap entity data from existing test data.
+    local social_ref01_data_raw = vs.items(helpers.to_map(
+      vs.getpath(setup.data, "existing.social")))
+    local social_ref01_data = nil
+    if #social_ref01_data_raw > 0 then
+      social_ref01_data = helpers.to_map(social_ref01_data_raw[1][2])
+    end
+
+    if setup.live then
+      runner.live_pace()
+    end
+    -- LIST
+    local social_ref01_ent = client:Social(nil)
+    local social_ref01_match = {}
+
+    local social_ref01_list_result, err = social_ref01_ent:list(social_ref01_match, nil)
+    assert.is_nil(err)
+    assert.is_table(social_ref01_list_result)
+
+    if setup.live then
+      runner.live_pace()
+    end
+    -- LOAD
+    local social_ref01_match_dt0 = {
+      id = social_ref01_data["id"],
+    }
+    local social_ref01_data_dt0_loaded, err = social_ref01_ent:load(social_ref01_match_dt0, nil)
+    assert.is_nil(err)
+    local social_ref01_data_dt0_load_result = helpers.to_map(type(social_ref01_data_dt0_loaded) == 'table' and social_ref01_data_dt0_loaded.data_get and social_ref01_data_dt0_loaded:data_get() or social_ref01_data_dt0_loaded)
+    assert.is_not_nil(social_ref01_data_dt0_load_result)
+    assert.is_true(runner.live_same_id(social_ref01_data_dt0_load_result["id"], social_ref01_data["id"]))
+
+      return
+    end
+
     local client = setup.client
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- CREATE
     local social_ref01_ent = client:Social(nil)
     local social_ref01_data = helpers.to_map(vs.getprop(
@@ -167,6 +221,9 @@ describe("SocialEntity", function()
     assert.is_not_nil(social_ref01_data)
     assert.is_not_nil(social_ref01_data["id"])
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LIST
     local social_ref01_match = {}
 
@@ -179,6 +236,9 @@ describe("SocialEntity", function()
       { id = social_ref01_data["id"] })
     assert.is_false(vs.isempty(found_item))
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LOAD
     local social_ref01_match_dt0 = {
       id = social_ref01_data["id"],
@@ -187,8 +247,11 @@ describe("SocialEntity", function()
     assert.is_nil(err)
     local social_ref01_data_dt0_load_result = helpers.to_map(type(social_ref01_data_dt0_loaded) == 'table' and social_ref01_data_dt0_loaded.data_get and social_ref01_data_dt0_loaded:data_get() or social_ref01_data_dt0_loaded)
     assert.is_not_nil(social_ref01_data_dt0_load_result)
-    assert.are.equal(social_ref01_data_dt0_load_result["id"], social_ref01_data["id"])
+    assert.is_true(runner.live_same_id(social_ref01_data_dt0_load_result["id"], social_ref01_data["id"]))
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- REMOVE
     local social_ref01_match_rm0 = {
       id = social_ref01_data["id"],
@@ -196,6 +259,9 @@ describe("SocialEntity", function()
     local _, err = social_ref01_ent:remove(social_ref01_match_rm0, nil)
     assert.is_nil(err)
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LIST
     local social_ref01_match_rt0 = {}
 

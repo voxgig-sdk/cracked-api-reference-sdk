@@ -8,7 +8,7 @@ main: kit: flow: BasicCarouselStatusFlow:
   step: [
     {
       m: {
-        video_id: "video01"
+        carousel_id: "carousel01"
       }
 
       o: "list",

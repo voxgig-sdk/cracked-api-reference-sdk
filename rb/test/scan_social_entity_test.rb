@@ -41,8 +41,14 @@ class ScanSocialEntityTest < Minitest::Test
         return
       end
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE"
+      puts "LIVE STEP {\"id\":\"scan_social.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/reset-product/scan-socials\"}"
+      skip("Live coverage incomplete: scan_social.create.0 excluded (GET-only live run: needs POST /api/reset-product/scan-socials)")
+    end
+
     client = setup[:client]
 
+    Runner.live_pace if setup[:live]
     # CREATE
     scan_social_ref01_ent = client.ScanSocial(nil)
     scan_social_ref01_data = Helpers.to_map(Vs.getprop(

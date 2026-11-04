@@ -41,8 +41,14 @@ class ChatHistoryEntityTest < Minitest::Test
         return
       end
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE"
+      puts "LIVE STEP {\"id\":\"chat_history.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/chat/sessions\"}"
+      skip("Live coverage incomplete: chat_history.create.0 excluded (GET-only live run: needs POST /api/chat/sessions)")
+    end
+
     client = setup[:client]
 
+    Runner.live_pace if setup[:live]
     # CREATE
     chat_history_ref01_ent = client.ChatHistory(nil)
     chat_history_ref01_data = Helpers.to_map(Vs.getprop(

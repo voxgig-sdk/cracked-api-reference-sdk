@@ -157,6 +157,29 @@ class ProductLandingEntityTest < Minitest::Test
         return
       end
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE"
+      puts "LIVE STEP {\"id\":\"product_landing.update.1\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs PUT /api/landings/microhub\"}"
+    client = setup[:client]
+
+    # Bootstrap entity data from existing test data.
+    product_landing_ref01_data_raw = Vs.items(Helpers.to_map(
+      Vs.getpath(setup[:data], "existing.product_landing")))
+    product_landing_ref01_data = nil
+    if product_landing_ref01_data_raw.length > 0
+      product_landing_ref01_data = Helpers.to_map(product_landing_ref01_data_raw[0][1])
+    end
+
+    Runner.live_pace if setup[:live]
+    # LIST
+    product_landing_ref01_ent = client.ProductLanding(nil)
+    product_landing_ref01_match = {}
+
+    product_landing_ref01_list_result = product_landing_ref01_ent.list(product_landing_ref01_match, nil)
+    assert product_landing_ref01_list_result.is_a?(Array)
+
+      return
+    end
+
     if setup[:live]
       Runner.live_miss(LIVE_STRICT, "Live entity test blocked: " + "the flow updates a product_landing record it did not create")
     end
@@ -170,6 +193,7 @@ class ProductLandingEntityTest < Minitest::Test
       product_landing_ref01_data = Helpers.to_map(product_landing_ref01_data_raw[0][1])
     end
 
+    Runner.live_pace if setup[:live]
     # LIST
     product_landing_ref01_ent = client.ProductLanding(nil)
     product_landing_ref01_match = {}
@@ -177,6 +201,7 @@ class ProductLandingEntityTest < Minitest::Test
     product_landing_ref01_list_result = product_landing_ref01_ent.list(product_landing_ref01_match, nil)
     assert product_landing_ref01_list_result.is_a?(Array)
 
+    Runner.live_pace if setup[:live]
     # UPDATE
     product_landing_ref01_data_up0_up = {
       "id" => product_landing_ref01_data["id"],
@@ -189,7 +214,7 @@ class ProductLandingEntityTest < Minitest::Test
     product_landing_ref01_resdata_up0_result = product_landing_ref01_ent.update(product_landing_ref01_data_up0_up, nil)
     product_landing_ref01_resdata_up0 = Helpers.to_map(product_landing_ref01_resdata_up0_result.respond_to?(:data_get) ? product_landing_ref01_resdata_up0_result.data_get : product_landing_ref01_resdata_up0_result)
     assert !product_landing_ref01_resdata_up0.nil?
-    assert_equal product_landing_ref01_resdata_up0["id"], product_landing_ref01_data_up0_up["id"]
+    assert Runner.live_same_id(product_landing_ref01_resdata_up0["id"], product_landing_ref01_data_up0_up["id"])
     assert_equal product_landing_ref01_resdata_up0[product_landing_ref01_markdef_up0_name], product_landing_ref01_markdef_up0_value
 
   end

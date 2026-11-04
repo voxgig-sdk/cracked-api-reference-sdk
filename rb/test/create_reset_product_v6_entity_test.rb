@@ -41,8 +41,14 @@ class CreateResetProductV6EntityTest < Minitest::Test
         return
       end
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE"
+      puts "LIVE STEP {\"id\":\"create_reset_product_v6.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/reset-product/create-v6\"}"
+      skip("Live coverage incomplete: create_reset_product_v6.create.0 excluded (GET-only live run: needs POST /api/reset-product/create-v6)")
+    end
+
     client = setup[:client]
 
+    Runner.live_pace if setup[:live]
     # CREATE
     create_reset_product_v6_ref01_ent = client.CreateResetProductV6(nil)
     create_reset_product_v6_ref01_data = Helpers.to_map(Vs.getprop(

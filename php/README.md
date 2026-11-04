@@ -68,7 +68,7 @@ Entity operations throw a `\Throwable` on failure, so wrap them in
 
 ```php
 try {
-    $admininsights = $client->AdminInsight()->list();
+    $agenthealths = $client->AgentHealth()->list();
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
@@ -280,7 +280,6 @@ Creates a test-mode client with mock transport. Both arguments may be `null`.
 | `Carousel` | `($data): CarouselEntity` | Create a Carousel entity instance. |
 | `CarouselAgentDetail` | `($data): CarouselAgentDetailEntity` | Create a CarouselAgentDetail entity instance. |
 | `CarouselStatus` | `($data): CarouselStatusEntity` | Create a CarouselStatus entity instance. |
-| `Chat` | `($data): ChatEntity` | Create a Chat entity instance. |
 | `ChatHistory` | `($data): ChatHistoryEntity` | Create a ChatHistory entity instance. |
 | `ChatSession` | `($data): ChatSessionEntity` | Create a ChatSession entity instance. |
 | `Comment` | `($data): CommentEntity` | Create a Comment entity instance. |
@@ -300,7 +299,6 @@ Creates a test-mode client with mock transport. Both arguments may be `null`.
 | `DailyStatus` | `($data): DailyStatusEntity` | Create a DailyStatus entity instance. |
 | `DedicatedAgentsDashboard` | `($data): DedicatedAgentsDashboardEntity` | Create a DedicatedAgentsDashboard entity instance. |
 | `EnterpriseAgent` | `($data): EnterpriseAgentEntity` | Create an EnterpriseAgent entity instance. |
-| `EnterpriseProduct` | `($data): EnterpriseProductEntity` | Create an EnterpriseProduct entity instance. |
 | `ExactAvailability` | `($data): ExactAvailabilityEntity` | Create an ExactAvailability entity instance. |
 | `ExactFormula` | `($data): ExactFormulaEntity` | Create an ExactFormula entity instance. |
 | `ExtractV2` | `($data): ExtractV2Entity` | Create an ExtractV2 entity instance. |
@@ -312,7 +310,6 @@ Creates a test-mode client with mock transport. Both arguments may be `null`.
 | `GenerateSora2Prompt` | `($data): GenerateSora2PromptEntity` | Create a GenerateSora2Prompt entity instance. |
 | `Healthrx` | `($data): HealthrxEntity` | Create a Healthrx entity instance. |
 | `InitResetProductV6` | `($data): InitResetProductV6Entity` | Create an InitResetProductV6 entity instance. |
-| `Iri` | `($data): IriEntity` | Create an Iri entity instance. |
 | `IrisCapability` | `($data): IrisCapabilityEntity` | Create an IrisCapability entity instance. |
 | `IrisChat` | `($data): IrisChatEntity` | Create an IrisChat entity instance. |
 | `IrisConnector` | `($data): IrisConnectorEntity` | Create an IrisConnector entity instance. |
@@ -342,16 +339,17 @@ Creates a test-mode client with mock transport. Both arguments may be `null`.
 | `ProductLanding` | `($data): ProductLandingEntity` | Create a ProductLanding entity instance. |
 | `PublicResumeStatus` | `($data): PublicResumeStatusEntity` | Create a PublicResumeStatus entity instance. |
 | `ReRollVideo` | `($data): ReRollVideoEntity` | Create a ReRollVideo entity instance. |
-| `ReadRootGet` | `($data): ReadRootGetEntity` | Create a ReadRootGet entity instance. |
 | `RecordDemoBooked` | `($data): RecordDemoBookedEntity` | Create a RecordDemoBooked entity instance. |
 | `RefreshStat` | `($data): RefreshStatEntity` | Create a RefreshStat entity instance. |
 | `RemixerClipper` | `($data): RemixerClipperEntity` | Create a RemixerClipper entity instance. |
 | `ResetProduct` | `($data): ResetProductEntity` | Create a ResetProduct entity instance. |
 | `RetryWebsiteScrape` | `($data): RetryWebsiteScrapeEntity` | Create a RetryWebsiteScrape entity instance. |
+| `RootGet` | `($data): RootGetEntity` | Create a RootGet entity instance. |
 | `SaveSurvey` | `($data): SaveSurveyEntity` | Create a SaveSurvey entity instance. |
 | `ScanSocial` | `($data): ScanSocialEntity` | Create a ScanSocial entity instance. |
 | `ScanSocialsPublic` | `($data): ScanSocialsPublicEntity` | Create a ScanSocialsPublic entity instance. |
 | `ScanSocialsStatus` | `($data): ScanSocialsStatusEntity` | Create a ScanSocialsStatus entity instance. |
+| `ScheduleQueue` | `($data): ScheduleQueueEntity` | Create a ScheduleQueue entity instance. |
 | `ScheduleV2` | `($data): ScheduleV2Entity` | Create a ScheduleV2 entity instance. |
 | `Scrape` | `($data): ScrapeEntity` | Create a Scrape entity instance. |
 | `ScrapeWebsitePublic` | `($data): ScrapeWebsitePublicEntity` | Create a ScrapeWebsitePublic entity instance. |
@@ -479,14 +477,11 @@ API path: `/api/onboarding-v6/active-session`
 | Field | Description |
 | --- | --- |
 | `apply` | Apply safe canonical or clean-only URL updates |
-| `count` |  |
 | `created_at` |  |
 | `date_from` |  |
 | `date_to` |  |
 | `email` |  |
 | `id` |  |
-| `include_failed` |  |
-| `include_pending` |  |
 | `include_records` | Include full per-field audit records in the response |
 | `issue_ids` |  |
 | `only_active` | Limit the audit to active agents |
@@ -495,14 +490,12 @@ API path: `/api/onboarding-v6/active-session`
 | `product_id` |  |
 | `query` |  |
 | `reason` |  |
-| `regenerate` |  |
 | `status` |  |
 | `user_membership` |  |
 | `user_name` |  |
 | `user_onboarding_step` |  |
-| `video_type` |  |
 
-Operations: Create, List, Load, Remove, Update.
+Operations: Create, List, Load, Remove.
 
 API path: `/api/admin/users/{user_id}/regenerate-video/{video_id}`
 
@@ -656,13 +649,25 @@ API path: `/api/admin/healthrx/items/{kind}/{item_id}/decision`
 
 | Field | Description |
 | --- | --- |
-| `customer_success_cases` |  |
-| `customers` |  |
-| `generated_at` |  |
-| `pfa_database` |  |
-| `recent_signups` |  |
-| `summary` |  |
-| `vireel_database` |  |
+| `active_agents` |  |
+| `active_products` |  |
+| `agents_count` |  |
+| `auto_schedule_status` |  |
+| `days_until_period_end` |  |
+| `email` |  |
+| `feature_impact` |  |
+| `last_notification_at` |  |
+| `membership` |  |
+| `name` |  |
+| `notification_count` |  |
+| `notification_events` |  |
+| `priority` |  |
+| `severity` |  |
+| `status_label` |  |
+| `subscription_current_period_end` |  |
+| `subscription_status` |  |
+| `upcoming_posts` |  |
+| `user_id` |  |
 
 Operations: List, Load.
 
@@ -682,14 +687,8 @@ API path: `/api/admin/users/{user_id}/regenerate-landing`
 
 | Field | Description |
 | --- | --- |
-| `paid_users_by_level` |  |
-| `total_cancellations` |  |
-| `total_previews_generated` |  |
-| `total_signups` |  |
-| `total_videos_generated` |  |
-| `url_attempts` |  |
-| `user_credits` |  |
-| `user_gifted_credits` |  |
+| `count` |  |
+| `level` |  |
 
 Operations: List.
 
@@ -842,7 +841,7 @@ API path: `/api/admin/slideshow-import2/{batch_id}/state`
 
 Operations: Create, List, Remove, Update.
 
-API path: `/api/admin/users/{user_id}/fix-auto-schedule-by-date`
+API path: `/api/admin/users/{user_id}/convert-to-enterprise`
 
 #### AdminUsersTableItem
 
@@ -1008,7 +1007,7 @@ API path: `/api/onboarding-v6/advance-step`
 | `tiktok_stats` |  |
 | `type` |  |
 
-Operations: List.
+Operations: List, Update.
 
 API path: `/api/admin/agents`
 
@@ -1107,13 +1106,17 @@ API path: `/api/agent-access/phil-notifications/videos`
 
 | Field | Description |
 | --- | --- |
-| `agentQuota` |  |
-| `agents` |  |
-| `assignedByType` |  |
-| `assignedTotal` |  |
-| `email` |  |
-| `products` |  |
-| `userId` |  |
+| `avatar` |  |
+| `facebookUrl` |  |
+| `id` |  |
+| `instagramUrl` |  |
+| `name` |  |
+| `productId` |  |
+| `productName` |  |
+| `tiktokUrl` |  |
+| `type` |  |
+| `uploadPostPlatforms` |  |
+| `youtubeUrl` |  |
 
 Operations: List.
 
@@ -1240,19 +1243,12 @@ API path: `/api/upload-post-agents/all`
 
 | Field | Description |
 | --- | --- |
-| `daily` |  |
-| `dates` |  |
-| `generated_at` |  |
-| `groups` |  |
-| `latest` |  |
-| `live_date` |  |
-| `phone_admin_generated_at` |  |
-| `platform` |  |
-| `post_target` |  |
-| `qa_managed_agent_ids` |  |
-| `scope_prefixes` |  |
-| `timezone` |  |
-| `warmup_target` |  |
+| `accounts` |  |
+| `date` |  |
+| `overall` |  |
+| `posts` |  |
+| `views` |  |
+| `warmups` |  |
 
 Operations: List.
 
@@ -1274,19 +1270,12 @@ API path: `/api/admin/agent-health/customers`
 
 | Field | Description |
 | --- | --- |
-| `archived_issue_total` |  |
-| `date` |  |
-| `generated_at` |  |
-| `group_id` |  |
-| `has_more` |  |
-| `issue_total` |  |
-| `issues` |  |
-| `limit` |  |
-| `metric` |  |
-| `offset` |  |
-| `warmup_runs` |  |
-| `warning_total` |  |
-| `warnings` |  |
+| `agent_id` |  |
+| `category` |  |
+| `connection_status` |  |
+| `device_status` |  |
+| `issue` |  |
+| `state` |  |
 
 Operations: List.
 
@@ -1466,7 +1455,6 @@ API path: `/api/upload-post-agents/bulk/tiktok-stats`
 | `formula_id` |  |
 | `formula_name` |  |
 | `generation` |  |
-| `id` |  |
 | `image_prompt` |  |
 | `likes` |  |
 | `main_prompt` |  |
@@ -1520,7 +1508,6 @@ API path: `/api/admin/carousels/agents/{agent_id}`
 | --- | --- |
 | `caption` |  |
 | `error` |  |
-| `id` |  |
 | `image_model` |  |
 | `image_provider` |  |
 | `image_task_id` |  |
@@ -1532,18 +1519,6 @@ API path: `/api/admin/carousels/agents/{agent_id}`
 Operations: List.
 
 API path: `/api/carousel/{video_id}/status`
-
-#### Chat
-
-| Field | Description |
-| --- | --- |
-| `idempotencyKey` |  |
-| `message` |  |
-| `sessionId` |  |
-
-Operations: Create.
-
-API path: `/api/chat/sessions/{session_id}/messages`
 
 #### ChatHistory
 
@@ -1572,6 +1547,8 @@ API path: `/api/chat/sessions`
 | --- | --- |
 | `chatSubVariant` |  |
 | `createdAt` |  |
+| `idempotencyKey` |  |
+| `message` |  |
 | `model` |  |
 | `plan` |  |
 | `route` |  |
@@ -1799,7 +1776,6 @@ API path: `/api/admin/customer-health/customers`
 | `date` |  |
 | `email` |  |
 | `entries` |  |
-| `id` |  |
 | `performance_overview` |  |
 | `platform_coverage_summary` |  |
 | `user_id` |  |
@@ -1828,20 +1804,10 @@ API path: `/api/admin/customer-health/all-customers`
 
 | Field | Description |
 | --- | --- |
-| `average_views_per_result` |  |
-| `date` |  |
-| `end_date` |  |
-| `paid_users_count` |  |
+| `email` |  |
 | `posted_results` |  |
-| `range` |  |
-| `start_date` |  |
-| `top_users` |  |
-| `total_views` |  |
-| `trend` |  |
-| `trend_granularity` |  |
-| `user_email` |  |
 | `user_id` |  |
-| `users_with_views` |  |
+| `views` |  |
 
 Operations: List.
 
@@ -1861,7 +1827,6 @@ API path: `/api/carousel/daily/{product_id}/plan`
 
 | Field | Description |
 | --- | --- |
-| `id` |  |
 
 Operations: Load.
 
@@ -1907,15 +1872,6 @@ API path: `/api/admin/agents/dedicated-dashboard`
 Operations: Create, Load.
 
 API path: `/api/enterprise/agents/assign`
-
-#### EnterpriseProduct
-
-| Field | Description |
-| --- | --- |
-
-Operations: Load.
-
-API path: `/api/enterprise/products/{product_id}/status`
 
 #### ExactAvailability
 
@@ -2090,18 +2046,6 @@ Operations: Create.
 
 API path: `/api/reset-product/init-v6`
 
-#### Iri
-
-| Field | Description |
-| --- | --- |
-| `correlationId` |  |
-| `idempotencyKey` |  |
-| `productId` |  |
-
-Operations: Create.
-
-API path: `/api/iris/connectors/{connector_id}/start`
-
 #### IrisCapability
 
 | Field | Description |
@@ -2153,9 +2097,9 @@ API path: `/api/iris/chat`
 | --- | --- |
 | `connectors` |  |
 
-Operations: List.
+Operations: Create, List.
 
-API path: `/api/iris/connectors`
+API path: `/api/iris/connectors/{connector_id}/start`
 
 #### IrisStatus
 
@@ -2178,8 +2122,10 @@ API path: `/api/iris/status`
 | `cadence` |  |
 | `capability` |  |
 | `completed` |  |
+| `correlationId` |  |
 | `description` |  |
 | `discover` |  |
+| `idempotencyKey` |  |
 | `productId` |  |
 | `recurring` |  |
 | `requiredConnectors` |  |
@@ -2187,7 +2133,7 @@ API path: `/api/iris/status`
 
 Operations: Create, List.
 
-API path: `/api/iris/tasks`
+API path: `/api/iris/tasks/{task_id}/run`
 
 #### IrisUsage
 
@@ -2490,13 +2436,18 @@ API path: `/api/products/{product_id}/validate-social-handle`
 
 | Field | Description |
 | --- | --- |
-| `agents` |  |
-| `date` |  |
-| `pagination` |  |
-| `phone_admin_error` |  |
-| `products` |  |
-| `selected_product` |  |
-| `summary` |  |
+| `comments` |  |
+| `failed_entries` |  |
+| `has_tiktok_community_violation` |  |
+| `id` |  |
+| `likes` |  |
+| `metrics_pending_count` |  |
+| `name` |  |
+| `platforms` |  |
+| `posted_entries` |  |
+| `posting_entries` |  |
+| `scheduled_entries` |  |
+| `views` |  |
 
 Operations: List.
 
@@ -2544,6 +2495,7 @@ API path: `/api/video-variation/product-demos`
 | `dmOngoingResponsePrompt` |  |
 | `firstCommentTextBeforeLink` |  |
 | `headerImageUrl` |  |
+| `icon` |  |
 | `id` |  |
 | `landingHtmlUrl` |  |
 | `landingLastGeneratedAt` |  |
@@ -2582,6 +2534,7 @@ API path: `/api/video-variation/product-demos`
 | `slug` |  |
 | `socialLinks` |  |
 | `testimonials` |  |
+| `url` |  |
 
 Operations: List, Update.
 
@@ -2617,15 +2570,6 @@ API path: `/api/onboarding-v6/resume-status-public`
 Operations: Create.
 
 API path: `/api/core/re-roll-video`
-
-#### ReadRootGet
-
-| Field | Description |
-| --- | --- |
-
-Operations: Load.
-
-API path: `/`
 
 #### RecordDemoBooked
 
@@ -2689,6 +2633,15 @@ Operations: Create.
 
 API path: `/api/onboarding-v6/retry-scrape`
 
+#### RootGet
+
+| Field | Description |
+| --- | --- |
+
+Operations: Load.
+
+API path: `/`
+
 #### SaveSurvey
 
 | Field | Description |
@@ -2747,6 +2700,15 @@ Operations: Load.
 
 API path: `/api/video-variation/scan-socials/status`
 
+#### ScheduleQueue
+
+| Field | Description |
+| --- | --- |
+
+Operations: Update.
+
+API path: `/api/schedule/queue/{queue_id}/replace-video`
+
 #### ScheduleV2
 
 | Field | Description |
@@ -2775,7 +2737,7 @@ API path: `/api/video-variation/scan-socials/status`
 | `youtube_posted_url` |  |
 | `youtube_scraped_social_post_id` |  |
 
-Operations: Create, List, Load, Remove, Update.
+Operations: Create, List, Load, Remove.
 
 API path: `/api/schedule/queue/add`
 
@@ -2924,14 +2886,11 @@ API path: `/api/seo/overview`
 
 | Field | Description |
 | --- | --- |
-| `end_date` |  |
-| `series` |  |
-| `site_url` |  |
-| `start_date` |  |
-| `top_countries` |  |
-| `top_pages` |  |
-| `top_queries` |  |
-| `totals` |  |
+| `clicks` |  |
+| `ctr` |  |
+| `date` |  |
+| `impressions` |  |
+| `position` |  |
 
 Operations: List.
 
@@ -3155,23 +3114,24 @@ API path: `/api/admin/customer-health/issues`
 
 | Field | Description |
 | --- | --- |
-| `active_run` |  |
 | `aged_over_24h` |  |
-| `backlog_preview` |  |
-| `coverage_percent` |  |
-| `customer_counts` |  |
-| `date` |  |
-| `generated_at` |  |
-| `method_counts` |  |
-| `platform_counts` |  |
-| `platform_units_resolved` |  |
-| `platform_units_total` |  |
-| `platform_units_unresolved` |  |
-| `posted_entries` |  |
-| `reason_counts` |  |
-| `sla_deadline_et` |  |
+| `agent_id` |  |
+| `agent_name` |  |
+| `is_resolved` |  |
+| `last_refresh_completed_at` |  |
+| `latest_error_message` |  |
+| `platform` |  |
+| `post_method` |  |
+| `post_url` |  |
+| `posted_date_et` |  |
+| `product_id` |  |
+| `product_name` |  |
+| `reason_code` |  |
+| `schedule_queue_id` |  |
+| `scheduled_datetime_utc` |  |
 | `stale_after_sla` |  |
-| `top_affected_customers` |  |
+| `user_email` |  |
+| `user_id` |  |
 
 Operations: List.
 
@@ -3333,9 +3293,9 @@ API path: `/api/upload-post-agents/sync-platforms`
 | `updatedAt` |  |
 | `userId` |  |
 
-Operations: Load, Update.
+Operations: Create, Load, Update.
 
-API path: `/api/upload-post-agents/user/{user_id}`
+API path: `/api/admin/users/{user_id}/fix-auto-schedule-by-date`
 
 #### UserAgent
 
@@ -3345,7 +3305,6 @@ API path: `/api/upload-post-agents/user/{user_id}`
 | `assigned_at` |  |
 | `assignment_id` |  |
 | `expires_at` |  |
-| `id` |  |
 | `status` |  |
 
 Operations: Create, List.
@@ -3356,65 +3315,9 @@ API path: `/api/admin/users/{user_id}/agents`
 
 | Field | Description |
 | --- | --- |
-| `account_type` |  |
-| `activated` |  |
-| `activated_by_admin_at` |  |
-| `activated_by_admin_id` |  |
-| `admin_notes` |  |
-| `agents_count` |  |
-| `assigned_agents` |  |
-| `assigned_agents_count` |  |
-| `assigned_agents_preview_limit` |  |
-| `assigned_agents_truncated` |  |
-| `auto_schedule_enabled` |  |
-| `comments_expected_per_day` |  |
-| `comments_fix_block_reason` |  |
-| `comments_fix_ready` |  |
-| `comments_today_failed` |  |
-| `comments_today_posted` |  |
-| `comments_today_scheduled` |  |
-| `comments_yesterday_failed` |  |
-| `comments_yesterday_posted` |  |
-| `comments_yesterday_total` |  |
-| `created_at` |  |
-| `credits` |  |
-| `effective_posted_video_reuse_percent` |  |
-| `email` |  |
-| `expected_agents_count` |  |
 | `id` |  |
-| `is_activated_by_admin` |  |
-| `is_admin` |  |
-| `is_bookmarked` |  |
-| `is_internal_user` |  |
-| `is_migrated` |  |
-| `landing_slug` |  |
-| `landing_status` |  |
-| `landing_url` |  |
-| `membership` |  |
-| `microhub_status` |  |
-| `microhub_url` |  |
 | `name` |  |
-| `onboarding_flow` |  |
-| `posted_video_reuse_percent` |  |
-| `product_id` |  |
-| `product_name` |  |
-| `product_url` |  |
-| `subscription_status` |  |
-| `survey_data` |  |
-| `today_failed` |  |
-| `today_posted` |  |
-| `today_scheduled` |  |
-| `tomorrow_capacity` |  |
-| `tomorrow_scheduled` |  |
-| `videos_completed` |  |
-| `videos_failed` |  |
-| `videos_pending` |  |
-| `videos_stale` |  |
-| `videos_total` |  |
-| `yesterday_failed` |  |
-| `yesterday_failed_entries` |  |
-| `yesterday_posted` |  |
-| `yesterday_total` |  |
+| `type` |  |
 
 Operations: List.
 
@@ -3694,21 +3597,17 @@ Create an instance: `$admin = $client->Admin();`
 | `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 | `remove(match)` | Remove the matching entity. |
-| `update(data)` | Update an existing entity. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
 | `apply` | `bool` | Apply safe canonical or clean-only URL updates |
-| `count` | `int` |  |
 | `created_at` | `string` |  |
 | `date_from` | `mixed` |  |
 | `date_to` | `mixed` |  |
 | `email` | `string` |  |
 | `id` | `string` |  |
-| `include_failed` | `bool` |  |
-| `include_pending` | `bool` |  |
 | `include_records` | `bool` | Include full per-field audit records in the response |
 | `issue_ids` | `mixed` |  |
 | `only_active` | `bool` | Limit the audit to active agents |
@@ -3717,12 +3616,10 @@ Create an instance: `$admin = $client->Admin();`
 | `product_id` | `string` |  |
 | `query` | `mixed` |  |
 | `reason` | `mixed` |  |
-| `regenerate` | `bool` |  |
 | `status` | `string` |  |
 | `user_membership` | `mixed` |  |
 | `user_name` | `mixed` |  |
 | `user_onboarding_step` | `mixed` |  |
-| `video_type` | `string` |  |
 
 #### Example: Load
 
@@ -3743,14 +3640,12 @@ $admins = $client->Admin()->list();
 ```php
 $admin = $client->Admin()->create([
     "user_id" => null, // string
-    "count" => null, // int
     "created_at" => null, // string
     "date_from" => null, // mixed
     "date_to" => null, // mixed
     "email" => null, // string
     "id" => null, // string
     "product_id" => null, // string
-    "video_type" => null, // string
 ]);
 ```
 
@@ -4068,13 +3963,25 @@ Create an instance: `$admin_insight = $client->AdminInsight();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `customer_success_cases` | `array` |  |
-| `customers` | `array` |  |
-| `generated_at` | `string` |  |
-| `pfa_database` | `array` |  |
-| `recent_signups` | `array` |  |
-| `summary` | `array` |  |
-| `vireel_database` | `array` |  |
+| `active_agents` | `int` |  |
+| `active_products` | `int` |  |
+| `agents_count` | `int` |  |
+| `auto_schedule_status` | `string` |  |
+| `days_until_period_end` | `mixed` |  |
+| `email` | `string` |  |
+| `feature_impact` | `string` |  |
+| `last_notification_at` | `mixed` |  |
+| `membership` | `mixed` |  |
+| `name` | `string` |  |
+| `notification_count` | `int` |  |
+| `notification_events` | `array` |  |
+| `priority` | `string` |  |
+| `severity` | `string` |  |
+| `status_label` | `string` |  |
+| `subscription_current_period_end` | `mixed` |  |
+| `subscription_status` | `mixed` |  |
+| `upcoming_posts` | `int` |  |
+| `user_id` | `string` |  |
 
 #### Example: Load
 
@@ -4131,14 +4038,8 @@ Create an instance: `$admin_metrics_summary = $client->AdminMetricsSummary();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `paid_users_by_level` | `array` |  |
-| `total_cancellations` | `int` |  |
-| `total_previews_generated` | `int` |  |
-| `total_signups` | `int` |  |
-| `total_videos_generated` | `int` |  |
-| `url_attempts` | `int` |  |
-| `user_credits` | `array` |  |
-| `user_gifted_credits` | `array` |  |
+| `count` | `int` |  |
+| `level` | `string` |  |
 
 #### Example: List
 
@@ -4656,6 +4557,7 @@ Create an instance: `$agent = $client->Agent();`
 | Method | Description |
 | --- | --- |
 | `list(match)` | List entities matching the criteria. |
+| `update(data)` | Update an existing entity. |
 
 #### Fields
 
@@ -4852,13 +4754,17 @@ Create an instance: `$agent_access_user_agent = $client->AgentAccessUserAgent();
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `agentQuota` | `int` |  |
-| `agents` | `array` |  |
-| `assignedByType` | `array` |  |
-| `assignedTotal` | `int` |  |
-| `email` | `string` |  |
-| `products` | `array` |  |
-| `userId` | `string` |  |
+| `avatar` | `mixed` |  |
+| `facebookUrl` | `mixed` |  |
+| `id` | `string` |  |
+| `instagramUrl` | `mixed` |  |
+| `name` | `string` |  |
+| `productId` | `mixed` |  |
+| `productName` | `mixed` |  |
+| `tiktokUrl` | `mixed` |  |
+| `type` | `mixed` |  |
+| `uploadPostPlatforms` | `mixed` |  |
+| `youtubeUrl` | `mixed` |  |
 
 #### Example: List
 
@@ -5098,19 +5004,12 @@ Create an instance: `$agent_health = $client->AgentHealth();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `daily` | `array` |  |
-| `dates` | `array` |  |
-| `generated_at` | `string` |  |
-| `groups` | `array` |  |
-| `latest` | `array` |  |
-| `live_date` | `mixed` |  |
-| `phone_admin_generated_at` | `string` |  |
-| `platform` | `string` |  |
-| `post_target` | `int` |  |
-| `qa_managed_agent_ids` | `array` |  |
-| `scope_prefixes` | `array` |  |
-| `timezone` | `string` |  |
-| `warmup_target` | `int` |  |
+| `accounts` | `array` |  |
+| `date` | `string` |  |
+| `overall` | `array` |  |
+| `posts` | `array` |  |
+| `views` | `array` |  |
+| `warmups` | `array` |  |
 
 #### Example: List
 
@@ -5160,19 +5059,12 @@ Create an instance: `$agent_health_detail = $client->AgentHealthDetail();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `archived_issue_total` | `int` |  |
-| `date` | `string` |  |
-| `generated_at` | `string` |  |
-| `group_id` | `string` |  |
-| `has_more` | `bool` |  |
-| `issue_total` | `int` |  |
-| `issues` | `array` |  |
-| `limit` | `int` |  |
-| `metric` | `string` |  |
-| `offset` | `int` |  |
-| `warmup_runs` | `array` |  |
-| `warning_total` | `int` |  |
-| `warnings` | `array` |  |
+| `agent_id` | `string` |  |
+| `category` | `string` |  |
+| `connection_status` | `string` |  |
+| `device_status` | `string` |  |
+| `issue` | `mixed` |  |
+| `state` | `string` |  |
 
 #### Example: List
 
@@ -5216,7 +5108,7 @@ Create an instance: `$agent_post = $client->AgentPost();`
 
 ```php
 // list() returns an array of AgentPost entities, one per record (throws on error).
-$agent_posts = $client->AgentPost()->list(["id" => "example"]);
+$agent_posts = $client->AgentPost()->list(["agent_id" => "example"]);
 ```
 
 
@@ -5501,7 +5393,6 @@ Create an instance: `$carousel = $client->Carousel();`
 | `formula_id` | `string` |  |
 | `formula_name` | `mixed` |  |
 | `generation` | `array` |  |
-| `id` | `string` |  |
 | `image_prompt` | `mixed` |  |
 | `likes` | `mixed` |  |
 | `main_prompt` | `mixed` |  |
@@ -5609,7 +5500,6 @@ Create an instance: `$carousel_status = $client->CarouselStatus();`
 | --- | --- | --- |
 | `caption` | `mixed` |  |
 | `error` | `mixed` |  |
-| `id` | `string` |  |
 | `image_model` | `mixed` |  |
 | `image_provider` | `mixed` |  |
 | `image_task_id` | `string` |  |
@@ -5622,37 +5512,7 @@ Create an instance: `$carousel_status = $client->CarouselStatus();`
 
 ```php
 // list() returns an array of CarouselStatus entities, one per record (throws on error).
-$carousel_statuss = $client->CarouselStatus()->list(["id" => "example"]);
-```
-
-
-### Chat
-
-Create an instance: `$chat = $client->Chat();`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `create(data)` | Create a new entity with the given data. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `idempotencyKey` | `string` |  |
-| `message` | `string` |  |
-| `sessionId` | `string` |  |
-
-#### Example: Create
-
-```php
-$chat = $client->Chat()->create([
-    "session_id" => null, // string
-    "idempotencyKey" => null, // string
-    "message" => null, // string
-    "sessionId" => null, // string
-]);
+$carousel_statuss = $client->CarouselStatus()->list(["carousel_id" => "example"]);
 ```
 
 
@@ -5716,6 +5576,8 @@ Create an instance: `$chat_session = $client->ChatSession();`
 | --- | --- | --- |
 | `chatSubVariant` | `string` |  |
 | `createdAt` | `string` |  |
+| `idempotencyKey` | `string` |  |
+| `message` | `string` |  |
 | `model` | `mixed` |  |
 | `plan` | `mixed` |  |
 | `route` | `mixed` |  |
@@ -5731,6 +5593,9 @@ Create an instance: `$chat_session = $client->ChatSession();`
 ```php
 $chat_session = $client->ChatSession()->create([
     "session_id" => null, // string
+    "idempotencyKey" => null, // string
+    "message" => null, // string
+    "sessionId" => null, // string
 ]);
 ```
 
@@ -6119,7 +5984,6 @@ Create an instance: `$customer_health = $client->CustomerHealth();`
 | `date` | `string` |  |
 | `email` | `string` |  |
 | `entries` | `array` |  |
-| `id` | `string` |  |
 | `performance_overview` | `array` |  |
 | `platform_coverage_summary` | `array` |  |
 | `user_id` | `string` |  |
@@ -6176,20 +6040,10 @@ Create an instance: `$customer_health_views_summary = $client->CustomerHealthVie
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `average_views_per_result` | `int` |  |
-| `date` | `string` |  |
-| `end_date` | `mixed` |  |
-| `paid_users_count` | `int` |  |
+| `email` | `string` |  |
 | `posted_results` | `int` |  |
-| `range` | `string` |  |
-| `start_date` | `mixed` |  |
-| `top_users` | `array` |  |
-| `total_views` | `int` |  |
-| `trend` | `array` |  |
-| `trend_granularity` | `string` |  |
-| `user_email` | `mixed` |  |
 | `user_id` | `string` |  |
-| `users_with_views` | `int` |  |
+| `views` | `int` |  |
 
 #### Example: List
 
@@ -6235,17 +6089,11 @@ Create an instance: `$daily_status = $client->DailyStatus();`
 | --- | --- |
 | `load(match)` | Load a single entity by match criteria. |
 
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `id` | `string` |  |
-
 #### Example: Load
 
 ```php
 // load() returns the ENTITY — call data_get() for the DailyStatus record (throws on error).
-$daily_status = $client->DailyStatus()->load(["id" => "daily_status_id", "day" => "day"]);
+$daily_status = $client->DailyStatus()->load(["daily_id" => "daily_id", "day" => "day"]);
 ```
 
 
@@ -6326,24 +6174,6 @@ $enterprise_agent = $client->EnterpriseAgent()->create([
     "source_product_id" => null, // string
     "target_product_id" => null, // string
 ]);
-```
-
-
-### EnterpriseProduct
-
-Create an instance: `$enterprise_product = $client->EnterpriseProduct();`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `load(match)` | Load a single entity by match criteria. |
-
-#### Example: Load
-
-```php
-// load() returns the ENTITY — call data_get() for the EnterpriseProduct record (throws on error).
-$enterprise_product = $client->EnterpriseProduct()->load(["product_id" => "product_id"]);
 ```
 
 
@@ -6702,34 +6532,6 @@ $init_reset_product_v6 = $client->InitResetProductV6()->create([
 ```
 
 
-### Iri
-
-Create an instance: `$iri = $client->Iri();`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `create(data)` | Create a new entity with the given data. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `correlationId` | `mixed` |  |
-| `idempotencyKey` | `string` |  |
-| `productId` | `mixed` |  |
-
-#### Example: Create
-
-```php
-$iri = $client->Iri()->create([
-    "connector_id" => null, // string
-    "idempotencyKey" => null, // string
-]);
-```
-
-
 ### IrisCapability
 
 Create an instance: `$iris_capability = $client->IrisCapability();`
@@ -6820,6 +6622,7 @@ Create an instance: `$iris_connector = $client->IrisConnector();`
 
 | Method | Description |
 | --- | --- |
+| `create(data)` | Create a new entity with the given data. |
 | `list(match)` | List entities matching the criteria. |
 
 #### Fields
@@ -6833,6 +6636,14 @@ Create an instance: `$iris_connector = $client->IrisConnector();`
 ```php
 // list() returns an array of IrisConnector entities, one per record (throws on error).
 $iris_connectors = $client->IrisConnector()->list();
+```
+
+#### Example: Create
+
+```php
+$iris_connector = $client->IrisConnector()->create([
+    "connector_id" => null, // string
+]);
 ```
 
 
@@ -6882,8 +6693,10 @@ Create an instance: `$iris_task = $client->IrisTask();`
 | `cadence` | `string` |  |
 | `capability` | `mixed` |  |
 | `completed` | `array` |  |
+| `correlationId` | `mixed` |  |
 | `description` | `string` |  |
 | `discover` | `array` |  |
+| `idempotencyKey` | `string` |  |
 | `productId` | `mixed` |  |
 | `recurring` | `array` |  |
 | `requiredConnectors` | `array` |  |
@@ -6900,6 +6713,7 @@ $iris_tasks = $client->IrisTask()->list();
 
 ```php
 $iris_task = $client->IrisTask()->create([
+    "idempotencyKey" => null, // string
     "title" => null, // string
 ]);
 ```
@@ -7507,13 +7321,18 @@ Create an instance: `$product_dashboard = $client->ProductDashboard();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `agents` | `array` |  |
-| `date` | `string` |  |
-| `pagination` | `array` |  |
-| `phone_admin_error` | `mixed` |  |
-| `products` | `array` |  |
-| `selected_product` | `mixed` |  |
-| `summary` | `array` |  |
+| `comments` | `int` |  |
+| `failed_entries` | `int` |  |
+| `has_tiktok_community_violation` | `bool` |  |
+| `id` | `string` |  |
+| `likes` | `int` |  |
+| `metrics_pending_count` | `int` |  |
+| `name` | `string` |  |
+| `platforms` | `array` |  |
+| `posted_entries` | `int` |  |
+| `posting_entries` | `int` |  |
+| `scheduled_entries` | `int` |  |
+| `views` | `int` |  |
 
 #### Example: List
 
@@ -7604,6 +7423,7 @@ Create an instance: `$product_landing = $client->ProductLanding();`
 | `dmOngoingResponsePrompt` | `mixed` |  |
 | `firstCommentTextBeforeLink` | `mixed` |  |
 | `headerImageUrl` | `mixed` |  |
+| `icon` | `mixed` |  |
 | `id` | `string` |  |
 | `landingHtmlUrl` | `mixed` |  |
 | `landingLastGeneratedAt` | `mixed` |  |
@@ -7642,6 +7462,7 @@ Create an instance: `$product_landing = $client->ProductLanding();`
 | `slug` | `string` |  |
 | `socialLinks` | `mixed` |  |
 | `testimonials` | `mixed` |  |
+| `url` | `string` |  |
 
 #### Example: List
 
@@ -7708,24 +7529,6 @@ Create an instance: `$re_roll_video = $client->ReRollVideo();`
 $re_roll_video = $client->ReRollVideo()->create([
     "queue_id" => null, // string
 ]);
-```
-
-
-### ReadRootGet
-
-Create an instance: `$read_root_get = $client->ReadRootGet();`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `load(match)` | Load a single entity by match criteria. |
-
-#### Example: Load
-
-```php
-// load() returns the ENTITY — call data_get() for the ReadRootGet record (throws on error).
-$read_root_get = $client->ReadRootGet()->load();
 ```
 
 
@@ -7871,6 +7674,24 @@ $retry_website_scrape = $client->RetryWebsiteScrape()->create([
 ```
 
 
+### RootGet
+
+Create an instance: `$root_get = $client->RootGet();`
+
+#### Operations
+
+| Method | Description |
+| --- | --- |
+| `load(match)` | Load a single entity by match criteria. |
+
+#### Example: Load
+
+```php
+// load() returns the ENTITY — call data_get() for the RootGet record (throws on error).
+$root_get = $client->RootGet()->load();
+```
+
+
 ### SaveSurvey
 
 Create an instance: `$save_survey = $client->SaveSurvey();`
@@ -7990,6 +7811,17 @@ $scan_socials_status = $client->ScanSocialsStatus()->load();
 ```
 
 
+### ScheduleQueue
+
+Create an instance: `$schedule_queue = $client->ScheduleQueue();`
+
+#### Operations
+
+| Method | Description |
+| --- | --- |
+| `update(data)` | Update an existing entity. |
+
+
 ### ScheduleV2
 
 Create an instance: `$schedule_v2 = $client->ScheduleV2();`
@@ -8002,7 +7834,6 @@ Create an instance: `$schedule_v2 = $client->ScheduleV2();`
 | `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 | `remove(match)` | Remove the matching entity. |
-| `update(data)` | Update an existing entity. |
 
 #### Fields
 
@@ -8351,14 +8182,11 @@ Create an instance: `$seo_traffic = $client->SeoTraffic();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `end_date` | `string` |  |
-| `series` | `array` |  |
-| `site_url` | `string` |  |
-| `start_date` | `string` |  |
-| `top_countries` | `array` |  |
-| `top_pages` | `array` |  |
-| `top_queries` | `array` |  |
-| `totals` | `array` |  |
+| `clicks` | `float` |  |
+| `ctr` | `float` |  |
+| `date` | `string` |  |
+| `impressions` | `float` |  |
+| `position` | `float` |  |
 
 #### Example: List
 
@@ -8836,23 +8664,24 @@ Create an instance: `$stats_refresh_overview = $client->StatsRefreshOverview();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `active_run` | `mixed` |  |
-| `aged_over_24h` | `int` |  |
-| `backlog_preview` | `array` |  |
-| `coverage_percent` | `float` |  |
-| `customer_counts` | `array` |  |
-| `date` | `string` |  |
-| `generated_at` | `string` |  |
-| `method_counts` | `array` |  |
-| `platform_counts` | `array` |  |
-| `platform_units_resolved` | `int` |  |
-| `platform_units_total` | `int` |  |
-| `platform_units_unresolved` | `int` |  |
-| `posted_entries` | `int` |  |
-| `reason_counts` | `array` |  |
-| `sla_deadline_et` | `string` |  |
-| `stale_after_sla` | `int` |  |
-| `top_affected_customers` | `array` |  |
+| `aged_over_24h` | `bool` |  |
+| `agent_id` | `string` |  |
+| `agent_name` | `mixed` |  |
+| `is_resolved` | `bool` |  |
+| `last_refresh_completed_at` | `mixed` |  |
+| `latest_error_message` | `mixed` |  |
+| `platform` | `string` |  |
+| `post_method` | `mixed` |  |
+| `post_url` | `mixed` |  |
+| `posted_date_et` | `string` |  |
+| `product_id` | `string` |  |
+| `product_name` | `mixed` |  |
+| `reason_code` | `mixed` |  |
+| `schedule_queue_id` | `string` |  |
+| `scheduled_datetime_utc` | `string` |  |
+| `stale_after_sla` | `bool` |  |
+| `user_email` | `string` |  |
+| `user_id` | `string` |  |
 
 #### Example: List
 
@@ -9075,6 +8904,7 @@ Create an instance: `$user = $client->User();`
 
 | Method | Description |
 | --- | --- |
+| `create(data)` | Create a new entity with the given data. |
 | `load(match)` | Load a single entity by match criteria. |
 | `update(data)` | Update an existing entity. |
 
@@ -9145,21 +8975,20 @@ Create an instance: `$user_agent = $client->UserAgent();`
 | `assigned_at` | `string` |  |
 | `assignment_id` | `string` |  |
 | `expires_at` | `mixed` |  |
-| `id` | `string` |  |
 | `status` | `string` |  |
 
 #### Example: List
 
 ```php
 // list() returns an array of UserAgent entities, one per record (throws on error).
-$user_agents = $client->UserAgent()->list(["id" => "example"]);
+$user_agents = $client->UserAgent()->list(["user_id" => "example"]);
 ```
 
 #### Example: Create
 
 ```php
 $user_agent = $client->UserAgent()->create([
-    "id" => null, // string
+    "user_id" => null, // string
     "agent" => null, // array
     "assigned_at" => null, // string
     "assignment_id" => null, // string
@@ -9182,71 +9011,15 @@ Create an instance: `$user_health_detail = $client->UserHealthDetail();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `account_type` | `mixed` |  |
-| `activated` | `bool` |  |
-| `activated_by_admin_at` | `mixed` |  |
-| `activated_by_admin_id` | `string` |  |
-| `admin_notes` | `mixed` |  |
-| `agents_count` | `int` |  |
-| `assigned_agents` | `array` |  |
-| `assigned_agents_count` | `int` |  |
-| `assigned_agents_preview_limit` | `int` |  |
-| `assigned_agents_truncated` | `bool` |  |
-| `auto_schedule_enabled` | `bool` |  |
-| `comments_expected_per_day` | `int` |  |
-| `comments_fix_block_reason` | `mixed` |  |
-| `comments_fix_ready` | `bool` |  |
-| `comments_today_failed` | `int` |  |
-| `comments_today_posted` | `int` |  |
-| `comments_today_scheduled` | `int` |  |
-| `comments_yesterday_failed` | `int` |  |
-| `comments_yesterday_posted` | `int` |  |
-| `comments_yesterday_total` | `int` |  |
-| `created_at` | `string` |  |
-| `credits` | `int` |  |
-| `effective_posted_video_reuse_percent` | `int` |  |
-| `email` | `string` |  |
-| `expected_agents_count` | `int` |  |
 | `id` | `string` |  |
-| `is_activated_by_admin` | `bool` |  |
-| `is_admin` | `bool` |  |
-| `is_bookmarked` | `bool` |  |
-| `is_internal_user` | `bool` |  |
-| `is_migrated` | `bool` |  |
-| `landing_slug` | `mixed` |  |
-| `landing_status` | `mixed` |  |
-| `landing_url` | `mixed` |  |
-| `membership` | `mixed` |  |
-| `microhub_status` | `mixed` |  |
-| `microhub_url` | `mixed` |  |
 | `name` | `string` |  |
-| `onboarding_flow` | `string` |  |
-| `posted_video_reuse_percent` | `mixed` |  |
-| `product_id` | `string` |  |
-| `product_name` | `mixed` |  |
-| `product_url` | `mixed` |  |
-| `subscription_status` | `mixed` |  |
-| `survey_data` | `mixed` |  |
-| `today_failed` | `int` |  |
-| `today_posted` | `int` |  |
-| `today_scheduled` | `int` |  |
-| `tomorrow_capacity` | `int` |  |
-| `tomorrow_scheduled` | `int` |  |
-| `videos_completed` | `int` |  |
-| `videos_failed` | `int` |  |
-| `videos_pending` | `int` |  |
-| `videos_stale` | `int` |  |
-| `videos_total` | `int` |  |
-| `yesterday_failed` | `int` |  |
-| `yesterday_failed_entries` | `array` |  |
-| `yesterday_posted` | `int` |  |
-| `yesterday_total` | `int` |  |
+| `type` | `string` |  |
 
 #### Example: List
 
 ```php
 // list() returns an array of UserHealthDetail entities, one per record (throws on error).
-$user_health_details = $client->UserHealthDetail()->list(["id" => "example"]);
+$user_health_details = $client->UserHealthDetail()->list(["user_id" => "example"]);
 ```
 
 
@@ -9742,11 +9515,11 @@ Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$admininsight = $client->AdminInsight();
-$admininsight->list();
+$agenthealth = $client->AgentHealth();
+$agenthealth->list();
 
-// $admininsight->data_get() now returns the admininsight data from the last list
-// $admininsight->match_get() returns the last match criteria
+// $agenthealth->data_get() now returns the agenthealth data from the last list
+// $agenthealth->match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

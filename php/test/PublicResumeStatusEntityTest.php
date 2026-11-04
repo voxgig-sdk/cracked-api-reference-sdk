@@ -62,6 +62,9 @@ class PublicResumeStatusEntityTest extends TestCase
             $public_resume_status_ref01_data = Helpers::to_map($public_resume_status_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LOAD
         $public_resume_status_ref01_ent = $client->PublicResumeStatus(null);
         $public_resume_status_ref01_match_dt0 = [];

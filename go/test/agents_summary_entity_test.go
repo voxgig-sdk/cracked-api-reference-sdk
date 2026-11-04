@@ -75,6 +75,9 @@ func TestAgentsSummaryEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = agentsSummaryRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LOAD
 		agentsSummaryRef01Ent := client.AgentsSummary(nil)
 		agentsSummaryRef01MatchDt0 := map[string]any{}

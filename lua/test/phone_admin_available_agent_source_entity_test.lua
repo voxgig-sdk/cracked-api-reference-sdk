@@ -164,6 +164,9 @@ describe("PhoneAdminAvailableAgentSourceEntity", function()
       phone_admin_available_agent_source_ref01_data = helpers.to_map(phone_admin_available_agent_source_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LIST
     local phone_admin_available_agent_source_ref01_ent = client:PhoneAdminAvailableAgentSource(nil)
     local phone_admin_available_agent_source_ref01_match = {}

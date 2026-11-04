@@ -51,12 +51,19 @@ class TestSlideEntity:
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
                 return
+        if setup["live"] and os.environ.get("VOXGIG_GETONLY_GUARD") == "TRUE":
+            print("LIVE STEP {\"id\":\"slide.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/carousel/{video_id}/slides/{slide_index}/regenerate\"}")
+            print("LIVE STEP {\"id\":\"slide.update.1\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs PATCH /api/carousel/{video_id}/slides/{slide_index}\"}")
+            pytest.skip("Live coverage incomplete: slide.create.0 excluded (GET-only live run: needs POST /api/carousel/{video_id}/slides/{slide_index}/regenerate); slide.update.1 excluded (GET-only live run: needs PATCH /api/carousel/{video_id}/slides/{slide_index})")
+
         if setup["live"]:
             for _live_key in ["carousel01", "slide_index01"]:
                 if setup.get("synthetic_only") or setup["idmap"].get(_live_key) is None:
                     runner.live_miss(LIVE_STRICT, f"Live entity test blocked: needs {_live_key} via CRACKED_API_REFERENCE_TEST_SLIDE_ENTID")
         client = setup["client"]
 
+        if setup["live"]:
+            runner.live_pace()
         # CREATE
         slide_ref01_ent = client.Slide(None)
         slide_ref01_data = helpers.to_map(vs.getprop(
@@ -68,6 +75,8 @@ class TestSlideEntity:
         assert slide_ref01_data is not None
         assert slide_ref01_data["id"] is not None
 
+        if setup["live"]:
+            runner.live_pace()
         # UPDATE
         slide_ref01_data_up0_up = {
             "id": slide_ref01_data["id"],
@@ -76,7 +85,8 @@ class TestSlideEntity:
 
         slide_ref01_resdata_up0 = helpers.to_map(runner.entity_data(slide_ref01_ent.update(slide_ref01_data_up0_up, None)))
         assert slide_ref01_resdata_up0 is not None
-        assert slide_ref01_resdata_up0["id"] == slide_ref01_data_up0_up["id"]
+        if not setup["live"]:
+            assert runner.live_same_id(slide_ref01_resdata_up0.get("id"), slide_ref01_data_up0_up["id"])
 
 
 

@@ -154,6 +154,8 @@ describe("AgentDetailEntity", function()
         return
       end
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" then
+      print("LIVE STEP {\"id\":\"agent_detail.update.1\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs PATCH /api/upload-post-agents/{agent_id}/bio\"}")
     local client = setup.client
 
     -- Bootstrap entity data from existing test data.
@@ -164,6 +166,33 @@ describe("AgentDetailEntity", function()
       agent_detail_ref01_data = helpers.to_map(agent_detail_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
+    -- LIST
+    local agent_detail_ref01_ent = client:AgentDetail(nil)
+    local agent_detail_ref01_match = {}
+
+    local agent_detail_ref01_list_result, err = agent_detail_ref01_ent:list(agent_detail_ref01_match, nil)
+    assert.is_nil(err)
+    assert.is_table(agent_detail_ref01_list_result)
+
+      return
+    end
+
+    local client = setup.client
+
+    -- Bootstrap entity data from existing test data.
+    local agent_detail_ref01_data_raw = vs.items(helpers.to_map(
+      vs.getpath(setup.data, "existing.agent_detail")))
+    local agent_detail_ref01_data = nil
+    if #agent_detail_ref01_data_raw > 0 then
+      agent_detail_ref01_data = helpers.to_map(agent_detail_ref01_data_raw[1][2])
+    end
+
+    if setup.live then
+      runner.live_pace()
+    end
     -- LIST
     local agent_detail_ref01_ent = client:AgentDetail(nil)
     local agent_detail_ref01_match = {}

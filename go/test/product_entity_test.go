@@ -200,6 +200,73 @@ func TestProductEntity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" {
+			t.Log("LIVE STEP {\"id\":\"product.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/products/{product_id}/validate-social-handle\"}")
+			t.Log("LIVE STEP {\"id\":\"product.update.2\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs PUT /api/enterprise/products/{product_id}\"}")
+			t.Log("LIVE STEP {\"id\":\"product.remove.4\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs DELETE /api/enterprise/products/{product_id}\"}")
+			t.Log("LIVE STEP {\"id\":\"product.list.5\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: checks a removal this run does not make\"}")
+		client := setup.client
+		_ = client
+		if setup.live {
+			var _liveId any
+			if !setup.syntheticOnly {
+				_liveId = setup.idmap["product01"]
+			}
+			livePace()
+			liveExisting(t, productEntityLiveStrict, setup.data, "product", "product_id", _liveId,
+				func() (any, error) {
+					return client.Product(nil).List(map[string]any{}, nil)
+				})
+		}
+
+		// Bootstrap entity data from existing test data (no create step in flow).
+		productRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.product")))
+		var productRef01Data map[string]any
+		if len(productRef01DataRaw) > 0 {
+			productRef01Data = core.ToMapAny(productRef01DataRaw[0][1])
+		}
+		// Discard guards against Go's unused-var check when the flow's steps
+		// happen not to consume the bootstrap data (e.g. list-only flows).
+		_ = productRef01Data
+
+		if setup.live {
+			livePace()
+		}
+		// LIST
+		productRef01Ent := client.Product(nil)
+		productRef01Match := map[string]any{}
+
+		productRef01ListResult, err := productRef01Ent.List(productRef01Match, nil)
+		if err != nil {
+			t.Fatalf("list failed: %v", err)
+		}
+		_, productRef01ListOk := productRef01ListResult.([]any)
+		if !productRef01ListOk {
+			t.Fatalf("expected list result to be an array, got %T", productRef01ListResult)
+		}
+
+		if setup.live {
+			livePace()
+		}
+		// LOAD
+		productRef01MatchDt0 := map[string]any{
+			"id": productRef01Data["product_id"],
+		}
+		productRef01DataDt0Loaded, err := productRef01Ent.Load(productRef01MatchDt0, nil)
+		if err != nil {
+			t.Fatalf("load failed: %v", err)
+		}
+		productRef01DataDt0LoadResult := core.ToMapAny(entityData(productRef01DataDt0Loaded))
+		if productRef01DataDt0LoadResult == nil {
+			t.Fatal("expected load result to be a map")
+		}
+		if !liveSameId(productRef01DataDt0LoadResult["product_id"], productRef01Data["product_id"]) {
+			t.Fatal("expected load result id to match")
+		}
+
+		return
+		}
+
 		if setup.live {
 			for _, _liveKey := range []string{"user01"} {
 				if setup.syntheticOnly || setup.idmap[_liveKey] == nil {
@@ -210,6 +277,9 @@ func TestProductEntity(t *testing.T) {
 		client := setup.client
 		_ = client
 
+		if setup.live {
+			livePace()
+		}
 		// CREATE
 		productRef01Ent := client.Product(nil)
 		productRef01Data := core.ToMapAny(vs.GetProp(
@@ -224,10 +294,13 @@ func TestProductEntity(t *testing.T) {
 		if productRef01Data == nil {
 			t.Fatal("expected create result to be a map")
 		}
-		if productRef01Data["id"] == nil {
+		if productRef01Data["product_id"] == nil {
 			t.Fatal("expected created entity to have an id")
 		}
 
+		if setup.live {
+			livePace()
+		}
 		// LIST
 		productRef01Match := map[string]any{}
 
@@ -240,14 +313,17 @@ func TestProductEntity(t *testing.T) {
 			t.Fatalf("expected list result to be an array, got %T", productRef01ListResult)
 		}
 
-		foundItem := vs.Select(entityListToData(productRef01List), map[string]any{"id": productRef01Data["id"]})
+		foundItem := vs.Select(entityListToData(productRef01List), map[string]any{"product_id": productRef01Data["product_id"]})
 		if vs.IsEmpty(foundItem) {
 			t.Fatal("expected to find created entity in list")
 		}
 
+		if setup.live {
+			livePace()
+		}
 		// UPDATE
 		productRef01DataUp0Up := map[string]any{
-			"id": productRef01Data["id"],
+			"id": productRef01Data["product_id"],
 		}
 
 		productRef01MarkdefUp0Name := "description"
@@ -262,16 +338,19 @@ func TestProductEntity(t *testing.T) {
 		if productRef01ResdataUp0 == nil {
 			t.Fatal("expected update result to be a map")
 		}
-		if productRef01ResdataUp0["id"] != productRef01DataUp0Up["id"] {
+		if !liveSameId(productRef01ResdataUp0["product_id"], productRef01DataUp0Up["id"]) {
 			t.Fatal("expected update result id to match")
 		}
 		if productRef01ResdataUp0[productRef01MarkdefUp0Name] != productRef01MarkdefUp0Value {
 			t.Fatalf("expected %s to be updated, got %v", productRef01MarkdefUp0Name, productRef01ResdataUp0[productRef01MarkdefUp0Name])
 		}
 
+		if setup.live {
+			livePace()
+		}
 		// LOAD
 		productRef01MatchDt0 := map[string]any{
-			"id": productRef01Data["id"],
+			"id": productRef01Data["product_id"],
 		}
 		productRef01DataDt0Loaded, err := productRef01Ent.Load(productRef01MatchDt0, nil)
 		if err != nil {
@@ -281,19 +360,25 @@ func TestProductEntity(t *testing.T) {
 		if productRef01DataDt0LoadResult == nil {
 			t.Fatal("expected load result to be a map")
 		}
-		if productRef01DataDt0LoadResult["id"] != productRef01Data["id"] {
+		if !liveSameId(productRef01DataDt0LoadResult["product_id"], productRef01Data["product_id"]) {
 			t.Fatal("expected load result id to match")
 		}
 
+		if setup.live {
+			livePace()
+		}
 		// REMOVE
 		productRef01MatchRm0 := map[string]any{
-			"id": productRef01Data["id"],
+			"id": productRef01Data["product_id"],
 		}
 		_, err = productRef01Ent.Remove(productRef01MatchRm0, nil)
 		if err != nil {
 			t.Fatalf("remove failed: %v", err)
 		}
 
+		if setup.live {
+			livePace()
+		}
 		// LIST
 		productRef01MatchRt0 := map[string]any{}
 
@@ -306,7 +391,7 @@ func TestProductEntity(t *testing.T) {
 			t.Fatalf("expected list result to be an array, got %T", productRef01ListRt0Result)
 		}
 
-		notFoundItem := vs.Select(entityListToData(productRef01ListRt0), map[string]any{"id": productRef01Data["id"]})
+		notFoundItem := vs.Select(entityListToData(productRef01ListRt0), map[string]any{"product_id": productRef01Data["product_id"]})
 		if !vs.IsEmpty(notFoundItem) {
 			t.Fatal("expected removed entity to not be in list")
 		}
@@ -330,6 +415,12 @@ func productBasicSetup(extra map[string]any) *entityTestSetup {
 	var entityData map[string]any
 	if err := json.Unmarshal(entityDataSource, &entityData); err != nil {
 		panic("failed to parse product test data: " + err.Error())
+	}
+
+	for _, rec := range core.ToMapAny(vs.GetPath(entityData, "existing.product")) {
+		if recMap := core.ToMapAny(rec); recMap != nil && recMap["id"] != nil {
+			recMap["product_id"] = recMap["id"]
+		}
 	}
 
 	options := map[string]any{}

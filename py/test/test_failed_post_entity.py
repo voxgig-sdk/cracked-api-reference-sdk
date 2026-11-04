@@ -153,6 +153,8 @@ class TestFailedPostEntity:
         if len(failed_post_ref01_data_raw) > 0:
             failed_post_ref01_data = helpers.to_map(failed_post_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LIST
         failed_post_ref01_ent = client.FailedPost(None)
         failed_post_ref01_match = {}

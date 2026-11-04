@@ -211,6 +211,9 @@ class DedicatedAgentsDashboardEntityTest extends TestCase
             $dedicated_agents_dashboard_ref01_data = Helpers::to_map($dedicated_agents_dashboard_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LIST
         $dedicated_agents_dashboard_ref01_ent = $client->DedicatedAgentsDashboard(null);
         $dedicated_agents_dashboard_ref01_match = [];

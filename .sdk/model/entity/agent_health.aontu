@@ -5,85 +5,41 @@ main: kit: entity: agent_health: {
   alias: field: {}
 
   fields: {
-    daily: {
-      h: "Daily"
-      n: "daily"
-      r: true
-      t: "`$ARRAY`"
-    }
-    dates: {
-      h: "Dates"
-      n: "dates"
-      r: true
-      t: "`$ARRAY`"
-    }
-    generated_at: {
-      fo: "date-time"
-      h: "Generated At"
-      n: "generated_at"
-      r: true
-      t: "`$STRING`"
-    }
-    groups: {
-      h: "Groups"
-      n: "groups"
-      r: true
-      t: "`$ARRAY`"
-    }
-    latest: {
-      h: "Latest"
-      n: "latest"
+    accounts: {
+      h: "Accounts"
+      n: "accounts"
       r: true
       t: "`$OBJECT`"
     }
-    live_date: {
-      h: "Live Date"
-      n: "live_date"
-      r: false
-      t: "`$ANY`"
-    }
-    phone_admin_generated_at: {
-      fo: "date-time"
-      h: "Phone Admin Generated At"
-      n: "phone_admin_generated_at"
+    date: {
+      h: "Date"
+      n: "date"
       r: true
       t: "`$STRING`"
     }
-    platform: {
-      h: "Platform"
-      n: "platform"
-      r: false
-      t: "`$STRING`"
-    }
-    post_target: {
-      h: "Post Target"
-      n: "post_target"
+    overall: {
+      h: "Overall"
+      n: "overall"
       r: true
-      t: "`$INTEGER`"
+      t: "`$OBJECT`"
     }
-    qa_managed_agent_ids: {
-      h: "Qa Managed Agent Ids"
-      n: "qa_managed_agent_ids"
-      r: false
-      t: "`$ARRAY`"
-    }
-    scope_prefixes: {
-      h: "Scope Prefixes"
-      n: "scope_prefixes"
+    posts: {
+      h: "Posts"
+      n: "posts"
       r: true
-      t: "`$ARRAY`"
+      t: "`$OBJECT`"
     }
-    timezone: {
-      h: "Timezone"
-      n: "timezone"
+    views: {
+      h: "Views"
+      n: "views"
       r: true
-      t: "`$STRING`"
+      t: "`$OBJECT`"
     }
-    warmup_target: {
-      h: "Warmup Target"
-      n: "warmup_target"
+    warmups: {
+      h: "Warmups"
+      n: "warmups"
       r: true
-      t: "`$INTEGER`"
+      t: "`$OBJECT`"
     }
   }
 
@@ -159,7 +115,7 @@ main: kit: entity: agent_health: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.daily`"
           }
         }
       ]

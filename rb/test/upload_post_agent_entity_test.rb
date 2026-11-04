@@ -29,8 +29,14 @@ class UploadPostAgentEntityTest < Minitest::Test
         return
       end
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE"
+      puts "LIVE STEP {\"id\":\"upload_post_agent.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/upload-post-agents/sync-platforms\"}"
+      skip("Live coverage incomplete: upload_post_agent.create.0 excluded (GET-only live run: needs POST /api/upload-post-agents/sync-platforms)")
+    end
+
     client = setup[:client]
 
+    Runner.live_pace if setup[:live]
     # CREATE
     upload_post_agent_ref01_ent = client.UploadPostAgent(nil)
     upload_post_agent_ref01_data = Helpers.to_map(Vs.getprop(

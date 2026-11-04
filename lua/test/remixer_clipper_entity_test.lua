@@ -44,6 +44,31 @@ describe("RemixerClipperEntity", function()
         return
       end
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" then
+      print("LIVE STEP {\"id\":\"remixer_clipper.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/remixer-clippers/jobs/{identifier}/download\"}")
+    local client = setup.client
+
+    -- Bootstrap entity data from existing test data.
+    local remixer_clipper_ref01_data_raw = vs.items(helpers.to_map(
+      vs.getpath(setup.data, "existing.remixer_clipper")))
+    local remixer_clipper_ref01_data = nil
+    if #remixer_clipper_ref01_data_raw > 0 then
+      remixer_clipper_ref01_data = helpers.to_map(remixer_clipper_ref01_data_raw[1][2])
+    end
+
+    if setup.live then
+      runner.live_pace()
+    end
+    -- LOAD
+    local remixer_clipper_ref01_ent = client:RemixerClipper(nil)
+    local remixer_clipper_ref01_match_dt0 = {}
+    local remixer_clipper_ref01_data_dt0_loaded, err = remixer_clipper_ref01_ent:load(remixer_clipper_ref01_match_dt0, nil)
+    assert.is_nil(err)
+    assert.is_not_nil(remixer_clipper_ref01_data_dt0_loaded)
+
+      return
+    end
+
     if setup.live then
       for _, _live_key in ipairs({"identifier01"}) do
         if setup.synthetic_only or setup.idmap[_live_key] == nil then
@@ -53,6 +78,9 @@ describe("RemixerClipperEntity", function()
     end
     local client = setup.client
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- CREATE
     local remixer_clipper_ref01_ent = client:RemixerClipper(nil)
     local remixer_clipper_ref01_data = helpers.to_map(vs.getprop(
@@ -64,6 +92,9 @@ describe("RemixerClipperEntity", function()
     remixer_clipper_ref01_data = helpers.to_map(type(remixer_clipper_ref01_data_result) == 'table' and remixer_clipper_ref01_data_result.data_get and remixer_clipper_ref01_data_result:data_get() or remixer_clipper_ref01_data_result)
     assert.is_not_nil(remixer_clipper_ref01_data)
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LOAD
     local remixer_clipper_ref01_match_dt0 = {}
     local remixer_clipper_ref01_data_dt0_loaded, err = remixer_clipper_ref01_ent:load(remixer_clipper_ref01_match_dt0, nil)

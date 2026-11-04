@@ -62,14 +62,11 @@ type AdminLoadMatch struct {
 // AdminListMatch is the typed request payload for Admin.ListTyped.
 type AdminListMatch struct {
 	Apply *bool `json:"apply,omitempty"`
-	Count *int `json:"count,omitempty"`
 	CreatedAt *string `json:"created_at,omitempty"`
 	DateFrom *any `json:"date_from,omitempty"`
 	DateTo *any `json:"date_to,omitempty"`
 	Email *string `json:"email,omitempty"`
 	Id *string `json:"id,omitempty"`
-	IncludeFailed *bool `json:"include_failed,omitempty"`
-	IncludePending *bool `json:"include_pending,omitempty"`
 	IncludeRecords *bool `json:"include_records,omitempty"`
 	IssueIds *any `json:"issue_ids,omitempty"`
 	OnlyActive *bool `json:"only_active,omitempty"`
@@ -78,26 +75,21 @@ type AdminListMatch struct {
 	ProductId *string `json:"product_id,omitempty"`
 	Query *any `json:"query,omitempty"`
 	Reason *any `json:"reason,omitempty"`
-	Regenerate *bool `json:"regenerate,omitempty"`
 	Status *string `json:"status,omitempty"`
 	UserMembership *any `json:"user_membership,omitempty"`
 	UserName *any `json:"user_name,omitempty"`
 	UserOnboardingStep *any `json:"user_onboarding_step,omitempty"`
-	VideoType *string `json:"video_type,omitempty"`
 }
 
 // AdminCreateData is the typed request payload for Admin.CreateTyped.
 type AdminCreateData struct {
 	UserId string `json:"user_id"`
 	Apply *bool `json:"apply,omitempty"`
-	Count int `json:"count"`
 	CreatedAt string `json:"created_at"`
 	DateFrom any `json:"date_from"`
 	DateTo any `json:"date_to"`
 	Email string `json:"email"`
 	Id string `json:"id"`
-	IncludeFailed *bool `json:"include_failed,omitempty"`
-	IncludePending *bool `json:"include_pending,omitempty"`
 	IncludeRecords *bool `json:"include_records,omitempty"`
 	IssueIds *any `json:"issue_ids,omitempty"`
 	OnlyActive *bool `json:"only_active,omitempty"`
@@ -106,42 +98,10 @@ type AdminCreateData struct {
 	ProductId string `json:"product_id"`
 	Query *any `json:"query,omitempty"`
 	Reason *any `json:"reason,omitempty"`
-	Regenerate *bool `json:"regenerate,omitempty"`
 	Status *string `json:"status,omitempty"`
 	UserMembership *any `json:"user_membership,omitempty"`
 	UserName *any `json:"user_name,omitempty"`
 	UserOnboardingStep *any `json:"user_onboarding_step,omitempty"`
-	VideoType string `json:"video_type"`
-}
-
-// AdminUpdateData is the typed request payload for Admin.UpdateTyped.
-type AdminUpdateData struct {
-	AgentId string `json:"agent_id"`
-	AgentType *string `json:"agent_type,omitempty"`
-	IsActive *bool `json:"is_active,omitempty"`
-	Apply *bool `json:"apply,omitempty"`
-	Count *int `json:"count,omitempty"`
-	CreatedAt *string `json:"created_at,omitempty"`
-	DateFrom *any `json:"date_from,omitempty"`
-	DateTo *any `json:"date_to,omitempty"`
-	Email *string `json:"email,omitempty"`
-	Id *string `json:"id,omitempty"`
-	IncludeFailed *bool `json:"include_failed,omitempty"`
-	IncludePending *bool `json:"include_pending,omitempty"`
-	IncludeRecords *bool `json:"include_records,omitempty"`
-	IssueIds *any `json:"issue_ids,omitempty"`
-	OnlyActive *bool `json:"only_active,omitempty"`
-	Platform *any `json:"platform,omitempty"`
-	PostingMethod *any `json:"posting_method,omitempty"`
-	ProductId *string `json:"product_id,omitempty"`
-	Query *any `json:"query,omitempty"`
-	Reason *any `json:"reason,omitempty"`
-	Regenerate *bool `json:"regenerate,omitempty"`
-	Status *string `json:"status,omitempty"`
-	UserMembership *any `json:"user_membership,omitempty"`
-	UserName *any `json:"user_name,omitempty"`
-	UserOnboardingStep *any `json:"user_onboarding_step,omitempty"`
-	VideoType *string `json:"video_type,omitempty"`
 }
 
 // AdminRemoveMatch is the typed request payload for Admin.RemoveTyped.
@@ -329,13 +289,25 @@ type AdminInsightLoadMatch struct {
 
 // AdminInsightListMatch is the typed request payload for AdminInsight.ListTyped.
 type AdminInsightListMatch struct {
-	CustomerSuccessCases *[]any `json:"customer_success_cases,omitempty"`
-	Customers *[]any `json:"customers,omitempty"`
-	GeneratedAt *string `json:"generated_at,omitempty"`
-	PfaDatabase *map[string]any `json:"pfa_database,omitempty"`
-	RecentSignups *[]any `json:"recent_signups,omitempty"`
-	Summary *map[string]any `json:"summary,omitempty"`
-	VireelDatabase *map[string]any `json:"vireel_database,omitempty"`
+	ActiveAgents *int `json:"active_agents,omitempty"`
+	ActiveProducts *int `json:"active_products,omitempty"`
+	AgentsCount *int `json:"agents_count,omitempty"`
+	AutoScheduleStatus *string `json:"auto_schedule_status,omitempty"`
+	DaysUntilPeriodEnd *any `json:"days_until_period_end,omitempty"`
+	Email *string `json:"email,omitempty"`
+	FeatureImpact *string `json:"feature_impact,omitempty"`
+	LastNotificationAt *any `json:"last_notification_at,omitempty"`
+	Membership *any `json:"membership,omitempty"`
+	Name *string `json:"name,omitempty"`
+	NotificationCount *int `json:"notification_count,omitempty"`
+	NotificationEvents *[]any `json:"notification_events,omitempty"`
+	Priority *string `json:"priority,omitempty"`
+	Severity *string `json:"severity,omitempty"`
+	StatusLabel *string `json:"status_label,omitempty"`
+	SubscriptionCurrentPeriodEnd *any `json:"subscription_current_period_end,omitempty"`
+	SubscriptionStatus *any `json:"subscription_status,omitempty"`
+	UpcomingPosts *int `json:"upcoming_posts,omitempty"`
+	UserId *string `json:"user_id,omitempty"`
 }
 
 // AdminLandingTask is the typed data model for the admin_landing_task entity.
@@ -733,6 +705,18 @@ type AgentListMatch struct {
 	AgentType *any `json:"agent_type,omitempty"`
 }
 
+// AgentUpdateData is the typed request payload for Agent.UpdateTyped.
+type AgentUpdateData struct {
+	Id string `json:"id"`
+	IsActive *bool `json:"is_active,omitempty"`
+	AgentType *string `json:"agent_type,omitempty"`
+	ActiveConnections *int `json:"active_connections,omitempty"`
+	AtCapacity *bool `json:"at_capacity,omitempty"`
+	Name *string `json:"name,omitempty"`
+	TiktokStats *any `json:"tiktok_stats,omitempty"`
+	Type *string `json:"type,omitempty"`
+}
+
 // AgentAccessCustomersHealth is the typed data model for the agent_access_customers_health entity.
 type AgentAccessCustomersHealth struct {
 }
@@ -910,7 +894,7 @@ type AgentPost struct {
 
 // AgentPostListMatch is the typed request payload for AgentPost.ListTyped.
 type AgentPostListMatch struct {
-	Id string `json:"id"`
+	AgentId string `json:"agent_id"`
 	Day *string `json:"day,omitempty"`
 }
 
@@ -1096,19 +1080,7 @@ type CarouselStatus struct {
 
 // CarouselStatusListMatch is the typed request payload for CarouselStatus.ListTyped.
 type CarouselStatusListMatch struct {
-	Id string `json:"id"`
-}
-
-// Chat is the typed data model for the chat entity.
-type Chat struct {
-}
-
-// ChatCreateData is the typed request payload for Chat.CreateTyped.
-type ChatCreateData struct {
-	SessionId string `json:"session_id"`
-	IdempotencyKey string `json:"idempotencyKey"`
-	Message string `json:"message"`
-	SessionId2 string `json:"sessionId"`
+	CarouselId string `json:"carousel_id"`
 }
 
 // ChatHistory is the typed data model for the chat_history entity.
@@ -1132,8 +1104,11 @@ type ChatSession struct {
 // ChatSessionCreateData is the typed request payload for ChatSession.CreateTyped.
 type ChatSessionCreateData struct {
 	SessionId string `json:"session_id"`
+	IdempotencyKey string `json:"idempotencyKey"`
+	Message string `json:"message"`
 	Plan *any `json:"plan,omitempty"`
 	Route *any `json:"route,omitempty"`
+	SessionId2 string `json:"sessionId"`
 }
 
 // Comment is the typed data model for the comment entity.
@@ -1414,7 +1389,7 @@ type DailyStatus struct {
 
 // DailyStatusLoadMatch is the typed request payload for DailyStatus.LoadTyped.
 type DailyStatusLoadMatch struct {
-	Id string `json:"id"`
+	DailyId string `json:"daily_id"`
 	Day string `json:"day"`
 }
 
@@ -1463,15 +1438,6 @@ type EnterpriseAgentCreateData struct {
 	ProductId string `json:"product_id"`
 	SourceProductId string `json:"source_product_id"`
 	TargetProductId string `json:"target_product_id"`
-}
-
-// EnterpriseProduct is the typed data model for the enterprise_product entity.
-type EnterpriseProduct struct {
-}
-
-// EnterpriseProductLoadMatch is the typed request payload for EnterpriseProduct.LoadTyped.
-type EnterpriseProductLoadMatch struct {
-	ProductId string `json:"product_id"`
 }
 
 // ExactAvailability is the typed data model for the exact_availability entity.
@@ -1616,18 +1582,6 @@ type InitResetProductV6CreateData struct {
 	ProductId *string `json:"product_id,omitempty"`
 }
 
-// Iri is the typed data model for the iri entity.
-type Iri struct {
-}
-
-// IriCreateData is the typed request payload for Iri.CreateTyped.
-type IriCreateData struct {
-	ConnectorId string `json:"connector_id"`
-	CorrelationId *any `json:"correlationId,omitempty"`
-	IdempotencyKey string `json:"idempotencyKey"`
-	ProductId *any `json:"productId,omitempty"`
-}
-
 // IrisCapability is the typed data model for the iris_capability entity.
 type IrisCapability struct {
 }
@@ -1671,6 +1625,12 @@ type IrisConnectorListMatch struct {
 	Connectors *[]any `json:"connectors,omitempty"`
 }
 
+// IrisConnectorCreateData is the typed request payload for IrisConnector.CreateTyped.
+type IrisConnectorCreateData struct {
+	ConnectorId string `json:"connector_id"`
+	Connectors *[]any `json:"connectors,omitempty"`
+}
+
 // IrisStatus is the typed data model for the iris_status entity.
 type IrisStatus struct {
 }
@@ -1694,7 +1654,9 @@ type IrisTaskCreateData struct {
 	ApprovalRequired *bool `json:"approvalRequired,omitempty"`
 	Cadence *string `json:"cadence,omitempty"`
 	Capability *any `json:"capability,omitempty"`
+	CorrelationId *any `json:"correlationId,omitempty"`
 	Description *string `json:"description,omitempty"`
+	IdempotencyKey string `json:"idempotencyKey"`
 	ProductId *any `json:"productId,omitempty"`
 	RequiredConnectors *[]any `json:"requiredConnectors,omitempty"`
 	Title string `json:"title"`
@@ -2120,14 +2082,6 @@ type ReRollVideoCreateData struct {
 	SkipCreditCheck *bool `json:"skip_credit_check,omitempty"`
 }
 
-// ReadRootGet is the typed data model for the read_root_get entity.
-type ReadRootGet struct {
-}
-
-// ReadRootGetLoadMatch is the typed request payload for ReadRootGet.LoadTyped.
-type ReadRootGetLoadMatch struct {
-}
-
 // RecordDemoBooked is the typed data model for the record_demo_booked entity.
 type RecordDemoBooked struct {
 }
@@ -2187,6 +2141,14 @@ type RetryWebsiteScrapeCreateData struct {
 	Url string `json:"url"`
 }
 
+// RootGet is the typed data model for the root_get entity.
+type RootGet struct {
+}
+
+// RootGetLoadMatch is the typed request payload for RootGet.LoadTyped.
+type RootGetLoadMatch struct {
+}
+
 // SaveSurvey is the typed data model for the save_survey entity.
 type SaveSurvey struct {
 }
@@ -2228,6 +2190,16 @@ type ScanSocialsStatus struct {
 type ScanSocialsStatusLoadMatch struct {
 	OnboardingDataId *string `json:"onboarding_data_id,omitempty"`
 	ProductId *string `json:"product_id,omitempty"`
+}
+
+// ScheduleQueue is the typed data model for the schedule_queue entity.
+type ScheduleQueue struct {
+}
+
+// ScheduleQueueUpdateData is the typed request payload for ScheduleQueue.UpdateTyped.
+type ScheduleQueueUpdateData struct {
+	QueueId string `json:"queue_id"`
+	VideoId *any `json:"video_id,omitempty"`
 }
 
 // ScheduleV2 is the typed data model for the schedule_v2 entity.
@@ -2277,12 +2249,6 @@ type ScheduleV2CreateData struct {
 	YoutubePostedBy *any `json:"youtube_posted_by,omitempty"`
 	YoutubePostedUrl *any `json:"youtube_posted_url,omitempty"`
 	YoutubeScrapedSocialPostId *string `json:"youtube_scraped_social_post_id,omitempty"`
-}
-
-// ScheduleV2UpdateData is the typed request payload for ScheduleV2.UpdateTyped.
-type ScheduleV2UpdateData struct {
-	QueueId string `json:"queue_id"`
-	VideoId *string `json:"video_id,omitempty"`
 }
 
 // ScheduleV2RemoveMatch is the typed request payload for ScheduleV2.RemoveTyped.
@@ -2749,6 +2715,54 @@ type UserLoadMatch struct {
 	ProductId *string `json:"product_id,omitempty"`
 }
 
+// UserCreateData is the typed request payload for User.CreateTyped.
+type UserCreateData struct {
+	Id string `json:"id"`
+	ProductId *string `json:"product_id,omitempty"`
+	TargetDate *string `json:"target_date,omitempty"`
+	PhoneAdminPcName *any `json:"phone_admin_pc_name,omitempty"`
+	Background *bool `json:"background,omitempty"`
+	AccountType *any `json:"accountType,omitempty"`
+	ActivatedByAdminAt *any `json:"activatedByAdminAt,omitempty"`
+	ActivatedByAdminId *any `json:"activatedByAdminId,omitempty"`
+	Agents []any `json:"agents"`
+	AgentsCount *any `json:"agentsCount,omitempty"`
+	Attribution *any `json:"attribution,omitempty"`
+	AvatarImageUrl *any `json:"avatarImageUrl,omitempty"`
+	AvatarVoiceUrl *any `json:"avatarVoiceUrl,omitempty"`
+	CreatedAt string `json:"createdAt"`
+	Credits *int `json:"credits,omitempty"`
+	Email string `json:"email"`
+	GoogleId *any `json:"googleId,omitempty"`
+	HasSeenScheduleWelcome *bool `json:"hasSeenScheduleWelcome,omitempty"`
+	Industry *any `json:"industry,omitempty"`
+	InstagramId *any `json:"instagramId,omitempty"`
+	IsActivatedByAdmin *bool `json:"isActivatedByAdmin,omitempty"`
+	IsAdmin *bool `json:"isAdmin,omitempty"`
+	IsInternalUser *any `json:"isInternalUser,omitempty"`
+	IsMigrated *any `json:"isMigrated,omitempty"`
+	IsResettingProduct *any `json:"isResettingProduct,omitempty"`
+	Membership *any `json:"membership,omitempty"`
+	Name string `json:"name"`
+	PartnerDirectLoginDisabled *bool `json:"partnerDirectLoginDisabled,omitempty"`
+	PartnerExternalUserId *any `json:"partnerExternalUserId,omitempty"`
+	PartnerPolicyCode *any `json:"partnerPolicyCode,omitempty"`
+	PartnerSource *any `json:"partnerSource,omitempty"`
+	Picture *any `json:"picture,omitempty"`
+	StripeCustomerId *any `json:"stripeCustomerId,omitempty"`
+	StripeSubscriptionId *any `json:"stripeSubscriptionId,omitempty"`
+	SubscriptionCurrentPeriodEnd *any `json:"subscriptionCurrentPeriodEnd,omitempty"`
+	SubscriptionStatus *any `json:"subscriptionStatus,omitempty"`
+	TotalCount int `json:"totalCount"`
+	UpdatedAt string `json:"updatedAt"`
+	UserId string `json:"userId"`
+	Count *any `json:"count,omitempty"`
+	IncludeFailed *any `json:"include_failed,omitempty"`
+	IncludePending *any `json:"include_pending,omitempty"`
+	Regenerate *any `json:"regenerate,omitempty"`
+	VideoType *any `json:"video_type,omitempty"`
+}
+
 // UserUpdateData is the typed request payload for User.UpdateTyped.
 type UserUpdateData struct {
 	AccountType *any `json:"accountType,omitempty"`
@@ -2786,6 +2800,8 @@ type UserUpdateData struct {
 	TotalCount *int `json:"totalCount,omitempty"`
 	UpdatedAt *string `json:"updatedAt,omitempty"`
 	UserId *string `json:"userId,omitempty"`
+	PostedVideoReusePercent *any `json:"posted_video_reuse_percent,omitempty"`
+	Rebuild *any `json:"rebuild,omitempty"`
 }
 
 // UserAgent is the typed data model for the user_agent entity.
@@ -2794,7 +2810,7 @@ type UserAgent struct {
 
 // UserAgentListMatch is the typed request payload for UserAgent.ListTyped.
 type UserAgentListMatch struct {
-	Id string `json:"id"`
+	UserId string `json:"user_id"`
 	Limit *int `json:"limit,omitempty"`
 	Offset *int `json:"offset,omitempty"`
 	ProductId *string `json:"product_id,omitempty"`
@@ -2802,7 +2818,7 @@ type UserAgentListMatch struct {
 
 // UserAgentCreateData is the typed request payload for UserAgent.CreateTyped.
 type UserAgentCreateData struct {
-	Id string `json:"id"`
+	UserId string `json:"user_id"`
 	AgentId *string `json:"agent_id,omitempty"`
 	PhoneAdminPcName *any `json:"phone_admin_pc_name,omitempty"`
 	ProductId *string `json:"product_id,omitempty"`
@@ -2819,7 +2835,7 @@ type UserHealthDetail struct {
 
 // UserHealthDetailListMatch is the typed request payload for UserHealthDetail.ListTyped.
 type UserHealthDetailListMatch struct {
-	Id string `json:"id"`
+	UserId string `json:"user_id"`
 	AssignedAgentsPreviewLimit *int `json:"assigned_agents_preview_limit,omitempty"`
 	ProductId *string `json:"product_id,omitempty"`
 }

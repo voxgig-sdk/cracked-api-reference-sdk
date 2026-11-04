@@ -173,6 +173,24 @@ class AgentHealthDetailEntityTest extends TestCase
         $this->assertSame(2, $client->_cost["total"]["attempts"]);
     }
 
+    public function test_validate_list_response(): void
+    {
+        $cfg = CrackedApiReferenceConfig::shared_config();
+        if (!isset($cfg["feature"]["validate"])) {
+            $this->markTestSkipped('feature not present in this SDK: validate');
+        }
+        $opts = ["feature" => ["validate" => ["active" => true, "request" => false, "response" => true]]];
+        $listed = CrackedApiReferenceSDK::test(['entity' => ['agent_health_detail' => ['v1' => ['agent_id' => 'x', 'category' => 'x', 'connection_status' => 'x', 'device_status' => 'x', 'issue' => 'x', 'state' => 'x']]]], $opts)->AgentHealthDetail(null)->list(null, null);
+        $this->assertSame(['v1'], array_map(fn($ent) => $ent->data_get()['id'] ?? null, $listed));
+        $err = null;
+        try {
+            CrackedApiReferenceSDK::test(['entity' => ['agent_health_detail' => ['v1' => ['agent_id' => 1, 'category' => 'x', 'connection_status' => 'x', 'device_status' => 'x', 'issue' => 'x', 'state' => 'x']]]], $opts)->AgentHealthDetail(null)->list(null, null);
+        } catch (\Throwable $e) {
+            $err = $e;
+        }
+        $this->assertSame('validate_failed', $err->sdk_code ?? null);
+    }
+
     public function test_validate(): void
     {
         $cfg = CrackedApiReferenceConfig::shared_config();
@@ -211,6 +229,9 @@ class AgentHealthDetailEntityTest extends TestCase
             $agent_health_detail_ref01_data = Helpers::to_map($agent_health_detail_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LIST
         $agent_health_detail_ref01_ent = $client->AgentHealthDetail(null);
         $agent_health_detail_ref01_match = [];

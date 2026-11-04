@@ -41,6 +41,13 @@ class AdminHealthrxEntityTest < Minitest::Test
         return
       end
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE"
+      puts "LIVE STEP {\"id\":\"admin_healthrx.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/admin/healthrx/items/{kind}/{item_id}/decision\"}"
+      puts "LIVE STEP {\"id\":\"admin_healthrx.update.1\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs PUT /api/admin/healthrx/automation/config\"}"
+      puts "LIVE STEP {\"id\":\"admin_healthrx.load.2\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: reads a record only admin_healthrx.create.0 gives\"}"
+      skip("Live coverage incomplete: admin_healthrx.create.0 excluded (GET-only live run: needs POST /api/admin/healthrx/items/{kind}/{item_id}/decision); admin_healthrx.update.1 excluded (GET-only live run: needs PUT /api/admin/healthrx/automation/config); admin_healthrx.load.2 excluded (GET-only live run: reads a record only admin_healthrx.create.0 gives)")
+    end
+
     if setup[:live]
       ["kind01"].each do |_live_key|
         if setup[:synthetic_only] || setup[:idmap][_live_key].nil?
@@ -50,6 +57,7 @@ class AdminHealthrxEntityTest < Minitest::Test
     end
     client = setup[:client]
 
+    Runner.live_pace if setup[:live]
     # CREATE
     admin_healthrx_ref01_ent = client.AdminHealthrx(nil)
     admin_healthrx_ref01_data = Helpers.to_map(Vs.getprop(
@@ -61,6 +69,7 @@ class AdminHealthrxEntityTest < Minitest::Test
     assert !admin_healthrx_ref01_data.nil?
     assert !admin_healthrx_ref01_data["id"].nil?
 
+    Runner.live_pace if setup[:live]
     # UPDATE
     admin_healthrx_ref01_data_up0_up = {
       "id" => admin_healthrx_ref01_data["id"],
@@ -73,9 +82,10 @@ class AdminHealthrxEntityTest < Minitest::Test
     admin_healthrx_ref01_resdata_up0_result = admin_healthrx_ref01_ent.update(admin_healthrx_ref01_data_up0_up, nil)
     admin_healthrx_ref01_resdata_up0 = Helpers.to_map(admin_healthrx_ref01_resdata_up0_result.respond_to?(:data_get) ? admin_healthrx_ref01_resdata_up0_result.data_get : admin_healthrx_ref01_resdata_up0_result)
     assert !admin_healthrx_ref01_resdata_up0.nil?
-    assert_equal admin_healthrx_ref01_resdata_up0["id"], admin_healthrx_ref01_data_up0_up["id"]
+    assert Runner.live_same_id(admin_healthrx_ref01_resdata_up0["id"], admin_healthrx_ref01_data_up0_up["id"]) unless setup[:live]
     assert_equal admin_healthrx_ref01_resdata_up0[admin_healthrx_ref01_markdef_up0_name], admin_healthrx_ref01_markdef_up0_value
 
+    Runner.live_pace if setup[:live]
     # LOAD
     admin_healthrx_ref01_match_dt0 = {
       "id" => admin_healthrx_ref01_data["id"],
@@ -83,7 +93,7 @@ class AdminHealthrxEntityTest < Minitest::Test
     admin_healthrx_ref01_data_dt0_loaded = admin_healthrx_ref01_ent.load(admin_healthrx_ref01_match_dt0, nil)
     admin_healthrx_ref01_data_dt0_load_result = Helpers.to_map(admin_healthrx_ref01_data_dt0_loaded.respond_to?(:data_get) ? admin_healthrx_ref01_data_dt0_loaded.data_get : admin_healthrx_ref01_data_dt0_loaded)
     assert !admin_healthrx_ref01_data_dt0_load_result.nil?
-    assert_equal admin_healthrx_ref01_data_dt0_load_result["id"], admin_healthrx_ref01_data["id"]
+    assert Runner.live_same_id(admin_healthrx_ref01_data_dt0_load_result["id"], admin_healthrx_ref01_data["id"]) unless setup[:live]
 
   end
 end

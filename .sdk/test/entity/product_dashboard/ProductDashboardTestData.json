@@ -2,44 +2,63 @@
   "existing": {
     "product_dashboard": {
       "PRODUCT_DASHBOARD00": {
-        "agents": [],
-        "date": "s47",
-        "pagination": {},
-        "phone_admin_error": "s49",
-        "products": [],
-        "selected_product": "s4b",
-        "summary": {}
+        "comments": 120,
+        "failed_entries": 121,
+        "has_tiktok_community_violation": true,
+        "id": "PRODUCT_DASHBOARD00",
+        "likes": 124,
+        "metrics_pending_count": 125,
+        "name": "s7e",
+        "platforms": [],
+        "posted_entries": 128,
+        "posting_entries": 129,
+        "scheduled_entries": 130,
+        "views": 131
       },
       "PRODUCT_DASHBOARD01": {
-        "agents": [],
-        "date": "s8d",
-        "pagination": {},
-        "phone_admin_error": "s8f",
-        "products": [],
-        "selected_product": "s91",
-        "summary": {}
+        "comments": 240,
+        "failed_entries": 241,
+        "has_tiktok_community_violation": true,
+        "id": "PRODUCT_DASHBOARD01",
+        "likes": 244,
+        "metrics_pending_count": 245,
+        "name": "sf6",
+        "platforms": [],
+        "posted_entries": 248,
+        "posting_entries": 249,
+        "scheduled_entries": 250,
+        "views": 251
       },
       "PRODUCT_DASHBOARD02": {
-        "agents": [],
-        "date": "sd3",
-        "pagination": {},
-        "phone_admin_error": "sd5",
-        "products": [],
-        "selected_product": "sd7",
-        "summary": {}
+        "comments": 360,
+        "failed_entries": 361,
+        "has_tiktok_community_violation": true,
+        "id": "PRODUCT_DASHBOARD02",
+        "likes": 364,
+        "metrics_pending_count": 365,
+        "name": "s16e",
+        "platforms": [],
+        "posted_entries": 368,
+        "posting_entries": 369,
+        "scheduled_entries": 370,
+        "views": 371
       }
     }
   },
   "new": {
     "product_dashboard": {
       "product_dashboard_ref01": {
-        "agents": [],
-        "date": "s119",
-        "pagination": {},
-        "phone_admin_error": "s11b",
-        "products": [],
-        "selected_product": "s11d",
-        "summary": {}
+        "comments": 480,
+        "failed_entries": 481,
+        "has_tiktok_community_violation": true,
+        "likes": 484,
+        "metrics_pending_count": 485,
+        "name": "s1e6",
+        "platforms": [],
+        "posted_entries": 488,
+        "posting_entries": 489,
+        "scheduled_entries": 490,
+        "views": 491
       }
     }
   },

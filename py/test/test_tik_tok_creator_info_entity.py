@@ -153,6 +153,8 @@ class TestTikTokCreatorInfoEntity:
         if len(tik_tok_creator_info_ref01_data_raw) > 0:
             tik_tok_creator_info_ref01_data = helpers.to_map(tik_tok_creator_info_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LIST
         tik_tok_creator_info_ref01_ent = client.TikTokCreatorInfo(None)
         tik_tok_creator_info_ref01_match = {}

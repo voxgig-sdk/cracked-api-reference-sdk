@@ -41,6 +41,29 @@ class CommentCampaignEntityTest < Minitest::Test
         return
       end
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE"
+      puts "LIVE STEP {\"id\":\"comment_campaign.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/comments/products/{product_id}/campaign/sources/{source_id}/resolve\"}"
+      puts "LIVE STEP {\"id\":\"comment_campaign.update.1\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs PUT /api/comments/products/{product_id}/campaign\"}"
+    client = setup[:client]
+
+    # Bootstrap entity data from existing test data.
+    comment_campaign_ref01_data_raw = Vs.items(Helpers.to_map(
+      Vs.getpath(setup[:data], "existing.comment_campaign")))
+    comment_campaign_ref01_data = nil
+    if comment_campaign_ref01_data_raw.length > 0
+      comment_campaign_ref01_data = Helpers.to_map(comment_campaign_ref01_data_raw[0][1])
+    end
+
+    Runner.live_pace if setup[:live]
+    # LOAD
+    comment_campaign_ref01_ent = client.CommentCampaign(nil)
+    comment_campaign_ref01_match_dt0 = {}
+    comment_campaign_ref01_data_dt0_loaded = comment_campaign_ref01_ent.load(comment_campaign_ref01_match_dt0, nil)
+    assert !comment_campaign_ref01_data_dt0_loaded.nil?
+
+      return
+    end
+
     if setup[:live]
       ["product01"].each do |_live_key|
         if setup[:synthetic_only] || setup[:idmap][_live_key].nil?
@@ -50,6 +73,7 @@ class CommentCampaignEntityTest < Minitest::Test
     end
     client = setup[:client]
 
+    Runner.live_pace if setup[:live]
     # CREATE
     comment_campaign_ref01_ent = client.CommentCampaign(nil)
     comment_campaign_ref01_data = Helpers.to_map(Vs.getprop(
@@ -60,6 +84,7 @@ class CommentCampaignEntityTest < Minitest::Test
     comment_campaign_ref01_data = Helpers.to_map(comment_campaign_ref01_data_result.respond_to?(:data_get) ? comment_campaign_ref01_data_result.data_get : comment_campaign_ref01_data_result)
     assert !comment_campaign_ref01_data.nil?
 
+    Runner.live_pace if setup[:live]
     # UPDATE
     comment_campaign_ref01_data_up0_up = {
     }
@@ -73,6 +98,7 @@ class CommentCampaignEntityTest < Minitest::Test
     assert !comment_campaign_ref01_resdata_up0.nil?
     assert_equal comment_campaign_ref01_resdata_up0[comment_campaign_ref01_markdef_up0_name], comment_campaign_ref01_markdef_up0_value
 
+    Runner.live_pace if setup[:live]
     # LOAD
     comment_campaign_ref01_match_dt0 = {}
     comment_campaign_ref01_data_dt0_loaded = comment_campaign_ref01_ent.load(comment_campaign_ref01_match_dt0, nil)

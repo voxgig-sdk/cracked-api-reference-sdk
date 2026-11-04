@@ -201,6 +201,52 @@ class ProductEntityTest extends TestCase
                 return;
             }
         }
+        if (!empty($setup["live"]) && getenv('VOXGIG_GETONLY_GUARD') === "TRUE") {
+            fwrite(STDOUT, 'LIVE STEP {"id":"product.create.0","state":"excluded","attempted":false,"reason":"GET-only live run: needs POST /api/products/{product_id}/validate-social-handle"}' . "\n");
+            fwrite(STDOUT, 'LIVE STEP {"id":"product.update.2","state":"excluded","attempted":false,"reason":"GET-only live run: needs PUT /api/enterprise/products/{product_id}"}' . "\n");
+            fwrite(STDOUT, 'LIVE STEP {"id":"product.remove.4","state":"excluded","attempted":false,"reason":"GET-only live run: needs DELETE /api/enterprise/products/{product_id}"}' . "\n");
+            fwrite(STDOUT, 'LIVE STEP {"id":"product.list.5","state":"excluded","attempted":false,"reason":"GET-only live run: checks a removal this run does not make"}' . "\n");
+        $client = $setup["client"];
+        if (!empty($setup["live"])) {
+            $_liveId = empty($setup["synthetic_only"]) ? ($setup["idmap"]["product01"] ?? null) : null;
+            Runner::live_pace();
+            Runner::live_existing($setup, self::LIVE_STRICT, "product",
+                fn() => $client->Product(null)->list([], null), "product_id", $_liveId);
+        }
+
+        // Bootstrap entity data from existing test data.
+        $product_ref01_data_raw = Vs::items(Helpers::to_map(
+            Vs::getpath($setup["data"], "existing.product")));
+        $product_ref01_data = null;
+        if (count($product_ref01_data_raw) > 0) {
+            $product_ref01_data = Helpers::to_map($product_ref01_data_raw[0][1]);
+        }
+
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
+        // LIST
+        $product_ref01_ent = $client->Product(null);
+        $product_ref01_match = [];
+
+        $product_ref01_list_result = $product_ref01_ent->list($product_ref01_match, null);
+        $this->assertIsArray($product_ref01_list_result);
+
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
+        // LOAD
+        $product_ref01_match_dt0 = [
+            "id" => $product_ref01_data["product_id"],
+        ];
+        $product_ref01_data_dt0_loaded = $product_ref01_ent->load($product_ref01_match_dt0, null);
+        $product_ref01_data_dt0_load_result = Helpers::to_map(is_object($product_ref01_data_dt0_loaded) && method_exists($product_ref01_data_dt0_loaded, 'data_get') ? $product_ref01_data_dt0_loaded->data_get() : $product_ref01_data_dt0_loaded);
+        $this->assertNotNull($product_ref01_data_dt0_load_result);
+        $this->assertTrue(Runner::live_same_id($product_ref01_data_dt0_load_result["product_id"] ?? null, $product_ref01_data["product_id"]));
+
+            return;
+        }
+
         if (!empty($setup["live"])) {
             foreach (["user01"] as $_liveKey) {
                 if (!empty($setup["synthetic_only"]) || null === ($setup["idmap"][$_liveKey] ?? null)) {
@@ -210,6 +256,9 @@ class ProductEntityTest extends TestCase
         }
         $client = $setup["client"];
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // CREATE
         $product_ref01_ent = $client->Product(null);
         $product_ref01_data = Helpers::to_map(Vs::getprop(
@@ -219,8 +268,11 @@ class ProductEntityTest extends TestCase
         $product_ref01_data_result = $product_ref01_ent->create($product_ref01_data, null);
         $product_ref01_data = Helpers::to_map(is_object($product_ref01_data_result) && method_exists($product_ref01_data_result, 'data_get') ? $product_ref01_data_result->data_get() : $product_ref01_data_result);
         $this->assertNotNull($product_ref01_data);
-        $this->assertNotNull($product_ref01_data["id"]);
+        $this->assertNotNull($product_ref01_data["product_id"]);
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LIST
         $product_ref01_match = [];
 
@@ -229,12 +281,15 @@ class ProductEntityTest extends TestCase
 
         $found_item = sdk_select(
             Runner::entity_list_to_data($product_ref01_list_result),
-            ["id" => $product_ref01_data["id"]]);
+            ["product_id" => $product_ref01_data["product_id"]]);
         $this->assertNotEmpty($found_item);
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // UPDATE
         $product_ref01_data_up0_up = [
-            "id" => $product_ref01_data["id"],
+            "id" => $product_ref01_data["product_id"],
         ];
 
         $product_ref01_markdef_up0_name = "description";
@@ -244,24 +299,33 @@ class ProductEntityTest extends TestCase
         $product_ref01_resdata_up0_result = $product_ref01_ent->update($product_ref01_data_up0_up, null);
         $product_ref01_resdata_up0 = Helpers::to_map(is_object($product_ref01_resdata_up0_result) && method_exists($product_ref01_resdata_up0_result, 'data_get') ? $product_ref01_resdata_up0_result->data_get() : $product_ref01_resdata_up0_result);
         $this->assertNotNull($product_ref01_resdata_up0);
-        $this->assertEquals($product_ref01_resdata_up0["id"], $product_ref01_data_up0_up["id"]);
+        $this->assertTrue(Runner::live_same_id($product_ref01_resdata_up0["product_id"] ?? null, $product_ref01_data_up0_up["id"]));
         $this->assertEquals($product_ref01_resdata_up0[$product_ref01_markdef_up0_name], $product_ref01_markdef_up0_value);
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LOAD
         $product_ref01_match_dt0 = [
-            "id" => $product_ref01_data["id"],
+            "id" => $product_ref01_data["product_id"],
         ];
         $product_ref01_data_dt0_loaded = $product_ref01_ent->load($product_ref01_match_dt0, null);
         $product_ref01_data_dt0_load_result = Helpers::to_map(is_object($product_ref01_data_dt0_loaded) && method_exists($product_ref01_data_dt0_loaded, 'data_get') ? $product_ref01_data_dt0_loaded->data_get() : $product_ref01_data_dt0_loaded);
         $this->assertNotNull($product_ref01_data_dt0_load_result);
-        $this->assertEquals($product_ref01_data_dt0_load_result["id"], $product_ref01_data["id"]);
+        $this->assertTrue(Runner::live_same_id($product_ref01_data_dt0_load_result["product_id"] ?? null, $product_ref01_data["product_id"]));
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // REMOVE
         $product_ref01_match_rm0 = [
-            "id" => $product_ref01_data["id"],
+            "id" => $product_ref01_data["product_id"],
         ];
         $product_ref01_ent->remove($product_ref01_match_rm0, null);
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LIST
         $product_ref01_match_rt0 = [];
 
@@ -270,7 +334,7 @@ class ProductEntityTest extends TestCase
 
         $not_found_item = sdk_select(
             Runner::entity_list_to_data($product_ref01_list_rt0_result),
-            ["id" => $product_ref01_data["id"]]);
+            ["product_id" => $product_ref01_data["product_id"]]);
         $this->assertEmpty($not_found_item);
 
     }
@@ -283,6 +347,12 @@ function product_basic_setup($extra)
     $entity_data_file = __DIR__ . '/../../.sdk/test/entity/product/ProductTestData.json';
     $entity_data_source = file_get_contents($entity_data_file);
     $entity_data = json_decode($entity_data_source, true);
+
+    foreach (($entity_data["existing"]["product"] ?? []) as $rec_key => $rec) {
+        if (is_array($rec) && isset($rec["id"])) {
+            $entity_data["existing"]["product"][$rec_key]["product_id"] = $rec["id"];
+        }
+    }
 
     $options = [];
     $options["entity"] = $entity_data["existing"];

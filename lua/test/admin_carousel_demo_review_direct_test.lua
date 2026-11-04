@@ -28,12 +28,20 @@ describe("AdminCarouselDemoReviewDirect", function()
       pending(_reason or "skipped via sdk-test-control.json")
       return
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" and setup.idmap["admin_carousel_demo_review01"] == nil then
+      print("LIVE STEP {\"id\":\"direct-load-admin_carousel_demo_review\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs admin_carousel_demo_review01, which only POST /api/admin/carousels/demo-reviews/{formula_id}/decision gives\"}")
+      pending("Live coverage incomplete: direct-load-admin_carousel_demo_review excluded (GET-only live run: needs admin_carousel_demo_review01, which only POST /api/admin/carousels/demo-reviews/{formula_id}/decision gives)")
+      return
+    end
     if setup.live then
       for _, _live_key in ipairs({"admin_carousel_demo_review01"}) do
         if setup.idmap[_live_key] == nil then
           runner.live_miss(pending, LIVE_STRICT, "Live test blocked: needs " .. _live_key .. " via CRACKED_API_REFERENCE_TEST_ADMIN_CAROUSEL_DEMO_REVIEW_ENTID")
         end
       end
+    end
+    if setup.live then
+      runner.live_pace()
     end
     local client = setup.client
 

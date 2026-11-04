@@ -39,6 +39,7 @@ class SiteEntityTest < Minitest::Test
       site_ref01_data = Helpers.to_map(site_ref01_data_raw[0][1])
     end
 
+    Runner.live_pace if setup[:live]
     # LOAD
     site_ref01_ent = client.Site(nil)
     site_ref01_match_dt0 = {}

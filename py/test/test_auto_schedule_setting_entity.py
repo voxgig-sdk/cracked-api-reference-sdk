@@ -51,6 +51,10 @@ class TestAutoScheduleSettingEntity:
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
                 return
+        if setup["live"] and os.environ.get("VOXGIG_GETONLY_GUARD") == "TRUE":
+            print("LIVE STEP {\"id\":\"auto_schedule_setting.update.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs PUT /api/schedule/settings\"}")
+            return self._run_get_only_flow(setup)
+
         client = setup["client"]
 
         # Bootstrap entity data from existing test data.
@@ -60,6 +64,8 @@ class TestAutoScheduleSettingEntity:
         if len(auto_schedule_setting_ref01_data_raw) > 0:
             auto_schedule_setting_ref01_data = helpers.to_map(auto_schedule_setting_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # UPDATE
         auto_schedule_setting_ref01_ent = client.AutoScheduleSetting(None)
         auto_schedule_setting_ref01_data_up0_up = {
@@ -73,7 +79,28 @@ class TestAutoScheduleSettingEntity:
         assert auto_schedule_setting_ref01_resdata_up0 is not None
         assert auto_schedule_setting_ref01_resdata_up0[auto_schedule_setting_ref01_markdef_up0_name] == auto_schedule_setting_ref01_markdef_up0_value
 
+        if setup["live"]:
+            runner.live_pace()
         # LOAD
+        auto_schedule_setting_ref01_match_dt0 = {}
+        auto_schedule_setting_ref01_data_dt0_loaded = auto_schedule_setting_ref01_ent.load(auto_schedule_setting_ref01_match_dt0, None)
+        assert auto_schedule_setting_ref01_data_dt0_loaded is not None
+
+
+    def _run_get_only_flow(self, setup):
+        client = setup["client"]
+
+        # Bootstrap entity data from existing test data.
+        auto_schedule_setting_ref01_data_raw = vs.items(helpers.to_map(
+            vs.getpath(setup["data"], "existing.auto_schedule_setting")))
+        auto_schedule_setting_ref01_data = None
+        if len(auto_schedule_setting_ref01_data_raw) > 0:
+            auto_schedule_setting_ref01_data = helpers.to_map(auto_schedule_setting_ref01_data_raw[0][1])
+
+        if setup["live"]:
+            runner.live_pace()
+        # LOAD
+        auto_schedule_setting_ref01_ent = client.AutoScheduleSetting(None)
         auto_schedule_setting_ref01_match_dt0 = {}
         auto_schedule_setting_ref01_data_dt0_loaded = auto_schedule_setting_ref01_ent.load(auto_schedule_setting_ref01_match_dt0, None)
         assert auto_schedule_setting_ref01_data_dt0_loaded is not None

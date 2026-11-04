@@ -19,7 +19,7 @@ type ListArgs struct {
 
 // LoadArgs is what an agent sends to cracked-api-reference_load.
 type LoadArgs struct {
-	Entity string         `json:"entity" jsonschema:"one of: active_onboarding | admin | admin_carousel | admin_carousel_demo_review | admin_healthrx | admin_insight | admin_slideshow_import | admin_video_remixer | agent_access_overview | agent_access_phil_hourly_notification | agent_access_phil_stats_refresh | agent_access_phil_video | agent_access_user_video | agent_stat | agents_summary | analysis_status | auto_schedule_setting | carousel | carousel_agent_detail | chat_history | comment | comment_campaign | customer_health | daily_status | enterprise_agent | enterprise_product | exact_availability | exact_formula | generate_sora2_prompt | healthrx | landing_stat | landing_status | link_in_bio | link_in_dm | link_in_post | media_asset | microdrama | microhub_public | product | public_resume_status | read_root_get | remixer_clipper | reset_product | scan_socials_status | schedule_v2 | scraping_status | seo | site | slug_validation | social | sora2_avatar | sora2_avatar_stat | style | template | user | video | watchdog_recovery | x_adaptation"`
+	Entity string         `json:"entity" jsonschema:"one of: active_onboarding | admin | admin_carousel | admin_carousel_demo_review | admin_healthrx | admin_insight | admin_slideshow_import | admin_video_remixer | agent_access_overview | agent_access_phil_hourly_notification | agent_access_phil_stats_refresh | agent_access_phil_video | agent_access_user_video | agent_stat | agents_summary | analysis_status | auto_schedule_setting | carousel | carousel_agent_detail | chat_history | comment | comment_campaign | customer_health | daily_status | enterprise_agent | exact_availability | exact_formula | generate_sora2_prompt | healthrx | landing_stat | landing_status | link_in_bio | link_in_dm | link_in_post | media_asset | microdrama | microhub_public | product | public_resume_status | remixer_clipper | reset_product | root_get | scan_socials_status | schedule_v2 | scraping_status | seo | site | slug_validation | social | sora2_avatar | sora2_avatar_stat | style | template | user | video | watchdog_recovery | x_adaptation"`
 	Query  map[string]any `json:"query" jsonschema:"match map naming the record, such as {\"id\":1}"`
 }
 
@@ -36,7 +36,7 @@ func registerTools(server *mcp.Server, client *sdk.CrackedApiReferenceSDK) {
 		Name:        "cracked-api-reference_load",
 		Description: "Load one record from CrackedApiReference. Args: entity, query (match map naming the record, such as {\"id\":1}). Returns the record as JSON.",
 		Annotations: &mcp.ToolAnnotations{ReadOnlyHint: true},
-		InputSchema: entitySchema[LoadArgs]("active_onboarding", "admin", "admin_carousel", "admin_carousel_demo_review", "admin_healthrx", "admin_insight", "admin_slideshow_import", "admin_video_remixer", "agent_access_overview", "agent_access_phil_hourly_notification", "agent_access_phil_stats_refresh", "agent_access_phil_video", "agent_access_user_video", "agent_stat", "agents_summary", "analysis_status", "auto_schedule_setting", "carousel", "carousel_agent_detail", "chat_history", "comment", "comment_campaign", "customer_health", "daily_status", "enterprise_agent", "enterprise_product", "exact_availability", "exact_formula", "generate_sora2_prompt", "healthrx", "landing_stat", "landing_status", "link_in_bio", "link_in_dm", "link_in_post", "media_asset", "microdrama", "microhub_public", "product", "public_resume_status", "read_root_get", "remixer_clipper", "reset_product", "scan_socials_status", "schedule_v2", "scraping_status", "seo", "site", "slug_validation", "social", "sora2_avatar", "sora2_avatar_stat", "style", "template", "user", "video", "watchdog_recovery", "x_adaptation"),
+		InputSchema: entitySchema[LoadArgs]("active_onboarding", "admin", "admin_carousel", "admin_carousel_demo_review", "admin_healthrx", "admin_insight", "admin_slideshow_import", "admin_video_remixer", "agent_access_overview", "agent_access_phil_hourly_notification", "agent_access_phil_stats_refresh", "agent_access_phil_video", "agent_access_user_video", "agent_stat", "agents_summary", "analysis_status", "auto_schedule_setting", "carousel", "carousel_agent_detail", "chat_history", "comment", "comment_campaign", "customer_health", "daily_status", "enterprise_agent", "exact_availability", "exact_formula", "generate_sora2_prompt", "healthrx", "landing_stat", "landing_status", "link_in_bio", "link_in_dm", "link_in_post", "media_asset", "microdrama", "microhub_public", "product", "public_resume_status", "remixer_clipper", "reset_product", "root_get", "scan_socials_status", "schedule_v2", "scraping_status", "seo", "site", "slug_validation", "social", "sora2_avatar", "sora2_avatar_stat", "style", "template", "user", "video", "watchdog_recovery", "x_adaptation"),
 	}, func(ctx context.Context, req *mcp.CallToolRequest, args LoadArgs) (*mcp.CallToolResult, any, error) {
 		return runOp(ctx, client, "load", args.Entity, args.Query)
 	})
@@ -101,7 +101,7 @@ func runOp(_ context.Context, client *sdk.CrackedApiReferenceSDK, op string, ent
 
 // entityFor dispatches on the lowercase entity name. The generator
 // emits one `case "<name>":` per entity defined in the SDK model.
-func entityFor(client *sdk.CrackedApiReferenceSDK, name string) (sdk.CrackedApiReferenceEntity, error) {
+func entityFor(client *sdk.CrackedApiReferenceSDK, name string) (sdk.CrackedApiReferenceEntityBase, error) {
 	switch strings.ToLower(name) {
 	case "activate":
 		return client.Activate(nil), nil
@@ -209,8 +209,6 @@ func entityFor(client *sdk.CrackedApiReferenceSDK, name string) (sdk.CrackedApiR
 		return client.CarouselAgentDetail(nil), nil
 	case "carousel_status":
 		return client.CarouselStatus(nil), nil
-	case "chat":
-		return client.Chat(nil), nil
 	case "chat_history":
 		return client.ChatHistory(nil), nil
 	case "chat_session":
@@ -249,8 +247,6 @@ func entityFor(client *sdk.CrackedApiReferenceSDK, name string) (sdk.CrackedApiR
 		return client.DedicatedAgentsDashboard(nil), nil
 	case "enterprise_agent":
 		return client.EnterpriseAgent(nil), nil
-	case "enterprise_product":
-		return client.EnterpriseProduct(nil), nil
 	case "exact_availability":
 		return client.ExactAvailability(nil), nil
 	case "exact_formula":
@@ -273,8 +269,6 @@ func entityFor(client *sdk.CrackedApiReferenceSDK, name string) (sdk.CrackedApiR
 		return client.Healthrx(nil), nil
 	case "init_reset_product_v6":
 		return client.InitResetProductV6(nil), nil
-	case "iri":
-		return client.Iri(nil), nil
 	case "iris_capability":
 		return client.IrisCapability(nil), nil
 	case "iris_chat":
@@ -333,8 +327,6 @@ func entityFor(client *sdk.CrackedApiReferenceSDK, name string) (sdk.CrackedApiR
 		return client.PublicResumeStatus(nil), nil
 	case "re_roll_video":
 		return client.ReRollVideo(nil), nil
-	case "read_root_get":
-		return client.ReadRootGet(nil), nil
 	case "record_demo_booked":
 		return client.RecordDemoBooked(nil), nil
 	case "refresh_stat":
@@ -345,6 +337,8 @@ func entityFor(client *sdk.CrackedApiReferenceSDK, name string) (sdk.CrackedApiR
 		return client.ResetProduct(nil), nil
 	case "retry_website_scrape":
 		return client.RetryWebsiteScrape(nil), nil
+	case "root_get":
+		return client.RootGet(nil), nil
 	case "save_survey":
 		return client.SaveSurvey(nil), nil
 	case "scan_social":
@@ -353,6 +347,8 @@ func entityFor(client *sdk.CrackedApiReferenceSDK, name string) (sdk.CrackedApiR
 		return client.ScanSocialsPublic(nil), nil
 	case "scan_socials_status":
 		return client.ScanSocialsStatus(nil), nil
+	case "schedule_queue":
+		return client.ScheduleQueue(nil), nil
 	case "schedule_v2":
 		return client.ScheduleV2(nil), nil
 	case "scrape":

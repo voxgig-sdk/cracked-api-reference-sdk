@@ -167,6 +167,7 @@ class AdminCustomerSuccessEntityTest < Minitest::Test
       admin_customer_success_ref01_data = Helpers.to_map(admin_customer_success_ref01_data_raw[0][1])
     end
 
+    Runner.live_pace if setup[:live]
     # LIST
     admin_customer_success_ref01_ent = client.AdminCustomerSuccess(nil)
     admin_customer_success_ref01_match = {}

@@ -134,10 +134,17 @@ class TestCarouselEntity:
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
                 return
+        if setup["live"] and os.environ.get("VOXGIG_GETONLY_GUARD") == "TRUE":
+            print("LIVE STEP {\"id\":\"carousel.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/carousel/{video_id}/finalize\"}")
+            return self._run_get_only_flow(setup)
+
         client = setup["client"]
         if setup["live"]:
+            _live_id = None if setup.get("synthetic_only") else setup["idmap"].get("carousel01")
+            runner.live_pace()
             runner.live_existing(setup, LIVE_STRICT, "carousel",
-                                 lambda: client.Carousel(None).list({}, None))
+                                 lambda: client.Carousel(None).list({}, None),
+                                 "queue_id", _live_id)
 
         # Bootstrap entity data from existing test data.
         carousel_ref01_data_raw = vs.items(helpers.to_map(
@@ -146,6 +153,8 @@ class TestCarouselEntity:
         if len(carousel_ref01_data_raw) > 0:
             carousel_ref01_data = helpers.to_map(carousel_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LIST
         carousel_ref01_ent = client.Carousel(None)
         carousel_ref01_match = {}
@@ -153,14 +162,53 @@ class TestCarouselEntity:
         carousel_ref01_list_result = carousel_ref01_ent.list(carousel_ref01_match, None)
         assert isinstance(carousel_ref01_list_result, list)
 
+        if setup["live"]:
+            runner.live_pace()
         # LOAD
         carousel_ref01_match_dt0 = {
-            "id": carousel_ref01_data["id"],
+            "id": carousel_ref01_data["queue_id"],
         }
         carousel_ref01_data_dt0_loaded = carousel_ref01_ent.load(carousel_ref01_match_dt0, None)
         carousel_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(carousel_ref01_data_dt0_loaded))
         assert carousel_ref01_data_dt0_load_result is not None
-        assert carousel_ref01_data_dt0_load_result["id"] == carousel_ref01_data["id"]
+        assert runner.live_same_id(carousel_ref01_data_dt0_load_result.get("queue_id"), carousel_ref01_data["queue_id"])
+
+
+    def _run_get_only_flow(self, setup):
+        client = setup["client"]
+        if setup["live"]:
+            _live_id = None if setup.get("synthetic_only") else setup["idmap"].get("carousel01")
+            runner.live_pace()
+            runner.live_existing(setup, LIVE_STRICT, "carousel",
+                                 lambda: client.Carousel(None).list({}, None),
+                                 "queue_id", _live_id)
+
+        # Bootstrap entity data from existing test data.
+        carousel_ref01_data_raw = vs.items(helpers.to_map(
+            vs.getpath(setup["data"], "existing.carousel")))
+        carousel_ref01_data = None
+        if len(carousel_ref01_data_raw) > 0:
+            carousel_ref01_data = helpers.to_map(carousel_ref01_data_raw[0][1])
+
+        if setup["live"]:
+            runner.live_pace()
+        # LIST
+        carousel_ref01_ent = client.Carousel(None)
+        carousel_ref01_match = {}
+
+        carousel_ref01_list_result = carousel_ref01_ent.list(carousel_ref01_match, None)
+        assert isinstance(carousel_ref01_list_result, list)
+
+        if setup["live"]:
+            runner.live_pace()
+        # LOAD
+        carousel_ref01_match_dt0 = {
+            "id": carousel_ref01_data["queue_id"],
+        }
+        carousel_ref01_data_dt0_loaded = carousel_ref01_ent.load(carousel_ref01_match_dt0, None)
+        carousel_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(carousel_ref01_data_dt0_loaded))
+        assert carousel_ref01_data_dt0_load_result is not None
+        assert runner.live_same_id(carousel_ref01_data_dt0_load_result.get("queue_id"), carousel_ref01_data["queue_id"])
 
 
 
@@ -172,6 +220,10 @@ def _carousel_basic_setup(extra):
         entity_data_source = f.read()
 
     entity_data = json.loads(entity_data_source)
+
+    for rec in ((entity_data.get("existing") or {}).get("carousel") or {}).values():
+        if isinstance(rec, dict) and rec.get("id") is not None:
+            rec["queue_id"] = rec["id"]
 
     options = {}
     options["entity"] = entity_data.get("existing")

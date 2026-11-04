@@ -51,8 +51,14 @@ class TestCreateSora2VideoEntity:
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
                 return
+        if setup["live"] and os.environ.get("VOXGIG_GETONLY_GUARD") == "TRUE":
+            print("LIVE STEP {\"id\":\"create_sora2_video.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/core/create-sora2-video\"}")
+            pytest.skip("Live coverage incomplete: create_sora2_video.create.0 excluded (GET-only live run: needs POST /api/core/create-sora2-video)")
+
         client = setup["client"]
 
+        if setup["live"]:
+            runner.live_pace()
         # CREATE
         create_sora2_video_ref01_ent = client.CreateSora2Video(None)
         create_sora2_video_ref01_data = helpers.to_map(vs.getprop(

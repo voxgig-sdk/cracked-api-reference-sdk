@@ -122,16 +122,6 @@ main: kit: entity: video_remixer_worker: {
             version: 2
           }
           g: {
-            header: [
-              {
-                ex: ""
-                k: "header"
-                n: "authorization"
-                or: "authorization"
-                r: false
-                t: "`$STRING`"
-              }
-            ]
             params: [
               {
                 k: "param"
@@ -196,16 +186,6 @@ main: kit: entity: video_remixer_worker: {
             version: 2
           }
           g: {
-            header: [
-              {
-                ex: ""
-                k: "header"
-                n: "authorization"
-                or: "authorization"
-                r: false
-                t: "`$STRING`"
-              }
-            ]
             params: [
               {
                 k: "param"
@@ -269,16 +249,6 @@ main: kit: entity: video_remixer_worker: {
             version: 2
           }
           g: {
-            header: [
-              {
-                ex: ""
-                k: "header"
-                n: "authorization"
-                or: "authorization"
-                r: false
-                t: "`$STRING`"
-              }
-            ]
             params: [
               {
                 k: "param"
@@ -339,14 +309,6 @@ main: kit: entity: video_remixer_worker: {
           }
           g: {
             header: [
-              {
-                ex: ""
-                k: "header"
-                n: "authorization"
-                or: "authorization"
-                r: false
-                t: "`$STRING`"
-              }
               {
                 ex: ""
                 k: "header"
@@ -452,16 +414,6 @@ main: kit: entity: video_remixer_worker: {
             version: 2
           }
           g: {
-            header: [
-              {
-                ex: ""
-                k: "header"
-                n: "authorization"
-                or: "authorization"
-                r: false
-                t: "`$STRING`"
-              }
-            ]
             params: [
               {
                 k: "param"
@@ -527,14 +479,6 @@ main: kit: entity: video_remixer_worker: {
           }
           g: {
             header: [
-              {
-                ex: ""
-                k: "header"
-                n: "authorization"
-                or: "authorization"
-                r: false
-                t: "`$STRING`"
-              }
               {
                 ex: ""
                 k: "header"
@@ -622,18 +566,6 @@ main: kit: entity: video_remixer_worker: {
             id: "POST /api/admin/video-remixer/worker/claim"
             source: "openapi3"
             version: 2
-          }
-          g: {
-            header: [
-              {
-                ex: ""
-                k: "header"
-                n: "authorization"
-                or: "authorization"
-                r: false
-                t: "`$STRING`"
-              }
-            ]
           }
           m: "POST"
           o: "/api/admin/video-remixer/worker/claim"

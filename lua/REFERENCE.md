@@ -253,10 +253,6 @@ Create a new `CarouselAgentDetail` entity instance. Pass `nil` for no initial da
 
 Create a new `CarouselStatus` entity instance. Pass `nil` for no initial data.
 
-#### `Chat(data)`
-
-Create a new `Chat` entity instance. Pass `nil` for no initial data.
-
 #### `ChatHistory(data)`
 
 Create a new `ChatHistory` entity instance. Pass `nil` for no initial data.
@@ -333,10 +329,6 @@ Create a new `DedicatedAgentsDashboard` entity instance. Pass `nil` for no initi
 
 Create a new `EnterpriseAgent` entity instance. Pass `nil` for no initial data.
 
-#### `EnterpriseProduct(data)`
-
-Create a new `EnterpriseProduct` entity instance. Pass `nil` for no initial data.
-
 #### `ExactAvailability(data)`
 
 Create a new `ExactAvailability` entity instance. Pass `nil` for no initial data.
@@ -380,10 +372,6 @@ Create a new `Healthrx` entity instance. Pass `nil` for no initial data.
 #### `InitResetProductV6(data)`
 
 Create a new `InitResetProductV6` entity instance. Pass `nil` for no initial data.
-
-#### `Iri(data)`
-
-Create a new `Iri` entity instance. Pass `nil` for no initial data.
 
 #### `IrisCapability(data)`
 
@@ -501,10 +489,6 @@ Create a new `PublicResumeStatus` entity instance. Pass `nil` for no initial dat
 
 Create a new `ReRollVideo` entity instance. Pass `nil` for no initial data.
 
-#### `ReadRootGet(data)`
-
-Create a new `ReadRootGet` entity instance. Pass `nil` for no initial data.
-
 #### `RecordDemoBooked(data)`
 
 Create a new `RecordDemoBooked` entity instance. Pass `nil` for no initial data.
@@ -525,6 +509,10 @@ Create a new `ResetProduct` entity instance. Pass `nil` for no initial data.
 
 Create a new `RetryWebsiteScrape` entity instance. Pass `nil` for no initial data.
 
+#### `RootGet(data)`
+
+Create a new `RootGet` entity instance. Pass `nil` for no initial data.
+
 #### `SaveSurvey(data)`
 
 Create a new `SaveSurvey` entity instance. Pass `nil` for no initial data.
@@ -540,6 +528,10 @@ Create a new `ScanSocialsPublic` entity instance. Pass `nil` for no initial data
 #### `ScanSocialsStatus(data)`
 
 Create a new `ScanSocialsStatus` entity instance. Pass `nil` for no initial data.
+
+#### `ScheduleQueue(data)`
+
+Create a new `ScheduleQueue` entity instance. Pass `nil` for no initial data.
 
 #### `ScheduleV2(data)`
 
@@ -942,56 +934,46 @@ local admin = client:Admin(nil)
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `apply` | `boolean` | No | Apply safe canonical or clean-only URL updates |
-| `count` | `number` | Yes |  |
 | `created_at` | `string` | Yes |  |
 | `date_from` | `any` | No |  |
 | `date_to` | `any` | No |  |
 | `email` | `string` | Yes |  |
 | `id` | `string` | Yes |  |
-| `include_failed` | `boolean` | No |  |
-| `include_pending` | `boolean` | No |  |
 | `include_records` | `boolean` | No | Include full per-field audit records in the response |
 | `issue_ids` | `any` | No |  |
 | `only_active` | `boolean` | No | Limit the audit to active agents |
 | `platform` | `any` | No |  |
 | `posting_method` | `any` | No |  |
-| `product_id` | `string` | No |  |
+| `product_id` | `string` | Yes |  |
 | `query` | `any` | No |  |
 | `reason` | `any` | No |  |
-| `regenerate` | `boolean` | No |  |
 | `status` | `string` | No |  |
 | `user_membership` | `any` | No |  |
 | `user_name` | `any` | No |  |
 | `user_onboarding_step` | `any` | No |  |
-| `video_type` | `string` | Yes |  |
 
 ### Field Usage by Operation
 
-| Field | load | list | create | update | remove |
-| --- | --- | --- | --- | --- | --- |
-| `apply` | - | - | - | - | - |
-| `count` | - | - | - | - | - |
-| `created_at` | - | - | - | - | - |
-| `date_from` | - | - | Yes | - | - |
-| `date_to` | - | - | Yes | - | - |
-| `email` | - | - | - | - | - |
-| `id` | - | - | - | - | - |
-| `include_failed` | - | - | - | - | - |
-| `include_pending` | - | - | - | - | - |
-| `include_records` | - | - | - | - | - |
-| `issue_ids` | - | - | - | - | - |
-| `only_active` | - | - | - | - | - |
-| `platform` | - | - | - | - | - |
-| `posting_method` | - | - | - | - | - |
-| `product_id` | - | - | Yes | - | - |
-| `query` | - | - | - | - | - |
-| `reason` | - | - | - | - | - |
-| `regenerate` | - | - | - | - | - |
-| `status` | - | - | - | - | - |
-| `user_membership` | - | - | - | - | - |
-| `user_name` | - | - | - | - | - |
-| `user_onboarding_step` | - | - | - | - | - |
-| `video_type` | - | - | - | - | - |
+| Field | load | list | create | remove |
+| --- | --- | --- | --- | --- |
+| `apply` | - | - | - | - |
+| `created_at` | - | - | - | - |
+| `date_from` | - | - | Yes | - |
+| `date_to` | - | - | Yes | - |
+| `email` | - | - | - | - |
+| `id` | - | - | - | - |
+| `include_records` | - | - | - | - |
+| `issue_ids` | - | - | - | - |
+| `only_active` | - | - | - | - |
+| `platform` | - | - | - | - |
+| `posting_method` | - | - | - | - |
+| `product_id` | - | - | - | - |
+| `query` | - | - | - | - |
+| `reason` | - | - | - | - |
+| `status` | - | - | - | - |
+| `user_membership` | - | - | - | - |
+| `user_name` | - | - | - | - |
+| `user_onboarding_step` | - | - | - | - |
 
 ### Operations
 
@@ -1002,14 +984,12 @@ Create a new entity with the given data. Returns the created entity, or `nil` an
 ```lua
 local result, err = client:Admin():create({
   user_id = --[[ string ]],
-  count = --[[ number ]],
   created_at = --[[ string ]],
   date_from = --[[ any ]],
   date_to = --[[ any ]],
   email = --[[ string ]],
   id = --[[ string ]],
   product_id = --[[ string ]],
-  video_type = --[[ string ]],
 })
 ```
 
@@ -1035,17 +1015,6 @@ Remove the entity matching the given criteria. Returns the entity, marked as del
 
 ```lua
 local result, err = client:Admin():remove({ tester_id = "tester_id" })
-```
-
-#### `update(reqdata, ctrl) -> any, err`
-
-Update an existing entity. The data must include the entity `id`. Returns the updated entity, or `nil` and an error on failure.
-
-```lua
-local result, err = client:Admin():update({
-  agent_id = "agent_id",
-  -- Fields to update
-})
 ```
 
 ### Common Methods
@@ -1635,13 +1604,25 @@ local admin_insight = client:AdminInsight(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `customer_success_cases` | `table` | Yes |  |
-| `customers` | `table` | Yes |  |
-| `generated_at` | `string` | Yes |  |
-| `pfa_database` | `table` | Yes |  |
-| `recent_signups` | `table` | Yes |  |
-| `summary` | `table` | Yes |  |
-| `vireel_database` | `table` | Yes |  |
+| `active_agents` | `number` | Yes |  |
+| `active_products` | `number` | Yes |  |
+| `agents_count` | `number` | Yes |  |
+| `auto_schedule_status` | `string` | Yes |  |
+| `days_until_period_end` | `any` | No |  |
+| `email` | `string` | Yes |  |
+| `feature_impact` | `string` | Yes |  |
+| `last_notification_at` | `any` | No |  |
+| `membership` | `any` | No |  |
+| `name` | `string` | No |  |
+| `notification_count` | `number` | Yes |  |
+| `notification_events` | `table` | Yes |  |
+| `priority` | `string` | Yes |  |
+| `severity` | `string` | Yes |  |
+| `status_label` | `string` | Yes |  |
+| `subscription_current_period_end` | `any` | No |  |
+| `subscription_status` | `any` | No |  |
+| `upcoming_posts` | `number` | Yes |  |
+| `user_id` | `string` | Yes |  |
 
 ### Operations
 
@@ -1756,14 +1737,8 @@ local admin_metrics_summary = client:AdminMetricsSummary(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `paid_users_by_level` | `table` | Yes |  |
-| `total_cancellations` | `number` | Yes |  |
-| `total_previews_generated` | `number` | Yes |  |
-| `total_signups` | `number` | Yes |  |
-| `total_videos_generated` | `number` | Yes |  |
-| `url_attempts` | `number` | Yes |  |
-| `user_credits` | `table` | Yes |  |
-| `user_gifted_credits` | `table` | Yes |  |
+| `count` | `number` | Yes |  |
+| `level` | `string` | Yes |  |
 
 ### Operations
 
@@ -2746,6 +2721,10 @@ List entities matching the given criteria. Returns an array of entities, one per
 local results, err = client:Agent():list()
 ```
 
+#### `update(reqdata, ctrl) -> any, err`
+
+Update an existing entity. The data must include the entity `id`. Returns the updated entity, or `nil` and an error on failure.
+
 ### Common Methods
 
 #### `data_get() -> table`
@@ -3087,13 +3066,17 @@ local agent_access_user_agent = client:AgentAccessUserAgent(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `agentQuota` | `number` | Yes |  |
-| `agents` | `table` | Yes |  |
-| `assignedByType` | `table` | Yes |  |
-| `assignedTotal` | `number` | Yes |  |
-| `email` | `string` | Yes |  |
-| `products` | `table` | Yes |  |
-| `userId` | `string` | Yes |  |
+| `avatar` | `any` | No |  |
+| `facebookUrl` | `any` | No |  |
+| `id` | `string` | Yes |  |
+| `instagramUrl` | `any` | No |  |
+| `name` | `string` | Yes |  |
+| `productId` | `any` | No |  |
+| `productName` | `any` | No |  |
+| `tiktokUrl` | `any` | No |  |
+| `type` | `any` | No |  |
+| `uploadPostPlatforms` | `any` | No |  |
+| `youtubeUrl` | `any` | No |  |
 
 ### Operations
 
@@ -3567,19 +3550,12 @@ local agent_health = client:AgentHealth(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `daily` | `table` | Yes |  |
-| `dates` | `table` | Yes |  |
-| `generated_at` | `string` | Yes |  |
-| `groups` | `table` | Yes |  |
-| `latest` | `table` | Yes |  |
-| `live_date` | `any` | No |  |
-| `phone_admin_generated_at` | `string` | Yes |  |
-| `platform` | `string` | No |  |
-| `post_target` | `number` | Yes |  |
-| `qa_managed_agent_ids` | `table` | No |  |
-| `scope_prefixes` | `table` | Yes |  |
-| `timezone` | `string` | Yes |  |
-| `warmup_target` | `number` | Yes |  |
+| `accounts` | `table` | Yes |  |
+| `date` | `string` | Yes |  |
+| `overall` | `table` | Yes |  |
+| `posts` | `table` | Yes |  |
+| `views` | `table` | Yes |  |
+| `warmups` | `table` | Yes |  |
 
 ### Operations
 
@@ -3685,19 +3661,12 @@ local agent_health_detail = client:AgentHealthDetail(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `archived_issue_total` | `number` | No |  |
-| `date` | `string` | Yes |  |
-| `generated_at` | `string` | Yes |  |
-| `group_id` | `string` | Yes |  |
-| `has_more` | `boolean` | Yes |  |
-| `issue_total` | `number` | Yes |  |
-| `issues` | `table` | Yes |  |
-| `limit` | `number` | Yes |  |
-| `metric` | `string` | Yes |  |
-| `offset` | `number` | Yes |  |
-| `warmup_runs` | `table` | No |  |
-| `warning_total` | `number` | No |  |
-| `warnings` | `table` | No |  |
+| `agent_id` | `string` | Yes |  |
+| `category` | `string` | Yes |  |
+| `connection_status` | `string` | Yes |  |
+| `device_status` | `string` | Yes |  |
+| `issue` | `any` | No |  |
+| `state` | `string` | Yes |  |
 
 ### Operations
 
@@ -3772,7 +3741,7 @@ local agent_post = client:AgentPost(nil)
 List entities matching the given criteria. Returns an array of entities, one per record, or `nil` and an error on failure.
 
 ```lua
-local results, err = client:AgentPost():list({ id = "example" })
+local results, err = client:AgentPost():list({ agent_id = "example" })
 ```
 
 ### Common Methods
@@ -4398,7 +4367,6 @@ local carousel = client:Carousel(nil)
 | `formula_id` | `string` | No |  |
 | `formula_name` | `any` | No |  |
 | `generation` | `table` | No |  |
-| `id` | `string` | No |  |
 | `image_prompt` | `any` | No |  |
 | `likes` | `any` | No |  |
 | `main_prompt` | `any` | No |  |
@@ -4565,7 +4533,6 @@ local carousel_status = client:CarouselStatus(nil)
 | --- | --- | --- | --- |
 | `caption` | `any` | Yes |  |
 | `error` | `any` | No |  |
-| `id` | `string` | No |  |
 | `image_model` | `any` | No |  |
 | `image_provider` | `any` | No |  |
 | `image_task_id` | `string` | No |  |
@@ -4581,7 +4548,7 @@ local carousel_status = client:CarouselStatus(nil)
 List entities matching the given criteria. Returns an array of entities, one per record, or `nil` and an error on failure.
 
 ```lua
-local results, err = client:CarouselStatus():list({ id = "example" })
+local results, err = client:CarouselStatus():list({ carousel_id = "example" })
 ```
 
 ### Common Methods
@@ -4605,65 +4572,6 @@ Set the entity match criteria.
 #### `make() -> Entity`
 
 Create a new `CarouselStatusEntity` instance with the same client and
-options.
-
-#### `get_name() -> string`
-
-Return the entity name.
-
-
----
-
-## ChatEntity
-
-```lua
-local chat = client:Chat(nil)
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `idempotencyKey` | `string` | Yes |  |
-| `message` | `string` | Yes |  |
-| `sessionId` | `string` | Yes |  |
-
-### Operations
-
-#### `create(reqdata, ctrl) -> any, err`
-
-Create a new entity with the given data. Returns the created entity, or `nil` and an error on failure.
-
-```lua
-local result, err = client:Chat():create({
-  session_id = --[[ string ]],
-  idempotencyKey = --[[ string ]],
-  message = --[[ string ]],
-  sessionId = --[[ string ]],
-})
-```
-
-### Common Methods
-
-#### `data_get() -> table`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get() -> table`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make() -> Entity`
-
-Create a new `ChatEntity` instance with the same client and
 options.
 
 #### `get_name() -> string`
@@ -4758,6 +4666,8 @@ local chat_session = client:ChatSession(nil)
 | --- | --- | --- | --- |
 | `chatSubVariant` | `string` | Yes |  |
 | `createdAt` | `string` | Yes |  |
+| `idempotencyKey` | `string` | Yes |  |
+| `message` | `string` | Yes |  |
 | `model` | `any` | No |  |
 | `plan` | `any` | No |  |
 | `route` | `any` | No |  |
@@ -4777,6 +4687,9 @@ Create a new entity with the given data. Returns the created entity, or `nil` an
 ```lua
 local result, err = client:ChatSession():create({
   session_id = --[[ string ]],
+  idempotencyKey = --[[ string ]],
+  message = --[[ string ]],
+  sessionId = --[[ string ]],
 })
 ```
 
@@ -5488,7 +5401,6 @@ local customer_health = client:CustomerHealth(nil)
 | `date` | `string` | Yes |  |
 | `email` | `string` | Yes |  |
 | `entries` | `table` | Yes |  |
-| `id` | `string` | No |  |
 | `performance_overview` | `table` | Yes |  |
 | `platform_coverage_summary` | `table` | Yes |  |
 | `user_id` | `string` | Yes |  |
@@ -5601,20 +5513,10 @@ local customer_health_views_summary = client:CustomerHealthViewsSummary(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `average_views_per_result` | `number` | Yes |  |
-| `date` | `string` | Yes |  |
-| `end_date` | `any` | No |  |
-| `paid_users_count` | `number` | Yes |  |
+| `email` | `string` | Yes |  |
 | `posted_results` | `number` | Yes |  |
-| `range` | `string` | Yes |  |
-| `start_date` | `any` | No |  |
-| `top_users` | `table` | Yes |  |
-| `total_views` | `number` | Yes |  |
-| `trend` | `table` | Yes |  |
-| `trend_granularity` | `string` | Yes |  |
-| `user_email` | `any` | No |  |
-| `user_id` | `string` | No |  |
-| `users_with_views` | `number` | Yes |  |
+| `user_id` | `string` | Yes |  |
+| `views` | `number` | Yes |  |
 
 ### Operations
 
@@ -5717,12 +5619,6 @@ Return the entity name.
 local daily_status = client:DailyStatus(nil)
 ```
 
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `id` | `string` | No |  |
-
 ### Operations
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -5730,7 +5626,7 @@ local daily_status = client:DailyStatus(nil)
 Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, or `nil` and an error on failure.
 
 ```lua
-local result, err = client:DailyStatus():load({ id = "daily_status_id", day = "day" })
+local result, err = client:DailyStatus():load({ daily_id = "daily_id", day = "day" })
 ```
 
 ### Common Methods
@@ -5900,52 +5796,6 @@ Set the entity match criteria.
 #### `make() -> Entity`
 
 Create a new `EnterpriseAgentEntity` instance with the same client and
-options.
-
-#### `get_name() -> string`
-
-Return the entity name.
-
-
----
-
-## EnterpriseProductEntity
-
-```lua
-local enterprise_product = client:EnterpriseProduct(nil)
-```
-
-### Operations
-
-#### `load(reqmatch, ctrl) -> any, err`
-
-Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, or `nil` and an error on failure.
-
-```lua
-local result, err = client:EnterpriseProduct():load({ product_id = "product_id" })
-```
-
-### Common Methods
-
-#### `data_get() -> table`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get() -> table`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make() -> Entity`
-
-Create a new `EnterpriseProductEntity` instance with the same client and
 options.
 
 #### `get_name() -> string`
@@ -6627,63 +6477,6 @@ Return the entity name.
 
 ---
 
-## IriEntity
-
-```lua
-local iri = client:Iri(nil)
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `correlationId` | `any` | No |  |
-| `idempotencyKey` | `string` | Yes |  |
-| `productId` | `any` | No |  |
-
-### Operations
-
-#### `create(reqdata, ctrl) -> any, err`
-
-Create a new entity with the given data. Returns the created entity, or `nil` and an error on failure.
-
-```lua
-local result, err = client:Iri():create({
-  connector_id = --[[ string ]],
-  idempotencyKey = --[[ string ]],
-})
-```
-
-### Common Methods
-
-#### `data_get() -> table`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get() -> table`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make() -> Entity`
-
-Create a new `IriEntity` instance with the same client and
-options.
-
-#### `get_name() -> string`
-
-Return the entity name.
-
-
----
-
 ## IrisCapabilityEntity
 
 ```lua
@@ -6838,6 +6631,16 @@ local iris_connector = client:IrisConnector(nil)
 
 ### Operations
 
+#### `create(reqdata, ctrl) -> any, err`
+
+Create a new entity with the given data. Returns the created entity, or `nil` and an error on failure.
+
+```lua
+local result, err = client:IrisConnector():create({
+  connector_id = --[[ string ]],
+})
+```
+
 #### `list(reqmatch, ctrl) -> any, err`
 
 List entities matching the given criteria. Returns an array of entities, one per record, or `nil` and an error on failure.
@@ -6945,8 +6748,10 @@ local iris_task = client:IrisTask(nil)
 | `cadence` | `string` | No |  |
 | `capability` | `any` | No |  |
 | `completed` | `table` | No |  |
+| `correlationId` | `any` | No |  |
 | `description` | `string` | No |  |
 | `discover` | `table` | No |  |
+| `idempotencyKey` | `string` | Yes |  |
 | `productId` | `any` | No |  |
 | `recurring` | `table` | No |  |
 | `requiredConnectors` | `table` | No |  |
@@ -6960,6 +6765,7 @@ Create a new entity with the given data. Returns the created entity, or `nil` an
 
 ```lua
 local result, err = client:IrisTask():create({
+  idempotencyKey = --[[ string ]],
   title = --[[ string ]],
 })
 ```
@@ -8201,13 +8007,18 @@ local product_dashboard = client:ProductDashboard(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `agents` | `table` | Yes |  |
-| `date` | `string` | Yes |  |
-| `pagination` | `table` | Yes |  |
-| `phone_admin_error` | `any` | No |  |
-| `products` | `table` | Yes |  |
-| `selected_product` | `any` | Yes |  |
-| `summary` | `table` | Yes |  |
+| `comments` | `number` | Yes |  |
+| `failed_entries` | `number` | Yes |  |
+| `has_tiktok_community_violation` | `boolean` | No |  |
+| `id` | `string` | Yes |  |
+| `likes` | `number` | Yes |  |
+| `metrics_pending_count` | `number` | No |  |
+| `name` | `string` | Yes |  |
+| `platforms` | `table` | Yes |  |
+| `posted_entries` | `number` | Yes |  |
+| `posting_entries` | `number` | Yes |  |
+| `scheduled_entries` | `number` | Yes |  |
+| `views` | `number` | Yes |  |
 
 ### Operations
 
@@ -8381,6 +8192,7 @@ local product_landing = client:ProductLanding(nil)
 | `dmOngoingResponsePrompt` | `any` | No |  |
 | `firstCommentTextBeforeLink` | `any` | No |  |
 | `headerImageUrl` | `any` | No |  |
+| `icon` | `any` | No |  |
 | `id` | `string` | Yes |  |
 | `landingHtmlUrl` | `any` | No |  |
 | `landingLastGeneratedAt` | `any` | No |  |
@@ -8419,6 +8231,7 @@ local product_landing = client:ProductLanding(nil)
 | `slug` | `string` | Yes |  |
 | `socialLinks` | `any` | No |  |
 | `testimonials` | `any` | No |  |
+| `url` | `string` | Yes |  |
 
 ### Field Usage by Operation
 
@@ -8436,6 +8249,7 @@ local product_landing = client:ProductLanding(nil)
 | `dmOngoingResponsePrompt` | - | - |
 | `firstCommentTextBeforeLink` | - | - |
 | `headerImageUrl` | - | - |
+| `icon` | - | - |
 | `id` | - | - |
 | `landingHtmlUrl` | - | - |
 | `landingLastGeneratedAt` | - | - |
@@ -8462,7 +8276,7 @@ local product_landing = client:ProductLanding(nil)
 | `microhubTestimonials` | - | - |
 | `microhubUrl` | - | - |
 | `myPostsStylePrompt` | - | - |
-| `name` | - | - |
+| `name` | Yes | - |
 | `othersStylePrompt` | - | - |
 | `othersTargetMarketPrompt` | - | - |
 | `productLinkSelection` | - | Yes |
@@ -8474,6 +8288,7 @@ local product_landing = client:ProductLanding(nil)
 | `slug` | - | Yes |
 | `socialLinks` | - | - |
 | `testimonials` | - | - |
+| `url` | - | - |
 
 ### Operations
 
@@ -8633,52 +8448,6 @@ Set the entity match criteria.
 #### `make() -> Entity`
 
 Create a new `ReRollVideoEntity` instance with the same client and
-options.
-
-#### `get_name() -> string`
-
-Return the entity name.
-
-
----
-
-## ReadRootGetEntity
-
-```lua
-local read_root_get = client:ReadRootGet(nil)
-```
-
-### Operations
-
-#### `load(reqmatch, ctrl) -> any, err`
-
-Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, or `nil` and an error on failure.
-
-```lua
-local result, err = client:ReadRootGet():load()
-```
-
-### Common Methods
-
-#### `data_get() -> table`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get() -> table`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make() -> Entity`
-
-Create a new `ReadRootGetEntity` instance with the same client and
 options.
 
 #### `get_name() -> string`
@@ -8987,6 +8756,52 @@ Return the entity name.
 
 ---
 
+## RootGetEntity
+
+```lua
+local root_get = client:RootGet(nil)
+```
+
+### Operations
+
+#### `load(reqmatch, ctrl) -> any, err`
+
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, or `nil` and an error on failure.
+
+```lua
+local result, err = client:RootGet():load()
+```
+
+### Common Methods
+
+#### `data_get() -> table`
+
+Get the entity data. Returns a copy of the current data.
+
+#### `data_set(data)`
+
+Set the entity data.
+
+#### `match_get() -> table`
+
+Get the entity match criteria.
+
+#### `match_set(match)`
+
+Set the entity match criteria.
+
+#### `make() -> Entity`
+
+Create a new `RootGetEntity` instance with the same client and
+options.
+
+#### `get_name() -> string`
+
+Return the entity name.
+
+
+---
+
 ## SaveSurveyEntity
 
 ```lua
@@ -9233,6 +9048,55 @@ Return the entity name.
 
 ---
 
+## ScheduleQueueEntity
+
+```lua
+local schedule_queue = client:ScheduleQueue(nil)
+```
+
+### Operations
+
+#### `update(reqdata, ctrl) -> any, err`
+
+Update an existing entity. The data must include the entity `id`. Returns the updated entity, or `nil` and an error on failure.
+
+```lua
+local result, err = client:ScheduleQueue():update({
+  queue_id = "queue_id",
+  -- Fields to update
+})
+```
+
+### Common Methods
+
+#### `data_get() -> table`
+
+Get the entity data. Returns a copy of the current data.
+
+#### `data_set(data)`
+
+Set the entity data.
+
+#### `match_get() -> table`
+
+Get the entity match criteria.
+
+#### `match_set(match)`
+
+Set the entity match criteria.
+
+#### `make() -> Entity`
+
+Create a new `ScheduleQueueEntity` instance with the same client and
+options.
+
+#### `get_name() -> string`
+
+Return the entity name.
+
+
+---
+
 ## ScheduleV2Entity
 
 ```lua
@@ -9307,17 +9171,6 @@ Remove the entity matching the given criteria. Returns the entity, marked as del
 
 ```lua
 local result, err = client:ScheduleV2():remove({ queue_id = "queue_id" })
-```
-
-#### `update(reqdata, ctrl) -> any, err`
-
-Update an existing entity. The data must include the entity `id`. Returns the updated entity, or `nil` and an error on failure.
-
-```lua
-local result, err = client:ScheduleV2():update({
-  queue_id = "queue_id",
-  -- Fields to update
-})
 ```
 
 ### Common Methods
@@ -9920,14 +9773,11 @@ local seo_traffic = client:SeoTraffic(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `end_date` | `string` | Yes |  |
-| `series` | `table` | Yes |  |
-| `site_url` | `string` | Yes |  |
-| `start_date` | `string` | Yes |  |
-| `top_countries` | `table` | Yes |  |
-| `top_pages` | `table` | Yes |  |
-| `top_queries` | `table` | Yes |  |
-| `totals` | `table` | Yes |  |
+| `clicks` | `number` | Yes |  |
+| `ctr` | `number` | Yes |  |
+| `date` | `string` | Yes |  |
+| `impressions` | `number` | Yes |  |
+| `position` | `number` | Yes |  |
 
 ### Operations
 
@@ -10888,23 +10738,24 @@ local stats_refresh_overview = client:StatsRefreshOverview(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `active_run` | `any` | No |  |
-| `aged_over_24h` | `number` | Yes |  |
-| `backlog_preview` | `table` | Yes |  |
-| `coverage_percent` | `number` | Yes |  |
-| `customer_counts` | `table` | Yes |  |
-| `date` | `string` | Yes |  |
-| `generated_at` | `string` | Yes |  |
-| `method_counts` | `table` | Yes |  |
-| `platform_counts` | `table` | Yes |  |
-| `platform_units_resolved` | `number` | Yes |  |
-| `platform_units_total` | `number` | Yes |  |
-| `platform_units_unresolved` | `number` | Yes |  |
-| `posted_entries` | `number` | Yes |  |
-| `reason_counts` | `table` | Yes |  |
-| `sla_deadline_et` | `string` | Yes |  |
-| `stale_after_sla` | `number` | Yes |  |
-| `top_affected_customers` | `table` | Yes |  |
+| `aged_over_24h` | `boolean` | Yes |  |
+| `agent_id` | `string` | No |  |
+| `agent_name` | `any` | No |  |
+| `is_resolved` | `boolean` | Yes |  |
+| `last_refresh_completed_at` | `any` | No |  |
+| `latest_error_message` | `any` | No |  |
+| `platform` | `string` | Yes |  |
+| `post_method` | `any` | No |  |
+| `post_url` | `any` | No |  |
+| `posted_date_et` | `string` | Yes |  |
+| `product_id` | `string` | No |  |
+| `product_name` | `any` | No |  |
+| `reason_code` | `any` | No |  |
+| `schedule_queue_id` | `string` | Yes |  |
+| `scheduled_datetime_utc` | `string` | Yes |  |
+| `stale_after_sla` | `boolean` | Yes |  |
+| `user_email` | `string` | Yes |  |
+| `user_id` | `string` | Yes |  |
 
 ### Operations
 
@@ -11428,6 +11279,10 @@ local user = client:User(nil)
 
 ### Operations
 
+#### `create(reqdata, ctrl) -> any, err`
+
+Create a new entity with the given data. Returns the created entity, or `nil` and an error on failure.
+
 #### `load(reqmatch, ctrl) -> any, err`
 
 Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, or `nil` and an error on failure.
@@ -11484,7 +11339,6 @@ local user_agent = client:UserAgent(nil)
 | `assigned_at` | `string` | Yes |  |
 | `assignment_id` | `string` | Yes |  |
 | `expires_at` | `any` | No |  |
-| `id` | `string` | No |  |
 | `status` | `string` | Yes |  |
 
 ### Operations
@@ -11495,7 +11349,7 @@ Create a new entity with the given data. Returns the created entity, or `nil` an
 
 ```lua
 local result, err = client:UserAgent():create({
-  id = --[[ string ]],
+  user_id = --[[ string ]],
   agent = --[[ table ]],
   assigned_at = --[[ string ]],
   assignment_id = --[[ string ]],
@@ -11508,7 +11362,7 @@ local result, err = client:UserAgent():create({
 List entities matching the given criteria. Returns an array of entities, one per record, or `nil` and an error on failure.
 
 ```lua
-local results, err = client:UserAgent():list({ id = "example" })
+local results, err = client:UserAgent():list({ user_id = "example" })
 ```
 
 ### Common Methods
@@ -11551,65 +11405,9 @@ local user_health_detail = client:UserHealthDetail(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `account_type` | `any` | Yes |  |
-| `activated` | `boolean` | Yes |  |
-| `activated_by_admin_at` | `any` | No |  |
-| `activated_by_admin_id` | `string` | No |  |
-| `admin_notes` | `any` | No |  |
-| `agents_count` | `number` | No |  |
-| `assigned_agents` | `table` | Yes |  |
-| `assigned_agents_count` | `number` | Yes |  |
-| `assigned_agents_preview_limit` | `number` | No |  |
-| `assigned_agents_truncated` | `boolean` | No |  |
-| `auto_schedule_enabled` | `boolean` | Yes |  |
-| `comments_expected_per_day` | `number` | No |  |
-| `comments_fix_block_reason` | `any` | No |  |
-| `comments_fix_ready` | `boolean` | No |  |
-| `comments_today_failed` | `number` | No |  |
-| `comments_today_posted` | `number` | No |  |
-| `comments_today_scheduled` | `number` | No |  |
-| `comments_yesterday_failed` | `number` | No |  |
-| `comments_yesterday_posted` | `number` | No |  |
-| `comments_yesterday_total` | `number` | No |  |
-| `created_at` | `string` | Yes |  |
-| `credits` | `number` | Yes |  |
-| `effective_posted_video_reuse_percent` | `number` | Yes |  |
-| `email` | `string` | Yes |  |
-| `expected_agents_count` | `number` | Yes |  |
 | `id` | `string` | Yes |  |
-| `is_activated_by_admin` | `boolean` | Yes |  |
-| `is_admin` | `boolean` | Yes |  |
-| `is_bookmarked` | `boolean` | No |  |
-| `is_internal_user` | `boolean` | Yes |  |
-| `is_migrated` | `boolean` | Yes |  |
-| `landing_slug` | `any` | No |  |
-| `landing_status` | `any` | No |  |
-| `landing_url` | `any` | No |  |
-| `membership` | `any` | Yes |  |
-| `microhub_status` | `any` | No |  |
-| `microhub_url` | `any` | No |  |
 | `name` | `string` | Yes |  |
-| `onboarding_flow` | `string` | Yes |  |
-| `posted_video_reuse_percent` | `any` | No |  |
-| `product_id` | `string` | Yes |  |
-| `product_name` | `any` | Yes |  |
-| `product_url` | `any` | Yes |  |
-| `subscription_status` | `any` | Yes |  |
-| `survey_data` | `any` | No |  |
-| `today_failed` | `number` | Yes |  |
-| `today_posted` | `number` | Yes |  |
-| `today_scheduled` | `number` | Yes |  |
-| `tomorrow_capacity` | `number` | Yes |  |
-| `tomorrow_scheduled` | `number` | Yes |  |
-| `videos_completed` | `number` | Yes |  |
-| `videos_failed` | `number` | Yes |  |
-| `videos_pending` | `number` | Yes |  |
-| `videos_stale` | `number` | Yes |  |
-| `videos_total` | `number` | Yes |  |
-| `yesterday_failed` | `number` | Yes |  |
-| `yesterday_failed_entries` | `table` | Yes |  |
-| `yesterday_posted` | `number` | Yes |  |
-| `yesterday_total` | `number` | Yes |  |
+| `type` | `string` | Yes |  |
 
 ### Operations
 
@@ -11618,7 +11416,7 @@ local user_health_detail = client:UserHealthDetail(nil)
 List entities matching the given criteria. Returns an array of entities, one per record, or `nil` and an error on failure.
 
 ```lua
-local results, err = client:UserHealthDetail():list({ id = "example" })
+local results, err = client:UserHealthDetail():list({ user_id = "example" })
 ```
 
 ### Common Methods

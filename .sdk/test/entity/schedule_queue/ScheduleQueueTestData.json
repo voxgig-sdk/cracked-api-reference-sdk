@@ -1,0 +1,30 @@
+{
+  "existing": {
+    "schedule_queue": {
+      "SCHEDULE_QUEUE00": {
+        "queue_id": "QUEUE01",
+        "id": "SCHEDULE_QUEUE00"
+      },
+      "SCHEDULE_QUEUE01": {
+        "queue_id": "QUEUE01",
+        "id": "SCHEDULE_QUEUE01"
+      },
+      "SCHEDULE_QUEUE02": {
+        "queue_id": "QUEUE01",
+        "id": "SCHEDULE_QUEUE02"
+      }
+    }
+  },
+  "new": {
+    "schedule_queue": {
+      "schedule_queue_ref01": {}
+    }
+  },
+  "requests": {
+    "PUT /api/schedule/queue/{queue_id}/replace-video": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

@@ -212,6 +212,9 @@ func TestCustomerHealthViewsSummaryEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = customerHealthViewsSummaryRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LIST
 		customerHealthViewsSummaryRef01Ent := client.CustomerHealthViewsSummary(nil)
 		customerHealthViewsSummaryRef01Match := map[string]any{}

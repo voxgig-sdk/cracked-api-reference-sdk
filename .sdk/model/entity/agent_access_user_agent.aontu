@@ -5,50 +5,77 @@ main: kit: entity: agent_access_user_agent: {
   alias: field: {}
 
   fields: {
-    agentQuota: {
-      h: "Agent Quota"
-      n: "agentQuota"
-      r: true
-      t: "`$INTEGER`"
+    avatar: {
+      h: "Avatar"
+      n: "avatar"
+      r: false
+      t: "`$ANY`"
     }
-    agents: {
-      h: "Agents"
-      n: "agents"
-      r: true
-      t: "`$ARRAY`"
+    facebookUrl: {
+      h: "Facebook Url"
+      n: "facebookUrl"
+      r: false
+      t: "`$ANY`"
     }
-    assignedByType: {
-      h: "Assigned By Type"
-      n: "assignedByType"
-      r: true
-      t: "`$OBJECT`"
-    }
-    assignedTotal: {
-      h: "Assigned Total"
-      n: "assignedTotal"
-      r: true
-      t: "`$INTEGER`"
-    }
-    email: {
-      fo: "email"
-      h: "Email"
-      n: "email"
+    id: {
+      h: "Id"
+      n: "id"
       r: true
       t: "`$STRING`"
     }
-    products: {
-      h: "Products"
-      n: "products"
-      r: true
-      t: "`$ARRAY`"
+    instagramUrl: {
+      h: "Instagram Url"
+      n: "instagramUrl"
+      r: false
+      t: "`$ANY`"
     }
-    userId: {
-      fo: "uuid"
-      h: "User Id"
-      n: "userId"
+    name: {
+      h: "Name"
+      n: "name"
       r: true
       t: "`$STRING`"
     }
+    productId: {
+      h: "Product Id"
+      n: "productId"
+      r: false
+      t: "`$ANY`"
+    }
+    productName: {
+      h: "Product Name"
+      n: "productName"
+      r: false
+      t: "`$ANY`"
+    }
+    tiktokUrl: {
+      h: "Tiktok Url"
+      n: "tiktokUrl"
+      r: false
+      t: "`$ANY`"
+    }
+    type: {
+      h: "Type"
+      n: "type"
+      r: false
+      t: "`$ANY`"
+    }
+    uploadPostPlatforms: {
+      h: "Upload Post Platforms"
+      n: "uploadPostPlatforms"
+      r: false
+      t: "`$ANY`"
+    }
+    youtubeUrl: {
+      h: "Youtube Url"
+      n: "youtubeUrl"
+      r: false
+      t: "`$ANY`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
   }
 
   name: "agent_access_user_agent"
@@ -106,7 +133,7 @@ main: kit: entity: agent_access_user_agent: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.agents`"
           }
         }
       ]

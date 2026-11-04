@@ -62,9 +62,18 @@ func TestCreateSora2VideoEntity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" {
+			t.Log("LIVE STEP {\"id\":\"create_sora2_video.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/core/create-sora2-video\"}")
+			t.Skip("Live coverage incomplete: create_sora2_video.create.0 excluded (GET-only live run: needs POST /api/core/create-sora2-video)")
+			return
+		}
+
 		client := setup.client
 		_ = client
 
+		if setup.live {
+			livePace()
+		}
 		// CREATE
 		createSora2VideoRef01Ent := client.CreateSora2Video(nil)
 		createSora2VideoRef01Data := core.ToMapAny(vs.GetProp(

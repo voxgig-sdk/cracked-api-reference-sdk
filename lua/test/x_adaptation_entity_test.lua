@@ -43,6 +43,9 @@ describe("XAdaptationEntity", function()
       x_adaptation_ref01_data = helpers.to_map(x_adaptation_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LOAD
     local x_adaptation_ref01_ent = client:XAdaptation(nil)
     local x_adaptation_ref01_match_dt0 = {}

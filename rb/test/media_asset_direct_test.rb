@@ -24,6 +24,10 @@ class MediaAssetDirectTest < Minitest::Test
       skip(_reason || "skipped via sdk-test-control.json")
       return
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE" && setup[:idmap]["media_asset01"].nil?
+      puts "LIVE STEP {\"id\":\"direct-load-media_asset\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs media_asset01, which only POST /api/media-assets/{media_asset_id}/exclude-copycat gives\"}"
+      skip("Live coverage incomplete: direct-load-media_asset excluded (GET-only live run: needs media_asset01, which only POST /api/media-assets/{media_asset_id}/exclude-copycat gives)")
+    end
     if setup[:live]
       ["media_asset01"].each do |_live_key|
         if setup[:idmap][_live_key].nil?
@@ -31,6 +35,7 @@ class MediaAssetDirectTest < Minitest::Test
         end
       end
     end
+    Runner.live_pace if setup[:live]
     client = setup[:client]
 
     params = {}

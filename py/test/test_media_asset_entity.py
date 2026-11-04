@@ -51,8 +51,15 @@ class TestMediaAssetEntity:
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
                 return
+        if setup["live"] and os.environ.get("VOXGIG_GETONLY_GUARD") == "TRUE":
+            print("LIVE STEP {\"id\":\"media_asset.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/media-assets/{media_asset_id}/exclude-copycat\"}")
+            print("LIVE STEP {\"id\":\"media_asset.load.1\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: reads a record only media_asset.create.0 gives\"}")
+            pytest.skip("Live coverage incomplete: media_asset.create.0 excluded (GET-only live run: needs POST /api/media-assets/{media_asset_id}/exclude-copycat); media_asset.load.1 excluded (GET-only live run: reads a record only media_asset.create.0 gives)")
+
         client = setup["client"]
 
+        if setup["live"]:
+            runner.live_pace()
         # CREATE
         media_asset_ref01_ent = client.MediaAsset(None)
         media_asset_ref01_data = helpers.to_map(vs.getprop(
@@ -60,16 +67,18 @@ class TestMediaAssetEntity:
 
         media_asset_ref01_data = helpers.to_map(runner.entity_data(media_asset_ref01_ent.create(media_asset_ref01_data, None)))
         assert media_asset_ref01_data is not None
-        assert media_asset_ref01_data["id"] is not None
+        assert media_asset_ref01_data["product_id"] is not None
 
+        if setup["live"]:
+            runner.live_pace()
         # LOAD
         media_asset_ref01_match_dt0 = {
-            "id": media_asset_ref01_data["id"],
+            "id": media_asset_ref01_data["product_id"],
         }
         media_asset_ref01_data_dt0_loaded = media_asset_ref01_ent.load(media_asset_ref01_match_dt0, None)
         media_asset_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(media_asset_ref01_data_dt0_loaded))
         assert media_asset_ref01_data_dt0_load_result is not None
-        assert media_asset_ref01_data_dt0_load_result["id"] == media_asset_ref01_data["id"]
+        assert runner.live_same_id(media_asset_ref01_data_dt0_load_result.get("product_id"), media_asset_ref01_data["product_id"])
 
 
 
@@ -81,6 +90,10 @@ def _media_asset_basic_setup(extra):
         entity_data_source = f.read()
 
     entity_data = json.loads(entity_data_source)
+
+    for rec in ((entity_data.get("existing") or {}).get("media_asset") or {}).values():
+        if isinstance(rec, dict) and rec.get("id") is not None:
+            rec["product_id"] = rec["id"]
 
     options = {}
     options["entity"] = entity_data.get("existing")

@@ -29,6 +29,11 @@ const utility_1 = require("../../utility");
         const setup = directSetup({ id: 'direct01' });
         if ((0, utility_1.maybeSkipControl)(t, 'direct', 'direct-load-product', setup.live))
             return;
+        if (setup.live && 'TRUE' === process.env.VOXGIG_GETONLY_GUARD && null == setup.idmap?.["user01"]) {
+            console.log("LIVE STEP {\"id\":\"direct-load-product\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs user01, which only POST /api/admin/users/{user_id}/fix-auto-schedule-by-date gives\"}");
+            t.skip("Live coverage incomplete: direct-load-product excluded (GET-only live run: needs user01, which only POST /api/admin/users/{user_id}/fix-auto-schedule-by-date gives)");
+            return;
+        }
         if ((0, utility_1.skipIfMissingIds)(t, setup, ["user01"], LIVE_STRICT))
             return;
         const { client, calls } = setup;
@@ -52,7 +57,7 @@ const utility_1 = require("../../utility");
             if (0 === listArr.length) {
                 return void (0, utility_1.liveEmpty)(t, 'The account has no product record to load');
             }
-            const candidateId = listArr[0]?.id ?? listArr[0]?.id;
+            const candidateId = listArr[0]?.product_id;
             if (null == candidateId) {
                 return void (0, utility_1.liveMiss)(t, LIVE_STRICT, 'Live load blocked: discovery returned no usable identity');
             }
@@ -93,6 +98,11 @@ const utility_1 = require("../../utility");
         const setup = directSetup([{ id: 'direct01' }, { id: 'direct02' }]);
         if ((0, utility_1.maybeSkipControl)(t, 'direct', 'direct-list-product', setup.live))
             return;
+        if (setup.live && 'TRUE' === process.env.VOXGIG_GETONLY_GUARD && null == setup.idmap?.["user01"]) {
+            console.log("LIVE STEP {\"id\":\"direct-list-product\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs user01, which only POST /api/admin/users/{user_id}/fix-auto-schedule-by-date gives\"}");
+            t.skip("Live coverage incomplete: direct-list-product excluded (GET-only live run: needs user01, which only POST /api/admin/users/{user_id}/fix-auto-schedule-by-date gives)");
+            return;
+        }
         if ((0, utility_1.skipIfMissingIds)(t, setup, ["user01"], LIVE_STRICT))
             return;
         const { client, calls } = setup;

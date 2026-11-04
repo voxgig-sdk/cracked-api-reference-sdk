@@ -75,6 +75,9 @@ func TestCommentEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = commentRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LOAD
 		commentRef01Ent := client.Comment(nil)
 		commentRef01MatchDt0 := map[string]any{}

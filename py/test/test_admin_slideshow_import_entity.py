@@ -51,8 +51,14 @@ class TestAdminSlideshowImportEntity:
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
                 return
+        if setup["live"] and os.environ.get("VOXGIG_GETONLY_GUARD") == "TRUE":
+            print("LIVE STEP {\"id\":\"admin_slideshow_import.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/admin/slideshow-import2/{batch_id}/state\"}")
+            return self._run_get_only_flow(setup)
+
         client = setup["client"]
 
+        if setup["live"]:
+            runner.live_pace()
         # CREATE
         admin_slideshow_import_ref01_ent = client.AdminSlideshowImport(None)
         admin_slideshow_import_ref01_data = helpers.to_map(vs.getprop(
@@ -61,7 +67,28 @@ class TestAdminSlideshowImportEntity:
         admin_slideshow_import_ref01_data = helpers.to_map(runner.entity_data(admin_slideshow_import_ref01_ent.create(admin_slideshow_import_ref01_data, None)))
         assert admin_slideshow_import_ref01_data is not None
 
+        if setup["live"]:
+            runner.live_pace()
         # LOAD
+        admin_slideshow_import_ref01_match_dt0 = {}
+        admin_slideshow_import_ref01_data_dt0_loaded = admin_slideshow_import_ref01_ent.load(admin_slideshow_import_ref01_match_dt0, None)
+        assert admin_slideshow_import_ref01_data_dt0_loaded is not None
+
+
+    def _run_get_only_flow(self, setup):
+        client = setup["client"]
+
+        # Bootstrap entity data from existing test data.
+        admin_slideshow_import_ref01_data_raw = vs.items(helpers.to_map(
+            vs.getpath(setup["data"], "existing.admin_slideshow_import")))
+        admin_slideshow_import_ref01_data = None
+        if len(admin_slideshow_import_ref01_data_raw) > 0:
+            admin_slideshow_import_ref01_data = helpers.to_map(admin_slideshow_import_ref01_data_raw[0][1])
+
+        if setup["live"]:
+            runner.live_pace()
+        # LOAD
+        admin_slideshow_import_ref01_ent = client.AdminSlideshowImport(None)
         admin_slideshow_import_ref01_match_dt0 = {}
         admin_slideshow_import_ref01_data_dt0_loaded = admin_slideshow_import_ref01_ent.load(admin_slideshow_import_ref01_match_dt0, None)
         assert admin_slideshow_import_ref01_data_dt0_loaded is not None

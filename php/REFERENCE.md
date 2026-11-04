@@ -254,10 +254,6 @@ Create a new `CarouselAgentDetailEntity` instance. Pass `null` for no initial da
 
 Create a new `CarouselStatusEntity` instance. Pass `null` for no initial data.
 
-#### `Chat($data = null)`
-
-Create a new `ChatEntity` instance. Pass `null` for no initial data.
-
 #### `ChatHistory($data = null)`
 
 Create a new `ChatHistoryEntity` instance. Pass `null` for no initial data.
@@ -334,10 +330,6 @@ Create a new `DedicatedAgentsDashboardEntity` instance. Pass `null` for no initi
 
 Create a new `EnterpriseAgentEntity` instance. Pass `null` for no initial data.
 
-#### `EnterpriseProduct($data = null)`
-
-Create a new `EnterpriseProductEntity` instance. Pass `null` for no initial data.
-
 #### `ExactAvailability($data = null)`
 
 Create a new `ExactAvailabilityEntity` instance. Pass `null` for no initial data.
@@ -381,10 +373,6 @@ Create a new `HealthrxEntity` instance. Pass `null` for no initial data.
 #### `InitResetProductV6($data = null)`
 
 Create a new `InitResetProductV6Entity` instance. Pass `null` for no initial data.
-
-#### `Iri($data = null)`
-
-Create a new `IriEntity` instance. Pass `null` for no initial data.
 
 #### `IrisCapability($data = null)`
 
@@ -502,10 +490,6 @@ Create a new `PublicResumeStatusEntity` instance. Pass `null` for no initial dat
 
 Create a new `ReRollVideoEntity` instance. Pass `null` for no initial data.
 
-#### `ReadRootGet($data = null)`
-
-Create a new `ReadRootGetEntity` instance. Pass `null` for no initial data.
-
 #### `RecordDemoBooked($data = null)`
 
 Create a new `RecordDemoBookedEntity` instance. Pass `null` for no initial data.
@@ -526,6 +510,10 @@ Create a new `ResetProductEntity` instance. Pass `null` for no initial data.
 
 Create a new `RetryWebsiteScrapeEntity` instance. Pass `null` for no initial data.
 
+#### `RootGet($data = null)`
+
+Create a new `RootGetEntity` instance. Pass `null` for no initial data.
+
 #### `SaveSurvey($data = null)`
 
 Create a new `SaveSurveyEntity` instance. Pass `null` for no initial data.
@@ -541,6 +529,10 @@ Create a new `ScanSocialsPublicEntity` instance. Pass `null` for no initial data
 #### `ScanSocialsStatus($data = null)`
 
 Create a new `ScanSocialsStatusEntity` instance. Pass `null` for no initial data.
+
+#### `ScheduleQueue($data = null)`
+
+Create a new `ScheduleQueueEntity` instance. Pass `null` for no initial data.
 
 #### `ScheduleV2($data = null)`
 
@@ -944,56 +936,46 @@ $admin = $client->Admin();
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `apply` | `bool` | No | Apply safe canonical or clean-only URL updates |
-| `count` | `int` | Yes |  |
 | `created_at` | `string` | Yes |  |
 | `date_from` | `mixed` | No |  |
 | `date_to` | `mixed` | No |  |
 | `email` | `string` | Yes |  |
 | `id` | `string` | Yes |  |
-| `include_failed` | `bool` | No |  |
-| `include_pending` | `bool` | No |  |
 | `include_records` | `bool` | No | Include full per-field audit records in the response |
 | `issue_ids` | `mixed` | No |  |
 | `only_active` | `bool` | No | Limit the audit to active agents |
 | `platform` | `mixed` | No |  |
 | `posting_method` | `mixed` | No |  |
-| `product_id` | `string` | No |  |
+| `product_id` | `string` | Yes |  |
 | `query` | `mixed` | No |  |
 | `reason` | `mixed` | No |  |
-| `regenerate` | `bool` | No |  |
 | `status` | `string` | No |  |
 | `user_membership` | `mixed` | No |  |
 | `user_name` | `mixed` | No |  |
 | `user_onboarding_step` | `mixed` | No |  |
-| `video_type` | `string` | Yes |  |
 
 ### Field Usage by Operation
 
-| Field | load | list | create | update | remove |
-| --- | --- | --- | --- | --- | --- |
-| `apply` | - | - | - | - | - |
-| `count` | - | - | - | - | - |
-| `created_at` | - | - | - | - | - |
-| `date_from` | - | - | Yes | - | - |
-| `date_to` | - | - | Yes | - | - |
-| `email` | - | - | - | - | - |
-| `id` | - | - | - | - | - |
-| `include_failed` | - | - | - | - | - |
-| `include_pending` | - | - | - | - | - |
-| `include_records` | - | - | - | - | - |
-| `issue_ids` | - | - | - | - | - |
-| `only_active` | - | - | - | - | - |
-| `platform` | - | - | - | - | - |
-| `posting_method` | - | - | - | - | - |
-| `product_id` | - | - | Yes | - | - |
-| `query` | - | - | - | - | - |
-| `reason` | - | - | - | - | - |
-| `regenerate` | - | - | - | - | - |
-| `status` | - | - | - | - | - |
-| `user_membership` | - | - | - | - | - |
-| `user_name` | - | - | - | - | - |
-| `user_onboarding_step` | - | - | - | - | - |
-| `video_type` | - | - | - | - | - |
+| Field | load | list | create | remove |
+| --- | --- | --- | --- | --- |
+| `apply` | - | - | - | - |
+| `created_at` | - | - | - | - |
+| `date_from` | - | - | Yes | - |
+| `date_to` | - | - | Yes | - |
+| `email` | - | - | - | - |
+| `id` | - | - | - | - |
+| `include_records` | - | - | - | - |
+| `issue_ids` | - | - | - | - |
+| `only_active` | - | - | - | - |
+| `platform` | - | - | - | - |
+| `posting_method` | - | - | - | - |
+| `product_id` | - | - | - | - |
+| `query` | - | - | - | - |
+| `reason` | - | - | - | - |
+| `status` | - | - | - | - |
+| `user_membership` | - | - | - | - |
+| `user_name` | - | - | - | - |
+| `user_onboarding_step` | - | - | - | - |
 
 ### Operations
 
@@ -1004,14 +986,12 @@ Create a new entity with the given data. Returns the created entity and throws o
 ```php
 $result = $client->Admin()->create([
   "user_id" => null, // string
-  "count" => null, // int
   "created_at" => null, // string
   "date_from" => null, // mixed
   "date_to" => null, // mixed
   "email" => null, // string
   "id" => null, // string
   "product_id" => null, // string
-  "video_type" => null, // string
 ]);
 ```
 
@@ -1037,17 +1017,6 @@ Remove the entity matching the given criteria. Returns the entity, marked as del
 
 ```php
 $result = $client->Admin()->remove(["tester_id" => "tester_id"]);
-```
-
-#### `update(array $reqdata, ?array $ctrl = null): mixed`
-
-Update an existing entity. The data must include the entity `id`. Returns the updated entity and throws on error.
-
-```php
-$result = $client->Admin()->update([
-  "agent_id" => "agent_id",
-  // Fields to update
-]);
 ```
 
 ### Common Methods
@@ -1637,13 +1606,25 @@ $admin_insight = $client->AdminInsight();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `customer_success_cases` | `array` | Yes |  |
-| `customers` | `array` | Yes |  |
-| `generated_at` | `string` | Yes |  |
-| `pfa_database` | `array` | Yes |  |
-| `recent_signups` | `array` | Yes |  |
-| `summary` | `array` | Yes |  |
-| `vireel_database` | `array` | Yes |  |
+| `active_agents` | `int` | Yes |  |
+| `active_products` | `int` | Yes |  |
+| `agents_count` | `int` | Yes |  |
+| `auto_schedule_status` | `string` | Yes |  |
+| `days_until_period_end` | `mixed` | No |  |
+| `email` | `string` | Yes |  |
+| `feature_impact` | `string` | Yes |  |
+| `last_notification_at` | `mixed` | No |  |
+| `membership` | `mixed` | No |  |
+| `name` | `string` | No |  |
+| `notification_count` | `int` | Yes |  |
+| `notification_events` | `array` | Yes |  |
+| `priority` | `string` | Yes |  |
+| `severity` | `string` | Yes |  |
+| `status_label` | `string` | Yes |  |
+| `subscription_current_period_end` | `mixed` | No |  |
+| `subscription_status` | `mixed` | No |  |
+| `upcoming_posts` | `int` | Yes |  |
+| `user_id` | `string` | Yes |  |
 
 ### Operations
 
@@ -1758,14 +1739,8 @@ $admin_metrics_summary = $client->AdminMetricsSummary();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `paid_users_by_level` | `array` | Yes |  |
-| `total_cancellations` | `int` | Yes |  |
-| `total_previews_generated` | `int` | Yes |  |
-| `total_signups` | `int` | Yes |  |
-| `total_videos_generated` | `int` | Yes |  |
-| `url_attempts` | `int` | Yes |  |
-| `user_credits` | `array` | Yes |  |
-| `user_gifted_credits` | `array` | Yes |  |
+| `count` | `int` | Yes |  |
+| `level` | `string` | Yes |  |
 
 ### Operations
 
@@ -2748,6 +2723,10 @@ List entities matching the given criteria (call with no argument to list all). R
 $results = $client->Agent()->list();
 ```
 
+#### `update(array $reqdata, ?array $ctrl = null): mixed`
+
+Update an existing entity. The data must include the entity `id`. Returns the updated entity and throws on error.
+
 ### Common Methods
 
 #### `data_get(): array`
@@ -3089,13 +3068,17 @@ $agent_access_user_agent = $client->AgentAccessUserAgent();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `agentQuota` | `int` | Yes |  |
-| `agents` | `array` | Yes |  |
-| `assignedByType` | `array` | Yes |  |
-| `assignedTotal` | `int` | Yes |  |
-| `email` | `string` | Yes |  |
-| `products` | `array` | Yes |  |
-| `userId` | `string` | Yes |  |
+| `avatar` | `mixed` | No |  |
+| `facebookUrl` | `mixed` | No |  |
+| `id` | `string` | Yes |  |
+| `instagramUrl` | `mixed` | No |  |
+| `name` | `string` | Yes |  |
+| `productId` | `mixed` | No |  |
+| `productName` | `mixed` | No |  |
+| `tiktokUrl` | `mixed` | No |  |
+| `type` | `mixed` | No |  |
+| `uploadPostPlatforms` | `mixed` | No |  |
+| `youtubeUrl` | `mixed` | No |  |
 
 ### Operations
 
@@ -3569,19 +3552,12 @@ $agent_health = $client->AgentHealth();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `daily` | `array` | Yes |  |
-| `dates` | `array` | Yes |  |
-| `generated_at` | `string` | Yes |  |
-| `groups` | `array` | Yes |  |
-| `latest` | `array` | Yes |  |
-| `live_date` | `mixed` | No |  |
-| `phone_admin_generated_at` | `string` | Yes |  |
-| `platform` | `string` | No |  |
-| `post_target` | `int` | Yes |  |
-| `qa_managed_agent_ids` | `array` | No |  |
-| `scope_prefixes` | `array` | Yes |  |
-| `timezone` | `string` | Yes |  |
-| `warmup_target` | `int` | Yes |  |
+| `accounts` | `array` | Yes |  |
+| `date` | `string` | Yes |  |
+| `overall` | `array` | Yes |  |
+| `posts` | `array` | Yes |  |
+| `views` | `array` | Yes |  |
+| `warmups` | `array` | Yes |  |
 
 ### Operations
 
@@ -3687,19 +3663,12 @@ $agent_health_detail = $client->AgentHealthDetail();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `archived_issue_total` | `int` | No |  |
-| `date` | `string` | Yes |  |
-| `generated_at` | `string` | Yes |  |
-| `group_id` | `string` | Yes |  |
-| `has_more` | `bool` | Yes |  |
-| `issue_total` | `int` | Yes |  |
-| `issues` | `array` | Yes |  |
-| `limit` | `int` | Yes |  |
-| `metric` | `string` | Yes |  |
-| `offset` | `int` | Yes |  |
-| `warmup_runs` | `array` | No |  |
-| `warning_total` | `int` | No |  |
-| `warnings` | `array` | No |  |
+| `agent_id` | `string` | Yes |  |
+| `category` | `string` | Yes |  |
+| `connection_status` | `string` | Yes |  |
+| `device_status` | `string` | Yes |  |
+| `issue` | `mixed` | No |  |
+| `state` | `string` | Yes |  |
 
 ### Operations
 
@@ -3774,7 +3743,7 @@ $agent_post = $client->AgentPost();
 List entities matching the given criteria (call with no argument to list all). Returns an array of entities, one per record, and throws on error.
 
 ```php
-$results = $client->AgentPost()->list(["id" => "example"]);
+$results = $client->AgentPost()->list(["agent_id" => "example"]);
 ```
 
 ### Common Methods
@@ -4400,7 +4369,6 @@ $carousel = $client->Carousel();
 | `formula_id` | `string` | No |  |
 | `formula_name` | `mixed` | No |  |
 | `generation` | `array` | No |  |
-| `id` | `string` | No |  |
 | `image_prompt` | `mixed` | No |  |
 | `likes` | `mixed` | No |  |
 | `main_prompt` | `mixed` | No |  |
@@ -4567,7 +4535,6 @@ $carousel_status = $client->CarouselStatus();
 | --- | --- | --- | --- |
 | `caption` | `mixed` | Yes |  |
 | `error` | `mixed` | No |  |
-| `id` | `string` | No |  |
 | `image_model` | `mixed` | No |  |
 | `image_provider` | `mixed` | No |  |
 | `image_task_id` | `string` | No |  |
@@ -4583,7 +4550,7 @@ $carousel_status = $client->CarouselStatus();
 List entities matching the given criteria (call with no argument to list all). Returns an array of entities, one per record, and throws on error.
 
 ```php
-$results = $client->CarouselStatus()->list(["id" => "example"]);
+$results = $client->CarouselStatus()->list(["carousel_id" => "example"]);
 ```
 
 ### Common Methods
@@ -4607,65 +4574,6 @@ Set the entity match criteria.
 #### `make(): CarouselStatusEntity`
 
 Create a new `CarouselStatusEntity` instance with the same client and
-options.
-
-#### `get_name(): string`
-
-Return the entity name.
-
-
----
-
-## ChatEntity
-
-```php
-$chat = $client->Chat();
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `idempotencyKey` | `string` | Yes |  |
-| `message` | `string` | Yes |  |
-| `sessionId` | `string` | Yes |  |
-
-### Operations
-
-#### `create(array $reqdata, ?array $ctrl = null): mixed`
-
-Create a new entity with the given data. Returns the created entity and throws on error.
-
-```php
-$result = $client->Chat()->create([
-  "session_id" => null, // string
-  "idempotencyKey" => null, // string
-  "message" => null, // string
-  "sessionId" => null, // string
-]);
-```
-
-### Common Methods
-
-#### `data_get(): array`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set($data): void`
-
-Set the entity data.
-
-#### `match_get(): array`
-
-Get the entity match criteria.
-
-#### `match_set($match): void`
-
-Set the entity match criteria.
-
-#### `make(): ChatEntity`
-
-Create a new `ChatEntity` instance with the same client and
 options.
 
 #### `get_name(): string`
@@ -4760,6 +4668,8 @@ $chat_session = $client->ChatSession();
 | --- | --- | --- | --- |
 | `chatSubVariant` | `string` | Yes |  |
 | `createdAt` | `string` | Yes |  |
+| `idempotencyKey` | `string` | Yes |  |
+| `message` | `string` | Yes |  |
 | `model` | `mixed` | No |  |
 | `plan` | `mixed` | No |  |
 | `route` | `mixed` | No |  |
@@ -4779,6 +4689,9 @@ Create a new entity with the given data. Returns the created entity and throws o
 ```php
 $result = $client->ChatSession()->create([
   "session_id" => null, // string
+  "idempotencyKey" => null, // string
+  "message" => null, // string
+  "sessionId" => null, // string
 ]);
 ```
 
@@ -5490,7 +5403,6 @@ $customer_health = $client->CustomerHealth();
 | `date` | `string` | Yes |  |
 | `email` | `string` | Yes |  |
 | `entries` | `array` | Yes |  |
-| `id` | `string` | No |  |
 | `performance_overview` | `array` | Yes |  |
 | `platform_coverage_summary` | `array` | Yes |  |
 | `user_id` | `string` | Yes |  |
@@ -5603,20 +5515,10 @@ $customer_health_views_summary = $client->CustomerHealthViewsSummary();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `average_views_per_result` | `int` | Yes |  |
-| `date` | `string` | Yes |  |
-| `end_date` | `mixed` | No |  |
-| `paid_users_count` | `int` | Yes |  |
+| `email` | `string` | Yes |  |
 | `posted_results` | `int` | Yes |  |
-| `range` | `string` | Yes |  |
-| `start_date` | `mixed` | No |  |
-| `top_users` | `array` | Yes |  |
-| `total_views` | `int` | Yes |  |
-| `trend` | `array` | Yes |  |
-| `trend_granularity` | `string` | Yes |  |
-| `user_email` | `mixed` | No |  |
-| `user_id` | `string` | No |  |
-| `users_with_views` | `int` | Yes |  |
+| `user_id` | `string` | Yes |  |
+| `views` | `int` | Yes |  |
 
 ### Operations
 
@@ -5719,12 +5621,6 @@ Return the entity name.
 $daily_status = $client->DailyStatus();
 ```
 
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `id` | `string` | No |  |
-
 ### Operations
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -5732,7 +5628,7 @@ $daily_status = $client->DailyStatus();
 Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and throws on error.
 
 ```php
-$result = $client->DailyStatus()->load(["id" => "daily_status_id", "day" => "day"]);
+$result = $client->DailyStatus()->load(["daily_id" => "daily_id", "day" => "day"]);
 ```
 
 ### Common Methods
@@ -5902,52 +5798,6 @@ Set the entity match criteria.
 #### `make(): EnterpriseAgentEntity`
 
 Create a new `EnterpriseAgentEntity` instance with the same client and
-options.
-
-#### `get_name(): string`
-
-Return the entity name.
-
-
----
-
-## EnterpriseProductEntity
-
-```php
-$enterprise_product = $client->EnterpriseProduct();
-```
-
-### Operations
-
-#### `load(array $reqmatch, ?array $ctrl = null): mixed`
-
-Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and throws on error.
-
-```php
-$result = $client->EnterpriseProduct()->load(["product_id" => "product_id"]);
-```
-
-### Common Methods
-
-#### `data_get(): array`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set($data): void`
-
-Set the entity data.
-
-#### `match_get(): array`
-
-Get the entity match criteria.
-
-#### `match_set($match): void`
-
-Set the entity match criteria.
-
-#### `make(): EnterpriseProductEntity`
-
-Create a new `EnterpriseProductEntity` instance with the same client and
 options.
 
 #### `get_name(): string`
@@ -6629,63 +6479,6 @@ Return the entity name.
 
 ---
 
-## IriEntity
-
-```php
-$iri = $client->Iri();
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `correlationId` | `mixed` | No |  |
-| `idempotencyKey` | `string` | Yes |  |
-| `productId` | `mixed` | No |  |
-
-### Operations
-
-#### `create(array $reqdata, ?array $ctrl = null): mixed`
-
-Create a new entity with the given data. Returns the created entity and throws on error.
-
-```php
-$result = $client->Iri()->create([
-  "connector_id" => null, // string
-  "idempotencyKey" => null, // string
-]);
-```
-
-### Common Methods
-
-#### `data_get(): array`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set($data): void`
-
-Set the entity data.
-
-#### `match_get(): array`
-
-Get the entity match criteria.
-
-#### `match_set($match): void`
-
-Set the entity match criteria.
-
-#### `make(): IriEntity`
-
-Create a new `IriEntity` instance with the same client and
-options.
-
-#### `get_name(): string`
-
-Return the entity name.
-
-
----
-
 ## IrisCapabilityEntity
 
 ```php
@@ -6840,6 +6633,16 @@ $iris_connector = $client->IrisConnector();
 
 ### Operations
 
+#### `create(array $reqdata, ?array $ctrl = null): mixed`
+
+Create a new entity with the given data. Returns the created entity and throws on error.
+
+```php
+$result = $client->IrisConnector()->create([
+  "connector_id" => null, // string
+]);
+```
+
 #### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
 List entities matching the given criteria (call with no argument to list all). Returns an array of entities, one per record, and throws on error.
@@ -6947,8 +6750,10 @@ $iris_task = $client->IrisTask();
 | `cadence` | `string` | No |  |
 | `capability` | `mixed` | No |  |
 | `completed` | `array` | No |  |
+| `correlationId` | `mixed` | No |  |
 | `description` | `string` | No |  |
 | `discover` | `array` | No |  |
+| `idempotencyKey` | `string` | Yes |  |
 | `productId` | `mixed` | No |  |
 | `recurring` | `array` | No |  |
 | `requiredConnectors` | `array` | No |  |
@@ -6962,6 +6767,7 @@ Create a new entity with the given data. Returns the created entity and throws o
 
 ```php
 $result = $client->IrisTask()->create([
+  "idempotencyKey" => null, // string
   "title" => null, // string
 ]);
 ```
@@ -8203,13 +8009,18 @@ $product_dashboard = $client->ProductDashboard();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `agents` | `array` | Yes |  |
-| `date` | `string` | Yes |  |
-| `pagination` | `array` | Yes |  |
-| `phone_admin_error` | `mixed` | No |  |
-| `products` | `array` | Yes |  |
-| `selected_product` | `mixed` | Yes |  |
-| `summary` | `array` | Yes |  |
+| `comments` | `int` | Yes |  |
+| `failed_entries` | `int` | Yes |  |
+| `has_tiktok_community_violation` | `bool` | No |  |
+| `id` | `string` | Yes |  |
+| `likes` | `int` | Yes |  |
+| `metrics_pending_count` | `int` | No |  |
+| `name` | `string` | Yes |  |
+| `platforms` | `array` | Yes |  |
+| `posted_entries` | `int` | Yes |  |
+| `posting_entries` | `int` | Yes |  |
+| `scheduled_entries` | `int` | Yes |  |
+| `views` | `int` | Yes |  |
 
 ### Operations
 
@@ -8383,6 +8194,7 @@ $product_landing = $client->ProductLanding();
 | `dmOngoingResponsePrompt` | `mixed` | No |  |
 | `firstCommentTextBeforeLink` | `mixed` | No |  |
 | `headerImageUrl` | `mixed` | No |  |
+| `icon` | `mixed` | No |  |
 | `id` | `string` | Yes |  |
 | `landingHtmlUrl` | `mixed` | No |  |
 | `landingLastGeneratedAt` | `mixed` | No |  |
@@ -8421,6 +8233,7 @@ $product_landing = $client->ProductLanding();
 | `slug` | `string` | Yes |  |
 | `socialLinks` | `mixed` | No |  |
 | `testimonials` | `mixed` | No |  |
+| `url` | `string` | Yes |  |
 
 ### Field Usage by Operation
 
@@ -8438,6 +8251,7 @@ $product_landing = $client->ProductLanding();
 | `dmOngoingResponsePrompt` | - | - |
 | `firstCommentTextBeforeLink` | - | - |
 | `headerImageUrl` | - | - |
+| `icon` | - | - |
 | `id` | - | - |
 | `landingHtmlUrl` | - | - |
 | `landingLastGeneratedAt` | - | - |
@@ -8464,7 +8278,7 @@ $product_landing = $client->ProductLanding();
 | `microhubTestimonials` | - | - |
 | `microhubUrl` | - | - |
 | `myPostsStylePrompt` | - | - |
-| `name` | - | - |
+| `name` | Yes | - |
 | `othersStylePrompt` | - | - |
 | `othersTargetMarketPrompt` | - | - |
 | `productLinkSelection` | - | Yes |
@@ -8476,6 +8290,7 @@ $product_landing = $client->ProductLanding();
 | `slug` | - | Yes |
 | `socialLinks` | - | - |
 | `testimonials` | - | - |
+| `url` | - | - |
 
 ### Operations
 
@@ -8635,52 +8450,6 @@ Set the entity match criteria.
 #### `make(): ReRollVideoEntity`
 
 Create a new `ReRollVideoEntity` instance with the same client and
-options.
-
-#### `get_name(): string`
-
-Return the entity name.
-
-
----
-
-## ReadRootGetEntity
-
-```php
-$read_root_get = $client->ReadRootGet();
-```
-
-### Operations
-
-#### `load(array $reqmatch, ?array $ctrl = null): mixed`
-
-Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and throws on error.
-
-```php
-$result = $client->ReadRootGet()->load();
-```
-
-### Common Methods
-
-#### `data_get(): array`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set($data): void`
-
-Set the entity data.
-
-#### `match_get(): array`
-
-Get the entity match criteria.
-
-#### `match_set($match): void`
-
-Set the entity match criteria.
-
-#### `make(): ReadRootGetEntity`
-
-Create a new `ReadRootGetEntity` instance with the same client and
 options.
 
 #### `get_name(): string`
@@ -8989,6 +8758,52 @@ Return the entity name.
 
 ---
 
+## RootGetEntity
+
+```php
+$root_get = $client->RootGet();
+```
+
+### Operations
+
+#### `load(array $reqmatch, ?array $ctrl = null): mixed`
+
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and throws on error.
+
+```php
+$result = $client->RootGet()->load();
+```
+
+### Common Methods
+
+#### `data_get(): array`
+
+Get the entity data. Returns a copy of the current data.
+
+#### `data_set($data): void`
+
+Set the entity data.
+
+#### `match_get(): array`
+
+Get the entity match criteria.
+
+#### `match_set($match): void`
+
+Set the entity match criteria.
+
+#### `make(): RootGetEntity`
+
+Create a new `RootGetEntity` instance with the same client and
+options.
+
+#### `get_name(): string`
+
+Return the entity name.
+
+
+---
+
 ## SaveSurveyEntity
 
 ```php
@@ -9235,6 +9050,55 @@ Return the entity name.
 
 ---
 
+## ScheduleQueueEntity
+
+```php
+$schedule_queue = $client->ScheduleQueue();
+```
+
+### Operations
+
+#### `update(array $reqdata, ?array $ctrl = null): mixed`
+
+Update an existing entity. The data must include the entity `id`. Returns the updated entity and throws on error.
+
+```php
+$result = $client->ScheduleQueue()->update([
+  "queue_id" => "queue_id",
+  // Fields to update
+]);
+```
+
+### Common Methods
+
+#### `data_get(): array`
+
+Get the entity data. Returns a copy of the current data.
+
+#### `data_set($data): void`
+
+Set the entity data.
+
+#### `match_get(): array`
+
+Get the entity match criteria.
+
+#### `match_set($match): void`
+
+Set the entity match criteria.
+
+#### `make(): ScheduleQueueEntity`
+
+Create a new `ScheduleQueueEntity` instance with the same client and
+options.
+
+#### `get_name(): string`
+
+Return the entity name.
+
+
+---
+
 ## ScheduleV2Entity
 
 ```php
@@ -9309,17 +9173,6 @@ Remove the entity matching the given criteria. Returns the entity, marked as del
 
 ```php
 $result = $client->ScheduleV2()->remove(["queue_id" => "queue_id"]);
-```
-
-#### `update(array $reqdata, ?array $ctrl = null): mixed`
-
-Update an existing entity. The data must include the entity `id`. Returns the updated entity and throws on error.
-
-```php
-$result = $client->ScheduleV2()->update([
-  "queue_id" => "queue_id",
-  // Fields to update
-]);
 ```
 
 ### Common Methods
@@ -9922,14 +9775,11 @@ $seo_traffic = $client->SeoTraffic();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `end_date` | `string` | Yes |  |
-| `series` | `array` | Yes |  |
-| `site_url` | `string` | Yes |  |
-| `start_date` | `string` | Yes |  |
-| `top_countries` | `array` | Yes |  |
-| `top_pages` | `array` | Yes |  |
-| `top_queries` | `array` | Yes |  |
-| `totals` | `array` | Yes |  |
+| `clicks` | `float` | Yes |  |
+| `ctr` | `float` | Yes |  |
+| `date` | `string` | Yes |  |
+| `impressions` | `float` | Yes |  |
+| `position` | `float` | Yes |  |
 
 ### Operations
 
@@ -10890,23 +10740,24 @@ $stats_refresh_overview = $client->StatsRefreshOverview();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `active_run` | `mixed` | No |  |
-| `aged_over_24h` | `int` | Yes |  |
-| `backlog_preview` | `array` | Yes |  |
-| `coverage_percent` | `float` | Yes |  |
-| `customer_counts` | `array` | Yes |  |
-| `date` | `string` | Yes |  |
-| `generated_at` | `string` | Yes |  |
-| `method_counts` | `array` | Yes |  |
-| `platform_counts` | `array` | Yes |  |
-| `platform_units_resolved` | `int` | Yes |  |
-| `platform_units_total` | `int` | Yes |  |
-| `platform_units_unresolved` | `int` | Yes |  |
-| `posted_entries` | `int` | Yes |  |
-| `reason_counts` | `array` | Yes |  |
-| `sla_deadline_et` | `string` | Yes |  |
-| `stale_after_sla` | `int` | Yes |  |
-| `top_affected_customers` | `array` | Yes |  |
+| `aged_over_24h` | `bool` | Yes |  |
+| `agent_id` | `string` | No |  |
+| `agent_name` | `mixed` | No |  |
+| `is_resolved` | `bool` | Yes |  |
+| `last_refresh_completed_at` | `mixed` | No |  |
+| `latest_error_message` | `mixed` | No |  |
+| `platform` | `string` | Yes |  |
+| `post_method` | `mixed` | No |  |
+| `post_url` | `mixed` | No |  |
+| `posted_date_et` | `string` | Yes |  |
+| `product_id` | `string` | No |  |
+| `product_name` | `mixed` | No |  |
+| `reason_code` | `mixed` | No |  |
+| `schedule_queue_id` | `string` | Yes |  |
+| `scheduled_datetime_utc` | `string` | Yes |  |
+| `stale_after_sla` | `bool` | Yes |  |
+| `user_email` | `string` | Yes |  |
+| `user_id` | `string` | Yes |  |
 
 ### Operations
 
@@ -11430,6 +11281,10 @@ $user = $client->User();
 
 ### Operations
 
+#### `create(array $reqdata, ?array $ctrl = null): mixed`
+
+Create a new entity with the given data. Returns the created entity and throws on error.
+
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
 Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and throws on error.
@@ -11486,7 +11341,6 @@ $user_agent = $client->UserAgent();
 | `assigned_at` | `string` | Yes |  |
 | `assignment_id` | `string` | Yes |  |
 | `expires_at` | `mixed` | No |  |
-| `id` | `string` | No |  |
 | `status` | `string` | Yes |  |
 
 ### Operations
@@ -11497,7 +11351,7 @@ Create a new entity with the given data. Returns the created entity and throws o
 
 ```php
 $result = $client->UserAgent()->create([
-  "id" => null, // string
+  "user_id" => null, // string
   "agent" => null, // array
   "assigned_at" => null, // string
   "assignment_id" => null, // string
@@ -11510,7 +11364,7 @@ $result = $client->UserAgent()->create([
 List entities matching the given criteria (call with no argument to list all). Returns an array of entities, one per record, and throws on error.
 
 ```php
-$results = $client->UserAgent()->list(["id" => "example"]);
+$results = $client->UserAgent()->list(["user_id" => "example"]);
 ```
 
 ### Common Methods
@@ -11553,65 +11407,9 @@ $user_health_detail = $client->UserHealthDetail();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `account_type` | `mixed` | Yes |  |
-| `activated` | `bool` | Yes |  |
-| `activated_by_admin_at` | `mixed` | No |  |
-| `activated_by_admin_id` | `string` | No |  |
-| `admin_notes` | `mixed` | No |  |
-| `agents_count` | `int` | No |  |
-| `assigned_agents` | `array` | Yes |  |
-| `assigned_agents_count` | `int` | Yes |  |
-| `assigned_agents_preview_limit` | `int` | No |  |
-| `assigned_agents_truncated` | `bool` | No |  |
-| `auto_schedule_enabled` | `bool` | Yes |  |
-| `comments_expected_per_day` | `int` | No |  |
-| `comments_fix_block_reason` | `mixed` | No |  |
-| `comments_fix_ready` | `bool` | No |  |
-| `comments_today_failed` | `int` | No |  |
-| `comments_today_posted` | `int` | No |  |
-| `comments_today_scheduled` | `int` | No |  |
-| `comments_yesterday_failed` | `int` | No |  |
-| `comments_yesterday_posted` | `int` | No |  |
-| `comments_yesterday_total` | `int` | No |  |
-| `created_at` | `string` | Yes |  |
-| `credits` | `int` | Yes |  |
-| `effective_posted_video_reuse_percent` | `int` | Yes |  |
-| `email` | `string` | Yes |  |
-| `expected_agents_count` | `int` | Yes |  |
 | `id` | `string` | Yes |  |
-| `is_activated_by_admin` | `bool` | Yes |  |
-| `is_admin` | `bool` | Yes |  |
-| `is_bookmarked` | `bool` | No |  |
-| `is_internal_user` | `bool` | Yes |  |
-| `is_migrated` | `bool` | Yes |  |
-| `landing_slug` | `mixed` | No |  |
-| `landing_status` | `mixed` | No |  |
-| `landing_url` | `mixed` | No |  |
-| `membership` | `mixed` | Yes |  |
-| `microhub_status` | `mixed` | No |  |
-| `microhub_url` | `mixed` | No |  |
 | `name` | `string` | Yes |  |
-| `onboarding_flow` | `string` | Yes |  |
-| `posted_video_reuse_percent` | `mixed` | No |  |
-| `product_id` | `string` | Yes |  |
-| `product_name` | `mixed` | Yes |  |
-| `product_url` | `mixed` | Yes |  |
-| `subscription_status` | `mixed` | Yes |  |
-| `survey_data` | `mixed` | No |  |
-| `today_failed` | `int` | Yes |  |
-| `today_posted` | `int` | Yes |  |
-| `today_scheduled` | `int` | Yes |  |
-| `tomorrow_capacity` | `int` | Yes |  |
-| `tomorrow_scheduled` | `int` | Yes |  |
-| `videos_completed` | `int` | Yes |  |
-| `videos_failed` | `int` | Yes |  |
-| `videos_pending` | `int` | Yes |  |
-| `videos_stale` | `int` | Yes |  |
-| `videos_total` | `int` | Yes |  |
-| `yesterday_failed` | `int` | Yes |  |
-| `yesterday_failed_entries` | `array` | Yes |  |
-| `yesterday_posted` | `int` | Yes |  |
-| `yesterday_total` | `int` | Yes |  |
+| `type` | `string` | Yes |  |
 
 ### Operations
 
@@ -11620,7 +11418,7 @@ $user_health_detail = $client->UserHealthDetail();
 List entities matching the given criteria (call with no argument to list all). Returns an array of entities, one per record, and throws on error.
 
 ```php
-$results = $client->UserHealthDetail()->list(["id" => "example"]);
+$results = $client->UserHealthDetail()->list(["user_id" => "example"]);
 ```
 
 ### Common Methods

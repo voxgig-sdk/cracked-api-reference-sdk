@@ -51,12 +51,19 @@ class TestCommentCampaignEntity:
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
                 return
+        if setup["live"] and os.environ.get("VOXGIG_GETONLY_GUARD") == "TRUE":
+            print("LIVE STEP {\"id\":\"comment_campaign.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/comments/products/{product_id}/campaign/sources/{source_id}/resolve\"}")
+            print("LIVE STEP {\"id\":\"comment_campaign.update.1\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs PUT /api/comments/products/{product_id}/campaign\"}")
+            return self._run_get_only_flow(setup)
+
         if setup["live"]:
             for _live_key in ["product01"]:
                 if setup.get("synthetic_only") or setup["idmap"].get(_live_key) is None:
                     runner.live_miss(LIVE_STRICT, f"Live entity test blocked: needs {_live_key} via CRACKED_API_REFERENCE_TEST_COMMENT_CAMPAIGN_ENTID")
         client = setup["client"]
 
+        if setup["live"]:
+            runner.live_pace()
         # CREATE
         comment_campaign_ref01_ent = client.CommentCampaign(None)
         comment_campaign_ref01_data = helpers.to_map(vs.getprop(
@@ -66,6 +73,8 @@ class TestCommentCampaignEntity:
         comment_campaign_ref01_data = helpers.to_map(runner.entity_data(comment_campaign_ref01_ent.create(comment_campaign_ref01_data, None)))
         assert comment_campaign_ref01_data is not None
 
+        if setup["live"]:
+            runner.live_pace()
         # UPDATE
         comment_campaign_ref01_data_up0_up = {
         }
@@ -78,7 +87,28 @@ class TestCommentCampaignEntity:
         assert comment_campaign_ref01_resdata_up0 is not None
         assert comment_campaign_ref01_resdata_up0[comment_campaign_ref01_markdef_up0_name] == comment_campaign_ref01_markdef_up0_value
 
+        if setup["live"]:
+            runner.live_pace()
         # LOAD
+        comment_campaign_ref01_match_dt0 = {}
+        comment_campaign_ref01_data_dt0_loaded = comment_campaign_ref01_ent.load(comment_campaign_ref01_match_dt0, None)
+        assert comment_campaign_ref01_data_dt0_loaded is not None
+
+
+    def _run_get_only_flow(self, setup):
+        client = setup["client"]
+
+        # Bootstrap entity data from existing test data.
+        comment_campaign_ref01_data_raw = vs.items(helpers.to_map(
+            vs.getpath(setup["data"], "existing.comment_campaign")))
+        comment_campaign_ref01_data = None
+        if len(comment_campaign_ref01_data_raw) > 0:
+            comment_campaign_ref01_data = helpers.to_map(comment_campaign_ref01_data_raw[0][1])
+
+        if setup["live"]:
+            runner.live_pace()
+        # LOAD
+        comment_campaign_ref01_ent = client.CommentCampaign(None)
         comment_campaign_ref01_match_dt0 = {}
         comment_campaign_ref01_data_dt0_loaded = comment_campaign_ref01_ent.load(comment_campaign_ref01_match_dt0, None)
         assert comment_campaign_ref01_data_dt0_loaded is not None

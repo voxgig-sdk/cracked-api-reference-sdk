@@ -160,6 +160,40 @@ const PLAN = [
         "accessor": "Admin",
         "op": "create",
         "method": "POST",
+        "path": "/api/admin/impersonate/{user_id}",
+        "args": [
+            {
+                "name": "user_id",
+                "wire": "user_id",
+                "value": "p1"
+            }
+        ],
+        "select": {},
+        "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
+        "query": [],
+        "queryArgs": [],
+        "auth": [
+            [
+                {
+                    "in": "header",
+                    "name": "authorization",
+                    "scheme": "bearer"
+                }
+            ]
+        ],
+        "status": 200,
+        "sample": null,
+        "idField": "id"
+    },
+    {
+        "entity": "admin",
+        "accessor": "Admin",
+        "op": "create",
+        "method": "POST",
         "path": "/api/admin/batch-regenerate-sora2",
         "action": "batch_regenerate_sora2",
         "args": [],
@@ -252,7 +286,8 @@ const PLAN = [
         "select": {
             "date": "v1",
             "day": "v1",
-            "user_email": "v1"
+            "user_email": "v1",
+            "user_id": "v1"
         },
         "headers": [],
         "cookies": [],
@@ -277,6 +312,10 @@ const PLAN = [
             {
                 "name": "user_email",
                 "wire": "user_email"
+            },
+            {
+                "name": "user_id",
+                "wire": "user_id"
             }
         ],
         "auth": [
@@ -429,82 +468,6 @@ const PLAN = [
             "application/json"
         ],
         "query": [],
-        "queryArgs": [],
-        "auth": [
-            [
-                {
-                    "in": "header",
-                    "name": "authorization",
-                    "scheme": "bearer"
-                }
-            ]
-        ],
-        "status": 200,
-        "sample": null,
-        "idField": "id"
-    },
-    {
-        "entity": "admin",
-        "accessor": "Admin",
-        "op": "update",
-        "method": "PUT",
-        "path": "/api/admin/agents/{agent_id}/type",
-        "args": [
-            {
-                "name": "agent_id",
-                "wire": "agent_id",
-                "value": "p1"
-            }
-        ],
-        "select": {
-            "agent_type": "v1"
-        },
-        "headers": [],
-        "cookies": [],
-        "responseMedia": [
-            "application/json"
-        ],
-        "query": [
-            "agent_type"
-        ],
-        "queryArgs": [],
-        "auth": [
-            [
-                {
-                    "in": "header",
-                    "name": "authorization",
-                    "scheme": "bearer"
-                }
-            ]
-        ],
-        "status": 200,
-        "sample": null,
-        "idField": "id"
-    },
-    {
-        "entity": "admin",
-        "accessor": "Admin",
-        "op": "update",
-        "method": "PUT",
-        "path": "/api/admin/agents/{agent_id}/active",
-        "args": [
-            {
-                "name": "agent_id",
-                "wire": "agent_id",
-                "value": "p1"
-            }
-        ],
-        "select": {
-            "is_active": "v1"
-        },
-        "headers": [],
-        "cookies": [],
-        "responseMedia": [
-            "application/json"
-        ],
-        "query": [
-            "is_active"
-        ],
         "queryArgs": [],
         "auth": [
             [
@@ -2050,415 +2013,6 @@ const PLAN = [
     {
         "entity": "admin_user_view",
         "accessor": "AdminUserView",
-        "op": "create",
-        "method": "POST",
-        "path": "/api/admin/users/{user_id}/fix-auto-schedule-by-date",
-        "action": "fix_auto_schedule_by_date",
-        "args": [
-            {
-                "name": "user_id",
-                "wire": "user_id",
-                "value": "p1"
-            }
-        ],
-        "select": {
-            "target_date": "v1"
-        },
-        "headers": [],
-        "cookies": [],
-        "responseMedia": [
-            "application/json"
-        ],
-        "query": [
-            "target_date",
-            "product_id"
-        ],
-        "queryArgs": [],
-        "auth": [
-            [
-                {
-                    "in": "header",
-                    "name": "authorization",
-                    "scheme": "bearer"
-                }
-            ]
-        ],
-        "status": 200,
-        "sample": null,
-        "idField": "id"
-    },
-    {
-        "entity": "admin_user_view",
-        "accessor": "AdminUserView",
-        "op": "create",
-        "method": "POST",
-        "path": "/api/admin/users/{user_id}/repair-approved-source-queue-today",
-        "action": "repair_approved_source_queue_today",
-        "args": [
-            {
-                "name": "user_id",
-                "wire": "user_id",
-                "value": "p1"
-            }
-        ],
-        "select": {
-            "product_id": "v1"
-        },
-        "headers": [],
-        "cookies": [],
-        "responseMedia": [
-            "application/json"
-        ],
-        "query": [
-            "product_id"
-        ],
-        "queryArgs": [],
-        "auth": [
-            [
-                {
-                    "in": "header",
-                    "name": "authorization",
-                    "scheme": "bearer"
-                }
-            ]
-        ],
-        "status": 200,
-        "sample": null,
-        "idField": "id"
-    },
-    {
-        "entity": "admin_user_view",
-        "accessor": "AdminUserView",
-        "op": "create",
-        "method": "POST",
-        "path": "/api/admin/users/{user_id}/fix-all",
-        "action": "fix_all",
-        "args": [
-            {
-                "name": "user_id",
-                "wire": "user_id",
-                "value": "p1"
-            }
-        ],
-        "select": {},
-        "headers": [],
-        "cookies": [],
-        "responseMedia": [
-            "application/json"
-        ],
-        "query": [],
-        "queryArgs": [],
-        "auth": [
-            [
-                {
-                    "in": "header",
-                    "name": "authorization",
-                    "scheme": "bearer"
-                }
-            ]
-        ],
-        "status": 200,
-        "sample": null,
-        "idField": "id"
-    },
-    {
-        "entity": "admin_user_view",
-        "accessor": "AdminUserView",
-        "op": "create",
-        "method": "POST",
-        "path": "/api/admin/users/{user_id}/fix-auto-schedule",
-        "action": "fix_auto_schedule",
-        "args": [
-            {
-                "name": "user_id",
-                "wire": "user_id",
-                "value": "p1"
-            }
-        ],
-        "select": {},
-        "headers": [],
-        "cookies": [],
-        "responseMedia": [
-            "application/json"
-        ],
-        "query": [
-            "product_id"
-        ],
-        "queryArgs": [],
-        "auth": [
-            [
-                {
-                    "in": "header",
-                    "name": "authorization",
-                    "scheme": "bearer"
-                }
-            ]
-        ],
-        "status": 200,
-        "sample": null,
-        "idField": "id"
-    },
-    {
-        "entity": "admin_user_view",
-        "accessor": "AdminUserView",
-        "op": "create",
-        "method": "POST",
-        "path": "/api/admin/users/{user_id}/fix-auto-schedule-today",
-        "action": "fix_auto_schedule_today",
-        "args": [
-            {
-                "name": "user_id",
-                "wire": "user_id",
-                "value": "p1"
-            }
-        ],
-        "select": {
-            "background": "v1"
-        },
-        "headers": [],
-        "cookies": [],
-        "responseMedia": [
-            "application/json"
-        ],
-        "query": [
-            "product_id",
-            "background"
-        ],
-        "queryArgs": [],
-        "auth": [
-            [
-                {
-                    "in": "header",
-                    "name": "authorization",
-                    "scheme": "bearer"
-                }
-            ]
-        ],
-        "status": 200,
-        "sample": null,
-        "idField": "id"
-    },
-    {
-        "entity": "admin_user_view",
-        "accessor": "AdminUserView",
-        "op": "create",
-        "method": "POST",
-        "path": "/api/admin/users/{user_id}/fix-auto-schedule-today-force",
-        "action": "fix_auto_schedule_today_force",
-        "args": [
-            {
-                "name": "user_id",
-                "wire": "user_id",
-                "value": "p1"
-            }
-        ],
-        "select": {},
-        "headers": [],
-        "cookies": [],
-        "responseMedia": [
-            "application/json"
-        ],
-        "query": [
-            "product_id"
-        ],
-        "queryArgs": [],
-        "auth": [
-            [
-                {
-                    "in": "header",
-                    "name": "authorization",
-                    "scheme": "bearer"
-                }
-            ]
-        ],
-        "status": 200,
-        "sample": null,
-        "idField": "id"
-    },
-    {
-        "entity": "admin_user_view",
-        "accessor": "AdminUserView",
-        "op": "create",
-        "method": "POST",
-        "path": "/api/admin/users/{user_id}/fix-auto-schedule-tomorrow",
-        "action": "fix_auto_schedule_tomorrow",
-        "args": [
-            {
-                "name": "user_id",
-                "wire": "user_id",
-                "value": "p1"
-            }
-        ],
-        "select": {},
-        "headers": [],
-        "cookies": [],
-        "responseMedia": [
-            "application/json"
-        ],
-        "query": [
-            "product_id"
-        ],
-        "queryArgs": [],
-        "auth": [
-            [
-                {
-                    "in": "header",
-                    "name": "authorization",
-                    "scheme": "bearer"
-                }
-            ]
-        ],
-        "status": 200,
-        "sample": null,
-        "idField": "id"
-    },
-    {
-        "entity": "admin_user_view",
-        "accessor": "AdminUserView",
-        "op": "create",
-        "method": "POST",
-        "path": "/api/admin/users/{user_id}/fix-comments-today",
-        "action": "fix_comments_today",
-        "args": [
-            {
-                "name": "user_id",
-                "wire": "user_id",
-                "value": "p1"
-            }
-        ],
-        "select": {},
-        "headers": [],
-        "cookies": [],
-        "responseMedia": [
-            "application/json"
-        ],
-        "query": [
-            "product_id"
-        ],
-        "queryArgs": [],
-        "auth": [
-            [
-                {
-                    "in": "header",
-                    "name": "authorization",
-                    "scheme": "bearer"
-                }
-            ]
-        ],
-        "status": 200,
-        "sample": null,
-        "idField": "id"
-    },
-    {
-        "entity": "admin_user_view",
-        "accessor": "AdminUserView",
-        "op": "create",
-        "method": "POST",
-        "path": "/api/admin/users/{user_id}/generate-pomelli-video",
-        "action": "generate_pomelli_video",
-        "args": [
-            {
-                "name": "user_id",
-                "wire": "user_id",
-                "value": "p1"
-            }
-        ],
-        "select": {},
-        "headers": [],
-        "cookies": [],
-        "responseMedia": [
-            "application/json"
-        ],
-        "query": [],
-        "queryArgs": [],
-        "auth": [
-            [
-                {
-                    "in": "header",
-                    "name": "authorization",
-                    "scheme": "bearer"
-                }
-            ]
-        ],
-        "status": 200,
-        "sample": null,
-        "idField": "id"
-    },
-    {
-        "entity": "admin_user_view",
-        "accessor": "AdminUserView",
-        "op": "create",
-        "method": "POST",
-        "path": "/api/admin/users/{user_id}/repost-tiktok-videos-tomorrow",
-        "action": "repost_tiktok_videos_tomorrow",
-        "args": [
-            {
-                "name": "user_id",
-                "wire": "user_id",
-                "value": "p1"
-            }
-        ],
-        "select": {},
-        "headers": [],
-        "cookies": [],
-        "responseMedia": [
-            "application/json"
-        ],
-        "query": [
-            "product_id"
-        ],
-        "queryArgs": [],
-        "auth": [
-            [
-                {
-                    "in": "header",
-                    "name": "authorization",
-                    "scheme": "bearer"
-                }
-            ]
-        ],
-        "status": 200,
-        "sample": null,
-        "idField": "id"
-    },
-    {
-        "entity": "admin_user_view",
-        "accessor": "AdminUserView",
-        "op": "create",
-        "method": "POST",
-        "path": "/api/admin/users/{user_id}/reset-onboarding",
-        "action": "reset_onboarding",
-        "args": [
-            {
-                "name": "user_id",
-                "wire": "user_id",
-                "value": "p1"
-            }
-        ],
-        "select": {},
-        "headers": [],
-        "cookies": [],
-        "responseMedia": [
-            "application/json"
-        ],
-        "query": [],
-        "queryArgs": [],
-        "auth": [
-            [
-                {
-                    "in": "header",
-                    "name": "authorization",
-                    "scheme": "bearer"
-                }
-            ]
-        ],
-        "status": 200,
-        "sample": null,
-        "idField": "id"
-    },
-    {
-        "entity": "admin_user_view",
-        "accessor": "AdminUserView",
         "op": "list",
         "method": "GET",
         "path": "/api/admin/users/search",
@@ -2588,85 +2142,6 @@ const PLAN = [
             "application/json"
         ],
         "query": [],
-        "queryArgs": [],
-        "auth": [
-            [
-                {
-                    "in": "header",
-                    "name": "authorization",
-                    "scheme": "bearer"
-                }
-            ]
-        ],
-        "status": 200,
-        "sample": null,
-        "idField": "id"
-    },
-    {
-        "entity": "admin_user_view",
-        "accessor": "AdminUserView",
-        "op": "update",
-        "method": "PUT",
-        "path": "/api/admin/users/{user_id}/auto-schedule",
-        "action": "auto_schedule",
-        "args": [
-            {
-                "name": "user_id",
-                "wire": "user_id",
-                "value": "p1"
-            }
-        ],
-        "select": {
-            "is_enabled": "v1"
-        },
-        "headers": [],
-        "cookies": [],
-        "responseMedia": [
-            "application/json"
-        ],
-        "query": [
-            "is_enabled",
-            "product_id"
-        ],
-        "queryArgs": [],
-        "auth": [
-            [
-                {
-                    "in": "header",
-                    "name": "authorization",
-                    "scheme": "bearer"
-                }
-            ]
-        ],
-        "status": 200,
-        "sample": null,
-        "idField": "id"
-    },
-    {
-        "entity": "admin_user_view",
-        "accessor": "AdminUserView",
-        "op": "update",
-        "method": "PUT",
-        "path": "/api/admin/users/{user_id}/posted-video-reuse",
-        "action": "posted_video_reuse",
-        "args": [
-            {
-                "name": "user_id",
-                "wire": "user_id",
-                "value": "p1"
-            }
-        ],
-        "select": {
-            "product_id": "v1"
-        },
-        "headers": [],
-        "cookies": [],
-        "responseMedia": [
-            "application/json"
-        ],
-        "query": [
-            "product_id"
-        ],
         "queryArgs": [],
         "auth": [
             [
@@ -3517,6 +2992,84 @@ const PLAN = [
                 "tiktok_stats": {}
             }
         ],
+        "idField": "id"
+    },
+    {
+        "entity": "agent",
+        "accessor": "Agent",
+        "op": "update",
+        "method": "PUT",
+        "path": "/api/admin/agents/{agent_id}/active",
+        "action": "active",
+        "args": [
+            {
+                "name": "id",
+                "wire": "agent_id",
+                "value": "p1"
+            }
+        ],
+        "select": {
+            "is_active": "v1"
+        },
+        "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
+        "query": [
+            "is_active"
+        ],
+        "queryArgs": [],
+        "auth": [
+            [
+                {
+                    "in": "header",
+                    "name": "authorization",
+                    "scheme": "bearer"
+                }
+            ]
+        ],
+        "status": 200,
+        "sample": null,
+        "idField": "id"
+    },
+    {
+        "entity": "agent",
+        "accessor": "Agent",
+        "op": "update",
+        "method": "PUT",
+        "path": "/api/admin/agents/{agent_id}/type",
+        "action": "type",
+        "args": [
+            {
+                "name": "id",
+                "wire": "agent_id",
+                "value": "p1"
+            }
+        ],
+        "select": {
+            "agent_type": "v1"
+        },
+        "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
+        "query": [
+            "agent_type"
+        ],
+        "queryArgs": [],
+        "auth": [
+            [
+                {
+                    "in": "header",
+                    "name": "authorization",
+                    "scheme": "bearer"
+                }
+            ]
+        ],
+        "status": 200,
+        "sample": null,
         "idField": "id"
     },
     {
@@ -4695,7 +4248,7 @@ const PLAN = [
         "path": "/api/admin/agents/{agent_id}/posts",
         "args": [
             {
-                "name": "id",
+                "name": "agent_id",
                 "wire": "agent_id",
                 "value": "p1"
             }
@@ -5310,7 +4863,7 @@ const PLAN = [
         ],
         "status": 200,
         "sample": null,
-        "idField": "id"
+        "idField": "queue_id"
     },
     {
         "entity": "carousel",
@@ -5382,7 +4935,7 @@ const PLAN = [
             "previous_date": "2026-01-01",
             "next_date": "2026-01-01"
         },
-        "idField": "id"
+        "idField": "queue_id"
     },
     {
         "entity": "carousel",
@@ -5464,7 +5017,7 @@ const PLAN = [
             "audit_snapshot_sha256": "x",
             "audit_created_at": "x"
         },
-        "idField": "id"
+        "idField": "queue_id"
     },
     {
         "entity": "carousel_agent_detail",
@@ -5521,7 +5074,7 @@ const PLAN = [
         "path": "/api/carousel/{video_id}/status",
         "args": [
             {
-                "name": "id",
+                "name": "carousel_id",
                 "wire": "video_id",
                 "value": "p1"
             }
@@ -5574,40 +5127,6 @@ const PLAN = [
             },
             "image_model": "gpt-image-2-5-sunburst-text-to-image"
         },
-        "idField": "id"
-    },
-    {
-        "entity": "chat",
-        "accessor": "Chat",
-        "op": "create",
-        "method": "POST",
-        "path": "/api/chat/sessions/{session_id}/messages",
-        "args": [
-            {
-                "name": "session_id",
-                "wire": "session_id",
-                "value": "p1"
-            }
-        ],
-        "select": {},
-        "headers": [],
-        "cookies": [],
-        "responseMedia": [
-            "application/json"
-        ],
-        "query": [],
-        "queryArgs": [],
-        "auth": [
-            [
-                {
-                    "in": "header",
-                    "name": "authorization",
-                    "scheme": "bearer"
-                }
-            ]
-        ],
-        "status": 200,
-        "sample": null,
         "idField": "id"
     },
     {
@@ -5701,50 +5220,6 @@ const PLAN = [
                     "createdAt": "2026-01-01T00:00:00Z"
                 }
             ]
-        },
-        "idField": "id"
-    },
-    {
-        "entity": "chat_session",
-        "accessor": "ChatSession",
-        "op": "create",
-        "method": "POST",
-        "path": "/api/chat/sessions/{session_id}/complete",
-        "args": [
-            {
-                "name": "session_id",
-                "wire": "session_id",
-                "value": "p1"
-            }
-        ],
-        "select": {},
-        "headers": [],
-        "cookies": [],
-        "responseMedia": [
-            "application/json"
-        ],
-        "query": [],
-        "queryArgs": [],
-        "auth": [
-            [
-                {
-                    "in": "header",
-                    "name": "authorization",
-                    "scheme": "bearer"
-                }
-            ]
-        ],
-        "status": 200,
-        "sample": {
-            "sessionId": "x",
-            "chatSubVariant": "A",
-            "status": "x",
-            "salesStage": "x",
-            "routeRecommendation": "x",
-            "selectedPlan": "3_agents",
-            "model": "x",
-            "createdAt": "2026-01-01T00:00:00Z",
-            "updatedAt": "2026-01-01T00:00:00Z"
         },
         "idField": "id"
     },
@@ -6287,7 +5762,7 @@ const PLAN = [
                 }
             ]
         },
-        "idField": "id"
+        "idField": "user_id"
     },
     {
         "entity": "customer_health_all_customers_item",
@@ -6480,7 +5955,7 @@ const PLAN = [
         "path": "/api/carousel/daily/{product_id}/status",
         "args": [
             {
-                "name": "id",
+                "name": "daily_id",
                 "wire": "product_id",
                 "value": "p1"
             }
@@ -6613,40 +6088,6 @@ const PLAN = [
         "method": "GET",
         "path": "/api/enterprise/agents/global-pool-status",
         "args": [],
-        "select": {},
-        "headers": [],
-        "cookies": [],
-        "responseMedia": [
-            "application/json"
-        ],
-        "query": [],
-        "queryArgs": [],
-        "auth": [
-            [
-                {
-                    "in": "header",
-                    "name": "authorization",
-                    "scheme": "bearer"
-                }
-            ]
-        ],
-        "status": 200,
-        "sample": null,
-        "idField": "id"
-    },
-    {
-        "entity": "enterprise_product",
-        "accessor": "EnterpriseProduct",
-        "op": "load",
-        "method": "GET",
-        "path": "/api/enterprise/products/{product_id}/status",
-        "args": [
-            {
-                "name": "product_id",
-                "wire": "product_id",
-                "value": "p1"
-            }
-        ],
         "select": {},
         "headers": [],
         "cookies": [],
@@ -7174,74 +6615,6 @@ const PLAN = [
         "idField": "id"
     },
     {
-        "entity": "iri",
-        "accessor": "Iri",
-        "op": "create",
-        "method": "POST",
-        "path": "/api/iris/connectors/{connector_id}/start",
-        "args": [
-            {
-                "name": "connector_id",
-                "wire": "connector_id",
-                "value": "p1"
-            }
-        ],
-        "select": {},
-        "headers": [],
-        "cookies": [],
-        "responseMedia": [
-            "application/json"
-        ],
-        "query": [],
-        "queryArgs": [],
-        "auth": [
-            [
-                {
-                    "in": "header",
-                    "name": "authorization",
-                    "scheme": "bearer"
-                }
-            ]
-        ],
-        "status": 200,
-        "sample": {},
-        "idField": "id"
-    },
-    {
-        "entity": "iri",
-        "accessor": "Iri",
-        "op": "create",
-        "method": "POST",
-        "path": "/api/iris/tasks/{task_id}/run",
-        "args": [
-            {
-                "name": "task_id",
-                "wire": "task_id",
-                "value": "p1"
-            }
-        ],
-        "select": {},
-        "headers": [],
-        "cookies": [],
-        "responseMedia": [
-            "application/json"
-        ],
-        "query": [],
-        "queryArgs": [],
-        "auth": [
-            [
-                {
-                    "in": "header",
-                    "name": "authorization",
-                    "scheme": "bearer"
-                }
-            ]
-        ],
-        "status": 200,
-        "sample": {},
-        "idField": "id"
-    },
-    {
         "entity": "iris_capability",
         "accessor": "IrisCapability",
         "op": "create",
@@ -7311,6 +6684,40 @@ const PLAN = [
             ],
             "correlationId": "x"
         },
+        "idField": "id"
+    },
+    {
+        "entity": "iris_connector",
+        "accessor": "IrisConnector",
+        "op": "create",
+        "method": "POST",
+        "path": "/api/iris/connectors/{connector_id}/start",
+        "args": [
+            {
+                "name": "connector_id",
+                "wire": "connector_id",
+                "value": "p1"
+            }
+        ],
+        "select": {},
+        "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
+        "query": [],
+        "queryArgs": [],
+        "auth": [
+            [
+                {
+                    "in": "header",
+                    "name": "authorization",
+                    "scheme": "bearer"
+                }
+            ]
+        ],
+        "status": 200,
+        "sample": {},
         "idField": "id"
     },
     {
@@ -7409,6 +6816,40 @@ const PLAN = [
                 {}
             ]
         },
+        "idField": "id"
+    },
+    {
+        "entity": "iris_task",
+        "accessor": "IrisTask",
+        "op": "create",
+        "method": "POST",
+        "path": "/api/iris/tasks/{task_id}/run",
+        "args": [
+            {
+                "name": "task_id",
+                "wire": "task_id",
+                "value": "p1"
+            }
+        ],
+        "select": {},
+        "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
+        "query": [],
+        "queryArgs": [],
+        "auth": [
+            [
+                {
+                    "in": "header",
+                    "name": "authorization",
+                    "scheme": "bearer"
+                }
+            ]
+        ],
+        "status": 200,
+        "sample": {},
         "idField": "id"
     },
     {
@@ -7898,7 +7339,7 @@ const PLAN = [
             "createdAt": "2026-01-01T00:00:00Z",
             "updatedAt": "2026-01-01T00:00:00Z"
         },
-        "idField": "id"
+        "idField": "product_id"
     },
     {
         "entity": "media_asset",
@@ -7940,7 +7381,7 @@ const PLAN = [
             "createdAt": "2026-01-01T00:00:00Z",
             "updatedAt": "2026-01-01T00:00:00Z"
         },
-        "idField": "id"
+        "idField": "product_id"
     },
     {
         "entity": "media_asset",
@@ -7981,7 +7422,7 @@ const PLAN = [
             "createdAt": "2026-01-01T00:00:00Z",
             "updatedAt": "2026-01-01T00:00:00Z"
         },
-        "idField": "id"
+        "idField": "product_id"
     },
     {
         "entity": "media_asset",
@@ -8027,7 +7468,7 @@ const PLAN = [
             ],
             "product_id": "x"
         },
-        "idField": "id"
+        "idField": "product_id"
     },
     {
         "entity": "men",
@@ -8848,7 +8289,7 @@ const PLAN = [
             "error": "x",
             "sampleVideoCount": 1
         },
-        "idField": "id"
+        "idField": "product_id"
     },
     {
         "entity": "product",
@@ -8898,7 +8339,7 @@ const PLAN = [
             "instagram_handle": "x",
             "repost_source": "x"
         },
-        "idField": "id"
+        "idField": "product_id"
     },
     {
         "entity": "product",
@@ -8927,7 +8368,7 @@ const PLAN = [
         ],
         "status": 200,
         "sample": null,
-        "idField": "id"
+        "idField": "product_id"
     },
     {
         "entity": "product",
@@ -8968,7 +8409,7 @@ const PLAN = [
                 "is_active": true
             }
         ],
-        "idField": "id"
+        "idField": "product_id"
     },
     {
         "entity": "product",
@@ -9012,7 +8453,42 @@ const PLAN = [
             "assigned_count": 1,
             "available_quota": 1
         },
-        "idField": "id"
+        "idField": "product_id"
+    },
+    {
+        "entity": "product",
+        "accessor": "Product",
+        "op": "load",
+        "method": "GET",
+        "path": "/api/enterprise/products/{product_id}/status",
+        "action": "status",
+        "args": [
+            {
+                "name": "id",
+                "wire": "product_id",
+                "value": "p1"
+            }
+        ],
+        "select": {},
+        "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
+        "query": [],
+        "queryArgs": [],
+        "auth": [
+            [
+                {
+                    "in": "header",
+                    "name": "authorization",
+                    "scheme": "bearer"
+                }
+            ]
+        ],
+        "status": 200,
+        "sample": null,
+        "idField": "product_id"
     },
     {
         "entity": "product",
@@ -9087,7 +8563,7 @@ const PLAN = [
             "createdAt": "2026-01-01T00:00:00Z",
             "updatedAt": "2026-01-01T00:00:00Z"
         },
-        "idField": "id"
+        "idField": "product_id"
     },
     {
         "entity": "product",
@@ -9125,7 +8601,7 @@ const PLAN = [
             "agents_released": 1,
             "queue_entries_cleared": 1
         },
-        "idField": "id"
+        "idField": "product_id"
     },
     {
         "entity": "product",
@@ -9181,7 +8657,7 @@ const PLAN = [
             "instagram_handle": "x",
             "repost_source": "x"
         },
-        "idField": "id"
+        "idField": "product_id"
     },
     {
         "entity": "product",
@@ -9216,7 +8692,7 @@ const PLAN = [
         ],
         "status": 200,
         "sample": null,
-        "idField": "id"
+        "idField": "product_id"
     },
     {
         "entity": "product",
@@ -9291,7 +8767,7 @@ const PLAN = [
             "createdAt": "2026-01-01T00:00:00Z",
             "updatedAt": "2026-01-01T00:00:00Z"
         },
-        "idField": "id"
+        "idField": "product_id"
     },
     {
         "entity": "product_dashboard",
@@ -9727,26 +9203,6 @@ const PLAN = [
         "idField": "id"
     },
     {
-        "entity": "read_root_get",
-        "accessor": "ReadRootGet",
-        "op": "load",
-        "method": "GET",
-        "path": "/",
-        "args": [],
-        "select": {},
-        "headers": [],
-        "cookies": [],
-        "responseMedia": [
-            "application/json"
-        ],
-        "query": [],
-        "queryArgs": [],
-        "auth": [],
-        "status": 200,
-        "sample": null,
-        "idField": "id"
-    },
-    {
         "entity": "record_demo_booked",
         "accessor": "RecordDemoBooked",
         "op": "create",
@@ -9977,6 +9433,26 @@ const PLAN = [
         "idField": "id"
     },
     {
+        "entity": "root_get",
+        "accessor": "RootGet",
+        "op": "load",
+        "method": "GET",
+        "path": "/",
+        "args": [],
+        "select": {},
+        "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
+        "query": [],
+        "queryArgs": [],
+        "auth": [],
+        "status": 200,
+        "sample": null,
+        "idField": "id"
+    },
+    {
         "entity": "save_survey",
         "accessor": "SaveSurvey",
         "op": "create",
@@ -10086,6 +9562,41 @@ const PLAN = [
             "task_id": "x",
             "ads_count": 1
         },
+        "idField": "id"
+    },
+    {
+        "entity": "schedule_queue",
+        "accessor": "ScheduleQueue",
+        "op": "update",
+        "method": "PUT",
+        "path": "/api/schedule/queue/{queue_id}/replace-video",
+        "action": "replace_video",
+        "args": [
+            {
+                "name": "queue_id",
+                "wire": "queue_id",
+                "value": "p1"
+            }
+        ],
+        "select": {},
+        "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
+        "query": [],
+        "queryArgs": [],
+        "auth": [
+            [
+                {
+                    "in": "header",
+                    "name": "authorization",
+                    "scheme": "bearer"
+                }
+            ]
+        ],
+        "status": 200,
+        "sample": null,
         "idField": "id"
     },
     {
@@ -10265,41 +9776,6 @@ const PLAN = [
         "op": "remove",
         "method": "DELETE",
         "path": "/api/schedule/queue/{queue_id}",
-        "args": [
-            {
-                "name": "queue_id",
-                "wire": "queue_id",
-                "value": "p1"
-            }
-        ],
-        "select": {},
-        "headers": [],
-        "cookies": [],
-        "responseMedia": [
-            "application/json"
-        ],
-        "query": [],
-        "queryArgs": [],
-        "auth": [
-            [
-                {
-                    "in": "header",
-                    "name": "authorization",
-                    "scheme": "bearer"
-                }
-            ]
-        ],
-        "status": 200,
-        "sample": null,
-        "idField": "id"
-    },
-    {
-        "entity": "schedule_v2",
-        "accessor": "ScheduleV2",
-        "op": "update",
-        "method": "PUT",
-        "path": "/api/schedule/queue/{queue_id}/replace-video",
-        "action": "replace_video",
         "args": [
             {
                 "name": "queue_id",
@@ -12457,6 +11933,826 @@ const PLAN = [
     {
         "entity": "user",
         "accessor": "User",
+        "op": "create",
+        "method": "POST",
+        "path": "/api/admin/users/{user_id}/fix-auto-schedule-by-date",
+        "action": "fix_auto_schedule_by_date",
+        "args": [
+            {
+                "name": "id",
+                "wire": "user_id",
+                "value": "p1"
+            }
+        ],
+        "select": {
+            "target_date": "v1"
+        },
+        "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
+        "query": [
+            "target_date",
+            "product_id"
+        ],
+        "queryArgs": [],
+        "auth": [
+            [
+                {
+                    "in": "header",
+                    "name": "authorization",
+                    "scheme": "bearer"
+                }
+            ]
+        ],
+        "status": 200,
+        "sample": null,
+        "idField": "userId"
+    },
+    {
+        "entity": "user",
+        "accessor": "User",
+        "op": "create",
+        "method": "POST",
+        "path": "/api/admin/users/{user_id}/repair-approved-source-queue-today",
+        "action": "repair_approved_source_queue_today",
+        "args": [
+            {
+                "name": "id",
+                "wire": "user_id",
+                "value": "p1"
+            }
+        ],
+        "select": {
+            "product_id": "v1"
+        },
+        "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
+        "query": [
+            "product_id"
+        ],
+        "queryArgs": [],
+        "auth": [
+            [
+                {
+                    "in": "header",
+                    "name": "authorization",
+                    "scheme": "bearer"
+                }
+            ]
+        ],
+        "status": 200,
+        "sample": null,
+        "idField": "userId"
+    },
+    {
+        "entity": "user",
+        "accessor": "User",
+        "op": "create",
+        "method": "POST",
+        "path": "/api/admin/users/{user_id}/agents/reconcile",
+        "action": "agent_reconcile",
+        "args": [
+            {
+                "name": "id",
+                "wire": "user_id",
+                "value": "p1"
+            }
+        ],
+        "select": {
+            "phone_admin_pc_name": "v1"
+        },
+        "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
+        "query": [
+            "product_id",
+            "phone_admin_pc_name"
+        ],
+        "queryArgs": [],
+        "auth": [
+            [
+                {
+                    "in": "header",
+                    "name": "authorization",
+                    "scheme": "bearer"
+                }
+            ]
+        ],
+        "status": 200,
+        "sample": null,
+        "idField": "userId"
+    },
+    {
+        "entity": "user",
+        "accessor": "User",
+        "op": "create",
+        "method": "POST",
+        "path": "/api/admin/users/{user_id}/bulk-create-videos",
+        "action": "bulk_create_video",
+        "args": [
+            {
+                "name": "id",
+                "wire": "user_id",
+                "value": "p1"
+            }
+        ],
+        "select": {},
+        "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
+        "query": [],
+        "queryArgs": [],
+        "auth": [
+            [
+                {
+                    "in": "header",
+                    "name": "authorization",
+                    "scheme": "bearer"
+                }
+            ]
+        ],
+        "status": 200,
+        "sample": null,
+        "idField": "userId"
+    },
+    {
+        "entity": "user",
+        "accessor": "User",
+        "op": "create",
+        "method": "POST",
+        "path": "/api/admin/users/{user_id}/clear-failed-videos",
+        "action": "clear_failed_video",
+        "args": [
+            {
+                "name": "id",
+                "wire": "user_id",
+                "value": "p1"
+            }
+        ],
+        "select": {},
+        "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
+        "query": [],
+        "queryArgs": [],
+        "auth": [
+            [
+                {
+                    "in": "header",
+                    "name": "authorization",
+                    "scheme": "bearer"
+                }
+            ]
+        ],
+        "status": 200,
+        "sample": null,
+        "idField": "userId"
+    },
+    {
+        "entity": "user",
+        "accessor": "User",
+        "op": "create",
+        "method": "POST",
+        "path": "/api/admin/users/{user_id}/clear-future-auto-entries",
+        "action": "clear_future_auto_entry",
+        "args": [
+            {
+                "name": "id",
+                "wire": "user_id",
+                "value": "p1"
+            }
+        ],
+        "select": {},
+        "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
+        "query": [
+            "product_id"
+        ],
+        "queryArgs": [],
+        "auth": [
+            [
+                {
+                    "in": "header",
+                    "name": "authorization",
+                    "scheme": "bearer"
+                }
+            ]
+        ],
+        "status": 200,
+        "sample": null,
+        "idField": "userId"
+    },
+    {
+        "entity": "user",
+        "accessor": "User",
+        "op": "create",
+        "method": "POST",
+        "path": "/api/admin/users/{user_id}/clear-manual-entries",
+        "action": "clear_manual_entry",
+        "args": [
+            {
+                "name": "id",
+                "wire": "user_id",
+                "value": "p1"
+            }
+        ],
+        "select": {},
+        "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
+        "query": [
+            "product_id"
+        ],
+        "queryArgs": [],
+        "auth": [
+            [
+                {
+                    "in": "header",
+                    "name": "authorization",
+                    "scheme": "bearer"
+                }
+            ]
+        ],
+        "status": 200,
+        "sample": null,
+        "idField": "userId"
+    },
+    {
+        "entity": "user",
+        "accessor": "User",
+        "op": "create",
+        "method": "POST",
+        "path": "/api/admin/users/{user_id}/clear-today-auto-entries",
+        "action": "clear_today_auto_entry",
+        "args": [
+            {
+                "name": "id",
+                "wire": "user_id",
+                "value": "p1"
+            }
+        ],
+        "select": {},
+        "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
+        "query": [
+            "product_id"
+        ],
+        "queryArgs": [],
+        "auth": [
+            [
+                {
+                    "in": "header",
+                    "name": "authorization",
+                    "scheme": "bearer"
+                }
+            ]
+        ],
+        "status": 200,
+        "sample": null,
+        "idField": "userId"
+    },
+    {
+        "entity": "user",
+        "accessor": "User",
+        "op": "create",
+        "method": "POST",
+        "path": "/api/admin/users/{user_id}/fix-all",
+        "action": "fix_all",
+        "args": [
+            {
+                "name": "id",
+                "wire": "user_id",
+                "value": "p1"
+            }
+        ],
+        "select": {},
+        "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
+        "query": [],
+        "queryArgs": [],
+        "auth": [
+            [
+                {
+                    "in": "header",
+                    "name": "authorization",
+                    "scheme": "bearer"
+                }
+            ]
+        ],
+        "status": 200,
+        "sample": null,
+        "idField": "userId"
+    },
+    {
+        "entity": "user",
+        "accessor": "User",
+        "op": "create",
+        "method": "POST",
+        "path": "/api/admin/users/{user_id}/fix-auto-schedule",
+        "action": "fix_auto_schedule",
+        "args": [
+            {
+                "name": "id",
+                "wire": "user_id",
+                "value": "p1"
+            }
+        ],
+        "select": {},
+        "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
+        "query": [
+            "product_id"
+        ],
+        "queryArgs": [],
+        "auth": [
+            [
+                {
+                    "in": "header",
+                    "name": "authorization",
+                    "scheme": "bearer"
+                }
+            ]
+        ],
+        "status": 200,
+        "sample": null,
+        "idField": "userId"
+    },
+    {
+        "entity": "user",
+        "accessor": "User",
+        "op": "create",
+        "method": "POST",
+        "path": "/api/admin/users/{user_id}/fix-auto-schedule-today",
+        "action": "fix_auto_schedule_today",
+        "args": [
+            {
+                "name": "id",
+                "wire": "user_id",
+                "value": "p1"
+            }
+        ],
+        "select": {
+            "background": "v1"
+        },
+        "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
+        "query": [
+            "product_id",
+            "background"
+        ],
+        "queryArgs": [],
+        "auth": [
+            [
+                {
+                    "in": "header",
+                    "name": "authorization",
+                    "scheme": "bearer"
+                }
+            ]
+        ],
+        "status": 200,
+        "sample": null,
+        "idField": "userId"
+    },
+    {
+        "entity": "user",
+        "accessor": "User",
+        "op": "create",
+        "method": "POST",
+        "path": "/api/admin/users/{user_id}/fix-auto-schedule-today-force",
+        "action": "fix_auto_schedule_today_force",
+        "args": [
+            {
+                "name": "id",
+                "wire": "user_id",
+                "value": "p1"
+            }
+        ],
+        "select": {},
+        "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
+        "query": [
+            "product_id"
+        ],
+        "queryArgs": [],
+        "auth": [
+            [
+                {
+                    "in": "header",
+                    "name": "authorization",
+                    "scheme": "bearer"
+                }
+            ]
+        ],
+        "status": 200,
+        "sample": null,
+        "idField": "userId"
+    },
+    {
+        "entity": "user",
+        "accessor": "User",
+        "op": "create",
+        "method": "POST",
+        "path": "/api/admin/users/{user_id}/fix-auto-schedule-tomorrow",
+        "action": "fix_auto_schedule_tomorrow",
+        "args": [
+            {
+                "name": "id",
+                "wire": "user_id",
+                "value": "p1"
+            }
+        ],
+        "select": {},
+        "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
+        "query": [
+            "product_id"
+        ],
+        "queryArgs": [],
+        "auth": [
+            [
+                {
+                    "in": "header",
+                    "name": "authorization",
+                    "scheme": "bearer"
+                }
+            ]
+        ],
+        "status": 200,
+        "sample": null,
+        "idField": "userId"
+    },
+    {
+        "entity": "user",
+        "accessor": "User",
+        "op": "create",
+        "method": "POST",
+        "path": "/api/admin/users/{user_id}/fix-comments-today",
+        "action": "fix_comments_today",
+        "args": [
+            {
+                "name": "id",
+                "wire": "user_id",
+                "value": "p1"
+            }
+        ],
+        "select": {},
+        "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
+        "query": [
+            "product_id"
+        ],
+        "queryArgs": [],
+        "auth": [
+            [
+                {
+                    "in": "header",
+                    "name": "authorization",
+                    "scheme": "bearer"
+                }
+            ]
+        ],
+        "status": 200,
+        "sample": null,
+        "idField": "userId"
+    },
+    {
+        "entity": "user",
+        "accessor": "User",
+        "op": "create",
+        "method": "POST",
+        "path": "/api/admin/users/{user_id}/generate-pomelli-video",
+        "action": "generate_pomelli_video",
+        "args": [
+            {
+                "name": "id",
+                "wire": "user_id",
+                "value": "p1"
+            }
+        ],
+        "select": {},
+        "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
+        "query": [],
+        "queryArgs": [],
+        "auth": [
+            [
+                {
+                    "in": "header",
+                    "name": "authorization",
+                    "scheme": "bearer"
+                }
+            ]
+        ],
+        "status": 200,
+        "sample": null,
+        "idField": "userId"
+    },
+    {
+        "entity": "user",
+        "accessor": "User",
+        "op": "create",
+        "method": "POST",
+        "path": "/api/admin/users/{user_id}/repost-tiktok-videos-tomorrow",
+        "action": "repost_tiktok_videos_tomorrow",
+        "args": [
+            {
+                "name": "id",
+                "wire": "user_id",
+                "value": "p1"
+            }
+        ],
+        "select": {},
+        "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
+        "query": [
+            "product_id"
+        ],
+        "queryArgs": [],
+        "auth": [
+            [
+                {
+                    "in": "header",
+                    "name": "authorization",
+                    "scheme": "bearer"
+                }
+            ]
+        ],
+        "status": 200,
+        "sample": null,
+        "idField": "userId"
+    },
+    {
+        "entity": "user",
+        "accessor": "User",
+        "op": "create",
+        "method": "POST",
+        "path": "/api/admin/users/{user_id}/reset-onboarding",
+        "action": "reset_onboarding",
+        "args": [
+            {
+                "name": "id",
+                "wire": "user_id",
+                "value": "p1"
+            }
+        ],
+        "select": {},
+        "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
+        "query": [],
+        "queryArgs": [],
+        "auth": [
+            [
+                {
+                    "in": "header",
+                    "name": "authorization",
+                    "scheme": "bearer"
+                }
+            ]
+        ],
+        "status": 200,
+        "sample": null,
+        "idField": "userId"
+    },
+    {
+        "entity": "user",
+        "accessor": "User",
+        "op": "create",
+        "method": "POST",
+        "path": "/api/admin/users/{user_id}/retry-todays-videos",
+        "action": "retry_todays_video",
+        "args": [
+            {
+                "name": "id",
+                "wire": "user_id",
+                "value": "p1"
+            }
+        ],
+        "select": {},
+        "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
+        "query": [],
+        "queryArgs": [],
+        "auth": [
+            [
+                {
+                    "in": "header",
+                    "name": "authorization",
+                    "scheme": "bearer"
+                }
+            ]
+        ],
+        "status": 200,
+        "sample": null,
+        "idField": "userId"
+    },
+    {
+        "entity": "user",
+        "accessor": "User",
+        "op": "create",
+        "method": "POST",
+        "path": "/api/admin/users/{user_id}/retry-videos",
+        "action": "retry_video",
+        "args": [
+            {
+                "name": "id",
+                "wire": "user_id",
+                "value": "p1"
+            }
+        ],
+        "select": {},
+        "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
+        "query": [],
+        "queryArgs": [],
+        "auth": [
+            [
+                {
+                    "in": "header",
+                    "name": "authorization",
+                    "scheme": "bearer"
+                }
+            ]
+        ],
+        "status": 200,
+        "sample": null,
+        "idField": "userId"
+    },
+    {
+        "entity": "user",
+        "accessor": "User",
+        "op": "load",
+        "method": "GET",
+        "path": "/api/admin/users/{user_id}/failed-videos",
+        "action": "failed_video",
+        "args": [
+            {
+                "name": "id",
+                "wire": "user_id",
+                "value": "p1"
+            }
+        ],
+        "select": {},
+        "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
+        "query": [],
+        "queryArgs": [],
+        "auth": [
+            [
+                {
+                    "in": "header",
+                    "name": "authorization",
+                    "scheme": "bearer"
+                }
+            ]
+        ],
+        "status": 200,
+        "sample": null,
+        "idField": "userId"
+    },
+    {
+        "entity": "user",
+        "accessor": "User",
+        "op": "load",
+        "method": "GET",
+        "path": "/api/admin/users/{user_id}/pending-videos",
+        "action": "pending_video",
+        "args": [
+            {
+                "name": "id",
+                "wire": "user_id",
+                "value": "p1"
+            }
+        ],
+        "select": {},
+        "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
+        "query": [],
+        "queryArgs": [],
+        "auth": [
+            [
+                {
+                    "in": "header",
+                    "name": "authorization",
+                    "scheme": "bearer"
+                }
+            ]
+        ],
+        "status": 200,
+        "sample": null,
+        "idField": "userId"
+    },
+    {
+        "entity": "user",
+        "accessor": "User",
+        "op": "load",
+        "method": "GET",
+        "path": "/api/admin/users/{user_id}/schedule-queue",
+        "action": "schedule_queue",
+        "args": [
+            {
+                "name": "id",
+                "wire": "user_id",
+                "value": "p1"
+            }
+        ],
+        "select": {
+            "date_filter": "v1",
+            "product_id": "v1"
+        },
+        "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
+        "query": [
+            "product_id",
+            "date_filter"
+        ],
+        "queryArgs": [
+            {
+                "name": "date_filter",
+                "wire": "date_filter"
+            },
+            {
+                "name": "product_id",
+                "wire": "product_id"
+            }
+        ],
+        "auth": [
+            [
+                {
+                    "in": "header",
+                    "name": "authorization",
+                    "scheme": "bearer"
+                }
+            ]
+        ],
+        "status": 200,
+        "sample": null,
+        "idField": "userId"
+    },
+    {
+        "entity": "user",
+        "accessor": "User",
         "op": "load",
         "method": "GET",
         "path": "/api/upload-post-agents/user/{user_id}",
@@ -12511,7 +12807,7 @@ const PLAN = [
             ],
             "totalCount": 1
         },
-        "idField": "id"
+        "idField": "userId"
     },
     {
         "entity": "user",
@@ -12572,7 +12868,86 @@ const PLAN = [
             "activatedByAdminAt": "2026-01-01T00:00:00Z",
             "activatedByAdminId": "x"
         },
-        "idField": "id"
+        "idField": "userId"
+    },
+    {
+        "entity": "user",
+        "accessor": "User",
+        "op": "update",
+        "method": "PUT",
+        "path": "/api/admin/users/{user_id}/auto-schedule",
+        "action": "auto_schedule",
+        "args": [
+            {
+                "name": "id",
+                "wire": "user_id",
+                "value": "p1"
+            }
+        ],
+        "select": {
+            "is_enabled": "v1"
+        },
+        "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
+        "query": [
+            "is_enabled",
+            "product_id"
+        ],
+        "queryArgs": [],
+        "auth": [
+            [
+                {
+                    "in": "header",
+                    "name": "authorization",
+                    "scheme": "bearer"
+                }
+            ]
+        ],
+        "status": 200,
+        "sample": null,
+        "idField": "userId"
+    },
+    {
+        "entity": "user",
+        "accessor": "User",
+        "op": "update",
+        "method": "PUT",
+        "path": "/api/admin/users/{user_id}/posted-video-reuse",
+        "action": "posted_video_reuse",
+        "args": [
+            {
+                "name": "id",
+                "wire": "user_id",
+                "value": "p1"
+            }
+        ],
+        "select": {
+            "product_id": "v1"
+        },
+        "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
+        "query": [
+            "product_id"
+        ],
+        "queryArgs": [],
+        "auth": [
+            [
+                {
+                    "in": "header",
+                    "name": "authorization",
+                    "scheme": "bearer"
+                }
+            ]
+        ],
+        "status": 200,
+        "sample": null,
+        "idField": "userId"
     },
     {
         "entity": "user",
@@ -12601,7 +12976,7 @@ const PLAN = [
         ],
         "status": 200,
         "sample": null,
-        "idField": "id"
+        "idField": "userId"
     },
     {
         "entity": "user",
@@ -12630,7 +13005,7 @@ const PLAN = [
         ],
         "status": 200,
         "sample": null,
-        "idField": "id"
+        "idField": "userId"
     },
     {
         "entity": "user",
@@ -12659,7 +13034,7 @@ const PLAN = [
         ],
         "status": 200,
         "sample": null,
-        "idField": "id"
+        "idField": "userId"
     },
     {
         "entity": "user_agent",
@@ -12669,7 +13044,7 @@ const PLAN = [
         "path": "/api/admin/users/{user_id}/agents",
         "args": [
             {
-                "name": "id",
+                "name": "user_id",
                 "wire": "user_id",
                 "value": "p1"
             }
@@ -12711,7 +13086,7 @@ const PLAN = [
         "path": "/api/admin/users/{user_id}/agents",
         "args": [
             {
-                "name": "id",
+                "name": "user_id",
                 "wire": "user_id",
                 "value": "p1"
             }
@@ -12795,7 +13170,7 @@ const PLAN = [
         "path": "/api/admin/users/{user_id}/health-detail",
         "args": [
             {
-                "name": "id",
+                "name": "user_id",
                 "wire": "user_id",
                 "value": "p1"
             }

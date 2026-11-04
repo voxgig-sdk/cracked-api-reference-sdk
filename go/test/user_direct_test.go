@@ -30,6 +30,11 @@ func TestUserDirect(t *testing.T) {
 			t.Skip(_reason)
 			return
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" && setup.idmap["user01"] == nil {
+			t.Log("LIVE STEP {\"id\":\"direct-load-user\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs user01, which only POST /api/admin/users/{user_id}/fix-auto-schedule-by-date gives\"}")
+			t.Skip("Live coverage incomplete: direct-load-user excluded (GET-only live run: needs user01, which only POST /api/admin/users/{user_id}/fix-auto-schedule-by-date gives)")
+			return
+		}
 		if setup.live {
 			for _, _liveKey := range []string{"user01"} {
 				if v := setup.idmap[_liveKey]; v == nil {
@@ -37,6 +42,9 @@ func TestUserDirect(t *testing.T) {
 					return
 				}
 			}
+		}
+		if setup.live {
+			livePace()
 		}
 		client := setup.client
 
@@ -49,7 +57,7 @@ func TestUserDirect(t *testing.T) {
 		}
 
 		result, err := client.Direct(map[string]any{
-			"path":   "api/upload-post-agents/user/{id}",
+			"path":   "api/admin/users/{id}/failed-videos",
 			"method": "GET",
 			"params": params,
 			"query":  query,

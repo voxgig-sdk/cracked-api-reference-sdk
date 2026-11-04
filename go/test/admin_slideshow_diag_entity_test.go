@@ -62,6 +62,17 @@ func TestAdminSlideshowDiagEntity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" {
+			t.Log("LIVE STEP {\"id\":\"admin_slideshow_diag.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/admin/slideshow-diag/{stage}\"}")
+			t.Skip("Live coverage incomplete: admin_slideshow_diag.create.0 excluded (GET-only live run: needs POST /api/admin/slideshow-diag/{stage})")
+			return
+		}
+
+		if setup.live {
+			t.Skip("Live coverage incomplete: the flow has no step to run")
+			return
+		}
+
 		// Bootstrap entity data from existing test data (no create step in flow).
 		adminSlideshowDiagRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.admin_slideshow_diag")))
 		var adminSlideshowDiagRef01Data map[string]any

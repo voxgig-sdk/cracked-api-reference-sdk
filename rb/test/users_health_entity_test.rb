@@ -167,6 +167,7 @@ class UsersHealthEntityTest < Minitest::Test
       users_health_ref01_data = Helpers.to_map(users_health_ref01_data_raw[0][1])
     end
 
+    Runner.live_pace if setup[:live]
     # LIST
     users_health_ref01_ent = client.UsersHealth(nil)
     users_health_ref01_match = {}

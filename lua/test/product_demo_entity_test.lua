@@ -164,6 +164,9 @@ describe("ProductDemoEntity", function()
       product_demo_ref01_data = helpers.to_map(product_demo_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LIST
     local product_demo_ref01_ent = client:ProductDemo(nil)
     local product_demo_ref01_match = {}

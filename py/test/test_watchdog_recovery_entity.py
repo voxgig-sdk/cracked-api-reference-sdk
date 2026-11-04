@@ -51,8 +51,14 @@ class TestWatchdogRecoveryEntity:
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
                 return
+        if setup["live"] and os.environ.get("VOXGIG_GETONLY_GUARD") == "TRUE":
+            print("LIVE STEP {\"id\":\"watchdog_recovery.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/v1/watchdog/recovery-queue/resolve\"}")
+            return self._run_get_only_flow(setup)
+
         client = setup["client"]
 
+        if setup["live"]:
+            runner.live_pace()
         # CREATE
         watchdog_recovery_ref01_ent = client.WatchdogRecovery(None)
         watchdog_recovery_ref01_data = helpers.to_map(vs.getprop(
@@ -61,7 +67,28 @@ class TestWatchdogRecoveryEntity:
         watchdog_recovery_ref01_data = helpers.to_map(runner.entity_data(watchdog_recovery_ref01_ent.create(watchdog_recovery_ref01_data, None)))
         assert watchdog_recovery_ref01_data is not None
 
+        if setup["live"]:
+            runner.live_pace()
         # LOAD
+        watchdog_recovery_ref01_match_dt0 = {}
+        watchdog_recovery_ref01_data_dt0_loaded = watchdog_recovery_ref01_ent.load(watchdog_recovery_ref01_match_dt0, None)
+        assert watchdog_recovery_ref01_data_dt0_loaded is not None
+
+
+    def _run_get_only_flow(self, setup):
+        client = setup["client"]
+
+        # Bootstrap entity data from existing test data.
+        watchdog_recovery_ref01_data_raw = vs.items(helpers.to_map(
+            vs.getpath(setup["data"], "existing.watchdog_recovery")))
+        watchdog_recovery_ref01_data = None
+        if len(watchdog_recovery_ref01_data_raw) > 0:
+            watchdog_recovery_ref01_data = helpers.to_map(watchdog_recovery_ref01_data_raw[0][1])
+
+        if setup["live"]:
+            runner.live_pace()
+        # LOAD
+        watchdog_recovery_ref01_ent = client.WatchdogRecovery(None)
         watchdog_recovery_ref01_match_dt0 = {}
         watchdog_recovery_ref01_data_dt0_loaded = watchdog_recovery_ref01_ent.load(watchdog_recovery_ref01_match_dt0, None)
         assert watchdog_recovery_ref01_data_dt0_loaded is not None

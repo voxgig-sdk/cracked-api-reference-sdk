@@ -153,6 +153,8 @@ class TestPaidUserEntity:
         if len(paid_user_ref01_data_raw) > 0:
             paid_user_ref01_data = helpers.to_map(paid_user_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LIST
         paid_user_ref01_ent = client.PaidUser(None)
         paid_user_ref01_match = {}

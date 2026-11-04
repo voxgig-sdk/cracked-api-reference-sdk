@@ -60,6 +60,8 @@ class TestAgentsSummaryEntity:
         if len(agents_summary_ref01_data_raw) > 0:
             agents_summary_ref01_data = helpers.to_map(agents_summary_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LOAD
         agents_summary_ref01_ent = client.AgentsSummary(None)
         agents_summary_ref01_match_dt0 = {}

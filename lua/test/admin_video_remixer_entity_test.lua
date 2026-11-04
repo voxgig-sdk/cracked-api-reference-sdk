@@ -44,8 +44,38 @@ describe("AdminVideoRemixerEntity", function()
         return
       end
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" then
+      print("LIVE STEP {\"id\":\"admin_video_remixer.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/admin/video-remixer/clips/{clip_id}/media\"}")
+      print("LIVE STEP {\"id\":\"admin_video_remixer.update.1\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs PUT /api/admin/video-remixer/audits/{identifier}/answer\"}")
+      print("LIVE STEP {\"id\":\"admin_video_remixer.remove.3\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs DELETE /api/admin/video-remixer/runs/{identifier}\"}")
     local client = setup.client
 
+    -- Bootstrap entity data from existing test data.
+    local admin_video_remixer_ref01_data_raw = vs.items(helpers.to_map(
+      vs.getpath(setup.data, "existing.admin_video_remixer")))
+    local admin_video_remixer_ref01_data = nil
+    if #admin_video_remixer_ref01_data_raw > 0 then
+      admin_video_remixer_ref01_data = helpers.to_map(admin_video_remixer_ref01_data_raw[1][2])
+    end
+
+    if setup.live then
+      runner.live_pace()
+    end
+    -- LOAD
+    local admin_video_remixer_ref01_ent = client:AdminVideoRemixer(nil)
+    local admin_video_remixer_ref01_match_dt0 = {}
+    local admin_video_remixer_ref01_data_dt0_loaded, err = admin_video_remixer_ref01_ent:load(admin_video_remixer_ref01_match_dt0, nil)
+    assert.is_nil(err)
+    assert.is_not_nil(admin_video_remixer_ref01_data_dt0_loaded)
+
+      return
+    end
+
+    local client = setup.client
+
+    if setup.live then
+      runner.live_pace()
+    end
     -- CREATE
     local admin_video_remixer_ref01_ent = client:AdminVideoRemixer(nil)
     local admin_video_remixer_ref01_data = helpers.to_map(vs.getprop(
@@ -56,6 +86,9 @@ describe("AdminVideoRemixerEntity", function()
     admin_video_remixer_ref01_data = helpers.to_map(type(admin_video_remixer_ref01_data_result) == 'table' and admin_video_remixer_ref01_data_result.data_get and admin_video_remixer_ref01_data_result:data_get() or admin_video_remixer_ref01_data_result)
     assert.is_not_nil(admin_video_remixer_ref01_data)
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- UPDATE
     local admin_video_remixer_ref01_data_up0_up = {
     }
@@ -70,6 +103,9 @@ describe("AdminVideoRemixerEntity", function()
     assert.is_not_nil(admin_video_remixer_ref01_resdata_up0)
     assert.are.equal(admin_video_remixer_ref01_resdata_up0[admin_video_remixer_ref01_markdef_up0_name], admin_video_remixer_ref01_markdef_up0_value)
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LOAD
     local admin_video_remixer_ref01_match_dt0 = {}
     local admin_video_remixer_ref01_data_dt0_loaded, err = admin_video_remixer_ref01_ent:load(admin_video_remixer_ref01_match_dt0, nil)

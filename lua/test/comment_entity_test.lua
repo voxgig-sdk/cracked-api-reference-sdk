@@ -54,6 +54,9 @@ describe("CommentEntity", function()
       comment_ref01_data = helpers.to_map(comment_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LOAD
     local comment_ref01_ent = client:Comment(nil)
     local comment_ref01_match_dt0 = {}

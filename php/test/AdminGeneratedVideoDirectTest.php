@@ -33,6 +33,10 @@ class AdminGeneratedVideoDirectTest extends TestCase
             $this->markTestSkipped($_reason ?? "skipped via sdk-test-control.json");
             return;
         }
+        if (!empty($setup["live"]) && getenv('VOXGIG_GETONLY_GUARD') === "TRUE" && null === ($setup["idmap"]['user01'] ?? null)) {
+            fwrite(STDOUT, 'LIVE STEP {"id":"direct-list-admin_generated_video","state":"excluded","attempted":false,"reason":"GET-only live run: needs user01, which only POST /api/admin/users/{user_id}/fix-auto-schedule-by-date gives"}' . "\n");
+            $this->markTestSkipped('Live coverage incomplete: direct-list-admin_generated_video excluded (GET-only live run: needs user01, which only POST /api/admin/users/{user_id}/fix-auto-schedule-by-date gives)');
+        }
         if ($setup["live"]) {
             foreach (["user01"] as $_liveKey) {
                 if (null === ($setup["idmap"][$_liveKey] ?? null)) {
@@ -40,15 +44,20 @@ class AdminGeneratedVideoDirectTest extends TestCase
                 }
             }
         }
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         $client = $setup["client"];
 
         $params = [];
+        $query = [];
         $params["user_id"] = $setup["live"] ? ($setup["idmap"]["user01"] ?? null) : "direct01";
 
         $result = $client->direct([
             "path" => "api/admin/users/{user_id}/generated-videos",
             "method" => "GET",
             "params" => $params,
+            "query" => $query,
         ]);
         if ($setup["live"]) {
             if (!self::liveOk($result)) {

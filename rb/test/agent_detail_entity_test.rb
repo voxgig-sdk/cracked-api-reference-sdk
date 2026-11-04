@@ -171,6 +171,8 @@ class AgentDetailEntityTest < Minitest::Test
         return
       end
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE"
+      puts "LIVE STEP {\"id\":\"agent_detail.update.1\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs PATCH /api/upload-post-agents/{agent_id}/bio\"}"
     client = setup[:client]
 
     # Bootstrap entity data from existing test data.
@@ -181,6 +183,28 @@ class AgentDetailEntityTest < Minitest::Test
       agent_detail_ref01_data = Helpers.to_map(agent_detail_ref01_data_raw[0][1])
     end
 
+    Runner.live_pace if setup[:live]
+    # LIST
+    agent_detail_ref01_ent = client.AgentDetail(nil)
+    agent_detail_ref01_match = {}
+
+    agent_detail_ref01_list_result = agent_detail_ref01_ent.list(agent_detail_ref01_match, nil)
+    assert agent_detail_ref01_list_result.is_a?(Array)
+
+      return
+    end
+
+    client = setup[:client]
+
+    # Bootstrap entity data from existing test data.
+    agent_detail_ref01_data_raw = Vs.items(Helpers.to_map(
+      Vs.getpath(setup[:data], "existing.agent_detail")))
+    agent_detail_ref01_data = nil
+    if agent_detail_ref01_data_raw.length > 0
+      agent_detail_ref01_data = Helpers.to_map(agent_detail_ref01_data_raw[0][1])
+    end
+
+    Runner.live_pace if setup[:live]
     # LIST
     agent_detail_ref01_ent = client.AgentDetail(nil)
     agent_detail_ref01_match = {}

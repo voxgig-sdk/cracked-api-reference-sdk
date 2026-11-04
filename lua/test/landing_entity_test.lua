@@ -44,8 +44,17 @@ describe("LandingEntity", function()
         return
       end
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" then
+      print("LIVE STEP {\"id\":\"landing.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/landings/microhub/testimonial-image/{index}\"}")
+      pending("Live coverage incomplete: landing.create.0 excluded (GET-only live run: needs POST /api/landings/microhub/testimonial-image/{index})")
+      return
+    end
+
     local client = setup.client
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- CREATE
     local landing_ref01_ent = client:Landing(nil)
     local landing_ref01_data = helpers.to_map(vs.getprop(

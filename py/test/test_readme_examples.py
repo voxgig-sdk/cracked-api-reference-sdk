@@ -129,7 +129,6 @@ _ENTITIES = {
     "Carousel": "carousel",
     "CarouselAgentDetail": "carousel_agent_detail",
     "CarouselStatus": "carousel_status",
-    "Chat": "chat",
     "ChatHistory": "chat_history",
     "ChatSession": "chat_session",
     "Comment": "comment",
@@ -149,7 +148,6 @@ _ENTITIES = {
     "DailyStatus": "daily_status",
     "DedicatedAgentsDashboard": "dedicated_agents_dashboard",
     "EnterpriseAgent": "enterprise_agent",
-    "EnterpriseProduct": "enterprise_product",
     "ExactAvailability": "exact_availability",
     "ExactFormula": "exact_formula",
     "ExtractV2": "extract_v2",
@@ -161,7 +159,6 @@ _ENTITIES = {
     "GenerateSora2Prompt": "generate_sora2_prompt",
     "Healthrx": "healthrx",
     "InitResetProductV6": "init_reset_product_v6",
-    "Iri": "iri",
     "IrisCapability": "iris_capability",
     "IrisChat": "iris_chat",
     "IrisConnector": "iris_connector",
@@ -191,16 +188,17 @@ _ENTITIES = {
     "ProductLanding": "product_landing",
     "PublicResumeStatus": "public_resume_status",
     "ReRollVideo": "re_roll_video",
-    "ReadRootGet": "read_root_get",
     "RecordDemoBooked": "record_demo_booked",
     "RefreshStat": "refresh_stat",
     "RemixerClipper": "remixer_clipper",
     "ResetProduct": "reset_product",
     "RetryWebsiteScrape": "retry_website_scrape",
+    "RootGet": "root_get",
     "SaveSurvey": "save_survey",
     "ScanSocial": "scan_social",
     "ScanSocialsPublic": "scan_socials_public",
     "ScanSocialsStatus": "scan_socials_status",
+    "ScheduleQueue": "schedule_queue",
     "ScheduleV2": "schedule_v2",
     "Scrape": "scrape",
     "ScrapeWebsitePublic": "scrape_website_public",
@@ -248,6 +246,9 @@ _ENTITIES = {
     "XAdaptation": "x_adaptation",
     "ZerohumanAdminAccount": "zerohuman_admin_account",
 }
+
+# Fixture key -> the entity's declared identity field, where it is not "id".
+_ID_FIELDS = {"carousel": "queue_id", "customer_health": "user_id", "media_asset": "product_id", "product": "product_id", "user": "userId"}
 
 # The three documents held to the gate, tagged by human label.
 _DOCS = (
@@ -520,7 +521,10 @@ def _seed_literal(block):
     seeded = {}
     for cap, key in _ENTITIES.items():
         if ("." + cap + "(") in block:
-            seeded[key] = {"test01": {"id": "test01"}}
+            record = {"id": "test01"}
+            if key in _ID_FIELDS:
+                record[_ID_FIELDS[key]] = "test01"
+            seeded[key] = {"test01": record}
     return {"entity": seeded}
 
 

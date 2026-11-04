@@ -51,6 +51,13 @@ class TestDailyEntity:
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
                 return
+        if setup["live"] and os.environ.get("VOXGIG_GETONLY_GUARD") == "TRUE":
+            print("LIVE STEP {\"id\":\"daily.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/carousel/daily/{product_id}/plan\"}")
+            pytest.skip("Live coverage incomplete: daily.create.0 excluded (GET-only live run: needs POST /api/carousel/daily/{product_id}/plan)")
+
+        if setup["live"]:
+            pytest.skip("Live coverage incomplete: the flow has no step to run")
+
         client = setup["client"]
 
         # Bootstrap entity data from existing test data.

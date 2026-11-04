@@ -62,9 +62,18 @@ func TestGenerateBlackoutSora2PromptEntity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" {
+			t.Log("LIVE STEP {\"id\":\"generate_blackout_sora2_prompt.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/core/generate-blackout-sora2-prompt\"}")
+			t.Skip("Live coverage incomplete: generate_blackout_sora2_prompt.create.0 excluded (GET-only live run: needs POST /api/core/generate-blackout-sora2-prompt)")
+			return
+		}
+
 		client := setup.client
 		_ = client
 
+		if setup.live {
+			livePace()
+		}
 		// CREATE
 		generateBlackoutSora2PromptRef01Ent := client.GenerateBlackoutSora2Prompt(nil)
 		generateBlackoutSora2PromptRef01Data := core.ToMapAny(vs.GetProp(

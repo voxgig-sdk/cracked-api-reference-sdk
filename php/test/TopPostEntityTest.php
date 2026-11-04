@@ -211,6 +211,9 @@ class TopPostEntityTest extends TestCase
             $top_post_ref01_data = Helpers::to_map($top_post_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LIST
         $top_post_ref01_ent = $client->TopPost(null);
         $top_post_ref01_match = [];

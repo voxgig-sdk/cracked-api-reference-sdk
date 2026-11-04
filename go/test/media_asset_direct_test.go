@@ -30,6 +30,11 @@ func TestMediaAssetDirect(t *testing.T) {
 			t.Skip(_reason)
 			return
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" && setup.idmap["media_asset01"] == nil {
+			t.Log("LIVE STEP {\"id\":\"direct-load-media_asset\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs media_asset01, which only POST /api/media-assets/{media_asset_id}/exclude-copycat gives\"}")
+			t.Skip("Live coverage incomplete: direct-load-media_asset excluded (GET-only live run: needs media_asset01, which only POST /api/media-assets/{media_asset_id}/exclude-copycat gives)")
+			return
+		}
 		if setup.live {
 			for _, _liveKey := range []string{"media_asset01"} {
 				if v := setup.idmap[_liveKey]; v == nil {
@@ -37,6 +42,9 @@ func TestMediaAssetDirect(t *testing.T) {
 					return
 				}
 			}
+		}
+		if setup.live {
+			livePace()
 		}
 		client := setup.client
 

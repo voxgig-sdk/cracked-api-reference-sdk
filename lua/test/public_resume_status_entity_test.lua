@@ -54,6 +54,9 @@ describe("PublicResumeStatusEntity", function()
       public_resume_status_ref01_data = helpers.to_map(public_resume_status_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LOAD
     local public_resume_status_ref01_ent = client:PublicResumeStatus(nil)
     local public_resume_status_ref01_match_dt0 = {}

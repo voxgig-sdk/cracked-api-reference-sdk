@@ -41,6 +41,28 @@ class HealthrxEntityTest < Minitest::Test
         return
       end
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE"
+      puts "LIVE STEP {\"id\":\"healthrx.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/healthrx/products/{product_id}/accounts/{account_id}/content\"}"
+    client = setup[:client]
+
+    # Bootstrap entity data from existing test data.
+    healthrx_ref01_data_raw = Vs.items(Helpers.to_map(
+      Vs.getpath(setup[:data], "existing.healthrx")))
+    healthrx_ref01_data = nil
+    if healthrx_ref01_data_raw.length > 0
+      healthrx_ref01_data = Helpers.to_map(healthrx_ref01_data_raw[0][1])
+    end
+
+    Runner.live_pace if setup[:live]
+    # LOAD
+    healthrx_ref01_ent = client.Healthrx(nil)
+    healthrx_ref01_match_dt0 = {}
+    healthrx_ref01_data_dt0_loaded = healthrx_ref01_ent.load(healthrx_ref01_match_dt0, nil)
+    assert !healthrx_ref01_data_dt0_loaded.nil?
+
+      return
+    end
+
     if setup[:live]
       ["product01"].each do |_live_key|
         if setup[:synthetic_only] || setup[:idmap][_live_key].nil?
@@ -50,6 +72,7 @@ class HealthrxEntityTest < Minitest::Test
     end
     client = setup[:client]
 
+    Runner.live_pace if setup[:live]
     # CREATE
     healthrx_ref01_ent = client.Healthrx(nil)
     healthrx_ref01_data = Helpers.to_map(Vs.getprop(
@@ -60,6 +83,7 @@ class HealthrxEntityTest < Minitest::Test
     healthrx_ref01_data = Helpers.to_map(healthrx_ref01_data_result.respond_to?(:data_get) ? healthrx_ref01_data_result.data_get : healthrx_ref01_data_result)
     assert !healthrx_ref01_data.nil?
 
+    Runner.live_pace if setup[:live]
     # LOAD
     healthrx_ref01_match_dt0 = {}
     healthrx_ref01_data_dt0_loaded = healthrx_ref01_ent.load(healthrx_ref01_match_dt0, nil)

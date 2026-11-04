@@ -62,6 +62,12 @@ func TestActivateUserEntity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" {
+			t.Log("LIVE STEP {\"id\":\"activate_user.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/admin/users/{user_id}/activate-and-complete-onboarding\"}")
+			t.Skip("Live coverage incomplete: activate_user.create.0 excluded (GET-only live run: needs POST /api/admin/users/{user_id}/activate-and-complete-onboarding)")
+			return
+		}
+
 		if setup.live {
 			for _, _liveKey := range []string{"user01"} {
 				if setup.syntheticOnly || setup.idmap[_liveKey] == nil {
@@ -72,6 +78,9 @@ func TestActivateUserEntity(t *testing.T) {
 		client := setup.client
 		_ = client
 
+		if setup.live {
+			livePace()
+		}
 		// CREATE
 		activateUserRef01Ent := client.ActivateUser(nil)
 		activateUserRef01Data := core.ToMapAny(vs.GetProp(

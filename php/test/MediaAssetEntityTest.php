@@ -52,8 +52,17 @@ class MediaAssetEntityTest extends TestCase
                 return;
             }
         }
+        if (!empty($setup["live"]) && getenv('VOXGIG_GETONLY_GUARD') === "TRUE") {
+            fwrite(STDOUT, 'LIVE STEP {"id":"media_asset.create.0","state":"excluded","attempted":false,"reason":"GET-only live run: needs POST /api/media-assets/{media_asset_id}/exclude-copycat"}' . "\n");
+            fwrite(STDOUT, 'LIVE STEP {"id":"media_asset.load.1","state":"excluded","attempted":false,"reason":"GET-only live run: reads a record only media_asset.create.0 gives"}' . "\n");
+            $this->markTestSkipped('Live coverage incomplete: media_asset.create.0 excluded (GET-only live run: needs POST /api/media-assets/{media_asset_id}/exclude-copycat); media_asset.load.1 excluded (GET-only live run: reads a record only media_asset.create.0 gives)');
+        }
+
         $client = $setup["client"];
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // CREATE
         $media_asset_ref01_ent = $client->MediaAsset(null);
         $media_asset_ref01_data = Helpers::to_map(Vs::getprop(
@@ -62,16 +71,19 @@ class MediaAssetEntityTest extends TestCase
         $media_asset_ref01_data_result = $media_asset_ref01_ent->create($media_asset_ref01_data, null);
         $media_asset_ref01_data = Helpers::to_map(is_object($media_asset_ref01_data_result) && method_exists($media_asset_ref01_data_result, 'data_get') ? $media_asset_ref01_data_result->data_get() : $media_asset_ref01_data_result);
         $this->assertNotNull($media_asset_ref01_data);
-        $this->assertNotNull($media_asset_ref01_data["id"]);
+        $this->assertNotNull($media_asset_ref01_data["product_id"]);
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LOAD
         $media_asset_ref01_match_dt0 = [
-            "id" => $media_asset_ref01_data["id"],
+            "id" => $media_asset_ref01_data["product_id"],
         ];
         $media_asset_ref01_data_dt0_loaded = $media_asset_ref01_ent->load($media_asset_ref01_match_dt0, null);
         $media_asset_ref01_data_dt0_load_result = Helpers::to_map(is_object($media_asset_ref01_data_dt0_loaded) && method_exists($media_asset_ref01_data_dt0_loaded, 'data_get') ? $media_asset_ref01_data_dt0_loaded->data_get() : $media_asset_ref01_data_dt0_loaded);
         $this->assertNotNull($media_asset_ref01_data_dt0_load_result);
-        $this->assertEquals($media_asset_ref01_data_dt0_load_result["id"], $media_asset_ref01_data["id"]);
+        $this->assertTrue(Runner::live_same_id($media_asset_ref01_data_dt0_load_result["product_id"] ?? null, $media_asset_ref01_data["product_id"]));
 
     }
 }
@@ -83,6 +95,12 @@ function media_asset_basic_setup($extra)
     $entity_data_file = __DIR__ . '/../../.sdk/test/entity/media_asset/MediaAssetTestData.json';
     $entity_data_source = file_get_contents($entity_data_file);
     $entity_data = json_decode($entity_data_source, true);
+
+    foreach (($entity_data["existing"]["media_asset"] ?? []) as $rec_key => $rec) {
+        if (is_array($rec) && isset($rec["id"])) {
+            $entity_data["existing"]["media_asset"][$rec_key]["product_id"] = $rec["id"];
+        }
+    }
 
     $options = [];
     $options["entity"] = $entity_data["existing"];

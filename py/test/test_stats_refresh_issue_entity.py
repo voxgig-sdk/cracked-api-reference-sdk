@@ -143,6 +143,8 @@ class TestStatsRefreshIssueEntity:
         if len(stats_refresh_issue_ref01_data_raw) > 0:
             stats_refresh_issue_ref01_data = helpers.to_map(stats_refresh_issue_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LIST
         stats_refresh_issue_ref01_ent = client.StatsRefreshIssue(None)
         stats_refresh_issue_ref01_match = {}

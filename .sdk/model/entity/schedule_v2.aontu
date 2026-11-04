@@ -471,65 +471,6 @@ main: kit: entity: schedule_v2: {
         }
       ]
     }
-    update: {
-      name: "update"
-      points: [
-        {
-          bf: [
-            "video_id"
-          ]
-          co: {
-            id: "PUT /api/schedule/queue/{queue_id}/replace-video"
-            source: "openapi3"
-            version: 2
-          }
-          g: {
-            params: [
-              {
-                k: "param"
-                n: "queue_id"
-                or: "queue_id"
-                r: true
-                t: "`$STRING`"
-              }
-            ]
-          }
-          m: "PUT"
-          o: "/api/schedule/queue/{queue_id}/replace-video"
-          q: {
-            "$action": "replace_video"
-            exist: [
-              "queue_id"
-            ]
-          }
-          rs: {
-            kind: "json"
-            media: "application/json"
-          }
-          s: [
-            {
-              lit: "api"
-            }
-            {
-              lit: "schedule"
-            }
-            {
-              lit: "queue"
-            }
-            {
-              var: "queue_id"
-            }
-            {
-              lit: "replace-video"
-            }
-          ]
-          t: {
-            req: "`reqdata`"
-            res: "`body`"
-          }
-        }
-      ]
-    }
   }
 
 

@@ -32,25 +32,30 @@ describe("AgentPostDirect", function()
       return
     end
     if setup.live then
-      for _, _live_key in ipairs({"agent_post01"}) do
+      for _, _live_key in ipairs({"agent01"}) do
         if setup.idmap[_live_key] == nil then
           runner.live_miss(pending, LIVE_STRICT, "Live test blocked: needs " .. _live_key .. " via CRACKED_API_REFERENCE_TEST_AGENT_POST_ENTID")
         end
       end
     end
+    if setup.live then
+      runner.live_pace()
+    end
     local client = setup.client
 
     local params = {}
+    local query = {}
     if setup.live then
-      params["id"] = setup.idmap["agent_post01"]
+      params["agent_id"] = setup.idmap["agent01"]
     else
-      params["id"] = "direct01"
+      params["agent_id"] = "direct01"
     end
 
     local result, err = client:direct({
-      path = "api/admin/agents/{id}/posts",
+      path = "api/admin/agents/{agent_id}/posts",
       method = "GET",
       params = params,
+      query = query,
     })
     if setup.live then
       if not live_ok(result, err) then

@@ -43,6 +43,11 @@ describe('ProductDirect', async () => {
     if (liveScenariosActive()) { t.skip('Covered by live operation scenarios'); return }
     const setup = directSetup({ id: 'direct01' })
     if (maybeSkipControl(t, 'direct', 'direct-load-product', setup.live)) return
+    if (setup.live && 'TRUE' === process.env.VOXGIG_GETONLY_GUARD && null == setup.idmap?.["user01"]) {
+      console.log("LIVE STEP {\"id\":\"direct-load-product\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs user01, which only POST /api/admin/users/{user_id}/fix-auto-schedule-by-date gives\"}")
+      t.skip("Live coverage incomplete: direct-load-product excluded (GET-only live run: needs user01, which only POST /api/admin/users/{user_id}/fix-auto-schedule-by-date gives)")
+      return
+    }
     if (skipIfMissingIds(t, setup, ["user01"], LIVE_STRICT)) return
     const { client, calls } = setup
 
@@ -66,7 +71,7 @@ describe('ProductDirect', async () => {
       if (0 === listArr.length) {
         return void liveEmpty(t, 'The account has no product record to load')
       }
-      const candidateId = listArr[0]?.id ?? listArr[0]?.id
+      const candidateId = listArr[0]?.product_id
       if (null == candidateId) {
         return void liveMiss(t, LIVE_STRICT, 'Live load blocked: discovery returned no usable identity')
       }
@@ -105,6 +110,11 @@ describe('ProductDirect', async () => {
     if (liveScenariosActive()) { t.skip('Covered by live operation scenarios'); return }
     const setup = directSetup([{ id: 'direct01' }, { id: 'direct02' }])
     if (maybeSkipControl(t, 'direct', 'direct-list-product', setup.live)) return
+    if (setup.live && 'TRUE' === process.env.VOXGIG_GETONLY_GUARD && null == setup.idmap?.["user01"]) {
+      console.log("LIVE STEP {\"id\":\"direct-list-product\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs user01, which only POST /api/admin/users/{user_id}/fix-auto-schedule-by-date gives\"}")
+      t.skip("Live coverage incomplete: direct-list-product excluded (GET-only live run: needs user01, which only POST /api/admin/users/{user_id}/fix-auto-schedule-by-date gives)")
+      return
+    }
     if (skipIfMissingIds(t, setup, ["user01"], LIVE_STRICT)) return
     const { client, calls } = setup
 

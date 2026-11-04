@@ -52,8 +52,13 @@ class TestCustomerHealthEntity:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
                 return
         if setup["live"]:
-            runner.live_miss(LIVE_STRICT, "Live entity test blocked: " + "the flow loads a customer_health record it has no list to find")
+            for _live_key in ["customer_health01"]:
+                if setup.get("synthetic_only") or setup["idmap"].get(_live_key) is None:
+                    runner.live_miss(LIVE_STRICT, f"Live entity test blocked: needs {_live_key} via CRACKED_API_REFERENCE_TEST_CUSTOMER_HEALTH_ENTID")
         client = setup["client"]
+        if setup["live"]:
+            runner.live_existing(setup, LIVE_STRICT, "customer_health",
+                                 lambda: [{"id": setup["idmap"].get("customer_health01")}], "user_id", setup["idmap"].get("customer_health01"))
 
         # Bootstrap entity data from existing test data.
         customer_health_ref01_data_raw = vs.items(helpers.to_map(
@@ -62,15 +67,17 @@ class TestCustomerHealthEntity:
         if len(customer_health_ref01_data_raw) > 0:
             customer_health_ref01_data = helpers.to_map(customer_health_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LOAD
         customer_health_ref01_ent = client.CustomerHealth(None)
         customer_health_ref01_match_dt0 = {
-            "id": customer_health_ref01_data["id"],
+            "id": customer_health_ref01_data["user_id"],
         }
         customer_health_ref01_data_dt0_loaded = customer_health_ref01_ent.load(customer_health_ref01_match_dt0, None)
         customer_health_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(customer_health_ref01_data_dt0_loaded))
         assert customer_health_ref01_data_dt0_load_result is not None
-        assert customer_health_ref01_data_dt0_load_result["id"] == customer_health_ref01_data["id"]
+        assert runner.live_same_id(customer_health_ref01_data_dt0_load_result.get("user_id"), customer_health_ref01_data["user_id"])
 
 
 
@@ -82,6 +89,10 @@ def _customer_health_basic_setup(extra):
         entity_data_source = f.read()
 
     entity_data = json.loads(entity_data_source)
+
+    for rec in ((entity_data.get("existing") or {}).get("customer_health") or {}).values():
+        if isinstance(rec, dict) and rec.get("id") is not None:
+            rec["user_id"] = rec["id"]
 
     options = {}
     options["entity"] = entity_data.get("existing")

@@ -41,8 +41,15 @@ class MediaAssetEntityTest < Minitest::Test
         return
       end
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE"
+      puts "LIVE STEP {\"id\":\"media_asset.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/media-assets/{media_asset_id}/exclude-copycat\"}"
+      puts "LIVE STEP {\"id\":\"media_asset.load.1\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: reads a record only media_asset.create.0 gives\"}"
+      skip("Live coverage incomplete: media_asset.create.0 excluded (GET-only live run: needs POST /api/media-assets/{media_asset_id}/exclude-copycat); media_asset.load.1 excluded (GET-only live run: reads a record only media_asset.create.0 gives)")
+    end
+
     client = setup[:client]
 
+    Runner.live_pace if setup[:live]
     # CREATE
     media_asset_ref01_ent = client.MediaAsset(nil)
     media_asset_ref01_data = Helpers.to_map(Vs.getprop(
@@ -51,16 +58,17 @@ class MediaAssetEntityTest < Minitest::Test
     media_asset_ref01_data_result = media_asset_ref01_ent.create(media_asset_ref01_data, nil)
     media_asset_ref01_data = Helpers.to_map(media_asset_ref01_data_result.respond_to?(:data_get) ? media_asset_ref01_data_result.data_get : media_asset_ref01_data_result)
     assert !media_asset_ref01_data.nil?
-    assert !media_asset_ref01_data["id"].nil?
+    assert !media_asset_ref01_data["product_id"].nil?
 
+    Runner.live_pace if setup[:live]
     # LOAD
     media_asset_ref01_match_dt0 = {
-      "id" => media_asset_ref01_data["id"],
+      "id" => media_asset_ref01_data["product_id"],
     }
     media_asset_ref01_data_dt0_loaded = media_asset_ref01_ent.load(media_asset_ref01_match_dt0, nil)
     media_asset_ref01_data_dt0_load_result = Helpers.to_map(media_asset_ref01_data_dt0_loaded.respond_to?(:data_get) ? media_asset_ref01_data_dt0_loaded.data_get : media_asset_ref01_data_dt0_loaded)
     assert !media_asset_ref01_data_dt0_load_result.nil?
-    assert_equal media_asset_ref01_data_dt0_load_result["id"], media_asset_ref01_data["id"]
+    assert Runner.live_same_id(media_asset_ref01_data_dt0_load_result["product_id"], media_asset_ref01_data["product_id"])
 
   end
 end
@@ -71,6 +79,10 @@ def media_asset_basic_setup(extra)
   entity_data_file = File.join(__dir__, "..", "..", ".sdk", "test", "entity", "media_asset", "MediaAssetTestData.json")
   entity_data_source = File.read(entity_data_file, encoding: "UTF-8")
   entity_data = JSON.parse(entity_data_source)
+
+  ((entity_data["existing"] || {})["media_asset"] || {}).each_value do |rec|
+    rec["product_id"] = rec["id"] if rec.is_a?(Hash) && !rec["id"].nil?
+  end
 
   options = {}
   options["entity"] = entity_data["existing"]

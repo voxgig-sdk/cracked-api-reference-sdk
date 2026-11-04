@@ -164,6 +164,9 @@ describe("AdminCustomerSuccessEntity", function()
       admin_customer_success_ref01_data = helpers.to_map(admin_customer_success_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LIST
     local admin_customer_success_ref01_ent = client:AdminCustomerSuccess(nil)
     local admin_customer_success_ref01_match = {}

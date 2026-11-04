@@ -51,8 +51,14 @@ class TestChatHistoryEntity:
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
                 return
+        if setup["live"] and os.environ.get("VOXGIG_GETONLY_GUARD") == "TRUE":
+            print("LIVE STEP {\"id\":\"chat_history.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/chat/sessions\"}")
+            pytest.skip("Live coverage incomplete: chat_history.create.0 excluded (GET-only live run: needs POST /api/chat/sessions)")
+
         client = setup["client"]
 
+        if setup["live"]:
+            runner.live_pace()
         # CREATE
         chat_history_ref01_ent = client.ChatHistory(None)
         chat_history_ref01_data = helpers.to_map(vs.getprop(

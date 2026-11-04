@@ -46,6 +46,9 @@ class AgentAccessPhilVideoEntityTest extends TestCase
             $agent_access_phil_video_ref01_data = Helpers::to_map($agent_access_phil_video_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LOAD
         $agent_access_phil_video_ref01_ent = $client->AgentAccessPhilVideo(null);
         $agent_access_phil_video_ref01_match_dt0 = [];

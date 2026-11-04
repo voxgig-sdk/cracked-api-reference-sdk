@@ -219,8 +219,55 @@ class Sora2AvatarEntityTest extends TestCase
                 return;
             }
         }
+        if (!empty($setup["live"]) && getenv('VOXGIG_GETONLY_GUARD') === "TRUE") {
+            fwrite(STDOUT, 'LIVE STEP {"id":"sora2_avatar.create.0","state":"excluded","attempted":false,"reason":"GET-only live run: needs POST /api/admin/sora2-avatars"}' . "\n");
+            fwrite(STDOUT, 'LIVE STEP {"id":"sora2_avatar.update.2","state":"excluded","attempted":false,"reason":"GET-only live run: needs PUT /api/admin/sora2-avatars/{avatar_id}"}' . "\n");
+        $client = $setup["client"];
+        if (!empty($setup["live"])) {
+            $_liveId = empty($setup["synthetic_only"]) ? ($setup["idmap"]["sora2_avatar01"] ?? null) : null;
+            Runner::live_pace();
+            Runner::live_existing($setup, self::LIVE_STRICT, "sora2_avatar",
+                fn() => $client->Sora2Avatar(null)->list([], null), "id", $_liveId);
+        }
+
+        // Bootstrap entity data from existing test data.
+        $sora2_avatar_ref01_data_raw = Vs::items(Helpers::to_map(
+            Vs::getpath($setup["data"], "existing.sora2_avatar")));
+        $sora2_avatar_ref01_data = null;
+        if (count($sora2_avatar_ref01_data_raw) > 0) {
+            $sora2_avatar_ref01_data = Helpers::to_map($sora2_avatar_ref01_data_raw[0][1]);
+        }
+
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
+        // LIST
+        $sora2_avatar_ref01_ent = $client->Sora2Avatar(null);
+        $sora2_avatar_ref01_match = [];
+
+        $sora2_avatar_ref01_list_result = $sora2_avatar_ref01_ent->list($sora2_avatar_ref01_match, null);
+        $this->assertIsArray($sora2_avatar_ref01_list_result);
+
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
+        // LOAD
+        $sora2_avatar_ref01_match_dt0 = [
+            "id" => $sora2_avatar_ref01_data["id"],
+        ];
+        $sora2_avatar_ref01_data_dt0_loaded = $sora2_avatar_ref01_ent->load($sora2_avatar_ref01_match_dt0, null);
+        $sora2_avatar_ref01_data_dt0_load_result = Helpers::to_map(is_object($sora2_avatar_ref01_data_dt0_loaded) && method_exists($sora2_avatar_ref01_data_dt0_loaded, 'data_get') ? $sora2_avatar_ref01_data_dt0_loaded->data_get() : $sora2_avatar_ref01_data_dt0_loaded);
+        $this->assertNotNull($sora2_avatar_ref01_data_dt0_load_result);
+        $this->assertTrue(Runner::live_same_id($sora2_avatar_ref01_data_dt0_load_result["id"] ?? null, $sora2_avatar_ref01_data["id"]));
+
+            return;
+        }
+
         $client = $setup["client"];
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // CREATE
         $sora2_avatar_ref01_ent = $client->Sora2Avatar(null);
         $sora2_avatar_ref01_data = Helpers::to_map(Vs::getprop(
@@ -231,6 +278,9 @@ class Sora2AvatarEntityTest extends TestCase
         $this->assertNotNull($sora2_avatar_ref01_data);
         $this->assertNotNull($sora2_avatar_ref01_data["id"]);
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LIST
         $sora2_avatar_ref01_match = [];
 
@@ -242,6 +292,9 @@ class Sora2AvatarEntityTest extends TestCase
             ["id" => $sora2_avatar_ref01_data["id"]]);
         $this->assertNotEmpty($found_item);
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // UPDATE
         $sora2_avatar_ref01_data_up0_up = [
             "id" => $sora2_avatar_ref01_data["id"],
@@ -254,9 +307,12 @@ class Sora2AvatarEntityTest extends TestCase
         $sora2_avatar_ref01_resdata_up0_result = $sora2_avatar_ref01_ent->update($sora2_avatar_ref01_data_up0_up, null);
         $sora2_avatar_ref01_resdata_up0 = Helpers::to_map(is_object($sora2_avatar_ref01_resdata_up0_result) && method_exists($sora2_avatar_ref01_resdata_up0_result, 'data_get') ? $sora2_avatar_ref01_resdata_up0_result->data_get() : $sora2_avatar_ref01_resdata_up0_result);
         $this->assertNotNull($sora2_avatar_ref01_resdata_up0);
-        $this->assertEquals($sora2_avatar_ref01_resdata_up0["id"], $sora2_avatar_ref01_data_up0_up["id"]);
+        $this->assertTrue(Runner::live_same_id($sora2_avatar_ref01_resdata_up0["id"] ?? null, $sora2_avatar_ref01_data_up0_up["id"]));
         $this->assertEquals($sora2_avatar_ref01_resdata_up0[$sora2_avatar_ref01_markdef_up0_name], $sora2_avatar_ref01_markdef_up0_value);
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LOAD
         $sora2_avatar_ref01_match_dt0 = [
             "id" => $sora2_avatar_ref01_data["id"],
@@ -264,7 +320,7 @@ class Sora2AvatarEntityTest extends TestCase
         $sora2_avatar_ref01_data_dt0_loaded = $sora2_avatar_ref01_ent->load($sora2_avatar_ref01_match_dt0, null);
         $sora2_avatar_ref01_data_dt0_load_result = Helpers::to_map(is_object($sora2_avatar_ref01_data_dt0_loaded) && method_exists($sora2_avatar_ref01_data_dt0_loaded, 'data_get') ? $sora2_avatar_ref01_data_dt0_loaded->data_get() : $sora2_avatar_ref01_data_dt0_loaded);
         $this->assertNotNull($sora2_avatar_ref01_data_dt0_load_result);
-        $this->assertEquals($sora2_avatar_ref01_data_dt0_load_result["id"], $sora2_avatar_ref01_data["id"]);
+        $this->assertTrue(Runner::live_same_id($sora2_avatar_ref01_data_dt0_load_result["id"] ?? null, $sora2_avatar_ref01_data["id"]));
 
     }
 }

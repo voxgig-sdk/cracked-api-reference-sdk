@@ -51,8 +51,14 @@ class TestLinkUserEntity:
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
                 return
+        if setup["live"] and os.environ.get("VOXGIG_GETONLY_GUARD") == "TRUE":
+            print("LIVE STEP {\"id\":\"link_user.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/onboarding-v6/link-user\"}")
+            pytest.skip("Live coverage incomplete: link_user.create.0 excluded (GET-only live run: needs POST /api/onboarding-v6/link-user)")
+
         client = setup["client"]
 
+        if setup["live"]:
+            runner.live_pace()
         # CREATE
         link_user_ref01_ent = client.LinkUser(None)
         link_user_ref01_data = helpers.to_map(vs.getprop(

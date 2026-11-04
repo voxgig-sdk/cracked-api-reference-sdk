@@ -212,6 +212,9 @@ func TestSeoAiMentionEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = seoAiMentionRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LIST
 		seoAiMentionRef01Ent := client.SeoAiMention(nil)
 		seoAiMentionRef01Match := map[string]any{}

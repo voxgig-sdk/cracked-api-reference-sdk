@@ -41,8 +41,14 @@ class CreateBlackoutSora2VideoEntityTest < Minitest::Test
         return
       end
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE"
+      puts "LIVE STEP {\"id\":\"create_blackout_sora2_video.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/core/create-blackout-sora2-video\"}"
+      skip("Live coverage incomplete: create_blackout_sora2_video.create.0 excluded (GET-only live run: needs POST /api/core/create-blackout-sora2-video)")
+    end
+
     client = setup[:client]
 
+    Runner.live_pace if setup[:live]
     # CREATE
     create_blackout_sora2_video_ref01_ent = client.CreateBlackoutSora2Video(nil)
     create_blackout_sora2_video_ref01_data = Helpers.to_map(Vs.getprop(

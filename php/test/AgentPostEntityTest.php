@@ -33,7 +33,7 @@ class AgentPostEntityTest extends TestCase
         $client = CrackedApiReferenceSDK::test(null, ["feature" => ["validate" => ["active" => true]]]);
         $err = null;
         try {
-            $client->AgentPost(null)->list(["id" => 1], null);
+            $client->AgentPost(null)->list(["agent_id" => 1], null);
         } catch (\Throwable $e) {
             $err = $e;
         }
@@ -45,11 +45,18 @@ class AgentPostEntityTest extends TestCase
         $setup = agent_post_basic_setup(null);
         // Per-op sdk-test-control.json skip.
         $_live = !empty($setup["live"]);
-        foreach ([] as $_op) {
+        foreach (["list"] as $_op) {
             [$_shouldSkip, $_reason] = Runner::is_control_skipped("entityOp", "agent_post." . $_op, $_live ? "live" : "unit");
             if ($_shouldSkip) {
                 $this->markTestSkipped($_reason ?? "skipped via sdk-test-control.json");
                 return;
+            }
+        }
+        if (!empty($setup["live"])) {
+            foreach (["agent01"] as $_liveKey) {
+                if (!empty($setup["synthetic_only"]) || null === ($setup["idmap"][$_liveKey] ?? null)) {
+                    Runner::live_miss(self::LIVE_STRICT, "Live entity test blocked: needs " . $_liveKey . " via CRACKED_API_REFERENCE_TEST_AGENT_POST_ENTID");
+                }
             }
         }
         $client = $setup["client"];
@@ -61,6 +68,18 @@ class AgentPostEntityTest extends TestCase
         if (count($agent_post_ref01_data_raw) > 0) {
             $agent_post_ref01_data = Helpers::to_map($agent_post_ref01_data_raw[0][1]);
         }
+
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
+        // LIST
+        $agent_post_ref01_ent = $client->AgentPost(null);
+        $agent_post_ref01_match = [
+            "agent_id" => $setup["idmap"]["agent01"],
+        ];
+
+        $agent_post_ref01_list_result = $agent_post_ref01_ent->list($agent_post_ref01_match, null);
+        $this->assertIsArray($agent_post_ref01_list_result);
 
     }
 }
@@ -80,7 +99,7 @@ function agent_post_basic_setup($extra)
 
     // Generate idmap.
     $idmap = [];
-    foreach (["agent_post01", "agent_post02", "agent_post03"] as $k) {
+    foreach (["agent_post01", "agent_post02", "agent_post03", "agent01", "agent02", "agent03"] as $k) {
         $idmap[$k] = strtoupper($k);
     }
 

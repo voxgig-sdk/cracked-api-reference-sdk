@@ -164,6 +164,9 @@ describe("DedicatedAgentsDashboardEntity", function()
       dedicated_agents_dashboard_ref01_data = helpers.to_map(dedicated_agents_dashboard_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LIST
     local dedicated_agents_dashboard_ref01_ent = client:DedicatedAgentsDashboard(nil)
     local dedicated_agents_dashboard_ref01_match = {}

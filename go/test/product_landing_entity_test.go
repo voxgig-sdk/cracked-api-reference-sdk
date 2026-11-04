@@ -200,6 +200,40 @@ func TestProductLandingEntity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" {
+			t.Log("LIVE STEP {\"id\":\"product_landing.update.1\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs PUT /api/landings/microhub\"}")
+		client := setup.client
+		_ = client
+
+		// Bootstrap entity data from existing test data (no create step in flow).
+		productLandingRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.product_landing")))
+		var productLandingRef01Data map[string]any
+		if len(productLandingRef01DataRaw) > 0 {
+			productLandingRef01Data = core.ToMapAny(productLandingRef01DataRaw[0][1])
+		}
+		// Discard guards against Go's unused-var check when the flow's steps
+		// happen not to consume the bootstrap data (e.g. list-only flows).
+		_ = productLandingRef01Data
+
+		if setup.live {
+			livePace()
+		}
+		// LIST
+		productLandingRef01Ent := client.ProductLanding(nil)
+		productLandingRef01Match := map[string]any{}
+
+		productLandingRef01ListResult, err := productLandingRef01Ent.List(productLandingRef01Match, nil)
+		if err != nil {
+			t.Fatalf("list failed: %v", err)
+		}
+		_, productLandingRef01ListOk := productLandingRef01ListResult.([]any)
+		if !productLandingRef01ListOk {
+			t.Fatalf("expected list result to be an array, got %T", productLandingRef01ListResult)
+		}
+
+		return
+		}
+
 		if setup.live {
 			liveMiss(t, product_landingEntityLiveStrict, "Live entity test blocked: %s", "the flow updates a product_landing record it did not create")
 		}
@@ -216,6 +250,9 @@ func TestProductLandingEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = productLandingRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LIST
 		productLandingRef01Ent := client.ProductLanding(nil)
 		productLandingRef01Match := map[string]any{}
@@ -229,6 +266,9 @@ func TestProductLandingEntity(t *testing.T) {
 			t.Fatalf("expected list result to be an array, got %T", productLandingRef01ListResult)
 		}
 
+		if setup.live {
+			livePace()
+		}
 		// UPDATE
 		productLandingRef01DataUp0Up := map[string]any{
 			"id": productLandingRef01Data["id"],
@@ -246,7 +286,7 @@ func TestProductLandingEntity(t *testing.T) {
 		if productLandingRef01ResdataUp0 == nil {
 			t.Fatal("expected update result to be a map")
 		}
-		if productLandingRef01ResdataUp0["id"] != productLandingRef01DataUp0Up["id"] {
+		if !liveSameId(productLandingRef01ResdataUp0["id"], productLandingRef01DataUp0Up["id"]) {
 			t.Fatal("expected update result id to match")
 		}
 		if productLandingRef01ResdataUp0[productLandingRef01MarkdefUp0Name] != productLandingRef01MarkdefUp0Value {

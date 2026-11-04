@@ -323,7 +323,7 @@ main: kit: entity: product: {
   }
 
   id: {
-    field: "id"
+    field: "product_id"
     name: "id"
   }
 
@@ -645,6 +645,62 @@ main: kit: entity: product: {
             }
             {
               var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/enterprise/products/{product_id}/status"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "product_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/enterprise/products/{product_id}/status"
+          q: {
+            "$action": "status"
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              product_id: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "enterprise"
+            }
+            {
+              lit: "products"
+            }
+            {
+              var: "id"
+            }
+            {
+              lit: "status"
             }
           ]
           t: {

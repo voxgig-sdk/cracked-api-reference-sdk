@@ -39,6 +39,7 @@ class ExactFormulaEntityTest < Minitest::Test
       exact_formula_ref01_data = Helpers.to_map(exact_formula_ref01_data_raw[0][1])
     end
 
+    Runner.live_pace if setup[:live]
     # LOAD
     exact_formula_ref01_ent = client.ExactFormula(nil)
     exact_formula_ref01_match_dt0 = {}

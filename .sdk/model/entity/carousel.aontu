@@ -77,12 +77,6 @@ main: kit: entity: carousel: {
       r: false
       t: "`$OBJECT`"
     }
-    id: {
-      h: "Id"
-      n: "id"
-      r: false
-      t: "`$STRING`"
-    }
     image_prompt: {
       h: "Image Prompt"
       n: "image_prompt"
@@ -215,7 +209,7 @@ main: kit: entity: carousel: {
   }
 
   id: {
-    field: "id"
+    field: "queue_id"
     name: "id"
   }
 

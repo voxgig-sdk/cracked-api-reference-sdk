@@ -100,6 +100,143 @@ main: kit: entity: agent: {
         }
       ]
     }
+    update: {
+      name: "update"
+      points: [
+        {
+          co: {
+            id: "PUT /api/admin/agents/{agent_id}/active"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "agent_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "is_active"
+                or: "is_active"
+                r: true
+                t: "`$BOOLEAN`"
+              }
+            ]
+          }
+          m: "PUT"
+          o: "/api/admin/agents/{agent_id}/active"
+          q: {
+            "$action": "active"
+            exist: [
+              "id"
+              "is_active"
+            ]
+          }
+          r: {
+            param: {
+              agent_id: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "agents"
+            }
+            {
+              var: "id"
+            }
+            {
+              lit: "active"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "PUT /api/admin/agents/{agent_id}/type"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "agent_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "agent_type"
+                or: "agent_type"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PUT"
+          o: "/api/admin/agents/{agent_id}/type"
+          q: {
+            "$action": "type"
+            exist: [
+              "agent_type"
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              agent_id: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "admin"
+            }
+            {
+              lit: "agents"
+            }
+            {
+              var: "id"
+            }
+            {
+              lit: "type"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
   }
 
 

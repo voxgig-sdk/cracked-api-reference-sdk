@@ -75,6 +75,9 @@ func TestLandingStatusEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = landingStatusRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LOAD
 		landingStatusRef01Ent := client.LandingStatus(nil)
 		landingStatusRef01MatchDt0 := map[string]any{}

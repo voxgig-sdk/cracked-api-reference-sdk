@@ -30,6 +30,11 @@ func TestVideoDirect(t *testing.T) {
 			t.Skip(_reason)
 			return
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" && setup.idmap["video01"] == nil {
+			t.Log("LIVE STEP {\"id\":\"direct-load-video\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs video01, which only POST /videos/{video_id}/retry-video gives\"}")
+			t.Skip("Live coverage incomplete: direct-load-video excluded (GET-only live run: needs video01, which only POST /videos/{video_id}/retry-video gives)")
+			return
+		}
 		if setup.live {
 			for _, _liveKey := range []string{"video01"} {
 				if v := setup.idmap[_liveKey]; v == nil {
@@ -37,6 +42,9 @@ func TestVideoDirect(t *testing.T) {
 					return
 				}
 			}
+		}
+		if setup.live {
+			livePace()
 		}
 		client := setup.client
 

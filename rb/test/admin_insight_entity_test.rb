@@ -141,7 +141,7 @@ class AdminInsightEntityTest < Minitest::Test
     end
     client = CrackedApiReferenceSDK.test(nil, { "feature" => { "validate" => { "active" => true } } })
     err = assert_raises(StandardError) do
-      client.AdminInsight(nil).list({ "generated_at" => 1 }, nil)
+      client.AdminInsight(nil).list({ "active_agents" => "x" }, nil)
     end
     assert_equal "validate_failed", err.code
   end
@@ -167,6 +167,7 @@ class AdminInsightEntityTest < Minitest::Test
       admin_insight_ref01_data = Helpers.to_map(admin_insight_ref01_data_raw[0][1])
     end
 
+    Runner.live_pace if setup[:live]
     # LIST
     admin_insight_ref01_ent = client.AdminInsight(nil)
     admin_insight_ref01_match = {}
@@ -174,6 +175,7 @@ class AdminInsightEntityTest < Minitest::Test
     admin_insight_ref01_list_result = admin_insight_ref01_ent.list(admin_insight_ref01_match, nil)
     assert admin_insight_ref01_list_result.is_a?(Array)
 
+    Runner.live_pace if setup[:live]
     # LOAD
     admin_insight_ref01_match_dt0 = {}
     admin_insight_ref01_data_dt0_loaded = admin_insight_ref01_ent.load(admin_insight_ref01_match_dt0, nil)

@@ -167,6 +167,7 @@ class IrisStatusEntityTest < Minitest::Test
       iris_status_ref01_data = Helpers.to_map(iris_status_ref01_data_raw[0][1])
     end
 
+    Runner.live_pace if setup[:live]
     # LIST
     iris_status_ref01_ent = client.IrisStatus(nil)
     iris_status_ref01_match = {}

@@ -47,33 +47,7 @@ describe('AdminDirect', async () => {
 
     const params: any = {}
     const query: any = {}
-    if (setup.live) {
-      const listResult: any = await client.direct({
-        path: 'api/admin/whitelist-testers',
-        method: 'GET',
-        params: {
 
-        },
-      })
-      if (!listResult.ok || listResult.status < 200 || listResult.status >= 300) {
-        return void liveMiss(t, LIVE_STRICT, 'Live list discovery failed: ' + describeLive(listResult))
-      }
-      const listArr = unwrapListData(listResult.data)
-      if (null == listArr) {
-        return void liveMiss(t, LIVE_STRICT, 'Live list discovery returned no list: ' + describeLive(listResult))
-      }
-      if (0 === listArr.length) {
-        return void liveEmpty(t, 'The account has no admin record to load')
-      }
-      const candidateId = listArr[0]?.id ?? listArr[0]?.id
-      if (null == candidateId) {
-        return void liveMiss(t, LIVE_STRICT, 'Live load blocked: discovery returned no usable identity')
-      }
-      params.id = candidateId
-
-    } else {
-
-    }
 
     const result: any = await client.direct({
       path: 'api/admin/stats/by-date-and-type',

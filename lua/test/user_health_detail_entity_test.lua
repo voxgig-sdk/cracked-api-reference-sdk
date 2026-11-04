@@ -29,7 +29,7 @@ describe("UserHealthDetailEntity", function()
       return
     end
     local client = sdk.test(nil, { feature = { validate = { active = true } } })
-    local _, err = client:UserHealthDetail(nil):list({ ["id"] = 1 }, nil)
+    local _, err = client:UserHealthDetail(nil):list({ ["user_id"] = 1 }, nil)
     assert.are.equal("validate_failed", type(err) == "table" and err.code or nil)
   end)
 
@@ -37,11 +37,18 @@ describe("UserHealthDetailEntity", function()
     local setup = user_health_detail_basic_setup(nil)
     -- Per-op sdk-test-control.json skip.
     local _live = setup.live or false
-    for _, _op in ipairs({}) do
+    for _, _op in ipairs({"list"}) do
       local _should_skip, _reason = runner.is_control_skipped("entityOp", "user_health_detail." .. _op, _live and "live" or "unit")
       if _should_skip then
         pending(_reason or "skipped via sdk-test-control.json")
         return
+      end
+    end
+    if setup.live then
+      for _, _live_key in ipairs({"user01"}) do
+        if setup.synthetic_only or setup.idmap[_live_key] == nil then
+          runner.live_miss(pending, LIVE_STRICT, "Live entity test blocked: needs " .. _live_key .. " via CRACKED_API_REFERENCE_TEST_USER_HEALTH_DETAIL_ENTID")
+        end
       end
     end
     local client = setup.client
@@ -53,6 +60,19 @@ describe("UserHealthDetailEntity", function()
     if #user_health_detail_ref01_data_raw > 0 then
       user_health_detail_ref01_data = helpers.to_map(user_health_detail_ref01_data_raw[1][2])
     end
+
+    if setup.live then
+      runner.live_pace()
+    end
+    -- LIST
+    local user_health_detail_ref01_ent = client:UserHealthDetail(nil)
+    local user_health_detail_ref01_match = {
+      ["user_id"] = setup.idmap["user01"],
+    }
+
+    local user_health_detail_ref01_list_result, err = user_health_detail_ref01_ent:list(user_health_detail_ref01_match, nil)
+    assert.is_nil(err)
+    assert.is_table(user_health_detail_ref01_list_result)
 
   end)
 end)
@@ -77,7 +97,7 @@ function user_health_detail_basic_setup(extra)
 
   -- Generate idmap via transform.
   local idmap = vs.transform(
-    { "user_health_detail01", "user_health_detail02", "user_health_detail03" },
+    { "user_health_detail01", "user_health_detail02", "user_health_detail03", "user01", "user02", "user03" },
     {
       ["`$PACK`"] = { "", {
         ["`$KEY`"] = "`$COPY`",

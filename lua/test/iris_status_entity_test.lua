@@ -164,6 +164,9 @@ describe("IrisStatusEntity", function()
       iris_status_ref01_data = helpers.to_map(iris_status_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LIST
     local iris_status_ref01_ent = client:IrisStatus(nil)
     local iris_status_ref01_match = {}

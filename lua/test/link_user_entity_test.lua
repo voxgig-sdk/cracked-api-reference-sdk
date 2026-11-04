@@ -44,8 +44,17 @@ describe("LinkUserEntity", function()
         return
       end
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" then
+      print("LIVE STEP {\"id\":\"link_user.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/onboarding-v6/link-user\"}")
+      pending("Live coverage incomplete: link_user.create.0 excluded (GET-only live run: needs POST /api/onboarding-v6/link-user)")
+      return
+    end
+
     local client = setup.client
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- CREATE
     local link_user_ref01_ent = client:LinkUser(nil)
     local link_user_ref01_data = helpers.to_map(vs.getprop(

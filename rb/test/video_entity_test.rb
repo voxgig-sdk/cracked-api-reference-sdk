@@ -41,8 +41,17 @@ class VideoEntityTest < Minitest::Test
         return
       end
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE"
+      puts "LIVE STEP {\"id\":\"video.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /videos/{video_id}/retry-video\"}"
+      puts "LIVE STEP {\"id\":\"video.update.1\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs PATCH /videos/{video_id}\"}"
+      puts "LIVE STEP {\"id\":\"video.load.2\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: reads a record only video.create.0 gives\"}"
+      puts "LIVE STEP {\"id\":\"video.remove.3\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs DELETE /videos/{video_id}\"}"
+      skip("Live coverage incomplete: video.create.0 excluded (GET-only live run: needs POST /videos/{video_id}/retry-video); video.update.1 excluded (GET-only live run: needs PATCH /videos/{video_id}); video.load.2 excluded (GET-only live run: reads a record only video.create.0 gives); video.remove.3 excluded (GET-only live run: needs DELETE /videos/{video_id})")
+    end
+
     client = setup[:client]
 
+    Runner.live_pace if setup[:live]
     # CREATE
     video_ref01_ent = client.Video(nil)
     video_ref01_data = Helpers.to_map(Vs.getprop(
@@ -53,6 +62,7 @@ class VideoEntityTest < Minitest::Test
     assert !video_ref01_data.nil?
     assert !video_ref01_data["id"].nil?
 
+    Runner.live_pace if setup[:live]
     # UPDATE
     video_ref01_data_up0_up = {
       "id" => video_ref01_data["id"],
@@ -65,9 +75,10 @@ class VideoEntityTest < Minitest::Test
     video_ref01_resdata_up0_result = video_ref01_ent.update(video_ref01_data_up0_up, nil)
     video_ref01_resdata_up0 = Helpers.to_map(video_ref01_resdata_up0_result.respond_to?(:data_get) ? video_ref01_resdata_up0_result.data_get : video_ref01_resdata_up0_result)
     assert !video_ref01_resdata_up0.nil?
-    assert_equal video_ref01_resdata_up0["id"], video_ref01_data_up0_up["id"]
+    assert Runner.live_same_id(video_ref01_resdata_up0["id"], video_ref01_data_up0_up["id"])
     assert_equal video_ref01_resdata_up0[video_ref01_markdef_up0_name], video_ref01_markdef_up0_value
 
+    Runner.live_pace if setup[:live]
     # LOAD
     video_ref01_match_dt0 = {
       "id" => video_ref01_data["id"],
@@ -75,8 +86,9 @@ class VideoEntityTest < Minitest::Test
     video_ref01_data_dt0_loaded = video_ref01_ent.load(video_ref01_match_dt0, nil)
     video_ref01_data_dt0_load_result = Helpers.to_map(video_ref01_data_dt0_loaded.respond_to?(:data_get) ? video_ref01_data_dt0_loaded.data_get : video_ref01_data_dt0_loaded)
     assert !video_ref01_data_dt0_load_result.nil?
-    assert_equal video_ref01_data_dt0_load_result["id"], video_ref01_data["id"]
+    assert Runner.live_same_id(video_ref01_data_dt0_load_result["id"], video_ref01_data["id"])
 
+    Runner.live_pace if setup[:live]
     # REMOVE
     video_ref01_match_rm0 = {
       "id" => video_ref01_data["id"],

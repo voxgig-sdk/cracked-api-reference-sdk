@@ -44,8 +44,17 @@ describe("GeneratePromptEntity", function()
         return
       end
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" then
+      print("LIVE STEP {\"id\":\"generate_prompt.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/video-variation/generate-prompt\"}")
+      pending("Live coverage incomplete: generate_prompt.create.0 excluded (GET-only live run: needs POST /api/video-variation/generate-prompt)")
+      return
+    end
+
     local client = setup.client
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- CREATE
     local generate_prompt_ref01_ent = client:GeneratePrompt(nil)
     local generate_prompt_ref01_data = helpers.to_map(vs.getprop(

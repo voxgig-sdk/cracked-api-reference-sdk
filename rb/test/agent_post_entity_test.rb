@@ -25,7 +25,7 @@ class AgentPostEntityTest < Minitest::Test
     end
     client = CrackedApiReferenceSDK.test(nil, { "feature" => { "validate" => { "active" => true } } })
     err = assert_raises(StandardError) do
-      client.AgentPost(nil).list({ "id" => 1 }, nil)
+      client.AgentPost(nil).list({ "agent_id" => 1 }, nil)
     end
     assert_equal "validate_failed", err.code
   end
@@ -34,11 +34,18 @@ class AgentPostEntityTest < Minitest::Test
     setup = agent_post_basic_setup(nil)
     # Per-op sdk-test-control.json skip.
     _live = setup[:live] || false
-    [].each do |_op|
+    ["list"].each do |_op|
       _should_skip, _reason = Runner.is_control_skipped("entityOp", "agent_post." + _op, _live ? "live" : "unit")
       if _should_skip
         skip(_reason || "skipped via sdk-test-control.json")
         return
+      end
+    end
+    if setup[:live]
+      ["agent01"].each do |_live_key|
+        if setup[:synthetic_only] || setup[:idmap][_live_key].nil?
+          Runner.live_miss(LIVE_STRICT, "Live entity test blocked: needs #{_live_key} via CRACKED_API_REFERENCE_TEST_AGENT_POST_ENTID")
+        end
       end
     end
     client = setup[:client]
@@ -50,6 +57,16 @@ class AgentPostEntityTest < Minitest::Test
     if agent_post_ref01_data_raw.length > 0
       agent_post_ref01_data = Helpers.to_map(agent_post_ref01_data_raw[0][1])
     end
+
+    Runner.live_pace if setup[:live]
+    # LIST
+    agent_post_ref01_ent = client.AgentPost(nil)
+    agent_post_ref01_match = {
+      "agent_id" => setup[:idmap]["agent01"],
+    }
+
+    agent_post_ref01_list_result = agent_post_ref01_ent.list(agent_post_ref01_match, nil)
+    assert agent_post_ref01_list_result.is_a?(Array)
 
   end
 end
@@ -68,7 +85,7 @@ def agent_post_basic_setup(extra)
 
   # Generate idmap via transform.
   idmap = Vs.transform(
-    ["agent_post01", "agent_post02", "agent_post03"],
+    ["agent_post01", "agent_post02", "agent_post03", "agent01", "agent02", "agent03"],
     {
       "`$PACK`" => ["", {
         "`$KEY`" => "`$COPY`",

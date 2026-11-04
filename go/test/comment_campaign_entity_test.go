@@ -63,6 +63,39 @@ func TestCommentCampaignEntity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" {
+			t.Log("LIVE STEP {\"id\":\"comment_campaign.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/comments/products/{product_id}/campaign/sources/{source_id}/resolve\"}")
+			t.Log("LIVE STEP {\"id\":\"comment_campaign.update.1\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs PUT /api/comments/products/{product_id}/campaign\"}")
+		client := setup.client
+		_ = client
+
+		// Bootstrap entity data from existing test data (no create step in flow).
+		commentCampaignRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.comment_campaign")))
+		var commentCampaignRef01Data map[string]any
+		if len(commentCampaignRef01DataRaw) > 0 {
+			commentCampaignRef01Data = core.ToMapAny(commentCampaignRef01DataRaw[0][1])
+		}
+		// Discard guards against Go's unused-var check when the flow's steps
+		// happen not to consume the bootstrap data (e.g. list-only flows).
+		_ = commentCampaignRef01Data
+
+		if setup.live {
+			livePace()
+		}
+		// LOAD
+		commentCampaignRef01Ent := client.CommentCampaign(nil)
+		commentCampaignRef01MatchDt0 := map[string]any{}
+		commentCampaignRef01DataDt0Loaded, err := commentCampaignRef01Ent.Load(commentCampaignRef01MatchDt0, nil)
+		if err != nil {
+			t.Fatalf("load failed: %v", err)
+		}
+		if commentCampaignRef01DataDt0Loaded == nil {
+			t.Fatal("expected load result to be non-nil")
+		}
+
+		return
+		}
+
 		if setup.live {
 			for _, _liveKey := range []string{"product01"} {
 				if setup.syntheticOnly || setup.idmap[_liveKey] == nil {
@@ -73,6 +106,9 @@ func TestCommentCampaignEntity(t *testing.T) {
 		client := setup.client
 		_ = client
 
+		if setup.live {
+			livePace()
+		}
 		// CREATE
 		commentCampaignRef01Ent := client.CommentCampaign(nil)
 		commentCampaignRef01Data := core.ToMapAny(vs.GetProp(
@@ -88,6 +124,9 @@ func TestCommentCampaignEntity(t *testing.T) {
 			t.Fatal("expected create result to be a map")
 		}
 
+		if setup.live {
+			livePace()
+		}
 		// UPDATE
 		commentCampaignRef01DataUp0Up := map[string]any{
 		}
@@ -108,6 +147,9 @@ func TestCommentCampaignEntity(t *testing.T) {
 			t.Fatalf("expected %s to be updated, got %v", commentCampaignRef01MarkdefUp0Name, commentCampaignRef01ResdataUp0[commentCampaignRef01MarkdefUp0Name])
 		}
 
+		if setup.live {
+			livePace()
+		}
 		// LOAD
 		commentCampaignRef01MatchDt0 := map[string]any{}
 		commentCampaignRef01DataDt0Loaded, err := commentCampaignRef01Ent.Load(commentCampaignRef01MatchDt0, nil)

@@ -62,6 +62,9 @@ func TestTemplateEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = templateRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LOAD
 		templateRef01Ent := client.Template(nil)
 		templateRef01MatchDt0 := map[string]any{}

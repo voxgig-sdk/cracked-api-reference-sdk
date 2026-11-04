@@ -44,6 +44,12 @@ describe("RecordDemoBookedEntity", function()
         return
       end
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" then
+      print("LIVE STEP {\"id\":\"record_demo_booked.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/chat/sessions/{session_id}/demo-booked\"}")
+      pending("Live coverage incomplete: record_demo_booked.create.0 excluded (GET-only live run: needs POST /api/chat/sessions/{session_id}/demo-booked)")
+      return
+    end
+
     if setup.live then
       for _, _live_key in ipairs({"session01"}) do
         if setup.synthetic_only or setup.idmap[_live_key] == nil then
@@ -53,6 +59,9 @@ describe("RecordDemoBookedEntity", function()
     end
     local client = setup.client
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- CREATE
     local record_demo_booked_ref01_ent = client:RecordDemoBooked(nil)
     local record_demo_booked_ref01_data = helpers.to_map(vs.getprop(

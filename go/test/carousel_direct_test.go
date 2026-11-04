@@ -33,6 +33,9 @@ func TestCarouselDirect(t *testing.T) {
 			t.Skip(_reason)
 			return
 		}
+		if setup.live {
+			livePace()
+		}
 		client := setup.client
 
 
@@ -91,6 +94,9 @@ func TestCarouselDirect(t *testing.T) {
 			t.Skip(_reason)
 			return
 		}
+		if setup.live {
+			livePace()
+		}
 		client := setup.client
 
 		params := map[string]any{}
@@ -116,10 +122,10 @@ func TestCarouselDirect(t *testing.T) {
 				liveEmpty(t, "The account has no carousel record to load")
 			}
 			firstEnt := core.ToMapAny(listData[0])
-			if firstEnt["id"] == nil {
+			if firstEnt["queue_id"] == nil {
 				liveMiss(t, carouselDirectLiveStrict, "Live load blocked: discovery returned no usable identity")
 			}
-			params["id"] = firstEnt["id"]
+			params["id"] = firstEnt["queue_id"]
 		} else {
 			params["id"] = "direct01"
 		}

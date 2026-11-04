@@ -51,6 +51,8 @@ class TestSeoEntity:
         if len(seo_ref01_data_raw) > 0:
             seo_ref01_data = helpers.to_map(seo_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LOAD
         seo_ref01_ent = client.Seo(None)
         seo_ref01_match_dt0 = {}

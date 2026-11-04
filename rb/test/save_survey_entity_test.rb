@@ -41,8 +41,14 @@ class SaveSurveyEntityTest < Minitest::Test
         return
       end
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE"
+      puts "LIVE STEP {\"id\":\"save_survey.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/onboarding-v6/save-survey\"}"
+      skip("Live coverage incomplete: save_survey.create.0 excluded (GET-only live run: needs POST /api/onboarding-v6/save-survey)")
+    end
+
     client = setup[:client]
 
+    Runner.live_pace if setup[:live]
     # CREATE
     save_survey_ref01_ent = client.SaveSurvey(nil)
     save_survey_ref01_data = Helpers.to_map(Vs.getprop(

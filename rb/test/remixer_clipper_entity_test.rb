@@ -41,6 +41,28 @@ class RemixerClipperEntityTest < Minitest::Test
         return
       end
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE"
+      puts "LIVE STEP {\"id\":\"remixer_clipper.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/remixer-clippers/jobs/{identifier}/download\"}"
+    client = setup[:client]
+
+    # Bootstrap entity data from existing test data.
+    remixer_clipper_ref01_data_raw = Vs.items(Helpers.to_map(
+      Vs.getpath(setup[:data], "existing.remixer_clipper")))
+    remixer_clipper_ref01_data = nil
+    if remixer_clipper_ref01_data_raw.length > 0
+      remixer_clipper_ref01_data = Helpers.to_map(remixer_clipper_ref01_data_raw[0][1])
+    end
+
+    Runner.live_pace if setup[:live]
+    # LOAD
+    remixer_clipper_ref01_ent = client.RemixerClipper(nil)
+    remixer_clipper_ref01_match_dt0 = {}
+    remixer_clipper_ref01_data_dt0_loaded = remixer_clipper_ref01_ent.load(remixer_clipper_ref01_match_dt0, nil)
+    assert !remixer_clipper_ref01_data_dt0_loaded.nil?
+
+      return
+    end
+
     if setup[:live]
       ["identifier01"].each do |_live_key|
         if setup[:synthetic_only] || setup[:idmap][_live_key].nil?
@@ -50,6 +72,7 @@ class RemixerClipperEntityTest < Minitest::Test
     end
     client = setup[:client]
 
+    Runner.live_pace if setup[:live]
     # CREATE
     remixer_clipper_ref01_ent = client.RemixerClipper(nil)
     remixer_clipper_ref01_data = Helpers.to_map(Vs.getprop(
@@ -60,6 +83,7 @@ class RemixerClipperEntityTest < Minitest::Test
     remixer_clipper_ref01_data = Helpers.to_map(remixer_clipper_ref01_data_result.respond_to?(:data_get) ? remixer_clipper_ref01_data_result.data_get : remixer_clipper_ref01_data_result)
     assert !remixer_clipper_ref01_data.nil?
 
+    Runner.live_pace if setup[:live]
     # LOAD
     remixer_clipper_ref01_match_dt0 = {}
     remixer_clipper_ref01_data_dt0_loaded = remixer_clipper_ref01_ent.load(remixer_clipper_ref01_match_dt0, nil)

@@ -43,19 +43,19 @@ describe('CarouselStatusDirect', async () => {
     if (liveScenariosActive()) { t.skip('Covered by live operation scenarios'); return }
     const setup = directSetup([{ id: 'direct01' }, { id: 'direct02' }])
     if (maybeSkipControl(t, 'direct', 'direct-list-carousel_status', setup.live)) return
-    if (skipIfMissingIds(t, setup, ["carousel_status01"], LIVE_STRICT)) return
+    if (skipIfMissingIds(t, setup, ["carousel01"], LIVE_STRICT)) return
     const { client, calls } = setup
 
     const params: any = {}
     const query: any = {}
     if (setup.live) {
-      params.id = setup.idmap['carousel_status01']
+      params.carousel_id = setup.idmap['carousel01']
     } else {
-      params.id = 'direct01'
+      params.carousel_id = 'direct01'
     }
 
     const result: any = await client.direct({
-      path: 'api/carousel/{id}/status',
+      path: 'api/carousel/{carousel_id}/status',
       method: 'GET',
       params,
       query,

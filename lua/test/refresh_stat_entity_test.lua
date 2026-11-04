@@ -44,8 +44,17 @@ describe("RefreshStatEntity", function()
         return
       end
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" then
+      print("LIVE STEP {\"id\":\"refresh_stat.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/analytics/refresh-stats\"}")
+      pending("Live coverage incomplete: refresh_stat.create.0 excluded (GET-only live run: needs POST /api/analytics/refresh-stats)")
+      return
+    end
+
     local client = setup.client
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- CREATE
     local refresh_stat_ref01_ent = client:RefreshStat(nil)
     local refresh_stat_ref01_data = helpers.to_map(vs.getprop(

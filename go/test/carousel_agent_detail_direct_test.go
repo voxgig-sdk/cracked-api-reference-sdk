@@ -38,6 +38,9 @@ func TestCarouselAgentDetailDirect(t *testing.T) {
 				}
 			}
 		}
+		if setup.live {
+			livePace()
+		}
 		client := setup.client
 
 		params := map[string]any{}

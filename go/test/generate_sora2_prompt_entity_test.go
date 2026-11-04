@@ -75,6 +75,9 @@ func TestGenerateSora2PromptEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = generateSora2PromptRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LOAD
 		generateSora2PromptRef01Ent := client.GenerateSora2Prompt(nil)
 		generateSora2PromptRef01MatchDt0 := map[string]any{}

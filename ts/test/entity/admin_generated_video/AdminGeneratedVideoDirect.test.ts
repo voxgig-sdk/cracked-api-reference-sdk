@@ -43,6 +43,11 @@ describe('AdminGeneratedVideoDirect', async () => {
     if (liveScenariosActive()) { t.skip('Covered by live operation scenarios'); return }
     const setup = directSetup([{ id: 'direct01' }, { id: 'direct02' }])
     if (maybeSkipControl(t, 'direct', 'direct-list-admin_generated_video', setup.live)) return
+    if (setup.live && 'TRUE' === process.env.VOXGIG_GETONLY_GUARD && null == setup.idmap?.["user01"]) {
+      console.log("LIVE STEP {\"id\":\"direct-list-admin_generated_video\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs user01, which only POST /api/admin/users/{user_id}/fix-auto-schedule-by-date gives\"}")
+      t.skip("Live coverage incomplete: direct-list-admin_generated_video excluded (GET-only live run: needs user01, which only POST /api/admin/users/{user_id}/fix-auto-schedule-by-date gives)")
+      return
+    }
     if (skipIfMissingIds(t, setup, ["user01"], LIVE_STRICT)) return
     const { client, calls } = setup
 

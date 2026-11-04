@@ -41,6 +41,11 @@ class RecordDemoBookedEntityTest < Minitest::Test
         return
       end
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE"
+      puts "LIVE STEP {\"id\":\"record_demo_booked.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/chat/sessions/{session_id}/demo-booked\"}"
+      skip("Live coverage incomplete: record_demo_booked.create.0 excluded (GET-only live run: needs POST /api/chat/sessions/{session_id}/demo-booked)")
+    end
+
     if setup[:live]
       ["session01"].each do |_live_key|
         if setup[:synthetic_only] || setup[:idmap][_live_key].nil?
@@ -50,6 +55,7 @@ class RecordDemoBookedEntityTest < Minitest::Test
     end
     client = setup[:client]
 
+    Runner.live_pace if setup[:live]
     # CREATE
     record_demo_booked_ref01_ent = client.RecordDemoBooked(nil)
     record_demo_booked_ref01_data = Helpers.to_map(Vs.getprop(

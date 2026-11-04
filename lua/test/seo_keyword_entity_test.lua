@@ -164,6 +164,9 @@ describe("SeoKeywordEntity", function()
       seo_keyword_ref01_data = helpers.to_map(seo_keyword_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LIST
     local seo_keyword_ref01_ent = client:SeoKeyword(nil)
     local seo_keyword_ref01_match = {}

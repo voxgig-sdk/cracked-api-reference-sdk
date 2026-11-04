@@ -211,6 +211,9 @@ class SeoAiMentionEntityTest extends TestCase
             $seo_ai_mention_ref01_data = Helpers::to_map($seo_ai_mention_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LIST
         $seo_ai_mention_ref01_ent = $client->SeoAiMention(null);
         $seo_ai_mention_ref01_match = [];

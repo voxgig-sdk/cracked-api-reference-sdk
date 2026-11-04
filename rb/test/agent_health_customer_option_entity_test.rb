@@ -181,6 +181,7 @@ class AgentHealthCustomerOptionEntityTest < Minitest::Test
       agent_health_customer_option_ref01_data = Helpers.to_map(agent_health_customer_option_ref01_data_raw[0][1])
     end
 
+    Runner.live_pace if setup[:live]
     # LIST
     agent_health_customer_option_ref01_ent = client.AgentHealthCustomerOption(nil)
     agent_health_customer_option_ref01_match = {}

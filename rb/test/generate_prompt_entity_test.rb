@@ -41,8 +41,14 @@ class GeneratePromptEntityTest < Minitest::Test
         return
       end
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE"
+      puts "LIVE STEP {\"id\":\"generate_prompt.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/video-variation/generate-prompt\"}"
+      skip("Live coverage incomplete: generate_prompt.create.0 excluded (GET-only live run: needs POST /api/video-variation/generate-prompt)")
+    end
+
     client = setup[:client]
 
+    Runner.live_pace if setup[:live]
     # CREATE
     generate_prompt_ref01_ent = client.GeneratePrompt(nil)
     generate_prompt_ref01_data = Helpers.to_map(Vs.getprop(

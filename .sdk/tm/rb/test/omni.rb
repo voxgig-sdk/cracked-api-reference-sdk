@@ -301,7 +301,7 @@ module CrackedApiReferenceOmni
       err_map = res_map['err']
       if err_map.is_a?(::Hash) && err_map['message'].is_a?(::String) &&
          !err_map['message'].empty?
-        ctx.result.err = CrackedApiReferenceError.new('', err_map['message'])
+        ctx.result.err = CrackedApiReferenceError.new(err_map['message'])
       end
     end
 

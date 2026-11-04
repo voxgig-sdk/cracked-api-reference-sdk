@@ -5,84 +5,41 @@ main: kit: entity: agent_health_detail: {
   alias: field: {}
 
   fields: {
-    archived_issue_total: {
-      h: "Archived Issue Total"
-      n: "archived_issue_total"
-      r: false
-      t: "`$INTEGER`"
-    }
-    date: {
-      h: "Date"
-      n: "date"
+    agent_id: {
+      h: "Agent Id"
+      n: "agent_id"
       r: true
       t: "`$STRING`"
     }
-    generated_at: {
-      fo: "date-time"
-      h: "Generated At"
-      n: "generated_at"
+    category: {
+      h: "Category"
+      n: "category"
       r: true
       t: "`$STRING`"
     }
-    group_id: {
-      h: "Group Id"
-      n: "group_id"
+    connection_status: {
+      h: "Connection Status"
+      n: "connection_status"
       r: true
       t: "`$STRING`"
     }
-    has_more: {
-      h: "Has More"
-      n: "has_more"
-      r: true
-      t: "`$BOOLEAN`"
-    }
-    issue_total: {
-      h: "Issue Total"
-      n: "issue_total"
-      r: true
-      t: "`$INTEGER`"
-    }
-    issues: {
-      h: "Issues"
-      n: "issues"
-      r: true
-      t: "`$ARRAY`"
-    }
-    limit: {
-      h: "Limit"
-      n: "limit"
-      r: true
-      t: "`$INTEGER`"
-    }
-    metric: {
-      h: "Metric"
-      n: "metric"
+    device_status: {
+      h: "Device Status"
+      n: "device_status"
       r: true
       t: "`$STRING`"
     }
-    offset: {
-      h: "Offset"
-      n: "offset"
+    issue: {
+      h: "Issue"
+      n: "issue"
+      r: false
+      t: "`$ANY`"
+    }
+    state: {
+      h: "State"
+      n: "state"
       r: true
-      t: "`$INTEGER`"
-    }
-    warmup_runs: {
-      h: "Warmup Runs"
-      n: "warmup_runs"
-      r: false
-      t: "`$ARRAY`"
-    }
-    warning_total: {
-      h: "Warning Total"
-      n: "warning_total"
-      r: false
-      t: "`$INTEGER`"
-    }
-    warnings: {
-      h: "Warnings"
-      n: "warnings"
-      r: false
-      t: "`$ARRAY`"
+      t: "`$STRING`"
     }
   }
 
@@ -175,7 +132,7 @@ main: kit: entity: agent_health_detail: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.issues`"
           }
         }
       ]

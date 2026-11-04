@@ -44,8 +44,17 @@ describe("FileEntity", function()
         return
       end
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" then
+      print("LIVE STEP {\"id\":\"file.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/file-upload\"}")
+      pending("Live coverage incomplete: file.create.0 excluded (GET-only live run: needs POST /api/file-upload)")
+      return
+    end
+
     local client = setup.client
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- CREATE
     local file_ref01_ent = client:File(nil)
     local file_ref01_data = helpers.to_map(vs.getprop(

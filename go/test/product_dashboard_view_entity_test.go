@@ -212,6 +212,9 @@ func TestProductDashboardViewEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = productDashboardViewRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LIST
 		productDashboardViewRef01Ent := client.ProductDashboardView(nil)
 		productDashboardViewRef01Match := map[string]any{}

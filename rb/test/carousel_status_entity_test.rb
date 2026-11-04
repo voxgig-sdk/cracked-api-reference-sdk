@@ -25,7 +25,7 @@ class CarouselStatusEntityTest < Minitest::Test
     end
     client = CrackedApiReferenceSDK.test(nil, { "feature" => { "validate" => { "active" => true } } })
     err = assert_raises(StandardError) do
-      client.CarouselStatus(nil).list({ "id" => 1 }, nil)
+      client.CarouselStatus(nil).list({ "carousel_id" => 1 }, nil)
     end
     assert_equal "validate_failed", err.code
   end
@@ -34,11 +34,18 @@ class CarouselStatusEntityTest < Minitest::Test
     setup = carousel_status_basic_setup(nil)
     # Per-op sdk-test-control.json skip.
     _live = setup[:live] || false
-    [].each do |_op|
+    ["list"].each do |_op|
       _should_skip, _reason = Runner.is_control_skipped("entityOp", "carousel_status." + _op, _live ? "live" : "unit")
       if _should_skip
         skip(_reason || "skipped via sdk-test-control.json")
         return
+      end
+    end
+    if setup[:live]
+      ["carousel01"].each do |_live_key|
+        if setup[:synthetic_only] || setup[:idmap][_live_key].nil?
+          Runner.live_miss(LIVE_STRICT, "Live entity test blocked: needs #{_live_key} via CRACKED_API_REFERENCE_TEST_CAROUSEL_STATUS_ENTID")
+        end
       end
     end
     client = setup[:client]
@@ -50,6 +57,16 @@ class CarouselStatusEntityTest < Minitest::Test
     if carousel_status_ref01_data_raw.length > 0
       carousel_status_ref01_data = Helpers.to_map(carousel_status_ref01_data_raw[0][1])
     end
+
+    Runner.live_pace if setup[:live]
+    # LIST
+    carousel_status_ref01_ent = client.CarouselStatus(nil)
+    carousel_status_ref01_match = {
+      "carousel_id" => setup[:idmap]["carousel01"],
+    }
+
+    carousel_status_ref01_list_result = carousel_status_ref01_ent.list(carousel_status_ref01_match, nil)
+    assert carousel_status_ref01_list_result.is_a?(Array)
 
   end
 end
@@ -68,7 +85,7 @@ def carousel_status_basic_setup(extra)
 
   # Generate idmap via transform.
   idmap = Vs.transform(
-    ["carousel_status01", "carousel_status02", "carousel_status03"],
+    ["carousel_status01", "carousel_status02", "carousel_status03", "carousel01", "carousel02", "carousel03"],
     {
       "`$PACK`" => ["", {
         "`$KEY`" => "`$COPY`",

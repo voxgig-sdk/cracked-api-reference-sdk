@@ -155,12 +155,132 @@
     }
   },
   "requests": {
+    "POST /api/admin/users/{user_id}/fix-auto-schedule-by-date": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/users/{user_id}/repair-approved-source-queue-today": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/users/{user_id}/agents/reconcile": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/users/{user_id}/bulk-create-videos": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/users/{user_id}/clear-failed-videos": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/users/{user_id}/clear-future-auto-entries": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/users/{user_id}/clear-manual-entries": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/users/{user_id}/clear-today-auto-entries": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/users/{user_id}/fix-all": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/users/{user_id}/fix-auto-schedule": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/users/{user_id}/fix-auto-schedule-today": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/users/{user_id}/fix-auto-schedule-today-force": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/users/{user_id}/fix-auto-schedule-tomorrow": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/users/{user_id}/fix-comments-today": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/users/{user_id}/generate-pomelli-video": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/users/{user_id}/repost-tiktok-videos-tomorrow": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/users/{user_id}/reset-onboarding": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/users/{user_id}/retry-todays-videos": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /api/admin/users/{user_id}/retry-videos": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/users/{user_id}/failed-videos": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/users/{user_id}/pending-videos": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/admin/users/{user_id}/schedule-queue": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
     "GET /api/upload-post-agents/user/{user_id}": {
       "provenance": "operation-contract",
       "version": 2,
       "source": "openapi3"
     },
     "GET /auth/me": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PUT /api/admin/users/{user_id}/auto-schedule": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PUT /api/admin/users/{user_id}/posted-video-reuse": {
       "provenance": "operation-contract",
       "version": 2,
       "source": "openapi3"

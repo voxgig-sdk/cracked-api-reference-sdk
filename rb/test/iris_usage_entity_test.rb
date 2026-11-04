@@ -181,6 +181,7 @@ class IrisUsageEntityTest < Minitest::Test
       iris_usage_ref01_data = Helpers.to_map(iris_usage_ref01_data_raw[0][1])
     end
 
+    Runner.live_pace if setup[:live]
     # LIST
     iris_usage_ref01_ent = client.IrisUsage(nil)
     iris_usage_ref01_match = {}

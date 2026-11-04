@@ -60,23 +60,28 @@ const utility_1 = require("../../utility");
             return;
         }
         const client = __1.CrackedApiReferenceSDK.test(undefined, { feature: { validate: { active: true } } });
-        await node_assert_1.default.rejects(client.CarouselStatus().list({ "id": 1 }), (err) => 'validate_failed' === err.code);
+        await node_assert_1.default.rejects(client.CarouselStatus().list({ "carousel_id": 1 }), (err) => 'validate_failed' === err.code);
     });
     (0, node_test_1.test)('basic', async (t) => {
         const live = 'TRUE' === process.env.CRACKED_API_REFERENCE_TEST_LIVE;
-        for (const op of []) {
+        for (const op of ['list']) {
             if (!live && (0, utility_1.maybeSkipControl)(t, 'entityOp', 'carousel_status.' + op, live))
                 return;
         }
         const setup = basicSetup();
         if (setup.live) {
-            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": { "caption": { "a": true, "h": "Caption", "n": "caption", "r": true, "t": "`$ANY`", "key$": "caption", "index$": 0 }, "error": { "a": true, "h": "Error", "n": "error", "r": false, "t": "`$ANY`", "key$": "error", "index$": 1 }, "id": { "a": true, "h": "Id", "n": "id", "r": false, "t": "`$STRING`", "key$": "id", "index$": 2 }, "image_model": { "a": true, "h": "Image Model", "n": "image_model", "r": false, "t": "`$ANY`", "key$": "image_model", "index$": 3 }, "image_provider": { "a": true, "h": "Image Provider", "n": "image_provider", "r": false, "t": "`$ANY`", "key$": "image_provider", "index$": 4 }, "image_task_id": { "a": true, "h": "Image Task Id", "n": "image_task_id", "r": false, "t": "`$STRING`", "key$": "image_task_id", "index$": 5 }, "image_url": { "a": true, "h": "Image Url", "n": "image_url", "r": true, "t": "`$ANY`", "key$": "image_url", "index$": 6 }, "index": { "a": true, "h": "Index", "n": "index", "r": true, "t": "`$INTEGER`", "key$": "index", "index$": 7 }, "prompt": { "a": true, "h": "Prompt", "n": "prompt", "r": true, "t": "`$ANY`", "key$": "prompt", "index$": 8 }, "status": { "a": true, "h": "Status", "n": "status", "r": true, "t": "`$STRING`", "key$": "status", "index$": 9 } }, "id": { "field": "id", "name": "id" }, "name": "carousel_status", "op": { "list": { "input": "data", "name": "list", "points": [{ "a": true, "co": { "id": "GET /api/carousel/{video_id}/status", "source": "openapi3", "version": 2 }, "g": { "params": [{ "a": true, "k": "param", "n": "id", "or": "video_id", "r": true, "t": "`$STRING`", "index$": 0 }] }, "k": "http", "m": "GET", "o": "/api/carousel/{video_id}/status", "q": { "exist": ["id"] }, "r": { "param": { "video_id": "id" } }, "rs": { "kind": "json", "media": "application/json" }, "s": [{ "lit": "api" }, { "lit": "carousel" }, { "var": "id" }, { "lit": "status" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "list" } }, "relations": { "ancestors": [] }, "key$": "carousel_status", "name__orig": "carousel_status", "Name": "CarouselStatus", "name_": "carousel_status", "name-": "carousel-status", "NAME": "CAROUSEL_STATUS", "index$": 52 }, { "active": true, "entity": "carousel_status", "key$": "BasicCarouselStatusFlow", "kind": "basic", "name": "BasicCarouselStatusFlow", "param": {}, "step": [{ "a": false, "d": {}, "i": {}, "m": { "video_id": "video01" }, "o": "list", "s": [], "v": [{ "apply": "ItemExists", "def": { "ref": "carousel_status_ref01" } }], "unreachable": true }] }, 'CarouselStatus', { "GET /api/carousel/{video_id}/status": { "protocol": "http", "parameters": [{ "name": "video_id", "in": "path", "required": true, "schema": { "type": "string", "format": "uuid", "title": "Video Id" }, "index$": 0 }] } }, { strict: LIVE_STRICT, t });
+            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": { "caption": { "a": true, "h": "Caption", "n": "caption", "r": true, "t": "`$ANY`", "key$": "caption", "index$": 0 }, "error": { "a": true, "h": "Error", "n": "error", "r": false, "t": "`$ANY`", "key$": "error", "index$": 1 }, "image_model": { "a": true, "h": "Image Model", "n": "image_model", "r": false, "t": "`$ANY`", "key$": "image_model", "index$": 2 }, "image_provider": { "a": true, "h": "Image Provider", "n": "image_provider", "r": false, "t": "`$ANY`", "key$": "image_provider", "index$": 3 }, "image_task_id": { "a": true, "h": "Image Task Id", "n": "image_task_id", "r": false, "t": "`$STRING`", "key$": "image_task_id", "index$": 4 }, "image_url": { "a": true, "h": "Image Url", "n": "image_url", "r": true, "t": "`$ANY`", "key$": "image_url", "index$": 5 }, "index": { "a": true, "h": "Index", "n": "index", "r": true, "t": "`$INTEGER`", "key$": "index", "index$": 6 }, "prompt": { "a": true, "h": "Prompt", "n": "prompt", "r": true, "t": "`$ANY`", "key$": "prompt", "index$": 7 }, "status": { "a": true, "h": "Status", "n": "status", "r": true, "t": "`$STRING`", "key$": "status", "index$": 8 } }, "name": "carousel_status", "op": { "list": { "input": "data", "name": "list", "points": [{ "a": true, "co": { "id": "GET /api/carousel/{video_id}/status", "source": "openapi3", "version": 2 }, "g": { "params": [{ "a": true, "k": "param", "n": "carousel_id", "or": "video_id", "r": true, "t": "`$STRING`", "index$": 0 }] }, "k": "http", "m": "GET", "o": "/api/carousel/{video_id}/status", "q": { "exist": ["carousel_id"] }, "r": { "param": { "video_id": "carousel_id" } }, "rs": { "kind": "json", "media": "application/json" }, "s": [{ "lit": "api" }, { "lit": "carousel" }, { "var": "carousel_id" }, { "lit": "status" }], "t": { "req": "`reqdata`", "res": "`body.slides`" }, "index$": 0 }], "key$": "list" } }, "relations": { "ancestors": [["$.main.kit.entity.carousel"]] }, "key$": "carousel_status", "name__orig": "carousel_status", "Name": "CarouselStatus", "name_": "carousel_status", "name-": "carousel-status", "NAME": "CAROUSEL_STATUS", "index$": 52 }, { "active": true, "entity": "carousel_status", "key$": "BasicCarouselStatusFlow", "kind": "basic", "name": "BasicCarouselStatusFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": {}, "m": { "carousel_id": "carousel01" }, "o": "list", "s": [], "v": [{ "apply": "ItemExists", "def": { "ref": "carousel_status_ref01" } }], "index$": 0 }] }, 'CarouselStatus', { "GET /api/carousel/{video_id}/status": { "protocol": "http", "parameters": [{ "name": "video_id", "in": "path", "required": true, "schema": { "type": "string", "format": "uuid", "title": "Video Id" }, "index$": 0 }] } }, { strict: LIVE_STRICT, t });
         }
         const client = setup.client;
         const struct = setup.struct;
         const isempty = struct.isempty;
         const select = struct.select;
         let carousel_status_ref01_data = Object.values(setup.data.existing.carousel_status)[0];
+        // LIST
+        const carousel_status_ref01_ent = client.CarouselStatus();
+        const carousel_status_ref01_match = {};
+        carousel_status_ref01_match['carousel_id'] = setup.idmap['carousel01'];
+        const carousel_status_ref01_list = (await carousel_status_ref01_ent.list(carousel_status_ref01_match)).map((e) => e.data());
     });
 });
 // main.kit.test.live.strict is true (the default is true): a live
@@ -98,7 +103,7 @@ function basicSetup(extra) {
     const struct = client.utility().struct;
     const merge = struct.merge;
     const transform = struct.transform;
-    let idmap = transform(['carousel_status01', 'carousel_status02', 'carousel_status03'], {
+    let idmap = transform(['carousel_status01', 'carousel_status02', 'carousel_status03', 'carousel01', 'carousel02', 'carousel03'], {
         '`$PACK`': ['', {
                 '`$KEY`': '`$COPY`',
                 '`$VAL`': ['`$FORMAT`', 'upper', '`$COPY`']

@@ -27,14 +27,17 @@ class PhoneAdminAvailableAgentSourceDirectTest < Minitest::Test
       skip(_reason || "skipped via sdk-test-control.json")
       return
     end
+    Runner.live_pace if setup[:live]
     client = setup[:client]
 
     params = {}
+    query = {}
 
     result = client.direct({
       "path" => "api/admin/phone-admin/available-agent-sources",
       "method" => "GET",
       "params" => params,
+      "query" => query,
     })
     if setup[:live]
       unless live_ok(result)

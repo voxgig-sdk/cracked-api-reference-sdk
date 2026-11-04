@@ -118,10 +118,10 @@ class TestAdminEntity:
         if "validate" not in (shared_config().get("feature") or {}):
             pytest.skip("feature not present in this SDK: validate")
         opts = {"feature": {"validate": {"active": True, "request": False, "response": True}}}
-        listed = CrackedApiReferenceSDK.test({"entity": {"admin": {"v1": {"count": 1, "created_at": "x", "date_from": "x", "date_to": "x", "email": "x", "issue_ids": "x", "platform": "x", "posting_method": "x", "query": "x", "reason": "x", "user_membership": "x", "user_name": "x", "user_onboarding_step": "x", "video_type": "x"}}}}, opts).Admin(None).list(None, None)
+        listed = CrackedApiReferenceSDK.test({"entity": {"admin": {"v1": {"created_at": "x", "date_from": "x", "date_to": "x", "email": "x", "issue_ids": "x", "platform": "x", "posting_method": "x", "product_id": "x", "query": "x", "reason": "x", "user_membership": "x", "user_name": "x", "user_onboarding_step": "x"}}}}, opts).Admin(None).list(None, None)
         assert ["v1"] == [ent.data_get().get("id") for ent in listed]
         with pytest.raises(Exception) as err:
-            CrackedApiReferenceSDK.test({"entity": {"admin": {"v1": {"count": "x", "created_at": "x", "date_from": "x", "date_to": "x", "email": "x", "issue_ids": "x", "platform": "x", "posting_method": "x", "query": "x", "reason": "x", "user_membership": "x", "user_name": "x", "user_onboarding_step": "x", "video_type": "x"}}}}, opts).Admin(None).list(None, None)
+            CrackedApiReferenceSDK.test({"entity": {"admin": {"v1": {"created_at": 1, "date_from": "x", "date_to": "x", "email": "x", "issue_ids": "x", "platform": "x", "posting_method": "x", "product_id": "x", "query": "x", "reason": "x", "user_membership": "x", "user_name": "x", "user_onboarding_step": "x"}}}}, opts).Admin(None).list(None, None)
         assert "validate_failed" == getattr(err.value, "code", None)
 
     def test_should_refuse_an_invalid_request(self):
@@ -144,12 +144,20 @@ class TestAdminEntity:
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
                 return
+        if setup["live"] and os.environ.get("VOXGIG_GETONLY_GUARD") == "TRUE":
+            print("LIVE STEP {\"id\":\"admin.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/admin/users/{user_id}/regenerate-video/{video_id}\"}")
+            print("LIVE STEP {\"id\":\"admin.remove.3\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs DELETE /api/admin/users/{user_id}/agents/{agent_id}\"}")
+            print("LIVE STEP {\"id\":\"admin.list.4\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: checks a removal this run does not make\"}")
+            return self._run_get_only_flow(setup)
+
         if setup["live"]:
             for _live_key in ["user01"]:
                 if setup.get("synthetic_only") or setup["idmap"].get(_live_key) is None:
                     runner.live_miss(LIVE_STRICT, f"Live entity test blocked: needs {_live_key} via CRACKED_API_REFERENCE_TEST_ADMIN_ENTID")
         client = setup["client"]
 
+        if setup["live"]:
+            runner.live_pace()
         # CREATE
         admin_ref01_ent = client.Admin(None)
         admin_ref01_data = helpers.to_map(vs.getprop(
@@ -160,6 +168,8 @@ class TestAdminEntity:
         assert admin_ref01_data is not None
         assert admin_ref01_data["id"] is not None
 
+        if setup["live"]:
+            runner.live_pace()
         # LIST
         admin_ref01_match = {}
 
@@ -171,6 +181,8 @@ class TestAdminEntity:
             {"id": admin_ref01_data["id"]})
         assert not vs.isempty(found_item)
 
+        if setup["live"]:
+            runner.live_pace()
         # LOAD
         admin_ref01_match_dt0 = {
             "id": admin_ref01_data["id"],
@@ -178,7 +190,44 @@ class TestAdminEntity:
         admin_ref01_data_dt0_loaded = admin_ref01_ent.load(admin_ref01_match_dt0, None)
         admin_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(admin_ref01_data_dt0_loaded))
         assert admin_ref01_data_dt0_load_result is not None
-        assert admin_ref01_data_dt0_load_result["id"] == admin_ref01_data["id"]
+        assert runner.live_same_id(admin_ref01_data_dt0_load_result.get("id"), admin_ref01_data["id"])
+
+
+    def _run_get_only_flow(self, setup):
+        client = setup["client"]
+        if setup["live"]:
+            _live_id = None if setup.get("synthetic_only") else setup["idmap"].get("admin01")
+            runner.live_pace()
+            runner.live_existing(setup, LIVE_STRICT, "admin",
+                                 lambda: client.Admin(None).list({}, None),
+                                 "id", _live_id)
+
+        # Bootstrap entity data from existing test data.
+        admin_ref01_data_raw = vs.items(helpers.to_map(
+            vs.getpath(setup["data"], "existing.admin")))
+        admin_ref01_data = None
+        if len(admin_ref01_data_raw) > 0:
+            admin_ref01_data = helpers.to_map(admin_ref01_data_raw[0][1])
+
+        if setup["live"]:
+            runner.live_pace()
+        # LIST
+        admin_ref01_ent = client.Admin(None)
+        admin_ref01_match = {}
+
+        admin_ref01_list_result = admin_ref01_ent.list(admin_ref01_match, None)
+        assert isinstance(admin_ref01_list_result, list)
+
+        if setup["live"]:
+            runner.live_pace()
+        # LOAD
+        admin_ref01_match_dt0 = {
+            "id": admin_ref01_data["id"],
+        }
+        admin_ref01_data_dt0_loaded = admin_ref01_ent.load(admin_ref01_match_dt0, None)
+        admin_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(admin_ref01_data_dt0_loaded))
+        assert admin_ref01_data_dt0_load_result is not None
+        assert runner.live_same_id(admin_ref01_data_dt0_load_result.get("id"), admin_ref01_data["id"])
 
 
 
@@ -198,7 +247,7 @@ def _admin_basic_setup(extra):
 
     # Generate idmap via transform.
     idmap = vs.transform(
-        ["admin01", "admin02", "admin03", "user01", "user02", "user03", "agent01", "agent02", "agent03", "video01", "video02", "video03"],
+        ["admin01", "admin02", "admin03", "user01", "user02", "user03", "agent01", "agent02", "agent03", "schedule_queue01", "schedule_queue02", "schedule_queue03", "video01", "video02", "video03"],
         {
             "`$PACK`": ["", {
                 "`$KEY`": "`$COPY`",

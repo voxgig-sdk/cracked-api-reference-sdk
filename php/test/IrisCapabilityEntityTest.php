@@ -52,6 +52,15 @@ class IrisCapabilityEntityTest extends TestCase
                 return;
             }
         }
+        if (!empty($setup["live"]) && getenv('VOXGIG_GETONLY_GUARD') === "TRUE") {
+            fwrite(STDOUT, 'LIVE STEP {"id":"iris_capability.create.0","state":"excluded","attempted":false,"reason":"GET-only live run: needs POST /api/platform/capabilities/{capability_name}"}' . "\n");
+            $this->markTestSkipped('Live coverage incomplete: iris_capability.create.0 excluded (GET-only live run: needs POST /api/platform/capabilities/{capability_name})');
+        }
+
+        if (!empty($setup["live"])) {
+            $this->markTestSkipped('Live coverage incomplete: the flow has no step to run');
+        }
+
         $client = $setup["client"];
 
         // Bootstrap entity data from existing test data.

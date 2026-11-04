@@ -164,6 +164,9 @@ describe("PaidUserEntity", function()
       paid_user_ref01_data = helpers.to_map(paid_user_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LIST
     local paid_user_ref01_ent = client:PaidUser(nil)
     local paid_user_ref01_match = {}

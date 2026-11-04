@@ -229,6 +229,9 @@ class AgentHealthCustomerOptionEntityTest extends TestCase
             $agent_health_customer_option_ref01_data = Helpers::to_map($agent_health_customer_option_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LIST
         $agent_health_customer_option_ref01_ent = $client->AgentHealthCustomerOption(null);
         $agent_health_customer_option_ref01_match = [];

@@ -52,8 +52,36 @@ class AdminCarouselEntityTest extends TestCase
                 return;
             }
         }
+        if (!empty($setup["live"]) && getenv('VOXGIG_GETONLY_GUARD') === "TRUE") {
+            fwrite(STDOUT, 'LIVE STEP {"id":"admin_carousel.create.0","state":"excluded","attempted":false,"reason":"GET-only live run: needs POST /api/admin/carousels/slideshow-import/{batch_id}/state"}' . "\n");
+            fwrite(STDOUT, 'LIVE STEP {"id":"admin_carousel.update.1","state":"excluded","attempted":false,"reason":"GET-only live run: needs PUT /api/admin/carousels/production-prompts/{fmt}"}' . "\n");
         $client = $setup["client"];
 
+        // Bootstrap entity data from existing test data.
+        $admin_carousel_ref01_data_raw = Vs::items(Helpers::to_map(
+            Vs::getpath($setup["data"], "existing.admin_carousel")));
+        $admin_carousel_ref01_data = null;
+        if (count($admin_carousel_ref01_data_raw) > 0) {
+            $admin_carousel_ref01_data = Helpers::to_map($admin_carousel_ref01_data_raw[0][1]);
+        }
+
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
+        // LOAD
+        $admin_carousel_ref01_ent = $client->AdminCarousel(null);
+        $admin_carousel_ref01_match_dt0 = [];
+        $admin_carousel_ref01_data_dt0_loaded = $admin_carousel_ref01_ent->load($admin_carousel_ref01_match_dt0, null);
+        $this->assertNotNull($admin_carousel_ref01_data_dt0_loaded);
+
+            return;
+        }
+
+        $client = $setup["client"];
+
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // CREATE
         $admin_carousel_ref01_ent = $client->AdminCarousel(null);
         $admin_carousel_ref01_data = Helpers::to_map(Vs::getprop(
@@ -63,6 +91,9 @@ class AdminCarouselEntityTest extends TestCase
         $admin_carousel_ref01_data = Helpers::to_map(is_object($admin_carousel_ref01_data_result) && method_exists($admin_carousel_ref01_data_result, 'data_get') ? $admin_carousel_ref01_data_result->data_get() : $admin_carousel_ref01_data_result);
         $this->assertNotNull($admin_carousel_ref01_data);
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // UPDATE
         $admin_carousel_ref01_data_up0_up = [
         ];
@@ -76,6 +107,9 @@ class AdminCarouselEntityTest extends TestCase
         $this->assertNotNull($admin_carousel_ref01_resdata_up0);
         $this->assertEquals($admin_carousel_ref01_resdata_up0[$admin_carousel_ref01_markdef_up0_name], $admin_carousel_ref01_markdef_up0_value);
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LOAD
         $admin_carousel_ref01_match_dt0 = [];
         $admin_carousel_ref01_data_dt0_loaded = $admin_carousel_ref01_ent->load($admin_carousel_ref01_match_dt0, null);

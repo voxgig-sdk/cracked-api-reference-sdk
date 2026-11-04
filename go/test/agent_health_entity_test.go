@@ -212,6 +212,9 @@ func TestAgentHealthEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = agentHealthRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LIST
 		agentHealthRef01Ent := client.AgentHealth(nil)
 		agentHealthRef01Match := map[string]any{}

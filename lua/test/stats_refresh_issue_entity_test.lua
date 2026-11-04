@@ -164,6 +164,9 @@ describe("StatsRefreshIssueEntity", function()
       stats_refresh_issue_ref01_data = helpers.to_map(stats_refresh_issue_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LIST
     local stats_refresh_issue_ref01_ent = client:StatsRefreshIssue(nil)
     local stats_refresh_issue_ref01_match = {}

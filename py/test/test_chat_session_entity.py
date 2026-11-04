@@ -37,7 +37,7 @@ class TestChatSessionEntity:
         client = CrackedApiReferenceSDK.test(
             None, {"feature": {"validate": {"active": True}}})
         with pytest.raises(Exception) as err:
-            client.ChatSession(None).create({"session_id": 1}, None)
+            client.ChatSession(None).create({"session_id": 1, "idempotencyKey": "x", "message": "x", "sessionId": "x"}, None)
         assert "validate_failed" == getattr(err.value, "code", None)
 
     def test_should_run_basic_flow(self):
@@ -51,12 +51,18 @@ class TestChatSessionEntity:
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
                 return
+        if setup["live"] and os.environ.get("VOXGIG_GETONLY_GUARD") == "TRUE":
+            print("LIVE STEP {\"id\":\"chat_session.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/chat/sessions/{session_id}/complete\"}")
+            pytest.skip("Live coverage incomplete: chat_session.create.0 excluded (GET-only live run: needs POST /api/chat/sessions/{session_id}/complete)")
+
         if setup["live"]:
             for _live_key in ["session01"]:
                 if setup.get("synthetic_only") or setup["idmap"].get(_live_key) is None:
                     runner.live_miss(LIVE_STRICT, f"Live entity test blocked: needs {_live_key} via CRACKED_API_REFERENCE_TEST_CHAT_SESSION_ENTID")
         client = setup["client"]
 
+        if setup["live"]:
+            runner.live_pace()
         # CREATE
         chat_session_ref01_ent = client.ChatSession(None)
         chat_session_ref01_data = helpers.to_map(vs.getprop(

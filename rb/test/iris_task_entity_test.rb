@@ -140,10 +140,10 @@ class IrisTaskEntityTest < Minitest::Test
       skip("feature not present in this SDK: validate")
     end
     opts = { "feature" => { "validate" => { "active" => true, "request" => false, "response" => true } } }
-    listed = CrackedApiReferenceSDK.test({ "entity" => { "iris_task" => { "v1" => { "capability" => "x", "productId" => "x", "title" => "x" } } } }, opts).IrisTask(nil).list(nil, nil)
+    listed = CrackedApiReferenceSDK.test({ "entity" => { "iris_task" => { "v1" => { "capability" => "x", "correlationId" => "x", "idempotencyKey" => "x", "productId" => "x", "title" => "x" } } } }, opts).IrisTask(nil).list(nil, nil)
     assert_equal ["v1"], listed.map { |ent| ent.data_get["id"] }
     err = assert_raises(StandardError) do
-      CrackedApiReferenceSDK.test({ "entity" => { "iris_task" => { "v1" => { "capability" => "x", "productId" => "x", "title" => "x", "cadence" => 1 } } } }, opts).IrisTask(nil).list(nil, nil)
+      CrackedApiReferenceSDK.test({ "entity" => { "iris_task" => { "v1" => { "capability" => "x", "correlationId" => "x", "idempotencyKey" => "x", "productId" => "x", "title" => "x", "cadence" => 1 } } } }, opts).IrisTask(nil).list(nil, nil)
     end
     assert_equal "validate_failed", err.code
   end
@@ -171,8 +171,32 @@ class IrisTaskEntityTest < Minitest::Test
         return
       end
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE"
+      puts "LIVE STEP {\"id\":\"iris_task.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/iris/tasks/{task_id}/run\"}"
     client = setup[:client]
 
+    # Bootstrap entity data from existing test data.
+    iris_task_ref01_data_raw = Vs.items(Helpers.to_map(
+      Vs.getpath(setup[:data], "existing.iris_task")))
+    iris_task_ref01_data = nil
+    if iris_task_ref01_data_raw.length > 0
+      iris_task_ref01_data = Helpers.to_map(iris_task_ref01_data_raw[0][1])
+    end
+
+    Runner.live_pace if setup[:live]
+    # LIST
+    iris_task_ref01_ent = client.IrisTask(nil)
+    iris_task_ref01_match = {}
+
+    iris_task_ref01_list_result = iris_task_ref01_ent.list(iris_task_ref01_match, nil)
+    assert iris_task_ref01_list_result.is_a?(Array)
+
+      return
+    end
+
+    client = setup[:client]
+
+    Runner.live_pace if setup[:live]
     # CREATE
     iris_task_ref01_ent = client.IrisTask(nil)
     iris_task_ref01_data = Helpers.to_map(Vs.getprop(
@@ -182,6 +206,7 @@ class IrisTaskEntityTest < Minitest::Test
     iris_task_ref01_data = Helpers.to_map(iris_task_ref01_data_result.respond_to?(:data_get) ? iris_task_ref01_data_result.data_get : iris_task_ref01_data_result)
     assert !iris_task_ref01_data.nil?
 
+    Runner.live_pace if setup[:live]
     # LIST
     iris_task_ref01_match = {}
 

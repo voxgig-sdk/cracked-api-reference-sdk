@@ -685,18 +685,6 @@ Create a new `CarouselStatus` entity instance.
 
 **Returns:** `CarouselStatusEntity` instance.
 
-#### `Chat(data?: object)`
-
-Create a new `Chat` entity instance.
-
-**Parameters:**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| `data` | `object` | Initial entity data. |
-
-**Returns:** `ChatEntity` instance.
-
 #### `ChatHistory(data?: object)`
 
 Create a new `ChatHistory` entity instance.
@@ -925,18 +913,6 @@ Create a new `EnterpriseAgent` entity instance.
 
 **Returns:** `EnterpriseAgentEntity` instance.
 
-#### `EnterpriseProduct(data?: object)`
-
-Create a new `EnterpriseProduct` entity instance.
-
-**Parameters:**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| `data` | `object` | Initial entity data. |
-
-**Returns:** `EnterpriseProductEntity` instance.
-
 #### `ExactAvailability(data?: object)`
 
 Create a new `ExactAvailability` entity instance.
@@ -1068,18 +1044,6 @@ Create a new `InitResetProductV6` entity instance.
 | `data` | `object` | Initial entity data. |
 
 **Returns:** `InitResetProductV6Entity` instance.
-
-#### `Iri(data?: object)`
-
-Create a new `Iri` entity instance.
-
-**Parameters:**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| `data` | `object` | Initial entity data. |
-
-**Returns:** `IriEntity` instance.
 
 #### `IrisCapability(data?: object)`
 
@@ -1429,18 +1393,6 @@ Create a new `ReRollVideo` entity instance.
 
 **Returns:** `ReRollVideoEntity` instance.
 
-#### `ReadRootGet(data?: object)`
-
-Create a new `ReadRootGet` entity instance.
-
-**Parameters:**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| `data` | `object` | Initial entity data. |
-
-**Returns:** `ReadRootGetEntity` instance.
-
 #### `RecordDemoBooked(data?: object)`
 
 Create a new `RecordDemoBooked` entity instance.
@@ -1501,6 +1453,18 @@ Create a new `RetryWebsiteScrape` entity instance.
 
 **Returns:** `RetryWebsiteScrapeEntity` instance.
 
+#### `RootGet(data?: object)`
+
+Create a new `RootGet` entity instance.
+
+**Parameters:**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `data` | `object` | Initial entity data. |
+
+**Returns:** `RootGetEntity` instance.
+
 #### `SaveSurvey(data?: object)`
 
 Create a new `SaveSurvey` entity instance.
@@ -1548,6 +1512,18 @@ Create a new `ScanSocialsStatus` entity instance.
 | `data` | `object` | Initial entity data. |
 
 **Returns:** `ScanSocialsStatusEntity` instance.
+
+#### `ScheduleQueue(data?: object)`
+
+Create a new `ScheduleQueue` entity instance.
+
+**Parameters:**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `data` | `object` | Initial entity data. |
+
+**Returns:** `ScheduleQueueEntity` instance.
 
 #### `ScheduleV2(data?: object)`
 
@@ -2333,56 +2309,46 @@ const admin = client.Admin()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `apply` | `boolean` | No | Apply safe canonical or clean-only URL updates |
-| `count` | `number` | Yes |  |
 | `created_at` | `string` | Yes |  |
 | `date_from` | `any` | No |  |
 | `date_to` | `any` | No |  |
 | `email` | `string` | Yes |  |
 | `id` | `string` | Yes |  |
-| `include_failed` | `boolean` | No |  |
-| `include_pending` | `boolean` | No |  |
 | `include_records` | `boolean` | No | Include full per-field audit records in the response |
 | `issue_ids` | `any` | No |  |
 | `only_active` | `boolean` | No | Limit the audit to active agents |
 | `platform` | `any` | No |  |
 | `posting_method` | `any` | No |  |
-| `product_id` | `string` | No |  |
+| `product_id` | `string` | Yes |  |
 | `query` | `any` | No |  |
 | `reason` | `any` | No |  |
-| `regenerate` | `boolean` | No |  |
 | `status` | `string` | No |  |
 | `user_membership` | `any` | No |  |
 | `user_name` | `any` | No |  |
 | `user_onboarding_step` | `any` | No |  |
-| `video_type` | `string` | Yes |  |
 
 ### Field Usage by Operation
 
-| Field | load | list | create | update | remove |
-| --- | --- | --- | --- | --- | --- |
-| `apply` | - | - | - | - | - |
-| `count` | - | - | - | - | - |
-| `created_at` | - | - | - | - | - |
-| `date_from` | - | - | Yes | - | - |
-| `date_to` | - | - | Yes | - | - |
-| `email` | - | - | - | - | - |
-| `id` | - | - | - | - | - |
-| `include_failed` | - | - | - | - | - |
-| `include_pending` | - | - | - | - | - |
-| `include_records` | - | - | - | - | - |
-| `issue_ids` | - | - | - | - | - |
-| `only_active` | - | - | - | - | - |
-| `platform` | - | - | - | - | - |
-| `posting_method` | - | - | - | - | - |
-| `product_id` | - | - | Yes | - | - |
-| `query` | - | - | - | - | - |
-| `reason` | - | - | - | - | - |
-| `regenerate` | - | - | - | - | - |
-| `status` | - | - | - | - | - |
-| `user_membership` | - | - | - | - | - |
-| `user_name` | - | - | - | - | - |
-| `user_onboarding_step` | - | - | - | - | - |
-| `video_type` | - | - | - | - | - |
+| Field | load | list | create | remove |
+| --- | --- | --- | --- | --- |
+| `apply` | - | - | - | - |
+| `created_at` | - | - | - | - |
+| `date_from` | - | - | Yes | - |
+| `date_to` | - | - | Yes | - |
+| `email` | - | - | - | - |
+| `id` | - | - | - | - |
+| `include_records` | - | - | - | - |
+| `issue_ids` | - | - | - | - |
+| `only_active` | - | - | - | - |
+| `platform` | - | - | - | - |
+| `posting_method` | - | - | - | - |
+| `product_id` | - | - | - | - |
+| `query` | - | - | - | - |
+| `reason` | - | - | - | - |
+| `status` | - | - | - | - |
+| `user_membership` | - | - | - | - |
+| `user_name` | - | - | - | - |
+| `user_onboarding_step` | - | - | - | - |
 
 ### Actions
 
@@ -2414,14 +2380,12 @@ Create a new entity with the given data. Resolves to the created entity.
 ```ts
 const result = await client.Admin().create({
   user_id: 'example_user_id',
-  count: 1,
   created_at: 'example_created_at',
   date_from: 'example_date_from',
   date_to: 'example_date_to',
   email: 'example_email',
   id: 'example_id',
   product_id: 'example_product_id',
-  video_type: 'example_video_type',
 })
 ```
 
@@ -2447,17 +2411,6 @@ Remove the entity matching the given criteria. Resolves to the entity, marked as
 
 ```ts
 const result = await client.Admin().remove({ tester_id: 'tester_id' })
-```
-
-#### `update(data: object, ctrl?: object)`
-
-Update an existing entity. The data must include the entity `id`. Resolves to the updated entity.
-
-```ts
-const result = await client.Admin().update({
-  agent_id: 'agent_id',
-  // Fields to update
-})
 ```
 
 ### Common Methods
@@ -3072,13 +3025,25 @@ const admin_insight = client.AdminInsight()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `customer_success_cases` | `any[]` | Yes |  |
-| `customers` | `any[]` | Yes |  |
-| `generated_at` | `string` | Yes |  |
-| `pfa_database` | `Record<string, any>` | Yes |  |
-| `recent_signups` | `any[]` | Yes |  |
-| `summary` | `Record<string, any>` | Yes |  |
-| `vireel_database` | `Record<string, any>` | Yes |  |
+| `active_agents` | `number` | Yes |  |
+| `active_products` | `number` | Yes |  |
+| `agents_count` | `number` | Yes |  |
+| `auto_schedule_status` | `string` | Yes |  |
+| `days_until_period_end` | `any` | No |  |
+| `email` | `string` | Yes |  |
+| `feature_impact` | `string` | Yes |  |
+| `last_notification_at` | `any` | No |  |
+| `membership` | `any` | No |  |
+| `name` | `string` | No |  |
+| `notification_count` | `number` | Yes |  |
+| `notification_events` | `any[]` | Yes |  |
+| `priority` | `string` | Yes |  |
+| `severity` | `string` | Yes |  |
+| `status_label` | `string` | Yes |  |
+| `subscription_current_period_end` | `any` | No |  |
+| `subscription_status` | `any` | No |  |
+| `upcoming_posts` | `number` | Yes |  |
+| `user_id` | `string` | Yes |  |
 
 ### Operations
 
@@ -3189,14 +3154,8 @@ const admin_metrics_summary = client.AdminMetricsSummary()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `paid_users_by_level` | `any[]` | Yes |  |
-| `total_cancellations` | `number` | Yes |  |
-| `total_previews_generated` | `number` | Yes |  |
-| `total_signups` | `number` | Yes |  |
-| `total_videos_generated` | `number` | Yes |  |
-| `url_attempts` | `number` | Yes |  |
-| `user_credits` | `any[]` | Yes |  |
-| `user_gifted_credits` | `any[]` | Yes |  |
+| `count` | `number` | Yes |  |
+| `level` | `string` | Yes |  |
 
 ### Operations
 
@@ -3611,38 +3570,6 @@ const admin_user_view = client.AdminUserView()
 | `skip` | - | - | - | - |
 | `subscription_details` | - | - | - | - |
 | `subscription_status` | - | - | - | - |
-
-### Actions
-
-This entity exposes custom API actions in addition to the standard
-operations. Select one with `$action` in the call's argument; the
-remaining keys are sent as that action's payload.
-
-| Action | Route | Call |
-| --- | --- | --- |
-| `fix_all` | `/api/admin/users/{user_id}/fix-all` | `client.AdminUserView().create({ $action: 'fix_all', ... })` |
-| `fix_auto_schedule` | `/api/admin/users/{user_id}/fix-auto-schedule` | `client.AdminUserView().create({ $action: 'fix_auto_schedule', ... })` |
-| `fix_auto_schedule_by_date` | `/api/admin/users/{user_id}/fix-auto-schedule-by-date` | `client.AdminUserView().create({ $action: 'fix_auto_schedule_by_date', ... })` |
-| `fix_auto_schedule_today` | `/api/admin/users/{user_id}/fix-auto-schedule-today` | `client.AdminUserView().create({ $action: 'fix_auto_schedule_today', ... })` |
-| `fix_auto_schedule_today_force` | `/api/admin/users/{user_id}/fix-auto-schedule-today-force` | `client.AdminUserView().create({ $action: 'fix_auto_schedule_today_force', ... })` |
-| `fix_auto_schedule_tomorrow` | `/api/admin/users/{user_id}/fix-auto-schedule-tomorrow` | `client.AdminUserView().create({ $action: 'fix_auto_schedule_tomorrow', ... })` |
-| `fix_comments_today` | `/api/admin/users/{user_id}/fix-comments-today` | `client.AdminUserView().create({ $action: 'fix_comments_today', ... })` |
-| `generate_pomelli_video` | `/api/admin/users/{user_id}/generate-pomelli-video` | `client.AdminUserView().create({ $action: 'generate_pomelli_video', ... })` |
-| `repair_approved_source_queue_today` | `/api/admin/users/{user_id}/repair-approved-source-queue-today` | `client.AdminUserView().create({ $action: 'repair_approved_source_queue_today', ... })` |
-| `repost_tiktok_videos_tomorrow` | `/api/admin/users/{user_id}/repost-tiktok-videos-tomorrow` | `client.AdminUserView().create({ $action: 'repost_tiktok_videos_tomorrow', ... })` |
-| `reset_onboarding` | `/api/admin/users/{user_id}/reset-onboarding` | `client.AdminUserView().create({ $action: 'reset_onboarding', ... })` |
-| `auto_schedule` | `/api/admin/users/{user_id}/auto-schedule` | `client.AdminUserView().update({ $action: 'auto_schedule', ... })` |
-| `posted_video_reuse` | `/api/admin/users/{user_id}/posted-video-reuse` | `client.AdminUserView().update({ $action: 'posted_video_reuse', ... })` |
-
-An action returns that action's OWN response, which is not necessarily a
-AdminUserView record — check the API definition for its shape.
-
-```ts
-const result = await client.AdminUserView().create({
-  $action: 'fix_all',
-  /* ...the action's own arguments */
-})
-```
 
 ### Operations
 
@@ -4234,6 +4161,27 @@ const agent = client.Agent()
 | `tiktok_stats` | `any` | No |  |
 | `type` | `string` | Yes |  |
 
+### Actions
+
+This entity exposes custom API actions in addition to the standard
+operations. Select one with `$action` in the call's argument; the
+remaining keys are sent as that action's payload.
+
+| Action | Route | Call |
+| --- | --- | --- |
+| `active` | `/api/admin/agents/{agent_id}/active` | `client.Agent().update({ $action: 'active', ... })` |
+| `type` | `/api/admin/agents/{agent_id}/type` | `client.Agent().update({ $action: 'type', ... })` |
+
+An action returns that action's OWN response, which is not necessarily a
+Agent record — check the API definition for its shape.
+
+```ts
+const result = await client.Agent().update({
+  $action: 'active',
+  /* ...the action's own arguments */
+})
+```
+
 ### Operations
 
 #### `list(match: object, ctrl?: object)`
@@ -4243,6 +4191,10 @@ List entities matching the given criteria. Resolves to an array of entities, one
 ```ts
 const results = await client.Agent().list()
 ```
+
+#### `update(data: object, ctrl?: object)`
+
+Update an existing entity. The data must include the entity `id`. Resolves to the updated entity.
 
 ### Common Methods
 
@@ -4573,13 +4525,17 @@ const agent_access_user_agent = client.AgentAccessUserAgent()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `agentQuota` | `number` | Yes |  |
-| `agents` | `any[]` | Yes |  |
-| `assignedByType` | `Record<string, any>` | Yes |  |
-| `assignedTotal` | `number` | Yes |  |
-| `email` | `string` | Yes |  |
-| `products` | `any[]` | Yes |  |
-| `userId` | `string` | Yes |  |
+| `avatar` | `any` | No |  |
+| `facebookUrl` | `any` | No |  |
+| `id` | `string` | Yes |  |
+| `instagramUrl` | `any` | No |  |
+| `name` | `string` | Yes |  |
+| `productId` | `any` | No |  |
+| `productName` | `any` | No |  |
+| `tiktokUrl` | `any` | No |  |
+| `type` | `any` | No |  |
+| `uploadPostPlatforms` | `any` | No |  |
+| `youtubeUrl` | `any` | No |  |
 
 ### Operations
 
@@ -5037,19 +4993,12 @@ const agent_health = client.AgentHealth()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `daily` | `any[]` | Yes |  |
-| `dates` | `any[]` | Yes |  |
-| `generated_at` | `string` | Yes |  |
-| `groups` | `any[]` | Yes |  |
-| `latest` | `Record<string, any>` | Yes |  |
-| `live_date` | `any` | No |  |
-| `phone_admin_generated_at` | `string` | Yes |  |
-| `platform` | `string` | No |  |
-| `post_target` | `number` | Yes |  |
-| `qa_managed_agent_ids` | `any[]` | No |  |
-| `scope_prefixes` | `any[]` | Yes |  |
-| `timezone` | `string` | Yes |  |
-| `warmup_target` | `number` | Yes |  |
+| `accounts` | `Record<string, any>` | Yes |  |
+| `date` | `string` | Yes |  |
+| `overall` | `Record<string, any>` | Yes |  |
+| `posts` | `Record<string, any>` | Yes |  |
+| `views` | `Record<string, any>` | Yes |  |
+| `warmups` | `Record<string, any>` | Yes |  |
 
 ### Operations
 
@@ -5151,19 +5100,12 @@ const agent_health_detail = client.AgentHealthDetail()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `archived_issue_total` | `number` | No |  |
-| `date` | `string` | Yes |  |
-| `generated_at` | `string` | Yes |  |
-| `group_id` | `string` | Yes |  |
-| `has_more` | `boolean` | Yes |  |
-| `issue_total` | `number` | Yes |  |
-| `issues` | `any[]` | Yes |  |
-| `limit` | `number` | Yes |  |
-| `metric` | `string` | Yes |  |
-| `offset` | `number` | Yes |  |
-| `warmup_runs` | `any[]` | No |  |
-| `warning_total` | `number` | No |  |
-| `warnings` | `any[]` | No |  |
+| `agent_id` | `string` | Yes |  |
+| `category` | `string` | Yes |  |
+| `connection_status` | `string` | Yes |  |
+| `device_status` | `string` | Yes |  |
+| `issue` | `any` | No |  |
+| `state` | `string` | Yes |  |
 
 ### Operations
 
@@ -5236,7 +5178,7 @@ const agent_post = client.AgentPost()
 List entities matching the given criteria. Resolves to an array of entities, one per record.
 
 ```ts
-const results = await client.AgentPost().list({ id: "example" })
+const results = await client.AgentPost().list({ agent_id: "example" })
 ```
 
 ### Common Methods
@@ -5863,7 +5805,6 @@ const carousel = client.Carousel()
 | `formula_id` | `string` | No |  |
 | `formula_name` | `any` | No |  |
 | `generation` | `Record<string, any>` | No |  |
-| `id` | `string` | No |  |
 | `image_prompt` | `any` | No |  |
 | `likes` | `any` | No |  |
 | `main_prompt` | `any` | No |  |
@@ -6046,7 +5987,6 @@ const carousel_status = client.CarouselStatus()
 | --- | --- | --- | --- |
 | `caption` | `any` | Yes |  |
 | `error` | `any` | No |  |
-| `id` | `string` | No |  |
 | `image_model` | `any` | No |  |
 | `image_provider` | `any` | No |  |
 | `image_task_id` | `string` | No |  |
@@ -6062,7 +6002,7 @@ const carousel_status = client.CarouselStatus()
 List entities matching the given criteria. Resolves to an array of entities, one per record.
 
 ```ts
-const results = await client.CarouselStatus().list({ id: "example" })
+const results = await client.CarouselStatus().list({ carousel_id: "example" })
 ```
 
 ### Common Methods
@@ -6080,63 +6020,6 @@ Get or set the entity match criteria. Works the same as `data()`.
 #### `make()`
 
 Create a new `CarouselStatusEntity` instance with the same client and
-options.
-
-#### `client()`
-
-Return the parent `CrackedApiReferenceSDK` instance.
-
-#### `entopts()`
-
-Return a copy of the entity options.
-
-
----
-
-## ChatEntity
-
-```ts
-const chat = client.Chat()
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `idempotencyKey` | `string` | Yes |  |
-| `message` | `string` | Yes |  |
-| `sessionId` | `string` | Yes |  |
-
-### Operations
-
-#### `create(data: object, ctrl?: object)`
-
-Create a new entity with the given data. Resolves to the created entity.
-
-```ts
-const result = await client.Chat().create({
-  session_id: 'example_session_id',
-  idempotencyKey: 'example_idempotencyKey',
-  message: 'example_message',
-  sessionId: 'example_sessionId',
-})
-```
-
-### Common Methods
-
-#### `data(data?: object)`
-
-Get or set the entity data. When called with data, sets the entity's
-internal data and returns the current data. When called without
-arguments, returns a copy of the current data.
-
-#### `match(match?: object)`
-
-Get or set the entity match criteria. Works the same as `data()`.
-
-#### `make()`
-
-Create a new `ChatEntity` instance with the same client and
 options.
 
 #### `client()`
@@ -6233,6 +6116,8 @@ const chat_session = client.ChatSession()
 | --- | --- | --- | --- |
 | `chatSubVariant` | `string` | Yes |  |
 | `createdAt` | `string` | Yes |  |
+| `idempotencyKey` | `string` | Yes |  |
+| `message` | `string` | Yes |  |
 | `model` | `any` | No |  |
 | `plan` | `any` | No |  |
 | `route` | `any` | No |  |
@@ -6252,6 +6137,9 @@ Create a new entity with the given data. Resolves to the created entity.
 ```ts
 const result = await client.ChatSession().create({
   session_id: 'example_session_id',
+  idempotencyKey: 'example_idempotencyKey',
+  message: 'example_message',
+  sessionId: 'example_sessionId',
 })
 ```
 
@@ -6961,7 +6849,6 @@ const customer_health = client.CustomerHealth()
 | `date` | `string` | Yes |  |
 | `email` | `string` | Yes |  |
 | `entries` | `any[]` | Yes |  |
-| `id` | `string` | No |  |
 | `performance_overview` | `Record<string, any>` | Yes |  |
 | `platform_coverage_summary` | `Record<string, any>` | Yes |  |
 | `user_id` | `string` | Yes |  |
@@ -7070,20 +6957,10 @@ const customer_health_views_summary = client.CustomerHealthViewsSummary()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `average_views_per_result` | `number` | Yes |  |
-| `date` | `string` | Yes |  |
-| `end_date` | `any` | No |  |
-| `paid_users_count` | `number` | Yes |  |
+| `email` | `string` | Yes |  |
 | `posted_results` | `number` | Yes |  |
-| `range` | `string` | Yes |  |
-| `start_date` | `any` | No |  |
-| `top_users` | `any[]` | Yes |  |
-| `total_views` | `number` | Yes |  |
-| `trend` | `any[]` | Yes |  |
-| `trend_granularity` | `string` | Yes |  |
-| `user_email` | `any` | No |  |
-| `user_id` | `string` | No |  |
-| `users_with_views` | `number` | Yes |  |
+| `user_id` | `string` | Yes |  |
+| `views` | `number` | Yes |  |
 
 ### Operations
 
@@ -7202,12 +7079,6 @@ Return a copy of the entity options.
 const daily_status = client.DailyStatus()
 ```
 
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `id` | `string` | No |  |
-
 ### Operations
 
 #### `load(match: object, ctrl?: object)`
@@ -7215,7 +7086,7 @@ const daily_status = client.DailyStatus()
 Load a single entity matching the given criteria. Resolves to the entity, whose record `data()` reads.
 
 ```ts
-const result = await client.DailyStatus().load({ id: 'daily_status_id', day: 'day' })
+const result = await client.DailyStatus().load({ daily_id: 'daily_id', day: 'day' })
 ```
 
 ### Common Methods
@@ -7375,50 +7246,6 @@ Get or set the entity match criteria. Works the same as `data()`.
 #### `make()`
 
 Create a new `EnterpriseAgentEntity` instance with the same client and
-options.
-
-#### `client()`
-
-Return the parent `CrackedApiReferenceSDK` instance.
-
-#### `entopts()`
-
-Return a copy of the entity options.
-
-
----
-
-## EnterpriseProductEntity
-
-```ts
-const enterprise_product = client.EnterpriseProduct()
-```
-
-### Operations
-
-#### `load(match: object, ctrl?: object)`
-
-Load a single entity matching the given criteria. Resolves to the entity, whose record `data()` reads.
-
-```ts
-const result = await client.EnterpriseProduct().load({ product_id: 'product_id' })
-```
-
-### Common Methods
-
-#### `data(data?: object)`
-
-Get or set the entity data. When called with data, sets the entity's
-internal data and returns the current data. When called without
-arguments, returns a copy of the current data.
-
-#### `match(match?: object)`
-
-Get or set the entity match criteria. Works the same as `data()`.
-
-#### `make()`
-
-Create a new `EnterpriseProductEntity` instance with the same client and
 options.
 
 #### `client()`
@@ -8103,61 +7930,6 @@ Return a copy of the entity options.
 
 ---
 
-## IriEntity
-
-```ts
-const iri = client.Iri()
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `correlationId` | `any` | No |  |
-| `idempotencyKey` | `string` | Yes |  |
-| `productId` | `any` | No |  |
-
-### Operations
-
-#### `create(data: object, ctrl?: object)`
-
-Create a new entity with the given data. Resolves to the created entity.
-
-```ts
-const result = await client.Iri().create({
-  connector_id: 'example_connector_id',
-  idempotencyKey: 'example_idempotencyKey',
-})
-```
-
-### Common Methods
-
-#### `data(data?: object)`
-
-Get or set the entity data. When called with data, sets the entity's
-internal data and returns the current data. When called without
-arguments, returns a copy of the current data.
-
-#### `match(match?: object)`
-
-Get or set the entity match criteria. Works the same as `data()`.
-
-#### `make()`
-
-Create a new `IriEntity` instance with the same client and
-options.
-
-#### `client()`
-
-Return the parent `CrackedApiReferenceSDK` instance.
-
-#### `entopts()`
-
-Return a copy of the entity options.
-
-
----
-
 ## IrisCapabilityEntity
 
 ```ts
@@ -8308,6 +8080,16 @@ const iris_connector = client.IrisConnector()
 
 ### Operations
 
+#### `create(data: object, ctrl?: object)`
+
+Create a new entity with the given data. Resolves to the created entity.
+
+```ts
+const result = await client.IrisConnector().create({
+  connector_id: 'example_connector_id',
+})
+```
+
 #### `list(match: object, ctrl?: object)`
 
 List entities matching the given criteria. Resolves to an array of entities, one per record.
@@ -8411,8 +8193,10 @@ const iris_task = client.IrisTask()
 | `cadence` | `string` | No |  |
 | `capability` | `any` | No |  |
 | `completed` | `any[]` | No |  |
+| `correlationId` | `any` | No |  |
 | `description` | `string` | No |  |
 | `discover` | `any[]` | No |  |
+| `idempotencyKey` | `string` | Yes |  |
 | `productId` | `any` | No |  |
 | `recurring` | `any[]` | No |  |
 | `requiredConnectors` | `any[]` | No |  |
@@ -8426,6 +8210,7 @@ Create a new entity with the given data. Resolves to the created entity.
 
 ```ts
 const result = await client.IrisTask().create({
+  idempotencyKey: 'example_idempotencyKey',
   title: 'example_title',
 })
 ```
@@ -9643,6 +9428,7 @@ remaining keys are sent as that action's payload.
 | `clear` | `/api/products/clear` | `client.Product().create({ $action: 'clear', ... })` |
 | `validate_social_handle` | `/api/products/{product_id}/validate-social-handle` | `client.Product().create({ $action: 'validate_social_handle', ... })` |
 | `me` | `/api/products/me` | `client.Product().load({ $action: 'me', ... })` |
+| `status` | `/api/enterprise/products/{product_id}/status` | `client.Product().load({ $action: 'status', ... })` |
 | `activate` | `/api/enterprise/products/{product_id}/activate` | `client.Product().update({ $action: 'activate', ... })` |
 | `me` | `/api/products/me` | `client.Product().update({ $action: 'me', ... })` |
 
@@ -9742,13 +9528,18 @@ const product_dashboard = client.ProductDashboard()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `agents` | `any[]` | Yes |  |
-| `date` | `string` | Yes |  |
-| `pagination` | `Record<string, any>` | Yes |  |
-| `phone_admin_error` | `any` | No |  |
-| `products` | `any[]` | Yes |  |
-| `selected_product` | `any` | Yes |  |
-| `summary` | `Record<string, any>` | Yes |  |
+| `comments` | `number` | Yes |  |
+| `failed_entries` | `number` | Yes |  |
+| `has_tiktok_community_violation` | `boolean` | No |  |
+| `id` | `string` | Yes |  |
+| `likes` | `number` | Yes |  |
+| `metrics_pending_count` | `number` | No |  |
+| `name` | `string` | Yes |  |
+| `platforms` | `any[]` | Yes |  |
+| `posted_entries` | `number` | Yes |  |
+| `posting_entries` | `number` | Yes |  |
+| `scheduled_entries` | `number` | Yes |  |
+| `views` | `number` | Yes |  |
 
 ### Operations
 
@@ -9916,6 +9707,7 @@ const product_landing = client.ProductLanding()
 | `dmOngoingResponsePrompt` | `any` | No |  |
 | `firstCommentTextBeforeLink` | `any` | No |  |
 | `headerImageUrl` | `any` | No |  |
+| `icon` | `any` | No |  |
 | `id` | `string` | Yes |  |
 | `landingHtmlUrl` | `any` | No |  |
 | `landingLastGeneratedAt` | `any` | No |  |
@@ -9954,6 +9746,7 @@ const product_landing = client.ProductLanding()
 | `slug` | `string` | Yes |  |
 | `socialLinks` | `any` | No |  |
 | `testimonials` | `any` | No |  |
+| `url` | `string` | Yes |  |
 
 ### Field Usage by Operation
 
@@ -9971,6 +9764,7 @@ const product_landing = client.ProductLanding()
 | `dmOngoingResponsePrompt` | - | - |
 | `firstCommentTextBeforeLink` | - | - |
 | `headerImageUrl` | - | - |
+| `icon` | - | - |
 | `id` | - | - |
 | `landingHtmlUrl` | - | - |
 | `landingLastGeneratedAt` | - | - |
@@ -9997,7 +9791,7 @@ const product_landing = client.ProductLanding()
 | `microhubTestimonials` | - | - |
 | `microhubUrl` | - | - |
 | `myPostsStylePrompt` | - | - |
-| `name` | - | - |
+| `name` | Yes | - |
 | `othersStylePrompt` | - | - |
 | `othersTargetMarketPrompt` | - | - |
 | `productLinkSelection` | - | Yes |
@@ -10009,6 +9803,7 @@ const product_landing = client.ProductLanding()
 | `slug` | - | Yes |
 | `socialLinks` | - | - |
 | `testimonials` | - | - |
+| `url` | - | - |
 
 ### Operations
 
@@ -10158,50 +9953,6 @@ Get or set the entity match criteria. Works the same as `data()`.
 #### `make()`
 
 Create a new `ReRollVideoEntity` instance with the same client and
-options.
-
-#### `client()`
-
-Return the parent `CrackedApiReferenceSDK` instance.
-
-#### `entopts()`
-
-Return a copy of the entity options.
-
-
----
-
-## ReadRootGetEntity
-
-```ts
-const read_root_get = client.ReadRootGet()
-```
-
-### Operations
-
-#### `load(match: object, ctrl?: object)`
-
-Load a single entity matching the given criteria. Resolves to the entity, whose record `data()` reads.
-
-```ts
-const result = await client.ReadRootGet().load()
-```
-
-### Common Methods
-
-#### `data(data?: object)`
-
-Get or set the entity data. When called with data, sets the entity's
-internal data and returns the current data. When called without
-arguments, returns a copy of the current data.
-
-#### `match(match?: object)`
-
-Get or set the entity match criteria. Works the same as `data()`.
-
-#### `make()`
-
-Create a new `ReadRootGetEntity` instance with the same client and
 options.
 
 #### `client()`
@@ -10544,6 +10295,50 @@ Return a copy of the entity options.
 
 ---
 
+## RootGetEntity
+
+```ts
+const root_get = client.RootGet()
+```
+
+### Operations
+
+#### `load(match: object, ctrl?: object)`
+
+Load a single entity matching the given criteria. Resolves to the entity, whose record `data()` reads.
+
+```ts
+const result = await client.RootGet().load()
+```
+
+### Common Methods
+
+#### `data(data?: object)`
+
+Get or set the entity data. When called with data, sets the entity's
+internal data and returns the current data. When called without
+arguments, returns a copy of the current data.
+
+#### `match(match?: object)`
+
+Get or set the entity match criteria. Works the same as `data()`.
+
+#### `make()`
+
+Create a new `RootGetEntity` instance with the same client and
+options.
+
+#### `client()`
+
+Return the parent `CrackedApiReferenceSDK` instance.
+
+#### `entopts()`
+
+Return a copy of the entity options.
+
+
+---
+
 ## SaveSurveyEntity
 
 ```ts
@@ -10782,6 +10577,73 @@ Return a copy of the entity options.
 
 ---
 
+## ScheduleQueueEntity
+
+```ts
+const schedule_queue = client.ScheduleQueue()
+```
+
+### Actions
+
+This entity exposes custom API actions in addition to the standard
+operations. Select one with `$action` in the call's argument; the
+remaining keys are sent as that action's payload.
+
+| Action | Route | Call |
+| --- | --- | --- |
+| `replace_video` | `/api/schedule/queue/{queue_id}/replace-video` | `client.ScheduleQueue().update({ $action: 'replace_video', ... })` |
+
+An action returns that action's OWN response, which is not necessarily a
+ScheduleQueue record — check the API definition for its shape.
+
+```ts
+const result = await client.ScheduleQueue().update({
+  $action: 'replace_video',
+  /* ...the action's own arguments */
+})
+```
+
+### Operations
+
+#### `update(data: object, ctrl?: object)`
+
+Update an existing entity. The data must include the entity `id`. Resolves to the updated entity.
+
+```ts
+const result = await client.ScheduleQueue().update({
+  queue_id: 'queue_id',
+  // Fields to update
+})
+```
+
+### Common Methods
+
+#### `data(data?: object)`
+
+Get or set the entity data. When called with data, sets the entity's
+internal data and returns the current data. When called without
+arguments, returns a copy of the current data.
+
+#### `match(match?: object)`
+
+Get or set the entity match criteria. Works the same as `data()`.
+
+#### `make()`
+
+Create a new `ScheduleQueueEntity` instance with the same client and
+options.
+
+#### `client()`
+
+Return the parent `CrackedApiReferenceSDK` instance.
+
+#### `entopts()`
+
+Return a copy of the entity options.
+
+
+---
+
 ## ScheduleV2Entity
 
 ```ts
@@ -10815,26 +10677,6 @@ const schedule_v2 = client.ScheduleV2()
 | `youtube_posted_by` | `any` | No |  |
 | `youtube_posted_url` | `any` | No |  |
 | `youtube_scraped_social_post_id` | `string` | No |  |
-
-### Actions
-
-This entity exposes custom API actions in addition to the standard
-operations. Select one with `$action` in the call's argument; the
-remaining keys are sent as that action's payload.
-
-| Action | Route | Call |
-| --- | --- | --- |
-| `replace_video` | `/api/schedule/queue/{queue_id}/replace-video` | `client.ScheduleV2().update({ $action: 'replace_video', ... })` |
-
-An action returns that action's OWN response, which is not necessarily a
-ScheduleV2 record — check the API definition for its shape.
-
-```ts
-const result = await client.ScheduleV2().update({
-  $action: 'replace_video',
-  /* ...the action's own arguments */
-})
-```
 
 ### Operations
 
@@ -10876,17 +10718,6 @@ Remove the entity matching the given criteria. Resolves to the entity, marked as
 
 ```ts
 const result = await client.ScheduleV2().remove({ queue_id: 'queue_id' })
-```
-
-#### `update(data: object, ctrl?: object)`
-
-Update an existing entity. The data must include the entity `id`. Resolves to the updated entity.
-
-```ts
-const result = await client.ScheduleV2().update({
-  queue_id: 'queue_id',
-  // Fields to update
-})
 ```
 
 ### Common Methods
@@ -11467,14 +11298,11 @@ const seo_traffic = client.SeoTraffic()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `end_date` | `string` | Yes |  |
-| `series` | `any[]` | Yes |  |
-| `site_url` | `string` | Yes |  |
-| `start_date` | `string` | Yes |  |
-| `top_countries` | `any[]` | Yes |  |
-| `top_pages` | `any[]` | Yes |  |
-| `top_queries` | `any[]` | Yes |  |
-| `totals` | `Record<string, any>` | Yes |  |
+| `clicks` | `number` | Yes |  |
+| `ctr` | `number` | Yes |  |
+| `date` | `string` | Yes |  |
+| `impressions` | `number` | Yes |  |
+| `position` | `number` | Yes |  |
 
 ### Operations
 
@@ -12485,23 +12313,24 @@ const stats_refresh_overview = client.StatsRefreshOverview()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `active_run` | `any` | No |  |
-| `aged_over_24h` | `number` | Yes |  |
-| `backlog_preview` | `any[]` | Yes |  |
-| `coverage_percent` | `number` | Yes |  |
-| `customer_counts` | `Record<string, any>` | Yes |  |
-| `date` | `string` | Yes |  |
-| `generated_at` | `string` | Yes |  |
-| `method_counts` | `Record<string, any>` | Yes |  |
-| `platform_counts` | `Record<string, any>` | Yes |  |
-| `platform_units_resolved` | `number` | Yes |  |
-| `platform_units_total` | `number` | Yes |  |
-| `platform_units_unresolved` | `number` | Yes |  |
-| `posted_entries` | `number` | Yes |  |
-| `reason_counts` | `Record<string, any>` | Yes |  |
-| `sla_deadline_et` | `string` | Yes |  |
-| `stale_after_sla` | `number` | Yes |  |
-| `top_affected_customers` | `any[]` | Yes |  |
+| `aged_over_24h` | `boolean` | Yes |  |
+| `agent_id` | `string` | No |  |
+| `agent_name` | `any` | No |  |
+| `is_resolved` | `boolean` | Yes |  |
+| `last_refresh_completed_at` | `any` | No |  |
+| `latest_error_message` | `any` | No |  |
+| `platform` | `string` | Yes |  |
+| `post_method` | `any` | No |  |
+| `post_url` | `any` | No |  |
+| `posted_date_et` | `string` | Yes |  |
+| `product_id` | `string` | No |  |
+| `product_name` | `any` | No |  |
+| `reason_code` | `any` | No |  |
+| `schedule_queue_id` | `string` | Yes |  |
+| `scheduled_datetime_utc` | `string` | Yes |  |
+| `stale_after_sla` | `boolean` | Yes |  |
+| `user_email` | `string` | Yes |  |
+| `user_id` | `string` | Yes |  |
 
 ### Operations
 
@@ -13060,21 +12889,49 @@ remaining keys are sent as that action's payload.
 
 | Action | Route | Call |
 | --- | --- | --- |
+| `agent_reconcile` | `/api/admin/users/{user_id}/agents/reconcile` | `client.User().create({ $action: 'agent_reconcile', ... })` |
+| `bulk_create_video` | `/api/admin/users/{user_id}/bulk-create-videos` | `client.User().create({ $action: 'bulk_create_video', ... })` |
+| `clear_failed_video` | `/api/admin/users/{user_id}/clear-failed-videos` | `client.User().create({ $action: 'clear_failed_video', ... })` |
+| `clear_future_auto_entry` | `/api/admin/users/{user_id}/clear-future-auto-entries` | `client.User().create({ $action: 'clear_future_auto_entry', ... })` |
+| `clear_manual_entry` | `/api/admin/users/{user_id}/clear-manual-entries` | `client.User().create({ $action: 'clear_manual_entry', ... })` |
+| `clear_today_auto_entry` | `/api/admin/users/{user_id}/clear-today-auto-entries` | `client.User().create({ $action: 'clear_today_auto_entry', ... })` |
+| `fix_all` | `/api/admin/users/{user_id}/fix-all` | `client.User().create({ $action: 'fix_all', ... })` |
+| `fix_auto_schedule` | `/api/admin/users/{user_id}/fix-auto-schedule` | `client.User().create({ $action: 'fix_auto_schedule', ... })` |
+| `fix_auto_schedule_by_date` | `/api/admin/users/{user_id}/fix-auto-schedule-by-date` | `client.User().create({ $action: 'fix_auto_schedule_by_date', ... })` |
+| `fix_auto_schedule_today` | `/api/admin/users/{user_id}/fix-auto-schedule-today` | `client.User().create({ $action: 'fix_auto_schedule_today', ... })` |
+| `fix_auto_schedule_today_force` | `/api/admin/users/{user_id}/fix-auto-schedule-today-force` | `client.User().create({ $action: 'fix_auto_schedule_today_force', ... })` |
+| `fix_auto_schedule_tomorrow` | `/api/admin/users/{user_id}/fix-auto-schedule-tomorrow` | `client.User().create({ $action: 'fix_auto_schedule_tomorrow', ... })` |
+| `fix_comments_today` | `/api/admin/users/{user_id}/fix-comments-today` | `client.User().create({ $action: 'fix_comments_today', ... })` |
+| `generate_pomelli_video` | `/api/admin/users/{user_id}/generate-pomelli-video` | `client.User().create({ $action: 'generate_pomelli_video', ... })` |
+| `repair_approved_source_queue_today` | `/api/admin/users/{user_id}/repair-approved-source-queue-today` | `client.User().create({ $action: 'repair_approved_source_queue_today', ... })` |
+| `repost_tiktok_videos_tomorrow` | `/api/admin/users/{user_id}/repost-tiktok-videos-tomorrow` | `client.User().create({ $action: 'repost_tiktok_videos_tomorrow', ... })` |
+| `reset_onboarding` | `/api/admin/users/{user_id}/reset-onboarding` | `client.User().create({ $action: 'reset_onboarding', ... })` |
+| `retry_todays_video` | `/api/admin/users/{user_id}/retry-todays-videos` | `client.User().create({ $action: 'retry_todays_video', ... })` |
+| `retry_video` | `/api/admin/users/{user_id}/retry-videos` | `client.User().create({ $action: 'retry_video', ... })` |
+| `failed_video` | `/api/admin/users/{user_id}/failed-videos` | `client.User().load({ $action: 'failed_video', ... })` |
+| `pending_video` | `/api/admin/users/{user_id}/pending-videos` | `client.User().load({ $action: 'pending_video', ... })` |
+| `schedule_queue` | `/api/admin/users/{user_id}/schedule-queue` | `client.User().load({ $action: 'schedule_queue', ... })` |
 | `attribution` | `/api/users/attribution` | `client.User().update({ $action: 'attribution', ... })` |
+| `auto_schedule` | `/api/admin/users/{user_id}/auto-schedule` | `client.User().update({ $action: 'auto_schedule', ... })` |
 | `industry` | `/api/users/industry` | `client.User().update({ $action: 'industry', ... })` |
 | `mark_schedule_welcome_seen` | `/api/users/mark-schedule-welcome-seen` | `client.User().update({ $action: 'mark_schedule_welcome_seen', ... })` |
+| `posted_video_reuse` | `/api/admin/users/{user_id}/posted-video-reuse` | `client.User().update({ $action: 'posted_video_reuse', ... })` |
 
 An action returns that action's OWN response, which is not necessarily a
 User record — check the API definition for its shape.
 
 ```ts
-const result = await client.User().update({
-  $action: 'attribution',
+const result = await client.User().create({
+  $action: 'agent_reconcile',
   /* ...the action's own arguments */
 })
 ```
 
 ### Operations
+
+#### `create(data: object, ctrl?: object)`
+
+Create a new entity with the given data. Resolves to the created entity.
 
 #### `load(match: object, ctrl?: object)`
 
@@ -13130,7 +12987,6 @@ const user_agent = client.UserAgent()
 | `assigned_at` | `string` | Yes |  |
 | `assignment_id` | `string` | Yes |  |
 | `expires_at` | `any` | No |  |
-| `id` | `string` | No |  |
 | `status` | `string` | Yes |  |
 
 ### Operations
@@ -13141,7 +12997,7 @@ Create a new entity with the given data. Resolves to the created entity.
 
 ```ts
 const result = await client.UserAgent().create({
-  id: 'example_id',
+  user_id: 'example_user_id',
   agent: {},
   assigned_at: 'example_assigned_at',
   assignment_id: 'example_assignment_id',
@@ -13154,7 +13010,7 @@ const result = await client.UserAgent().create({
 List entities matching the given criteria. Resolves to an array of entities, one per record.
 
 ```ts
-const results = await client.UserAgent().list({ id: "example" })
+const results = await client.UserAgent().list({ user_id: "example" })
 ```
 
 ### Common Methods
@@ -13195,65 +13051,9 @@ const user_health_detail = client.UserHealthDetail()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `account_type` | `any` | Yes |  |
-| `activated` | `boolean` | Yes |  |
-| `activated_by_admin_at` | `any` | No |  |
-| `activated_by_admin_id` | `string` | No |  |
-| `admin_notes` | `any` | No |  |
-| `agents_count` | `number` | No |  |
-| `assigned_agents` | `any[]` | Yes |  |
-| `assigned_agents_count` | `number` | Yes |  |
-| `assigned_agents_preview_limit` | `number` | No |  |
-| `assigned_agents_truncated` | `boolean` | No |  |
-| `auto_schedule_enabled` | `boolean` | Yes |  |
-| `comments_expected_per_day` | `number` | No |  |
-| `comments_fix_block_reason` | `any` | No |  |
-| `comments_fix_ready` | `boolean` | No |  |
-| `comments_today_failed` | `number` | No |  |
-| `comments_today_posted` | `number` | No |  |
-| `comments_today_scheduled` | `number` | No |  |
-| `comments_yesterday_failed` | `number` | No |  |
-| `comments_yesterday_posted` | `number` | No |  |
-| `comments_yesterday_total` | `number` | No |  |
-| `created_at` | `string` | Yes |  |
-| `credits` | `number` | Yes |  |
-| `effective_posted_video_reuse_percent` | `number` | Yes |  |
-| `email` | `string` | Yes |  |
-| `expected_agents_count` | `number` | Yes |  |
 | `id` | `string` | Yes |  |
-| `is_activated_by_admin` | `boolean` | Yes |  |
-| `is_admin` | `boolean` | Yes |  |
-| `is_bookmarked` | `boolean` | No |  |
-| `is_internal_user` | `boolean` | Yes |  |
-| `is_migrated` | `boolean` | Yes |  |
-| `landing_slug` | `any` | No |  |
-| `landing_status` | `any` | No |  |
-| `landing_url` | `any` | No |  |
-| `membership` | `any` | Yes |  |
-| `microhub_status` | `any` | No |  |
-| `microhub_url` | `any` | No |  |
 | `name` | `string` | Yes |  |
-| `onboarding_flow` | `string` | Yes |  |
-| `posted_video_reuse_percent` | `any` | No |  |
-| `product_id` | `string` | Yes |  |
-| `product_name` | `any` | Yes |  |
-| `product_url` | `any` | Yes |  |
-| `subscription_status` | `any` | Yes |  |
-| `survey_data` | `any` | No |  |
-| `today_failed` | `number` | Yes |  |
-| `today_posted` | `number` | Yes |  |
-| `today_scheduled` | `number` | Yes |  |
-| `tomorrow_capacity` | `number` | Yes |  |
-| `tomorrow_scheduled` | `number` | Yes |  |
-| `videos_completed` | `number` | Yes |  |
-| `videos_failed` | `number` | Yes |  |
-| `videos_pending` | `number` | Yes |  |
-| `videos_stale` | `number` | Yes |  |
-| `videos_total` | `number` | Yes |  |
-| `yesterday_failed` | `number` | Yes |  |
-| `yesterday_failed_entries` | `any[]` | Yes |  |
-| `yesterday_posted` | `number` | Yes |  |
-| `yesterday_total` | `number` | Yes |  |
+| `type` | `string` | Yes |  |
 
 ### Operations
 
@@ -13262,7 +13062,7 @@ const user_health_detail = client.UserHealthDetail()
 List entities matching the given criteria. Resolves to an array of entities, one per record.
 
 ```ts
-const results = await client.UserHealthDetail().list({ id: "example" })
+const results = await client.UserHealthDetail().list({ user_id: "example" })
 ```
 
 ### Common Methods

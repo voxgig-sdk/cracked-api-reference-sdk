@@ -62,6 +62,9 @@ func TestXAdaptationEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = xAdaptationRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LOAD
 		xAdaptationRef01Ent := client.XAdaptation(nil)
 		xAdaptationRef01MatchDt0 := map[string]any{}

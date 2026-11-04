@@ -5,49 +5,83 @@ main: kit: entity: product_dashboard: {
   alias: field: {}
 
   fields: {
-    agents: {
-      h: "Agents"
-      n: "agents"
+    comments: {
+      h: "Comments"
+      n: "comments"
       r: true
-      t: "`$ARRAY`"
+      t: "`$INTEGER`"
     }
-    date: {
-      fo: "date"
-      h: "Date"
-      n: "date"
+    failed_entries: {
+      h: "Failed Entries"
+      n: "failed_entries"
+      r: true
+      t: "`$INTEGER`"
+    }
+    has_tiktok_community_violation: {
+      h: "Has Tiktok Community Violation"
+      n: "has_tiktok_community_violation"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
       r: true
       t: "`$STRING`"
     }
-    pagination: {
-      h: "Pagination"
-      n: "pagination"
+    likes: {
+      h: "Likes"
+      n: "likes"
       r: true
-      t: "`$OBJECT`"
+      t: "`$INTEGER`"
     }
-    phone_admin_error: {
-      h: "Phone Admin Error"
-      n: "phone_admin_error"
+    metrics_pending_count: {
+      h: "Metrics Pending Count"
+      n: "metrics_pending_count"
       r: false
-      t: "`$ANY`"
+      t: "`$INTEGER`"
     }
-    products: {
-      h: "Products"
-      n: "products"
+    name: {
+      h: "Name"
+      n: "name"
+      r: true
+      t: "`$STRING`"
+    }
+    platforms: {
+      h: "Platforms"
+      n: "platforms"
       r: true
       t: "`$ARRAY`"
     }
-    selected_product: {
-      h: "Selected Product"
-      n: "selected_product"
+    posted_entries: {
+      h: "Posted Entries"
+      n: "posted_entries"
       r: true
-      t: "`$ANY`"
+      t: "`$INTEGER`"
     }
-    summary: {
-      h: "Summary"
-      n: "summary"
+    posting_entries: {
+      h: "Posting Entries"
+      n: "posting_entries"
       r: true
-      t: "`$OBJECT`"
+      t: "`$INTEGER`"
     }
+    scheduled_entries: {
+      h: "Scheduled Entries"
+      n: "scheduled_entries"
+      r: true
+      t: "`$INTEGER`"
+    }
+    views: {
+      h: "Views"
+      n: "views"
+      r: true
+      t: "`$INTEGER`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
   }
 
   name: "product_dashboard"
@@ -121,7 +155,7 @@ main: kit: entity: product_dashboard: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.agents`"
           }
         }
       ]

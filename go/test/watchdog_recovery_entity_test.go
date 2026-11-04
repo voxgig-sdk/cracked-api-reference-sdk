@@ -62,9 +62,44 @@ func TestWatchdogRecoveryEntity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" {
+			t.Log("LIVE STEP {\"id\":\"watchdog_recovery.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/v1/watchdog/recovery-queue/resolve\"}")
 		client := setup.client
 		_ = client
 
+		// Bootstrap entity data from existing test data (no create step in flow).
+		watchdogRecoveryRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.watchdog_recovery")))
+		var watchdogRecoveryRef01Data map[string]any
+		if len(watchdogRecoveryRef01DataRaw) > 0 {
+			watchdogRecoveryRef01Data = core.ToMapAny(watchdogRecoveryRef01DataRaw[0][1])
+		}
+		// Discard guards against Go's unused-var check when the flow's steps
+		// happen not to consume the bootstrap data (e.g. list-only flows).
+		_ = watchdogRecoveryRef01Data
+
+		if setup.live {
+			livePace()
+		}
+		// LOAD
+		watchdogRecoveryRef01Ent := client.WatchdogRecovery(nil)
+		watchdogRecoveryRef01MatchDt0 := map[string]any{}
+		watchdogRecoveryRef01DataDt0Loaded, err := watchdogRecoveryRef01Ent.Load(watchdogRecoveryRef01MatchDt0, nil)
+		if err != nil {
+			t.Fatalf("load failed: %v", err)
+		}
+		if watchdogRecoveryRef01DataDt0Loaded == nil {
+			t.Fatal("expected load result to be non-nil")
+		}
+
+		return
+		}
+
+		client := setup.client
+		_ = client
+
+		if setup.live {
+			livePace()
+		}
 		// CREATE
 		watchdogRecoveryRef01Ent := client.WatchdogRecovery(nil)
 		watchdogRecoveryRef01Data := core.ToMapAny(vs.GetProp(
@@ -79,6 +114,9 @@ func TestWatchdogRecoveryEntity(t *testing.T) {
 			t.Fatal("expected create result to be a map")
 		}
 
+		if setup.live {
+			livePace()
+		}
 		// LOAD
 		watchdogRecoveryRef01MatchDt0 := map[string]any{}
 		watchdogRecoveryRef01DataDt0Loaded, err := watchdogRecoveryRef01Ent.Load(watchdogRecoveryRef01MatchDt0, nil)

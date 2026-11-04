@@ -33,27 +33,37 @@ func TestUserHealthDetailDirect(t *testing.T) {
 			t.Skip(_reason)
 			return
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" && setup.idmap["user01"] == nil {
+			t.Log("LIVE STEP {\"id\":\"direct-list-user_health_detail\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs user01, which only POST /api/admin/users/{user_id}/fix-auto-schedule-by-date gives\"}")
+			t.Skip("Live coverage incomplete: direct-list-user_health_detail excluded (GET-only live run: needs user01, which only POST /api/admin/users/{user_id}/fix-auto-schedule-by-date gives)")
+			return
+		}
 		if setup.live {
-			for _, _liveKey := range []string{"user_health_detail01"} {
+			for _, _liveKey := range []string{"user01"} {
 				if v := setup.idmap[_liveKey]; v == nil {
 					liveMiss(t, user_health_detailDirectLiveStrict, "Live test blocked: needs %s via CRACKED_API_REFERENCE_TEST_USER_HEALTH_DETAIL_ENTID", _liveKey)
 					return
 				}
 			}
 		}
+		if setup.live {
+			livePace()
+		}
 		client := setup.client
 
 		params := map[string]any{}
+		query := map[string]any{}
 		if setup.live {
-			params["id"] = setup.idmap["user_health_detail01"]
+			params["user_id"] = setup.idmap["user01"]
 		} else {
-			params["id"] = "direct01"
+			params["user_id"] = "direct01"
 		}
 
 		result, err := client.Direct(map[string]any{
-			"path":   "api/admin/users/{id}/health-detail",
+			"path":   "api/admin/users/{user_id}/health-detail",
 			"method": "GET",
 			"params": params,
+			"query":  query,
 		})
 		if setup.live {
 			if err != nil {

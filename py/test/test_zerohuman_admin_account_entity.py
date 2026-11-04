@@ -153,6 +153,8 @@ class TestZerohumanAdminAccountEntity:
         if len(zerohuman_admin_account_ref01_data_raw) > 0:
             zerohuman_admin_account_ref01_data = helpers.to_map(zerohuman_admin_account_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LIST
         zerohuman_admin_account_ref01_ent = client.ZerohumanAdminAccount(None)
         zerohuman_admin_account_ref01_match = {}

@@ -45,6 +45,7 @@ main: kit: entity: admin_slideshow_diag: {
       h: "Id"
       n: "id"
       r: false
+      syn: true
       t: "`$STRING`"
     }
     title: {

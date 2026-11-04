@@ -75,6 +75,9 @@ func TestAgentAccessOverviewEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = agentAccessOverviewRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LOAD
 		agentAccessOverviewRef01Ent := client.AgentAccessOverview(nil)
 		agentAccessOverviewRef01MatchDt0 := map[string]any{}

@@ -16,16 +16,6 @@ main: kit: entity: remixer_clipper: {
             version: 2
           }
           g: {
-            header: [
-              {
-                ex: ""
-                k: "header"
-                n: "authorization"
-                or: "authorization"
-                r: false
-                t: "`$STRING`"
-              }
-            ]
             params: [
               {
                 k: "param"
@@ -79,18 +69,6 @@ main: kit: entity: remixer_clipper: {
             id: "GET /api/remixer-clippers/catalog"
             source: "openapi3"
             version: 2
-          }
-          g: {
-            header: [
-              {
-                ex: ""
-                k: "header"
-                n: "authorization"
-                or: "authorization"
-                r: false
-                t: "`$STRING`"
-              }
-            ]
           }
           m: "GET"
           o: "/api/remixer-clippers/catalog"

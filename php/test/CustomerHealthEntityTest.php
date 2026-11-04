@@ -53,9 +53,17 @@ class CustomerHealthEntityTest extends TestCase
             }
         }
         if (!empty($setup["live"])) {
-            Runner::live_miss(self::LIVE_STRICT, "Live entity test blocked: " . "the flow loads a customer_health record it has no list to find");
+            foreach (["customer_health01"] as $_liveKey) {
+                if (!empty($setup["synthetic_only"]) || null === ($setup["idmap"][$_liveKey] ?? null)) {
+                    Runner::live_miss(self::LIVE_STRICT, "Live entity test blocked: needs " . $_liveKey . " via CRACKED_API_REFERENCE_TEST_CUSTOMER_HEALTH_ENTID");
+                }
+            }
         }
         $client = $setup["client"];
+        if (!empty($setup["live"])) {
+            Runner::live_existing($setup, self::LIVE_STRICT, "customer_health",
+                fn() => [["id" => $setup["idmap"]["customer_health01"] ?? null]], "user_id", $setup["idmap"]["customer_health01"] ?? null);
+        }
 
         // Bootstrap entity data from existing test data.
         $customer_health_ref01_data_raw = Vs::items(Helpers::to_map(
@@ -65,15 +73,18 @@ class CustomerHealthEntityTest extends TestCase
             $customer_health_ref01_data = Helpers::to_map($customer_health_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LOAD
         $customer_health_ref01_ent = $client->CustomerHealth(null);
         $customer_health_ref01_match_dt0 = [
-            "id" => $customer_health_ref01_data["id"],
+            "id" => $customer_health_ref01_data["user_id"],
         ];
         $customer_health_ref01_data_dt0_loaded = $customer_health_ref01_ent->load($customer_health_ref01_match_dt0, null);
         $customer_health_ref01_data_dt0_load_result = Helpers::to_map(is_object($customer_health_ref01_data_dt0_loaded) && method_exists($customer_health_ref01_data_dt0_loaded, 'data_get') ? $customer_health_ref01_data_dt0_loaded->data_get() : $customer_health_ref01_data_dt0_loaded);
         $this->assertNotNull($customer_health_ref01_data_dt0_load_result);
-        $this->assertEquals($customer_health_ref01_data_dt0_load_result["id"], $customer_health_ref01_data["id"]);
+        $this->assertTrue(Runner::live_same_id($customer_health_ref01_data_dt0_load_result["user_id"] ?? null, $customer_health_ref01_data["user_id"]));
 
     }
 }
@@ -85,6 +96,12 @@ function customer_health_basic_setup($extra)
     $entity_data_file = __DIR__ . '/../../.sdk/test/entity/customer_health/CustomerHealthTestData.json';
     $entity_data_source = file_get_contents($entity_data_file);
     $entity_data = json_decode($entity_data_source, true);
+
+    foreach (($entity_data["existing"]["customer_health"] ?? []) as $rec_key => $rec) {
+        if (is_array($rec) && isset($rec["id"])) {
+            $entity_data["existing"]["customer_health"][$rec_key]["user_id"] = $rec["id"];
+        }
+    }
 
     $options = [];
     $options["entity"] = $entity_data["existing"];

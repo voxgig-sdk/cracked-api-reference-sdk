@@ -119,7 +119,7 @@ main: kit: entity: admin_customer: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.customers`"
           }
         }
       ]

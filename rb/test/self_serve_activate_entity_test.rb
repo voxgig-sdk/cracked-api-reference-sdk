@@ -41,8 +41,14 @@ class SelfServeActivateEntityTest < Minitest::Test
         return
       end
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE"
+      puts "LIVE STEP {\"id\":\"self_serve_activate.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/onboarding-v6/self-serve-activate\"}"
+      skip("Live coverage incomplete: self_serve_activate.create.0 excluded (GET-only live run: needs POST /api/onboarding-v6/self-serve-activate)")
+    end
+
     client = setup[:client]
 
+    Runner.live_pace if setup[:live]
     # CREATE
     self_serve_activate_ref01_ent = client.SelfServeActivate(nil)
     self_serve_activate_ref01_data = Helpers.to_map(Vs.getprop(

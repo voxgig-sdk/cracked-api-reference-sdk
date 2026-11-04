@@ -167,6 +167,7 @@ class DedicatedAgentsDashboardEntityTest < Minitest::Test
       dedicated_agents_dashboard_ref01_data = Helpers.to_map(dedicated_agents_dashboard_ref01_data_raw[0][1])
     end
 
+    Runner.live_pace if setup[:live]
     # LIST
     dedicated_agents_dashboard_ref01_ent = client.DedicatedAgentsDashboard(nil)
     dedicated_agents_dashboard_ref01_match = {}

@@ -51,6 +51,8 @@ class TestAgentAccessPhilStatsRefreshEntity:
         if len(agent_access_phil_stats_refresh_ref01_data_raw) > 0:
             agent_access_phil_stats_refresh_ref01_data = helpers.to_map(agent_access_phil_stats_refresh_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LOAD
         agent_access_phil_stats_refresh_ref01_ent = client.AgentAccessPhilStatsRefresh(None)
         agent_access_phil_stats_refresh_ref01_match_dt0 = {}

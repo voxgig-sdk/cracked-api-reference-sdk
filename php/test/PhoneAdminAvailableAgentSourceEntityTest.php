@@ -229,6 +229,9 @@ class PhoneAdminAvailableAgentSourceEntityTest extends TestCase
             $phone_admin_available_agent_source_ref01_data = Helpers::to_map($phone_admin_available_agent_source_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LIST
         $phone_admin_available_agent_source_ref01_ent = $client->PhoneAdminAvailableAgentSource(null);
         $phone_admin_available_agent_source_ref01_match = [];

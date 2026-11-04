@@ -82,6 +82,9 @@ func TestAdminGeneratedVideoEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = adminGeneratedVideoRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LIST
 		adminGeneratedVideoRef01Ent := client.AdminGeneratedVideo(nil)
 		adminGeneratedVideoRef01Match := map[string]any{

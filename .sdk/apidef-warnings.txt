@@ -1,26 +1,210 @@
 {
   point: "warning"
+  note: "list GET /api/admin/agent-health reads `body.daily` and drops `groups`: declare the one it reads in guide.aontu"
+}
+
+
+{
+  point: "warning"
+  note: "list GET /api/admin/agent-health/details reads `body.issues` and drops `warmup_runs`, `warnings`: declare the one it reads in guide.aontu"
+}
+
+
+{
+  point: "warning"
+  note: "list GET /api/admin/customer-health/overview reads `body.backlog_preview` and drops `top_affected_customers`: declare the one it reads in guide.aontu"
+}
+
+
+{
+  point: "warning"
+  note: "list GET /api/admin/customer-health/views reads `body.top_users` and drops `trend`: declare the one it reads in guide.aontu"
+}
+
+
+{
+  point: "warning"
+  note: "list GET /api/admin/customers-health reads `body.customers`, beside data of the object it is in: declare what it lists in guide.aontu"
+}
+
+
+{
+  point: "warning"
+  note: "list GET /api/admin/insights reads `body.customer_success_cases` and drops `customers`, `recent_signups`: declare the one it reads in guide.aontu"
+}
+
+
+{
+  point: "warning"
+  note: "list GET /api/admin/insights/customers reads `body.customers`, beside data of the object it is in: declare what it lists in guide.aontu"
+}
+
+
+{
+  point: "warning"
+  note: "list GET /api/admin/metrics/summary reads `body.paid_users_by_level` and drops `user_credits`, `user_gifted_credits`: declare the one it reads in guide.aontu"
+}
+
+
+{
+  point: "warning"
+  note: "list GET /api/admin/posts reads `body.entries`, beside data of the object it is in: declare what it lists in guide.aontu"
+}
+
+
+{
+  point: "warning"
+  note: "list GET /api/admin/products-dashboard reads `body.agents` and drops `products`: declare the one it reads in guide.aontu"
+}
+
+
+{
+  point: "warning"
+  note: "list GET /api/admin/users/{user_id}/health-detail reads `body.assigned_agents` and drops `yesterday_failed_entries`: declare the one it reads in guide.aontu"
+}
+
+
+{
+  point: "warning"
+  note: "list GET /api/agent-access/customers-health reads `body.customers`, beside data of the object it is in: declare what it lists in guide.aontu"
+}
+
+
+{
+  point: "warning"
+  note: "list GET /api/agent-access/user-agents reads `body.agents` and drops `products`: declare the one it reads in guide.aontu"
+}
+
+
+{
+  point: "warning"
+  note: "list GET /api/agent-access/user-posts reads `body.perProduct`, beside data of the object it is in: declare what it lists in guide.aontu"
+}
+
+
+{
+  point: "warning"
+  note: "list GET /api/agent-access/user-summary reads `body.products`, beside data of the object it is in: declare what it lists in guide.aontu"
+}
+
+
+{
+  point: "warning"
+  note: "list GET /api/agent-access/winning-ads-summary reads `body.customers`, beside data of the object it is in: declare what it lists in guide.aontu"
+}
+
+
+{
+  point: "warning"
+  note: "list GET /api/analytics/posts reads `body.entries`, beside data of the object it is in: declare what it lists in guide.aontu"
+}
+
+
+{
+  point: "warning"
+  note: "list GET /api/carousel/{video_id}/status reads `body.slides`, beside data of the object it is in: declare what it lists in guide.aontu"
+}
+
+
+{
+  point: "warning"
+  note: "list GET /api/iris/status reads `body.connectorsPreview` and drops `tasksPreview`: declare the one it reads in guide.aontu"
+}
+
+
+{
+  point: "warning"
+  note: "list GET /api/iris/tasks reads `body.completed` and drops `discover`, `recurring`: declare the one it reads in guide.aontu"
+}
+
+
+{
+  point: "warning"
+  note: "list GET /api/landings/me reads `body.microhubLinks` and drops `microhubTestimonials`: declare the one it reads in guide.aontu"
+}
+
+
+{
+  point: "warning"
+  note: "list GET /api/onboarding-v6/status reads `body.social_posts`, beside data of the object it is in: declare what it lists in guide.aontu"
+}
+
+
+{
+  point: "warning"
+  note: "list GET /api/seo/overview reads `body.series`, beside data of the object it is in: declare what it lists in guide.aontu"
+}
+
+
+{
+  point: "warning"
+  note: "list GET /api/seo/traffic reads `body.series` and drops `top_countries`, `top_pages`, `top_queries`: declare the one it reads in guide.aontu"
+}
+
+
+{
+  point: "warning"
   note: "no server URL in the definition (servers[0].url): the SDK takes it as the server variable `base`; set the `server` build option to fix one"
 }
 
 
 {
   point: "warning"
-  note: "Points POST /api/admin/impersonate/{user_id}, POST /api/admin/users/{user_id}/agents/reconcile, POST /api/admin/users/{user_id}/bulk-create-videos, POST /api/admin/users/{user_id}/clear-failed-videos, POST /api/admin/users/{user_id}/clear-future-auto-entries, POST /api/admin/users/{user_id}/clear-manual-entries, POST /api/admin/users/{user_id}/clear-today-auto-entries, POST /api/admin/users/{user_id}/retry-todays-videos and POST /api/admin/users/{user_id}/retry-videos on entity=admin op=create have the same selector (exist: user_id), so only POST /api/admin/impersonate/{user_id} is ever chosen. An action or another entity in guide.aontu tells them apart."
-  entity: "admin"
-  op: "create"
-  points: [
-    "POST /api/admin/impersonate/{user_id}"
-    "POST /api/admin/users/{user_id}/agents/reconcile"
-    "POST /api/admin/users/{user_id}/bulk-create-videos"
-    "POST /api/admin/users/{user_id}/clear-failed-videos"
-    "POST /api/admin/users/{user_id}/clear-future-auto-entries"
-    "POST /api/admin/users/{user_id}/clear-manual-entries"
-    "POST /api/admin/users/{user_id}/clear-today-auto-entries"
-    "POST /api/admin/users/{user_id}/retry-todays-videos"
-    "POST /api/admin/users/{user_id}/retry-videos"
-  ]
+  note: "header parameter `authorization` of POST /api/admin/video-remixer/worker/claim ignored: OpenAPI ignores Accept, Content-Type and Authorization header parameters"
+}
 
+
+{
+  point: "warning"
+  note: "header parameter `authorization` of POST /api/admin/video-remixer/worker/jobs/{identifier}/fail ignored: OpenAPI ignores Accept, Content-Type and Authorization header parameters"
+}
+
+
+{
+  point: "warning"
+  note: "header parameter `authorization` of POST /api/admin/video-remixer/worker/jobs/{identifier}/heartbeat ignored: OpenAPI ignores Accept, Content-Type and Authorization header parameters"
+}
+
+
+{
+  point: "warning"
+  note: "header parameter `authorization` of POST /api/admin/video-remixer/worker/jobs/{identifier}/media ignored: OpenAPI ignores Accept, Content-Type and Authorization header parameters"
+}
+
+
+{
+  point: "warning"
+  note: "header parameter `authorization` of POST /api/admin/video-remixer/worker/jobs/{identifier}/render-output ignored: OpenAPI ignores Accept, Content-Type and Authorization header parameters"
+}
+
+
+{
+  point: "warning"
+  note: "header parameter `authorization` of POST /api/admin/video-remixer/worker/jobs/{identifier}/result ignored: OpenAPI ignores Accept, Content-Type and Authorization header parameters"
+}
+
+
+{
+  point: "warning"
+  note: "header parameter `authorization` of POST /api/admin/video-remixer/worker/jobs/{identifier}/upload ignored: OpenAPI ignores Accept, Content-Type and Authorization header parameters"
+}
+
+
+{
+  point: "warning"
+  note: "header parameter `authorization` of POST /api/platform/capabilities/{capability_name} ignored: OpenAPI ignores Accept, Content-Type and Authorization header parameters"
+}
+
+
+{
+  point: "warning"
+  note: "header parameter `authorization` of GET /api/remixer-clippers/catalog ignored: OpenAPI ignores Accept, Content-Type and Authorization header parameters"
+}
+
+
+{
+  point: "warning"
+  note: "header parameter `authorization` of POST /api/remixer-clippers/jobs/{identifier}/download ignored: OpenAPI ignores Accept, Content-Type and Authorization header parameters"
 }
 
 
@@ -38,20 +222,6 @@
     "POST /api/admin/stats/refresh-and-send-emails"
     "POST /api/admin/stats/refresh-last-7-days"
     "POST /api/admin/whitelist-testers"
-  ]
-
-}
-
-
-{
-  point: "warning"
-  note: "Points GET /api/admin/users/{user_id}/failed-videos, GET /api/admin/users/{user_id}/pending-videos and GET /api/admin/users/{user_id}/schedule-queue on entity=admin op=load have the same selector (exist: user_id), so only GET /api/admin/users/{user_id}/failed-videos is ever chosen. An action or another entity in guide.aontu tells them apart."
-  entity: "admin"
-  op: "load"
-  points: [
-    "GET /api/admin/users/{user_id}/failed-videos"
-    "GET /api/admin/users/{user_id}/pending-videos"
-    "GET /api/admin/users/{user_id}/schedule-queue"
   ]
 
 }
@@ -360,6 +530,19 @@
   points: [
     "PUT /api/schedule/settings"
     "PUT /api/schedule/settings/video-types"
+  ]
+
+}
+
+
+{
+  point: "warning"
+  note: "Points POST /api/chat/sessions/{session_id}/complete and POST /api/chat/sessions/{session_id}/messages on entity=chat_session op=create have the same selector (exist: session_id), so only POST /api/chat/sessions/{session_id}/complete is ever chosen. An action or another entity in guide.aontu tells them apart."
+  entity: "chat_session"
+  op: "create"
+  points: [
+    "POST /api/chat/sessions/{session_id}/complete"
+    "POST /api/chat/sessions/{session_id}/messages"
   ]
 
 }

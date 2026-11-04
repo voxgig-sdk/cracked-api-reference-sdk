@@ -211,6 +211,9 @@ class IrisStatusEntityTest extends TestCase
             $iris_status_ref01_data = Helpers::to_map($iris_status_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LIST
         $iris_status_ref01_ent = $client->IrisStatus(null);
         $iris_status_ref01_match = [];

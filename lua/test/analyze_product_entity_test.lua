@@ -44,8 +44,17 @@ describe("AnalyzeProductEntity", function()
         return
       end
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" then
+      print("LIVE STEP {\"id\":\"analyze_product.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/scraper/analyze-product\"}")
+      pending("Live coverage incomplete: analyze_product.create.0 excluded (GET-only live run: needs POST /api/scraper/analyze-product)")
+      return
+    end
+
     local client = setup.client
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- CREATE
     local analyze_product_ref01_ent = client:AnalyzeProduct(nil)
     local analyze_product_ref01_data = helpers.to_map(vs.getprop(

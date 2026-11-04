@@ -42,8 +42,14 @@ class TestResetProductEntity:
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
                 return
+        if setup["live"] and os.environ.get("VOXGIG_GETONLY_GUARD") == "TRUE":
+            print("LIVE STEP {\"id\":\"reset_product.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/reset-product/generate-videos-v6\"}")
+            return self._run_get_only_flow(setup)
+
         client = setup["client"]
 
+        if setup["live"]:
+            runner.live_pace()
         # CREATE
         reset_product_ref01_ent = client.ResetProduct(None)
         reset_product_ref01_data = helpers.to_map(vs.getprop(
@@ -52,7 +58,28 @@ class TestResetProductEntity:
         reset_product_ref01_data = helpers.to_map(runner.entity_data(reset_product_ref01_ent.create(reset_product_ref01_data, None)))
         assert reset_product_ref01_data is not None
 
+        if setup["live"]:
+            runner.live_pace()
         # LOAD
+        reset_product_ref01_match_dt0 = {}
+        reset_product_ref01_data_dt0_loaded = reset_product_ref01_ent.load(reset_product_ref01_match_dt0, None)
+        assert reset_product_ref01_data_dt0_loaded is not None
+
+
+    def _run_get_only_flow(self, setup):
+        client = setup["client"]
+
+        # Bootstrap entity data from existing test data.
+        reset_product_ref01_data_raw = vs.items(helpers.to_map(
+            vs.getpath(setup["data"], "existing.reset_product")))
+        reset_product_ref01_data = None
+        if len(reset_product_ref01_data_raw) > 0:
+            reset_product_ref01_data = helpers.to_map(reset_product_ref01_data_raw[0][1])
+
+        if setup["live"]:
+            runner.live_pace()
+        # LOAD
+        reset_product_ref01_ent = client.ResetProduct(None)
         reset_product_ref01_match_dt0 = {}
         reset_product_ref01_data_dt0_loaded = reset_product_ref01_ent.load(reset_product_ref01_match_dt0, None)
         assert reset_product_ref01_data_dt0_loaded is not None

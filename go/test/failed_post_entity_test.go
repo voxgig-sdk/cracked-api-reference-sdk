@@ -212,6 +212,9 @@ func TestFailedPostEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = failedPostRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LIST
 		failedPostRef01Ent := client.FailedPost(nil)
 		failedPostRef01Match := map[string]any{}

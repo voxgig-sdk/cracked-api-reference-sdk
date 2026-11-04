@@ -62,6 +62,9 @@ func TestAgentAccessPhilVideoEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = agentAccessPhilVideoRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LOAD
 		agentAccessPhilVideoRef01Ent := client.AgentAccessPhilVideo(nil)
 		agentAccessPhilVideoRef01MatchDt0 := map[string]any{}

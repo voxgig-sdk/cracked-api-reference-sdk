@@ -52,8 +52,16 @@ class CreateVariationEntityTest extends TestCase
                 return;
             }
         }
+        if (!empty($setup["live"]) && getenv('VOXGIG_GETONLY_GUARD') === "TRUE") {
+            fwrite(STDOUT, 'LIVE STEP {"id":"create_variation.create.0","state":"excluded","attempted":false,"reason":"GET-only live run: needs POST /api/video-variation/create-hook"}' . "\n");
+            $this->markTestSkipped('Live coverage incomplete: create_variation.create.0 excluded (GET-only live run: needs POST /api/video-variation/create-hook)');
+        }
+
         $client = $setup["client"];
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // CREATE
         $create_variation_ref01_ent = $client->CreateVariation(null);
         $create_variation_ref01_data = Helpers::to_map(Vs::getprop(

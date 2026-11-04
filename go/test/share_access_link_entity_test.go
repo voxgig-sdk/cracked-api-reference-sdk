@@ -62,9 +62,18 @@ func TestShareAccessLinkEntity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" {
+			t.Log("LIVE STEP {\"id\":\"share_access_link.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /auth/share-access-link\"}")
+			t.Skip("Live coverage incomplete: share_access_link.create.0 excluded (GET-only live run: needs POST /auth/share-access-link)")
+			return
+		}
+
 		client := setup.client
 		_ = client
 
+		if setup.live {
+			livePace()
+		}
 		// CREATE
 		shareAccessLinkRef01Ent := client.ShareAccessLink(nil)
 		shareAccessLinkRef01Data := core.ToMapAny(vs.GetProp(

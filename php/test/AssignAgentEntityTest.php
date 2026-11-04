@@ -52,8 +52,16 @@ class AssignAgentEntityTest extends TestCase
                 return;
             }
         }
+        if (!empty($setup["live"]) && getenv('VOXGIG_GETONLY_GUARD') === "TRUE") {
+            fwrite(STDOUT, 'LIVE STEP {"id":"assign_agent.create.0","state":"excluded","attempted":false,"reason":"GET-only live run: needs POST /api/onboarding-v6/assign-agent"}' . "\n");
+            $this->markTestSkipped('Live coverage incomplete: assign_agent.create.0 excluded (GET-only live run: needs POST /api/onboarding-v6/assign-agent)');
+        }
+
         $client = $setup["client"];
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // CREATE
         $assign_agent_ref01_ent = $client->AssignAgent(null);
         $assign_agent_ref01_data = Helpers::to_map(Vs::getprop(

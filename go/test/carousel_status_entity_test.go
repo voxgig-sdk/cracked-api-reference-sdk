@@ -38,7 +38,7 @@ func TestCarouselStatusEntity(t *testing.T) {
 		client := sdk.TestSDK(nil, map[string]any{
 			"feature": map[string]any{"validate": map[string]any{"active": true}},
 		})
-		_, err := client.CarouselStatus(nil).List(map[string]any{"id": 1}, nil)
+		_, err := client.CarouselStatus(nil).List(map[string]any{"carousel_id": 1}, nil)
 		if sdkerr, ok := err.(*core.CrackedApiReferenceError); !ok || "validate_failed" != sdkerr.Code {
 			t.Fatalf("expected validate_failed, got %v", err)
 		}
@@ -53,7 +53,7 @@ func TestCarouselStatusEntity(t *testing.T) {
 		if setup.live {
 			_mode = "live"
 		}
-		for _, _op := range []string{} {
+		for _, _op := range []string{"list"} {
 			if _shouldSkip, _reason := isControlSkipped("entityOp", "carousel_status." + _op, _mode); _shouldSkip {
 				if _reason == "" {
 					_reason = "skipped via sdk-test-control.json"
@@ -62,6 +62,16 @@ func TestCarouselStatusEntity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live {
+			for _, _liveKey := range []string{"carousel01"} {
+				if setup.syntheticOnly || setup.idmap[_liveKey] == nil {
+					liveMiss(t, carousel_statusEntityLiveStrict, "Live entity test blocked: needs %s via CRACKED_API_REFERENCE_TEST_CAROUSEL_STATUS_ENTID", _liveKey)
+				}
+			}
+		}
+		client := setup.client
+		_ = client
+
 		// Bootstrap entity data from existing test data (no create step in flow).
 		carouselStatusRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.carousel_status")))
 		var carouselStatusRef01Data map[string]any
@@ -71,6 +81,24 @@ func TestCarouselStatusEntity(t *testing.T) {
 		// Discard guards against Go's unused-var check when the flow's steps
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = carouselStatusRef01Data
+
+		if setup.live {
+			livePace()
+		}
+		// LIST
+		carouselStatusRef01Ent := client.CarouselStatus(nil)
+		carouselStatusRef01Match := map[string]any{
+			"carousel_id": setup.idmap["carousel01"],
+		}
+
+		carouselStatusRef01ListResult, err := carouselStatusRef01Ent.List(carouselStatusRef01Match, nil)
+		if err != nil {
+			t.Fatalf("list failed: %v", err)
+		}
+		_, carouselStatusRef01ListOk := carouselStatusRef01ListResult.([]any)
+		if !carouselStatusRef01ListOk {
+			t.Fatalf("expected list result to be an array, got %T", carouselStatusRef01ListResult)
+		}
 
 	})
 }
@@ -100,7 +128,7 @@ func carousel_statusBasicSetup(extra map[string]any) *entityTestSetup {
 
 	// Generate idmap via transform, matching TS pattern.
 	idmap, _ := vs.Transform(
-		[]any{"carousel_status01", "carousel_status02", "carousel_status03"},
+		[]any{"carousel_status01", "carousel_status02", "carousel_status03", "carousel01", "carousel02", "carousel03"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
 				"`$KEY`": "`$COPY`",

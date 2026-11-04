@@ -211,6 +211,9 @@ class AgentAccessCustomersHealthEntityTest extends TestCase
             $agent_access_customers_health_ref01_data = Helpers::to_map($agent_access_customers_health_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LIST
         $agent_access_customers_health_ref01_ent = $client->AgentAccessCustomersHealth(null);
         $agent_access_customers_health_ref01_match = [];

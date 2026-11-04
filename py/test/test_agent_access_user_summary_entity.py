@@ -153,6 +153,8 @@ class TestAgentAccessUserSummaryEntity:
         if len(agent_access_user_summary_ref01_data_raw) > 0:
             agent_access_user_summary_ref01_data = helpers.to_map(agent_access_user_summary_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LIST
         agent_access_user_summary_ref01_ent = client.AgentAccessUserSummary(None)
         agent_access_user_summary_ref01_match = {}

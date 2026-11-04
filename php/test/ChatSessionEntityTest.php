@@ -33,7 +33,7 @@ class ChatSessionEntityTest extends TestCase
         $client = CrackedApiReferenceSDK::test(null, ["feature" => ["validate" => ["active" => true]]]);
         $err = null;
         try {
-            $client->ChatSession(null)->create(["session_id" => 1], null);
+            $client->ChatSession(null)->create(["session_id" => 1, "idempotencyKey" => 'x', "message" => 'x', "sessionId" => 'x'], null);
         } catch (\Throwable $e) {
             $err = $e;
         }
@@ -52,6 +52,11 @@ class ChatSessionEntityTest extends TestCase
                 return;
             }
         }
+        if (!empty($setup["live"]) && getenv('VOXGIG_GETONLY_GUARD') === "TRUE") {
+            fwrite(STDOUT, 'LIVE STEP {"id":"chat_session.create.0","state":"excluded","attempted":false,"reason":"GET-only live run: needs POST /api/chat/sessions/{session_id}/complete"}' . "\n");
+            $this->markTestSkipped('Live coverage incomplete: chat_session.create.0 excluded (GET-only live run: needs POST /api/chat/sessions/{session_id}/complete)');
+        }
+
         if (!empty($setup["live"])) {
             foreach (["session01"] as $_liveKey) {
                 if (!empty($setup["synthetic_only"]) || null === ($setup["idmap"][$_liveKey] ?? null)) {
@@ -61,6 +66,9 @@ class ChatSessionEntityTest extends TestCase
         }
         $client = $setup["client"];
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // CREATE
         $chat_session_ref01_ent = $client->ChatSession(null);
         $chat_session_ref01_data = Helpers::to_map(Vs::getprop(

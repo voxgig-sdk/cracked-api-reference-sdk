@@ -153,6 +153,8 @@ class TestProductDemoEntity:
         if len(product_demo_ref01_data_raw) > 0:
             product_demo_ref01_data = helpers.to_map(product_demo_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LIST
         product_demo_ref01_ent = client.ProductDemo(None)
         product_demo_ref01_match = {}

@@ -62,9 +62,18 @@ func TestSaveSurveyEntity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" {
+			t.Log("LIVE STEP {\"id\":\"save_survey.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/onboarding-v6/save-survey\"}")
+			t.Skip("Live coverage incomplete: save_survey.create.0 excluded (GET-only live run: needs POST /api/onboarding-v6/save-survey)")
+			return
+		}
+
 		client := setup.client
 		_ = client
 
+		if setup.live {
+			livePace()
+		}
 		// CREATE
 		saveSurveyRef01Ent := client.SaveSurvey(nil)
 		saveSurveyRef01Data := core.ToMapAny(vs.GetProp(

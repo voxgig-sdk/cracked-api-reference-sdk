@@ -52,8 +52,35 @@ class WatchdogRecoveryEntityTest extends TestCase
                 return;
             }
         }
+        if (!empty($setup["live"]) && getenv('VOXGIG_GETONLY_GUARD') === "TRUE") {
+            fwrite(STDOUT, 'LIVE STEP {"id":"watchdog_recovery.create.0","state":"excluded","attempted":false,"reason":"GET-only live run: needs POST /api/v1/watchdog/recovery-queue/resolve"}' . "\n");
         $client = $setup["client"];
 
+        // Bootstrap entity data from existing test data.
+        $watchdog_recovery_ref01_data_raw = Vs::items(Helpers::to_map(
+            Vs::getpath($setup["data"], "existing.watchdog_recovery")));
+        $watchdog_recovery_ref01_data = null;
+        if (count($watchdog_recovery_ref01_data_raw) > 0) {
+            $watchdog_recovery_ref01_data = Helpers::to_map($watchdog_recovery_ref01_data_raw[0][1]);
+        }
+
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
+        // LOAD
+        $watchdog_recovery_ref01_ent = $client->WatchdogRecovery(null);
+        $watchdog_recovery_ref01_match_dt0 = [];
+        $watchdog_recovery_ref01_data_dt0_loaded = $watchdog_recovery_ref01_ent->load($watchdog_recovery_ref01_match_dt0, null);
+        $this->assertNotNull($watchdog_recovery_ref01_data_dt0_loaded);
+
+            return;
+        }
+
+        $client = $setup["client"];
+
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // CREATE
         $watchdog_recovery_ref01_ent = $client->WatchdogRecovery(null);
         $watchdog_recovery_ref01_data = Helpers::to_map(Vs::getprop(
@@ -63,6 +90,9 @@ class WatchdogRecoveryEntityTest extends TestCase
         $watchdog_recovery_ref01_data = Helpers::to_map(is_object($watchdog_recovery_ref01_data_result) && method_exists($watchdog_recovery_ref01_data_result, 'data_get') ? $watchdog_recovery_ref01_data_result->data_get() : $watchdog_recovery_ref01_data_result);
         $this->assertNotNull($watchdog_recovery_ref01_data);
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LOAD
         $watchdog_recovery_ref01_match_dt0 = [];
         $watchdog_recovery_ref01_data_dt0_loaded = $watchdog_recovery_ref01_ent->load($watchdog_recovery_ref01_match_dt0, null);

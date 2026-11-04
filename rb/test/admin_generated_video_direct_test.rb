@@ -27,6 +27,10 @@ class AdminGeneratedVideoDirectTest < Minitest::Test
       skip(_reason || "skipped via sdk-test-control.json")
       return
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE" && setup[:idmap]["user01"].nil?
+      puts "LIVE STEP {\"id\":\"direct-list-admin_generated_video\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs user01, which only POST /api/admin/users/{user_id}/fix-auto-schedule-by-date gives\"}"
+      skip("Live coverage incomplete: direct-list-admin_generated_video excluded (GET-only live run: needs user01, which only POST /api/admin/users/{user_id}/fix-auto-schedule-by-date gives)")
+    end
     if setup[:live]
       ["user01"].each do |_live_key|
         if setup[:idmap][_live_key].nil?
@@ -34,15 +38,18 @@ class AdminGeneratedVideoDirectTest < Minitest::Test
         end
       end
     end
+    Runner.live_pace if setup[:live]
     client = setup[:client]
 
     params = {}
+    query = {}
     params["user_id"] = setup[:live] ? setup[:idmap]["user01"] : "direct01"
 
     result = client.direct({
       "path" => "api/admin/users/{user_id}/generated-videos",
       "method" => "GET",
       "params" => params,
+      "query" => query,
     })
     if setup[:live]
       unless live_ok(result)

@@ -63,9 +63,45 @@ func TestAdminCarouselEntity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" {
+			t.Log("LIVE STEP {\"id\":\"admin_carousel.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/admin/carousels/slideshow-import/{batch_id}/state\"}")
+			t.Log("LIVE STEP {\"id\":\"admin_carousel.update.1\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs PUT /api/admin/carousels/production-prompts/{fmt}\"}")
 		client := setup.client
 		_ = client
 
+		// Bootstrap entity data from existing test data (no create step in flow).
+		adminCarouselRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.admin_carousel")))
+		var adminCarouselRef01Data map[string]any
+		if len(adminCarouselRef01DataRaw) > 0 {
+			adminCarouselRef01Data = core.ToMapAny(adminCarouselRef01DataRaw[0][1])
+		}
+		// Discard guards against Go's unused-var check when the flow's steps
+		// happen not to consume the bootstrap data (e.g. list-only flows).
+		_ = adminCarouselRef01Data
+
+		if setup.live {
+			livePace()
+		}
+		// LOAD
+		adminCarouselRef01Ent := client.AdminCarousel(nil)
+		adminCarouselRef01MatchDt0 := map[string]any{}
+		adminCarouselRef01DataDt0Loaded, err := adminCarouselRef01Ent.Load(adminCarouselRef01MatchDt0, nil)
+		if err != nil {
+			t.Fatalf("load failed: %v", err)
+		}
+		if adminCarouselRef01DataDt0Loaded == nil {
+			t.Fatal("expected load result to be non-nil")
+		}
+
+		return
+		}
+
+		client := setup.client
+		_ = client
+
+		if setup.live {
+			livePace()
+		}
 		// CREATE
 		adminCarouselRef01Ent := client.AdminCarousel(nil)
 		adminCarouselRef01Data := core.ToMapAny(vs.GetProp(
@@ -80,6 +116,9 @@ func TestAdminCarouselEntity(t *testing.T) {
 			t.Fatal("expected create result to be a map")
 		}
 
+		if setup.live {
+			livePace()
+		}
 		// UPDATE
 		adminCarouselRef01DataUp0Up := map[string]any{
 		}
@@ -100,6 +139,9 @@ func TestAdminCarouselEntity(t *testing.T) {
 			t.Fatalf("expected %s to be updated, got %v", adminCarouselRef01MarkdefUp0Name, adminCarouselRef01ResdataUp0[adminCarouselRef01MarkdefUp0Name])
 		}
 
+		if setup.live {
+			livePace()
+		}
 		// LOAD
 		adminCarouselRef01MatchDt0 := map[string]any{}
 		adminCarouselRef01DataDt0Loaded, err := adminCarouselRef01Ent.Load(adminCarouselRef01MatchDt0, nil)

@@ -44,8 +44,17 @@ describe("SaveSurveyEntity", function()
         return
       end
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" then
+      print("LIVE STEP {\"id\":\"save_survey.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/onboarding-v6/save-survey\"}")
+      pending("Live coverage incomplete: save_survey.create.0 excluded (GET-only live run: needs POST /api/onboarding-v6/save-survey)")
+      return
+    end
+
     local client = setup.client
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- CREATE
     local save_survey_ref01_ent = client:SaveSurvey(nil)
     local save_survey_ref01_data = helpers.to_map(vs.getprop(

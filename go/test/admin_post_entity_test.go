@@ -212,6 +212,9 @@ func TestAdminPostEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = adminPostRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LIST
 		adminPostRef01Ent := client.AdminPost(nil)
 		adminPostRef01Match := map[string]any{}

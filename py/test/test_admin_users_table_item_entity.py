@@ -143,6 +143,8 @@ class TestAdminUsersTableItemEntity:
         if len(admin_users_table_item_ref01_data_raw) > 0:
             admin_users_table_item_ref01_data = helpers.to_map(admin_users_table_item_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LIST
         admin_users_table_item_ref01_ent = client.AdminUsersTableItem(None)
         admin_users_table_item_ref01_match = {}

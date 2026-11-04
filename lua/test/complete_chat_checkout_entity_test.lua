@@ -44,8 +44,17 @@ describe("CompleteChatCheckoutEntity", function()
         return
       end
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" then
+      print("LIVE STEP {\"id\":\"complete_chat_checkout.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/onboarding-v6/complete-chat-checkout\"}")
+      pending("Live coverage incomplete: complete_chat_checkout.create.0 excluded (GET-only live run: needs POST /api/onboarding-v6/complete-chat-checkout)")
+      return
+    end
+
     local client = setup.client
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- CREATE
     local complete_chat_checkout_ref01_ent = client:CompleteChatCheckout(nil)
     local complete_chat_checkout_ref01_data = helpers.to_map(vs.getprop(

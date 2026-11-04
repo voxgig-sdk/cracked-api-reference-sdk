@@ -62,9 +62,18 @@ func TestCompleteChatCheckoutEntity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" {
+			t.Log("LIVE STEP {\"id\":\"complete_chat_checkout.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/onboarding-v6/complete-chat-checkout\"}")
+			t.Skip("Live coverage incomplete: complete_chat_checkout.create.0 excluded (GET-only live run: needs POST /api/onboarding-v6/complete-chat-checkout)")
+			return
+		}
+
 		client := setup.client
 		_ = client
 
+		if setup.live {
+			livePace()
+		}
 		// CREATE
 		completeChatCheckoutRef01Ent := client.CompleteChatCheckout(nil)
 		completeChatCheckoutRef01Data := core.ToMapAny(vs.GetProp(

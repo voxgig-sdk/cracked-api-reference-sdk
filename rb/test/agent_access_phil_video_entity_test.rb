@@ -39,6 +39,7 @@ class AgentAccessPhilVideoEntityTest < Minitest::Test
       agent_access_phil_video_ref01_data = Helpers.to_map(agent_access_phil_video_ref01_data_raw[0][1])
     end
 
+    Runner.live_pace if setup[:live]
     # LOAD
     agent_access_phil_video_ref01_ent = client.AgentAccessPhilVideo(nil)
     agent_access_phil_video_ref01_match_dt0 = {}

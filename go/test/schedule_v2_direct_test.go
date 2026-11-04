@@ -33,6 +33,9 @@ func TestScheduleV2Direct(t *testing.T) {
 			t.Skip(_reason)
 			return
 		}
+		if setup.live {
+			livePace()
+		}
 		client := setup.client
 
 
@@ -90,6 +93,9 @@ func TestScheduleV2Direct(t *testing.T) {
 			}
 			t.Skip(_reason)
 			return
+		}
+		if setup.live {
+			livePace()
 		}
 		client := setup.client
 

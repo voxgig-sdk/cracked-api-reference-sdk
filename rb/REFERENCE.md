@@ -254,10 +254,6 @@ Create a new `CarouselAgentDetail` entity instance. Pass `nil` for no initial da
 
 Create a new `CarouselStatus` entity instance. Pass `nil` for no initial data.
 
-#### `Chat(data = nil)`
-
-Create a new `Chat` entity instance. Pass `nil` for no initial data.
-
 #### `ChatHistory(data = nil)`
 
 Create a new `ChatHistory` entity instance. Pass `nil` for no initial data.
@@ -334,10 +330,6 @@ Create a new `DedicatedAgentsDashboard` entity instance. Pass `nil` for no initi
 
 Create a new `EnterpriseAgent` entity instance. Pass `nil` for no initial data.
 
-#### `EnterpriseProduct(data = nil)`
-
-Create a new `EnterpriseProduct` entity instance. Pass `nil` for no initial data.
-
 #### `ExactAvailability(data = nil)`
 
 Create a new `ExactAvailability` entity instance. Pass `nil` for no initial data.
@@ -381,10 +373,6 @@ Create a new `Healthrx` entity instance. Pass `nil` for no initial data.
 #### `InitResetProductV6(data = nil)`
 
 Create a new `InitResetProductV6` entity instance. Pass `nil` for no initial data.
-
-#### `Iri(data = nil)`
-
-Create a new `Iri` entity instance. Pass `nil` for no initial data.
 
 #### `IrisCapability(data = nil)`
 
@@ -502,10 +490,6 @@ Create a new `PublicResumeStatus` entity instance. Pass `nil` for no initial dat
 
 Create a new `ReRollVideo` entity instance. Pass `nil` for no initial data.
 
-#### `ReadRootGet(data = nil)`
-
-Create a new `ReadRootGet` entity instance. Pass `nil` for no initial data.
-
 #### `RecordDemoBooked(data = nil)`
 
 Create a new `RecordDemoBooked` entity instance. Pass `nil` for no initial data.
@@ -526,6 +510,10 @@ Create a new `ResetProduct` entity instance. Pass `nil` for no initial data.
 
 Create a new `RetryWebsiteScrape` entity instance. Pass `nil` for no initial data.
 
+#### `RootGet(data = nil)`
+
+Create a new `RootGet` entity instance. Pass `nil` for no initial data.
+
 #### `SaveSurvey(data = nil)`
 
 Create a new `SaveSurvey` entity instance. Pass `nil` for no initial data.
@@ -541,6 +529,10 @@ Create a new `ScanSocialsPublic` entity instance. Pass `nil` for no initial data
 #### `ScanSocialsStatus(data = nil)`
 
 Create a new `ScanSocialsStatus` entity instance. Pass `nil` for no initial data.
+
+#### `ScheduleQueue(data = nil)`
+
+Create a new `ScheduleQueue` entity instance. Pass `nil` for no initial data.
 
 #### `ScheduleV2(data = nil)`
 
@@ -945,56 +937,46 @@ admin = client.Admin
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `apply` | `Boolean` | No | Apply safe canonical or clean-only URL updates |
-| `count` | `Integer` | Yes |  |
 | `created_at` | `String` | Yes |  |
 | `date_from` | `Object` | No |  |
 | `date_to` | `Object` | No |  |
 | `email` | `String` | Yes |  |
 | `id` | `String` | Yes |  |
-| `include_failed` | `Boolean` | No |  |
-| `include_pending` | `Boolean` | No |  |
 | `include_records` | `Boolean` | No | Include full per-field audit records in the response |
 | `issue_ids` | `Object` | No |  |
 | `only_active` | `Boolean` | No | Limit the audit to active agents |
 | `platform` | `Object` | No |  |
 | `posting_method` | `Object` | No |  |
-| `product_id` | `String` | No |  |
+| `product_id` | `String` | Yes |  |
 | `query` | `Object` | No |  |
 | `reason` | `Object` | No |  |
-| `regenerate` | `Boolean` | No |  |
 | `status` | `String` | No |  |
 | `user_membership` | `Object` | No |  |
 | `user_name` | `Object` | No |  |
 | `user_onboarding_step` | `Object` | No |  |
-| `video_type` | `String` | Yes |  |
 
 ### Field Usage by Operation
 
-| Field | load | list | create | update | remove |
-| --- | --- | --- | --- | --- | --- |
-| `apply` | - | - | - | - | - |
-| `count` | - | - | - | - | - |
-| `created_at` | - | - | - | - | - |
-| `date_from` | - | - | Yes | - | - |
-| `date_to` | - | - | Yes | - | - |
-| `email` | - | - | - | - | - |
-| `id` | - | - | - | - | - |
-| `include_failed` | - | - | - | - | - |
-| `include_pending` | - | - | - | - | - |
-| `include_records` | - | - | - | - | - |
-| `issue_ids` | - | - | - | - | - |
-| `only_active` | - | - | - | - | - |
-| `platform` | - | - | - | - | - |
-| `posting_method` | - | - | - | - | - |
-| `product_id` | - | - | Yes | - | - |
-| `query` | - | - | - | - | - |
-| `reason` | - | - | - | - | - |
-| `regenerate` | - | - | - | - | - |
-| `status` | - | - | - | - | - |
-| `user_membership` | - | - | - | - | - |
-| `user_name` | - | - | - | - | - |
-| `user_onboarding_step` | - | - | - | - | - |
-| `video_type` | - | - | - | - | - |
+| Field | load | list | create | remove |
+| --- | --- | --- | --- | --- |
+| `apply` | - | - | - | - |
+| `created_at` | - | - | - | - |
+| `date_from` | - | - | Yes | - |
+| `date_to` | - | - | Yes | - |
+| `email` | - | - | - | - |
+| `id` | - | - | - | - |
+| `include_records` | - | - | - | - |
+| `issue_ids` | - | - | - | - |
+| `only_active` | - | - | - | - |
+| `platform` | - | - | - | - |
+| `posting_method` | - | - | - | - |
+| `product_id` | - | - | - | - |
+| `query` | - | - | - | - |
+| `reason` | - | - | - | - |
+| `status` | - | - | - | - |
+| `user_membership` | - | - | - | - |
+| `user_name` | - | - | - | - |
+| `user_onboarding_step` | - | - | - | - |
 
 ### Operations
 
@@ -1005,14 +987,12 @@ Create a new entity with the given data. Returns the created entity and raises o
 ```ruby
 result = client.Admin.create({
   "user_id" => "example_user_id", # String
-  "count" => 1, # Integer
   "created_at" => "example_created_at", # String
   "date_from" => "example_date_from", # Object
   "date_to" => "example_date_to", # Object
   "email" => "example_email", # String
   "id" => "example_id", # String
   "product_id" => "example_product_id", # String
-  "video_type" => "example_video_type", # String
 })
 ```
 
@@ -1039,17 +1019,6 @@ Remove the entity matching the given criteria. Returns the entity, marked as del
 
 ```ruby
 result = client.Admin.remove({ "tester_id" => "tester_id" })
-```
-
-#### `update(reqdata, ctrl = nil) -> result`
-
-Update an existing entity. The data must include the entity `id`. Returns the updated entity and raises on error.
-
-```ruby
-result = client.Admin.update({
-  "agent_id" => "agent_id",
-  # Fields to update
-})
 ```
 
 ### Common Methods
@@ -1642,13 +1611,25 @@ admin_insight = client.AdminInsight
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `customer_success_cases` | `Array` | Yes |  |
-| `customers` | `Array` | Yes |  |
-| `generated_at` | `String` | Yes |  |
-| `pfa_database` | `Hash` | Yes |  |
-| `recent_signups` | `Array` | Yes |  |
-| `summary` | `Hash` | Yes |  |
-| `vireel_database` | `Hash` | Yes |  |
+| `active_agents` | `Integer` | Yes |  |
+| `active_products` | `Integer` | Yes |  |
+| `agents_count` | `Integer` | Yes |  |
+| `auto_schedule_status` | `String` | Yes |  |
+| `days_until_period_end` | `Object` | No |  |
+| `email` | `String` | Yes |  |
+| `feature_impact` | `String` | Yes |  |
+| `last_notification_at` | `Object` | No |  |
+| `membership` | `Object` | No |  |
+| `name` | `String` | No |  |
+| `notification_count` | `Integer` | Yes |  |
+| `notification_events` | `Array` | Yes |  |
+| `priority` | `String` | Yes |  |
+| `severity` | `String` | Yes |  |
+| `status_label` | `String` | Yes |  |
+| `subscription_current_period_end` | `Object` | No |  |
+| `subscription_status` | `Object` | No |  |
+| `upcoming_posts` | `Integer` | Yes |  |
+| `user_id` | `String` | Yes |  |
 
 ### Operations
 
@@ -1764,14 +1745,8 @@ admin_metrics_summary = client.AdminMetricsSummary
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `paid_users_by_level` | `Array` | Yes |  |
-| `total_cancellations` | `Integer` | Yes |  |
-| `total_previews_generated` | `Integer` | Yes |  |
-| `total_signups` | `Integer` | Yes |  |
-| `total_videos_generated` | `Integer` | Yes |  |
-| `url_attempts` | `Integer` | Yes |  |
-| `user_credits` | `Array` | Yes |  |
-| `user_gifted_credits` | `Array` | Yes |  |
+| `count` | `Integer` | Yes |  |
+| `level` | `String` | Yes |  |
 
 ### Operations
 
@@ -2760,6 +2735,10 @@ results = client.Agent.list
 results.each { |item| puts item.data_get }
 ```
 
+#### `update(reqdata, ctrl = nil) -> result`
+
+Update an existing entity. The data must include the entity `id`. Returns the updated entity and raises on error.
+
 ### Common Methods
 
 #### `data_get -> Hash`
@@ -3102,13 +3081,17 @@ agent_access_user_agent = client.AgentAccessUserAgent
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `agentQuota` | `Integer` | Yes |  |
-| `agents` | `Array` | Yes |  |
-| `assignedByType` | `Hash` | Yes |  |
-| `assignedTotal` | `Integer` | Yes |  |
-| `email` | `String` | Yes |  |
-| `products` | `Array` | Yes |  |
-| `userId` | `String` | Yes |  |
+| `avatar` | `Object` | No |  |
+| `facebookUrl` | `Object` | No |  |
+| `id` | `String` | Yes |  |
+| `instagramUrl` | `Object` | No |  |
+| `name` | `String` | Yes |  |
+| `productId` | `Object` | No |  |
+| `productName` | `Object` | No |  |
+| `tiktokUrl` | `Object` | No |  |
+| `type` | `Object` | No |  |
+| `uploadPostPlatforms` | `Object` | No |  |
+| `youtubeUrl` | `Object` | No |  |
 
 ### Operations
 
@@ -3589,19 +3572,12 @@ agent_health = client.AgentHealth
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `daily` | `Array` | Yes |  |
-| `dates` | `Array` | Yes |  |
-| `generated_at` | `String` | Yes |  |
-| `groups` | `Array` | Yes |  |
-| `latest` | `Hash` | Yes |  |
-| `live_date` | `Object` | No |  |
-| `phone_admin_generated_at` | `String` | Yes |  |
-| `platform` | `String` | No |  |
-| `post_target` | `Integer` | Yes |  |
-| `qa_managed_agent_ids` | `Array` | No |  |
-| `scope_prefixes` | `Array` | Yes |  |
-| `timezone` | `String` | Yes |  |
-| `warmup_target` | `Integer` | Yes |  |
+| `accounts` | `Hash` | Yes |  |
+| `date` | `String` | Yes |  |
+| `overall` | `Hash` | Yes |  |
+| `posts` | `Hash` | Yes |  |
+| `views` | `Hash` | Yes |  |
+| `warmups` | `Hash` | Yes |  |
 
 ### Operations
 
@@ -3709,19 +3685,12 @@ agent_health_detail = client.AgentHealthDetail
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `archived_issue_total` | `Integer` | No |  |
-| `date` | `String` | Yes |  |
-| `generated_at` | `String` | Yes |  |
-| `group_id` | `String` | Yes |  |
-| `has_more` | `Boolean` | Yes |  |
-| `issue_total` | `Integer` | Yes |  |
-| `issues` | `Array` | Yes |  |
-| `limit` | `Integer` | Yes |  |
-| `metric` | `String` | Yes |  |
-| `offset` | `Integer` | Yes |  |
-| `warmup_runs` | `Array` | No |  |
-| `warning_total` | `Integer` | No |  |
-| `warnings` | `Array` | No |  |
+| `agent_id` | `String` | Yes |  |
+| `category` | `String` | Yes |  |
+| `connection_status` | `String` | Yes |  |
+| `device_status` | `String` | Yes |  |
+| `issue` | `Object` | No |  |
+| `state` | `String` | Yes |  |
 
 ### Operations
 
@@ -3797,7 +3766,7 @@ agent_post = client.AgentPost
 List entities matching the given criteria (call with no argument to list all). Returns an array of entities, one per record; `data_get` reads each record. Raises on error.
 
 ```ruby
-results = client.AgentPost.list({ "id" => "example" })
+results = client.AgentPost.list({ "agent_id" => "example" })
 results.each { |item| puts item.data_get }
 ```
 
@@ -4426,7 +4395,6 @@ carousel = client.Carousel
 | `formula_id` | `String` | No |  |
 | `formula_name` | `Object` | No |  |
 | `generation` | `Hash` | No |  |
-| `id` | `String` | No |  |
 | `image_prompt` | `Object` | No |  |
 | `likes` | `Object` | No |  |
 | `main_prompt` | `Object` | No |  |
@@ -4594,7 +4562,6 @@ carousel_status = client.CarouselStatus
 | --- | --- | --- | --- |
 | `caption` | `Object` | Yes |  |
 | `error` | `Object` | No |  |
-| `id` | `String` | No |  |
 | `image_model` | `Object` | No |  |
 | `image_provider` | `Object` | No |  |
 | `image_task_id` | `String` | No |  |
@@ -4610,7 +4577,7 @@ carousel_status = client.CarouselStatus
 List entities matching the given criteria (call with no argument to list all). Returns an array of entities, one per record; `data_get` reads each record. Raises on error.
 
 ```ruby
-results = client.CarouselStatus.list({ "id" => "example" })
+results = client.CarouselStatus.list({ "carousel_id" => "example" })
 results.each { |item| puts item.data_get }
 ```
 
@@ -4635,65 +4602,6 @@ Set the entity match criteria.
 #### `make -> Entity`
 
 Create a new `CarouselStatusEntity` instance with the same client and
-options.
-
-#### `get_name -> String`
-
-Return the entity name.
-
-
----
-
-## ChatEntity
-
-```ruby
-chat = client.Chat
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `idempotencyKey` | `String` | Yes |  |
-| `message` | `String` | Yes |  |
-| `sessionId` | `String` | Yes |  |
-
-### Operations
-
-#### `create(reqdata, ctrl = nil) -> result`
-
-Create a new entity with the given data. Returns the created entity and raises on error.
-
-```ruby
-result = client.Chat.create({
-  "session_id" => "example_session_id", # String
-  "idempotencyKey" => "example_idempotencyKey", # String
-  "message" => "example_message", # String
-  "sessionId" => "example_sessionId", # String
-})
-```
-
-### Common Methods
-
-#### `data_get -> Hash`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get -> Hash`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make -> Entity`
-
-Create a new `ChatEntity` instance with the same client and
 options.
 
 #### `get_name -> String`
@@ -4788,6 +4696,8 @@ chat_session = client.ChatSession
 | --- | --- | --- | --- |
 | `chatSubVariant` | `String` | Yes |  |
 | `createdAt` | `String` | Yes |  |
+| `idempotencyKey` | `String` | Yes |  |
+| `message` | `String` | Yes |  |
 | `model` | `Object` | No |  |
 | `plan` | `Object` | No |  |
 | `route` | `Object` | No |  |
@@ -4807,6 +4717,9 @@ Create a new entity with the given data. Returns the created entity and raises o
 ```ruby
 result = client.ChatSession.create({
   "session_id" => "example_session_id", # String
+  "idempotencyKey" => "example_idempotencyKey", # String
+  "message" => "example_message", # String
+  "sessionId" => "example_sessionId", # String
 })
 ```
 
@@ -5519,7 +5432,6 @@ customer_health = client.CustomerHealth
 | `date` | `String` | Yes |  |
 | `email` | `String` | Yes |  |
 | `entries` | `Array` | Yes |  |
-| `id` | `String` | No |  |
 | `performance_overview` | `Hash` | Yes |  |
 | `platform_coverage_summary` | `Hash` | Yes |  |
 | `user_id` | `String` | Yes |  |
@@ -5633,20 +5545,10 @@ customer_health_views_summary = client.CustomerHealthViewsSummary
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `average_views_per_result` | `Integer` | Yes |  |
-| `date` | `String` | Yes |  |
-| `end_date` | `Object` | No |  |
-| `paid_users_count` | `Integer` | Yes |  |
+| `email` | `String` | Yes |  |
 | `posted_results` | `Integer` | Yes |  |
-| `range` | `String` | Yes |  |
-| `start_date` | `Object` | No |  |
-| `top_users` | `Array` | Yes |  |
-| `total_views` | `Integer` | Yes |  |
-| `trend` | `Array` | Yes |  |
-| `trend_granularity` | `String` | Yes |  |
-| `user_email` | `Object` | No |  |
-| `user_id` | `String` | No |  |
-| `users_with_views` | `Integer` | Yes |  |
+| `user_id` | `String` | Yes |  |
+| `views` | `Integer` | Yes |  |
 
 ### Operations
 
@@ -5750,12 +5652,6 @@ Return the entity name.
 daily_status = client.DailyStatus
 ```
 
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `id` | `String` | No |  |
-
 ### Operations
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -5763,7 +5659,7 @@ daily_status = client.DailyStatus
 Load a single entity matching the given criteria. Returns the entity, whose record `data_get` reads, and raises on error.
 
 ```ruby
-result = client.DailyStatus.load({ "id" => "daily_status_id", "day" => "day" })
+result = client.DailyStatus.load({ "daily_id" => "daily_id", "day" => "day" })
 ```
 
 ### Common Methods
@@ -5934,52 +5830,6 @@ Set the entity match criteria.
 #### `make -> Entity`
 
 Create a new `EnterpriseAgentEntity` instance with the same client and
-options.
-
-#### `get_name -> String`
-
-Return the entity name.
-
-
----
-
-## EnterpriseProductEntity
-
-```ruby
-enterprise_product = client.EnterpriseProduct
-```
-
-### Operations
-
-#### `load(reqmatch, ctrl = nil) -> result`
-
-Load a single entity matching the given criteria. Returns the entity, whose record `data_get` reads, and raises on error.
-
-```ruby
-result = client.EnterpriseProduct.load({ "product_id" => "product_id" })
-```
-
-### Common Methods
-
-#### `data_get -> Hash`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get -> Hash`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make -> Entity`
-
-Create a new `EnterpriseProductEntity` instance with the same client and
 options.
 
 #### `get_name -> String`
@@ -6662,63 +6512,6 @@ Return the entity name.
 
 ---
 
-## IriEntity
-
-```ruby
-iri = client.Iri
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `correlationId` | `Object` | No |  |
-| `idempotencyKey` | `String` | Yes |  |
-| `productId` | `Object` | No |  |
-
-### Operations
-
-#### `create(reqdata, ctrl = nil) -> result`
-
-Create a new entity with the given data. Returns the created entity and raises on error.
-
-```ruby
-result = client.Iri.create({
-  "connector_id" => "example_connector_id", # String
-  "idempotencyKey" => "example_idempotencyKey", # String
-})
-```
-
-### Common Methods
-
-#### `data_get -> Hash`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get -> Hash`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make -> Entity`
-
-Create a new `IriEntity` instance with the same client and
-options.
-
-#### `get_name -> String`
-
-Return the entity name.
-
-
----
-
 ## IrisCapabilityEntity
 
 ```ruby
@@ -6873,6 +6666,16 @@ iris_connector = client.IrisConnector
 
 ### Operations
 
+#### `create(reqdata, ctrl = nil) -> result`
+
+Create a new entity with the given data. Returns the created entity and raises on error.
+
+```ruby
+result = client.IrisConnector.create({
+  "connector_id" => "example_connector_id", # String
+})
+```
+
 #### `list(reqmatch = nil, ctrl = nil) -> Array`
 
 List entities matching the given criteria (call with no argument to list all). Returns an array of entities, one per record; `data_get` reads each record. Raises on error.
@@ -6982,8 +6785,10 @@ iris_task = client.IrisTask
 | `cadence` | `String` | No |  |
 | `capability` | `Object` | No |  |
 | `completed` | `Array` | No |  |
+| `correlationId` | `Object` | No |  |
 | `description` | `String` | No |  |
 | `discover` | `Array` | No |  |
+| `idempotencyKey` | `String` | Yes |  |
 | `productId` | `Object` | No |  |
 | `recurring` | `Array` | No |  |
 | `requiredConnectors` | `Array` | No |  |
@@ -6997,6 +6802,7 @@ Create a new entity with the given data. Returns the created entity and raises o
 
 ```ruby
 result = client.IrisTask.create({
+  "idempotencyKey" => "example_idempotencyKey", # String
   "title" => "example_title", # String
 })
 ```
@@ -8246,13 +8052,18 @@ product_dashboard = client.ProductDashboard
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `agents` | `Array` | Yes |  |
-| `date` | `String` | Yes |  |
-| `pagination` | `Hash` | Yes |  |
-| `phone_admin_error` | `Object` | No |  |
-| `products` | `Array` | Yes |  |
-| `selected_product` | `Object` | Yes |  |
-| `summary` | `Hash` | Yes |  |
+| `comments` | `Integer` | Yes |  |
+| `failed_entries` | `Integer` | Yes |  |
+| `has_tiktok_community_violation` | `Boolean` | No |  |
+| `id` | `String` | Yes |  |
+| `likes` | `Integer` | Yes |  |
+| `metrics_pending_count` | `Integer` | No |  |
+| `name` | `String` | Yes |  |
+| `platforms` | `Array` | Yes |  |
+| `posted_entries` | `Integer` | Yes |  |
+| `posting_entries` | `Integer` | Yes |  |
+| `scheduled_entries` | `Integer` | Yes |  |
+| `views` | `Integer` | Yes |  |
 
 ### Operations
 
@@ -8429,6 +8240,7 @@ product_landing = client.ProductLanding
 | `dmOngoingResponsePrompt` | `Object` | No |  |
 | `firstCommentTextBeforeLink` | `Object` | No |  |
 | `headerImageUrl` | `Object` | No |  |
+| `icon` | `Object` | No |  |
 | `id` | `String` | Yes |  |
 | `landingHtmlUrl` | `Object` | No |  |
 | `landingLastGeneratedAt` | `Object` | No |  |
@@ -8467,6 +8279,7 @@ product_landing = client.ProductLanding
 | `slug` | `String` | Yes |  |
 | `socialLinks` | `Object` | No |  |
 | `testimonials` | `Object` | No |  |
+| `url` | `String` | Yes |  |
 
 ### Field Usage by Operation
 
@@ -8484,6 +8297,7 @@ product_landing = client.ProductLanding
 | `dmOngoingResponsePrompt` | - | - |
 | `firstCommentTextBeforeLink` | - | - |
 | `headerImageUrl` | - | - |
+| `icon` | - | - |
 | `id` | - | - |
 | `landingHtmlUrl` | - | - |
 | `landingLastGeneratedAt` | - | - |
@@ -8510,7 +8324,7 @@ product_landing = client.ProductLanding
 | `microhubTestimonials` | - | - |
 | `microhubUrl` | - | - |
 | `myPostsStylePrompt` | - | - |
-| `name` | - | - |
+| `name` | Yes | - |
 | `othersStylePrompt` | - | - |
 | `othersTargetMarketPrompt` | - | - |
 | `productLinkSelection` | - | Yes |
@@ -8522,6 +8336,7 @@ product_landing = client.ProductLanding
 | `slug` | - | Yes |
 | `socialLinks` | - | - |
 | `testimonials` | - | - |
+| `url` | - | - |
 
 ### Operations
 
@@ -8682,52 +8497,6 @@ Set the entity match criteria.
 #### `make -> Entity`
 
 Create a new `ReRollVideoEntity` instance with the same client and
-options.
-
-#### `get_name -> String`
-
-Return the entity name.
-
-
----
-
-## ReadRootGetEntity
-
-```ruby
-read_root_get = client.ReadRootGet
-```
-
-### Operations
-
-#### `load(reqmatch, ctrl = nil) -> result`
-
-Load a single entity matching the given criteria. Returns the entity, whose record `data_get` reads, and raises on error.
-
-```ruby
-result = client.ReadRootGet.load()
-```
-
-### Common Methods
-
-#### `data_get -> Hash`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get -> Hash`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make -> Entity`
-
-Create a new `ReadRootGetEntity` instance with the same client and
 options.
 
 #### `get_name -> String`
@@ -9036,6 +8805,52 @@ Return the entity name.
 
 ---
 
+## RootGetEntity
+
+```ruby
+root_get = client.RootGet
+```
+
+### Operations
+
+#### `load(reqmatch, ctrl = nil) -> result`
+
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get` reads, and raises on error.
+
+```ruby
+result = client.RootGet.load()
+```
+
+### Common Methods
+
+#### `data_get -> Hash`
+
+Get the entity data. Returns a copy of the current data.
+
+#### `data_set(data)`
+
+Set the entity data.
+
+#### `match_get -> Hash`
+
+Get the entity match criteria.
+
+#### `match_set(match)`
+
+Set the entity match criteria.
+
+#### `make -> Entity`
+
+Create a new `RootGetEntity` instance with the same client and
+options.
+
+#### `get_name -> String`
+
+Return the entity name.
+
+
+---
+
 ## SaveSurveyEntity
 
 ```ruby
@@ -9282,6 +9097,55 @@ Return the entity name.
 
 ---
 
+## ScheduleQueueEntity
+
+```ruby
+schedule_queue = client.ScheduleQueue
+```
+
+### Operations
+
+#### `update(reqdata, ctrl = nil) -> result`
+
+Update an existing entity. The data must include the entity `id`. Returns the updated entity and raises on error.
+
+```ruby
+result = client.ScheduleQueue.update({
+  "queue_id" => "queue_id",
+  # Fields to update
+})
+```
+
+### Common Methods
+
+#### `data_get -> Hash`
+
+Get the entity data. Returns a copy of the current data.
+
+#### `data_set(data)`
+
+Set the entity data.
+
+#### `match_get -> Hash`
+
+Get the entity match criteria.
+
+#### `match_set(match)`
+
+Set the entity match criteria.
+
+#### `make -> Entity`
+
+Create a new `ScheduleQueueEntity` instance with the same client and
+options.
+
+#### `get_name -> String`
+
+Return the entity name.
+
+
+---
+
 ## ScheduleV2Entity
 
 ```ruby
@@ -9357,17 +9221,6 @@ Remove the entity matching the given criteria. Returns the entity, marked as del
 
 ```ruby
 result = client.ScheduleV2.remove({ "queue_id" => "queue_id" })
-```
-
-#### `update(reqdata, ctrl = nil) -> result`
-
-Update an existing entity. The data must include the entity `id`. Returns the updated entity and raises on error.
-
-```ruby
-result = client.ScheduleV2.update({
-  "queue_id" => "queue_id",
-  # Fields to update
-})
 ```
 
 ### Common Methods
@@ -9974,14 +9827,11 @@ seo_traffic = client.SeoTraffic
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `end_date` | `String` | Yes |  |
-| `series` | `Array` | Yes |  |
-| `site_url` | `String` | Yes |  |
-| `start_date` | `String` | Yes |  |
-| `top_countries` | `Array` | Yes |  |
-| `top_pages` | `Array` | Yes |  |
-| `top_queries` | `Array` | Yes |  |
-| `totals` | `Hash` | Yes |  |
+| `clicks` | `Float` | Yes |  |
+| `ctr` | `Float` | Yes |  |
+| `date` | `String` | Yes |  |
+| `impressions` | `Float` | Yes |  |
+| `position` | `Float` | Yes |  |
 
 ### Operations
 
@@ -10947,23 +10797,24 @@ stats_refresh_overview = client.StatsRefreshOverview
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `active_run` | `Object` | No |  |
-| `aged_over_24h` | `Integer` | Yes |  |
-| `backlog_preview` | `Array` | Yes |  |
-| `coverage_percent` | `Float` | Yes |  |
-| `customer_counts` | `Hash` | Yes |  |
-| `date` | `String` | Yes |  |
-| `generated_at` | `String` | Yes |  |
-| `method_counts` | `Hash` | Yes |  |
-| `platform_counts` | `Hash` | Yes |  |
-| `platform_units_resolved` | `Integer` | Yes |  |
-| `platform_units_total` | `Integer` | Yes |  |
-| `platform_units_unresolved` | `Integer` | Yes |  |
-| `posted_entries` | `Integer` | Yes |  |
-| `reason_counts` | `Hash` | Yes |  |
-| `sla_deadline_et` | `String` | Yes |  |
-| `stale_after_sla` | `Integer` | Yes |  |
-| `top_affected_customers` | `Array` | Yes |  |
+| `aged_over_24h` | `Boolean` | Yes |  |
+| `agent_id` | `String` | No |  |
+| `agent_name` | `Object` | No |  |
+| `is_resolved` | `Boolean` | Yes |  |
+| `last_refresh_completed_at` | `Object` | No |  |
+| `latest_error_message` | `Object` | No |  |
+| `platform` | `String` | Yes |  |
+| `post_method` | `Object` | No |  |
+| `post_url` | `Object` | No |  |
+| `posted_date_et` | `String` | Yes |  |
+| `product_id` | `String` | No |  |
+| `product_name` | `Object` | No |  |
+| `reason_code` | `Object` | No |  |
+| `schedule_queue_id` | `String` | Yes |  |
+| `scheduled_datetime_utc` | `String` | Yes |  |
+| `stale_after_sla` | `Boolean` | Yes |  |
+| `user_email` | `String` | Yes |  |
+| `user_id` | `String` | Yes |  |
 
 ### Operations
 
@@ -11491,6 +11342,10 @@ user = client.User
 
 ### Operations
 
+#### `create(reqdata, ctrl = nil) -> result`
+
+Create a new entity with the given data. Returns the created entity and raises on error.
+
 #### `load(reqmatch, ctrl = nil) -> result`
 
 Load a single entity matching the given criteria. Returns the entity, whose record `data_get` reads, and raises on error.
@@ -11547,7 +11402,6 @@ user_agent = client.UserAgent
 | `assigned_at` | `String` | Yes |  |
 | `assignment_id` | `String` | Yes |  |
 | `expires_at` | `Object` | No |  |
-| `id` | `String` | No |  |
 | `status` | `String` | Yes |  |
 
 ### Operations
@@ -11558,7 +11412,7 @@ Create a new entity with the given data. Returns the created entity and raises o
 
 ```ruby
 result = client.UserAgent.create({
-  "id" => "example_id", # String
+  "user_id" => "example_user_id", # String
   "agent" => {}, # Hash
   "assigned_at" => "example_assigned_at", # String
   "assignment_id" => "example_assignment_id", # String
@@ -11571,7 +11425,7 @@ result = client.UserAgent.create({
 List entities matching the given criteria (call with no argument to list all). Returns an array of entities, one per record; `data_get` reads each record. Raises on error.
 
 ```ruby
-results = client.UserAgent.list({ "id" => "example" })
+results = client.UserAgent.list({ "user_id" => "example" })
 results.each { |item| puts item.data_get }
 ```
 
@@ -11615,65 +11469,9 @@ user_health_detail = client.UserHealthDetail
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `account_type` | `Object` | Yes |  |
-| `activated` | `Boolean` | Yes |  |
-| `activated_by_admin_at` | `Object` | No |  |
-| `activated_by_admin_id` | `String` | No |  |
-| `admin_notes` | `Object` | No |  |
-| `agents_count` | `Integer` | No |  |
-| `assigned_agents` | `Array` | Yes |  |
-| `assigned_agents_count` | `Integer` | Yes |  |
-| `assigned_agents_preview_limit` | `Integer` | No |  |
-| `assigned_agents_truncated` | `Boolean` | No |  |
-| `auto_schedule_enabled` | `Boolean` | Yes |  |
-| `comments_expected_per_day` | `Integer` | No |  |
-| `comments_fix_block_reason` | `Object` | No |  |
-| `comments_fix_ready` | `Boolean` | No |  |
-| `comments_today_failed` | `Integer` | No |  |
-| `comments_today_posted` | `Integer` | No |  |
-| `comments_today_scheduled` | `Integer` | No |  |
-| `comments_yesterday_failed` | `Integer` | No |  |
-| `comments_yesterday_posted` | `Integer` | No |  |
-| `comments_yesterday_total` | `Integer` | No |  |
-| `created_at` | `String` | Yes |  |
-| `credits` | `Integer` | Yes |  |
-| `effective_posted_video_reuse_percent` | `Integer` | Yes |  |
-| `email` | `String` | Yes |  |
-| `expected_agents_count` | `Integer` | Yes |  |
 | `id` | `String` | Yes |  |
-| `is_activated_by_admin` | `Boolean` | Yes |  |
-| `is_admin` | `Boolean` | Yes |  |
-| `is_bookmarked` | `Boolean` | No |  |
-| `is_internal_user` | `Boolean` | Yes |  |
-| `is_migrated` | `Boolean` | Yes |  |
-| `landing_slug` | `Object` | No |  |
-| `landing_status` | `Object` | No |  |
-| `landing_url` | `Object` | No |  |
-| `membership` | `Object` | Yes |  |
-| `microhub_status` | `Object` | No |  |
-| `microhub_url` | `Object` | No |  |
 | `name` | `String` | Yes |  |
-| `onboarding_flow` | `String` | Yes |  |
-| `posted_video_reuse_percent` | `Object` | No |  |
-| `product_id` | `String` | Yes |  |
-| `product_name` | `Object` | Yes |  |
-| `product_url` | `Object` | Yes |  |
-| `subscription_status` | `Object` | Yes |  |
-| `survey_data` | `Object` | No |  |
-| `today_failed` | `Integer` | Yes |  |
-| `today_posted` | `Integer` | Yes |  |
-| `today_scheduled` | `Integer` | Yes |  |
-| `tomorrow_capacity` | `Integer` | Yes |  |
-| `tomorrow_scheduled` | `Integer` | Yes |  |
-| `videos_completed` | `Integer` | Yes |  |
-| `videos_failed` | `Integer` | Yes |  |
-| `videos_pending` | `Integer` | Yes |  |
-| `videos_stale` | `Integer` | Yes |  |
-| `videos_total` | `Integer` | Yes |  |
-| `yesterday_failed` | `Integer` | Yes |  |
-| `yesterday_failed_entries` | `Array` | Yes |  |
-| `yesterday_posted` | `Integer` | Yes |  |
-| `yesterday_total` | `Integer` | Yes |  |
+| `type` | `String` | Yes |  |
 
 ### Operations
 
@@ -11682,7 +11480,7 @@ user_health_detail = client.UserHealthDetail
 List entities matching the given criteria (call with no argument to list all). Returns an array of entities, one per record; `data_get` reads each record. Raises on error.
 
 ```ruby
-results = client.UserHealthDetail.list({ "id" => "example" })
+results = client.UserHealthDetail.list({ "user_id" => "example" })
 results.each { |item| puts item.data_get }
 ```
 

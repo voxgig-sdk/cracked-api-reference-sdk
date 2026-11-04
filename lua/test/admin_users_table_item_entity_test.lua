@@ -164,6 +164,9 @@ describe("AdminUsersTableItemEntity", function()
       admin_users_table_item_ref01_data = helpers.to_map(admin_users_table_item_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LIST
     local admin_users_table_item_ref01_ent = client:AdminUsersTableItem(nil)
     local admin_users_table_item_ref01_match = {}

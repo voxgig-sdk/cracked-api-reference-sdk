@@ -37,7 +37,7 @@ class TestUserHealthDetailEntity:
         client = CrackedApiReferenceSDK.test(
             None, {"feature": {"validate": {"active": True}}})
         with pytest.raises(Exception) as err:
-            client.UserHealthDetail(None).list({"id": 1}, None)
+            client.UserHealthDetail(None).list({"user_id": 1}, None)
         assert "validate_failed" == getattr(err.value, "code", None)
 
     def test_should_run_basic_flow(self):
@@ -46,11 +46,15 @@ class TestUserHealthDetailEntity:
         # multiple ops; skipping any one skips the whole flow (steps depend
         # on each other).
         _live = setup.get("live", False)
-        for _op in []:
+        for _op in ["list"]:
             _skip, _reason = runner.is_control_skipped("entityOp", "user_health_detail." + _op, "live" if _live else "unit")
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
                 return
+        if setup["live"]:
+            for _live_key in ["user01"]:
+                if setup.get("synthetic_only") or setup["idmap"].get(_live_key) is None:
+                    runner.live_miss(LIVE_STRICT, f"Live entity test blocked: needs {_live_key} via CRACKED_API_REFERENCE_TEST_USER_HEALTH_DETAIL_ENTID")
         client = setup["client"]
 
         # Bootstrap entity data from existing test data.
@@ -59,6 +63,17 @@ class TestUserHealthDetailEntity:
         user_health_detail_ref01_data = None
         if len(user_health_detail_ref01_data_raw) > 0:
             user_health_detail_ref01_data = helpers.to_map(user_health_detail_ref01_data_raw[0][1])
+
+        if setup["live"]:
+            runner.live_pace()
+        # LIST
+        user_health_detail_ref01_ent = client.UserHealthDetail(None)
+        user_health_detail_ref01_match = {
+            "user_id": setup["idmap"]["user01"],
+        }
+
+        user_health_detail_ref01_list_result = user_health_detail_ref01_ent.list(user_health_detail_ref01_match, None)
+        assert isinstance(user_health_detail_ref01_list_result, list)
 
 
 
@@ -78,7 +93,7 @@ def _user_health_detail_basic_setup(extra):
 
     # Generate idmap via transform.
     idmap = vs.transform(
-        ["user_health_detail01", "user_health_detail02", "user_health_detail03"],
+        ["user_health_detail01", "user_health_detail02", "user_health_detail03", "user01", "user02", "user03"],
         {
             "`$PACK`": ["", {
                 "`$KEY`": "`$COPY`",

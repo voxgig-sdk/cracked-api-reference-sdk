@@ -123,9 +123,6 @@ ActiveOnboardingLoadMatch = Struct.new(
 # @!attribute [rw] apply
 #   @return [Boolean, nil]
 #
-# @!attribute [rw] count
-#   @return [Integer]
-#
 # @!attribute [rw] created_at
 #   @return [String]
 #
@@ -140,12 +137,6 @@ ActiveOnboardingLoadMatch = Struct.new(
 #
 # @!attribute [rw] id
 #   @return [String]
-#
-# @!attribute [rw] include_failed
-#   @return [Boolean, nil]
-#
-# @!attribute [rw] include_pending
-#   @return [Boolean, nil]
 #
 # @!attribute [rw] include_records
 #   @return [Boolean, nil]
@@ -163,16 +154,13 @@ ActiveOnboardingLoadMatch = Struct.new(
 #   @return [Object, nil]
 #
 # @!attribute [rw] product_id
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] query
 #   @return [Object, nil]
 #
 # @!attribute [rw] reason
 #   @return [Object, nil]
-#
-# @!attribute [rw] regenerate
-#   @return [Boolean, nil]
 #
 # @!attribute [rw] status
 #   @return [String, nil]
@@ -185,19 +173,13 @@ ActiveOnboardingLoadMatch = Struct.new(
 #
 # @!attribute [rw] user_onboarding_step
 #   @return [Object, nil]
-#
-# @!attribute [rw] video_type
-#   @return [String]
 Admin = Struct.new(
   :apply,
-  :count,
   :created_at,
   :date_from,
   :date_to,
   :email,
   :id,
-  :include_failed,
-  :include_pending,
   :include_records,
   :issue_ids,
   :only_active,
@@ -206,12 +188,10 @@ Admin = Struct.new(
   :product_id,
   :query,
   :reason,
-  :regenerate,
   :status,
   :user_membership,
   :user_name,
   :user_onboarding_step,
-  :video_type,
   keyword_init: true
 )
 
@@ -241,9 +221,6 @@ AdminLoadMatch = Struct.new(
 # @!attribute [rw] apply
 #   @return [Boolean, nil]
 #
-# @!attribute [rw] count
-#   @return [Integer, nil]
-#
 # @!attribute [rw] created_at
 #   @return [String, nil]
 #
@@ -258,12 +235,6 @@ AdminLoadMatch = Struct.new(
 #
 # @!attribute [rw] id
 #   @return [String, nil]
-#
-# @!attribute [rw] include_failed
-#   @return [Boolean, nil]
-#
-# @!attribute [rw] include_pending
-#   @return [Boolean, nil]
 #
 # @!attribute [rw] include_records
 #   @return [Boolean, nil]
@@ -289,9 +260,6 @@ AdminLoadMatch = Struct.new(
 # @!attribute [rw] reason
 #   @return [Object, nil]
 #
-# @!attribute [rw] regenerate
-#   @return [Boolean, nil]
-#
 # @!attribute [rw] status
 #   @return [String, nil]
 #
@@ -303,19 +271,13 @@ AdminLoadMatch = Struct.new(
 #
 # @!attribute [rw] user_onboarding_step
 #   @return [Object, nil]
-#
-# @!attribute [rw] video_type
-#   @return [String, nil]
 AdminListMatch = Struct.new(
   :apply,
-  :count,
   :created_at,
   :date_from,
   :date_to,
   :email,
   :id,
-  :include_failed,
-  :include_pending,
   :include_records,
   :issue_ids,
   :only_active,
@@ -324,12 +286,10 @@ AdminListMatch = Struct.new(
   :product_id,
   :query,
   :reason,
-  :regenerate,
   :status,
   :user_membership,
   :user_name,
   :user_onboarding_step,
-  :video_type,
   keyword_init: true
 )
 
@@ -341,9 +301,6 @@ AdminListMatch = Struct.new(
 # @!attribute [rw] apply
 #   @return [Boolean, nil]
 #
-# @!attribute [rw] count
-#   @return [Integer]
-#
 # @!attribute [rw] created_at
 #   @return [String]
 #
@@ -358,12 +315,6 @@ AdminListMatch = Struct.new(
 #
 # @!attribute [rw] id
 #   @return [String]
-#
-# @!attribute [rw] include_failed
-#   @return [Boolean, nil]
-#
-# @!attribute [rw] include_pending
-#   @return [Boolean, nil]
 #
 # @!attribute [rw] include_records
 #   @return [Boolean, nil]
@@ -389,9 +340,6 @@ AdminListMatch = Struct.new(
 # @!attribute [rw] reason
 #   @return [Object, nil]
 #
-# @!attribute [rw] regenerate
-#   @return [Boolean, nil]
-#
 # @!attribute [rw] status
 #   @return [String, nil]
 #
@@ -403,20 +351,14 @@ AdminListMatch = Struct.new(
 #
 # @!attribute [rw] user_onboarding_step
 #   @return [Object, nil]
-#
-# @!attribute [rw] video_type
-#   @return [String]
 AdminCreateData = Struct.new(
   :user_id,
   :apply,
-  :count,
   :created_at,
   :date_from,
   :date_to,
   :email,
   :id,
-  :include_failed,
-  :include_pending,
   :include_records,
   :issue_ids,
   :only_active,
@@ -425,121 +367,10 @@ AdminCreateData = Struct.new(
   :product_id,
   :query,
   :reason,
-  :regenerate,
   :status,
   :user_membership,
   :user_name,
   :user_onboarding_step,
-  :video_type,
-  keyword_init: true
-)
-
-# Request payload for Admin#update.
-#
-# @!attribute [rw] agent_id
-#   @return [String]
-#
-# @!attribute [rw] agent_type
-#   @return [String, nil]
-#
-# @!attribute [rw] is_active
-#   @return [Boolean, nil]
-#
-# @!attribute [rw] apply
-#   @return [Boolean, nil]
-#
-# @!attribute [rw] count
-#   @return [Integer, nil]
-#
-# @!attribute [rw] created_at
-#   @return [String, nil]
-#
-# @!attribute [rw] date_from
-#   @return [Object, nil]
-#
-# @!attribute [rw] date_to
-#   @return [Object, nil]
-#
-# @!attribute [rw] email
-#   @return [String, nil]
-#
-# @!attribute [rw] id
-#   @return [String, nil]
-#
-# @!attribute [rw] include_failed
-#   @return [Boolean, nil]
-#
-# @!attribute [rw] include_pending
-#   @return [Boolean, nil]
-#
-# @!attribute [rw] include_records
-#   @return [Boolean, nil]
-#
-# @!attribute [rw] issue_ids
-#   @return [Object, nil]
-#
-# @!attribute [rw] only_active
-#   @return [Boolean, nil]
-#
-# @!attribute [rw] platform
-#   @return [Object, nil]
-#
-# @!attribute [rw] posting_method
-#   @return [Object, nil]
-#
-# @!attribute [rw] product_id
-#   @return [String, nil]
-#
-# @!attribute [rw] query
-#   @return [Object, nil]
-#
-# @!attribute [rw] reason
-#   @return [Object, nil]
-#
-# @!attribute [rw] regenerate
-#   @return [Boolean, nil]
-#
-# @!attribute [rw] status
-#   @return [String, nil]
-#
-# @!attribute [rw] user_membership
-#   @return [Object, nil]
-#
-# @!attribute [rw] user_name
-#   @return [Object, nil]
-#
-# @!attribute [rw] user_onboarding_step
-#   @return [Object, nil]
-#
-# @!attribute [rw] video_type
-#   @return [String, nil]
-AdminUpdateData = Struct.new(
-  :agent_id,
-  :agent_type,
-  :is_active,
-  :apply,
-  :count,
-  :created_at,
-  :date_from,
-  :date_to,
-  :email,
-  :id,
-  :include_failed,
-  :include_pending,
-  :include_records,
-  :issue_ids,
-  :only_active,
-  :platform,
-  :posting_method,
-  :product_id,
-  :query,
-  :reason,
-  :regenerate,
-  :status,
-  :user_membership,
-  :user_name,
-  :user_onboarding_step,
-  :video_type,
   keyword_init: true
 )
 
@@ -1330,34 +1161,82 @@ AdminHealthrxUpdateData = Struct.new(
 
 # AdminInsight entity data model.
 #
-# @!attribute [rw] customer_success_cases
-#   @return [Array]
+# @!attribute [rw] active_agents
+#   @return [Integer]
 #
-# @!attribute [rw] customers
-#   @return [Array]
+# @!attribute [rw] active_products
+#   @return [Integer]
 #
-# @!attribute [rw] generated_at
+# @!attribute [rw] agents_count
+#   @return [Integer]
+#
+# @!attribute [rw] auto_schedule_status
 #   @return [String]
 #
-# @!attribute [rw] pfa_database
-#   @return [Hash]
+# @!attribute [rw] days_until_period_end
+#   @return [Object, nil]
 #
-# @!attribute [rw] recent_signups
+# @!attribute [rw] email
+#   @return [String]
+#
+# @!attribute [rw] feature_impact
+#   @return [String]
+#
+# @!attribute [rw] last_notification_at
+#   @return [Object, nil]
+#
+# @!attribute [rw] membership
+#   @return [Object, nil]
+#
+# @!attribute [rw] name
+#   @return [String, nil]
+#
+# @!attribute [rw] notification_count
+#   @return [Integer]
+#
+# @!attribute [rw] notification_events
 #   @return [Array]
 #
-# @!attribute [rw] summary
-#   @return [Hash]
+# @!attribute [rw] priority
+#   @return [String]
 #
-# @!attribute [rw] vireel_database
-#   @return [Hash]
+# @!attribute [rw] severity
+#   @return [String]
+#
+# @!attribute [rw] status_label
+#   @return [String]
+#
+# @!attribute [rw] subscription_current_period_end
+#   @return [Object, nil]
+#
+# @!attribute [rw] subscription_status
+#   @return [Object, nil]
+#
+# @!attribute [rw] upcoming_posts
+#   @return [Integer]
+#
+# @!attribute [rw] user_id
+#   @return [String]
 AdminInsight = Struct.new(
-  :customer_success_cases,
-  :customers,
-  :generated_at,
-  :pfa_database,
-  :recent_signups,
-  :summary,
-  :vireel_database,
+  :active_agents,
+  :active_products,
+  :agents_count,
+  :auto_schedule_status,
+  :days_until_period_end,
+  :email,
+  :feature_impact,
+  :last_notification_at,
+  :membership,
+  :name,
+  :notification_count,
+  :notification_events,
+  :priority,
+  :severity,
+  :status_label,
+  :subscription_current_period_end,
+  :subscription_status,
+  :upcoming_posts,
+  :user_id,
   keyword_init: true
 )
 
@@ -1384,34 +1263,82 @@ AdminInsightLoadMatch = Struct.new(
 
 # Request payload for AdminInsight#list.
 #
-# @!attribute [rw] customer_success_cases
-#   @return [Array, nil]
+# @!attribute [rw] active_agents
+#   @return [Integer, nil]
 #
-# @!attribute [rw] customers
-#   @return [Array, nil]
+# @!attribute [rw] active_products
+#   @return [Integer, nil]
 #
-# @!attribute [rw] generated_at
+# @!attribute [rw] agents_count
+#   @return [Integer, nil]
+#
+# @!attribute [rw] auto_schedule_status
 #   @return [String, nil]
 #
-# @!attribute [rw] pfa_database
-#   @return [Hash, nil]
+# @!attribute [rw] days_until_period_end
+#   @return [Object, nil]
 #
-# @!attribute [rw] recent_signups
+# @!attribute [rw] email
+#   @return [String, nil]
+#
+# @!attribute [rw] feature_impact
+#   @return [String, nil]
+#
+# @!attribute [rw] last_notification_at
+#   @return [Object, nil]
+#
+# @!attribute [rw] membership
+#   @return [Object, nil]
+#
+# @!attribute [rw] name
+#   @return [String, nil]
+#
+# @!attribute [rw] notification_count
+#   @return [Integer, nil]
+#
+# @!attribute [rw] notification_events
 #   @return [Array, nil]
 #
-# @!attribute [rw] summary
-#   @return [Hash, nil]
+# @!attribute [rw] priority
+#   @return [String, nil]
 #
-# @!attribute [rw] vireel_database
-#   @return [Hash, nil]
+# @!attribute [rw] severity
+#   @return [String, nil]
+#
+# @!attribute [rw] status_label
+#   @return [String, nil]
+#
+# @!attribute [rw] subscription_current_period_end
+#   @return [Object, nil]
+#
+# @!attribute [rw] subscription_status
+#   @return [Object, nil]
+#
+# @!attribute [rw] upcoming_posts
+#   @return [Integer, nil]
+#
+# @!attribute [rw] user_id
+#   @return [String, nil]
 AdminInsightListMatch = Struct.new(
-  :customer_success_cases,
-  :customers,
-  :generated_at,
-  :pfa_database,
-  :recent_signups,
-  :summary,
-  :vireel_database,
+  :active_agents,
+  :active_products,
+  :agents_count,
+  :auto_schedule_status,
+  :days_until_period_end,
+  :email,
+  :feature_impact,
+  :last_notification_at,
+  :membership,
+  :name,
+  :notification_count,
+  :notification_events,
+  :priority,
+  :severity,
+  :status_label,
+  :subscription_current_period_end,
+  :subscription_status,
+  :upcoming_posts,
+  :user_id,
   keyword_init: true
 )
 
@@ -1443,38 +1370,14 @@ AdminLandingTaskCreateData = Struct.new(
 
 # AdminMetricsSummary entity data model.
 #
-# @!attribute [rw] paid_users_by_level
-#   @return [Array]
-#
-# @!attribute [rw] total_cancellations
+# @!attribute [rw] count
 #   @return [Integer]
 #
-# @!attribute [rw] total_previews_generated
-#   @return [Integer]
-#
-# @!attribute [rw] total_signups
-#   @return [Integer]
-#
-# @!attribute [rw] total_videos_generated
-#   @return [Integer]
-#
-# @!attribute [rw] url_attempts
-#   @return [Integer]
-#
-# @!attribute [rw] user_credits
-#   @return [Array]
-#
-# @!attribute [rw] user_gifted_credits
-#   @return [Array]
+# @!attribute [rw] level
+#   @return [String]
 AdminMetricsSummary = Struct.new(
-  :paid_users_by_level,
-  :total_cancellations,
-  :total_previews_generated,
-  :total_signups,
-  :total_videos_generated,
-  :url_attempts,
-  :user_credits,
-  :user_gifted_credits,
+  :count,
+  :level,
   keyword_init: true
 )
 
@@ -3645,6 +3548,43 @@ AgentListMatch = Struct.new(
   keyword_init: true
 )
 
+# Request payload for Agent#update.
+#
+# @!attribute [rw] id
+#   @return [String]
+#
+# @!attribute [rw] is_active
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] agent_type
+#   @return [String, nil]
+#
+# @!attribute [rw] active_connections
+#   @return [Integer, nil]
+#
+# @!attribute [rw] at_capacity
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] name
+#   @return [String, nil]
+#
+# @!attribute [rw] tiktok_stats
+#   @return [Object, nil]
+#
+# @!attribute [rw] type
+#   @return [String, nil]
+AgentUpdateData = Struct.new(
+  :id,
+  :is_active,
+  :agent_type,
+  :active_connections,
+  :at_capacity,
+  :name,
+  :tiktok_stats,
+  :type,
+  keyword_init: true
+)
+
 # AgentAccessCustomersHealth entity data model.
 #
 # @!attribute [rw] accountType
@@ -3909,34 +3849,50 @@ AgentAccessPhilVideoLoadMatch = Struct.new(
 
 # AgentAccessUserAgent entity data model.
 #
-# @!attribute [rw] agentQuota
-#   @return [Integer]
+# @!attribute [rw] avatar
+#   @return [Object, nil]
 #
-# @!attribute [rw] agents
-#   @return [Array]
+# @!attribute [rw] facebookUrl
+#   @return [Object, nil]
 #
-# @!attribute [rw] assignedByType
-#   @return [Hash]
-#
-# @!attribute [rw] assignedTotal
-#   @return [Integer]
-#
-# @!attribute [rw] email
+# @!attribute [rw] id
 #   @return [String]
 #
-# @!attribute [rw] products
-#   @return [Array]
+# @!attribute [rw] instagramUrl
+#   @return [Object, nil]
 #
-# @!attribute [rw] userId
+# @!attribute [rw] name
 #   @return [String]
+#
+# @!attribute [rw] productId
+#   @return [Object, nil]
+#
+# @!attribute [rw] productName
+#   @return [Object, nil]
+#
+# @!attribute [rw] tiktokUrl
+#   @return [Object, nil]
+#
+# @!attribute [rw] type
+#   @return [Object, nil]
+#
+# @!attribute [rw] uploadPostPlatforms
+#   @return [Object, nil]
+#
+# @!attribute [rw] youtubeUrl
+#   @return [Object, nil]
 AgentAccessUserAgent = Struct.new(
-  :agentQuota,
-  :agents,
-  :assignedByType,
-  :assignedTotal,
-  :email,
-  :products,
-  :userId,
+  :avatar,
+  :facebookUrl,
+  :id,
+  :instagramUrl,
+  :name,
+  :productId,
+  :productName,
+  :tiktokUrl,
+  :type,
+  :uploadPostPlatforms,
+  :youtubeUrl,
   keyword_init: true
 )
 
@@ -4310,58 +4266,30 @@ AgentDetailUpdateData = Struct.new(
 
 # AgentHealth entity data model.
 #
-# @!attribute [rw] daily
-#   @return [Array]
-#
-# @!attribute [rw] dates
-#   @return [Array]
-#
-# @!attribute [rw] generated_at
-#   @return [String]
-#
-# @!attribute [rw] groups
-#   @return [Array]
-#
-# @!attribute [rw] latest
+# @!attribute [rw] accounts
 #   @return [Hash]
 #
-# @!attribute [rw] live_date
-#   @return [Object, nil]
-#
-# @!attribute [rw] phone_admin_generated_at
+# @!attribute [rw] date
 #   @return [String]
 #
-# @!attribute [rw] platform
-#   @return [String, nil]
+# @!attribute [rw] overall
+#   @return [Hash]
 #
-# @!attribute [rw] post_target
-#   @return [Integer]
+# @!attribute [rw] posts
+#   @return [Hash]
 #
-# @!attribute [rw] qa_managed_agent_ids
-#   @return [Array, nil]
+# @!attribute [rw] views
+#   @return [Hash]
 #
-# @!attribute [rw] scope_prefixes
-#   @return [Array]
-#
-# @!attribute [rw] timezone
-#   @return [String]
-#
-# @!attribute [rw] warmup_target
-#   @return [Integer]
+# @!attribute [rw] warmups
+#   @return [Hash]
 AgentHealth = Struct.new(
-  :daily,
-  :dates,
-  :generated_at,
-  :groups,
-  :latest,
-  :live_date,
-  :phone_admin_generated_at,
-  :platform,
-  :post_target,
-  :qa_managed_agent_ids,
-  :scope_prefixes,
-  :timezone,
-  :warmup_target,
+  :accounts,
+  :date,
+  :overall,
+  :posts,
+  :views,
+  :warmups,
   keyword_init: true
 )
 
@@ -4426,58 +4354,30 @@ AgentHealthCustomerOptionListMatch = Struct.new(
 
 # AgentHealthDetail entity data model.
 #
-# @!attribute [rw] archived_issue_total
-#   @return [Integer, nil]
-#
-# @!attribute [rw] date
+# @!attribute [rw] agent_id
 #   @return [String]
 #
-# @!attribute [rw] generated_at
+# @!attribute [rw] category
 #   @return [String]
 #
-# @!attribute [rw] group_id
+# @!attribute [rw] connection_status
 #   @return [String]
 #
-# @!attribute [rw] has_more
-#   @return [Boolean]
-#
-# @!attribute [rw] issue_total
-#   @return [Integer]
-#
-# @!attribute [rw] issues
-#   @return [Array]
-#
-# @!attribute [rw] limit
-#   @return [Integer]
-#
-# @!attribute [rw] metric
+# @!attribute [rw] device_status
 #   @return [String]
 #
-# @!attribute [rw] offset
-#   @return [Integer]
+# @!attribute [rw] issue
+#   @return [Object, nil]
 #
-# @!attribute [rw] warmup_runs
-#   @return [Array, nil]
-#
-# @!attribute [rw] warning_total
-#   @return [Integer, nil]
-#
-# @!attribute [rw] warnings
-#   @return [Array, nil]
+# @!attribute [rw] state
+#   @return [String]
 AgentHealthDetail = Struct.new(
-  :archived_issue_total,
-  :date,
-  :generated_at,
-  :group_id,
-  :has_more,
-  :issue_total,
-  :issues,
-  :limit,
-  :metric,
-  :offset,
-  :warmup_runs,
-  :warning_total,
-  :warnings,
+  :agent_id,
+  :category,
+  :connection_status,
+  :device_status,
+  :issue,
+  :state,
   keyword_init: true
 )
 
@@ -4577,13 +4477,13 @@ AgentPost = Struct.new(
 
 # Request payload for AgentPost#list.
 #
-# @!attribute [rw] id
+# @!attribute [rw] agent_id
 #   @return [String]
 #
 # @!attribute [rw] day
 #   @return [String, nil]
 AgentPostListMatch = Struct.new(
-  :id,
+  :agent_id,
   :day,
   keyword_init: true
 )
@@ -5024,9 +4924,6 @@ BulkTikTokStatsUpdateUpdateData = Struct.new(
 # @!attribute [rw] generation
 #   @return [Hash, nil]
 #
-# @!attribute [rw] id
-#   @return [String, nil]
-#
 # @!attribute [rw] image_prompt
 #   @return [Object, nil]
 #
@@ -5102,7 +4999,6 @@ Carousel = Struct.new(
   :formula_id,
   :formula_name,
   :generation,
-  :id,
   :image_prompt,
   :likes,
   :main_prompt,
@@ -5360,9 +5256,6 @@ CarouselAgentDetailLoadMatch = Struct.new(
 # @!attribute [rw] error
 #   @return [Object, nil]
 #
-# @!attribute [rw] id
-#   @return [String, nil]
-#
 # @!attribute [rw] image_model
 #   @return [Object, nil]
 #
@@ -5386,7 +5279,6 @@ CarouselAgentDetailLoadMatch = Struct.new(
 CarouselStatus = Struct.new(
   :caption,
   :error,
-  :id,
   :image_model,
   :image_provider,
   :image_task_id,
@@ -5399,48 +5291,10 @@ CarouselStatus = Struct.new(
 
 # Request payload for CarouselStatus#list.
 #
-# @!attribute [rw] id
+# @!attribute [rw] carousel_id
 #   @return [String]
 CarouselStatusListMatch = Struct.new(
-  :id,
-  keyword_init: true
-)
-
-# Chat entity data model.
-#
-# @!attribute [rw] idempotencyKey
-#   @return [String]
-#
-# @!attribute [rw] message
-#   @return [String]
-#
-# @!attribute [rw] sessionId
-#   @return [String]
-Chat = Struct.new(
-  :idempotencyKey,
-  :message,
-  :sessionId,
-  keyword_init: true
-)
-
-# Request payload for Chat#create.
-#
-# @!attribute [rw] session_id
-#   @return [String]
-#
-# @!attribute [rw] idempotencyKey
-#   @return [String]
-#
-# @!attribute [rw] message
-#   @return [String]
-#
-# @!attribute [rw] sessionId
-#   @return [String]
-ChatCreateData = Struct.new(
-  :session_id,
-  :idempotencyKey,
-  :message,
-  :sessionId,
+  :carousel_id,
   keyword_init: true
 )
 
@@ -5523,6 +5377,12 @@ ChatHistoryCreateData = Struct.new(
 # @!attribute [rw] createdAt
 #   @return [String]
 #
+# @!attribute [rw] idempotencyKey
+#   @return [String]
+#
+# @!attribute [rw] message
+#   @return [String]
+#
 # @!attribute [rw] model
 #   @return [Object, nil]
 #
@@ -5552,6 +5412,8 @@ ChatHistoryCreateData = Struct.new(
 ChatSession = Struct.new(
   :chatSubVariant,
   :createdAt,
+  :idempotencyKey,
+  :message,
   :model,
   :plan,
   :route,
@@ -5569,15 +5431,27 @@ ChatSession = Struct.new(
 # @!attribute [rw] session_id
 #   @return [String]
 #
+# @!attribute [rw] idempotencyKey
+#   @return [String]
+#
+# @!attribute [rw] message
+#   @return [String]
+#
 # @!attribute [rw] plan
 #   @return [Object, nil]
 #
 # @!attribute [rw] route
 #   @return [Object, nil]
+#
+# @!attribute [rw] sessionId
+#   @return [String]
 ChatSessionCreateData = Struct.new(
   :session_id,
+  :idempotencyKey,
+  :message,
   :plan,
   :route,
+  :sessionId,
   keyword_init: true
 )
 
@@ -6735,9 +6609,6 @@ CustomerListMatch = Struct.new(
 # @!attribute [rw] entries
 #   @return [Array]
 #
-# @!attribute [rw] id
-#   @return [String, nil]
-#
 # @!attribute [rw] performance_overview
 #   @return [Hash]
 #
@@ -6752,7 +6623,6 @@ CustomerHealth = Struct.new(
   :date,
   :email,
   :entries,
-  :id,
   :performance_overview,
   :platform_coverage_summary,
   :user_id,
@@ -6820,62 +6690,22 @@ CustomerHealthAllCustomersItemListMatch = Struct.new(
 
 # CustomerHealthViewsSummary entity data model.
 #
-# @!attribute [rw] average_views_per_result
-#   @return [Integer]
-#
-# @!attribute [rw] date
+# @!attribute [rw] email
 #   @return [String]
-#
-# @!attribute [rw] end_date
-#   @return [Object, nil]
-#
-# @!attribute [rw] paid_users_count
-#   @return [Integer]
 #
 # @!attribute [rw] posted_results
 #   @return [Integer]
 #
-# @!attribute [rw] range
-#   @return [String]
-#
-# @!attribute [rw] start_date
-#   @return [Object, nil]
-#
-# @!attribute [rw] top_users
-#   @return [Array]
-#
-# @!attribute [rw] total_views
-#   @return [Integer]
-#
-# @!attribute [rw] trend
-#   @return [Array]
-#
-# @!attribute [rw] trend_granularity
-#   @return [String]
-#
-# @!attribute [rw] user_email
-#   @return [Object, nil]
-#
 # @!attribute [rw] user_id
-#   @return [String, nil]
+#   @return [String]
 #
-# @!attribute [rw] users_with_views
+# @!attribute [rw] views
 #   @return [Integer]
 CustomerHealthViewsSummary = Struct.new(
-  :average_views_per_result,
-  :date,
-  :end_date,
-  :paid_users_count,
+  :email,
   :posted_results,
-  :range,
-  :start_date,
-  :top_users,
-  :total_views,
-  :trend,
-  :trend_granularity,
-  :user_email,
   :user_id,
-  :users_with_views,
+  :views,
   keyword_init: true
 )
 
@@ -6919,23 +6749,18 @@ DailyCreateData = Struct.new(
 )
 
 # DailyStatus entity data model.
-#
-# @!attribute [rw] id
-#   @return [String, nil]
-DailyStatus = Struct.new(
-  :id,
-  keyword_init: true
-)
+class DailyStatus
+end
 
 # Request payload for DailyStatus#load.
 #
-# @!attribute [rw] id
+# @!attribute [rw] daily_id
 #   @return [String]
 #
 # @!attribute [rw] day
 #   @return [String]
 DailyStatusLoadMatch = Struct.new(
-  :id,
+  :daily_id,
   :day,
   keyword_init: true
 )
@@ -7162,19 +6987,6 @@ EnterpriseAgentCreateData = Struct.new(
   :product_id,
   :source_product_id,
   :target_product_id,
-  keyword_init: true
-)
-
-# EnterpriseProduct entity data model.
-class EnterpriseProduct
-end
-
-# Request payload for EnterpriseProduct#load.
-#
-# @!attribute [rw] product_id
-#   @return [String]
-EnterpriseProductLoadMatch = Struct.new(
-  :product_id,
   keyword_init: true
 )
 
@@ -7785,44 +7597,6 @@ InitResetProductV6CreateData = Struct.new(
   keyword_init: true
 )
 
-# Iri entity data model.
-#
-# @!attribute [rw] correlationId
-#   @return [Object, nil]
-#
-# @!attribute [rw] idempotencyKey
-#   @return [String]
-#
-# @!attribute [rw] productId
-#   @return [Object, nil]
-Iri = Struct.new(
-  :correlationId,
-  :idempotencyKey,
-  :productId,
-  keyword_init: true
-)
-
-# Request payload for Iri#create.
-#
-# @!attribute [rw] connector_id
-#   @return [String]
-#
-# @!attribute [rw] correlationId
-#   @return [Object, nil]
-#
-# @!attribute [rw] idempotencyKey
-#   @return [String]
-#
-# @!attribute [rw] productId
-#   @return [Object, nil]
-IriCreateData = Struct.new(
-  :connector_id,
-  :correlationId,
-  :idempotencyKey,
-  :productId,
-  keyword_init: true
-)
-
 # IrisCapability entity data model.
 #
 # @!attribute [rw] capability
@@ -8041,6 +7815,19 @@ IrisConnectorListMatch = Struct.new(
   keyword_init: true
 )
 
+# Request payload for IrisConnector#create.
+#
+# @!attribute [rw] connector_id
+#   @return [String]
+#
+# @!attribute [rw] connectors
+#   @return [Array, nil]
+IrisConnectorCreateData = Struct.new(
+  :connector_id,
+  :connectors,
+  keyword_init: true
+)
+
 # IrisStatus entity data model.
 #
 # @!attribute [rw] connectorsPreview
@@ -8085,11 +7872,17 @@ IrisStatusListMatch = Struct.new(
 # @!attribute [rw] completed
 #   @return [Array, nil]
 #
+# @!attribute [rw] correlationId
+#   @return [Object, nil]
+#
 # @!attribute [rw] description
 #   @return [String, nil]
 #
 # @!attribute [rw] discover
 #   @return [Array, nil]
+#
+# @!attribute [rw] idempotencyKey
+#   @return [String]
 #
 # @!attribute [rw] productId
 #   @return [Object, nil]
@@ -8107,8 +7900,10 @@ IrisTask = Struct.new(
   :cadence,
   :capability,
   :completed,
+  :correlationId,
   :description,
   :discover,
+  :idempotencyKey,
   :productId,
   :recurring,
   :requiredConnectors,
@@ -8136,8 +7931,14 @@ IrisTaskListMatch = Struct.new(
 # @!attribute [rw] capability
 #   @return [Object, nil]
 #
+# @!attribute [rw] correlationId
+#   @return [Object, nil]
+#
 # @!attribute [rw] description
 #   @return [String, nil]
+#
+# @!attribute [rw] idempotencyKey
+#   @return [String]
 #
 # @!attribute [rw] productId
 #   @return [Object, nil]
@@ -8151,7 +7952,9 @@ IrisTaskCreateData = Struct.new(
   :approvalRequired,
   :cadence,
   :capability,
+  :correlationId,
   :description,
+  :idempotencyKey,
   :productId,
   :requiredConnectors,
   :title,
@@ -9528,34 +9331,54 @@ ProductRemoveMatch = Struct.new(
 
 # ProductDashboard entity data model.
 #
-# @!attribute [rw] agents
-#   @return [Array]
+# @!attribute [rw] comments
+#   @return [Integer]
 #
-# @!attribute [rw] date
+# @!attribute [rw] failed_entries
+#   @return [Integer]
+#
+# @!attribute [rw] has_tiktok_community_violation
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] id
 #   @return [String]
 #
-# @!attribute [rw] pagination
-#   @return [Hash]
+# @!attribute [rw] likes
+#   @return [Integer]
 #
-# @!attribute [rw] phone_admin_error
-#   @return [Object, nil]
+# @!attribute [rw] metrics_pending_count
+#   @return [Integer, nil]
 #
-# @!attribute [rw] products
+# @!attribute [rw] name
+#   @return [String]
+#
+# @!attribute [rw] platforms
 #   @return [Array]
 #
-# @!attribute [rw] selected_product
-#   @return [Object]
+# @!attribute [rw] posted_entries
+#   @return [Integer]
 #
-# @!attribute [rw] summary
-#   @return [Hash]
+# @!attribute [rw] posting_entries
+#   @return [Integer]
+#
+# @!attribute [rw] scheduled_entries
+#   @return [Integer]
+#
+# @!attribute [rw] views
+#   @return [Integer]
 ProductDashboard = Struct.new(
-  :agents,
-  :date,
-  :pagination,
-  :phone_admin_error,
-  :products,
-  :selected_product,
-  :summary,
+  :comments,
+  :failed_entries,
+  :has_tiktok_community_violation,
+  :id,
+  :likes,
+  :metrics_pending_count,
+  :name,
+  :platforms,
+  :posted_entries,
+  :posting_entries,
+  :scheduled_entries,
+  :views,
   keyword_init: true
 )
 
@@ -9690,6 +9513,9 @@ ProductDemoListMatch = Struct.new(
 # @!attribute [rw] headerImageUrl
 #   @return [Object, nil]
 #
+# @!attribute [rw] icon
+#   @return [Object, nil]
+#
 # @!attribute [rw] id
 #   @return [String]
 #
@@ -9803,6 +9629,9 @@ ProductDemoListMatch = Struct.new(
 #
 # @!attribute [rw] testimonials
 #   @return [Object, nil]
+#
+# @!attribute [rw] url
+#   @return [String]
 ProductLanding = Struct.new(
   :bio,
   :commentingOnMyPosts,
@@ -9816,6 +9645,7 @@ ProductLanding = Struct.new(
   :dmOngoingResponsePrompt,
   :firstCommentTextBeforeLink,
   :headerImageUrl,
+  :icon,
   :id,
   :landingHtmlUrl,
   :landingLastGeneratedAt,
@@ -9854,6 +9684,7 @@ ProductLanding = Struct.new(
   :slug,
   :socialLinks,
   :testimonials,
+  :url,
   keyword_init: true
 )
 
@@ -10071,14 +9902,6 @@ ReRollVideoCreateData = Struct.new(
   keyword_init: true
 )
 
-# ReadRootGet entity data model.
-class ReadRootGet
-end
-
-# Request payload for ReadRootGet#load.
-class ReadRootGetLoadMatch
-end
-
 # RecordDemoBooked entity data model.
 #
 # @!attribute [rw] calendlyEventUri
@@ -10245,6 +10068,14 @@ RetryWebsiteScrapeCreateData = Struct.new(
   :url,
   keyword_init: true
 )
+
+# RootGet entity data model.
+class RootGet
+end
+
+# Request payload for RootGet#load.
+class RootGetLoadMatch
+end
 
 # SaveSurvey entity data model.
 #
@@ -10415,6 +10246,23 @@ ScanSocialsStatus = Struct.new(
 ScanSocialsStatusLoadMatch = Struct.new(
   :onboarding_data_id,
   :product_id,
+  keyword_init: true
+)
+
+# ScheduleQueue entity data model.
+class ScheduleQueue
+end
+
+# Request payload for ScheduleQueue#update.
+#
+# @!attribute [rw] queue_id
+#   @return [String]
+#
+# @!attribute [rw] video_id
+#   @return [Object, nil]
+ScheduleQueueUpdateData = Struct.new(
+  :queue_id,
+  :video_id,
   keyword_init: true
 )
 
@@ -10659,19 +10507,6 @@ ScheduleV2CreateData = Struct.new(
   :youtube_posted_by,
   :youtube_posted_url,
   :youtube_scraped_social_post_id,
-  keyword_init: true
-)
-
-# Request payload for ScheduleV2#update.
-#
-# @!attribute [rw] queue_id
-#   @return [String]
-#
-# @!attribute [rw] video_id
-#   @return [String, nil]
-ScheduleV2UpdateData = Struct.new(
-  :queue_id,
-  :video_id,
   keyword_init: true
 )
 
@@ -11058,38 +10893,26 @@ SeoOverviewListMatch = Struct.new(
 
 # SeoTraffic entity data model.
 #
-# @!attribute [rw] end_date
+# @!attribute [rw] clicks
+#   @return [Float]
+#
+# @!attribute [rw] ctr
+#   @return [Float]
+#
+# @!attribute [rw] date
 #   @return [String]
 #
-# @!attribute [rw] series
-#   @return [Array]
+# @!attribute [rw] impressions
+#   @return [Float]
 #
-# @!attribute [rw] site_url
-#   @return [String]
-#
-# @!attribute [rw] start_date
-#   @return [String]
-#
-# @!attribute [rw] top_countries
-#   @return [Array]
-#
-# @!attribute [rw] top_pages
-#   @return [Array]
-#
-# @!attribute [rw] top_queries
-#   @return [Array]
-#
-# @!attribute [rw] totals
-#   @return [Hash]
+# @!attribute [rw] position
+#   @return [Float]
 SeoTraffic = Struct.new(
-  :end_date,
-  :series,
-  :site_url,
-  :start_date,
-  :top_countries,
-  :top_pages,
-  :top_queries,
-  :totals,
+  :clicks,
+  :ctr,
+  :date,
+  :impressions,
+  :position,
   keyword_init: true
 )
 
@@ -12032,74 +11855,78 @@ StatsRefreshIssueListMatch = Struct.new(
 
 # StatsRefreshOverview entity data model.
 #
-# @!attribute [rw] active_run
+# @!attribute [rw] aged_over_24h
+#   @return [Boolean]
+#
+# @!attribute [rw] agent_id
+#   @return [String, nil]
+#
+# @!attribute [rw] agent_name
 #   @return [Object, nil]
 #
-# @!attribute [rw] aged_over_24h
-#   @return [Integer]
+# @!attribute [rw] is_resolved
+#   @return [Boolean]
 #
-# @!attribute [rw] backlog_preview
-#   @return [Array]
+# @!attribute [rw] last_refresh_completed_at
+#   @return [Object, nil]
 #
-# @!attribute [rw] coverage_percent
-#   @return [Float]
+# @!attribute [rw] latest_error_message
+#   @return [Object, nil]
 #
-# @!attribute [rw] customer_counts
-#   @return [Hash]
-#
-# @!attribute [rw] date
+# @!attribute [rw] platform
 #   @return [String]
 #
-# @!attribute [rw] generated_at
+# @!attribute [rw] post_method
+#   @return [Object, nil]
+#
+# @!attribute [rw] post_url
+#   @return [Object, nil]
+#
+# @!attribute [rw] posted_date_et
 #   @return [String]
 #
-# @!attribute [rw] method_counts
-#   @return [Hash]
+# @!attribute [rw] product_id
+#   @return [String, nil]
 #
-# @!attribute [rw] platform_counts
-#   @return [Hash]
+# @!attribute [rw] product_name
+#   @return [Object, nil]
 #
-# @!attribute [rw] platform_units_resolved
-#   @return [Integer]
+# @!attribute [rw] reason_code
+#   @return [Object, nil]
 #
-# @!attribute [rw] platform_units_total
-#   @return [Integer]
+# @!attribute [rw] schedule_queue_id
+#   @return [String]
 #
-# @!attribute [rw] platform_units_unresolved
-#   @return [Integer]
-#
-# @!attribute [rw] posted_entries
-#   @return [Integer]
-#
-# @!attribute [rw] reason_counts
-#   @return [Hash]
-#
-# @!attribute [rw] sla_deadline_et
+# @!attribute [rw] scheduled_datetime_utc
 #   @return [String]
 #
 # @!attribute [rw] stale_after_sla
-#   @return [Integer]
+#   @return [Boolean]
 #
-# @!attribute [rw] top_affected_customers
-#   @return [Array]
+# @!attribute [rw] user_email
+#   @return [String]
+#
+# @!attribute [rw] user_id
+#   @return [String]
 StatsRefreshOverview = Struct.new(
-  :active_run,
   :aged_over_24h,
-  :backlog_preview,
-  :coverage_percent,
-  :customer_counts,
-  :date,
-  :generated_at,
-  :method_counts,
-  :platform_counts,
-  :platform_units_resolved,
-  :platform_units_total,
-  :platform_units_unresolved,
-  :posted_entries,
-  :reason_counts,
-  :sla_deadline_et,
+  :agent_id,
+  :agent_name,
+  :is_resolved,
+  :last_refresh_completed_at,
+  :latest_error_message,
+  :platform,
+  :post_method,
+  :post_url,
+  :posted_date_et,
+  :product_id,
+  :product_name,
+  :reason_code,
+  :schedule_queue_id,
+  :scheduled_datetime_utc,
   :stale_after_sla,
-  :top_affected_customers,
+  :user_email,
+  :user_id,
   keyword_init: true
 )
 
@@ -12631,6 +12458,187 @@ UserLoadMatch = Struct.new(
   keyword_init: true
 )
 
+# Request payload for User#create.
+#
+# @!attribute [rw] id
+#   @return [String]
+#
+# @!attribute [rw] product_id
+#   @return [String, nil]
+#
+# @!attribute [rw] target_date
+#   @return [String, nil]
+#
+# @!attribute [rw] phone_admin_pc_name
+#   @return [Object, nil]
+#
+# @!attribute [rw] background
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] accountType
+#   @return [Object, nil]
+#
+# @!attribute [rw] activatedByAdminAt
+#   @return [Object, nil]
+#
+# @!attribute [rw] activatedByAdminId
+#   @return [Object, nil]
+#
+# @!attribute [rw] agents
+#   @return [Array]
+#
+# @!attribute [rw] agentsCount
+#   @return [Object, nil]
+#
+# @!attribute [rw] attribution
+#   @return [Object, nil]
+#
+# @!attribute [rw] avatarImageUrl
+#   @return [Object, nil]
+#
+# @!attribute [rw] avatarVoiceUrl
+#   @return [Object, nil]
+#
+# @!attribute [rw] createdAt
+#   @return [String]
+#
+# @!attribute [rw] credits
+#   @return [Integer, nil]
+#
+# @!attribute [rw] email
+#   @return [String]
+#
+# @!attribute [rw] googleId
+#   @return [Object, nil]
+#
+# @!attribute [rw] hasSeenScheduleWelcome
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] industry
+#   @return [Object, nil]
+#
+# @!attribute [rw] instagramId
+#   @return [Object, nil]
+#
+# @!attribute [rw] isActivatedByAdmin
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] isAdmin
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] isInternalUser
+#   @return [Object, nil]
+#
+# @!attribute [rw] isMigrated
+#   @return [Object, nil]
+#
+# @!attribute [rw] isResettingProduct
+#   @return [Object, nil]
+#
+# @!attribute [rw] membership
+#   @return [Object, nil]
+#
+# @!attribute [rw] name
+#   @return [String]
+#
+# @!attribute [rw] partnerDirectLoginDisabled
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] partnerExternalUserId
+#   @return [Object, nil]
+#
+# @!attribute [rw] partnerPolicyCode
+#   @return [Object, nil]
+#
+# @!attribute [rw] partnerSource
+#   @return [Object, nil]
+#
+# @!attribute [rw] picture
+#   @return [Object, nil]
+#
+# @!attribute [rw] stripeCustomerId
+#   @return [Object, nil]
+#
+# @!attribute [rw] stripeSubscriptionId
+#   @return [Object, nil]
+#
+# @!attribute [rw] subscriptionCurrentPeriodEnd
+#   @return [Object, nil]
+#
+# @!attribute [rw] subscriptionStatus
+#   @return [Object, nil]
+#
+# @!attribute [rw] totalCount
+#   @return [Integer]
+#
+# @!attribute [rw] updatedAt
+#   @return [String]
+#
+# @!attribute [rw] userId
+#   @return [String]
+#
+# @!attribute [rw] count
+#   @return [Object, nil]
+#
+# @!attribute [rw] include_failed
+#   @return [Object, nil]
+#
+# @!attribute [rw] include_pending
+#   @return [Object, nil]
+#
+# @!attribute [rw] regenerate
+#   @return [Object, nil]
+#
+# @!attribute [rw] video_type
+#   @return [Object, nil]
+UserCreateData = Struct.new(
+  :id,
+  :product_id,
+  :target_date,
+  :phone_admin_pc_name,
+  :background,
+  :accountType,
+  :activatedByAdminAt,
+  :activatedByAdminId,
+  :agents,
+  :agentsCount,
+  :attribution,
+  :avatarImageUrl,
+  :avatarVoiceUrl,
+  :createdAt,
+  :credits,
+  :email,
+  :googleId,
+  :hasSeenScheduleWelcome,
+  :industry,
+  :instagramId,
+  :isActivatedByAdmin,
+  :isAdmin,
+  :isInternalUser,
+  :isMigrated,
+  :isResettingProduct,
+  :membership,
+  :name,
+  :partnerDirectLoginDisabled,
+  :partnerExternalUserId,
+  :partnerPolicyCode,
+  :partnerSource,
+  :picture,
+  :stripeCustomerId,
+  :stripeSubscriptionId,
+  :subscriptionCurrentPeriodEnd,
+  :subscriptionStatus,
+  :totalCount,
+  :updatedAt,
+  :userId,
+  :count,
+  :include_failed,
+  :include_pending,
+  :regenerate,
+  :video_type,
+  keyword_init: true
+)
+
 # Request payload for User#update.
 #
 # @!attribute [rw] accountType
@@ -12737,6 +12745,12 @@ UserLoadMatch = Struct.new(
 #
 # @!attribute [rw] userId
 #   @return [String, nil]
+#
+# @!attribute [rw] posted_video_reuse_percent
+#   @return [Object, nil]
+#
+# @!attribute [rw] rebuild
+#   @return [Object, nil]
 UserUpdateData = Struct.new(
   :accountType,
   :activatedByAdminAt,
@@ -12773,6 +12787,8 @@ UserUpdateData = Struct.new(
   :totalCount,
   :updatedAt,
   :userId,
+  :posted_video_reuse_percent,
+  :rebuild,
   keyword_init: true
 )
 
@@ -12790,9 +12806,6 @@ UserUpdateData = Struct.new(
 # @!attribute [rw] expires_at
 #   @return [Object, nil]
 #
-# @!attribute [rw] id
-#   @return [String, nil]
-#
 # @!attribute [rw] status
 #   @return [String]
 UserAgent = Struct.new(
@@ -12800,14 +12813,13 @@ UserAgent = Struct.new(
   :assigned_at,
   :assignment_id,
   :expires_at,
-  :id,
   :status,
   keyword_init: true
 )
 
 # Request payload for UserAgent#list.
 #
-# @!attribute [rw] id
+# @!attribute [rw] user_id
 #   @return [String]
 #
 # @!attribute [rw] limit
@@ -12819,7 +12831,7 @@ UserAgent = Struct.new(
 # @!attribute [rw] product_id
 #   @return [String, nil]
 UserAgentListMatch = Struct.new(
-  :id,
+  :user_id,
   :limit,
   :offset,
   :product_id,
@@ -12828,7 +12840,7 @@ UserAgentListMatch = Struct.new(
 
 # Request payload for UserAgent#create.
 #
-# @!attribute [rw] id
+# @!attribute [rw] user_id
 #   @return [String]
 #
 # @!attribute [rw] agent_id
@@ -12855,7 +12867,7 @@ UserAgentListMatch = Struct.new(
 # @!attribute [rw] status
 #   @return [String]
 UserAgentCreateData = Struct.new(
-  :id,
+  :user_id,
   :agent_id,
   :phone_admin_pc_name,
   :product_id,
@@ -12869,248 +12881,24 @@ UserAgentCreateData = Struct.new(
 
 # UserHealthDetail entity data model.
 #
-# @!attribute [rw] account_type
-#   @return [Object]
-#
-# @!attribute [rw] activated
-#   @return [Boolean]
-#
-# @!attribute [rw] activated_by_admin_at
-#   @return [Object, nil]
-#
-# @!attribute [rw] activated_by_admin_id
-#   @return [String, nil]
-#
-# @!attribute [rw] admin_notes
-#   @return [Object, nil]
-#
-# @!attribute [rw] agents_count
-#   @return [Integer, nil]
-#
-# @!attribute [rw] assigned_agents
-#   @return [Array]
-#
-# @!attribute [rw] assigned_agents_count
-#   @return [Integer]
-#
-# @!attribute [rw] assigned_agents_preview_limit
-#   @return [Integer, nil]
-#
-# @!attribute [rw] assigned_agents_truncated
-#   @return [Boolean, nil]
-#
-# @!attribute [rw] auto_schedule_enabled
-#   @return [Boolean]
-#
-# @!attribute [rw] comments_expected_per_day
-#   @return [Integer, nil]
-#
-# @!attribute [rw] comments_fix_block_reason
-#   @return [Object, nil]
-#
-# @!attribute [rw] comments_fix_ready
-#   @return [Boolean, nil]
-#
-# @!attribute [rw] comments_today_failed
-#   @return [Integer, nil]
-#
-# @!attribute [rw] comments_today_posted
-#   @return [Integer, nil]
-#
-# @!attribute [rw] comments_today_scheduled
-#   @return [Integer, nil]
-#
-# @!attribute [rw] comments_yesterday_failed
-#   @return [Integer, nil]
-#
-# @!attribute [rw] comments_yesterday_posted
-#   @return [Integer, nil]
-#
-# @!attribute [rw] comments_yesterday_total
-#   @return [Integer, nil]
-#
-# @!attribute [rw] created_at
-#   @return [String]
-#
-# @!attribute [rw] credits
-#   @return [Integer]
-#
-# @!attribute [rw] effective_posted_video_reuse_percent
-#   @return [Integer]
-#
-# @!attribute [rw] email
-#   @return [String]
-#
-# @!attribute [rw] expected_agents_count
-#   @return [Integer]
-#
 # @!attribute [rw] id
 #   @return [String]
-#
-# @!attribute [rw] is_activated_by_admin
-#   @return [Boolean]
-#
-# @!attribute [rw] is_admin
-#   @return [Boolean]
-#
-# @!attribute [rw] is_bookmarked
-#   @return [Boolean, nil]
-#
-# @!attribute [rw] is_internal_user
-#   @return [Boolean]
-#
-# @!attribute [rw] is_migrated
-#   @return [Boolean]
-#
-# @!attribute [rw] landing_slug
-#   @return [Object, nil]
-#
-# @!attribute [rw] landing_status
-#   @return [Object, nil]
-#
-# @!attribute [rw] landing_url
-#   @return [Object, nil]
-#
-# @!attribute [rw] membership
-#   @return [Object]
-#
-# @!attribute [rw] microhub_status
-#   @return [Object, nil]
-#
-# @!attribute [rw] microhub_url
-#   @return [Object, nil]
 #
 # @!attribute [rw] name
 #   @return [String]
 #
-# @!attribute [rw] onboarding_flow
+# @!attribute [rw] type
 #   @return [String]
-#
-# @!attribute [rw] posted_video_reuse_percent
-#   @return [Object, nil]
-#
-# @!attribute [rw] product_id
-#   @return [String]
-#
-# @!attribute [rw] product_name
-#   @return [Object]
-#
-# @!attribute [rw] product_url
-#   @return [Object]
-#
-# @!attribute [rw] subscription_status
-#   @return [Object]
-#
-# @!attribute [rw] survey_data
-#   @return [Object, nil]
-#
-# @!attribute [rw] today_failed
-#   @return [Integer]
-#
-# @!attribute [rw] today_posted
-#   @return [Integer]
-#
-# @!attribute [rw] today_scheduled
-#   @return [Integer]
-#
-# @!attribute [rw] tomorrow_capacity
-#   @return [Integer]
-#
-# @!attribute [rw] tomorrow_scheduled
-#   @return [Integer]
-#
-# @!attribute [rw] videos_completed
-#   @return [Integer]
-#
-# @!attribute [rw] videos_failed
-#   @return [Integer]
-#
-# @!attribute [rw] videos_pending
-#   @return [Integer]
-#
-# @!attribute [rw] videos_stale
-#   @return [Integer]
-#
-# @!attribute [rw] videos_total
-#   @return [Integer]
-#
-# @!attribute [rw] yesterday_failed
-#   @return [Integer]
-#
-# @!attribute [rw] yesterday_failed_entries
-#   @return [Array]
-#
-# @!attribute [rw] yesterday_posted
-#   @return [Integer]
-#
-# @!attribute [rw] yesterday_total
-#   @return [Integer]
 UserHealthDetail = Struct.new(
-  :account_type,
-  :activated,
-  :activated_by_admin_at,
-  :activated_by_admin_id,
-  :admin_notes,
-  :agents_count,
-  :assigned_agents,
-  :assigned_agents_count,
-  :assigned_agents_preview_limit,
-  :assigned_agents_truncated,
-  :auto_schedule_enabled,
-  :comments_expected_per_day,
-  :comments_fix_block_reason,
-  :comments_fix_ready,
-  :comments_today_failed,
-  :comments_today_posted,
-  :comments_today_scheduled,
-  :comments_yesterday_failed,
-  :comments_yesterday_posted,
-  :comments_yesterday_total,
-  :created_at,
-  :credits,
-  :effective_posted_video_reuse_percent,
-  :email,
-  :expected_agents_count,
   :id,
-  :is_activated_by_admin,
-  :is_admin,
-  :is_bookmarked,
-  :is_internal_user,
-  :is_migrated,
-  :landing_slug,
-  :landing_status,
-  :landing_url,
-  :membership,
-  :microhub_status,
-  :microhub_url,
   :name,
-  :onboarding_flow,
-  :posted_video_reuse_percent,
-  :product_id,
-  :product_name,
-  :product_url,
-  :subscription_status,
-  :survey_data,
-  :today_failed,
-  :today_posted,
-  :today_scheduled,
-  :tomorrow_capacity,
-  :tomorrow_scheduled,
-  :videos_completed,
-  :videos_failed,
-  :videos_pending,
-  :videos_stale,
-  :videos_total,
-  :yesterday_failed,
-  :yesterday_failed_entries,
-  :yesterday_posted,
-  :yesterday_total,
+  :type,
   keyword_init: true
 )
 
 # Request payload for UserHealthDetail#list.
 #
-# @!attribute [rw] id
+# @!attribute [rw] user_id
 #   @return [String]
 #
 # @!attribute [rw] assigned_agents_preview_limit
@@ -13119,7 +12907,7 @@ UserHealthDetail = Struct.new(
 # @!attribute [rw] product_id
 #   @return [String, nil]
 UserHealthDetailListMatch = Struct.new(
-  :id,
+  :user_id,
   :assigned_agents_preview_limit,
   :product_id,
   keyword_init: true

@@ -27,22 +27,29 @@ class UserHealthDetailDirectTest < Minitest::Test
       skip(_reason || "skipped via sdk-test-control.json")
       return
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE" && setup[:idmap]["user01"].nil?
+      puts "LIVE STEP {\"id\":\"direct-list-user_health_detail\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs user01, which only POST /api/admin/users/{user_id}/fix-auto-schedule-by-date gives\"}"
+      skip("Live coverage incomplete: direct-list-user_health_detail excluded (GET-only live run: needs user01, which only POST /api/admin/users/{user_id}/fix-auto-schedule-by-date gives)")
+    end
     if setup[:live]
-      ["user_health_detail01"].each do |_live_key|
+      ["user01"].each do |_live_key|
         if setup[:idmap][_live_key].nil?
           Runner.live_miss(LIVE_STRICT, "Live test blocked: needs #{_live_key} via CRACKED_API_REFERENCE_TEST_USER_HEALTH_DETAIL_ENTID")
         end
       end
     end
+    Runner.live_pace if setup[:live]
     client = setup[:client]
 
     params = {}
-    params["id"] = setup[:live] ? setup[:idmap]["user_health_detail01"] : "direct01"
+    query = {}
+    params["user_id"] = setup[:live] ? setup[:idmap]["user01"] : "direct01"
 
     result = client.direct({
-      "path" => "api/admin/users/{id}/health-detail",
+      "path" => "api/admin/users/{user_id}/health-detail",
       "method" => "GET",
       "params" => params,
+      "query" => query,
     })
     if setup[:live]
       unless live_ok(result)

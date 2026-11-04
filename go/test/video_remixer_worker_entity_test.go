@@ -62,9 +62,18 @@ func TestVideoRemixerWorkerEntity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" {
+			t.Log("LIVE STEP {\"id\":\"video_remixer_worker.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/admin/video-remixer/worker/jobs/{identifier}/fail\"}")
+			t.Skip("Live coverage incomplete: video_remixer_worker.create.0 excluded (GET-only live run: needs POST /api/admin/video-remixer/worker/jobs/{identifier}/fail)")
+			return
+		}
+
 		client := setup.client
 		_ = client
 
+		if setup.live {
+			livePace()
+		}
 		// CREATE
 		videoRemixerWorkerRef01Ent := client.VideoRemixerWorker(nil)
 		videoRemixerWorkerRef01Data := core.ToMapAny(vs.GetProp(

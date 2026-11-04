@@ -212,6 +212,9 @@ func TestAdminCustomerEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = adminCustomerRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LIST
 		adminCustomerRef01Ent := client.AdminCustomer(nil)
 		adminCustomerRef01Match := map[string]any{}

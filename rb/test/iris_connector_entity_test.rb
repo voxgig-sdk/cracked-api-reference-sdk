@@ -144,17 +144,31 @@ class IrisConnectorEntityTest < Minitest::Test
     assert_equal ["v1"], listed.map { |ent| ent.data_get["id"] }
   end
 
+  def test_validate
+    cfg = CrackedApiReferenceConfig.shared_config
+    unless cfg["feature"].is_a?(Hash) && cfg["feature"].key?("validate")
+      skip("feature not present in this SDK: validate")
+    end
+    client = CrackedApiReferenceSDK.test(nil, { "feature" => { "validate" => { "active" => true } } })
+    err = assert_raises(StandardError) do
+      client.IrisConnector(nil).create({ "connector_id" => 1 }, nil)
+    end
+    assert_equal "validate_failed", err.code
+  end
+
   def test_basic_flow
     setup = iris_connector_basic_setup(nil)
     # Per-op sdk-test-control.json skip.
     _live = setup[:live] || false
-    ["list"].each do |_op|
+    ["create", "list"].each do |_op|
       _should_skip, _reason = Runner.is_control_skipped("entityOp", "iris_connector." + _op, _live ? "live" : "unit")
       if _should_skip
         skip(_reason || "skipped via sdk-test-control.json")
         return
       end
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE"
+      puts "LIVE STEP {\"id\":\"iris_connector.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/iris/connectors/{connector_id}/start\"}"
     client = setup[:client]
 
     # Bootstrap entity data from existing test data.
@@ -165,8 +179,39 @@ class IrisConnectorEntityTest < Minitest::Test
       iris_connector_ref01_data = Helpers.to_map(iris_connector_ref01_data_raw[0][1])
     end
 
+    Runner.live_pace if setup[:live]
     # LIST
     iris_connector_ref01_ent = client.IrisConnector(nil)
+    iris_connector_ref01_match = {}
+
+    iris_connector_ref01_list_result = iris_connector_ref01_ent.list(iris_connector_ref01_match, nil)
+    assert iris_connector_ref01_list_result.is_a?(Array)
+
+      return
+    end
+
+    if setup[:live]
+      ["connector01"].each do |_live_key|
+        if setup[:synthetic_only] || setup[:idmap][_live_key].nil?
+          Runner.live_miss(LIVE_STRICT, "Live entity test blocked: needs #{_live_key} via CRACKED_API_REFERENCE_TEST_IRIS_CONNECTOR_ENTID")
+        end
+      end
+    end
+    client = setup[:client]
+
+    Runner.live_pace if setup[:live]
+    # CREATE
+    iris_connector_ref01_ent = client.IrisConnector(nil)
+    iris_connector_ref01_data = Helpers.to_map(Vs.getprop(
+      Vs.getpath(setup[:data], "new.iris_connector"), "iris_connector_ref01"))
+    iris_connector_ref01_data["connector_id"] = setup[:idmap]["connector01"]
+
+    iris_connector_ref01_data_result = iris_connector_ref01_ent.create(iris_connector_ref01_data, nil)
+    iris_connector_ref01_data = Helpers.to_map(iris_connector_ref01_data_result.respond_to?(:data_get) ? iris_connector_ref01_data_result.data_get : iris_connector_ref01_data_result)
+    assert !iris_connector_ref01_data.nil?
+
+    Runner.live_pace if setup[:live]
+    # LIST
     iris_connector_ref01_match = {}
 
     iris_connector_ref01_list_result = iris_connector_ref01_ent.list(iris_connector_ref01_match, nil)
@@ -189,7 +234,7 @@ def iris_connector_basic_setup(extra)
 
   # Generate idmap via transform.
   idmap = Vs.transform(
-    ["iris_connector01", "iris_connector02", "iris_connector03"],
+    ["iris_connector01", "iris_connector02", "iris_connector03", "connector01"],
     {
       "`$PACK`" => ["", {
         "`$KEY`" => "`$COPY`",

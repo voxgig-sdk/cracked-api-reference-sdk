@@ -38,7 +38,7 @@ func TestAgentPostEntity(t *testing.T) {
 		client := sdk.TestSDK(nil, map[string]any{
 			"feature": map[string]any{"validate": map[string]any{"active": true}},
 		})
-		_, err := client.AgentPost(nil).List(map[string]any{"id": 1}, nil)
+		_, err := client.AgentPost(nil).List(map[string]any{"agent_id": 1}, nil)
 		if sdkerr, ok := err.(*core.CrackedApiReferenceError); !ok || "validate_failed" != sdkerr.Code {
 			t.Fatalf("expected validate_failed, got %v", err)
 		}
@@ -53,7 +53,7 @@ func TestAgentPostEntity(t *testing.T) {
 		if setup.live {
 			_mode = "live"
 		}
-		for _, _op := range []string{} {
+		for _, _op := range []string{"list"} {
 			if _shouldSkip, _reason := isControlSkipped("entityOp", "agent_post." + _op, _mode); _shouldSkip {
 				if _reason == "" {
 					_reason = "skipped via sdk-test-control.json"
@@ -62,6 +62,16 @@ func TestAgentPostEntity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live {
+			for _, _liveKey := range []string{"agent01"} {
+				if setup.syntheticOnly || setup.idmap[_liveKey] == nil {
+					liveMiss(t, agent_postEntityLiveStrict, "Live entity test blocked: needs %s via CRACKED_API_REFERENCE_TEST_AGENT_POST_ENTID", _liveKey)
+				}
+			}
+		}
+		client := setup.client
+		_ = client
+
 		// Bootstrap entity data from existing test data (no create step in flow).
 		agentPostRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.agent_post")))
 		var agentPostRef01Data map[string]any
@@ -71,6 +81,24 @@ func TestAgentPostEntity(t *testing.T) {
 		// Discard guards against Go's unused-var check when the flow's steps
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = agentPostRef01Data
+
+		if setup.live {
+			livePace()
+		}
+		// LIST
+		agentPostRef01Ent := client.AgentPost(nil)
+		agentPostRef01Match := map[string]any{
+			"agent_id": setup.idmap["agent01"],
+		}
+
+		agentPostRef01ListResult, err := agentPostRef01Ent.List(agentPostRef01Match, nil)
+		if err != nil {
+			t.Fatalf("list failed: %v", err)
+		}
+		_, agentPostRef01ListOk := agentPostRef01ListResult.([]any)
+		if !agentPostRef01ListOk {
+			t.Fatalf("expected list result to be an array, got %T", agentPostRef01ListResult)
+		}
 
 	})
 }
@@ -100,7 +128,7 @@ func agent_postBasicSetup(extra map[string]any) *entityTestSetup {
 
 	// Generate idmap via transform, matching TS pattern.
 	idmap, _ := vs.Transform(
-		[]any{"agent_post01", "agent_post02", "agent_post03"},
+		[]any{"agent_post01", "agent_post02", "agent_post03", "agent01", "agent02", "agent03"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
 				"`$KEY`": "`$COPY`",

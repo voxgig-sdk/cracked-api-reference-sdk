@@ -171,8 +171,50 @@ class Sora2AvatarEntityTest < Minitest::Test
         return
       end
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE"
+      puts "LIVE STEP {\"id\":\"sora2_avatar.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/admin/sora2-avatars\"}"
+      puts "LIVE STEP {\"id\":\"sora2_avatar.update.2\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs PUT /api/admin/sora2-avatars/{avatar_id}\"}"
+    client = setup[:client]
+    if setup[:live]
+      _live_id = setup[:synthetic_only] ? nil : setup[:idmap]["sora2_avatar01"]
+      Runner.live_pace
+      Runner.live_existing(setup, LIVE_STRICT, "sora2_avatar", "id", _live_id) do
+        client.Sora2Avatar(nil).list({}, nil)
+      end
+    end
+
+    # Bootstrap entity data from existing test data.
+    sora2_avatar_ref01_data_raw = Vs.items(Helpers.to_map(
+      Vs.getpath(setup[:data], "existing.sora2_avatar")))
+    sora2_avatar_ref01_data = nil
+    if sora2_avatar_ref01_data_raw.length > 0
+      sora2_avatar_ref01_data = Helpers.to_map(sora2_avatar_ref01_data_raw[0][1])
+    end
+
+    Runner.live_pace if setup[:live]
+    # LIST
+    sora2_avatar_ref01_ent = client.Sora2Avatar(nil)
+    sora2_avatar_ref01_match = {}
+
+    sora2_avatar_ref01_list_result = sora2_avatar_ref01_ent.list(sora2_avatar_ref01_match, nil)
+    assert sora2_avatar_ref01_list_result.is_a?(Array)
+
+    Runner.live_pace if setup[:live]
+    # LOAD
+    sora2_avatar_ref01_match_dt0 = {
+      "id" => sora2_avatar_ref01_data["id"],
+    }
+    sora2_avatar_ref01_data_dt0_loaded = sora2_avatar_ref01_ent.load(sora2_avatar_ref01_match_dt0, nil)
+    sora2_avatar_ref01_data_dt0_load_result = Helpers.to_map(sora2_avatar_ref01_data_dt0_loaded.respond_to?(:data_get) ? sora2_avatar_ref01_data_dt0_loaded.data_get : sora2_avatar_ref01_data_dt0_loaded)
+    assert !sora2_avatar_ref01_data_dt0_load_result.nil?
+    assert Runner.live_same_id(sora2_avatar_ref01_data_dt0_load_result["id"], sora2_avatar_ref01_data["id"])
+
+      return
+    end
+
     client = setup[:client]
 
+    Runner.live_pace if setup[:live]
     # CREATE
     sora2_avatar_ref01_ent = client.Sora2Avatar(nil)
     sora2_avatar_ref01_data = Helpers.to_map(Vs.getprop(
@@ -183,6 +225,7 @@ class Sora2AvatarEntityTest < Minitest::Test
     assert !sora2_avatar_ref01_data.nil?
     assert !sora2_avatar_ref01_data["id"].nil?
 
+    Runner.live_pace if setup[:live]
     # LIST
     sora2_avatar_ref01_match = {}
 
@@ -194,6 +237,7 @@ class Sora2AvatarEntityTest < Minitest::Test
       { "id" => sora2_avatar_ref01_data["id"] })
     assert !Vs.isempty(found_item)
 
+    Runner.live_pace if setup[:live]
     # UPDATE
     sora2_avatar_ref01_data_up0_up = {
       "id" => sora2_avatar_ref01_data["id"],
@@ -206,9 +250,10 @@ class Sora2AvatarEntityTest < Minitest::Test
     sora2_avatar_ref01_resdata_up0_result = sora2_avatar_ref01_ent.update(sora2_avatar_ref01_data_up0_up, nil)
     sora2_avatar_ref01_resdata_up0 = Helpers.to_map(sora2_avatar_ref01_resdata_up0_result.respond_to?(:data_get) ? sora2_avatar_ref01_resdata_up0_result.data_get : sora2_avatar_ref01_resdata_up0_result)
     assert !sora2_avatar_ref01_resdata_up0.nil?
-    assert_equal sora2_avatar_ref01_resdata_up0["id"], sora2_avatar_ref01_data_up0_up["id"]
+    assert Runner.live_same_id(sora2_avatar_ref01_resdata_up0["id"], sora2_avatar_ref01_data_up0_up["id"])
     assert_equal sora2_avatar_ref01_resdata_up0[sora2_avatar_ref01_markdef_up0_name], sora2_avatar_ref01_markdef_up0_value
 
+    Runner.live_pace if setup[:live]
     # LOAD
     sora2_avatar_ref01_match_dt0 = {
       "id" => sora2_avatar_ref01_data["id"],
@@ -216,7 +261,7 @@ class Sora2AvatarEntityTest < Minitest::Test
     sora2_avatar_ref01_data_dt0_loaded = sora2_avatar_ref01_ent.load(sora2_avatar_ref01_match_dt0, nil)
     sora2_avatar_ref01_data_dt0_load_result = Helpers.to_map(sora2_avatar_ref01_data_dt0_loaded.respond_to?(:data_get) ? sora2_avatar_ref01_data_dt0_loaded.data_get : sora2_avatar_ref01_data_dt0_loaded)
     assert !sora2_avatar_ref01_data_dt0_load_result.nil?
-    assert_equal sora2_avatar_ref01_data_dt0_load_result["id"], sora2_avatar_ref01_data["id"]
+    assert Runner.live_same_id(sora2_avatar_ref01_data_dt0_load_result["id"], sora2_avatar_ref01_data["id"])
 
   end
 end

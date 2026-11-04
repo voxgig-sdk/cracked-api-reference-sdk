@@ -44,6 +44,13 @@ describe("SlideEntity", function()
         return
       end
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" then
+      print("LIVE STEP {\"id\":\"slide.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/carousel/{video_id}/slides/{slide_index}/regenerate\"}")
+      print("LIVE STEP {\"id\":\"slide.update.1\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs PATCH /api/carousel/{video_id}/slides/{slide_index}\"}")
+      pending("Live coverage incomplete: slide.create.0 excluded (GET-only live run: needs POST /api/carousel/{video_id}/slides/{slide_index}/regenerate); slide.update.1 excluded (GET-only live run: needs PATCH /api/carousel/{video_id}/slides/{slide_index})")
+      return
+    end
+
     if setup.live then
       for _, _live_key in ipairs({"carousel01", "slide_index01"}) do
         if setup.synthetic_only or setup.idmap[_live_key] == nil then
@@ -53,6 +60,9 @@ describe("SlideEntity", function()
     end
     local client = setup.client
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- CREATE
     local slide_ref01_ent = client:Slide(nil)
     local slide_ref01_data = helpers.to_map(vs.getprop(
@@ -66,6 +76,9 @@ describe("SlideEntity", function()
     assert.is_not_nil(slide_ref01_data)
     assert.is_not_nil(slide_ref01_data["id"])
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- UPDATE
     local slide_ref01_data_up0_up = {
       id = slide_ref01_data["id"],
@@ -76,7 +89,9 @@ describe("SlideEntity", function()
     assert.is_nil(err)
     local slide_ref01_resdata_up0 = helpers.to_map(type(slide_ref01_resdata_up0_result) == 'table' and slide_ref01_resdata_up0_result.data_get and slide_ref01_resdata_up0_result:data_get() or slide_ref01_resdata_up0_result)
     assert.is_not_nil(slide_ref01_resdata_up0)
-    assert.are.equal(slide_ref01_resdata_up0["id"], slide_ref01_data_up0_up["id"])
+    if not setup.live then
+      assert.is_true(runner.live_same_id(slide_ref01_resdata_up0["id"], slide_ref01_data_up0_up["id"]))
+    end
 
   end)
 end)

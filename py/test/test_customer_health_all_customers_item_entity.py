@@ -143,6 +143,8 @@ class TestCustomerHealthAllCustomersItemEntity:
         if len(customer_health_all_customers_item_ref01_data_raw) > 0:
             customer_health_all_customers_item_ref01_data = helpers.to_map(customer_health_all_customers_item_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LIST
         customer_health_all_customers_item_ref01_ent = client.CustomerHealthAllCustomersItem(None)
         customer_health_all_customers_item_ref01_match = {}

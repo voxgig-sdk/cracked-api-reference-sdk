@@ -25,7 +25,7 @@ class UserHealthDetailEntityTest < Minitest::Test
     end
     client = CrackedApiReferenceSDK.test(nil, { "feature" => { "validate" => { "active" => true } } })
     err = assert_raises(StandardError) do
-      client.UserHealthDetail(nil).list({ "id" => 1 }, nil)
+      client.UserHealthDetail(nil).list({ "user_id" => 1 }, nil)
     end
     assert_equal "validate_failed", err.code
   end
@@ -34,11 +34,18 @@ class UserHealthDetailEntityTest < Minitest::Test
     setup = user_health_detail_basic_setup(nil)
     # Per-op sdk-test-control.json skip.
     _live = setup[:live] || false
-    [].each do |_op|
+    ["list"].each do |_op|
       _should_skip, _reason = Runner.is_control_skipped("entityOp", "user_health_detail." + _op, _live ? "live" : "unit")
       if _should_skip
         skip(_reason || "skipped via sdk-test-control.json")
         return
+      end
+    end
+    if setup[:live]
+      ["user01"].each do |_live_key|
+        if setup[:synthetic_only] || setup[:idmap][_live_key].nil?
+          Runner.live_miss(LIVE_STRICT, "Live entity test blocked: needs #{_live_key} via CRACKED_API_REFERENCE_TEST_USER_HEALTH_DETAIL_ENTID")
+        end
       end
     end
     client = setup[:client]
@@ -50,6 +57,16 @@ class UserHealthDetailEntityTest < Minitest::Test
     if user_health_detail_ref01_data_raw.length > 0
       user_health_detail_ref01_data = Helpers.to_map(user_health_detail_ref01_data_raw[0][1])
     end
+
+    Runner.live_pace if setup[:live]
+    # LIST
+    user_health_detail_ref01_ent = client.UserHealthDetail(nil)
+    user_health_detail_ref01_match = {
+      "user_id" => setup[:idmap]["user01"],
+    }
+
+    user_health_detail_ref01_list_result = user_health_detail_ref01_ent.list(user_health_detail_ref01_match, nil)
+    assert user_health_detail_ref01_list_result.is_a?(Array)
 
   end
 end
@@ -68,7 +85,7 @@ def user_health_detail_basic_setup(extra)
 
   # Generate idmap via transform.
   idmap = Vs.transform(
-    ["user_health_detail01", "user_health_detail02", "user_health_detail03"],
+    ["user_health_detail01", "user_health_detail02", "user_health_detail03", "user01", "user02", "user03"],
     {
       "`$PACK`" => ["", {
         "`$KEY`" => "`$COPY`",

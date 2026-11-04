@@ -52,8 +52,16 @@ class SelfServeActivateEntityTest extends TestCase
                 return;
             }
         }
+        if (!empty($setup["live"]) && getenv('VOXGIG_GETONLY_GUARD') === "TRUE") {
+            fwrite(STDOUT, 'LIVE STEP {"id":"self_serve_activate.create.0","state":"excluded","attempted":false,"reason":"GET-only live run: needs POST /api/onboarding-v6/self-serve-activate"}' . "\n");
+            $this->markTestSkipped('Live coverage incomplete: self_serve_activate.create.0 excluded (GET-only live run: needs POST /api/onboarding-v6/self-serve-activate)');
+        }
+
         $client = $setup["client"];
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // CREATE
         $self_serve_activate_ref01_ent = $client->SelfServeActivate(null);
         $self_serve_activate_ref01_data = Helpers::to_map(Vs::getprop(

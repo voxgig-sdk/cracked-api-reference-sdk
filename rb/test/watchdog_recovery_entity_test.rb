@@ -41,8 +41,31 @@ class WatchdogRecoveryEntityTest < Minitest::Test
         return
       end
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE"
+      puts "LIVE STEP {\"id\":\"watchdog_recovery.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/v1/watchdog/recovery-queue/resolve\"}"
     client = setup[:client]
 
+    # Bootstrap entity data from existing test data.
+    watchdog_recovery_ref01_data_raw = Vs.items(Helpers.to_map(
+      Vs.getpath(setup[:data], "existing.watchdog_recovery")))
+    watchdog_recovery_ref01_data = nil
+    if watchdog_recovery_ref01_data_raw.length > 0
+      watchdog_recovery_ref01_data = Helpers.to_map(watchdog_recovery_ref01_data_raw[0][1])
+    end
+
+    Runner.live_pace if setup[:live]
+    # LOAD
+    watchdog_recovery_ref01_ent = client.WatchdogRecovery(nil)
+    watchdog_recovery_ref01_match_dt0 = {}
+    watchdog_recovery_ref01_data_dt0_loaded = watchdog_recovery_ref01_ent.load(watchdog_recovery_ref01_match_dt0, nil)
+    assert !watchdog_recovery_ref01_data_dt0_loaded.nil?
+
+      return
+    end
+
+    client = setup[:client]
+
+    Runner.live_pace if setup[:live]
     # CREATE
     watchdog_recovery_ref01_ent = client.WatchdogRecovery(nil)
     watchdog_recovery_ref01_data = Helpers.to_map(Vs.getprop(
@@ -52,6 +75,7 @@ class WatchdogRecoveryEntityTest < Minitest::Test
     watchdog_recovery_ref01_data = Helpers.to_map(watchdog_recovery_ref01_data_result.respond_to?(:data_get) ? watchdog_recovery_ref01_data_result.data_get : watchdog_recovery_ref01_data_result)
     assert !watchdog_recovery_ref01_data.nil?
 
+    Runner.live_pace if setup[:live]
     # LOAD
     watchdog_recovery_ref01_match_dt0 = {}
     watchdog_recovery_ref01_data_dt0_loaded = watchdog_recovery_ref01_ent.load(watchdog_recovery_ref01_match_dt0, nil)

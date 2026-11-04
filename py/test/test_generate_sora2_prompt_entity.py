@@ -60,6 +60,8 @@ class TestGenerateSora2PromptEntity:
         if len(generate_sora2_prompt_ref01_data_raw) > 0:
             generate_sora2_prompt_ref01_data = helpers.to_map(generate_sora2_prompt_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LOAD
         generate_sora2_prompt_ref01_ent = client.GenerateSora2Prompt(None)
         generate_sora2_prompt_ref01_match_dt0 = {}

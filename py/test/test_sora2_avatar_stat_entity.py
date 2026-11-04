@@ -51,6 +51,8 @@ class TestSora2AvatarStatEntity:
         if len(sora2_avatar_stat_ref01_data_raw) > 0:
             sora2_avatar_stat_ref01_data = helpers.to_map(sora2_avatar_stat_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LOAD
         sora2_avatar_stat_ref01_ent = client.Sora2AvatarStat(None)
         sora2_avatar_stat_ref01_match_dt0 = {}

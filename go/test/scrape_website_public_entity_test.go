@@ -62,9 +62,18 @@ func TestScrapeWebsitePublicEntity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" {
+			t.Log("LIVE STEP {\"id\":\"scrape_website_public.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/onboarding-v6/scrape-website-public\"}")
+			t.Skip("Live coverage incomplete: scrape_website_public.create.0 excluded (GET-only live run: needs POST /api/onboarding-v6/scrape-website-public)")
+			return
+		}
+
 		client := setup.client
 		_ = client
 
+		if setup.live {
+			livePace()
+		}
 		// CREATE
 		scrapeWebsitePublicRef01Ent := client.ScrapeWebsitePublic(nil)
 		scrapeWebsitePublicRef01Data := core.ToMapAny(vs.GetProp(

@@ -1,6 +1,7 @@
 # User direct test
 
 import json
+import os
 import pytest
 
 from crackedapireference_sdk.utility.voxgig_struct import voxgig_struct as vs
@@ -29,11 +30,17 @@ class TestUserDirect:
         if _skip:
             pytest.skip(_reason or "skipped via sdk-test-control.json")
             return
+        if setup["live"] and os.environ.get("VOXGIG_GETONLY_GUARD") == "TRUE" and setup["idmap"].get("user01") is None:
+            print("LIVE STEP {\"id\":\"direct-load-user\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs user01, which only POST /api/admin/users/{user_id}/fix-auto-schedule-by-date gives\"}")
+            pytest.skip("Live coverage incomplete: direct-load-user excluded (GET-only live run: needs user01, which only POST /api/admin/users/{user_id}/fix-auto-schedule-by-date gives)")
+
         if setup["live"]:
             for _live_key in ["user01"]:
                 if setup["idmap"].get(_live_key) is None:
                     runner.live_miss(LIVE_STRICT, f"Live test blocked: needs {_live_key} via CRACKED_API_REFERENCE_TEST_USER_ENTID")
 
+        if setup["live"]:
+            runner.live_pace()
         client = setup["client"]
 
         params = {}
@@ -46,7 +53,7 @@ class TestUserDirect:
             pass
 
         result = client.direct({
-            "path": "api/upload-post-agents/user/{id}",
+            "path": "api/admin/users/{id}/failed-videos",
             "method": "GET",
             "params": params,
             "query": query,

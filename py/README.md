@@ -70,8 +70,8 @@ Entity operations raise on failure, so wrap them in `try` / `except`:
 
 ```python
 try:
-    admininsights = client.AdminInsight().list()
-    print([item.data_get() for item in admininsights])
+    agenthealths = client.AgentHealth().list()
+    print([item.data_get() for item in agenthealths])
 except Exception as err:
     print(f"list failed: {err}")
 ```
@@ -138,7 +138,7 @@ Create a mock client for unit testing — no server required:
 client = CrackedApiReferenceSDK.test()
 
 # Entity ops return the entity, and list one per record; they raise on error.
-admininsight = client.AdminInsight().list()
+agenthealth = client.AgentHealth().list()
 # data_get() on an entity reads its mock response record
 ```
 
@@ -270,7 +270,6 @@ Creates a test-mode client with mock transport. Both arguments may be `None`.
 | `Carousel` | `(data) -> CarouselEntity` | Create a Carousel entity instance. |
 | `CarouselAgentDetail` | `(data) -> CarouselAgentDetailEntity` | Create a CarouselAgentDetail entity instance. |
 | `CarouselStatus` | `(data) -> CarouselStatusEntity` | Create a CarouselStatus entity instance. |
-| `Chat` | `(data) -> ChatEntity` | Create a Chat entity instance. |
 | `ChatHistory` | `(data) -> ChatHistoryEntity` | Create a ChatHistory entity instance. |
 | `ChatSession` | `(data) -> ChatSessionEntity` | Create a ChatSession entity instance. |
 | `Comment` | `(data) -> CommentEntity` | Create a Comment entity instance. |
@@ -290,7 +289,6 @@ Creates a test-mode client with mock transport. Both arguments may be `None`.
 | `DailyStatus` | `(data) -> DailyStatusEntity` | Create a DailyStatus entity instance. |
 | `DedicatedAgentsDashboard` | `(data) -> DedicatedAgentsDashboardEntity` | Create a DedicatedAgentsDashboard entity instance. |
 | `EnterpriseAgent` | `(data) -> EnterpriseAgentEntity` | Create an EnterpriseAgent entity instance. |
-| `EnterpriseProduct` | `(data) -> EnterpriseProductEntity` | Create an EnterpriseProduct entity instance. |
 | `ExactAvailability` | `(data) -> ExactAvailabilityEntity` | Create an ExactAvailability entity instance. |
 | `ExactFormula` | `(data) -> ExactFormulaEntity` | Create an ExactFormula entity instance. |
 | `ExtractV2` | `(data) -> ExtractV2Entity` | Create an ExtractV2 entity instance. |
@@ -302,7 +300,6 @@ Creates a test-mode client with mock transport. Both arguments may be `None`.
 | `GenerateSora2Prompt` | `(data) -> GenerateSora2PromptEntity` | Create a GenerateSora2Prompt entity instance. |
 | `Healthrx` | `(data) -> HealthrxEntity` | Create a Healthrx entity instance. |
 | `InitResetProductV6` | `(data) -> InitResetProductV6Entity` | Create an InitResetProductV6 entity instance. |
-| `Iri` | `(data) -> IriEntity` | Create an Iri entity instance. |
 | `IrisCapability` | `(data) -> IrisCapabilityEntity` | Create an IrisCapability entity instance. |
 | `IrisChat` | `(data) -> IrisChatEntity` | Create an IrisChat entity instance. |
 | `IrisConnector` | `(data) -> IrisConnectorEntity` | Create an IrisConnector entity instance. |
@@ -332,16 +329,17 @@ Creates a test-mode client with mock transport. Both arguments may be `None`.
 | `ProductLanding` | `(data) -> ProductLandingEntity` | Create a ProductLanding entity instance. |
 | `PublicResumeStatus` | `(data) -> PublicResumeStatusEntity` | Create a PublicResumeStatus entity instance. |
 | `ReRollVideo` | `(data) -> ReRollVideoEntity` | Create a ReRollVideo entity instance. |
-| `ReadRootGet` | `(data) -> ReadRootGetEntity` | Create a ReadRootGet entity instance. |
 | `RecordDemoBooked` | `(data) -> RecordDemoBookedEntity` | Create a RecordDemoBooked entity instance. |
 | `RefreshStat` | `(data) -> RefreshStatEntity` | Create a RefreshStat entity instance. |
 | `RemixerClipper` | `(data) -> RemixerClipperEntity` | Create a RemixerClipper entity instance. |
 | `ResetProduct` | `(data) -> ResetProductEntity` | Create a ResetProduct entity instance. |
 | `RetryWebsiteScrape` | `(data) -> RetryWebsiteScrapeEntity` | Create a RetryWebsiteScrape entity instance. |
+| `RootGet` | `(data) -> RootGetEntity` | Create a RootGet entity instance. |
 | `SaveSurvey` | `(data) -> SaveSurveyEntity` | Create a SaveSurvey entity instance. |
 | `ScanSocial` | `(data) -> ScanSocialEntity` | Create a ScanSocial entity instance. |
 | `ScanSocialsPublic` | `(data) -> ScanSocialsPublicEntity` | Create a ScanSocialsPublic entity instance. |
 | `ScanSocialsStatus` | `(data) -> ScanSocialsStatusEntity` | Create a ScanSocialsStatus entity instance. |
+| `ScheduleQueue` | `(data) -> ScheduleQueueEntity` | Create a ScheduleQueue entity instance. |
 | `ScheduleV2` | `(data) -> ScheduleV2Entity` | Create a ScheduleV2 entity instance. |
 | `Scrape` | `(data) -> ScrapeEntity` | Create a Scrape entity instance. |
 | `ScrapeWebsitePublic` | `(data) -> ScrapeWebsitePublicEntity` | Create a ScrapeWebsitePublic entity instance. |
@@ -469,14 +467,11 @@ API path: `/api/onboarding-v6/active-session`
 | Field | Description |
 | --- | --- |
 | `apply` | Apply safe canonical or clean-only URL updates |
-| `count` |  |
 | `created_at` |  |
 | `date_from` |  |
 | `date_to` |  |
 | `email` |  |
 | `id` |  |
-| `include_failed` |  |
-| `include_pending` |  |
 | `include_records` | Include full per-field audit records in the response |
 | `issue_ids` |  |
 | `only_active` | Limit the audit to active agents |
@@ -485,14 +480,12 @@ API path: `/api/onboarding-v6/active-session`
 | `product_id` |  |
 | `query` |  |
 | `reason` |  |
-| `regenerate` |  |
 | `status` |  |
 | `user_membership` |  |
 | `user_name` |  |
 | `user_onboarding_step` |  |
-| `video_type` |  |
 
-Operations: Create, List, Load, Remove, Update.
+Operations: Create, List, Load, Remove.
 
 API path: `/api/admin/users/{user_id}/regenerate-video/{video_id}`
 
@@ -646,13 +639,25 @@ API path: `/api/admin/healthrx/items/{kind}/{item_id}/decision`
 
 | Field | Description |
 | --- | --- |
-| `customer_success_cases` |  |
-| `customers` |  |
-| `generated_at` |  |
-| `pfa_database` |  |
-| `recent_signups` |  |
-| `summary` |  |
-| `vireel_database` |  |
+| `active_agents` |  |
+| `active_products` |  |
+| `agents_count` |  |
+| `auto_schedule_status` |  |
+| `days_until_period_end` |  |
+| `email` |  |
+| `feature_impact` |  |
+| `last_notification_at` |  |
+| `membership` |  |
+| `name` |  |
+| `notification_count` |  |
+| `notification_events` |  |
+| `priority` |  |
+| `severity` |  |
+| `status_label` |  |
+| `subscription_current_period_end` |  |
+| `subscription_status` |  |
+| `upcoming_posts` |  |
+| `user_id` |  |
 
 Operations: List, Load.
 
@@ -672,14 +677,8 @@ API path: `/api/admin/users/{user_id}/regenerate-landing`
 
 | Field | Description |
 | --- | --- |
-| `paid_users_by_level` |  |
-| `total_cancellations` |  |
-| `total_previews_generated` |  |
-| `total_signups` |  |
-| `total_videos_generated` |  |
-| `url_attempts` |  |
-| `user_credits` |  |
-| `user_gifted_credits` |  |
+| `count` |  |
+| `level` |  |
 
 Operations: List.
 
@@ -832,7 +831,7 @@ API path: `/api/admin/slideshow-import2/{batch_id}/state`
 
 Operations: Create, List, Remove, Update.
 
-API path: `/api/admin/users/{user_id}/fix-auto-schedule-by-date`
+API path: `/api/admin/users/{user_id}/convert-to-enterprise`
 
 #### AdminUsersTableItem
 
@@ -998,7 +997,7 @@ API path: `/api/onboarding-v6/advance-step`
 | `tiktok_stats` |  |
 | `type` |  |
 
-Operations: List.
+Operations: List, Update.
 
 API path: `/api/admin/agents`
 
@@ -1097,13 +1096,17 @@ API path: `/api/agent-access/phil-notifications/videos`
 
 | Field | Description |
 | --- | --- |
-| `agentQuota` |  |
-| `agents` |  |
-| `assignedByType` |  |
-| `assignedTotal` |  |
-| `email` |  |
-| `products` |  |
-| `userId` |  |
+| `avatar` |  |
+| `facebookUrl` |  |
+| `id` |  |
+| `instagramUrl` |  |
+| `name` |  |
+| `productId` |  |
+| `productName` |  |
+| `tiktokUrl` |  |
+| `type` |  |
+| `uploadPostPlatforms` |  |
+| `youtubeUrl` |  |
 
 Operations: List.
 
@@ -1230,19 +1233,12 @@ API path: `/api/upload-post-agents/all`
 
 | Field | Description |
 | --- | --- |
-| `daily` |  |
-| `dates` |  |
-| `generated_at` |  |
-| `groups` |  |
-| `latest` |  |
-| `live_date` |  |
-| `phone_admin_generated_at` |  |
-| `platform` |  |
-| `post_target` |  |
-| `qa_managed_agent_ids` |  |
-| `scope_prefixes` |  |
-| `timezone` |  |
-| `warmup_target` |  |
+| `accounts` |  |
+| `date` |  |
+| `overall` |  |
+| `posts` |  |
+| `views` |  |
+| `warmups` |  |
 
 Operations: List.
 
@@ -1264,19 +1260,12 @@ API path: `/api/admin/agent-health/customers`
 
 | Field | Description |
 | --- | --- |
-| `archived_issue_total` |  |
-| `date` |  |
-| `generated_at` |  |
-| `group_id` |  |
-| `has_more` |  |
-| `issue_total` |  |
-| `issues` |  |
-| `limit` |  |
-| `metric` |  |
-| `offset` |  |
-| `warmup_runs` |  |
-| `warning_total` |  |
-| `warnings` |  |
+| `agent_id` |  |
+| `category` |  |
+| `connection_status` |  |
+| `device_status` |  |
+| `issue` |  |
+| `state` |  |
 
 Operations: List.
 
@@ -1456,7 +1445,6 @@ API path: `/api/upload-post-agents/bulk/tiktok-stats`
 | `formula_id` |  |
 | `formula_name` |  |
 | `generation` |  |
-| `id` |  |
 | `image_prompt` |  |
 | `likes` |  |
 | `main_prompt` |  |
@@ -1510,7 +1498,6 @@ API path: `/api/admin/carousels/agents/{agent_id}`
 | --- | --- |
 | `caption` |  |
 | `error` |  |
-| `id` |  |
 | `image_model` |  |
 | `image_provider` |  |
 | `image_task_id` |  |
@@ -1522,18 +1509,6 @@ API path: `/api/admin/carousels/agents/{agent_id}`
 Operations: List.
 
 API path: `/api/carousel/{video_id}/status`
-
-#### Chat
-
-| Field | Description |
-| --- | --- |
-| `idempotencyKey` |  |
-| `message` |  |
-| `sessionId` |  |
-
-Operations: Create.
-
-API path: `/api/chat/sessions/{session_id}/messages`
 
 #### ChatHistory
 
@@ -1562,6 +1537,8 @@ API path: `/api/chat/sessions`
 | --- | --- |
 | `chatSubVariant` |  |
 | `createdAt` |  |
+| `idempotencyKey` |  |
+| `message` |  |
 | `model` |  |
 | `plan` |  |
 | `route` |  |
@@ -1789,7 +1766,6 @@ API path: `/api/admin/customer-health/customers`
 | `date` |  |
 | `email` |  |
 | `entries` |  |
-| `id` |  |
 | `performance_overview` |  |
 | `platform_coverage_summary` |  |
 | `user_id` |  |
@@ -1818,20 +1794,10 @@ API path: `/api/admin/customer-health/all-customers`
 
 | Field | Description |
 | --- | --- |
-| `average_views_per_result` |  |
-| `date` |  |
-| `end_date` |  |
-| `paid_users_count` |  |
+| `email` |  |
 | `posted_results` |  |
-| `range` |  |
-| `start_date` |  |
-| `top_users` |  |
-| `total_views` |  |
-| `trend` |  |
-| `trend_granularity` |  |
-| `user_email` |  |
 | `user_id` |  |
-| `users_with_views` |  |
+| `views` |  |
 
 Operations: List.
 
@@ -1851,7 +1817,6 @@ API path: `/api/carousel/daily/{product_id}/plan`
 
 | Field | Description |
 | --- | --- |
-| `id` |  |
 
 Operations: Load.
 
@@ -1897,15 +1862,6 @@ API path: `/api/admin/agents/dedicated-dashboard`
 Operations: Create, Load.
 
 API path: `/api/enterprise/agents/assign`
-
-#### EnterpriseProduct
-
-| Field | Description |
-| --- | --- |
-
-Operations: Load.
-
-API path: `/api/enterprise/products/{product_id}/status`
 
 #### ExactAvailability
 
@@ -2080,18 +2036,6 @@ Operations: Create.
 
 API path: `/api/reset-product/init-v6`
 
-#### Iri
-
-| Field | Description |
-| --- | --- |
-| `correlationId` |  |
-| `idempotencyKey` |  |
-| `productId` |  |
-
-Operations: Create.
-
-API path: `/api/iris/connectors/{connector_id}/start`
-
 #### IrisCapability
 
 | Field | Description |
@@ -2143,9 +2087,9 @@ API path: `/api/iris/chat`
 | --- | --- |
 | `connectors` |  |
 
-Operations: List.
+Operations: Create, List.
 
-API path: `/api/iris/connectors`
+API path: `/api/iris/connectors/{connector_id}/start`
 
 #### IrisStatus
 
@@ -2168,8 +2112,10 @@ API path: `/api/iris/status`
 | `cadence` |  |
 | `capability` |  |
 | `completed` |  |
+| `correlationId` |  |
 | `description` |  |
 | `discover` |  |
+| `idempotencyKey` |  |
 | `productId` |  |
 | `recurring` |  |
 | `requiredConnectors` |  |
@@ -2177,7 +2123,7 @@ API path: `/api/iris/status`
 
 Operations: Create, List.
 
-API path: `/api/iris/tasks`
+API path: `/api/iris/tasks/{task_id}/run`
 
 #### IrisUsage
 
@@ -2480,13 +2426,18 @@ API path: `/api/products/{product_id}/validate-social-handle`
 
 | Field | Description |
 | --- | --- |
-| `agents` |  |
-| `date` |  |
-| `pagination` |  |
-| `phone_admin_error` |  |
-| `products` |  |
-| `selected_product` |  |
-| `summary` |  |
+| `comments` |  |
+| `failed_entries` |  |
+| `has_tiktok_community_violation` |  |
+| `id` |  |
+| `likes` |  |
+| `metrics_pending_count` |  |
+| `name` |  |
+| `platforms` |  |
+| `posted_entries` |  |
+| `posting_entries` |  |
+| `scheduled_entries` |  |
+| `views` |  |
 
 Operations: List.
 
@@ -2534,6 +2485,7 @@ API path: `/api/video-variation/product-demos`
 | `dmOngoingResponsePrompt` |  |
 | `firstCommentTextBeforeLink` |  |
 | `headerImageUrl` |  |
+| `icon` |  |
 | `id` |  |
 | `landingHtmlUrl` |  |
 | `landingLastGeneratedAt` |  |
@@ -2572,6 +2524,7 @@ API path: `/api/video-variation/product-demos`
 | `slug` |  |
 | `socialLinks` |  |
 | `testimonials` |  |
+| `url` |  |
 
 Operations: List, Update.
 
@@ -2607,15 +2560,6 @@ API path: `/api/onboarding-v6/resume-status-public`
 Operations: Create.
 
 API path: `/api/core/re-roll-video`
-
-#### ReadRootGet
-
-| Field | Description |
-| --- | --- |
-
-Operations: Load.
-
-API path: `/`
 
 #### RecordDemoBooked
 
@@ -2679,6 +2623,15 @@ Operations: Create.
 
 API path: `/api/onboarding-v6/retry-scrape`
 
+#### RootGet
+
+| Field | Description |
+| --- | --- |
+
+Operations: Load.
+
+API path: `/`
+
 #### SaveSurvey
 
 | Field | Description |
@@ -2737,6 +2690,15 @@ Operations: Load.
 
 API path: `/api/video-variation/scan-socials/status`
 
+#### ScheduleQueue
+
+| Field | Description |
+| --- | --- |
+
+Operations: Update.
+
+API path: `/api/schedule/queue/{queue_id}/replace-video`
+
 #### ScheduleV2
 
 | Field | Description |
@@ -2765,7 +2727,7 @@ API path: `/api/video-variation/scan-socials/status`
 | `youtube_posted_url` |  |
 | `youtube_scraped_social_post_id` |  |
 
-Operations: Create, List, Load, Remove, Update.
+Operations: Create, List, Load, Remove.
 
 API path: `/api/schedule/queue/add`
 
@@ -2914,14 +2876,11 @@ API path: `/api/seo/overview`
 
 | Field | Description |
 | --- | --- |
-| `end_date` |  |
-| `series` |  |
-| `site_url` |  |
-| `start_date` |  |
-| `top_countries` |  |
-| `top_pages` |  |
-| `top_queries` |  |
-| `totals` |  |
+| `clicks` |  |
+| `ctr` |  |
+| `date` |  |
+| `impressions` |  |
+| `position` |  |
 
 Operations: List.
 
@@ -3145,23 +3104,24 @@ API path: `/api/admin/customer-health/issues`
 
 | Field | Description |
 | --- | --- |
-| `active_run` |  |
 | `aged_over_24h` |  |
-| `backlog_preview` |  |
-| `coverage_percent` |  |
-| `customer_counts` |  |
-| `date` |  |
-| `generated_at` |  |
-| `method_counts` |  |
-| `platform_counts` |  |
-| `platform_units_resolved` |  |
-| `platform_units_total` |  |
-| `platform_units_unresolved` |  |
-| `posted_entries` |  |
-| `reason_counts` |  |
-| `sla_deadline_et` |  |
+| `agent_id` |  |
+| `agent_name` |  |
+| `is_resolved` |  |
+| `last_refresh_completed_at` |  |
+| `latest_error_message` |  |
+| `platform` |  |
+| `post_method` |  |
+| `post_url` |  |
+| `posted_date_et` |  |
+| `product_id` |  |
+| `product_name` |  |
+| `reason_code` |  |
+| `schedule_queue_id` |  |
+| `scheduled_datetime_utc` |  |
 | `stale_after_sla` |  |
-| `top_affected_customers` |  |
+| `user_email` |  |
+| `user_id` |  |
 
 Operations: List.
 
@@ -3323,9 +3283,9 @@ API path: `/api/upload-post-agents/sync-platforms`
 | `updatedAt` |  |
 | `userId` |  |
 
-Operations: Load, Update.
+Operations: Create, Load, Update.
 
-API path: `/api/upload-post-agents/user/{user_id}`
+API path: `/api/admin/users/{user_id}/fix-auto-schedule-by-date`
 
 #### UserAgent
 
@@ -3335,7 +3295,6 @@ API path: `/api/upload-post-agents/user/{user_id}`
 | `assigned_at` |  |
 | `assignment_id` |  |
 | `expires_at` |  |
-| `id` |  |
 | `status` |  |
 
 Operations: Create, List.
@@ -3346,65 +3305,9 @@ API path: `/api/admin/users/{user_id}/agents`
 
 | Field | Description |
 | --- | --- |
-| `account_type` |  |
-| `activated` |  |
-| `activated_by_admin_at` |  |
-| `activated_by_admin_id` |  |
-| `admin_notes` |  |
-| `agents_count` |  |
-| `assigned_agents` |  |
-| `assigned_agents_count` |  |
-| `assigned_agents_preview_limit` |  |
-| `assigned_agents_truncated` |  |
-| `auto_schedule_enabled` |  |
-| `comments_expected_per_day` |  |
-| `comments_fix_block_reason` |  |
-| `comments_fix_ready` |  |
-| `comments_today_failed` |  |
-| `comments_today_posted` |  |
-| `comments_today_scheduled` |  |
-| `comments_yesterday_failed` |  |
-| `comments_yesterday_posted` |  |
-| `comments_yesterday_total` |  |
-| `created_at` |  |
-| `credits` |  |
-| `effective_posted_video_reuse_percent` |  |
-| `email` |  |
-| `expected_agents_count` |  |
 | `id` |  |
-| `is_activated_by_admin` |  |
-| `is_admin` |  |
-| `is_bookmarked` |  |
-| `is_internal_user` |  |
-| `is_migrated` |  |
-| `landing_slug` |  |
-| `landing_status` |  |
-| `landing_url` |  |
-| `membership` |  |
-| `microhub_status` |  |
-| `microhub_url` |  |
 | `name` |  |
-| `onboarding_flow` |  |
-| `posted_video_reuse_percent` |  |
-| `product_id` |  |
-| `product_name` |  |
-| `product_url` |  |
-| `subscription_status` |  |
-| `survey_data` |  |
-| `today_failed` |  |
-| `today_posted` |  |
-| `today_scheduled` |  |
-| `tomorrow_capacity` |  |
-| `tomorrow_scheduled` |  |
-| `videos_completed` |  |
-| `videos_failed` |  |
-| `videos_pending` |  |
-| `videos_stale` |  |
-| `videos_total` |  |
-| `yesterday_failed` |  |
-| `yesterday_failed_entries` |  |
-| `yesterday_posted` |  |
-| `yesterday_total` |  |
+| `type` |  |
 
 Operations: List.
 
@@ -3683,21 +3586,17 @@ Create an instance: `admin = client.Admin()`
 | `list()` | List entities, optionally matching the given criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 | `remove(match)` | Remove the matching entity. |
-| `update(data)` | Update an existing entity. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
 | `apply` | `bool` | Apply safe canonical or clean-only URL updates |
-| `count` | `int` |  |
 | `created_at` | `str` |  |
 | `date_from` | `Any` |  |
 | `date_to` | `Any` |  |
 | `email` | `str` |  |
 | `id` | `str` |  |
-| `include_failed` | `bool` |  |
-| `include_pending` | `bool` |  |
 | `include_records` | `bool` | Include full per-field audit records in the response |
 | `issue_ids` | `Any` |  |
 | `only_active` | `bool` | Limit the audit to active agents |
@@ -3706,12 +3605,10 @@ Create an instance: `admin = client.Admin()`
 | `product_id` | `str` |  |
 | `query` | `Any` |  |
 | `reason` | `Any` |  |
-| `regenerate` | `bool` |  |
 | `status` | `str` |  |
 | `user_membership` | `Any` |  |
 | `user_name` | `Any` |  |
 | `user_onboarding_step` | `Any` |  |
-| `video_type` | `str` |  |
 
 #### Example: Load
 
@@ -3730,14 +3627,12 @@ admins = client.Admin().list()
 ```python
 admin = client.Admin().create({
     "user_id": "example_user_id",  # str
-    "count": 1,  # int
     "created_at": "example_created_at",  # str
     "date_from": "example_date_from",  # Any
     "date_to": "example_date_to",  # Any
     "email": "example_email",  # str
     "id": "example_id",  # str
     "product_id": "example_product_id",  # str
-    "video_type": "example_video_type",  # str
 })
 ```
 
@@ -4049,13 +3944,25 @@ Create an instance: `admin_insight = client.AdminInsight()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `customer_success_cases` | `list` |  |
-| `customers` | `list` |  |
-| `generated_at` | `str` |  |
-| `pfa_database` | `dict` |  |
-| `recent_signups` | `list` |  |
-| `summary` | `dict` |  |
-| `vireel_database` | `dict` |  |
+| `active_agents` | `int` |  |
+| `active_products` | `int` |  |
+| `agents_count` | `int` |  |
+| `auto_schedule_status` | `str` |  |
+| `days_until_period_end` | `Any` |  |
+| `email` | `str` |  |
+| `feature_impact` | `str` |  |
+| `last_notification_at` | `Any` |  |
+| `membership` | `Any` |  |
+| `name` | `str` |  |
+| `notification_count` | `int` |  |
+| `notification_events` | `list` |  |
+| `priority` | `str` |  |
+| `severity` | `str` |  |
+| `status_label` | `str` |  |
+| `subscription_current_period_end` | `Any` |  |
+| `subscription_status` | `Any` |  |
+| `upcoming_posts` | `int` |  |
+| `user_id` | `str` |  |
 
 #### Example: Load
 
@@ -4110,14 +4017,8 @@ Create an instance: `admin_metrics_summary = client.AdminMetricsSummary()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `paid_users_by_level` | `list` |  |
-| `total_cancellations` | `int` |  |
-| `total_previews_generated` | `int` |  |
-| `total_signups` | `int` |  |
-| `total_videos_generated` | `int` |  |
-| `url_attempts` | `int` |  |
-| `user_credits` | `list` |  |
-| `user_gifted_credits` | `list` |  |
+| `count` | `int` |  |
+| `level` | `str` |  |
 
 #### Example: List
 
@@ -4628,6 +4529,7 @@ Create an instance: `agent = client.Agent()`
 | Method | Description |
 | --- | --- |
 | `list()` | List entities, optionally matching the given criteria. |
+| `update(data)` | Update an existing entity. |
 
 #### Fields
 
@@ -4818,13 +4720,17 @@ Create an instance: `agent_access_user_agent = client.AgentAccessUserAgent()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `agentQuota` | `int` |  |
-| `agents` | `list` |  |
-| `assignedByType` | `dict` |  |
-| `assignedTotal` | `int` |  |
-| `email` | `str` |  |
-| `products` | `list` |  |
-| `userId` | `str` |  |
+| `avatar` | `Any` |  |
+| `facebookUrl` | `Any` |  |
+| `id` | `str` |  |
+| `instagramUrl` | `Any` |  |
+| `name` | `str` |  |
+| `productId` | `Any` |  |
+| `productName` | `Any` |  |
+| `tiktokUrl` | `Any` |  |
+| `type` | `Any` |  |
+| `uploadPostPlatforms` | `Any` |  |
+| `youtubeUrl` | `Any` |  |
 
 #### Example: List
 
@@ -5056,19 +4962,12 @@ Create an instance: `agent_health = client.AgentHealth()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `daily` | `list` |  |
-| `dates` | `list` |  |
-| `generated_at` | `str` |  |
-| `groups` | `list` |  |
-| `latest` | `dict` |  |
-| `live_date` | `Any` |  |
-| `phone_admin_generated_at` | `str` |  |
-| `platform` | `str` |  |
-| `post_target` | `int` |  |
-| `qa_managed_agent_ids` | `list` |  |
-| `scope_prefixes` | `list` |  |
-| `timezone` | `str` |  |
-| `warmup_target` | `int` |  |
+| `accounts` | `dict` |  |
+| `date` | `str` |  |
+| `overall` | `dict` |  |
+| `posts` | `dict` |  |
+| `views` | `dict` |  |
+| `warmups` | `dict` |  |
 
 #### Example: List
 
@@ -5116,19 +5015,12 @@ Create an instance: `agent_health_detail = client.AgentHealthDetail()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `archived_issue_total` | `int` |  |
-| `date` | `str` |  |
-| `generated_at` | `str` |  |
-| `group_id` | `str` |  |
-| `has_more` | `bool` |  |
-| `issue_total` | `int` |  |
-| `issues` | `list` |  |
-| `limit` | `int` |  |
-| `metric` | `str` |  |
-| `offset` | `int` |  |
-| `warmup_runs` | `list` |  |
-| `warning_total` | `int` |  |
-| `warnings` | `list` |  |
+| `agent_id` | `str` |  |
+| `category` | `str` |  |
+| `connection_status` | `str` |  |
+| `device_status` | `str` |  |
+| `issue` | `Any` |  |
+| `state` | `str` |  |
 
 #### Example: List
 
@@ -5170,7 +5062,7 @@ Create an instance: `agent_post = client.AgentPost()`
 #### Example: List
 
 ```python
-agent_posts = client.AgentPost().list({"id": "example"})
+agent_posts = client.AgentPost().list({"agent_id": "example"})
 ```
 
 
@@ -5449,7 +5341,6 @@ Create an instance: `carousel = client.Carousel()`
 | `formula_id` | `str` |  |
 | `formula_name` | `Any` |  |
 | `generation` | `dict` |  |
-| `id` | `str` |  |
 | `image_prompt` | `Any` |  |
 | `likes` | `Any` |  |
 | `main_prompt` | `Any` |  |
@@ -5554,7 +5445,6 @@ Create an instance: `carousel_status = client.CarouselStatus()`
 | --- | --- | --- |
 | `caption` | `Any` |  |
 | `error` | `Any` |  |
-| `id` | `str` |  |
 | `image_model` | `Any` |  |
 | `image_provider` | `Any` |  |
 | `image_task_id` | `str` |  |
@@ -5566,37 +5456,7 @@ Create an instance: `carousel_status = client.CarouselStatus()`
 #### Example: List
 
 ```python
-carousel_statuss = client.CarouselStatus().list({"id": "example"})
-```
-
-
-### Chat
-
-Create an instance: `chat = client.Chat()`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `create(data)` | Create a new entity with the given data. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `idempotencyKey` | `str` |  |
-| `message` | `str` |  |
-| `sessionId` | `str` |  |
-
-#### Example: Create
-
-```python
-chat = client.Chat().create({
-    "session_id": "example_session_id",  # str
-    "idempotencyKey": "example_idempotencyKey",  # str
-    "message": "example_message",  # str
-    "sessionId": "example_sessionId",  # str
-})
+carousel_statuss = client.CarouselStatus().list({"carousel_id": "example"})
 ```
 
 
@@ -5659,6 +5519,8 @@ Create an instance: `chat_session = client.ChatSession()`
 | --- | --- | --- |
 | `chatSubVariant` | `str` |  |
 | `createdAt` | `str` |  |
+| `idempotencyKey` | `str` |  |
+| `message` | `str` |  |
 | `model` | `Any` |  |
 | `plan` | `Any` |  |
 | `route` | `Any` |  |
@@ -5674,6 +5536,9 @@ Create an instance: `chat_session = client.ChatSession()`
 ```python
 chat_session = client.ChatSession().create({
     "session_id": "example_session_id",  # str
+    "idempotencyKey": "example_idempotencyKey",  # str
+    "message": "example_message",  # str
+    "sessionId": "example_sessionId",  # str
 })
 ```
 
@@ -6059,7 +5924,6 @@ Create an instance: `customer_health = client.CustomerHealth()`
 | `date` | `str` |  |
 | `email` | `str` |  |
 | `entries` | `list` |  |
-| `id` | `str` |  |
 | `performance_overview` | `dict` |  |
 | `platform_coverage_summary` | `dict` |  |
 | `user_id` | `str` |  |
@@ -6114,20 +5978,10 @@ Create an instance: `customer_health_views_summary = client.CustomerHealthViewsS
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `average_views_per_result` | `int` |  |
-| `date` | `str` |  |
-| `end_date` | `Any` |  |
-| `paid_users_count` | `int` |  |
+| `email` | `str` |  |
 | `posted_results` | `int` |  |
-| `range` | `str` |  |
-| `start_date` | `Any` |  |
-| `top_users` | `list` |  |
-| `total_views` | `int` |  |
-| `trend` | `list` |  |
-| `trend_granularity` | `str` |  |
-| `user_email` | `Any` |  |
 | `user_id` | `str` |  |
-| `users_with_views` | `int` |  |
+| `views` | `int` |  |
 
 #### Example: List
 
@@ -6172,16 +6026,10 @@ Create an instance: `daily_status = client.DailyStatus()`
 | --- | --- |
 | `load(match)` | Load a single entity by match criteria. |
 
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `id` | `str` |  |
-
 #### Example: Load
 
 ```python
-daily_status = client.DailyStatus().load({"id": "daily_status_id", "day": "day"})
+daily_status = client.DailyStatus().load({"daily_id": "daily_id", "day": "day"})
 ```
 
 
@@ -6260,23 +6108,6 @@ enterprise_agent = client.EnterpriseAgent().create({
     "source_product_id": "example_source_product_id",  # str
     "target_product_id": "example_target_product_id",  # str
 })
-```
-
-
-### EnterpriseProduct
-
-Create an instance: `enterprise_product = client.EnterpriseProduct()`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `load(match)` | Load a single entity by match criteria. |
-
-#### Example: Load
-
-```python
-enterprise_product = client.EnterpriseProduct().load({"product_id": "product_id"})
 ```
 
 
@@ -6630,34 +6461,6 @@ init_reset_product_v6 = client.InitResetProductV6().create({
 ```
 
 
-### Iri
-
-Create an instance: `iri = client.Iri()`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `create(data)` | Create a new entity with the given data. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `correlationId` | `Any` |  |
-| `idempotencyKey` | `str` |  |
-| `productId` | `Any` |  |
-
-#### Example: Create
-
-```python
-iri = client.Iri().create({
-    "connector_id": "example_connector_id",  # str
-    "idempotencyKey": "example_idempotencyKey",  # str
-})
-```
-
-
 ### IrisCapability
 
 Create an instance: `iris_capability = client.IrisCapability()`
@@ -6748,6 +6551,7 @@ Create an instance: `iris_connector = client.IrisConnector()`
 
 | Method | Description |
 | --- | --- |
+| `create(data)` | Create a new entity with the given data. |
 | `list()` | List entities, optionally matching the given criteria. |
 
 #### Fields
@@ -6760,6 +6564,14 @@ Create an instance: `iris_connector = client.IrisConnector()`
 
 ```python
 iris_connectors = client.IrisConnector().list()
+```
+
+#### Example: Create
+
+```python
+iris_connector = client.IrisConnector().create({
+    "connector_id": "example_connector_id",  # str
+})
 ```
 
 
@@ -6808,8 +6620,10 @@ Create an instance: `iris_task = client.IrisTask()`
 | `cadence` | `str` |  |
 | `capability` | `Any` |  |
 | `completed` | `list` |  |
+| `correlationId` | `Any` |  |
 | `description` | `str` |  |
 | `discover` | `list` |  |
+| `idempotencyKey` | `str` |  |
 | `productId` | `Any` |  |
 | `recurring` | `list` |  |
 | `requiredConnectors` | `list` |  |
@@ -6825,6 +6639,7 @@ iris_tasks = client.IrisTask().list()
 
 ```python
 iris_task = client.IrisTask().create({
+    "idempotencyKey": "example_idempotencyKey",  # str
     "title": "example_title",  # str
 })
 ```
@@ -7416,13 +7231,18 @@ Create an instance: `product_dashboard = client.ProductDashboard()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `agents` | `list` |  |
-| `date` | `str` |  |
-| `pagination` | `dict` |  |
-| `phone_admin_error` | `Any` |  |
-| `products` | `list` |  |
-| `selected_product` | `Any` |  |
-| `summary` | `dict` |  |
+| `comments` | `int` |  |
+| `failed_entries` | `int` |  |
+| `has_tiktok_community_violation` | `bool` |  |
+| `id` | `str` |  |
+| `likes` | `int` |  |
+| `metrics_pending_count` | `int` |  |
+| `name` | `str` |  |
+| `platforms` | `list` |  |
+| `posted_entries` | `int` |  |
+| `posting_entries` | `int` |  |
+| `scheduled_entries` | `int` |  |
+| `views` | `int` |  |
 
 #### Example: List
 
@@ -7510,6 +7330,7 @@ Create an instance: `product_landing = client.ProductLanding()`
 | `dmOngoingResponsePrompt` | `Any` |  |
 | `firstCommentTextBeforeLink` | `Any` |  |
 | `headerImageUrl` | `Any` |  |
+| `icon` | `Any` |  |
 | `id` | `str` |  |
 | `landingHtmlUrl` | `Any` |  |
 | `landingLastGeneratedAt` | `Any` |  |
@@ -7548,6 +7369,7 @@ Create an instance: `product_landing = client.ProductLanding()`
 | `slug` | `str` |  |
 | `socialLinks` | `Any` |  |
 | `testimonials` | `Any` |  |
+| `url` | `str` |  |
 
 #### Example: List
 
@@ -7612,23 +7434,6 @@ Create an instance: `re_roll_video = client.ReRollVideo()`
 re_roll_video = client.ReRollVideo().create({
     "queue_id": "example_queue_id",  # str
 })
-```
-
-
-### ReadRootGet
-
-Create an instance: `read_root_get = client.ReadRootGet()`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `load(match)` | Load a single entity by match criteria. |
-
-#### Example: Load
-
-```python
-read_root_get = client.ReadRootGet().load()
 ```
 
 
@@ -7772,6 +7577,23 @@ retry_website_scrape = client.RetryWebsiteScrape().create({
 ```
 
 
+### RootGet
+
+Create an instance: `root_get = client.RootGet()`
+
+#### Operations
+
+| Method | Description |
+| --- | --- |
+| `load(match)` | Load a single entity by match criteria. |
+
+#### Example: Load
+
+```python
+root_get = client.RootGet().load()
+```
+
+
 ### SaveSurvey
 
 Create an instance: `save_survey = client.SaveSurvey()`
@@ -7890,6 +7712,17 @@ scan_socials_status = client.ScanSocialsStatus().load()
 ```
 
 
+### ScheduleQueue
+
+Create an instance: `schedule_queue = client.ScheduleQueue()`
+
+#### Operations
+
+| Method | Description |
+| --- | --- |
+| `update(data)` | Update an existing entity. |
+
+
 ### ScheduleV2
 
 Create an instance: `schedule_v2 = client.ScheduleV2()`
@@ -7902,7 +7735,6 @@ Create an instance: `schedule_v2 = client.ScheduleV2()`
 | `list()` | List entities, optionally matching the given criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 | `remove(match)` | Remove the matching entity. |
-| `update(data)` | Update an existing entity. |
 
 #### Fields
 
@@ -8243,14 +8075,11 @@ Create an instance: `seo_traffic = client.SeoTraffic()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `end_date` | `str` |  |
-| `series` | `list` |  |
-| `site_url` | `str` |  |
-| `start_date` | `str` |  |
-| `top_countries` | `list` |  |
-| `top_pages` | `list` |  |
-| `top_queries` | `list` |  |
-| `totals` | `dict` |  |
+| `clicks` | `float` |  |
+| `ctr` | `float` |  |
+| `date` | `str` |  |
+| `impressions` | `float` |  |
+| `position` | `float` |  |
 
 #### Example: List
 
@@ -8718,23 +8547,24 @@ Create an instance: `stats_refresh_overview = client.StatsRefreshOverview()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `active_run` | `Any` |  |
-| `aged_over_24h` | `int` |  |
-| `backlog_preview` | `list` |  |
-| `coverage_percent` | `float` |  |
-| `customer_counts` | `dict` |  |
-| `date` | `str` |  |
-| `generated_at` | `str` |  |
-| `method_counts` | `dict` |  |
-| `platform_counts` | `dict` |  |
-| `platform_units_resolved` | `int` |  |
-| `platform_units_total` | `int` |  |
-| `platform_units_unresolved` | `int` |  |
-| `posted_entries` | `int` |  |
-| `reason_counts` | `dict` |  |
-| `sla_deadline_et` | `str` |  |
-| `stale_after_sla` | `int` |  |
-| `top_affected_customers` | `list` |  |
+| `aged_over_24h` | `bool` |  |
+| `agent_id` | `str` |  |
+| `agent_name` | `Any` |  |
+| `is_resolved` | `bool` |  |
+| `last_refresh_completed_at` | `Any` |  |
+| `latest_error_message` | `Any` |  |
+| `platform` | `str` |  |
+| `post_method` | `Any` |  |
+| `post_url` | `Any` |  |
+| `posted_date_et` | `str` |  |
+| `product_id` | `str` |  |
+| `product_name` | `Any` |  |
+| `reason_code` | `Any` |  |
+| `schedule_queue_id` | `str` |  |
+| `scheduled_datetime_utc` | `str` |  |
+| `stale_after_sla` | `bool` |  |
+| `user_email` | `str` |  |
+| `user_id` | `str` |  |
 
 #### Example: List
 
@@ -8951,6 +8781,7 @@ Create an instance: `user = client.User()`
 
 | Method | Description |
 | --- | --- |
+| `create(data)` | Create a new entity with the given data. |
 | `load(match)` | Load a single entity by match criteria. |
 | `update(data)` | Update an existing entity. |
 
@@ -9020,20 +8851,19 @@ Create an instance: `user_agent = client.UserAgent()`
 | `assigned_at` | `str` |  |
 | `assignment_id` | `str` |  |
 | `expires_at` | `Any` |  |
-| `id` | `str` |  |
 | `status` | `str` |  |
 
 #### Example: List
 
 ```python
-user_agents = client.UserAgent().list({"id": "example"})
+user_agents = client.UserAgent().list({"user_id": "example"})
 ```
 
 #### Example: Create
 
 ```python
 user_agent = client.UserAgent().create({
-    "id": "example_id",  # str
+    "user_id": "example_user_id",  # str
     "agent": {},  # dict
     "assigned_at": "example_assigned_at",  # str
     "assignment_id": "example_assignment_id",  # str
@@ -9056,70 +8886,14 @@ Create an instance: `user_health_detail = client.UserHealthDetail()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `account_type` | `Any` |  |
-| `activated` | `bool` |  |
-| `activated_by_admin_at` | `Any` |  |
-| `activated_by_admin_id` | `str` |  |
-| `admin_notes` | `Any` |  |
-| `agents_count` | `int` |  |
-| `assigned_agents` | `list` |  |
-| `assigned_agents_count` | `int` |  |
-| `assigned_agents_preview_limit` | `int` |  |
-| `assigned_agents_truncated` | `bool` |  |
-| `auto_schedule_enabled` | `bool` |  |
-| `comments_expected_per_day` | `int` |  |
-| `comments_fix_block_reason` | `Any` |  |
-| `comments_fix_ready` | `bool` |  |
-| `comments_today_failed` | `int` |  |
-| `comments_today_posted` | `int` |  |
-| `comments_today_scheduled` | `int` |  |
-| `comments_yesterday_failed` | `int` |  |
-| `comments_yesterday_posted` | `int` |  |
-| `comments_yesterday_total` | `int` |  |
-| `created_at` | `str` |  |
-| `credits` | `int` |  |
-| `effective_posted_video_reuse_percent` | `int` |  |
-| `email` | `str` |  |
-| `expected_agents_count` | `int` |  |
 | `id` | `str` |  |
-| `is_activated_by_admin` | `bool` |  |
-| `is_admin` | `bool` |  |
-| `is_bookmarked` | `bool` |  |
-| `is_internal_user` | `bool` |  |
-| `is_migrated` | `bool` |  |
-| `landing_slug` | `Any` |  |
-| `landing_status` | `Any` |  |
-| `landing_url` | `Any` |  |
-| `membership` | `Any` |  |
-| `microhub_status` | `Any` |  |
-| `microhub_url` | `Any` |  |
 | `name` | `str` |  |
-| `onboarding_flow` | `str` |  |
-| `posted_video_reuse_percent` | `Any` |  |
-| `product_id` | `str` |  |
-| `product_name` | `Any` |  |
-| `product_url` | `Any` |  |
-| `subscription_status` | `Any` |  |
-| `survey_data` | `Any` |  |
-| `today_failed` | `int` |  |
-| `today_posted` | `int` |  |
-| `today_scheduled` | `int` |  |
-| `tomorrow_capacity` | `int` |  |
-| `tomorrow_scheduled` | `int` |  |
-| `videos_completed` | `int` |  |
-| `videos_failed` | `int` |  |
-| `videos_pending` | `int` |  |
-| `videos_stale` | `int` |  |
-| `videos_total` | `int` |  |
-| `yesterday_failed` | `int` |  |
-| `yesterday_failed_entries` | `list` |  |
-| `yesterday_posted` | `int` |  |
-| `yesterday_total` | `int` |  |
+| `type` | `str` |  |
 
 #### Example: List
 
 ```python
-user_health_details = client.UserHealthDetail().list({"id": "example"})
+user_health_details = client.UserHealthDetail().list({"user_id": "example"})
 ```
 
 
@@ -9607,11 +9381,11 @@ Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-admininsight = client.AdminInsight()
-admininsight.list()
+agenthealth = client.AgentHealth()
+agenthealth.list()
 
-# admininsight.data_get() now returns the admininsight data from the last list
-# admininsight.match_get() returns the last match criteria
+# agenthealth.data_get() now returns the agenthealth data from the last list
+# agenthealth.match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

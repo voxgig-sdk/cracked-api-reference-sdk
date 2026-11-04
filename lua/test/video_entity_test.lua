@@ -44,8 +44,20 @@ describe("VideoEntity", function()
         return
       end
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" then
+      print("LIVE STEP {\"id\":\"video.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /videos/{video_id}/retry-video\"}")
+      print("LIVE STEP {\"id\":\"video.update.1\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs PATCH /videos/{video_id}\"}")
+      print("LIVE STEP {\"id\":\"video.load.2\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: reads a record only video.create.0 gives\"}")
+      print("LIVE STEP {\"id\":\"video.remove.3\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs DELETE /videos/{video_id}\"}")
+      pending("Live coverage incomplete: video.create.0 excluded (GET-only live run: needs POST /videos/{video_id}/retry-video); video.update.1 excluded (GET-only live run: needs PATCH /videos/{video_id}); video.load.2 excluded (GET-only live run: reads a record only video.create.0 gives); video.remove.3 excluded (GET-only live run: needs DELETE /videos/{video_id})")
+      return
+    end
+
     local client = setup.client
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- CREATE
     local video_ref01_ent = client:Video(nil)
     local video_ref01_data = helpers.to_map(vs.getprop(
@@ -57,6 +69,9 @@ describe("VideoEntity", function()
     assert.is_not_nil(video_ref01_data)
     assert.is_not_nil(video_ref01_data["id"])
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- UPDATE
     local video_ref01_data_up0_up = {
       id = video_ref01_data["id"],
@@ -70,9 +85,12 @@ describe("VideoEntity", function()
     assert.is_nil(err)
     local video_ref01_resdata_up0 = helpers.to_map(type(video_ref01_resdata_up0_result) == 'table' and video_ref01_resdata_up0_result.data_get and video_ref01_resdata_up0_result:data_get() or video_ref01_resdata_up0_result)
     assert.is_not_nil(video_ref01_resdata_up0)
-    assert.are.equal(video_ref01_resdata_up0["id"], video_ref01_data_up0_up["id"])
+    assert.is_true(runner.live_same_id(video_ref01_resdata_up0["id"], video_ref01_data_up0_up["id"]))
     assert.are.equal(video_ref01_resdata_up0[video_ref01_markdef_up0_name], video_ref01_markdef_up0_value)
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LOAD
     local video_ref01_match_dt0 = {
       id = video_ref01_data["id"],
@@ -81,8 +99,11 @@ describe("VideoEntity", function()
     assert.is_nil(err)
     local video_ref01_data_dt0_load_result = helpers.to_map(type(video_ref01_data_dt0_loaded) == 'table' and video_ref01_data_dt0_loaded.data_get and video_ref01_data_dt0_loaded:data_get() or video_ref01_data_dt0_loaded)
     assert.is_not_nil(video_ref01_data_dt0_load_result)
-    assert.are.equal(video_ref01_data_dt0_load_result["id"], video_ref01_data["id"])
+    assert.is_true(runner.live_same_id(video_ref01_data_dt0_load_result["id"], video_ref01_data["id"]))
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- REMOVE
     local video_ref01_match_rm0 = {
       id = video_ref01_data["id"],

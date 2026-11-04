@@ -44,8 +44,37 @@ describe("AdminCarouselEntity", function()
         return
       end
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" then
+      print("LIVE STEP {\"id\":\"admin_carousel.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/admin/carousels/slideshow-import/{batch_id}/state\"}")
+      print("LIVE STEP {\"id\":\"admin_carousel.update.1\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs PUT /api/admin/carousels/production-prompts/{fmt}\"}")
     local client = setup.client
 
+    -- Bootstrap entity data from existing test data.
+    local admin_carousel_ref01_data_raw = vs.items(helpers.to_map(
+      vs.getpath(setup.data, "existing.admin_carousel")))
+    local admin_carousel_ref01_data = nil
+    if #admin_carousel_ref01_data_raw > 0 then
+      admin_carousel_ref01_data = helpers.to_map(admin_carousel_ref01_data_raw[1][2])
+    end
+
+    if setup.live then
+      runner.live_pace()
+    end
+    -- LOAD
+    local admin_carousel_ref01_ent = client:AdminCarousel(nil)
+    local admin_carousel_ref01_match_dt0 = {}
+    local admin_carousel_ref01_data_dt0_loaded, err = admin_carousel_ref01_ent:load(admin_carousel_ref01_match_dt0, nil)
+    assert.is_nil(err)
+    assert.is_not_nil(admin_carousel_ref01_data_dt0_loaded)
+
+      return
+    end
+
+    local client = setup.client
+
+    if setup.live then
+      runner.live_pace()
+    end
     -- CREATE
     local admin_carousel_ref01_ent = client:AdminCarousel(nil)
     local admin_carousel_ref01_data = helpers.to_map(vs.getprop(
@@ -56,6 +85,9 @@ describe("AdminCarouselEntity", function()
     admin_carousel_ref01_data = helpers.to_map(type(admin_carousel_ref01_data_result) == 'table' and admin_carousel_ref01_data_result.data_get and admin_carousel_ref01_data_result:data_get() or admin_carousel_ref01_data_result)
     assert.is_not_nil(admin_carousel_ref01_data)
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- UPDATE
     local admin_carousel_ref01_data_up0_up = {
     }
@@ -70,6 +102,9 @@ describe("AdminCarouselEntity", function()
     assert.is_not_nil(admin_carousel_ref01_resdata_up0)
     assert.are.equal(admin_carousel_ref01_resdata_up0[admin_carousel_ref01_markdef_up0_name], admin_carousel_ref01_markdef_up0_value)
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LOAD
     local admin_carousel_ref01_match_dt0 = {}
     local admin_carousel_ref01_data_dt0_loaded, err = admin_carousel_ref01_ent:load(admin_carousel_ref01_match_dt0, nil)

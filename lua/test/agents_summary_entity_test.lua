@@ -54,6 +54,9 @@ describe("AgentsSummaryEntity", function()
       agents_summary_ref01_data = helpers.to_map(agents_summary_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LOAD
     local agents_summary_ref01_ent = client:AgentsSummary(nil)
     local agents_summary_ref01_match_dt0 = {}

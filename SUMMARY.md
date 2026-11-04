@@ -6,7 +6,7 @@ Backend API for Vireel application
 
 This guide introduces the API, the client libraries, and the companion tools in this repository. Start with the API capabilities, choose a client for your application, and use the linked reference when you need exact request and response details.
 
-The selected API surface contains 171 entities and 453 HTTP routes. There are 6 SDK targets and 2 companion tools.
+The selected API surface contains 169 entities and 453 HTTP routes. There are 6 SDK targets and 2 companion tools.
 
 An entity groups related API operations. An operation can have several routes with different inputs or authentication requirements. The SDK exposes the entity and its operations using the conventions of the selected language.
 
@@ -34,7 +34,7 @@ SDK operations: `load`.
 
 Results: Successful Response.
 
-SDK operations: `create`, `list`, `load`, `remove`, `update`.
+SDK operations: `create`, `list`, `load`, `remove`.
 
 Key fields to recognise:
 
@@ -159,7 +159,7 @@ Key fields to recognise:
 
 Results: Successful Response.
 
-SDK operations: `list`.
+SDK operations: `list`, `update`.
 
 ### AgentAccessCustomersHealth
 
@@ -351,12 +351,6 @@ Results: Successful Response.
 
 SDK operations: `list`.
 
-### Chat
-
-Results: Successful Response.
-
-SDK operations: `create`.
-
 ### ChatHistory
 
 Results: Successful Response.
@@ -479,12 +473,6 @@ Results: Successful Response.
 
 SDK operations: `create`, `load`.
 
-### EnterpriseProduct
-
-Results: Successful Response.
-
-SDK operations: `load`.
-
 ### ExactAvailability
 
 Results: Successful Response.
@@ -555,12 +543,6 @@ Results: Successful Response.
 
 SDK operations: `create`.
 
-### Iri
-
-Results: Successful Response.
-
-SDK operations: `create`.
-
 ### IrisCapability
 
 Results: Successful Response.
@@ -577,7 +559,7 @@ SDK operations: `create`.
 
 Results: Successful Response.
 
-SDK operations: `list`.
+SDK operations: `create`, `list`.
 
 ### IrisStatus
 
@@ -743,12 +725,6 @@ Results: Successful Response.
 
 SDK operations: `create`.
 
-### ReadRootGet
-
-Results: Successful Response.
-
-SDK operations: `load`.
-
 ### RecordDemoBooked
 
 Results: Successful Response.
@@ -790,6 +766,12 @@ Key fields to recognise:
 - `onboarding_data_id`: UUID of existing OnboardingData
 - `url`: New website URL to scrape
 
+### RootGet
+
+Results: Successful Response.
+
+SDK operations: `load`.
+
 ### SaveSurvey
 
 Results: Successful Response.
@@ -825,11 +807,17 @@ Results: Successful Response.
 
 SDK operations: `load`.
 
+### ScheduleQueue
+
+Results: Successful Response.
+
+SDK operations: `update`.
+
 ### ScheduleV2
 
 Results: Successful Response.
 
-SDK operations: `create`, `list`, `load`, `remove`, `update`.
+SDK operations: `create`, `list`, `load`, `remove`.
 
 ### Scrape
 
@@ -1054,7 +1042,7 @@ SDK operations: `create`.
 
 Results: Successful Response.
 
-SDK operations: `load`, `update`.
+SDK operations: `create`, `load`, `update`.
 
 ### UserAgent
 
@@ -1127,14 +1115,6 @@ Use this map to locate a capability. Consult the entity reference before supplyi
 | ActiveOnboarding | `load` | `GET /api/onboarding-v6/active-session` | Required |
 | Admin | `create` | `POST /api/admin/users/{user_id}/regenerate-video/{video_id}` | Required |
 | Admin | `create` | `POST /api/admin/impersonate/{user_id}` | Required |
-| Admin | `create` | `POST /api/admin/users/{user_id}/agents/reconcile` | Required |
-| Admin | `create` | `POST /api/admin/users/{user_id}/bulk-create-videos` | Required |
-| Admin | `create` | `POST /api/admin/users/{user_id}/clear-failed-videos` | Required |
-| Admin | `create` | `POST /api/admin/users/{user_id}/clear-future-auto-entries` | Required |
-| Admin | `create` | `POST /api/admin/users/{user_id}/clear-manual-entries` | Required |
-| Admin | `create` | `POST /api/admin/users/{user_id}/clear-today-auto-entries` | Required |
-| Admin | `create` | `POST /api/admin/users/{user_id}/retry-todays-videos` | Required |
-| Admin | `create` | `POST /api/admin/users/{user_id}/retry-videos` | Required |
 | Admin | `create` | `POST /api/admin/agents/social-profile-audit` | Required |
 | Admin | `create` | `POST /api/admin/batch-regenerate-sora2` | Required |
 | Admin | `create` | `POST /api/admin/customer-health/issues/retry` | Required |
@@ -1147,17 +1127,12 @@ Use this map to locate a capability. Consult the entity reference before supplyi
 | Admin | `create` | `POST /api/admin/whitelist-testers` | Required |
 | Admin | `list` | `GET /api/admin/whitelist-testers` | Required |
 | Admin | `load` | `GET /api/admin/stats/by-date-and-type` | Required |
-| Admin | `load` | `GET /api/admin/users/{user_id}/failed-videos` | Required |
-| Admin | `load` | `GET /api/admin/users/{user_id}/pending-videos` | Required |
-| Admin | `load` | `GET /api/admin/users/{user_id}/schedule-queue` | Required |
 | Admin | `load` | `GET /api/admin/stats/aggregate` | Required |
 | Admin | `load` | `GET /api/admin/users/export` | Required |
 | Admin | `remove` | `DELETE /api/admin/users/{user_id}/agents/{agent_id}` | Required |
 | Admin | `remove` | `DELETE /api/admin/users/{user_id}/schedule-queue/{queue_id}` | Required |
 | Admin | `remove` | `DELETE /api/admin/users/{user_id}/video/{video_id}` | Required |
 | Admin | `remove` | `DELETE /api/admin/whitelist-testers/{tester_id}` | Required |
-| Admin | `update` | `PUT /api/admin/agents/{agent_id}/type` | Required |
-| Admin | `update` | `PUT /api/admin/agents/{agent_id}/active` | Required |
 | AdminAccountReset | `create` | `POST /api/admin/agent-account-reset` | Required |
 | AdminCarousel | `create` | `POST /api/admin/carousels/slideshow-import/{batch_id}/state` | Required |
 | AdminCarousel | `create` | `POST /api/admin/carousels/slideshow-import/diag/{stage}` | Required |
@@ -1203,24 +1178,11 @@ Use this map to locate a capability. Consult the entity reference before supplyi
 | AdminSlideshowImport | `create` | `POST /api/admin/slideshow-import2/{batch_id}/state` | Required |
 | AdminSlideshowImport | `create` | `POST /api/admin/slideshow-import2/decks-json` | Required |
 | AdminSlideshowImport | `load` | `GET /api/admin/slideshow-import2/{batch_id}` | Required |
-| AdminUserView | `create` | `POST /api/admin/users/{user_id}/fix-auto-schedule-by-date` | Required |
-| AdminUserView | `create` | `POST /api/admin/users/{user_id}/repair-approved-source-queue-today` | Required |
 | AdminUserView | `create` | `POST /api/admin/users/{user_id}/convert-to-enterprise` | Required |
-| AdminUserView | `create` | `POST /api/admin/users/{user_id}/fix-all` | Required |
-| AdminUserView | `create` | `POST /api/admin/users/{user_id}/fix-auto-schedule` | Required |
-| AdminUserView | `create` | `POST /api/admin/users/{user_id}/fix-auto-schedule-today` | Required |
-| AdminUserView | `create` | `POST /api/admin/users/{user_id}/fix-auto-schedule-today-force` | Required |
-| AdminUserView | `create` | `POST /api/admin/users/{user_id}/fix-auto-schedule-tomorrow` | Required |
-| AdminUserView | `create` | `POST /api/admin/users/{user_id}/fix-comments-today` | Required |
-| AdminUserView | `create` | `POST /api/admin/users/{user_id}/generate-pomelli-video` | Required |
-| AdminUserView | `create` | `POST /api/admin/users/{user_id}/repost-tiktok-videos-tomorrow` | Required |
-| AdminUserView | `create` | `POST /api/admin/users/{user_id}/reset-onboarding` | Required |
 | AdminUserView | `create` | `POST /api/admin/users/{user_id}/transfer-ownership` | Required |
 | AdminUserView | `list` | `GET /api/admin/users/search` | Required |
 | AdminUserView | `list` | `GET /api/admin/users` | Required |
 | AdminUserView | `remove` | `DELETE /api/admin/users/{user_id}` | Required |
-| AdminUserView | `update` | `PUT /api/admin/users/{user_id}/auto-schedule` | Required |
-| AdminUserView | `update` | `PUT /api/admin/users/{user_id}/posted-video-reuse` | Required |
 | AdminUserView | `update` | `PUT /api/admin/users/{user_id}` | Required |
 | AdminUsersTableItem | `list` | `GET /api/admin/users/table` | Required |
 | AdminVideoRemixer | `create` | `POST /api/admin/video-remixer/clips/{clip_id}/media` | Required |
@@ -1306,6 +1268,8 @@ Use this map to locate a capability. Consult the entity reference before supplyi
 | AdminVideoRemixer | `update` | `PUT /api/admin/video-remixer/source-policies/batch` | Required |
 | AdvanceStep | `create` | `POST /api/onboarding-v6/advance-step` | Required |
 | Agent | `list` | `GET /api/admin/agents` | Required |
+| Agent | `update` | `PUT /api/admin/agents/{agent_id}/active` | Required |
+| Agent | `update` | `PUT /api/admin/agents/{agent_id}/type` | Required |
 | AgentAccessCustomersHealth | `list` | `GET /api/admin/customers-health` | Required |
 | AgentAccessCustomersHealth | `list` | `GET /api/agent-access/customers-health` | See reference |
 | AgentAccessOverview | `load` | `GET /api/agent-access/overview` | See reference |
@@ -1348,10 +1312,10 @@ Use this map to locate a capability. Consult the entity reference before supplyi
 | Carousel | `load` | `GET /api/admin/carousels/{queue_id}` | Required |
 | CarouselAgentDetail | `load` | `GET /api/admin/carousels/agents/{agent_id}` | Required |
 | CarouselStatus | `list` | `GET /api/carousel/{video_id}/status` | Required |
-| Chat | `create` | `POST /api/chat/sessions/{session_id}/messages` | Required |
 | ChatHistory | `create` | `POST /api/chat/sessions` | Required |
 | ChatHistory | `load` | `GET /api/chat/sessions/{session_id}` | Required |
 | ChatSession | `create` | `POST /api/chat/sessions/{session_id}/complete` | Required |
+| ChatSession | `create` | `POST /api/chat/sessions/{session_id}/messages` | Required |
 | Comment | `load` | `GET /api/comments/results` | Required |
 | CommentCampaign | `create` | `POST /api/comments/products/{product_id}/campaign/sources/{source_id}/resolve` | Required |
 | CommentCampaign | `create` | `POST /api/comments/products/{product_id}/campaign/pilot` | Required |
@@ -1381,7 +1345,6 @@ Use this map to locate a capability. Consult the entity reference before supplyi
 | EnterpriseAgent | `create` | `POST /api/enterprise/agents/move` | Required |
 | EnterpriseAgent | `create` | `POST /api/enterprise/agents/release` | Required |
 | EnterpriseAgent | `load` | `GET /api/enterprise/agents/global-pool-status` | Required |
-| EnterpriseProduct | `load` | `GET /api/enterprise/products/{product_id}/status` | Required |
 | ExactAvailability | `load` | `GET /api/carousel/exact-availability` | See reference |
 | ExactFormula | `load` | `GET /api/carousel/exact-formulas` | See reference |
 | ExtractV2 | `create` | `POST /api/scraper/extract_v2` | Required |
@@ -1407,12 +1370,12 @@ Use this map to locate a capability. Consult the entity reference before supplyi
 | Healthrx | `load` | `GET /api/healthrx/products/{product_id}/profile-schema` | Required |
 | Healthrx | `load` | `GET /api/healthrx/products/{product_id}/reports` | Required |
 | InitResetProductV6 | `create` | `POST /api/reset-product/init-v6` | Required |
-| Iri | `create` | `POST /api/iris/connectors/{connector_id}/start` | Required |
-| Iri | `create` | `POST /api/iris/tasks/{task_id}/run` | Required |
 | IrisCapability | `create` | `POST /api/platform/capabilities/{capability_name}` | See reference |
 | IrisChat | `create` | `POST /api/iris/chat` | Required |
+| IrisConnector | `create` | `POST /api/iris/connectors/{connector_id}/start` | Required |
 | IrisConnector | `list` | `GET /api/iris/connectors` | Required |
 | IrisStatus | `list` | `GET /api/iris/status` | Required |
+| IrisTask | `create` | `POST /api/iris/tasks/{task_id}/run` | Required |
 | IrisTask | `create` | `POST /api/iris/tasks` | Required |
 | IrisTask | `list` | `GET /api/iris/tasks` | Required |
 | IrisUsage | `list` | `GET /api/iris/usage` | Required |
@@ -1460,6 +1423,7 @@ Use this map to locate a capability. Consult the entity reference before supplyi
 | Product | `list` | `GET /api/enterprise/products` | Required |
 | Product | `load` | `GET /api/enterprise/agents/product/{product_id}` | Required |
 | Product | `load` | `GET /api/enterprise/products/{product_id}` | Required |
+| Product | `load` | `GET /api/enterprise/products/{product_id}/status` | Required |
 | Product | `load` | `GET /api/products/me` | Required |
 | Product | `remove` | `DELETE /api/enterprise/products/{product_id}` | Required |
 | Product | `update` | `PUT /api/enterprise/products/{product_id}` | Required |
@@ -1473,7 +1437,6 @@ Use this map to locate a capability. Consult the entity reference before supplyi
 | ProductLanding | `update` | `PUT /api/landings/settings` | Required |
 | PublicResumeStatus | `load` | `GET /api/onboarding-v6/resume-status-public` | See reference |
 | ReRollVideo | `create` | `POST /api/core/re-roll-video` | Required |
-| ReadRootGet | `load` | `GET /` | See reference |
 | RecordDemoBooked | `create` | `POST /api/chat/sessions/{session_id}/demo-booked` | Required |
 | RefreshStat | `create` | `POST /api/analytics/refresh-stats` | See reference |
 | RemixerClipper | `create` | `POST /api/remixer-clippers/jobs/{identifier}/download` | See reference |
@@ -1481,18 +1444,19 @@ Use this map to locate a capability. Consult the entity reference before supplyi
 | ResetProduct | `create` | `POST /api/reset-product/generate-videos-v6` | Required |
 | ResetProduct | `load` | `GET /api/reset-product/generate-videos/status` | Required |
 | RetryWebsiteScrape | `create` | `POST /api/onboarding-v6/retry-scrape` | Required |
+| RootGet | `load` | `GET /` | See reference |
 | SaveSurvey | `create` | `POST /api/onboarding-v6/save-survey` | Required |
 | ScanSocial | `create` | `POST /api/reset-product/scan-socials` | Required |
 | ScanSocial | `create` | `POST /api/video-variation/scan-socials` | Required |
 | ScanSocialsPublic | `create` | `POST /api/onboarding-v6/scan-socials-public` | Required |
 | ScanSocialsStatus | `load` | `GET /api/video-variation/scan-socials/status` | Required |
+| ScheduleQueue | `update` | `PUT /api/schedule/queue/{queue_id}/replace-video` | Required |
 | ScheduleV2 | `create` | `POST /api/schedule/queue/add` | Required |
 | ScheduleV2 | `create` | `POST /api/schedule/queue/reorder` | Required |
 | ScheduleV2 | `create` | `POST /api/schedule/test-daily-email` | Required |
 | ScheduleV2 | `list` | `GET /api/schedule/queue` | Required |
 | ScheduleV2 | `load` | `GET /api/schedule/results` | Required |
 | ScheduleV2 | `remove` | `DELETE /api/schedule/queue/{queue_id}` | Required |
-| ScheduleV2 | `update` | `PUT /api/schedule/queue/{queue_id}/replace-video` | Required |
 | Scrape | `create` | `POST /api/reset-product/scrape` | Required |
 | ScrapeWebsitePublic | `create` | `POST /api/onboarding-v6/scrape-website-public` | See reference |
 | ScrapedData | `create` | `POST /api/scraper/extract` | Required |
@@ -1546,8 +1510,32 @@ Use this map to locate a capability. Consult the entity reference before supplyi
 | TikTokCreatorInfo | `list` | `GET /social/tiktok/creator-info` | Required |
 | TopPost | `list` | `GET /api/admin/stats/top-posts` | Required |
 | UploadPostAgent | `create` | `POST /api/upload-post-agents/sync-platforms` | See reference |
+| User | `create` | `POST /api/admin/users/{user_id}/fix-auto-schedule-by-date` | Required |
+| User | `create` | `POST /api/admin/users/{user_id}/repair-approved-source-queue-today` | Required |
+| User | `create` | `POST /api/admin/users/{user_id}/agents/reconcile` | Required |
+| User | `create` | `POST /api/admin/users/{user_id}/bulk-create-videos` | Required |
+| User | `create` | `POST /api/admin/users/{user_id}/clear-failed-videos` | Required |
+| User | `create` | `POST /api/admin/users/{user_id}/clear-future-auto-entries` | Required |
+| User | `create` | `POST /api/admin/users/{user_id}/clear-manual-entries` | Required |
+| User | `create` | `POST /api/admin/users/{user_id}/clear-today-auto-entries` | Required |
+| User | `create` | `POST /api/admin/users/{user_id}/fix-all` | Required |
+| User | `create` | `POST /api/admin/users/{user_id}/fix-auto-schedule` | Required |
+| User | `create` | `POST /api/admin/users/{user_id}/fix-auto-schedule-today` | Required |
+| User | `create` | `POST /api/admin/users/{user_id}/fix-auto-schedule-today-force` | Required |
+| User | `create` | `POST /api/admin/users/{user_id}/fix-auto-schedule-tomorrow` | Required |
+| User | `create` | `POST /api/admin/users/{user_id}/fix-comments-today` | Required |
+| User | `create` | `POST /api/admin/users/{user_id}/generate-pomelli-video` | Required |
+| User | `create` | `POST /api/admin/users/{user_id}/repost-tiktok-videos-tomorrow` | Required |
+| User | `create` | `POST /api/admin/users/{user_id}/reset-onboarding` | Required |
+| User | `create` | `POST /api/admin/users/{user_id}/retry-todays-videos` | Required |
+| User | `create` | `POST /api/admin/users/{user_id}/retry-videos` | Required |
+| User | `load` | `GET /api/admin/users/{user_id}/failed-videos` | Required |
+| User | `load` | `GET /api/admin/users/{user_id}/pending-videos` | Required |
+| User | `load` | `GET /api/admin/users/{user_id}/schedule-queue` | Required |
 | User | `load` | `GET /api/upload-post-agents/user/{user_id}` | See reference |
 | User | `load` | `GET /auth/me` | Required |
+| User | `update` | `PUT /api/admin/users/{user_id}/auto-schedule` | Required |
+| User | `update` | `PUT /api/admin/users/{user_id}/posted-video-reuse` | Required |
 | User | `update` | `PATCH /api/users/attribution` | Required |
 | User | `update` | `PATCH /api/users/industry` | Required |
 | User | `update` | `PATCH /api/users/mark-schedule-welcome-seen` | Required |
@@ -1625,7 +1613,7 @@ Use the MCP server to expose supported API operations to an MCP client.
 Repository directory: `go-mcp/`. Not published. Build from the go-mcp directory.
 
 - `cracked-api-reference_list`: List records for an entity. Supported entities: `admin`, `admin_customer`, `admin_customer_success`, `admin_generated_video`, `admin_insight`, `admin_metrics_summary`, `admin_post`, `admin_recent_signup`, `admin_user_view`, `admin_users_table_item`, `agent`, `agent_access_customers_health`, `agent_access_user_agent`, `agent_access_user_phone_farm`, `agent_access_user_post`, `agent_access_user_summary`, `agent_access_user_winning_ad`, `agent_access_winning_ads_summary`, `agent_detail`, `agent_health`, `agent_health_customer_option`, `agent_health_detail`, `agent_post`, `agent_summary`, `analytics_post`, `carousel`, `carousel_status`, `customer`, `customer_health_all_customers_item`, `customer_health_views_summary`, `dedicated_agents_dashboard`, `failed_post`, `iris_connector`, `iris_status`, `iris_task`, `iris_usage`, `men`, `onboarding_status`, `paid_user`, `pexel`, `phone_admin_available_agent_source`, `product`, `product_dashboard`, `product_dashboard_view`, `product_demo`, `product_landing`, `schedule_v2`, `seo_ai_mention`, `seo_backlink`, `seo_keyword`, `seo_overview`, `seo_traffic`, `social`, `sora2_avatar`, `stat`, `stats_refresh_issue`, `stats_refresh_overview`, `stats_refresh_run_summary`, `tik_tok_creator_info`, `top_post`, `user_agent`, `user_health_detail`, `user_with_avatar_submission`, `users_health`, `winning_ad`, `zerohuman_admin_account`.
-- `cracked-api-reference_load`: Load one record for an entity. Supported entities: `active_onboarding`, `admin`, `admin_carousel`, `admin_carousel_demo_review`, `admin_healthrx`, `admin_insight`, `admin_slideshow_import`, `admin_video_remixer`, `agent_access_overview`, `agent_access_phil_hourly_notification`, `agent_access_phil_stats_refresh`, `agent_access_phil_video`, `agent_access_user_video`, `agent_stat`, `agents_summary`, `analysis_status`, `auto_schedule_setting`, `carousel`, `carousel_agent_detail`, `chat_history`, `comment`, `comment_campaign`, `customer_health`, `daily_status`, `enterprise_agent`, `enterprise_product`, `exact_availability`, `exact_formula`, `generate_sora2_prompt`, `healthrx`, `landing_stat`, `landing_status`, `link_in_bio`, `link_in_dm`, `link_in_post`, `media_asset`, `microdrama`, `microhub_public`, `product`, `public_resume_status`, `read_root_get`, `remixer_clipper`, `reset_product`, `scan_socials_status`, `schedule_v2`, `scraping_status`, `seo`, `site`, `slug_validation`, `social`, `sora2_avatar`, `sora2_avatar_stat`, `style`, `template`, `user`, `video`, `watchdog_recovery`, `x_adaptation`.
+- `cracked-api-reference_load`: Load one record for an entity. Supported entities: `active_onboarding`, `admin`, `admin_carousel`, `admin_carousel_demo_review`, `admin_healthrx`, `admin_insight`, `admin_slideshow_import`, `admin_video_remixer`, `agent_access_overview`, `agent_access_phil_hourly_notification`, `agent_access_phil_stats_refresh`, `agent_access_phil_video`, `agent_access_user_video`, `agent_stat`, `agents_summary`, `analysis_status`, `auto_schedule_setting`, `carousel`, `carousel_agent_detail`, `chat_history`, `comment`, `comment_campaign`, `customer_health`, `daily_status`, `enterprise_agent`, `exact_availability`, `exact_formula`, `generate_sora2_prompt`, `healthrx`, `landing_stat`, `landing_status`, `link_in_bio`, `link_in_dm`, `link_in_post`, `media_asset`, `microdrama`, `microhub_public`, `product`, `public_resume_status`, `remixer_clipper`, `reset_product`, `root_get`, `scan_socials_status`, `schedule_v2`, `scraping_status`, `seo`, `site`, `slug_validation`, `social`, `sora2_avatar`, `sora2_avatar_stat`, `style`, `template`, `user`, `video`, `watchdog_recovery`, `x_adaptation`.
 
 ## Operational features
 

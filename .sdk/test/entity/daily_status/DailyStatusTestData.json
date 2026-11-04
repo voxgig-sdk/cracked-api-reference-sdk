@@ -2,12 +2,15 @@
   "existing": {
     "daily_status": {
       "DAILY_STATUS00": {
+        "daily_id": "DAILY01",
         "id": "DAILY_STATUS00"
       },
       "DAILY_STATUS01": {
+        "daily_id": "DAILY01",
         "id": "DAILY_STATUS01"
       },
       "DAILY_STATUS02": {
+        "daily_id": "DAILY01",
         "id": "DAILY_STATUS02"
       }
     }

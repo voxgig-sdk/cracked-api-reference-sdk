@@ -87,7 +87,7 @@ main: kit: entity: seo_overview: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.series`"
           }
         }
       ]

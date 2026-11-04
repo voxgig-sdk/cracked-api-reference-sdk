@@ -150,6 +150,8 @@ class TestPexelEntity:
         if len(pexel_ref01_data_raw) > 0:
             pexel_ref01_data = helpers.to_map(pexel_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LIST
         pexel_ref01_ent = client.Pexel(None)
         pexel_ref01_match = {}

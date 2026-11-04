@@ -212,6 +212,9 @@ func TestDedicatedAgentsDashboardEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = dedicatedAgentsDashboardRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LIST
 		dedicatedAgentsDashboardRef01Ent := client.DedicatedAgentsDashboard(nil)
 		dedicatedAgentsDashboardRef01Match := map[string]any{}

@@ -212,6 +212,9 @@ func TestSeoTrafficEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = seoTrafficRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LIST
 		seoTrafficRef01Ent := client.SeoTraffic(nil)
 		seoTrafficRef01Match := map[string]any{}

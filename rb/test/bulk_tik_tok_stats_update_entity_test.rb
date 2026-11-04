@@ -29,6 +29,11 @@ class BulkTikTokStatsUpdateEntityTest < Minitest::Test
         return
       end
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE"
+      puts "LIVE STEP {\"id\":\"bulk_tik_tok_stats_update.update.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs PATCH /api/upload-post-agents/bulk/tiktok-stats\"}"
+      skip("Live coverage incomplete: bulk_tik_tok_stats_update.update.0 excluded (GET-only live run: needs PATCH /api/upload-post-agents/bulk/tiktok-stats)")
+    end
+
     client = setup[:client]
 
     # Bootstrap entity data from existing test data.
@@ -39,6 +44,7 @@ class BulkTikTokStatsUpdateEntityTest < Minitest::Test
       bulk_tik_tok_stats_update_ref01_data = Helpers.to_map(bulk_tik_tok_stats_update_ref01_data_raw[0][1])
     end
 
+    Runner.live_pace if setup[:live]
     # UPDATE
     bulk_tik_tok_stats_update_ref01_ent = client.BulkTikTokStatsUpdate(nil)
     bulk_tik_tok_stats_update_ref01_data_up0_up = {

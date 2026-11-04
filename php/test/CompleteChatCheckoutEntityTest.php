@@ -52,8 +52,16 @@ class CompleteChatCheckoutEntityTest extends TestCase
                 return;
             }
         }
+        if (!empty($setup["live"]) && getenv('VOXGIG_GETONLY_GUARD') === "TRUE") {
+            fwrite(STDOUT, 'LIVE STEP {"id":"complete_chat_checkout.create.0","state":"excluded","attempted":false,"reason":"GET-only live run: needs POST /api/onboarding-v6/complete-chat-checkout"}' . "\n");
+            $this->markTestSkipped('Live coverage incomplete: complete_chat_checkout.create.0 excluded (GET-only live run: needs POST /api/onboarding-v6/complete-chat-checkout)');
+        }
+
         $client = $setup["client"];
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // CREATE
         $complete_chat_checkout_ref01_ent = $client->CompleteChatCheckout(null);
         $complete_chat_checkout_ref01_data = Helpers::to_map(Vs::getprop(

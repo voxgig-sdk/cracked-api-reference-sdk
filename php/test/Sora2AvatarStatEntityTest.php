@@ -46,6 +46,9 @@ class Sora2AvatarStatEntityTest extends TestCase
             $sora2_avatar_stat_ref01_data = Helpers::to_map($sora2_avatar_stat_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LOAD
         $sora2_avatar_stat_ref01_ent = $client->Sora2AvatarStat(null);
         $sora2_avatar_stat_ref01_match_dt0 = [];

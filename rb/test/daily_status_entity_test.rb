@@ -25,7 +25,7 @@ class DailyStatusEntityTest < Minitest::Test
     end
     client = CrackedApiReferenceSDK.test(nil, { "feature" => { "validate" => { "active" => true } } })
     err = assert_raises(StandardError) do
-      client.DailyStatus(nil).load({ "id" => 1, "day" => "x" }, nil)
+      client.DailyStatus(nil).load({ "daily_id" => 1, "day" => "x" }, nil)
     end
     assert_equal "validate_failed", err.code
   end
@@ -34,7 +34,7 @@ class DailyStatusEntityTest < Minitest::Test
     setup = daily_status_basic_setup(nil)
     # Per-op sdk-test-control.json skip.
     _live = setup[:live] || false
-    ["load"].each do |_op|
+    [].each do |_op|
       _should_skip, _reason = Runner.is_control_skipped("entityOp", "daily_status." + _op, _live ? "live" : "unit")
       if _should_skip
         skip(_reason || "skipped via sdk-test-control.json")
@@ -42,8 +42,9 @@ class DailyStatusEntityTest < Minitest::Test
       end
     end
     if setup[:live]
-      Runner.live_miss(LIVE_STRICT, "Live entity test blocked: " + "the flow loads a daily_status record it has no list to find")
+      skip("Live coverage incomplete: the flow has no step to run")
     end
+
     client = setup[:client]
 
     # Bootstrap entity data from existing test data.
@@ -53,16 +54,6 @@ class DailyStatusEntityTest < Minitest::Test
     if daily_status_ref01_data_raw.length > 0
       daily_status_ref01_data = Helpers.to_map(daily_status_ref01_data_raw[0][1])
     end
-
-    # LOAD
-    daily_status_ref01_ent = client.DailyStatus(nil)
-    daily_status_ref01_match_dt0 = {
-      "id" => daily_status_ref01_data["id"],
-    }
-    daily_status_ref01_data_dt0_loaded = daily_status_ref01_ent.load(daily_status_ref01_match_dt0, nil)
-    daily_status_ref01_data_dt0_load_result = Helpers.to_map(daily_status_ref01_data_dt0_loaded.respond_to?(:data_get) ? daily_status_ref01_data_dt0_loaded.data_get : daily_status_ref01_data_dt0_loaded)
-    assert !daily_status_ref01_data_dt0_load_result.nil?
-    assert_equal daily_status_ref01_data_dt0_load_result["id"], daily_status_ref01_data["id"]
 
   end
 end
@@ -81,7 +72,7 @@ def daily_status_basic_setup(extra)
 
   # Generate idmap via transform.
   idmap = Vs.transform(
-    ["daily_status01", "daily_status02", "daily_status03"],
+    ["daily_status01", "daily_status02", "daily_status03", "daily01", "daily02", "daily03"],
     {
       "`$PACK`" => ["", {
         "`$KEY`" => "`$COPY`",

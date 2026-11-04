@@ -212,6 +212,9 @@ func TestAgentAccessUserWinningAdEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = agentAccessUserWinningAdRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LIST
 		agentAccessUserWinningAdRef01Ent := client.AgentAccessUserWinningAd(nil)
 		agentAccessUserWinningAdRef01Match := map[string]any{}

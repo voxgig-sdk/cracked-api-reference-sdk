@@ -143,6 +143,8 @@ class TestSeoAiMentionEntity:
         if len(seo_ai_mention_ref01_data_raw) > 0:
             seo_ai_mention_ref01_data = helpers.to_map(seo_ai_mention_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LIST
         seo_ai_mention_ref01_ent = client.SeoAiMention(None)
         seo_ai_mention_ref01_match = {}

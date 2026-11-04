@@ -211,6 +211,9 @@ class ProductDashboardEntityTest extends TestCase
             $product_dashboard_ref01_data = Helpers::to_map($product_dashboard_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LIST
         $product_dashboard_ref01_ent = $client->ProductDashboard(null);
         $product_dashboard_ref01_match = [];

@@ -62,6 +62,38 @@ func TestRemixerClipperEntity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" {
+			t.Log("LIVE STEP {\"id\":\"remixer_clipper.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/remixer-clippers/jobs/{identifier}/download\"}")
+		client := setup.client
+		_ = client
+
+		// Bootstrap entity data from existing test data (no create step in flow).
+		remixerClipperRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.remixer_clipper")))
+		var remixerClipperRef01Data map[string]any
+		if len(remixerClipperRef01DataRaw) > 0 {
+			remixerClipperRef01Data = core.ToMapAny(remixerClipperRef01DataRaw[0][1])
+		}
+		// Discard guards against Go's unused-var check when the flow's steps
+		// happen not to consume the bootstrap data (e.g. list-only flows).
+		_ = remixerClipperRef01Data
+
+		if setup.live {
+			livePace()
+		}
+		// LOAD
+		remixerClipperRef01Ent := client.RemixerClipper(nil)
+		remixerClipperRef01MatchDt0 := map[string]any{}
+		remixerClipperRef01DataDt0Loaded, err := remixerClipperRef01Ent.Load(remixerClipperRef01MatchDt0, nil)
+		if err != nil {
+			t.Fatalf("load failed: %v", err)
+		}
+		if remixerClipperRef01DataDt0Loaded == nil {
+			t.Fatal("expected load result to be non-nil")
+		}
+
+		return
+		}
+
 		if setup.live {
 			for _, _liveKey := range []string{"identifier01"} {
 				if setup.syntheticOnly || setup.idmap[_liveKey] == nil {
@@ -72,6 +104,9 @@ func TestRemixerClipperEntity(t *testing.T) {
 		client := setup.client
 		_ = client
 
+		if setup.live {
+			livePace()
+		}
 		// CREATE
 		remixerClipperRef01Ent := client.RemixerClipper(nil)
 		remixerClipperRef01Data := core.ToMapAny(vs.GetProp(
@@ -87,6 +122,9 @@ func TestRemixerClipperEntity(t *testing.T) {
 			t.Fatal("expected create result to be a map")
 		}
 
+		if setup.live {
+			livePace()
+		}
 		// LOAD
 		remixerClipperRef01MatchDt0 := map[string]any{}
 		remixerClipperRef01DataDt0Loaded, err := remixerClipperRef01Ent.Load(remixerClipperRef01MatchDt0, nil)

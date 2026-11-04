@@ -229,6 +229,9 @@ class OnboardingStatusEntityTest extends TestCase
             $onboarding_status_ref01_data = Helpers::to_map($onboarding_status_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LIST
         $onboarding_status_ref01_ent = $client->OnboardingStatus(null);
         $onboarding_status_ref01_match = [];

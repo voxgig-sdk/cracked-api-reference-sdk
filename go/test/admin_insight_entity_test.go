@@ -175,7 +175,7 @@ func TestAdminInsightEntity(t *testing.T) {
 		client := sdk.TestSDK(nil, map[string]any{
 			"feature": map[string]any{"validate": map[string]any{"active": true}},
 		})
-		_, err := client.AdminInsight(nil).List(map[string]any{"generated_at": 1}, nil)
+		_, err := client.AdminInsight(nil).List(map[string]any{"active_agents": "x"}, nil)
 		if sdkerr, ok := err.(*core.CrackedApiReferenceError); !ok || "validate_failed" != sdkerr.Code {
 			t.Fatalf("expected validate_failed, got %v", err)
 		}
@@ -212,6 +212,9 @@ func TestAdminInsightEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = adminInsightRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LIST
 		adminInsightRef01Ent := client.AdminInsight(nil)
 		adminInsightRef01Match := map[string]any{}
@@ -225,6 +228,9 @@ func TestAdminInsightEntity(t *testing.T) {
 			t.Fatalf("expected list result to be an array, got %T", adminInsightRef01ListResult)
 		}
 
+		if setup.live {
+			livePace()
+		}
 		// LOAD
 		adminInsightRef01MatchDt0 := map[string]any{}
 		adminInsightRef01DataDt0Loaded, err := adminInsightRef01Ent.Load(adminInsightRef01MatchDt0, nil)

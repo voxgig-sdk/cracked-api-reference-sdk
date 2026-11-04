@@ -51,8 +51,14 @@ class TestShareAccessLinkEntity:
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
                 return
+        if setup["live"] and os.environ.get("VOXGIG_GETONLY_GUARD") == "TRUE":
+            print("LIVE STEP {\"id\":\"share_access_link.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /auth/share-access-link\"}")
+            pytest.skip("Live coverage incomplete: share_access_link.create.0 excluded (GET-only live run: needs POST /auth/share-access-link)")
+
         client = setup["client"]
 
+        if setup["live"]:
+            runner.live_pace()
         # CREATE
         share_access_link_ref01_ent = client.ShareAccessLink(None)
         share_access_link_ref01_data = helpers.to_map(vs.getprop(

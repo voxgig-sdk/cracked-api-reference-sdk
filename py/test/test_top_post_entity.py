@@ -143,6 +143,8 @@ class TestTopPostEntity:
         if len(top_post_ref01_data_raw) > 0:
             top_post_ref01_data = helpers.to_map(top_post_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LIST
         top_post_ref01_ent = client.TopPost(None)
         top_post_ref01_match = {}

@@ -44,8 +44,17 @@ describe("ScrapedDataEntity", function()
         return
       end
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" then
+      print("LIVE STEP {\"id\":\"scraped_data.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/scraper/extract\"}")
+      pending("Live coverage incomplete: scraped_data.create.0 excluded (GET-only live run: needs POST /api/scraper/extract)")
+      return
+    end
+
     local client = setup.client
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- CREATE
     local scraped_data_ref01_ent = client:ScrapedData(nil)
     local scraped_data_ref01_data = helpers.to_map(vs.getprop(

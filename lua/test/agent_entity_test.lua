@@ -143,6 +143,8 @@ describe("AgentEntity", function()
         return
       end
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" then
+      print("LIVE STEP {\"id\":\"agent.update.1\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs PUT /api/admin/agents/{agent_id}/active\"}")
     local client = setup.client
 
     -- Bootstrap entity data from existing test data.
@@ -153,6 +155,33 @@ describe("AgentEntity", function()
       agent_ref01_data = helpers.to_map(agent_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
+    -- LIST
+    local agent_ref01_ent = client:Agent(nil)
+    local agent_ref01_match = {}
+
+    local agent_ref01_list_result, err = agent_ref01_ent:list(agent_ref01_match, nil)
+    assert.is_nil(err)
+    assert.is_table(agent_ref01_list_result)
+
+      return
+    end
+
+    local client = setup.client
+
+    -- Bootstrap entity data from existing test data.
+    local agent_ref01_data_raw = vs.items(helpers.to_map(
+      vs.getpath(setup.data, "existing.agent")))
+    local agent_ref01_data = nil
+    if #agent_ref01_data_raw > 0 then
+      agent_ref01_data = helpers.to_map(agent_ref01_data_raw[1][2])
+    end
+
+    if setup.live then
+      runner.live_pace()
+    end
     -- LIST
     local agent_ref01_ent = client:Agent(nil)
     local agent_ref01_match = {}

@@ -212,6 +212,9 @@ func TestStatsRefreshRunSummaryEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = statsRefreshRunSummaryRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LIST
 		statsRefreshRunSummaryRef01Ent := client.StatsRefreshRunSummary(nil)
 		statsRefreshRunSummaryRef01Match := map[string]any{}

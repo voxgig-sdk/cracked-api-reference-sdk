@@ -62,6 +62,9 @@ class GenerateSora2PromptEntityTest extends TestCase
             $generate_sora2_prompt_ref01_data = Helpers::to_map($generate_sora2_prompt_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LOAD
         $generate_sora2_prompt_ref01_ent = $client->GenerateSora2Prompt(null);
         $generate_sora2_prompt_ref01_match_dt0 = [];

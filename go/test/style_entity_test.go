@@ -62,6 +62,9 @@ func TestStyleEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = styleRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LOAD
 		styleRef01Ent := client.Style(nil)
 		styleRef01MatchDt0 := map[string]any{}

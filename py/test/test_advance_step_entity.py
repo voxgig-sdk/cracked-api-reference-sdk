@@ -51,8 +51,14 @@ class TestAdvanceStepEntity:
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
                 return
+        if setup["live"] and os.environ.get("VOXGIG_GETONLY_GUARD") == "TRUE":
+            print("LIVE STEP {\"id\":\"advance_step.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/onboarding-v6/advance-step\"}")
+            pytest.skip("Live coverage incomplete: advance_step.create.0 excluded (GET-only live run: needs POST /api/onboarding-v6/advance-step)")
+
         client = setup["client"]
 
+        if setup["live"]:
+            runner.live_pace()
         # CREATE
         advance_step_ref01_ent = client.AdvanceStep(None)
         advance_step_ref01_data = helpers.to_map(vs.getprop(

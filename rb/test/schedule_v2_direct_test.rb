@@ -27,14 +27,17 @@ class ScheduleV2DirectTest < Minitest::Test
       skip(_reason || "skipped via sdk-test-control.json")
       return
     end
+    Runner.live_pace if setup[:live]
     client = setup[:client]
 
     params = {}
+    query = {}
 
     result = client.direct({
       "path" => "api/schedule/queue",
       "method" => "GET",
       "params" => params,
+      "query" => query,
     })
     if setup[:live]
       unless live_ok(result)
@@ -61,6 +64,7 @@ class ScheduleV2DirectTest < Minitest::Test
       skip(_reason || "skipped via sdk-test-control.json")
       return
     end
+    Runner.live_pace if setup[:live]
     client = setup[:client]
 
     params = {}

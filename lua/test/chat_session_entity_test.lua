@@ -29,7 +29,7 @@ describe("ChatSessionEntity", function()
       return
     end
     local client = sdk.test(nil, { feature = { validate = { active = true } } })
-    local _, err = client:ChatSession(nil):create({ ["session_id"] = 1 }, nil)
+    local _, err = client:ChatSession(nil):create({ ["session_id"] = 1, ["idempotencyKey"] = "x", ["message"] = "x", ["sessionId"] = "x" }, nil)
     assert.are.equal("validate_failed", type(err) == "table" and err.code or nil)
   end)
 
@@ -44,6 +44,12 @@ describe("ChatSessionEntity", function()
         return
       end
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" then
+      print("LIVE STEP {\"id\":\"chat_session.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/chat/sessions/{session_id}/complete\"}")
+      pending("Live coverage incomplete: chat_session.create.0 excluded (GET-only live run: needs POST /api/chat/sessions/{session_id}/complete)")
+      return
+    end
+
     if setup.live then
       for _, _live_key in ipairs({"session01"}) do
         if setup.synthetic_only or setup.idmap[_live_key] == nil then
@@ -53,6 +59,9 @@ describe("ChatSessionEntity", function()
     end
     local client = setup.client
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- CREATE
     local chat_session_ref01_ent = client:ChatSession(nil)
     local chat_session_ref01_data = helpers.to_map(vs.getprop(

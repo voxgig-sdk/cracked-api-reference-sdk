@@ -120,7 +120,7 @@ main: kit: entity: agent_post: {
             params: [
               {
                 k: "param"
-                n: "id"
+                n: "agent_id"
                 or: "agent_id"
                 r: true
                 t: "`$STRING`"
@@ -141,13 +141,8 @@ main: kit: entity: agent_post: {
           o: "/api/admin/agents/{agent_id}/posts"
           q: {
             exist: [
-              "id"
+              "agent_id"
             ]
-          }
-          r: {
-            param: {
-              agent_id: "id"
-            }
           }
           rs: {
             kind: "json"
@@ -164,7 +159,7 @@ main: kit: entity: agent_post: {
               lit: "agents"
             }
             {
-              var: "id"
+              var: "agent_id"
             }
             {
               lit: "posts"
@@ -180,5 +175,8 @@ main: kit: entity: agent_post: {
   }
 
 
+  relations: ancestors: [
+    [path("$.main.kit.entity.agent")]
+  ]
 
 }

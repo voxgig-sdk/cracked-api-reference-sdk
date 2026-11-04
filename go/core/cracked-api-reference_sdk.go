@@ -192,6 +192,20 @@ func (sdk *CrackedApiReferenceSDK) Prepare(fetchargs map[string]any) (map[string
 		}
 	}
 
+	// A raw request has no point to declare its response type, so it asks
+	// for the JSON it reads: an API that negotiates on Accept otherwise
+	// answers in its own default format. A caller's own accept wins.
+	hasAccept := false
+	for k := range ctx.Spec.Headers {
+		if strings.ToLower(k) == "accept" {
+			hasAccept = true
+			break
+		}
+	}
+	if !hasAccept {
+		ctx.Spec.Headers["accept"] = "application/json"
+	}
+
 	_, err := utility.PrepareAuth(ctx)
 	if err != nil {
 		return nil, err
@@ -375,7 +389,7 @@ func (sdk *CrackedApiReferenceSDK) Graphql(
 // Activate returns a Activate entity bound to this client.
 // Idiomatic usage: client.Activate(nil).List(nil, nil) or
 // client.Activate(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) Activate(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) Activate(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewActivateEntityFunc(sdk, data)
 }
 
@@ -383,7 +397,7 @@ func (sdk *CrackedApiReferenceSDK) Activate(data map[string]any) CrackedApiRefer
 // ActivateUser returns a ActivateUser entity bound to this client.
 // Idiomatic usage: client.ActivateUser(nil).List(nil, nil) or
 // client.ActivateUser(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) ActivateUser(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) ActivateUser(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewActivateUserEntityFunc(sdk, data)
 }
 
@@ -391,7 +405,7 @@ func (sdk *CrackedApiReferenceSDK) ActivateUser(data map[string]any) CrackedApiR
 // ActiveOnboarding returns a ActiveOnboarding entity bound to this client.
 // Idiomatic usage: client.ActiveOnboarding(nil).List(nil, nil) or
 // client.ActiveOnboarding(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) ActiveOnboarding(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) ActiveOnboarding(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewActiveOnboardingEntityFunc(sdk, data)
 }
 
@@ -399,7 +413,7 @@ func (sdk *CrackedApiReferenceSDK) ActiveOnboarding(data map[string]any) Cracked
 // Admin returns a Admin entity bound to this client.
 // Idiomatic usage: client.Admin(nil).List(nil, nil) or
 // client.Admin(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) Admin(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) Admin(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewAdminEntityFunc(sdk, data)
 }
 
@@ -407,7 +421,7 @@ func (sdk *CrackedApiReferenceSDK) Admin(data map[string]any) CrackedApiReferenc
 // AdminAccountReset returns a AdminAccountReset entity bound to this client.
 // Idiomatic usage: client.AdminAccountReset(nil).List(nil, nil) or
 // client.AdminAccountReset(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) AdminAccountReset(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) AdminAccountReset(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewAdminAccountResetEntityFunc(sdk, data)
 }
 
@@ -415,7 +429,7 @@ func (sdk *CrackedApiReferenceSDK) AdminAccountReset(data map[string]any) Cracke
 // AdminCarousel returns a AdminCarousel entity bound to this client.
 // Idiomatic usage: client.AdminCarousel(nil).List(nil, nil) or
 // client.AdminCarousel(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) AdminCarousel(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) AdminCarousel(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewAdminCarouselEntityFunc(sdk, data)
 }
 
@@ -423,7 +437,7 @@ func (sdk *CrackedApiReferenceSDK) AdminCarousel(data map[string]any) CrackedApi
 // AdminCarouselDemoReview returns a AdminCarouselDemoReview entity bound to this client.
 // Idiomatic usage: client.AdminCarouselDemoReview(nil).List(nil, nil) or
 // client.AdminCarouselDemoReview(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) AdminCarouselDemoReview(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) AdminCarouselDemoReview(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewAdminCarouselDemoReviewEntityFunc(sdk, data)
 }
 
@@ -431,7 +445,7 @@ func (sdk *CrackedApiReferenceSDK) AdminCarouselDemoReview(data map[string]any) 
 // AdminCustomer returns a AdminCustomer entity bound to this client.
 // Idiomatic usage: client.AdminCustomer(nil).List(nil, nil) or
 // client.AdminCustomer(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) AdminCustomer(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) AdminCustomer(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewAdminCustomerEntityFunc(sdk, data)
 }
 
@@ -439,7 +453,7 @@ func (sdk *CrackedApiReferenceSDK) AdminCustomer(data map[string]any) CrackedApi
 // AdminCustomerSuccess returns a AdminCustomerSuccess entity bound to this client.
 // Idiomatic usage: client.AdminCustomerSuccess(nil).List(nil, nil) or
 // client.AdminCustomerSuccess(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) AdminCustomerSuccess(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) AdminCustomerSuccess(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewAdminCustomerSuccessEntityFunc(sdk, data)
 }
 
@@ -447,7 +461,7 @@ func (sdk *CrackedApiReferenceSDK) AdminCustomerSuccess(data map[string]any) Cra
 // AdminGeneratedVideo returns a AdminGeneratedVideo entity bound to this client.
 // Idiomatic usage: client.AdminGeneratedVideo(nil).List(nil, nil) or
 // client.AdminGeneratedVideo(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) AdminGeneratedVideo(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) AdminGeneratedVideo(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewAdminGeneratedVideoEntityFunc(sdk, data)
 }
 
@@ -455,7 +469,7 @@ func (sdk *CrackedApiReferenceSDK) AdminGeneratedVideo(data map[string]any) Crac
 // AdminHealthrx returns a AdminHealthrx entity bound to this client.
 // Idiomatic usage: client.AdminHealthrx(nil).List(nil, nil) or
 // client.AdminHealthrx(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) AdminHealthrx(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) AdminHealthrx(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewAdminHealthrxEntityFunc(sdk, data)
 }
 
@@ -463,7 +477,7 @@ func (sdk *CrackedApiReferenceSDK) AdminHealthrx(data map[string]any) CrackedApi
 // AdminInsight returns a AdminInsight entity bound to this client.
 // Idiomatic usage: client.AdminInsight(nil).List(nil, nil) or
 // client.AdminInsight(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) AdminInsight(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) AdminInsight(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewAdminInsightEntityFunc(sdk, data)
 }
 
@@ -471,7 +485,7 @@ func (sdk *CrackedApiReferenceSDK) AdminInsight(data map[string]any) CrackedApiR
 // AdminLandingTask returns a AdminLandingTask entity bound to this client.
 // Idiomatic usage: client.AdminLandingTask(nil).List(nil, nil) or
 // client.AdminLandingTask(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) AdminLandingTask(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) AdminLandingTask(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewAdminLandingTaskEntityFunc(sdk, data)
 }
 
@@ -479,7 +493,7 @@ func (sdk *CrackedApiReferenceSDK) AdminLandingTask(data map[string]any) Cracked
 // AdminMetricsSummary returns a AdminMetricsSummary entity bound to this client.
 // Idiomatic usage: client.AdminMetricsSummary(nil).List(nil, nil) or
 // client.AdminMetricsSummary(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) AdminMetricsSummary(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) AdminMetricsSummary(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewAdminMetricsSummaryEntityFunc(sdk, data)
 }
 
@@ -487,7 +501,7 @@ func (sdk *CrackedApiReferenceSDK) AdminMetricsSummary(data map[string]any) Crac
 // AdminPost returns a AdminPost entity bound to this client.
 // Idiomatic usage: client.AdminPost(nil).List(nil, nil) or
 // client.AdminPost(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) AdminPost(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) AdminPost(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewAdminPostEntityFunc(sdk, data)
 }
 
@@ -495,7 +509,7 @@ func (sdk *CrackedApiReferenceSDK) AdminPost(data map[string]any) CrackedApiRefe
 // AdminRecentSignup returns a AdminRecentSignup entity bound to this client.
 // Idiomatic usage: client.AdminRecentSignup(nil).List(nil, nil) or
 // client.AdminRecentSignup(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) AdminRecentSignup(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) AdminRecentSignup(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewAdminRecentSignupEntityFunc(sdk, data)
 }
 
@@ -503,7 +517,7 @@ func (sdk *CrackedApiReferenceSDK) AdminRecentSignup(data map[string]any) Cracke
 // AdminSlideshowDiag returns a AdminSlideshowDiag entity bound to this client.
 // Idiomatic usage: client.AdminSlideshowDiag(nil).List(nil, nil) or
 // client.AdminSlideshowDiag(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) AdminSlideshowDiag(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) AdminSlideshowDiag(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewAdminSlideshowDiagEntityFunc(sdk, data)
 }
 
@@ -511,7 +525,7 @@ func (sdk *CrackedApiReferenceSDK) AdminSlideshowDiag(data map[string]any) Crack
 // AdminSlideshowImport returns a AdminSlideshowImport entity bound to this client.
 // Idiomatic usage: client.AdminSlideshowImport(nil).List(nil, nil) or
 // client.AdminSlideshowImport(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) AdminSlideshowImport(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) AdminSlideshowImport(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewAdminSlideshowImportEntityFunc(sdk, data)
 }
 
@@ -519,7 +533,7 @@ func (sdk *CrackedApiReferenceSDK) AdminSlideshowImport(data map[string]any) Cra
 // AdminUserView returns a AdminUserView entity bound to this client.
 // Idiomatic usage: client.AdminUserView(nil).List(nil, nil) or
 // client.AdminUserView(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) AdminUserView(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) AdminUserView(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewAdminUserViewEntityFunc(sdk, data)
 }
 
@@ -527,7 +541,7 @@ func (sdk *CrackedApiReferenceSDK) AdminUserView(data map[string]any) CrackedApi
 // AdminUsersTableItem returns a AdminUsersTableItem entity bound to this client.
 // Idiomatic usage: client.AdminUsersTableItem(nil).List(nil, nil) or
 // client.AdminUsersTableItem(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) AdminUsersTableItem(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) AdminUsersTableItem(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewAdminUsersTableItemEntityFunc(sdk, data)
 }
 
@@ -535,7 +549,7 @@ func (sdk *CrackedApiReferenceSDK) AdminUsersTableItem(data map[string]any) Crac
 // AdminVideoRemixer returns a AdminVideoRemixer entity bound to this client.
 // Idiomatic usage: client.AdminVideoRemixer(nil).List(nil, nil) or
 // client.AdminVideoRemixer(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) AdminVideoRemixer(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) AdminVideoRemixer(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewAdminVideoRemixerEntityFunc(sdk, data)
 }
 
@@ -543,7 +557,7 @@ func (sdk *CrackedApiReferenceSDK) AdminVideoRemixer(data map[string]any) Cracke
 // AdvanceStep returns a AdvanceStep entity bound to this client.
 // Idiomatic usage: client.AdvanceStep(nil).List(nil, nil) or
 // client.AdvanceStep(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) AdvanceStep(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) AdvanceStep(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewAdvanceStepEntityFunc(sdk, data)
 }
 
@@ -551,7 +565,7 @@ func (sdk *CrackedApiReferenceSDK) AdvanceStep(data map[string]any) CrackedApiRe
 // Agent returns a Agent entity bound to this client.
 // Idiomatic usage: client.Agent(nil).List(nil, nil) or
 // client.Agent(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) Agent(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) Agent(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewAgentEntityFunc(sdk, data)
 }
 
@@ -559,7 +573,7 @@ func (sdk *CrackedApiReferenceSDK) Agent(data map[string]any) CrackedApiReferenc
 // AgentAccessCustomersHealth returns a AgentAccessCustomersHealth entity bound to this client.
 // Idiomatic usage: client.AgentAccessCustomersHealth(nil).List(nil, nil) or
 // client.AgentAccessCustomersHealth(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) AgentAccessCustomersHealth(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) AgentAccessCustomersHealth(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewAgentAccessCustomersHealthEntityFunc(sdk, data)
 }
 
@@ -567,7 +581,7 @@ func (sdk *CrackedApiReferenceSDK) AgentAccessCustomersHealth(data map[string]an
 // AgentAccessOverview returns a AgentAccessOverview entity bound to this client.
 // Idiomatic usage: client.AgentAccessOverview(nil).List(nil, nil) or
 // client.AgentAccessOverview(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) AgentAccessOverview(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) AgentAccessOverview(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewAgentAccessOverviewEntityFunc(sdk, data)
 }
 
@@ -575,7 +589,7 @@ func (sdk *CrackedApiReferenceSDK) AgentAccessOverview(data map[string]any) Crac
 // AgentAccessPhilHourlyNotification returns a AgentAccessPhilHourlyNotification entity bound to this client.
 // Idiomatic usage: client.AgentAccessPhilHourlyNotification(nil).List(nil, nil) or
 // client.AgentAccessPhilHourlyNotification(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) AgentAccessPhilHourlyNotification(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) AgentAccessPhilHourlyNotification(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewAgentAccessPhilHourlyNotificationEntityFunc(sdk, data)
 }
 
@@ -583,7 +597,7 @@ func (sdk *CrackedApiReferenceSDK) AgentAccessPhilHourlyNotification(data map[st
 // AgentAccessPhilStatsRefresh returns a AgentAccessPhilStatsRefresh entity bound to this client.
 // Idiomatic usage: client.AgentAccessPhilStatsRefresh(nil).List(nil, nil) or
 // client.AgentAccessPhilStatsRefresh(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) AgentAccessPhilStatsRefresh(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) AgentAccessPhilStatsRefresh(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewAgentAccessPhilStatsRefreshEntityFunc(sdk, data)
 }
 
@@ -591,7 +605,7 @@ func (sdk *CrackedApiReferenceSDK) AgentAccessPhilStatsRefresh(data map[string]a
 // AgentAccessPhilVideo returns a AgentAccessPhilVideo entity bound to this client.
 // Idiomatic usage: client.AgentAccessPhilVideo(nil).List(nil, nil) or
 // client.AgentAccessPhilVideo(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) AgentAccessPhilVideo(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) AgentAccessPhilVideo(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewAgentAccessPhilVideoEntityFunc(sdk, data)
 }
 
@@ -599,7 +613,7 @@ func (sdk *CrackedApiReferenceSDK) AgentAccessPhilVideo(data map[string]any) Cra
 // AgentAccessUserAgent returns a AgentAccessUserAgent entity bound to this client.
 // Idiomatic usage: client.AgentAccessUserAgent(nil).List(nil, nil) or
 // client.AgentAccessUserAgent(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) AgentAccessUserAgent(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) AgentAccessUserAgent(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewAgentAccessUserAgentEntityFunc(sdk, data)
 }
 
@@ -607,7 +621,7 @@ func (sdk *CrackedApiReferenceSDK) AgentAccessUserAgent(data map[string]any) Cra
 // AgentAccessUserPhoneFarm returns a AgentAccessUserPhoneFarm entity bound to this client.
 // Idiomatic usage: client.AgentAccessUserPhoneFarm(nil).List(nil, nil) or
 // client.AgentAccessUserPhoneFarm(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) AgentAccessUserPhoneFarm(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) AgentAccessUserPhoneFarm(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewAgentAccessUserPhoneFarmEntityFunc(sdk, data)
 }
 
@@ -615,7 +629,7 @@ func (sdk *CrackedApiReferenceSDK) AgentAccessUserPhoneFarm(data map[string]any)
 // AgentAccessUserPost returns a AgentAccessUserPost entity bound to this client.
 // Idiomatic usage: client.AgentAccessUserPost(nil).List(nil, nil) or
 // client.AgentAccessUserPost(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) AgentAccessUserPost(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) AgentAccessUserPost(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewAgentAccessUserPostEntityFunc(sdk, data)
 }
 
@@ -623,7 +637,7 @@ func (sdk *CrackedApiReferenceSDK) AgentAccessUserPost(data map[string]any) Crac
 // AgentAccessUserSummary returns a AgentAccessUserSummary entity bound to this client.
 // Idiomatic usage: client.AgentAccessUserSummary(nil).List(nil, nil) or
 // client.AgentAccessUserSummary(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) AgentAccessUserSummary(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) AgentAccessUserSummary(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewAgentAccessUserSummaryEntityFunc(sdk, data)
 }
 
@@ -631,7 +645,7 @@ func (sdk *CrackedApiReferenceSDK) AgentAccessUserSummary(data map[string]any) C
 // AgentAccessUserVideo returns a AgentAccessUserVideo entity bound to this client.
 // Idiomatic usage: client.AgentAccessUserVideo(nil).List(nil, nil) or
 // client.AgentAccessUserVideo(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) AgentAccessUserVideo(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) AgentAccessUserVideo(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewAgentAccessUserVideoEntityFunc(sdk, data)
 }
 
@@ -639,7 +653,7 @@ func (sdk *CrackedApiReferenceSDK) AgentAccessUserVideo(data map[string]any) Cra
 // AgentAccessUserWinningAd returns a AgentAccessUserWinningAd entity bound to this client.
 // Idiomatic usage: client.AgentAccessUserWinningAd(nil).List(nil, nil) or
 // client.AgentAccessUserWinningAd(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) AgentAccessUserWinningAd(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) AgentAccessUserWinningAd(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewAgentAccessUserWinningAdEntityFunc(sdk, data)
 }
 
@@ -647,7 +661,7 @@ func (sdk *CrackedApiReferenceSDK) AgentAccessUserWinningAd(data map[string]any)
 // AgentAccessWinningAdsSummary returns a AgentAccessWinningAdsSummary entity bound to this client.
 // Idiomatic usage: client.AgentAccessWinningAdsSummary(nil).List(nil, nil) or
 // client.AgentAccessWinningAdsSummary(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) AgentAccessWinningAdsSummary(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) AgentAccessWinningAdsSummary(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewAgentAccessWinningAdsSummaryEntityFunc(sdk, data)
 }
 
@@ -655,7 +669,7 @@ func (sdk *CrackedApiReferenceSDK) AgentAccessWinningAdsSummary(data map[string]
 // AgentDetail returns a AgentDetail entity bound to this client.
 // Idiomatic usage: client.AgentDetail(nil).List(nil, nil) or
 // client.AgentDetail(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) AgentDetail(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) AgentDetail(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewAgentDetailEntityFunc(sdk, data)
 }
 
@@ -663,7 +677,7 @@ func (sdk *CrackedApiReferenceSDK) AgentDetail(data map[string]any) CrackedApiRe
 // AgentHealth returns a AgentHealth entity bound to this client.
 // Idiomatic usage: client.AgentHealth(nil).List(nil, nil) or
 // client.AgentHealth(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) AgentHealth(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) AgentHealth(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewAgentHealthEntityFunc(sdk, data)
 }
 
@@ -671,7 +685,7 @@ func (sdk *CrackedApiReferenceSDK) AgentHealth(data map[string]any) CrackedApiRe
 // AgentHealthCustomerOption returns a AgentHealthCustomerOption entity bound to this client.
 // Idiomatic usage: client.AgentHealthCustomerOption(nil).List(nil, nil) or
 // client.AgentHealthCustomerOption(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) AgentHealthCustomerOption(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) AgentHealthCustomerOption(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewAgentHealthCustomerOptionEntityFunc(sdk, data)
 }
 
@@ -679,7 +693,7 @@ func (sdk *CrackedApiReferenceSDK) AgentHealthCustomerOption(data map[string]any
 // AgentHealthDetail returns a AgentHealthDetail entity bound to this client.
 // Idiomatic usage: client.AgentHealthDetail(nil).List(nil, nil) or
 // client.AgentHealthDetail(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) AgentHealthDetail(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) AgentHealthDetail(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewAgentHealthDetailEntityFunc(sdk, data)
 }
 
@@ -687,7 +701,7 @@ func (sdk *CrackedApiReferenceSDK) AgentHealthDetail(data map[string]any) Cracke
 // AgentPost returns a AgentPost entity bound to this client.
 // Idiomatic usage: client.AgentPost(nil).List(nil, nil) or
 // client.AgentPost(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) AgentPost(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) AgentPost(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewAgentPostEntityFunc(sdk, data)
 }
 
@@ -695,7 +709,7 @@ func (sdk *CrackedApiReferenceSDK) AgentPost(data map[string]any) CrackedApiRefe
 // AgentStat returns a AgentStat entity bound to this client.
 // Idiomatic usage: client.AgentStat(nil).List(nil, nil) or
 // client.AgentStat(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) AgentStat(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) AgentStat(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewAgentStatEntityFunc(sdk, data)
 }
 
@@ -703,7 +717,7 @@ func (sdk *CrackedApiReferenceSDK) AgentStat(data map[string]any) CrackedApiRefe
 // AgentSummary returns a AgentSummary entity bound to this client.
 // Idiomatic usage: client.AgentSummary(nil).List(nil, nil) or
 // client.AgentSummary(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) AgentSummary(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) AgentSummary(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewAgentSummaryEntityFunc(sdk, data)
 }
 
@@ -711,7 +725,7 @@ func (sdk *CrackedApiReferenceSDK) AgentSummary(data map[string]any) CrackedApiR
 // AgentsSummary returns a AgentsSummary entity bound to this client.
 // Idiomatic usage: client.AgentsSummary(nil).List(nil, nil) or
 // client.AgentsSummary(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) AgentsSummary(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) AgentsSummary(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewAgentsSummaryEntityFunc(sdk, data)
 }
 
@@ -719,7 +733,7 @@ func (sdk *CrackedApiReferenceSDK) AgentsSummary(data map[string]any) CrackedApi
 // AnalysisStatus returns a AnalysisStatus entity bound to this client.
 // Idiomatic usage: client.AnalysisStatus(nil).List(nil, nil) or
 // client.AnalysisStatus(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) AnalysisStatus(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) AnalysisStatus(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewAnalysisStatusEntityFunc(sdk, data)
 }
 
@@ -727,7 +741,7 @@ func (sdk *CrackedApiReferenceSDK) AnalysisStatus(data map[string]any) CrackedAp
 // AnalyticsPost returns a AnalyticsPost entity bound to this client.
 // Idiomatic usage: client.AnalyticsPost(nil).List(nil, nil) or
 // client.AnalyticsPost(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) AnalyticsPost(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) AnalyticsPost(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewAnalyticsPostEntityFunc(sdk, data)
 }
 
@@ -735,7 +749,7 @@ func (sdk *CrackedApiReferenceSDK) AnalyticsPost(data map[string]any) CrackedApi
 // AnalyzeProduct returns a AnalyzeProduct entity bound to this client.
 // Idiomatic usage: client.AnalyzeProduct(nil).List(nil, nil) or
 // client.AnalyzeProduct(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) AnalyzeProduct(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) AnalyzeProduct(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewAnalyzeProductEntityFunc(sdk, data)
 }
 
@@ -743,7 +757,7 @@ func (sdk *CrackedApiReferenceSDK) AnalyzeProduct(data map[string]any) CrackedAp
 // AssignAgent returns a AssignAgent entity bound to this client.
 // Idiomatic usage: client.AssignAgent(nil).List(nil, nil) or
 // client.AssignAgent(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) AssignAgent(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) AssignAgent(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewAssignAgentEntityFunc(sdk, data)
 }
 
@@ -751,7 +765,7 @@ func (sdk *CrackedApiReferenceSDK) AssignAgent(data map[string]any) CrackedApiRe
 // Auth returns a Auth entity bound to this client.
 // Idiomatic usage: client.Auth(nil).List(nil, nil) or
 // client.Auth(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) Auth(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) Auth(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewAuthEntityFunc(sdk, data)
 }
 
@@ -759,7 +773,7 @@ func (sdk *CrackedApiReferenceSDK) Auth(data map[string]any) CrackedApiReference
 // AutoScheduleSetting returns a AutoScheduleSetting entity bound to this client.
 // Idiomatic usage: client.AutoScheduleSetting(nil).List(nil, nil) or
 // client.AutoScheduleSetting(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) AutoScheduleSetting(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) AutoScheduleSetting(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewAutoScheduleSettingEntityFunc(sdk, data)
 }
 
@@ -767,7 +781,7 @@ func (sdk *CrackedApiReferenceSDK) AutoScheduleSetting(data map[string]any) Crac
 // BulkTikTokStatsUpdate returns a BulkTikTokStatsUpdate entity bound to this client.
 // Idiomatic usage: client.BulkTikTokStatsUpdate(nil).List(nil, nil) or
 // client.BulkTikTokStatsUpdate(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) BulkTikTokStatsUpdate(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) BulkTikTokStatsUpdate(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewBulkTikTokStatsUpdateEntityFunc(sdk, data)
 }
 
@@ -775,7 +789,7 @@ func (sdk *CrackedApiReferenceSDK) BulkTikTokStatsUpdate(data map[string]any) Cr
 // Carousel returns a Carousel entity bound to this client.
 // Idiomatic usage: client.Carousel(nil).List(nil, nil) or
 // client.Carousel(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) Carousel(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) Carousel(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewCarouselEntityFunc(sdk, data)
 }
 
@@ -783,7 +797,7 @@ func (sdk *CrackedApiReferenceSDK) Carousel(data map[string]any) CrackedApiRefer
 // CarouselAgentDetail returns a CarouselAgentDetail entity bound to this client.
 // Idiomatic usage: client.CarouselAgentDetail(nil).List(nil, nil) or
 // client.CarouselAgentDetail(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) CarouselAgentDetail(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) CarouselAgentDetail(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewCarouselAgentDetailEntityFunc(sdk, data)
 }
 
@@ -791,23 +805,15 @@ func (sdk *CrackedApiReferenceSDK) CarouselAgentDetail(data map[string]any) Crac
 // CarouselStatus returns a CarouselStatus entity bound to this client.
 // Idiomatic usage: client.CarouselStatus(nil).List(nil, nil) or
 // client.CarouselStatus(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) CarouselStatus(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) CarouselStatus(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewCarouselStatusEntityFunc(sdk, data)
-}
-
-
-// Chat returns a Chat entity bound to this client.
-// Idiomatic usage: client.Chat(nil).List(nil, nil) or
-// client.Chat(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) Chat(data map[string]any) CrackedApiReferenceEntity {
-	return NewChatEntityFunc(sdk, data)
 }
 
 
 // ChatHistory returns a ChatHistory entity bound to this client.
 // Idiomatic usage: client.ChatHistory(nil).List(nil, nil) or
 // client.ChatHistory(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) ChatHistory(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) ChatHistory(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewChatHistoryEntityFunc(sdk, data)
 }
 
@@ -815,7 +821,7 @@ func (sdk *CrackedApiReferenceSDK) ChatHistory(data map[string]any) CrackedApiRe
 // ChatSession returns a ChatSession entity bound to this client.
 // Idiomatic usage: client.ChatSession(nil).List(nil, nil) or
 // client.ChatSession(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) ChatSession(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) ChatSession(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewChatSessionEntityFunc(sdk, data)
 }
 
@@ -823,7 +829,7 @@ func (sdk *CrackedApiReferenceSDK) ChatSession(data map[string]any) CrackedApiRe
 // Comment returns a Comment entity bound to this client.
 // Idiomatic usage: client.Comment(nil).List(nil, nil) or
 // client.Comment(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) Comment(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) Comment(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewCommentEntityFunc(sdk, data)
 }
 
@@ -831,7 +837,7 @@ func (sdk *CrackedApiReferenceSDK) Comment(data map[string]any) CrackedApiRefere
 // CommentCampaign returns a CommentCampaign entity bound to this client.
 // Idiomatic usage: client.CommentCampaign(nil).List(nil, nil) or
 // client.CommentCampaign(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) CommentCampaign(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) CommentCampaign(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewCommentCampaignEntityFunc(sdk, data)
 }
 
@@ -839,7 +845,7 @@ func (sdk *CrackedApiReferenceSDK) CommentCampaign(data map[string]any) CrackedA
 // CompleteChatCheckout returns a CompleteChatCheckout entity bound to this client.
 // Idiomatic usage: client.CompleteChatCheckout(nil).List(nil, nil) or
 // client.CompleteChatCheckout(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) CompleteChatCheckout(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) CompleteChatCheckout(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewCompleteChatCheckoutEntityFunc(sdk, data)
 }
 
@@ -847,7 +853,7 @@ func (sdk *CrackedApiReferenceSDK) CompleteChatCheckout(data map[string]any) Cra
 // CreateBlackoutSora2Video returns a CreateBlackoutSora2Video entity bound to this client.
 // Idiomatic usage: client.CreateBlackoutSora2Video(nil).List(nil, nil) or
 // client.CreateBlackoutSora2Video(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) CreateBlackoutSora2Video(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) CreateBlackoutSora2Video(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewCreateBlackoutSora2VideoEntityFunc(sdk, data)
 }
 
@@ -855,7 +861,7 @@ func (sdk *CrackedApiReferenceSDK) CreateBlackoutSora2Video(data map[string]any)
 // CreateCarousel returns a CreateCarousel entity bound to this client.
 // Idiomatic usage: client.CreateCarousel(nil).List(nil, nil) or
 // client.CreateCarousel(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) CreateCarousel(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) CreateCarousel(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewCreateCarouselEntityFunc(sdk, data)
 }
 
@@ -863,7 +869,7 @@ func (sdk *CrackedApiReferenceSDK) CreateCarousel(data map[string]any) CrackedAp
 // CreateProduct returns a CreateProduct entity bound to this client.
 // Idiomatic usage: client.CreateProduct(nil).List(nil, nil) or
 // client.CreateProduct(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) CreateProduct(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) CreateProduct(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewCreateProductEntityFunc(sdk, data)
 }
 
@@ -871,7 +877,7 @@ func (sdk *CrackedApiReferenceSDK) CreateProduct(data map[string]any) CrackedApi
 // CreateResetProductV6 returns a CreateResetProductV6 entity bound to this client.
 // Idiomatic usage: client.CreateResetProductV6(nil).List(nil, nil) or
 // client.CreateResetProductV6(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) CreateResetProductV6(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) CreateResetProductV6(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewCreateResetProductV6EntityFunc(sdk, data)
 }
 
@@ -879,7 +885,7 @@ func (sdk *CrackedApiReferenceSDK) CreateResetProductV6(data map[string]any) Cra
 // CreateSora2Video returns a CreateSora2Video entity bound to this client.
 // Idiomatic usage: client.CreateSora2Video(nil).List(nil, nil) or
 // client.CreateSora2Video(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) CreateSora2Video(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) CreateSora2Video(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewCreateSora2VideoEntityFunc(sdk, data)
 }
 
@@ -887,7 +893,7 @@ func (sdk *CrackedApiReferenceSDK) CreateSora2Video(data map[string]any) Cracked
 // CreateVariation returns a CreateVariation entity bound to this client.
 // Idiomatic usage: client.CreateVariation(nil).List(nil, nil) or
 // client.CreateVariation(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) CreateVariation(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) CreateVariation(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewCreateVariationEntityFunc(sdk, data)
 }
 
@@ -895,7 +901,7 @@ func (sdk *CrackedApiReferenceSDK) CreateVariation(data map[string]any) CrackedA
 // Customer returns a Customer entity bound to this client.
 // Idiomatic usage: client.Customer(nil).List(nil, nil) or
 // client.Customer(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) Customer(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) Customer(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewCustomerEntityFunc(sdk, data)
 }
 
@@ -903,7 +909,7 @@ func (sdk *CrackedApiReferenceSDK) Customer(data map[string]any) CrackedApiRefer
 // CustomerHealth returns a CustomerHealth entity bound to this client.
 // Idiomatic usage: client.CustomerHealth(nil).List(nil, nil) or
 // client.CustomerHealth(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) CustomerHealth(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) CustomerHealth(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewCustomerHealthEntityFunc(sdk, data)
 }
 
@@ -911,7 +917,7 @@ func (sdk *CrackedApiReferenceSDK) CustomerHealth(data map[string]any) CrackedAp
 // CustomerHealthAllCustomersItem returns a CustomerHealthAllCustomersItem entity bound to this client.
 // Idiomatic usage: client.CustomerHealthAllCustomersItem(nil).List(nil, nil) or
 // client.CustomerHealthAllCustomersItem(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) CustomerHealthAllCustomersItem(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) CustomerHealthAllCustomersItem(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewCustomerHealthAllCustomersItemEntityFunc(sdk, data)
 }
 
@@ -919,7 +925,7 @@ func (sdk *CrackedApiReferenceSDK) CustomerHealthAllCustomersItem(data map[strin
 // CustomerHealthViewsSummary returns a CustomerHealthViewsSummary entity bound to this client.
 // Idiomatic usage: client.CustomerHealthViewsSummary(nil).List(nil, nil) or
 // client.CustomerHealthViewsSummary(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) CustomerHealthViewsSummary(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) CustomerHealthViewsSummary(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewCustomerHealthViewsSummaryEntityFunc(sdk, data)
 }
 
@@ -927,7 +933,7 @@ func (sdk *CrackedApiReferenceSDK) CustomerHealthViewsSummary(data map[string]an
 // Daily returns a Daily entity bound to this client.
 // Idiomatic usage: client.Daily(nil).List(nil, nil) or
 // client.Daily(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) Daily(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) Daily(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewDailyEntityFunc(sdk, data)
 }
 
@@ -935,7 +941,7 @@ func (sdk *CrackedApiReferenceSDK) Daily(data map[string]any) CrackedApiReferenc
 // DailyStatus returns a DailyStatus entity bound to this client.
 // Idiomatic usage: client.DailyStatus(nil).List(nil, nil) or
 // client.DailyStatus(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) DailyStatus(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) DailyStatus(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewDailyStatusEntityFunc(sdk, data)
 }
 
@@ -943,7 +949,7 @@ func (sdk *CrackedApiReferenceSDK) DailyStatus(data map[string]any) CrackedApiRe
 // DedicatedAgentsDashboard returns a DedicatedAgentsDashboard entity bound to this client.
 // Idiomatic usage: client.DedicatedAgentsDashboard(nil).List(nil, nil) or
 // client.DedicatedAgentsDashboard(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) DedicatedAgentsDashboard(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) DedicatedAgentsDashboard(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewDedicatedAgentsDashboardEntityFunc(sdk, data)
 }
 
@@ -951,23 +957,15 @@ func (sdk *CrackedApiReferenceSDK) DedicatedAgentsDashboard(data map[string]any)
 // EnterpriseAgent returns a EnterpriseAgent entity bound to this client.
 // Idiomatic usage: client.EnterpriseAgent(nil).List(nil, nil) or
 // client.EnterpriseAgent(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) EnterpriseAgent(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) EnterpriseAgent(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewEnterpriseAgentEntityFunc(sdk, data)
-}
-
-
-// EnterpriseProduct returns a EnterpriseProduct entity bound to this client.
-// Idiomatic usage: client.EnterpriseProduct(nil).List(nil, nil) or
-// client.EnterpriseProduct(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) EnterpriseProduct(data map[string]any) CrackedApiReferenceEntity {
-	return NewEnterpriseProductEntityFunc(sdk, data)
 }
 
 
 // ExactAvailability returns a ExactAvailability entity bound to this client.
 // Idiomatic usage: client.ExactAvailability(nil).List(nil, nil) or
 // client.ExactAvailability(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) ExactAvailability(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) ExactAvailability(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewExactAvailabilityEntityFunc(sdk, data)
 }
 
@@ -975,7 +973,7 @@ func (sdk *CrackedApiReferenceSDK) ExactAvailability(data map[string]any) Cracke
 // ExactFormula returns a ExactFormula entity bound to this client.
 // Idiomatic usage: client.ExactFormula(nil).List(nil, nil) or
 // client.ExactFormula(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) ExactFormula(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) ExactFormula(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewExactFormulaEntityFunc(sdk, data)
 }
 
@@ -983,7 +981,7 @@ func (sdk *CrackedApiReferenceSDK) ExactFormula(data map[string]any) CrackedApiR
 // ExtractV2 returns a ExtractV2 entity bound to this client.
 // Idiomatic usage: client.ExtractV2(nil).List(nil, nil) or
 // client.ExtractV2(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) ExtractV2(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) ExtractV2(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewExtractV2EntityFunc(sdk, data)
 }
 
@@ -991,7 +989,7 @@ func (sdk *CrackedApiReferenceSDK) ExtractV2(data map[string]any) CrackedApiRefe
 // FailedPost returns a FailedPost entity bound to this client.
 // Idiomatic usage: client.FailedPost(nil).List(nil, nil) or
 // client.FailedPost(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) FailedPost(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) FailedPost(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewFailedPostEntityFunc(sdk, data)
 }
 
@@ -999,7 +997,7 @@ func (sdk *CrackedApiReferenceSDK) FailedPost(data map[string]any) CrackedApiRef
 // File returns a File entity bound to this client.
 // Idiomatic usage: client.File(nil).List(nil, nil) or
 // client.File(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) File(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) File(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewFileEntityFunc(sdk, data)
 }
 
@@ -1007,7 +1005,7 @@ func (sdk *CrackedApiReferenceSDK) File(data map[string]any) CrackedApiReference
 // GenerateBlackoutSora2Prompt returns a GenerateBlackoutSora2Prompt entity bound to this client.
 // Idiomatic usage: client.GenerateBlackoutSora2Prompt(nil).List(nil, nil) or
 // client.GenerateBlackoutSora2Prompt(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) GenerateBlackoutSora2Prompt(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) GenerateBlackoutSora2Prompt(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewGenerateBlackoutSora2PromptEntityFunc(sdk, data)
 }
 
@@ -1015,7 +1013,7 @@ func (sdk *CrackedApiReferenceSDK) GenerateBlackoutSora2Prompt(data map[string]a
 // GeneratePomelliDemo returns a GeneratePomelliDemo entity bound to this client.
 // Idiomatic usage: client.GeneratePomelliDemo(nil).List(nil, nil) or
 // client.GeneratePomelliDemo(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) GeneratePomelliDemo(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) GeneratePomelliDemo(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewGeneratePomelliDemoEntityFunc(sdk, data)
 }
 
@@ -1023,7 +1021,7 @@ func (sdk *CrackedApiReferenceSDK) GeneratePomelliDemo(data map[string]any) Crac
 // GeneratePrompt returns a GeneratePrompt entity bound to this client.
 // Idiomatic usage: client.GeneratePrompt(nil).List(nil, nil) or
 // client.GeneratePrompt(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) GeneratePrompt(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) GeneratePrompt(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewGeneratePromptEntityFunc(sdk, data)
 }
 
@@ -1031,7 +1029,7 @@ func (sdk *CrackedApiReferenceSDK) GeneratePrompt(data map[string]any) CrackedAp
 // GenerateSora2Prompt returns a GenerateSora2Prompt entity bound to this client.
 // Idiomatic usage: client.GenerateSora2Prompt(nil).List(nil, nil) or
 // client.GenerateSora2Prompt(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) GenerateSora2Prompt(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) GenerateSora2Prompt(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewGenerateSora2PromptEntityFunc(sdk, data)
 }
 
@@ -1039,7 +1037,7 @@ func (sdk *CrackedApiReferenceSDK) GenerateSora2Prompt(data map[string]any) Crac
 // Healthrx returns a Healthrx entity bound to this client.
 // Idiomatic usage: client.Healthrx(nil).List(nil, nil) or
 // client.Healthrx(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) Healthrx(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) Healthrx(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewHealthrxEntityFunc(sdk, data)
 }
 
@@ -1047,23 +1045,15 @@ func (sdk *CrackedApiReferenceSDK) Healthrx(data map[string]any) CrackedApiRefer
 // InitResetProductV6 returns a InitResetProductV6 entity bound to this client.
 // Idiomatic usage: client.InitResetProductV6(nil).List(nil, nil) or
 // client.InitResetProductV6(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) InitResetProductV6(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) InitResetProductV6(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewInitResetProductV6EntityFunc(sdk, data)
-}
-
-
-// Iri returns a Iri entity bound to this client.
-// Idiomatic usage: client.Iri(nil).List(nil, nil) or
-// client.Iri(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) Iri(data map[string]any) CrackedApiReferenceEntity {
-	return NewIriEntityFunc(sdk, data)
 }
 
 
 // IrisCapability returns a IrisCapability entity bound to this client.
 // Idiomatic usage: client.IrisCapability(nil).List(nil, nil) or
 // client.IrisCapability(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) IrisCapability(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) IrisCapability(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewIrisCapabilityEntityFunc(sdk, data)
 }
 
@@ -1071,7 +1061,7 @@ func (sdk *CrackedApiReferenceSDK) IrisCapability(data map[string]any) CrackedAp
 // IrisChat returns a IrisChat entity bound to this client.
 // Idiomatic usage: client.IrisChat(nil).List(nil, nil) or
 // client.IrisChat(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) IrisChat(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) IrisChat(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewIrisChatEntityFunc(sdk, data)
 }
 
@@ -1079,7 +1069,7 @@ func (sdk *CrackedApiReferenceSDK) IrisChat(data map[string]any) CrackedApiRefer
 // IrisConnector returns a IrisConnector entity bound to this client.
 // Idiomatic usage: client.IrisConnector(nil).List(nil, nil) or
 // client.IrisConnector(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) IrisConnector(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) IrisConnector(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewIrisConnectorEntityFunc(sdk, data)
 }
 
@@ -1087,7 +1077,7 @@ func (sdk *CrackedApiReferenceSDK) IrisConnector(data map[string]any) CrackedApi
 // IrisStatus returns a IrisStatus entity bound to this client.
 // Idiomatic usage: client.IrisStatus(nil).List(nil, nil) or
 // client.IrisStatus(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) IrisStatus(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) IrisStatus(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewIrisStatusEntityFunc(sdk, data)
 }
 
@@ -1095,7 +1085,7 @@ func (sdk *CrackedApiReferenceSDK) IrisStatus(data map[string]any) CrackedApiRef
 // IrisTask returns a IrisTask entity bound to this client.
 // Idiomatic usage: client.IrisTask(nil).List(nil, nil) or
 // client.IrisTask(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) IrisTask(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) IrisTask(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewIrisTaskEntityFunc(sdk, data)
 }
 
@@ -1103,7 +1093,7 @@ func (sdk *CrackedApiReferenceSDK) IrisTask(data map[string]any) CrackedApiRefer
 // IrisUsage returns a IrisUsage entity bound to this client.
 // Idiomatic usage: client.IrisUsage(nil).List(nil, nil) or
 // client.IrisUsage(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) IrisUsage(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) IrisUsage(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewIrisUsageEntityFunc(sdk, data)
 }
 
@@ -1111,7 +1101,7 @@ func (sdk *CrackedApiReferenceSDK) IrisUsage(data map[string]any) CrackedApiRefe
 // Landing returns a Landing entity bound to this client.
 // Idiomatic usage: client.Landing(nil).List(nil, nil) or
 // client.Landing(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) Landing(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) Landing(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewLandingEntityFunc(sdk, data)
 }
 
@@ -1119,7 +1109,7 @@ func (sdk *CrackedApiReferenceSDK) Landing(data map[string]any) CrackedApiRefere
 // LandingStat returns a LandingStat entity bound to this client.
 // Idiomatic usage: client.LandingStat(nil).List(nil, nil) or
 // client.LandingStat(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) LandingStat(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) LandingStat(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewLandingStatEntityFunc(sdk, data)
 }
 
@@ -1127,7 +1117,7 @@ func (sdk *CrackedApiReferenceSDK) LandingStat(data map[string]any) CrackedApiRe
 // LandingStatus returns a LandingStatus entity bound to this client.
 // Idiomatic usage: client.LandingStatus(nil).List(nil, nil) or
 // client.LandingStatus(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) LandingStatus(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) LandingStatus(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewLandingStatusEntityFunc(sdk, data)
 }
 
@@ -1135,7 +1125,7 @@ func (sdk *CrackedApiReferenceSDK) LandingStatus(data map[string]any) CrackedApi
 // LinkInBio returns a LinkInBio entity bound to this client.
 // Idiomatic usage: client.LinkInBio(nil).List(nil, nil) or
 // client.LinkInBio(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) LinkInBio(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) LinkInBio(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewLinkInBioEntityFunc(sdk, data)
 }
 
@@ -1143,7 +1133,7 @@ func (sdk *CrackedApiReferenceSDK) LinkInBio(data map[string]any) CrackedApiRefe
 // LinkInDm returns a LinkInDm entity bound to this client.
 // Idiomatic usage: client.LinkInDm(nil).List(nil, nil) or
 // client.LinkInDm(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) LinkInDm(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) LinkInDm(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewLinkInDmEntityFunc(sdk, data)
 }
 
@@ -1151,7 +1141,7 @@ func (sdk *CrackedApiReferenceSDK) LinkInDm(data map[string]any) CrackedApiRefer
 // LinkInPost returns a LinkInPost entity bound to this client.
 // Idiomatic usage: client.LinkInPost(nil).List(nil, nil) or
 // client.LinkInPost(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) LinkInPost(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) LinkInPost(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewLinkInPostEntityFunc(sdk, data)
 }
 
@@ -1159,7 +1149,7 @@ func (sdk *CrackedApiReferenceSDK) LinkInPost(data map[string]any) CrackedApiRef
 // LinkUser returns a LinkUser entity bound to this client.
 // Idiomatic usage: client.LinkUser(nil).List(nil, nil) or
 // client.LinkUser(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) LinkUser(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) LinkUser(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewLinkUserEntityFunc(sdk, data)
 }
 
@@ -1167,7 +1157,7 @@ func (sdk *CrackedApiReferenceSDK) LinkUser(data map[string]any) CrackedApiRefer
 // MediaAsset returns a MediaAsset entity bound to this client.
 // Idiomatic usage: client.MediaAsset(nil).List(nil, nil) or
 // client.MediaAsset(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) MediaAsset(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) MediaAsset(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewMediaAssetEntityFunc(sdk, data)
 }
 
@@ -1175,7 +1165,7 @@ func (sdk *CrackedApiReferenceSDK) MediaAsset(data map[string]any) CrackedApiRef
 // Men returns a Men entity bound to this client.
 // Idiomatic usage: client.Men(nil).List(nil, nil) or
 // client.Men(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) Men(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) Men(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewMenEntityFunc(sdk, data)
 }
 
@@ -1183,7 +1173,7 @@ func (sdk *CrackedApiReferenceSDK) Men(data map[string]any) CrackedApiReferenceE
 // Microdrama returns a Microdrama entity bound to this client.
 // Idiomatic usage: client.Microdrama(nil).List(nil, nil) or
 // client.Microdrama(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) Microdrama(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) Microdrama(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewMicrodramaEntityFunc(sdk, data)
 }
 
@@ -1191,7 +1181,7 @@ func (sdk *CrackedApiReferenceSDK) Microdrama(data map[string]any) CrackedApiRef
 // MicrohubPublic returns a MicrohubPublic entity bound to this client.
 // Idiomatic usage: client.MicrohubPublic(nil).List(nil, nil) or
 // client.MicrohubPublic(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) MicrohubPublic(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) MicrohubPublic(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewMicrohubPublicEntityFunc(sdk, data)
 }
 
@@ -1199,7 +1189,7 @@ func (sdk *CrackedApiReferenceSDK) MicrohubPublic(data map[string]any) CrackedAp
 // OnboardingStatus returns a OnboardingStatus entity bound to this client.
 // Idiomatic usage: client.OnboardingStatus(nil).List(nil, nil) or
 // client.OnboardingStatus(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) OnboardingStatus(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) OnboardingStatus(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewOnboardingStatusEntityFunc(sdk, data)
 }
 
@@ -1207,7 +1197,7 @@ func (sdk *CrackedApiReferenceSDK) OnboardingStatus(data map[string]any) Cracked
 // OnboardingV6 returns a OnboardingV6 entity bound to this client.
 // Idiomatic usage: client.OnboardingV6(nil).List(nil, nil) or
 // client.OnboardingV6(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) OnboardingV6(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) OnboardingV6(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewOnboardingV6EntityFunc(sdk, data)
 }
 
@@ -1215,7 +1205,7 @@ func (sdk *CrackedApiReferenceSDK) OnboardingV6(data map[string]any) CrackedApiR
 // PaidUser returns a PaidUser entity bound to this client.
 // Idiomatic usage: client.PaidUser(nil).List(nil, nil) or
 // client.PaidUser(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) PaidUser(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) PaidUser(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewPaidUserEntityFunc(sdk, data)
 }
 
@@ -1223,7 +1213,7 @@ func (sdk *CrackedApiReferenceSDK) PaidUser(data map[string]any) CrackedApiRefer
 // Pexel returns a Pexel entity bound to this client.
 // Idiomatic usage: client.Pexel(nil).List(nil, nil) or
 // client.Pexel(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) Pexel(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) Pexel(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewPexelEntityFunc(sdk, data)
 }
 
@@ -1231,7 +1221,7 @@ func (sdk *CrackedApiReferenceSDK) Pexel(data map[string]any) CrackedApiReferenc
 // PhoneAdminAvailableAgentSource returns a PhoneAdminAvailableAgentSource entity bound to this client.
 // Idiomatic usage: client.PhoneAdminAvailableAgentSource(nil).List(nil, nil) or
 // client.PhoneAdminAvailableAgentSource(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) PhoneAdminAvailableAgentSource(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) PhoneAdminAvailableAgentSource(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewPhoneAdminAvailableAgentSourceEntityFunc(sdk, data)
 }
 
@@ -1239,7 +1229,7 @@ func (sdk *CrackedApiReferenceSDK) PhoneAdminAvailableAgentSource(data map[strin
 // Product returns a Product entity bound to this client.
 // Idiomatic usage: client.Product(nil).List(nil, nil) or
 // client.Product(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) Product(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) Product(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewProductEntityFunc(sdk, data)
 }
 
@@ -1247,7 +1237,7 @@ func (sdk *CrackedApiReferenceSDK) Product(data map[string]any) CrackedApiRefere
 // ProductDashboard returns a ProductDashboard entity bound to this client.
 // Idiomatic usage: client.ProductDashboard(nil).List(nil, nil) or
 // client.ProductDashboard(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) ProductDashboard(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) ProductDashboard(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewProductDashboardEntityFunc(sdk, data)
 }
 
@@ -1255,7 +1245,7 @@ func (sdk *CrackedApiReferenceSDK) ProductDashboard(data map[string]any) Cracked
 // ProductDashboardView returns a ProductDashboardView entity bound to this client.
 // Idiomatic usage: client.ProductDashboardView(nil).List(nil, nil) or
 // client.ProductDashboardView(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) ProductDashboardView(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) ProductDashboardView(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewProductDashboardViewEntityFunc(sdk, data)
 }
 
@@ -1263,7 +1253,7 @@ func (sdk *CrackedApiReferenceSDK) ProductDashboardView(data map[string]any) Cra
 // ProductDemo returns a ProductDemo entity bound to this client.
 // Idiomatic usage: client.ProductDemo(nil).List(nil, nil) or
 // client.ProductDemo(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) ProductDemo(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) ProductDemo(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewProductDemoEntityFunc(sdk, data)
 }
 
@@ -1271,7 +1261,7 @@ func (sdk *CrackedApiReferenceSDK) ProductDemo(data map[string]any) CrackedApiRe
 // ProductLanding returns a ProductLanding entity bound to this client.
 // Idiomatic usage: client.ProductLanding(nil).List(nil, nil) or
 // client.ProductLanding(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) ProductLanding(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) ProductLanding(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewProductLandingEntityFunc(sdk, data)
 }
 
@@ -1279,7 +1269,7 @@ func (sdk *CrackedApiReferenceSDK) ProductLanding(data map[string]any) CrackedAp
 // PublicResumeStatus returns a PublicResumeStatus entity bound to this client.
 // Idiomatic usage: client.PublicResumeStatus(nil).List(nil, nil) or
 // client.PublicResumeStatus(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) PublicResumeStatus(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) PublicResumeStatus(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewPublicResumeStatusEntityFunc(sdk, data)
 }
 
@@ -1287,23 +1277,15 @@ func (sdk *CrackedApiReferenceSDK) PublicResumeStatus(data map[string]any) Crack
 // ReRollVideo returns a ReRollVideo entity bound to this client.
 // Idiomatic usage: client.ReRollVideo(nil).List(nil, nil) or
 // client.ReRollVideo(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) ReRollVideo(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) ReRollVideo(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewReRollVideoEntityFunc(sdk, data)
-}
-
-
-// ReadRootGet returns a ReadRootGet entity bound to this client.
-// Idiomatic usage: client.ReadRootGet(nil).List(nil, nil) or
-// client.ReadRootGet(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) ReadRootGet(data map[string]any) CrackedApiReferenceEntity {
-	return NewReadRootGetEntityFunc(sdk, data)
 }
 
 
 // RecordDemoBooked returns a RecordDemoBooked entity bound to this client.
 // Idiomatic usage: client.RecordDemoBooked(nil).List(nil, nil) or
 // client.RecordDemoBooked(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) RecordDemoBooked(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) RecordDemoBooked(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewRecordDemoBookedEntityFunc(sdk, data)
 }
 
@@ -1311,7 +1293,7 @@ func (sdk *CrackedApiReferenceSDK) RecordDemoBooked(data map[string]any) Cracked
 // RefreshStat returns a RefreshStat entity bound to this client.
 // Idiomatic usage: client.RefreshStat(nil).List(nil, nil) or
 // client.RefreshStat(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) RefreshStat(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) RefreshStat(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewRefreshStatEntityFunc(sdk, data)
 }
 
@@ -1319,7 +1301,7 @@ func (sdk *CrackedApiReferenceSDK) RefreshStat(data map[string]any) CrackedApiRe
 // RemixerClipper returns a RemixerClipper entity bound to this client.
 // Idiomatic usage: client.RemixerClipper(nil).List(nil, nil) or
 // client.RemixerClipper(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) RemixerClipper(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) RemixerClipper(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewRemixerClipperEntityFunc(sdk, data)
 }
 
@@ -1327,7 +1309,7 @@ func (sdk *CrackedApiReferenceSDK) RemixerClipper(data map[string]any) CrackedAp
 // ResetProduct returns a ResetProduct entity bound to this client.
 // Idiomatic usage: client.ResetProduct(nil).List(nil, nil) or
 // client.ResetProduct(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) ResetProduct(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) ResetProduct(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewResetProductEntityFunc(sdk, data)
 }
 
@@ -1335,15 +1317,23 @@ func (sdk *CrackedApiReferenceSDK) ResetProduct(data map[string]any) CrackedApiR
 // RetryWebsiteScrape returns a RetryWebsiteScrape entity bound to this client.
 // Idiomatic usage: client.RetryWebsiteScrape(nil).List(nil, nil) or
 // client.RetryWebsiteScrape(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) RetryWebsiteScrape(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) RetryWebsiteScrape(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewRetryWebsiteScrapeEntityFunc(sdk, data)
+}
+
+
+// RootGet returns a RootGet entity bound to this client.
+// Idiomatic usage: client.RootGet(nil).List(nil, nil) or
+// client.RootGet(nil).Load(map[string]any{"id": ...}, nil).
+func (sdk *CrackedApiReferenceSDK) RootGet(data map[string]any) CrackedApiReferenceEntityBase {
+	return NewRootGetEntityFunc(sdk, data)
 }
 
 
 // SaveSurvey returns a SaveSurvey entity bound to this client.
 // Idiomatic usage: client.SaveSurvey(nil).List(nil, nil) or
 // client.SaveSurvey(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) SaveSurvey(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) SaveSurvey(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewSaveSurveyEntityFunc(sdk, data)
 }
 
@@ -1351,7 +1341,7 @@ func (sdk *CrackedApiReferenceSDK) SaveSurvey(data map[string]any) CrackedApiRef
 // ScanSocial returns a ScanSocial entity bound to this client.
 // Idiomatic usage: client.ScanSocial(nil).List(nil, nil) or
 // client.ScanSocial(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) ScanSocial(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) ScanSocial(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewScanSocialEntityFunc(sdk, data)
 }
 
@@ -1359,7 +1349,7 @@ func (sdk *CrackedApiReferenceSDK) ScanSocial(data map[string]any) CrackedApiRef
 // ScanSocialsPublic returns a ScanSocialsPublic entity bound to this client.
 // Idiomatic usage: client.ScanSocialsPublic(nil).List(nil, nil) or
 // client.ScanSocialsPublic(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) ScanSocialsPublic(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) ScanSocialsPublic(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewScanSocialsPublicEntityFunc(sdk, data)
 }
 
@@ -1367,15 +1357,23 @@ func (sdk *CrackedApiReferenceSDK) ScanSocialsPublic(data map[string]any) Cracke
 // ScanSocialsStatus returns a ScanSocialsStatus entity bound to this client.
 // Idiomatic usage: client.ScanSocialsStatus(nil).List(nil, nil) or
 // client.ScanSocialsStatus(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) ScanSocialsStatus(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) ScanSocialsStatus(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewScanSocialsStatusEntityFunc(sdk, data)
+}
+
+
+// ScheduleQueue returns a ScheduleQueue entity bound to this client.
+// Idiomatic usage: client.ScheduleQueue(nil).List(nil, nil) or
+// client.ScheduleQueue(nil).Load(map[string]any{"id": ...}, nil).
+func (sdk *CrackedApiReferenceSDK) ScheduleQueue(data map[string]any) CrackedApiReferenceEntityBase {
+	return NewScheduleQueueEntityFunc(sdk, data)
 }
 
 
 // ScheduleV2 returns a ScheduleV2 entity bound to this client.
 // Idiomatic usage: client.ScheduleV2(nil).List(nil, nil) or
 // client.ScheduleV2(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) ScheduleV2(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) ScheduleV2(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewScheduleV2EntityFunc(sdk, data)
 }
 
@@ -1383,7 +1381,7 @@ func (sdk *CrackedApiReferenceSDK) ScheduleV2(data map[string]any) CrackedApiRef
 // Scrape returns a Scrape entity bound to this client.
 // Idiomatic usage: client.Scrape(nil).List(nil, nil) or
 // client.Scrape(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) Scrape(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) Scrape(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewScrapeEntityFunc(sdk, data)
 }
 
@@ -1391,7 +1389,7 @@ func (sdk *CrackedApiReferenceSDK) Scrape(data map[string]any) CrackedApiReferen
 // ScrapeWebsitePublic returns a ScrapeWebsitePublic entity bound to this client.
 // Idiomatic usage: client.ScrapeWebsitePublic(nil).List(nil, nil) or
 // client.ScrapeWebsitePublic(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) ScrapeWebsitePublic(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) ScrapeWebsitePublic(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewScrapeWebsitePublicEntityFunc(sdk, data)
 }
 
@@ -1399,7 +1397,7 @@ func (sdk *CrackedApiReferenceSDK) ScrapeWebsitePublic(data map[string]any) Crac
 // ScrapedData returns a ScrapedData entity bound to this client.
 // Idiomatic usage: client.ScrapedData(nil).List(nil, nil) or
 // client.ScrapedData(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) ScrapedData(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) ScrapedData(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewScrapedDataEntityFunc(sdk, data)
 }
 
@@ -1407,7 +1405,7 @@ func (sdk *CrackedApiReferenceSDK) ScrapedData(data map[string]any) CrackedApiRe
 // ScrapingStatus returns a ScrapingStatus entity bound to this client.
 // Idiomatic usage: client.ScrapingStatus(nil).List(nil, nil) or
 // client.ScrapingStatus(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) ScrapingStatus(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) ScrapingStatus(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewScrapingStatusEntityFunc(sdk, data)
 }
 
@@ -1415,7 +1413,7 @@ func (sdk *CrackedApiReferenceSDK) ScrapingStatus(data map[string]any) CrackedAp
 // SelfServeActivate returns a SelfServeActivate entity bound to this client.
 // Idiomatic usage: client.SelfServeActivate(nil).List(nil, nil) or
 // client.SelfServeActivate(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) SelfServeActivate(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) SelfServeActivate(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewSelfServeActivateEntityFunc(sdk, data)
 }
 
@@ -1423,7 +1421,7 @@ func (sdk *CrackedApiReferenceSDK) SelfServeActivate(data map[string]any) Cracke
 // Seo returns a Seo entity bound to this client.
 // Idiomatic usage: client.Seo(nil).List(nil, nil) or
 // client.Seo(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) Seo(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) Seo(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewSeoEntityFunc(sdk, data)
 }
 
@@ -1431,7 +1429,7 @@ func (sdk *CrackedApiReferenceSDK) Seo(data map[string]any) CrackedApiReferenceE
 // SeoAiMention returns a SeoAiMention entity bound to this client.
 // Idiomatic usage: client.SeoAiMention(nil).List(nil, nil) or
 // client.SeoAiMention(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) SeoAiMention(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) SeoAiMention(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewSeoAiMentionEntityFunc(sdk, data)
 }
 
@@ -1439,7 +1437,7 @@ func (sdk *CrackedApiReferenceSDK) SeoAiMention(data map[string]any) CrackedApiR
 // SeoBacklink returns a SeoBacklink entity bound to this client.
 // Idiomatic usage: client.SeoBacklink(nil).List(nil, nil) or
 // client.SeoBacklink(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) SeoBacklink(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) SeoBacklink(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewSeoBacklinkEntityFunc(sdk, data)
 }
 
@@ -1447,7 +1445,7 @@ func (sdk *CrackedApiReferenceSDK) SeoBacklink(data map[string]any) CrackedApiRe
 // SeoKeyword returns a SeoKeyword entity bound to this client.
 // Idiomatic usage: client.SeoKeyword(nil).List(nil, nil) or
 // client.SeoKeyword(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) SeoKeyword(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) SeoKeyword(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewSeoKeywordEntityFunc(sdk, data)
 }
 
@@ -1455,7 +1453,7 @@ func (sdk *CrackedApiReferenceSDK) SeoKeyword(data map[string]any) CrackedApiRef
 // SeoOverview returns a SeoOverview entity bound to this client.
 // Idiomatic usage: client.SeoOverview(nil).List(nil, nil) or
 // client.SeoOverview(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) SeoOverview(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) SeoOverview(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewSeoOverviewEntityFunc(sdk, data)
 }
 
@@ -1463,7 +1461,7 @@ func (sdk *CrackedApiReferenceSDK) SeoOverview(data map[string]any) CrackedApiRe
 // SeoTraffic returns a SeoTraffic entity bound to this client.
 // Idiomatic usage: client.SeoTraffic(nil).List(nil, nil) or
 // client.SeoTraffic(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) SeoTraffic(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) SeoTraffic(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewSeoTrafficEntityFunc(sdk, data)
 }
 
@@ -1471,7 +1469,7 @@ func (sdk *CrackedApiReferenceSDK) SeoTraffic(data map[string]any) CrackedApiRef
 // ShareAccessLink returns a ShareAccessLink entity bound to this client.
 // Idiomatic usage: client.ShareAccessLink(nil).List(nil, nil) or
 // client.ShareAccessLink(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) ShareAccessLink(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) ShareAccessLink(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewShareAccessLinkEntityFunc(sdk, data)
 }
 
@@ -1479,7 +1477,7 @@ func (sdk *CrackedApiReferenceSDK) ShareAccessLink(data map[string]any) CrackedA
 // Site returns a Site entity bound to this client.
 // Idiomatic usage: client.Site(nil).List(nil, nil) or
 // client.Site(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) Site(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) Site(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewSiteEntityFunc(sdk, data)
 }
 
@@ -1487,7 +1485,7 @@ func (sdk *CrackedApiReferenceSDK) Site(data map[string]any) CrackedApiReference
 // Slide returns a Slide entity bound to this client.
 // Idiomatic usage: client.Slide(nil).List(nil, nil) or
 // client.Slide(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) Slide(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) Slide(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewSlideEntityFunc(sdk, data)
 }
 
@@ -1495,7 +1493,7 @@ func (sdk *CrackedApiReferenceSDK) Slide(data map[string]any) CrackedApiReferenc
 // SlugValidation returns a SlugValidation entity bound to this client.
 // Idiomatic usage: client.SlugValidation(nil).List(nil, nil) or
 // client.SlugValidation(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) SlugValidation(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) SlugValidation(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewSlugValidationEntityFunc(sdk, data)
 }
 
@@ -1503,7 +1501,7 @@ func (sdk *CrackedApiReferenceSDK) SlugValidation(data map[string]any) CrackedAp
 // Social returns a Social entity bound to this client.
 // Idiomatic usage: client.Social(nil).List(nil, nil) or
 // client.Social(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) Social(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) Social(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewSocialEntityFunc(sdk, data)
 }
 
@@ -1511,7 +1509,7 @@ func (sdk *CrackedApiReferenceSDK) Social(data map[string]any) CrackedApiReferen
 // SocialScanPreview returns a SocialScanPreview entity bound to this client.
 // Idiomatic usage: client.SocialScanPreview(nil).List(nil, nil) or
 // client.SocialScanPreview(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) SocialScanPreview(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) SocialScanPreview(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewSocialScanPreviewEntityFunc(sdk, data)
 }
 
@@ -1519,7 +1517,7 @@ func (sdk *CrackedApiReferenceSDK) SocialScanPreview(data map[string]any) Cracke
 // SocialScanProcess returns a SocialScanProcess entity bound to this client.
 // Idiomatic usage: client.SocialScanProcess(nil).List(nil, nil) or
 // client.SocialScanProcess(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) SocialScanProcess(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) SocialScanProcess(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewSocialScanProcessEntityFunc(sdk, data)
 }
 
@@ -1527,7 +1525,7 @@ func (sdk *CrackedApiReferenceSDK) SocialScanProcess(data map[string]any) Cracke
 // SocialScanSave returns a SocialScanSave entity bound to this client.
 // Idiomatic usage: client.SocialScanSave(nil).List(nil, nil) or
 // client.SocialScanSave(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) SocialScanSave(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) SocialScanSave(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewSocialScanSaveEntityFunc(sdk, data)
 }
 
@@ -1535,7 +1533,7 @@ func (sdk *CrackedApiReferenceSDK) SocialScanSave(data map[string]any) CrackedAp
 // Sora2Avatar returns a Sora2Avatar entity bound to this client.
 // Idiomatic usage: client.Sora2Avatar(nil).List(nil, nil) or
 // client.Sora2Avatar(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) Sora2Avatar(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) Sora2Avatar(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewSora2AvatarEntityFunc(sdk, data)
 }
 
@@ -1543,7 +1541,7 @@ func (sdk *CrackedApiReferenceSDK) Sora2Avatar(data map[string]any) CrackedApiRe
 // Sora2AvatarAssetUpload returns a Sora2AvatarAssetUpload entity bound to this client.
 // Idiomatic usage: client.Sora2AvatarAssetUpload(nil).List(nil, nil) or
 // client.Sora2AvatarAssetUpload(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) Sora2AvatarAssetUpload(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) Sora2AvatarAssetUpload(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewSora2AvatarAssetUploadEntityFunc(sdk, data)
 }
 
@@ -1551,7 +1549,7 @@ func (sdk *CrackedApiReferenceSDK) Sora2AvatarAssetUpload(data map[string]any) C
 // Sora2AvatarStat returns a Sora2AvatarStat entity bound to this client.
 // Idiomatic usage: client.Sora2AvatarStat(nil).List(nil, nil) or
 // client.Sora2AvatarStat(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) Sora2AvatarStat(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) Sora2AvatarStat(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewSora2AvatarStatEntityFunc(sdk, data)
 }
 
@@ -1559,7 +1557,7 @@ func (sdk *CrackedApiReferenceSDK) Sora2AvatarStat(data map[string]any) CrackedA
 // Stat returns a Stat entity bound to this client.
 // Idiomatic usage: client.Stat(nil).List(nil, nil) or
 // client.Stat(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) Stat(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) Stat(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewStatEntityFunc(sdk, data)
 }
 
@@ -1567,7 +1565,7 @@ func (sdk *CrackedApiReferenceSDK) Stat(data map[string]any) CrackedApiReference
 // StatsRefreshBackfill returns a StatsRefreshBackfill entity bound to this client.
 // Idiomatic usage: client.StatsRefreshBackfill(nil).List(nil, nil) or
 // client.StatsRefreshBackfill(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) StatsRefreshBackfill(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) StatsRefreshBackfill(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewStatsRefreshBackfillEntityFunc(sdk, data)
 }
 
@@ -1575,7 +1573,7 @@ func (sdk *CrackedApiReferenceSDK) StatsRefreshBackfill(data map[string]any) Cra
 // StatsRefreshIssue returns a StatsRefreshIssue entity bound to this client.
 // Idiomatic usage: client.StatsRefreshIssue(nil).List(nil, nil) or
 // client.StatsRefreshIssue(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) StatsRefreshIssue(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) StatsRefreshIssue(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewStatsRefreshIssueEntityFunc(sdk, data)
 }
 
@@ -1583,7 +1581,7 @@ func (sdk *CrackedApiReferenceSDK) StatsRefreshIssue(data map[string]any) Cracke
 // StatsRefreshOverview returns a StatsRefreshOverview entity bound to this client.
 // Idiomatic usage: client.StatsRefreshOverview(nil).List(nil, nil) or
 // client.StatsRefreshOverview(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) StatsRefreshOverview(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) StatsRefreshOverview(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewStatsRefreshOverviewEntityFunc(sdk, data)
 }
 
@@ -1591,7 +1589,7 @@ func (sdk *CrackedApiReferenceSDK) StatsRefreshOverview(data map[string]any) Cra
 // StatsRefreshRunSummary returns a StatsRefreshRunSummary entity bound to this client.
 // Idiomatic usage: client.StatsRefreshRunSummary(nil).List(nil, nil) or
 // client.StatsRefreshRunSummary(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) StatsRefreshRunSummary(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) StatsRefreshRunSummary(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewStatsRefreshRunSummaryEntityFunc(sdk, data)
 }
 
@@ -1599,7 +1597,7 @@ func (sdk *CrackedApiReferenceSDK) StatsRefreshRunSummary(data map[string]any) C
 // StatsRefreshTaskTrigger returns a StatsRefreshTaskTrigger entity bound to this client.
 // Idiomatic usage: client.StatsRefreshTaskTrigger(nil).List(nil, nil) or
 // client.StatsRefreshTaskTrigger(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) StatsRefreshTaskTrigger(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) StatsRefreshTaskTrigger(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewStatsRefreshTaskTriggerEntityFunc(sdk, data)
 }
 
@@ -1607,7 +1605,7 @@ func (sdk *CrackedApiReferenceSDK) StatsRefreshTaskTrigger(data map[string]any) 
 // Stripe returns a Stripe entity bound to this client.
 // Idiomatic usage: client.Stripe(nil).List(nil, nil) or
 // client.Stripe(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) Stripe(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) Stripe(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewStripeEntityFunc(sdk, data)
 }
 
@@ -1615,7 +1613,7 @@ func (sdk *CrackedApiReferenceSDK) Stripe(data map[string]any) CrackedApiReferen
 // Style returns a Style entity bound to this client.
 // Idiomatic usage: client.Style(nil).List(nil, nil) or
 // client.Style(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) Style(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) Style(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewStyleEntityFunc(sdk, data)
 }
 
@@ -1623,7 +1621,7 @@ func (sdk *CrackedApiReferenceSDK) Style(data map[string]any) CrackedApiReferenc
 // Template returns a Template entity bound to this client.
 // Idiomatic usage: client.Template(nil).List(nil, nil) or
 // client.Template(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) Template(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) Template(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewTemplateEntityFunc(sdk, data)
 }
 
@@ -1631,7 +1629,7 @@ func (sdk *CrackedApiReferenceSDK) Template(data map[string]any) CrackedApiRefer
 // TikTokCreatorInfo returns a TikTokCreatorInfo entity bound to this client.
 // Idiomatic usage: client.TikTokCreatorInfo(nil).List(nil, nil) or
 // client.TikTokCreatorInfo(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) TikTokCreatorInfo(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) TikTokCreatorInfo(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewTikTokCreatorInfoEntityFunc(sdk, data)
 }
 
@@ -1639,7 +1637,7 @@ func (sdk *CrackedApiReferenceSDK) TikTokCreatorInfo(data map[string]any) Cracke
 // TopPost returns a TopPost entity bound to this client.
 // Idiomatic usage: client.TopPost(nil).List(nil, nil) or
 // client.TopPost(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) TopPost(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) TopPost(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewTopPostEntityFunc(sdk, data)
 }
 
@@ -1647,7 +1645,7 @@ func (sdk *CrackedApiReferenceSDK) TopPost(data map[string]any) CrackedApiRefere
 // UploadPostAgent returns a UploadPostAgent entity bound to this client.
 // Idiomatic usage: client.UploadPostAgent(nil).List(nil, nil) or
 // client.UploadPostAgent(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) UploadPostAgent(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) UploadPostAgent(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewUploadPostAgentEntityFunc(sdk, data)
 }
 
@@ -1655,7 +1653,7 @@ func (sdk *CrackedApiReferenceSDK) UploadPostAgent(data map[string]any) CrackedA
 // User returns a User entity bound to this client.
 // Idiomatic usage: client.User(nil).List(nil, nil) or
 // client.User(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) User(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) User(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewUserEntityFunc(sdk, data)
 }
 
@@ -1663,7 +1661,7 @@ func (sdk *CrackedApiReferenceSDK) User(data map[string]any) CrackedApiReference
 // UserAgent returns a UserAgent entity bound to this client.
 // Idiomatic usage: client.UserAgent(nil).List(nil, nil) or
 // client.UserAgent(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) UserAgent(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) UserAgent(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewUserAgentEntityFunc(sdk, data)
 }
 
@@ -1671,7 +1669,7 @@ func (sdk *CrackedApiReferenceSDK) UserAgent(data map[string]any) CrackedApiRefe
 // UserHealthDetail returns a UserHealthDetail entity bound to this client.
 // Idiomatic usage: client.UserHealthDetail(nil).List(nil, nil) or
 // client.UserHealthDetail(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) UserHealthDetail(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) UserHealthDetail(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewUserHealthDetailEntityFunc(sdk, data)
 }
 
@@ -1679,7 +1677,7 @@ func (sdk *CrackedApiReferenceSDK) UserHealthDetail(data map[string]any) Cracked
 // UserWithAvatarSubmission returns a UserWithAvatarSubmission entity bound to this client.
 // Idiomatic usage: client.UserWithAvatarSubmission(nil).List(nil, nil) or
 // client.UserWithAvatarSubmission(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) UserWithAvatarSubmission(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) UserWithAvatarSubmission(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewUserWithAvatarSubmissionEntityFunc(sdk, data)
 }
 
@@ -1687,7 +1685,7 @@ func (sdk *CrackedApiReferenceSDK) UserWithAvatarSubmission(data map[string]any)
 // UsersHealth returns a UsersHealth entity bound to this client.
 // Idiomatic usage: client.UsersHealth(nil).List(nil, nil) or
 // client.UsersHealth(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) UsersHealth(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) UsersHealth(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewUsersHealthEntityFunc(sdk, data)
 }
 
@@ -1695,7 +1693,7 @@ func (sdk *CrackedApiReferenceSDK) UsersHealth(data map[string]any) CrackedApiRe
 // Video returns a Video entity bound to this client.
 // Idiomatic usage: client.Video(nil).List(nil, nil) or
 // client.Video(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) Video(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) Video(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewVideoEntityFunc(sdk, data)
 }
 
@@ -1703,7 +1701,7 @@ func (sdk *CrackedApiReferenceSDK) Video(data map[string]any) CrackedApiReferenc
 // VideoRemixerWorker returns a VideoRemixerWorker entity bound to this client.
 // Idiomatic usage: client.VideoRemixerWorker(nil).List(nil, nil) or
 // client.VideoRemixerWorker(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) VideoRemixerWorker(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) VideoRemixerWorker(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewVideoRemixerWorkerEntityFunc(sdk, data)
 }
 
@@ -1711,7 +1709,7 @@ func (sdk *CrackedApiReferenceSDK) VideoRemixerWorker(data map[string]any) Crack
 // WatchdogRecovery returns a WatchdogRecovery entity bound to this client.
 // Idiomatic usage: client.WatchdogRecovery(nil).List(nil, nil) or
 // client.WatchdogRecovery(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) WatchdogRecovery(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) WatchdogRecovery(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewWatchdogRecoveryEntityFunc(sdk, data)
 }
 
@@ -1719,7 +1717,7 @@ func (sdk *CrackedApiReferenceSDK) WatchdogRecovery(data map[string]any) Cracked
 // WinningAd returns a WinningAd entity bound to this client.
 // Idiomatic usage: client.WinningAd(nil).List(nil, nil) or
 // client.WinningAd(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) WinningAd(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) WinningAd(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewWinningAdEntityFunc(sdk, data)
 }
 
@@ -1727,7 +1725,7 @@ func (sdk *CrackedApiReferenceSDK) WinningAd(data map[string]any) CrackedApiRefe
 // XAdaptation returns a XAdaptation entity bound to this client.
 // Idiomatic usage: client.XAdaptation(nil).List(nil, nil) or
 // client.XAdaptation(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) XAdaptation(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) XAdaptation(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewXAdaptationEntityFunc(sdk, data)
 }
 
@@ -1735,7 +1733,7 @@ func (sdk *CrackedApiReferenceSDK) XAdaptation(data map[string]any) CrackedApiRe
 // ZerohumanAdminAccount returns a ZerohumanAdminAccount entity bound to this client.
 // Idiomatic usage: client.ZerohumanAdminAccount(nil).List(nil, nil) or
 // client.ZerohumanAdminAccount(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *CrackedApiReferenceSDK) ZerohumanAdminAccount(data map[string]any) CrackedApiReferenceEntity {
+func (sdk *CrackedApiReferenceSDK) ZerohumanAdminAccount(data map[string]any) CrackedApiReferenceEntityBase {
 	return NewZerohumanAdminAccountEntityFunc(sdk, data)
 }
 

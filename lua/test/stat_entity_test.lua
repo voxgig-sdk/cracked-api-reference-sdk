@@ -164,6 +164,9 @@ describe("StatEntity", function()
       stat_ref01_data = helpers.to_map(stat_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LIST
     local stat_ref01_ent = client:Stat(nil)
     local stat_ref01_match = {}

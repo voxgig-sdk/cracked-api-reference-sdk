@@ -212,6 +212,9 @@ func TestMenEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = menRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LIST
 		menRef01Ent := client.Men(nil)
 		menRef01Match := map[string]any{}

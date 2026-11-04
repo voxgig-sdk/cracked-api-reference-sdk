@@ -153,6 +153,8 @@ class TestUserWithAvatarSubmissionEntity:
         if len(user_with_avatar_submission_ref01_data_raw) > 0:
             user_with_avatar_submission_ref01_data = helpers.to_map(user_with_avatar_submission_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LIST
         user_with_avatar_submission_ref01_ent = client.UserWithAvatarSubmission(None)
         user_with_avatar_submission_ref01_match = {}

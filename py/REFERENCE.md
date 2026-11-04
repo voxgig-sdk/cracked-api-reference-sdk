@@ -254,10 +254,6 @@ Create a new `CarouselAgentDetailEntity` instance. Pass `None` for no initial da
 
 Create a new `CarouselStatusEntity` instance. Pass `None` for no initial data.
 
-#### `Chat(data=None)`
-
-Create a new `ChatEntity` instance. Pass `None` for no initial data.
-
 #### `ChatHistory(data=None)`
 
 Create a new `ChatHistoryEntity` instance. Pass `None` for no initial data.
@@ -334,10 +330,6 @@ Create a new `DedicatedAgentsDashboardEntity` instance. Pass `None` for no initi
 
 Create a new `EnterpriseAgentEntity` instance. Pass `None` for no initial data.
 
-#### `EnterpriseProduct(data=None)`
-
-Create a new `EnterpriseProductEntity` instance. Pass `None` for no initial data.
-
 #### `ExactAvailability(data=None)`
 
 Create a new `ExactAvailabilityEntity` instance. Pass `None` for no initial data.
@@ -381,10 +373,6 @@ Create a new `HealthrxEntity` instance. Pass `None` for no initial data.
 #### `InitResetProductV6(data=None)`
 
 Create a new `InitResetProductV6Entity` instance. Pass `None` for no initial data.
-
-#### `Iri(data=None)`
-
-Create a new `IriEntity` instance. Pass `None` for no initial data.
 
 #### `IrisCapability(data=None)`
 
@@ -502,10 +490,6 @@ Create a new `PublicResumeStatusEntity` instance. Pass `None` for no initial dat
 
 Create a new `ReRollVideoEntity` instance. Pass `None` for no initial data.
 
-#### `ReadRootGet(data=None)`
-
-Create a new `ReadRootGetEntity` instance. Pass `None` for no initial data.
-
 #### `RecordDemoBooked(data=None)`
 
 Create a new `RecordDemoBookedEntity` instance. Pass `None` for no initial data.
@@ -526,6 +510,10 @@ Create a new `ResetProductEntity` instance. Pass `None` for no initial data.
 
 Create a new `RetryWebsiteScrapeEntity` instance. Pass `None` for no initial data.
 
+#### `RootGet(data=None)`
+
+Create a new `RootGetEntity` instance. Pass `None` for no initial data.
+
 #### `SaveSurvey(data=None)`
 
 Create a new `SaveSurveyEntity` instance. Pass `None` for no initial data.
@@ -541,6 +529,10 @@ Create a new `ScanSocialsPublicEntity` instance. Pass `None` for no initial data
 #### `ScanSocialsStatus(data=None)`
 
 Create a new `ScanSocialsStatusEntity` instance. Pass `None` for no initial data.
+
+#### `ScheduleQueue(data=None)`
+
+Create a new `ScheduleQueueEntity` instance. Pass `None` for no initial data.
 
 #### `ScheduleV2(data=None)`
 
@@ -936,56 +928,46 @@ admin = client.Admin()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `apply` | `bool` | No | Apply safe canonical or clean-only URL updates |
-| `count` | `int` | Yes |  |
 | `created_at` | `str` | Yes |  |
 | `date_from` | `Any` | No |  |
 | `date_to` | `Any` | No |  |
 | `email` | `str` | Yes |  |
 | `id` | `str` | Yes |  |
-| `include_failed` | `bool` | No |  |
-| `include_pending` | `bool` | No |  |
 | `include_records` | `bool` | No | Include full per-field audit records in the response |
 | `issue_ids` | `Any` | No |  |
 | `only_active` | `bool` | No | Limit the audit to active agents |
 | `platform` | `Any` | No |  |
 | `posting_method` | `Any` | No |  |
-| `product_id` | `str` | No |  |
+| `product_id` | `str` | Yes |  |
 | `query` | `Any` | No |  |
 | `reason` | `Any` | No |  |
-| `regenerate` | `bool` | No |  |
 | `status` | `str` | No |  |
 | `user_membership` | `Any` | No |  |
 | `user_name` | `Any` | No |  |
 | `user_onboarding_step` | `Any` | No |  |
-| `video_type` | `str` | Yes |  |
 
 ### Field Usage by Operation
 
-| Field | load | list | create | update | remove |
-| --- | --- | --- | --- | --- | --- |
-| `apply` | - | - | - | - | - |
-| `count` | - | - | - | - | - |
-| `created_at` | - | - | - | - | - |
-| `date_from` | - | - | Yes | - | - |
-| `date_to` | - | - | Yes | - | - |
-| `email` | - | - | - | - | - |
-| `id` | - | - | - | - | - |
-| `include_failed` | - | - | - | - | - |
-| `include_pending` | - | - | - | - | - |
-| `include_records` | - | - | - | - | - |
-| `issue_ids` | - | - | - | - | - |
-| `only_active` | - | - | - | - | - |
-| `platform` | - | - | - | - | - |
-| `posting_method` | - | - | - | - | - |
-| `product_id` | - | - | Yes | - | - |
-| `query` | - | - | - | - | - |
-| `reason` | - | - | - | - | - |
-| `regenerate` | - | - | - | - | - |
-| `status` | - | - | - | - | - |
-| `user_membership` | - | - | - | - | - |
-| `user_name` | - | - | - | - | - |
-| `user_onboarding_step` | - | - | - | - | - |
-| `video_type` | - | - | - | - | - |
+| Field | load | list | create | remove |
+| --- | --- | --- | --- | --- |
+| `apply` | - | - | - | - |
+| `created_at` | - | - | - | - |
+| `date_from` | - | - | Yes | - |
+| `date_to` | - | - | Yes | - |
+| `email` | - | - | - | - |
+| `id` | - | - | - | - |
+| `include_records` | - | - | - | - |
+| `issue_ids` | - | - | - | - |
+| `only_active` | - | - | - | - |
+| `platform` | - | - | - | - |
+| `posting_method` | - | - | - | - |
+| `product_id` | - | - | - | - |
+| `query` | - | - | - | - |
+| `reason` | - | - | - | - |
+| `status` | - | - | - | - |
+| `user_membership` | - | - | - | - |
+| `user_name` | - | - | - | - |
+| `user_onboarding_step` | - | - | - | - |
 
 ### Operations
 
@@ -996,14 +978,12 @@ Create a new entity with the given data. Returns the created entity and raises o
 ```python
 result = client.Admin().create({
     "user_id": "example_user_id",  # str
-    "count": 1,  # int
     "created_at": "example_created_at",  # str
     "date_from": "example_date_from",  # Any
     "date_to": "example_date_to",  # Any
     "email": "example_email",  # str
     "id": "example_id",  # str
     "product_id": "example_product_id",  # str
-    "video_type": "example_video_type",  # str
 })
 ```
 
@@ -1031,17 +1011,6 @@ Remove the entity matching the given criteria. Returns the entity, marked as del
 
 ```python
 result = client.Admin().remove({"tester_id": "tester_id"})
-```
-
-#### `update(reqdata, ctrl=None) -> AdminEntity`
-
-Update an existing entity. The data must include the entity `id`. Returns the updated entity and raises on error.
-
-```python
-result = client.Admin().update({
-    "agent_id": "agent_id",
-    # Fields to update
-})
 ```
 
 ### Common Methods
@@ -1629,13 +1598,25 @@ admin_insight = client.AdminInsight()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `customer_success_cases` | `list` | Yes |  |
-| `customers` | `list` | Yes |  |
-| `generated_at` | `str` | Yes |  |
-| `pfa_database` | `dict` | Yes |  |
-| `recent_signups` | `list` | Yes |  |
-| `summary` | `dict` | Yes |  |
-| `vireel_database` | `dict` | Yes |  |
+| `active_agents` | `int` | Yes |  |
+| `active_products` | `int` | Yes |  |
+| `agents_count` | `int` | Yes |  |
+| `auto_schedule_status` | `str` | Yes |  |
+| `days_until_period_end` | `Any` | No |  |
+| `email` | `str` | Yes |  |
+| `feature_impact` | `str` | Yes |  |
+| `last_notification_at` | `Any` | No |  |
+| `membership` | `Any` | No |  |
+| `name` | `str` | No |  |
+| `notification_count` | `int` | Yes |  |
+| `notification_events` | `list` | Yes |  |
+| `priority` | `str` | Yes |  |
+| `severity` | `str` | Yes |  |
+| `status_label` | `str` | Yes |  |
+| `subscription_current_period_end` | `Any` | No |  |
+| `subscription_status` | `Any` | No |  |
+| `upcoming_posts` | `int` | Yes |  |
+| `user_id` | `str` | Yes |  |
 
 ### Operations
 
@@ -1750,14 +1731,8 @@ admin_metrics_summary = client.AdminMetricsSummary()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `paid_users_by_level` | `list` | Yes |  |
-| `total_cancellations` | `int` | Yes |  |
-| `total_previews_generated` | `int` | Yes |  |
-| `total_signups` | `int` | Yes |  |
-| `total_videos_generated` | `int` | Yes |  |
-| `url_attempts` | `int` | Yes |  |
-| `user_credits` | `list` | Yes |  |
-| `user_gifted_credits` | `list` | Yes |  |
+| `count` | `int` | Yes |  |
+| `level` | `str` | Yes |  |
 
 ### Operations
 
@@ -2743,6 +2718,10 @@ for agent in results:
     print(agent.data_get())
 ```
 
+#### `update(reqdata, ctrl=None) -> AgentEntity`
+
+Update an existing entity. The data must include the entity `id`. Returns the updated entity and raises on error.
+
 ### Common Methods
 
 #### `data_get() -> dict`
@@ -3080,13 +3059,17 @@ agent_access_user_agent = client.AgentAccessUserAgent()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `agentQuota` | `int` | Yes |  |
-| `agents` | `list` | Yes |  |
-| `assignedByType` | `dict` | Yes |  |
-| `assignedTotal` | `int` | Yes |  |
-| `email` | `str` | Yes |  |
-| `products` | `list` | Yes |  |
-| `userId` | `str` | Yes |  |
+| `avatar` | `Any` | No |  |
+| `facebookUrl` | `Any` | No |  |
+| `id` | `str` | Yes |  |
+| `instagramUrl` | `Any` | No |  |
+| `name` | `str` | Yes |  |
+| `productId` | `Any` | No |  |
+| `productName` | `Any` | No |  |
+| `tiktokUrl` | `Any` | No |  |
+| `type` | `Any` | No |  |
+| `uploadPostPlatforms` | `Any` | No |  |
+| `youtubeUrl` | `Any` | No |  |
 
 ### Operations
 
@@ -3566,19 +3549,12 @@ agent_health = client.AgentHealth()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `daily` | `list` | Yes |  |
-| `dates` | `list` | Yes |  |
-| `generated_at` | `str` | Yes |  |
-| `groups` | `list` | Yes |  |
-| `latest` | `dict` | Yes |  |
-| `live_date` | `Any` | No |  |
-| `phone_admin_generated_at` | `str` | Yes |  |
-| `platform` | `str` | No |  |
-| `post_target` | `int` | Yes |  |
-| `qa_managed_agent_ids` | `list` | No |  |
-| `scope_prefixes` | `list` | Yes |  |
-| `timezone` | `str` | Yes |  |
-| `warmup_target` | `int` | Yes |  |
+| `accounts` | `dict` | Yes |  |
+| `date` | `str` | Yes |  |
+| `overall` | `dict` | Yes |  |
+| `posts` | `dict` | Yes |  |
+| `views` | `dict` | Yes |  |
+| `warmups` | `dict` | Yes |  |
 
 ### Operations
 
@@ -3686,19 +3662,12 @@ agent_health_detail = client.AgentHealthDetail()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `archived_issue_total` | `int` | No |  |
-| `date` | `str` | Yes |  |
-| `generated_at` | `str` | Yes |  |
-| `group_id` | `str` | Yes |  |
-| `has_more` | `bool` | Yes |  |
-| `issue_total` | `int` | Yes |  |
-| `issues` | `list` | Yes |  |
-| `limit` | `int` | Yes |  |
-| `metric` | `str` | Yes |  |
-| `offset` | `int` | Yes |  |
-| `warmup_runs` | `list` | No |  |
-| `warning_total` | `int` | No |  |
-| `warnings` | `list` | No |  |
+| `agent_id` | `str` | Yes |  |
+| `category` | `str` | Yes |  |
+| `connection_status` | `str` | Yes |  |
+| `device_status` | `str` | Yes |  |
+| `issue` | `Any` | No |  |
+| `state` | `str` | Yes |  |
 
 ### Operations
 
@@ -3774,7 +3743,7 @@ agent_post = client.AgentPost()
 List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list of entities, one per record, and raises on error.
 
 ```python
-results = client.AgentPost().list({"id": "example"})
+results = client.AgentPost().list({"agent_id": "example"})
 for agent_post in results:
     print(agent_post.data_get())
 ```
@@ -4395,7 +4364,6 @@ carousel = client.Carousel()
 | `formula_id` | `str` | No |  |
 | `formula_name` | `Any` | No |  |
 | `generation` | `dict` | No |  |
-| `id` | `str` | No |  |
 | `image_prompt` | `Any` | No |  |
 | `likes` | `Any` | No |  |
 | `main_prompt` | `Any` | No |  |
@@ -4562,7 +4530,6 @@ carousel_status = client.CarouselStatus()
 | --- | --- | --- | --- |
 | `caption` | `Any` | Yes |  |
 | `error` | `Any` | No |  |
-| `id` | `str` | No |  |
 | `image_model` | `Any` | No |  |
 | `image_provider` | `Any` | No |  |
 | `image_task_id` | `str` | No |  |
@@ -4578,7 +4545,7 @@ carousel_status = client.CarouselStatus()
 List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list of entities, one per record, and raises on error.
 
 ```python
-results = client.CarouselStatus().list({"id": "example"})
+results = client.CarouselStatus().list({"carousel_id": "example"})
 for carousel_status in results:
     print(carousel_status.data_get())
 ```
@@ -4604,64 +4571,6 @@ Set the entity match criteria.
 #### `make() -> Entity`
 
 Create a new `CarouselStatusEntity` instance with the same options.
-
-#### `get_name() -> str`
-
-Return the entity name.
-
-
----
-
-## ChatEntity
-
-```python
-chat = client.Chat()
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `idempotencyKey` | `str` | Yes |  |
-| `message` | `str` | Yes |  |
-| `sessionId` | `str` | Yes |  |
-
-### Operations
-
-#### `create(reqdata, ctrl=None) -> ChatEntity`
-
-Create a new entity with the given data. Returns the created entity and raises on error.
-
-```python
-result = client.Chat().create({
-    "session_id": "example_session_id",  # str
-    "idempotencyKey": "example_idempotencyKey",  # str
-    "message": "example_message",  # str
-    "sessionId": "example_sessionId",  # str
-})
-```
-
-### Common Methods
-
-#### `data_get() -> dict`
-
-Get the entity data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get() -> dict`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make() -> Entity`
-
-Create a new `ChatEntity` instance with the same options.
 
 #### `get_name() -> str`
 
@@ -4754,6 +4663,8 @@ chat_session = client.ChatSession()
 | --- | --- | --- | --- |
 | `chatSubVariant` | `str` | Yes |  |
 | `createdAt` | `str` | Yes |  |
+| `idempotencyKey` | `str` | Yes |  |
+| `message` | `str` | Yes |  |
 | `model` | `Any` | No |  |
 | `plan` | `Any` | No |  |
 | `route` | `Any` | No |  |
@@ -4773,6 +4684,9 @@ Create a new entity with the given data. Returns the created entity and raises o
 ```python
 result = client.ChatSession().create({
     "session_id": "example_session_id",  # str
+    "idempotencyKey": "example_idempotencyKey",  # str
+    "message": "example_message",  # str
+    "sessionId": "example_sessionId",  # str
 })
 ```
 
@@ -5475,7 +5389,6 @@ customer_health = client.CustomerHealth()
 | `date` | `str` | Yes |  |
 | `email` | `str` | Yes |  |
 | `entries` | `list` | Yes |  |
-| `id` | `str` | No |  |
 | `performance_overview` | `dict` | Yes |  |
 | `platform_coverage_summary` | `dict` | Yes |  |
 | `user_id` | `str` | Yes |  |
@@ -5588,20 +5501,10 @@ customer_health_views_summary = client.CustomerHealthViewsSummary()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `average_views_per_result` | `int` | Yes |  |
-| `date` | `str` | Yes |  |
-| `end_date` | `Any` | No |  |
-| `paid_users_count` | `int` | Yes |  |
+| `email` | `str` | Yes |  |
 | `posted_results` | `int` | Yes |  |
-| `range` | `str` | Yes |  |
-| `start_date` | `Any` | No |  |
-| `top_users` | `list` | Yes |  |
-| `total_views` | `int` | Yes |  |
-| `trend` | `list` | Yes |  |
-| `trend_granularity` | `str` | Yes |  |
-| `user_email` | `Any` | No |  |
-| `user_id` | `str` | No |  |
-| `users_with_views` | `int` | Yes |  |
+| `user_id` | `str` | Yes |  |
+| `views` | `int` | Yes |  |
 
 ### Operations
 
@@ -5704,12 +5607,6 @@ Return the entity name.
 daily_status = client.DailyStatus()
 ```
 
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `id` | `str` | No |  |
-
 ### Operations
 
 #### `load(reqmatch, ctrl=None) -> DailyStatusEntity`
@@ -5717,7 +5614,7 @@ daily_status = client.DailyStatus()
 Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and raises on error.
 
 ```python
-result = client.DailyStatus().load({"id": "daily_status_id", "day": "day"})
+result = client.DailyStatus().load({"daily_id": "daily_id", "day": "day"})
 ```
 
 ### Common Methods
@@ -5887,51 +5784,6 @@ Set the entity match criteria.
 #### `make() -> Entity`
 
 Create a new `EnterpriseAgentEntity` instance with the same options.
-
-#### `get_name() -> str`
-
-Return the entity name.
-
-
----
-
-## EnterpriseProductEntity
-
-```python
-enterprise_product = client.EnterpriseProduct()
-```
-
-### Operations
-
-#### `load(reqmatch, ctrl=None) -> EnterpriseProductEntity`
-
-Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and raises on error.
-
-```python
-result = client.EnterpriseProduct().load({"product_id": "product_id"})
-```
-
-### Common Methods
-
-#### `data_get() -> dict`
-
-Get the entity data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get() -> dict`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make() -> Entity`
-
-Create a new `EnterpriseProductEntity` instance with the same options.
 
 #### `get_name() -> str`
 
@@ -6603,62 +6455,6 @@ Return the entity name.
 
 ---
 
-## IriEntity
-
-```python
-iri = client.Iri()
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `correlationId` | `Any` | No |  |
-| `idempotencyKey` | `str` | Yes |  |
-| `productId` | `Any` | No |  |
-
-### Operations
-
-#### `create(reqdata, ctrl=None) -> IriEntity`
-
-Create a new entity with the given data. Returns the created entity and raises on error.
-
-```python
-result = client.Iri().create({
-    "connector_id": "example_connector_id",  # str
-    "idempotencyKey": "example_idempotencyKey",  # str
-})
-```
-
-### Common Methods
-
-#### `data_get() -> dict`
-
-Get the entity data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get() -> dict`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make() -> Entity`
-
-Create a new `IriEntity` instance with the same options.
-
-#### `get_name() -> str`
-
-Return the entity name.
-
-
----
-
 ## IrisCapabilityEntity
 
 ```python
@@ -6811,6 +6607,16 @@ iris_connector = client.IrisConnector()
 
 ### Operations
 
+#### `create(reqdata, ctrl=None) -> IrisConnectorEntity`
+
+Create a new entity with the given data. Returns the created entity and raises on error.
+
+```python
+result = client.IrisConnector().create({
+    "connector_id": "example_connector_id",  # str
+})
+```
+
 #### `list(reqmatch=None, ctrl=None) -> list[IrisConnectorEntity]`
 
 List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list of entities, one per record, and raises on error.
@@ -6920,8 +6726,10 @@ iris_task = client.IrisTask()
 | `cadence` | `str` | No |  |
 | `capability` | `Any` | No |  |
 | `completed` | `list` | No |  |
+| `correlationId` | `Any` | No |  |
 | `description` | `str` | No |  |
 | `discover` | `list` | No |  |
+| `idempotencyKey` | `str` | Yes |  |
 | `productId` | `Any` | No |  |
 | `recurring` | `list` | No |  |
 | `requiredConnectors` | `list` | No |  |
@@ -6935,6 +6743,7 @@ Create a new entity with the given data. Returns the created entity and raises o
 
 ```python
 result = client.IrisTask().create({
+    "idempotencyKey": "example_idempotencyKey",  # str
     "title": "example_title",  # str
 })
 ```
@@ -8173,13 +7982,18 @@ product_dashboard = client.ProductDashboard()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `agents` | `list` | Yes |  |
-| `date` | `str` | Yes |  |
-| `pagination` | `dict` | Yes |  |
-| `phone_admin_error` | `Any` | No |  |
-| `products` | `list` | Yes |  |
-| `selected_product` | `Any` | Yes |  |
-| `summary` | `dict` | Yes |  |
+| `comments` | `int` | Yes |  |
+| `failed_entries` | `int` | Yes |  |
+| `has_tiktok_community_violation` | `bool` | No |  |
+| `id` | `str` | Yes |  |
+| `likes` | `int` | Yes |  |
+| `metrics_pending_count` | `int` | No |  |
+| `name` | `str` | Yes |  |
+| `platforms` | `list` | Yes |  |
+| `posted_entries` | `int` | Yes |  |
+| `posting_entries` | `int` | Yes |  |
+| `scheduled_entries` | `int` | Yes |  |
+| `views` | `int` | Yes |  |
 
 ### Operations
 
@@ -8356,6 +8170,7 @@ product_landing = client.ProductLanding()
 | `dmOngoingResponsePrompt` | `Any` | No |  |
 | `firstCommentTextBeforeLink` | `Any` | No |  |
 | `headerImageUrl` | `Any` | No |  |
+| `icon` | `Any` | No |  |
 | `id` | `str` | Yes |  |
 | `landingHtmlUrl` | `Any` | No |  |
 | `landingLastGeneratedAt` | `Any` | No |  |
@@ -8394,6 +8209,7 @@ product_landing = client.ProductLanding()
 | `slug` | `str` | Yes |  |
 | `socialLinks` | `Any` | No |  |
 | `testimonials` | `Any` | No |  |
+| `url` | `str` | Yes |  |
 
 ### Field Usage by Operation
 
@@ -8411,6 +8227,7 @@ product_landing = client.ProductLanding()
 | `dmOngoingResponsePrompt` | - | - |
 | `firstCommentTextBeforeLink` | - | - |
 | `headerImageUrl` | - | - |
+| `icon` | - | - |
 | `id` | - | - |
 | `landingHtmlUrl` | - | - |
 | `landingLastGeneratedAt` | - | - |
@@ -8437,7 +8254,7 @@ product_landing = client.ProductLanding()
 | `microhubTestimonials` | - | - |
 | `microhubUrl` | - | - |
 | `myPostsStylePrompt` | - | - |
-| `name` | - | - |
+| `name` | Yes | - |
 | `othersStylePrompt` | - | - |
 | `othersTargetMarketPrompt` | - | - |
 | `productLinkSelection` | - | Yes |
@@ -8449,6 +8266,7 @@ product_landing = client.ProductLanding()
 | `slug` | - | Yes |
 | `socialLinks` | - | - |
 | `testimonials` | - | - |
+| `url` | - | - |
 
 ### Operations
 
@@ -8608,51 +8426,6 @@ Set the entity match criteria.
 #### `make() -> Entity`
 
 Create a new `ReRollVideoEntity` instance with the same options.
-
-#### `get_name() -> str`
-
-Return the entity name.
-
-
----
-
-## ReadRootGetEntity
-
-```python
-read_root_get = client.ReadRootGet()
-```
-
-### Operations
-
-#### `load(reqmatch, ctrl=None) -> ReadRootGetEntity`
-
-Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and raises on error.
-
-```python
-result = client.ReadRootGet().load()
-```
-
-### Common Methods
-
-#### `data_get() -> dict`
-
-Get the entity data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get() -> dict`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make() -> Entity`
-
-Create a new `ReadRootGetEntity` instance with the same options.
 
 #### `get_name() -> str`
 
@@ -8955,6 +8728,51 @@ Return the entity name.
 
 ---
 
+## RootGetEntity
+
+```python
+root_get = client.RootGet()
+```
+
+### Operations
+
+#### `load(reqmatch, ctrl=None) -> RootGetEntity`
+
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and raises on error.
+
+```python
+result = client.RootGet().load()
+```
+
+### Common Methods
+
+#### `data_get() -> dict`
+
+Get the entity data.
+
+#### `data_set(data)`
+
+Set the entity data.
+
+#### `match_get() -> dict`
+
+Get the entity match criteria.
+
+#### `match_set(match)`
+
+Set the entity match criteria.
+
+#### `make() -> Entity`
+
+Create a new `RootGetEntity` instance with the same options.
+
+#### `get_name() -> str`
+
+Return the entity name.
+
+
+---
+
 ## SaveSurveyEntity
 
 ```python
@@ -9197,6 +9015,54 @@ Return the entity name.
 
 ---
 
+## ScheduleQueueEntity
+
+```python
+schedule_queue = client.ScheduleQueue()
+```
+
+### Operations
+
+#### `update(reqdata, ctrl=None) -> ScheduleQueueEntity`
+
+Update an existing entity. The data must include the entity `id`. Returns the updated entity and raises on error.
+
+```python
+result = client.ScheduleQueue().update({
+    "queue_id": "queue_id",
+    # Fields to update
+})
+```
+
+### Common Methods
+
+#### `data_get() -> dict`
+
+Get the entity data.
+
+#### `data_set(data)`
+
+Set the entity data.
+
+#### `match_get() -> dict`
+
+Get the entity match criteria.
+
+#### `match_set(match)`
+
+Set the entity match criteria.
+
+#### `make() -> Entity`
+
+Create a new `ScheduleQueueEntity` instance with the same options.
+
+#### `get_name() -> str`
+
+Return the entity name.
+
+
+---
+
 ## ScheduleV2Entity
 
 ```python
@@ -9273,17 +9139,6 @@ Remove the entity matching the given criteria. Returns the entity, marked as del
 
 ```python
 result = client.ScheduleV2().remove({"queue_id": "queue_id"})
-```
-
-#### `update(reqdata, ctrl=None) -> ScheduleV2Entity`
-
-Update an existing entity. The data must include the entity `id`. Returns the updated entity and raises on error.
-
-```python
-result = client.ScheduleV2().update({
-    "queue_id": "queue_id",
-    # Fields to update
-})
 ```
 
 ### Common Methods
@@ -9883,14 +9738,11 @@ seo_traffic = client.SeoTraffic()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `end_date` | `str` | Yes |  |
-| `series` | `list` | Yes |  |
-| `site_url` | `str` | Yes |  |
-| `start_date` | `str` | Yes |  |
-| `top_countries` | `list` | Yes |  |
-| `top_pages` | `list` | Yes |  |
-| `top_queries` | `list` | Yes |  |
-| `totals` | `dict` | Yes |  |
+| `clicks` | `float` | Yes |  |
+| `ctr` | `float` | Yes |  |
+| `date` | `str` | Yes |  |
+| `impressions` | `float` | Yes |  |
+| `position` | `float` | Yes |  |
 
 ### Operations
 
@@ -10846,23 +10698,24 @@ stats_refresh_overview = client.StatsRefreshOverview()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `active_run` | `Any` | No |  |
-| `aged_over_24h` | `int` | Yes |  |
-| `backlog_preview` | `list` | Yes |  |
-| `coverage_percent` | `float` | Yes |  |
-| `customer_counts` | `dict` | Yes |  |
-| `date` | `str` | Yes |  |
-| `generated_at` | `str` | Yes |  |
-| `method_counts` | `dict` | Yes |  |
-| `platform_counts` | `dict` | Yes |  |
-| `platform_units_resolved` | `int` | Yes |  |
-| `platform_units_total` | `int` | Yes |  |
-| `platform_units_unresolved` | `int` | Yes |  |
-| `posted_entries` | `int` | Yes |  |
-| `reason_counts` | `dict` | Yes |  |
-| `sla_deadline_et` | `str` | Yes |  |
-| `stale_after_sla` | `int` | Yes |  |
-| `top_affected_customers` | `list` | Yes |  |
+| `aged_over_24h` | `bool` | Yes |  |
+| `agent_id` | `str` | No |  |
+| `agent_name` | `Any` | No |  |
+| `is_resolved` | `bool` | Yes |  |
+| `last_refresh_completed_at` | `Any` | No |  |
+| `latest_error_message` | `Any` | No |  |
+| `platform` | `str` | Yes |  |
+| `post_method` | `Any` | No |  |
+| `post_url` | `Any` | No |  |
+| `posted_date_et` | `str` | Yes |  |
+| `product_id` | `str` | No |  |
+| `product_name` | `Any` | No |  |
+| `reason_code` | `Any` | No |  |
+| `schedule_queue_id` | `str` | Yes |  |
+| `scheduled_datetime_utc` | `str` | Yes |  |
+| `stale_after_sla` | `bool` | Yes |  |
+| `user_email` | `str` | Yes |  |
+| `user_id` | `str` | Yes |  |
 
 ### Operations
 
@@ -11385,6 +11238,10 @@ user = client.User()
 
 ### Operations
 
+#### `create(reqdata, ctrl=None) -> UserEntity`
+
+Create a new entity with the given data. Returns the created entity and raises on error.
+
 #### `load(reqmatch, ctrl=None) -> UserEntity`
 
 Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and raises on error.
@@ -11440,7 +11297,6 @@ user_agent = client.UserAgent()
 | `assigned_at` | `str` | Yes |  |
 | `assignment_id` | `str` | Yes |  |
 | `expires_at` | `Any` | No |  |
-| `id` | `str` | No |  |
 | `status` | `str` | Yes |  |
 
 ### Operations
@@ -11451,7 +11307,7 @@ Create a new entity with the given data. Returns the created entity and raises o
 
 ```python
 result = client.UserAgent().create({
-    "id": "example_id",  # str
+    "user_id": "example_user_id",  # str
     "agent": {},  # dict
     "assigned_at": "example_assigned_at",  # str
     "assignment_id": "example_assignment_id",  # str
@@ -11464,7 +11320,7 @@ result = client.UserAgent().create({
 List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list of entities, one per record, and raises on error.
 
 ```python
-results = client.UserAgent().list({"id": "example"})
+results = client.UserAgent().list({"user_id": "example"})
 for user_agent in results:
     print(user_agent.data_get())
 ```
@@ -11508,65 +11364,9 @@ user_health_detail = client.UserHealthDetail()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `account_type` | `Any` | Yes |  |
-| `activated` | `bool` | Yes |  |
-| `activated_by_admin_at` | `Any` | No |  |
-| `activated_by_admin_id` | `str` | No |  |
-| `admin_notes` | `Any` | No |  |
-| `agents_count` | `int` | No |  |
-| `assigned_agents` | `list` | Yes |  |
-| `assigned_agents_count` | `int` | Yes |  |
-| `assigned_agents_preview_limit` | `int` | No |  |
-| `assigned_agents_truncated` | `bool` | No |  |
-| `auto_schedule_enabled` | `bool` | Yes |  |
-| `comments_expected_per_day` | `int` | No |  |
-| `comments_fix_block_reason` | `Any` | No |  |
-| `comments_fix_ready` | `bool` | No |  |
-| `comments_today_failed` | `int` | No |  |
-| `comments_today_posted` | `int` | No |  |
-| `comments_today_scheduled` | `int` | No |  |
-| `comments_yesterday_failed` | `int` | No |  |
-| `comments_yesterday_posted` | `int` | No |  |
-| `comments_yesterday_total` | `int` | No |  |
-| `created_at` | `str` | Yes |  |
-| `credits` | `int` | Yes |  |
-| `effective_posted_video_reuse_percent` | `int` | Yes |  |
-| `email` | `str` | Yes |  |
-| `expected_agents_count` | `int` | Yes |  |
 | `id` | `str` | Yes |  |
-| `is_activated_by_admin` | `bool` | Yes |  |
-| `is_admin` | `bool` | Yes |  |
-| `is_bookmarked` | `bool` | No |  |
-| `is_internal_user` | `bool` | Yes |  |
-| `is_migrated` | `bool` | Yes |  |
-| `landing_slug` | `Any` | No |  |
-| `landing_status` | `Any` | No |  |
-| `landing_url` | `Any` | No |  |
-| `membership` | `Any` | Yes |  |
-| `microhub_status` | `Any` | No |  |
-| `microhub_url` | `Any` | No |  |
 | `name` | `str` | Yes |  |
-| `onboarding_flow` | `str` | Yes |  |
-| `posted_video_reuse_percent` | `Any` | No |  |
-| `product_id` | `str` | Yes |  |
-| `product_name` | `Any` | Yes |  |
-| `product_url` | `Any` | Yes |  |
-| `subscription_status` | `Any` | Yes |  |
-| `survey_data` | `Any` | No |  |
-| `today_failed` | `int` | Yes |  |
-| `today_posted` | `int` | Yes |  |
-| `today_scheduled` | `int` | Yes |  |
-| `tomorrow_capacity` | `int` | Yes |  |
-| `tomorrow_scheduled` | `int` | Yes |  |
-| `videos_completed` | `int` | Yes |  |
-| `videos_failed` | `int` | Yes |  |
-| `videos_pending` | `int` | Yes |  |
-| `videos_stale` | `int` | Yes |  |
-| `videos_total` | `int` | Yes |  |
-| `yesterday_failed` | `int` | Yes |  |
-| `yesterday_failed_entries` | `list` | Yes |  |
-| `yesterday_posted` | `int` | Yes |  |
-| `yesterday_total` | `int` | Yes |  |
+| `type` | `str` | Yes |  |
 
 ### Operations
 
@@ -11575,7 +11375,7 @@ user_health_detail = client.UserHealthDetail()
 List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list of entities, one per record, and raises on error.
 
 ```python
-results = client.UserHealthDetail().list({"id": "example"})
+results = client.UserHealthDetail().list({"user_id": "example"})
 for user_health_detail in results:
     print(user_health_detail.data_get())
 ```

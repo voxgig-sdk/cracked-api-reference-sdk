@@ -338,7 +338,7 @@ main: kit: entity: admin_post: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.entries`"
           }
         }
       ]

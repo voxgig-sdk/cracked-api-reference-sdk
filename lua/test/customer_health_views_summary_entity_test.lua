@@ -164,6 +164,9 @@ describe("CustomerHealthViewsSummaryEntity", function()
       customer_health_views_summary_ref01_data = helpers.to_map(customer_health_views_summary_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LIST
     local customer_health_views_summary_ref01_ent = client:CustomerHealthViewsSummary(nil)
     local customer_health_views_summary_ref01_match = {}

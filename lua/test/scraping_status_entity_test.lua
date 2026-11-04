@@ -43,6 +43,9 @@ describe("ScrapingStatusEntity", function()
       scraping_status_ref01_data = helpers.to_map(scraping_status_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LOAD
     local scraping_status_ref01_ent = client:ScrapingStatus(nil)
     local scraping_status_ref01_match_dt0 = {}

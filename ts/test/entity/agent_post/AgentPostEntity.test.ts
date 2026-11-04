@@ -47,7 +47,7 @@ describe('AgentPostEntity', async () => {
       return
     }
     const client = CrackedApiReferenceSDK.test(undefined, { feature: { validate: { active: true } } })
-    await assert.rejects(client.AgentPost().list({"id":1} as any),
+    await assert.rejects(client.AgentPost().list({"agent_id":1} as any),
       (err: any) => 'validate_failed' === err.code)
   })
 
@@ -56,14 +56,14 @@ describe('AgentPostEntity', async () => {
   test('basic', async (t) => {
 
     const live = 'TRUE' === process.env.CRACKED_API_REFERENCE_TEST_LIVE
-    for (const op of []) {
+    for (const op of ['list']) {
       if (!live && maybeSkipControl(t, 'entityOp', 'agent_post.' + op, live)) return
     }
 
     
     const setup = basicSetup()
     if (setup.live) {
-      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"comments":{"a":true,"h":"Comments","n":"comments","r":true,"t":"`$INTEGER`","key$":"comments","index$":0},"error_message":{"a":true,"h":"Error Message","n":"error_message","r":true,"t":"`$ANY`","key$":"error_message","index$":1},"id":{"a":true,"fo":"uuid","h":"Id","n":"id","r":true,"t":"`$STRING`","key$":"id","index$":2},"likes":{"a":true,"h":"Likes","n":"likes","r":true,"t":"`$INTEGER`","key$":"likes","index$":3},"product_id":{"a":true,"h":"Product Id","n":"product_id","r":true,"t":"`$STRING`","key$":"product_id","index$":4},"results":{"a":true,"h":"Results","n":"results","r":true,"t":"`$ANY`","key$":"results","index$":5},"scheduled_datetime":{"a":true,"fo":"date-time","h":"Scheduled Datetime","n":"scheduled_datetime","r":true,"t":"`$STRING`","key$":"scheduled_datetime","index$":6},"source_type":{"a":true,"h":"Source Type","n":"source_type","r":true,"t":"`$STRING`","key$":"source_type","index$":7},"status":{"a":true,"h":"Status","n":"status","r":true,"t":"`$STRING`","key$":"status","index$":8},"user_email":{"a":true,"h":"User Email","n":"user_email","r":true,"t":"`$STRING`","key$":"user_email","index$":9},"user_id":{"a":true,"fo":"uuid","h":"User Id","n":"user_id","r":true,"t":"`$STRING`","key$":"user_id","index$":10},"user_name":{"a":true,"h":"User Name","n":"user_name","r":true,"t":"`$ANY`","key$":"user_name","index$":11},"video_id":{"a":true,"h":"Video Id","n":"video_id","r":true,"t":"`$STRING`","key$":"video_id","index$":12},"video_url":{"a":true,"h":"Video Url","n":"video_url","r":true,"t":"`$ANY`","key$":"video_url","index$":13},"views":{"a":true,"h":"Views","n":"views","r":true,"t":"`$INTEGER`","key$":"views","index$":14}},"id":{"field":"id","name":"id"},"name":"agent_post","op":{"list":{"input":"data","name":"list","points":[{"a":true,"co":{"id":"GET /api/admin/agents/{agent_id}/posts","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"id","or":"agent_id","r":true,"t":"`$STRING`","index$":0}],"query":[{"a":true,"ex":"today","k":"query","n":"day","or":"day","r":false,"t":"`$STRING`","index$":0}]},"k":"http","m":"GET","o":"/api/admin/agents/{agent_id}/posts","q":{"exist":["id"]},"r":{"param":{"agent_id":"id"}},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"api"},{"lit":"admin"},{"lit":"agents"},{"var":"id"},{"lit":"posts"}],"t":{"req":"`reqdata`","res":"`body.entries`"},"index$":0}],"key$":"list"}},"relations":{"ancestors":[]},"key$":"agent_post","name__orig":"agent_post","Name":"AgentPost","name_":"agent_post","name-":"agent-post","NAME":"AGENT_POST","index$":39}, {"active":true,"entity":"agent_post","key$":"BasicAgentPostFlow","kind":"basic","name":"BasicAgentPostFlow","param":{},"step":[{"a":false,"d":{},"i":{},"m":{"agent_id":"agent01"},"o":"list","s":[],"v":[{"apply":"ItemExists","def":{"ref":"agent_post_ref01"}}],"unreachable":true}]}, 'AgentPost', {"GET /api/admin/agents/{agent_id}/posts":{"protocol":"http","parameters":[{"name":"agent_id","in":"path","required":true,"schema":{"type":"string","title":"Agent Id"},"index$":0},{"name":"day","in":"query","required":false,"schema":{"enum":["today","yesterday"],"type":"string","default":"today","title":"Day"},"index$":1}]}}, { strict: LIVE_STRICT, t })
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"comments":{"a":true,"h":"Comments","n":"comments","r":true,"t":"`$INTEGER`","key$":"comments","index$":0},"error_message":{"a":true,"h":"Error Message","n":"error_message","r":true,"t":"`$ANY`","key$":"error_message","index$":1},"id":{"a":true,"fo":"uuid","h":"Id","n":"id","r":true,"t":"`$STRING`","key$":"id","index$":2},"likes":{"a":true,"h":"Likes","n":"likes","r":true,"t":"`$INTEGER`","key$":"likes","index$":3},"product_id":{"a":true,"h":"Product Id","n":"product_id","r":true,"t":"`$STRING`","key$":"product_id","index$":4},"results":{"a":true,"h":"Results","n":"results","r":true,"t":"`$ANY`","key$":"results","index$":5},"scheduled_datetime":{"a":true,"fo":"date-time","h":"Scheduled Datetime","n":"scheduled_datetime","r":true,"t":"`$STRING`","key$":"scheduled_datetime","index$":6},"source_type":{"a":true,"h":"Source Type","n":"source_type","r":true,"t":"`$STRING`","key$":"source_type","index$":7},"status":{"a":true,"h":"Status","n":"status","r":true,"t":"`$STRING`","key$":"status","index$":8},"user_email":{"a":true,"h":"User Email","n":"user_email","r":true,"t":"`$STRING`","key$":"user_email","index$":9},"user_id":{"a":true,"fo":"uuid","h":"User Id","n":"user_id","r":true,"t":"`$STRING`","key$":"user_id","index$":10},"user_name":{"a":true,"h":"User Name","n":"user_name","r":true,"t":"`$ANY`","key$":"user_name","index$":11},"video_id":{"a":true,"h":"Video Id","n":"video_id","r":true,"t":"`$STRING`","key$":"video_id","index$":12},"video_url":{"a":true,"h":"Video Url","n":"video_url","r":true,"t":"`$ANY`","key$":"video_url","index$":13},"views":{"a":true,"h":"Views","n":"views","r":true,"t":"`$INTEGER`","key$":"views","index$":14}},"id":{"field":"id","name":"id"},"name":"agent_post","op":{"list":{"input":"data","name":"list","points":[{"a":true,"co":{"id":"GET /api/admin/agents/{agent_id}/posts","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"agent_id","or":"agent_id","r":true,"t":"`$STRING`","index$":0}],"query":[{"a":true,"ex":"today","k":"query","n":"day","or":"day","r":false,"t":"`$STRING`","index$":0}]},"k":"http","m":"GET","o":"/api/admin/agents/{agent_id}/posts","q":{"exist":["agent_id"]},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"api"},{"lit":"admin"},{"lit":"agents"},{"var":"agent_id"},{"lit":"posts"}],"t":{"req":"`reqdata`","res":"`body.entries`"},"index$":0}],"key$":"list"}},"relations":{"ancestors":[["$.main.kit.entity.agent"]]},"key$":"agent_post","name__orig":"agent_post","Name":"AgentPost","name_":"agent_post","name-":"agent-post","NAME":"AGENT_POST","index$":39}, {"active":true,"entity":"agent_post","key$":"BasicAgentPostFlow","kind":"basic","name":"BasicAgentPostFlow","param":{},"step":[{"a":true,"d":{},"i":{},"m":{"agent_id":"agent01"},"o":"list","s":[],"v":[{"apply":"ItemExists","def":{"ref":"agent_post_ref01"}}],"index$":0}]}, 'AgentPost', {"GET /api/admin/agents/{agent_id}/posts":{"protocol":"http","parameters":[{"name":"agent_id","in":"path","required":true,"schema":{"type":"string","title":"Agent Id"},"index$":0},{"name":"day","in":"query","required":false,"schema":{"enum":["today","yesterday"],"type":"string","default":"today","title":"Day"},"index$":1}]}}, { strict: LIVE_STRICT, t })
     }
     const client = setup.client
     const struct = setup.struct
@@ -72,6 +72,14 @@ describe('AgentPostEntity', async () => {
     const select = struct.select
 
     let agent_post_ref01_data = Object.values(setup.data.existing.agent_post)[0] as any
+
+    // LIST
+    const agent_post_ref01_ent = client.AgentPost()
+    const agent_post_ref01_match: any = {}
+    agent_post_ref01_match['agent_id'] = setup.idmap['agent01']
+
+    const agent_post_ref01_list = (await agent_post_ref01_ent.list(agent_post_ref01_match)).map((e: any) => e.data())
+
 
   })
 })
@@ -107,7 +115,7 @@ function basicSetup(extra?: any) {
   const transform = struct.transform
 
   let idmap = transform(
-    ['agent_post01','agent_post02','agent_post03'],
+    ['agent_post01','agent_post02','agent_post03','agent01','agent02','agent03'],
     {
       '`$PACK`': ['', {
         '`$KEY`': '`$COPY`',

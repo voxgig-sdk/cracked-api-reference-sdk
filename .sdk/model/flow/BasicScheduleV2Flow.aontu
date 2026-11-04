@@ -30,25 +30,6 @@ main: kit: flow: BasicScheduleV2Flow:
       i: {
         ref: "schedule_v2_ref01",
         srcdatavar: "schedule_v2_ref01_data",
-        suffix: "_up0",
-        textfield: "created_at"
-      }
-
-      o: "update",
-      s: [
-        {
-          apply: "TextFieldMark",
-          def: {
-            mark: "Mark01-schedule_v2_ref01"
-          }
-        }
-      ]
-    }
-
-    {
-      i: {
-        ref: "schedule_v2_ref01",
-        srcdatavar: "schedule_v2_ref01_data",
         suffix: "_dt0"
       }
 

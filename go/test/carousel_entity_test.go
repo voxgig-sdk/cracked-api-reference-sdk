@@ -199,12 +199,20 @@ func TestCarouselEntity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" {
+			t.Log("LIVE STEP {\"id\":\"carousel.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/carousel/{video_id}/finalize\"}")
 		client := setup.client
 		_ = client
 		if setup.live {
-			liveExisting(t, carouselEntityLiveStrict, setup.data, "carousel", func() (any, error) {
-				return client.Carousel(nil).List(map[string]any{}, nil)
-			})
+			var _liveId any
+			if !setup.syntheticOnly {
+				_liveId = setup.idmap["carousel01"]
+			}
+			livePace()
+			liveExisting(t, carouselEntityLiveStrict, setup.data, "carousel", "queue_id", _liveId,
+				func() (any, error) {
+					return client.Carousel(nil).List(map[string]any{}, nil)
+				})
 		}
 
 		// Bootstrap entity data from existing test data (no create step in flow).
@@ -217,6 +225,9 @@ func TestCarouselEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = carouselRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LIST
 		carouselRef01Ent := client.Carousel(nil)
 		carouselRef01Match := map[string]any{}
@@ -230,9 +241,12 @@ func TestCarouselEntity(t *testing.T) {
 			t.Fatalf("expected list result to be an array, got %T", carouselRef01ListResult)
 		}
 
+		if setup.live {
+			livePace()
+		}
 		// LOAD
 		carouselRef01MatchDt0 := map[string]any{
-			"id": carouselRef01Data["id"],
+			"id": carouselRef01Data["queue_id"],
 		}
 		carouselRef01DataDt0Loaded, err := carouselRef01Ent.Load(carouselRef01MatchDt0, nil)
 		if err != nil {
@@ -242,7 +256,69 @@ func TestCarouselEntity(t *testing.T) {
 		if carouselRef01DataDt0LoadResult == nil {
 			t.Fatal("expected load result to be a map")
 		}
-		if carouselRef01DataDt0LoadResult["id"] != carouselRef01Data["id"] {
+		if !liveSameId(carouselRef01DataDt0LoadResult["queue_id"], carouselRef01Data["queue_id"]) {
+			t.Fatal("expected load result id to match")
+		}
+
+		return
+		}
+
+		client := setup.client
+		_ = client
+		if setup.live {
+			var _liveId any
+			if !setup.syntheticOnly {
+				_liveId = setup.idmap["carousel01"]
+			}
+			livePace()
+			liveExisting(t, carouselEntityLiveStrict, setup.data, "carousel", "queue_id", _liveId,
+				func() (any, error) {
+					return client.Carousel(nil).List(map[string]any{}, nil)
+				})
+		}
+
+		// Bootstrap entity data from existing test data (no create step in flow).
+		carouselRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.carousel")))
+		var carouselRef01Data map[string]any
+		if len(carouselRef01DataRaw) > 0 {
+			carouselRef01Data = core.ToMapAny(carouselRef01DataRaw[0][1])
+		}
+		// Discard guards against Go's unused-var check when the flow's steps
+		// happen not to consume the bootstrap data (e.g. list-only flows).
+		_ = carouselRef01Data
+
+		if setup.live {
+			livePace()
+		}
+		// LIST
+		carouselRef01Ent := client.Carousel(nil)
+		carouselRef01Match := map[string]any{}
+
+		carouselRef01ListResult, err := carouselRef01Ent.List(carouselRef01Match, nil)
+		if err != nil {
+			t.Fatalf("list failed: %v", err)
+		}
+		_, carouselRef01ListOk := carouselRef01ListResult.([]any)
+		if !carouselRef01ListOk {
+			t.Fatalf("expected list result to be an array, got %T", carouselRef01ListResult)
+		}
+
+		if setup.live {
+			livePace()
+		}
+		// LOAD
+		carouselRef01MatchDt0 := map[string]any{
+			"id": carouselRef01Data["queue_id"],
+		}
+		carouselRef01DataDt0Loaded, err := carouselRef01Ent.Load(carouselRef01MatchDt0, nil)
+		if err != nil {
+			t.Fatalf("load failed: %v", err)
+		}
+		carouselRef01DataDt0LoadResult := core.ToMapAny(entityData(carouselRef01DataDt0Loaded))
+		if carouselRef01DataDt0LoadResult == nil {
+			t.Fatal("expected load result to be a map")
+		}
+		if !liveSameId(carouselRef01DataDt0LoadResult["queue_id"], carouselRef01Data["queue_id"]) {
 			t.Fatal("expected load result id to match")
 		}
 
@@ -265,6 +341,12 @@ func carouselBasicSetup(extra map[string]any) *entityTestSetup {
 	var entityData map[string]any
 	if err := json.Unmarshal(entityDataSource, &entityData); err != nil {
 		panic("failed to parse carousel test data: " + err.Error())
+	}
+
+	for _, rec := range core.ToMapAny(vs.GetPath(entityData, "existing.carousel")) {
+		if recMap := core.ToMapAny(rec); recMap != nil && recMap["id"] != nil {
+			recMap["queue_id"] = recMap["id"]
+		}
 	}
 
 	options := map[string]any{}

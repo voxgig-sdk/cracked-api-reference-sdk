@@ -54,6 +54,9 @@ describe("ActiveOnboardingEntity", function()
       active_onboarding_ref01_data = helpers.to_map(active_onboarding_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LOAD
     local active_onboarding_ref01_ent = client:ActiveOnboarding(nil)
     local active_onboarding_ref01_match_dt0 = {}

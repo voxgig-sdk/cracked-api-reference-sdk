@@ -154,11 +154,18 @@ describe("CarouselEntity", function()
         return
       end
     end
+    if setup.live and os.getenv("VOXGIG_GETONLY_GUARD") == "TRUE" then
+      print("LIVE STEP {\"id\":\"carousel.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/carousel/{video_id}/finalize\"}")
     local client = setup.client
     if setup.live then
+      local _live_id = nil
+      if not setup.synthetic_only then
+        _live_id = setup.idmap["carousel01"]
+      end
+      runner.live_pace()
       runner.live_existing(pending, setup, LIVE_STRICT, "carousel", function()
         return client:Carousel(nil):list({}, nil)
-      end)
+      end, "queue_id", _live_id)
     end
 
     -- Bootstrap entity data from existing test data.
@@ -169,6 +176,9 @@ describe("CarouselEntity", function()
       carousel_ref01_data = helpers.to_map(carousel_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LIST
     local carousel_ref01_ent = client:Carousel(nil)
     local carousel_ref01_match = {}
@@ -177,15 +187,65 @@ describe("CarouselEntity", function()
     assert.is_nil(err)
     assert.is_table(carousel_ref01_list_result)
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LOAD
     local carousel_ref01_match_dt0 = {
-      id = carousel_ref01_data["id"],
+      id = carousel_ref01_data["queue_id"],
     }
     local carousel_ref01_data_dt0_loaded, err = carousel_ref01_ent:load(carousel_ref01_match_dt0, nil)
     assert.is_nil(err)
     local carousel_ref01_data_dt0_load_result = helpers.to_map(type(carousel_ref01_data_dt0_loaded) == 'table' and carousel_ref01_data_dt0_loaded.data_get and carousel_ref01_data_dt0_loaded:data_get() or carousel_ref01_data_dt0_loaded)
     assert.is_not_nil(carousel_ref01_data_dt0_load_result)
-    assert.are.equal(carousel_ref01_data_dt0_load_result["id"], carousel_ref01_data["id"])
+    assert.is_true(runner.live_same_id(carousel_ref01_data_dt0_load_result["queue_id"], carousel_ref01_data["queue_id"]))
+
+      return
+    end
+
+    local client = setup.client
+    if setup.live then
+      local _live_id = nil
+      if not setup.synthetic_only then
+        _live_id = setup.idmap["carousel01"]
+      end
+      runner.live_pace()
+      runner.live_existing(pending, setup, LIVE_STRICT, "carousel", function()
+        return client:Carousel(nil):list({}, nil)
+      end, "queue_id", _live_id)
+    end
+
+    -- Bootstrap entity data from existing test data.
+    local carousel_ref01_data_raw = vs.items(helpers.to_map(
+      vs.getpath(setup.data, "existing.carousel")))
+    local carousel_ref01_data = nil
+    if #carousel_ref01_data_raw > 0 then
+      carousel_ref01_data = helpers.to_map(carousel_ref01_data_raw[1][2])
+    end
+
+    if setup.live then
+      runner.live_pace()
+    end
+    -- LIST
+    local carousel_ref01_ent = client:Carousel(nil)
+    local carousel_ref01_match = {}
+
+    local carousel_ref01_list_result, err = carousel_ref01_ent:list(carousel_ref01_match, nil)
+    assert.is_nil(err)
+    assert.is_table(carousel_ref01_list_result)
+
+    if setup.live then
+      runner.live_pace()
+    end
+    -- LOAD
+    local carousel_ref01_match_dt0 = {
+      id = carousel_ref01_data["queue_id"],
+    }
+    local carousel_ref01_data_dt0_loaded, err = carousel_ref01_ent:load(carousel_ref01_match_dt0, nil)
+    assert.is_nil(err)
+    local carousel_ref01_data_dt0_load_result = helpers.to_map(type(carousel_ref01_data_dt0_loaded) == 'table' and carousel_ref01_data_dt0_loaded.data_get and carousel_ref01_data_dt0_loaded:data_get() or carousel_ref01_data_dt0_loaded)
+    assert.is_not_nil(carousel_ref01_data_dt0_load_result)
+    assert.is_true(runner.live_same_id(carousel_ref01_data_dt0_load_result["queue_id"], carousel_ref01_data["queue_id"]))
 
   end)
 end)
@@ -202,6 +262,12 @@ function carousel_basic_setup(extra)
   f:close()
 
   local entity_data = json.decode(entity_data_source)
+
+  for _, rec in pairs(((entity_data["existing"] or {})["carousel"]) or {}) do
+    if type(rec) == "table" and rec["id"] ~= nil then
+      rec["queue_id"] = rec["id"]
+    end
+  end
 
   local options = {}
   options["entity"] = entity_data["existing"]

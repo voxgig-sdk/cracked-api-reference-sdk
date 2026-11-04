@@ -62,9 +62,18 @@ func TestSelfServeActivateEntity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" {
+			t.Log("LIVE STEP {\"id\":\"self_serve_activate.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/onboarding-v6/self-serve-activate\"}")
+			t.Skip("Live coverage incomplete: self_serve_activate.create.0 excluded (GET-only live run: needs POST /api/onboarding-v6/self-serve-activate)")
+			return
+		}
+
 		client := setup.client
 		_ = client
 
+		if setup.live {
+			livePace()
+		}
 		// CREATE
 		selfServeActivateRef01Ent := client.SelfServeActivate(nil)
 		selfServeActivateRef01Data := core.ToMapAny(vs.GetProp(

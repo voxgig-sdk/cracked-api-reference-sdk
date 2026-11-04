@@ -25,7 +25,7 @@ class UserAgentEntityTest < Minitest::Test
     end
     client = CrackedApiReferenceSDK.test(nil, { "feature" => { "validate" => { "active" => true } } })
     err = assert_raises(StandardError) do
-      client.UserAgent(nil).list({ "id" => 1 }, nil)
+      client.UserAgent(nil).list({ "user_id" => 1 }, nil)
     end
     assert_equal "validate_failed", err.code
   end
@@ -34,11 +34,20 @@ class UserAgentEntityTest < Minitest::Test
     setup = user_agent_basic_setup(nil)
     # Per-op sdk-test-control.json skip.
     _live = setup[:live] || false
-    [].each do |_op|
+    ["create", "list"].each do |_op|
       _should_skip, _reason = Runner.is_control_skipped("entityOp", "user_agent." + _op, _live ? "live" : "unit")
       if _should_skip
         skip(_reason || "skipped via sdk-test-control.json")
         return
+      end
+    end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE"
+      puts "LIVE STEP {\"id\":\"user_agent.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/admin/users/{user_id}/agents\"}"
+    if setup[:live]
+      ["user01"].each do |_live_key|
+        if setup[:synthetic_only] || setup[:idmap][_live_key].nil?
+          Runner.live_miss(LIVE_STRICT, "Live entity test blocked: needs #{_live_key} via CRACKED_API_REFERENCE_TEST_USER_AGENT_ENTID")
+        end
       end
     end
     client = setup[:client]
@@ -50,6 +59,48 @@ class UserAgentEntityTest < Minitest::Test
     if user_agent_ref01_data_raw.length > 0
       user_agent_ref01_data = Helpers.to_map(user_agent_ref01_data_raw[0][1])
     end
+
+    Runner.live_pace if setup[:live]
+    # LIST
+    user_agent_ref01_ent = client.UserAgent(nil)
+    user_agent_ref01_match = {
+      "user_id" => setup[:idmap]["user01"],
+    }
+
+    user_agent_ref01_list_result = user_agent_ref01_ent.list(user_agent_ref01_match, nil)
+    assert user_agent_ref01_list_result.is_a?(Array)
+
+      return
+    end
+
+    if setup[:live]
+      ["user01"].each do |_live_key|
+        if setup[:synthetic_only] || setup[:idmap][_live_key].nil?
+          Runner.live_miss(LIVE_STRICT, "Live entity test blocked: needs #{_live_key} via CRACKED_API_REFERENCE_TEST_USER_AGENT_ENTID")
+        end
+      end
+    end
+    client = setup[:client]
+
+    Runner.live_pace if setup[:live]
+    # CREATE
+    user_agent_ref01_ent = client.UserAgent(nil)
+    user_agent_ref01_data = Helpers.to_map(Vs.getprop(
+      Vs.getpath(setup[:data], "new.user_agent"), "user_agent_ref01"))
+    user_agent_ref01_data["user_id"] = setup[:idmap]["user01"]
+
+    user_agent_ref01_data_result = user_agent_ref01_ent.create(user_agent_ref01_data, nil)
+    user_agent_ref01_data = Helpers.to_map(user_agent_ref01_data_result.respond_to?(:data_get) ? user_agent_ref01_data_result.data_get : user_agent_ref01_data_result)
+    assert !user_agent_ref01_data.nil?
+
+    Runner.live_pace if setup[:live]
+    # LIST
+    user_agent_ref01_match = {
+      "user_id" => setup[:idmap]["user01"],
+    }
+
+    user_agent_ref01_list_result = user_agent_ref01_ent.list(user_agent_ref01_match, nil)
+    assert user_agent_ref01_list_result.is_a?(Array)
 
   end
 end
@@ -68,7 +119,7 @@ def user_agent_basic_setup(extra)
 
   # Generate idmap via transform.
   idmap = Vs.transform(
-    ["user_agent01", "user_agent02", "user_agent03"],
+    ["user_agent01", "user_agent02", "user_agent03", "user01", "user02", "user03"],
     {
       "`$PACK`" => ["", {
         "`$KEY`" => "`$COPY`",

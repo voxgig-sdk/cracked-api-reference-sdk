@@ -43,19 +43,19 @@ describe('AgentPostDirect', async () => {
     if (liveScenariosActive()) { t.skip('Covered by live operation scenarios'); return }
     const setup = directSetup([{ id: 'direct01' }, { id: 'direct02' }])
     if (maybeSkipControl(t, 'direct', 'direct-list-agent_post', setup.live)) return
-    if (skipIfMissingIds(t, setup, ["agent_post01"], LIVE_STRICT)) return
+    if (skipIfMissingIds(t, setup, ["agent01"], LIVE_STRICT)) return
     const { client, calls } = setup
 
     const params: any = {}
     const query: any = {}
     if (setup.live) {
-      params.id = setup.idmap['agent_post01']
+      params.agent_id = setup.idmap['agent01']
     } else {
-      params.id = 'direct01'
+      params.agent_id = 'direct01'
     }
 
     const result: any = await client.direct({
-      path: 'api/admin/agents/{id}/posts',
+      path: 'api/admin/agents/{agent_id}/posts',
       method: 'GET',
       params,
       query,

@@ -229,6 +229,9 @@ class ProductDashboardViewEntityTest extends TestCase
             $product_dashboard_view_ref01_data = Helpers::to_map($product_dashboard_view_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LIST
         $product_dashboard_view_ref01_ent = $client->ProductDashboardView(null);
         $product_dashboard_view_ref01_match = [];

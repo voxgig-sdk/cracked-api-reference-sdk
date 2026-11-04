@@ -51,8 +51,14 @@ class TestAdminAccountResetEntity:
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
                 return
+        if setup["live"] and os.environ.get("VOXGIG_GETONLY_GUARD") == "TRUE":
+            print("LIVE STEP {\"id\":\"admin_account_reset.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /api/admin/agent-account-reset\"}")
+            pytest.skip("Live coverage incomplete: admin_account_reset.create.0 excluded (GET-only live run: needs POST /api/admin/agent-account-reset)")
+
         client = setup["client"]
 
+        if setup["live"]:
+            runner.live_pace()
         # CREATE
         admin_account_reset_ref01_ent = client.AdminAccountReset(None)
         admin_account_reset_ref01_data = helpers.to_map(vs.getprop(

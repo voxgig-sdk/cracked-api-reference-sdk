@@ -30,26 +30,34 @@ func TestDailyStatusDirect(t *testing.T) {
 			t.Skip(_reason)
 			return
 		}
+		if setup.live && os.Getenv("VOXGIG_GETONLY_GUARD") == "TRUE" && setup.idmap["daily01"] == nil {
+			t.Log("LIVE STEP {\"id\":\"direct-load-daily_status\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs daily01, which only POST /api/carousel/daily/{product_id}/plan gives\"}")
+			t.Skip("Live coverage incomplete: direct-load-daily_status excluded (GET-only live run: needs daily01, which only POST /api/carousel/daily/{product_id}/plan gives)")
+			return
+		}
 		if setup.live {
-			for _, _liveKey := range []string{"daily_status01"} {
+			for _, _liveKey := range []string{"daily01"} {
 				if v := setup.idmap[_liveKey]; v == nil {
 					liveMiss(t, daily_statusDirectLiveStrict, "Live test blocked: needs %s via CRACKED_API_REFERENCE_TEST_DAILY_STATUS_ENTID", _liveKey)
 					return
 				}
 			}
 		}
+		if setup.live {
+			livePace()
+		}
 		client := setup.client
 
 		params := map[string]any{}
 		query := map[string]any{}
 		if setup.live {
-			params["id"] = setup.idmap["daily_status01"]
+			params["daily_id"] = setup.idmap["daily01"]
 		} else {
-			params["id"] = "direct01"
+			params["daily_id"] = "direct01"
 		}
 
 		result, err := client.Direct(map[string]any{
-			"path":   "api/carousel/daily/{id}/status",
+			"path":   "api/carousel/daily/{daily_id}/status",
 			"method": "GET",
 			"params": params,
 			"query":  query,

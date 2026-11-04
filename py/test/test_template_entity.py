@@ -51,6 +51,8 @@ class TestTemplateEntity:
         if len(template_ref01_data_raw) > 0:
             template_ref01_data = helpers.to_map(template_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LOAD
         template_ref01_ent = client.Template(None)
         template_ref01_match_dt0 = {}

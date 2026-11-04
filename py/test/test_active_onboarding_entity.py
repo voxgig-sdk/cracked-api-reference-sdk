@@ -60,6 +60,8 @@ class TestActiveOnboardingEntity:
         if len(active_onboarding_ref01_data_raw) > 0:
             active_onboarding_ref01_data = helpers.to_map(active_onboarding_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LOAD
         active_onboarding_ref01_ent = client.ActiveOnboarding(None)
         active_onboarding_ref01_match_dt0 = {}

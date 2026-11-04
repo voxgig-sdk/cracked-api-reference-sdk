@@ -211,6 +211,9 @@ class AdminUsersTableItemEntityTest extends TestCase
             $admin_users_table_item_ref01_data = Helpers::to_map($admin_users_table_item_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LIST
         $admin_users_table_item_ref01_ent = $client->AdminUsersTableItem(null);
         $admin_users_table_item_ref01_match = [];

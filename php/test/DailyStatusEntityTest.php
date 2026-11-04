@@ -33,7 +33,7 @@ class DailyStatusEntityTest extends TestCase
         $client = CrackedApiReferenceSDK::test(null, ["feature" => ["validate" => ["active" => true]]]);
         $err = null;
         try {
-            $client->DailyStatus(null)->load(["id" => 1, "day" => 'x'], null);
+            $client->DailyStatus(null)->load(["daily_id" => 1, "day" => 'x'], null);
         } catch (\Throwable $e) {
             $err = $e;
         }
@@ -45,7 +45,7 @@ class DailyStatusEntityTest extends TestCase
         $setup = daily_status_basic_setup(null);
         // Per-op sdk-test-control.json skip.
         $_live = !empty($setup["live"]);
-        foreach (["load"] as $_op) {
+        foreach ([] as $_op) {
             [$_shouldSkip, $_reason] = Runner::is_control_skipped("entityOp", "daily_status." . $_op, $_live ? "live" : "unit");
             if ($_shouldSkip) {
                 $this->markTestSkipped($_reason ?? "skipped via sdk-test-control.json");
@@ -53,8 +53,9 @@ class DailyStatusEntityTest extends TestCase
             }
         }
         if (!empty($setup["live"])) {
-            Runner::live_miss(self::LIVE_STRICT, "Live entity test blocked: " . "the flow loads a daily_status record it has no list to find");
+            $this->markTestSkipped('Live coverage incomplete: the flow has no step to run');
         }
+
         $client = $setup["client"];
 
         // Bootstrap entity data from existing test data.
@@ -64,16 +65,6 @@ class DailyStatusEntityTest extends TestCase
         if (count($daily_status_ref01_data_raw) > 0) {
             $daily_status_ref01_data = Helpers::to_map($daily_status_ref01_data_raw[0][1]);
         }
-
-        // LOAD
-        $daily_status_ref01_ent = $client->DailyStatus(null);
-        $daily_status_ref01_match_dt0 = [
-            "id" => $daily_status_ref01_data["id"],
-        ];
-        $daily_status_ref01_data_dt0_loaded = $daily_status_ref01_ent->load($daily_status_ref01_match_dt0, null);
-        $daily_status_ref01_data_dt0_load_result = Helpers::to_map(is_object($daily_status_ref01_data_dt0_loaded) && method_exists($daily_status_ref01_data_dt0_loaded, 'data_get') ? $daily_status_ref01_data_dt0_loaded->data_get() : $daily_status_ref01_data_dt0_loaded);
-        $this->assertNotNull($daily_status_ref01_data_dt0_load_result);
-        $this->assertEquals($daily_status_ref01_data_dt0_load_result["id"], $daily_status_ref01_data["id"]);
 
     }
 }
@@ -93,7 +84,7 @@ function daily_status_basic_setup($extra)
 
     // Generate idmap.
     $idmap = [];
-    foreach (["daily_status01", "daily_status02", "daily_status03"] as $k) {
+    foreach (["daily_status01", "daily_status02", "daily_status03", "daily01", "daily02", "daily03"] as $k) {
         $idmap[$k] = strtoupper($k);
     }
 

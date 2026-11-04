@@ -143,6 +143,8 @@ class TestAdminRecentSignupEntity:
         if len(admin_recent_signup_ref01_data_raw) > 0:
             admin_recent_signup_ref01_data = helpers.to_map(admin_recent_signup_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LIST
         admin_recent_signup_ref01_ent = client.AdminRecentSignup(None)
         admin_recent_signup_ref01_match = {}

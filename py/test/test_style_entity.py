@@ -51,6 +51,8 @@ class TestStyleEntity:
         if len(style_ref01_data_raw) > 0:
             style_ref01_data = helpers.to_map(style_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LOAD
         style_ref01_ent = client.Style(None)
         style_ref01_match_dt0 = {}

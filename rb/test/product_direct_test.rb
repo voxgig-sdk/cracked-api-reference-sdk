@@ -27,6 +27,10 @@ class ProductDirectTest < Minitest::Test
       skip(_reason || "skipped via sdk-test-control.json")
       return
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE" && setup[:idmap]["user01"].nil?
+      puts "LIVE STEP {\"id\":\"direct-list-product\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs user01, which only POST /api/admin/users/{user_id}/fix-auto-schedule-by-date gives\"}"
+      skip("Live coverage incomplete: direct-list-product excluded (GET-only live run: needs user01, which only POST /api/admin/users/{user_id}/fix-auto-schedule-by-date gives)")
+    end
     if setup[:live]
       ["user01"].each do |_live_key|
         if setup[:idmap][_live_key].nil?
@@ -34,15 +38,18 @@ class ProductDirectTest < Minitest::Test
         end
       end
     end
+    Runner.live_pace if setup[:live]
     client = setup[:client]
 
     params = {}
+    query = {}
     params["user_id"] = setup[:live] ? setup[:idmap]["user01"] : "direct01"
 
     result = client.direct({
       "path" => "api/admin/users/{user_id}/products",
       "method" => "GET",
       "params" => params,
+      "query" => query,
     })
     if setup[:live]
       unless live_ok(result)
@@ -69,6 +76,10 @@ class ProductDirectTest < Minitest::Test
       skip(_reason || "skipped via sdk-test-control.json")
       return
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE" && setup[:idmap]["user01"].nil?
+      puts "LIVE STEP {\"id\":\"direct-load-product\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs user01, which only POST /api/admin/users/{user_id}/fix-auto-schedule-by-date gives\"}"
+      skip("Live coverage incomplete: direct-load-product excluded (GET-only live run: needs user01, which only POST /api/admin/users/{user_id}/fix-auto-schedule-by-date gives)")
+    end
     if setup[:live]
       ["user01"].each do |_live_key|
         if setup[:idmap][_live_key].nil?
@@ -76,6 +87,7 @@ class ProductDirectTest < Minitest::Test
         end
       end
     end
+    Runner.live_pace if setup[:live]
     client = setup[:client]
 
     params = {}
@@ -97,7 +109,7 @@ class ProductDirectTest < Minitest::Test
         Runner.live_empty("The account has no product record to load")
       end
       first = records[0].is_a?(Hash) ? records[0] : {}
-      found = first.fetch("id", first["id"])
+      found = first["product_id"]
       if found.nil?
         Runner.live_miss(LIVE_STRICT, "Live load blocked: discovery returned no usable identity")
       end

@@ -35,12 +35,6 @@ main: kit: entity: customer_health: {
       r: true
       t: "`$ARRAY`"
     }
-    id: {
-      h: "Id"
-      n: "id"
-      r: false
-      t: "`$STRING`"
-    }
     performance_overview: {
       h: "Performance Overview"
       n: "performance_overview"
@@ -63,7 +57,7 @@ main: kit: entity: customer_health: {
   }
 
   id: {
-    field: "id"
+    field: "user_id"
     name: "id"
   }
 

@@ -24,6 +24,10 @@ class VideoDirectTest < Minitest::Test
       skip(_reason || "skipped via sdk-test-control.json")
       return
     end
+    if setup[:live] && ENV["VOXGIG_GETONLY_GUARD"] == "TRUE" && setup[:idmap]["video01"].nil?
+      puts "LIVE STEP {\"id\":\"direct-load-video\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs video01, which only POST /videos/{video_id}/retry-video gives\"}"
+      skip("Live coverage incomplete: direct-load-video excluded (GET-only live run: needs video01, which only POST /videos/{video_id}/retry-video gives)")
+    end
     if setup[:live]
       ["video01"].each do |_live_key|
         if setup[:idmap][_live_key].nil?
@@ -31,6 +35,7 @@ class VideoDirectTest < Minitest::Test
         end
       end
     end
+    Runner.live_pace if setup[:live]
     client = setup[:client]
 
     params = {}

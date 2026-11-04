@@ -212,6 +212,9 @@ func TestUserWithAvatarSubmissionEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = userWithAvatarSubmissionRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LIST
 		userWithAvatarSubmissionRef01Ent := client.UserWithAvatarSubmission(nil)
 		userWithAvatarSubmissionRef01Match := map[string]any{}

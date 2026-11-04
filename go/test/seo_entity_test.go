@@ -62,6 +62,9 @@ func TestSeoEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = seoRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LOAD
 		seoRef01Ent := client.Seo(nil)
 		seoRef01MatchDt0 := map[string]any{}

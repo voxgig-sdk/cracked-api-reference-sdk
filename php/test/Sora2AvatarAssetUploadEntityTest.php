@@ -52,8 +52,16 @@ class Sora2AvatarAssetUploadEntityTest extends TestCase
                 return;
             }
         }
+        if (!empty($setup["live"]) && getenv('VOXGIG_GETONLY_GUARD') === "TRUE") {
+            fwrite(STDOUT, 'LIVE STEP {"id":"sora2_avatar_asset_upload.create.0","state":"excluded","attempted":false,"reason":"GET-only live run: needs POST /api/admin/sora2-avatars/upload-asset"}' . "\n");
+            $this->markTestSkipped('Live coverage incomplete: sora2_avatar_asset_upload.create.0 excluded (GET-only live run: needs POST /api/admin/sora2-avatars/upload-asset)');
+        }
+
         $client = $setup["client"];
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // CREATE
         $sora2_avatar_asset_upload_ref01_ent = $client->Sora2AvatarAssetUpload(null);
         $sora2_avatar_asset_upload_ref01_data = Helpers::to_map(Vs::getprop(

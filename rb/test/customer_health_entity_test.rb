@@ -42,9 +42,18 @@ class CustomerHealthEntityTest < Minitest::Test
       end
     end
     if setup[:live]
-      Runner.live_miss(LIVE_STRICT, "Live entity test blocked: " + "the flow loads a customer_health record it has no list to find")
+      ["customer_health01"].each do |_live_key|
+        if setup[:synthetic_only] || setup[:idmap][_live_key].nil?
+          Runner.live_miss(LIVE_STRICT, "Live entity test blocked: needs #{_live_key} via CRACKED_API_REFERENCE_TEST_CUSTOMER_HEALTH_ENTID")
+        end
+      end
     end
     client = setup[:client]
+    if setup[:live]
+      Runner.live_existing(setup, LIVE_STRICT, "customer_health", "user_id", setup[:idmap]["customer_health01"]) do
+        [{ "id" => setup[:idmap]["customer_health01"] }]
+      end
+    end
 
     # Bootstrap entity data from existing test data.
     customer_health_ref01_data_raw = Vs.items(Helpers.to_map(
@@ -54,15 +63,16 @@ class CustomerHealthEntityTest < Minitest::Test
       customer_health_ref01_data = Helpers.to_map(customer_health_ref01_data_raw[0][1])
     end
 
+    Runner.live_pace if setup[:live]
     # LOAD
     customer_health_ref01_ent = client.CustomerHealth(nil)
     customer_health_ref01_match_dt0 = {
-      "id" => customer_health_ref01_data["id"],
+      "id" => customer_health_ref01_data["user_id"],
     }
     customer_health_ref01_data_dt0_loaded = customer_health_ref01_ent.load(customer_health_ref01_match_dt0, nil)
     customer_health_ref01_data_dt0_load_result = Helpers.to_map(customer_health_ref01_data_dt0_loaded.respond_to?(:data_get) ? customer_health_ref01_data_dt0_loaded.data_get : customer_health_ref01_data_dt0_loaded)
     assert !customer_health_ref01_data_dt0_load_result.nil?
-    assert_equal customer_health_ref01_data_dt0_load_result["id"], customer_health_ref01_data["id"]
+    assert Runner.live_same_id(customer_health_ref01_data_dt0_load_result["user_id"], customer_health_ref01_data["user_id"])
 
   end
 end
@@ -73,6 +83,10 @@ def customer_health_basic_setup(extra)
   entity_data_file = File.join(__dir__, "..", "..", ".sdk", "test", "entity", "customer_health", "CustomerHealthTestData.json")
   entity_data_source = File.read(entity_data_file, encoding: "UTF-8")
   entity_data = JSON.parse(entity_data_source)
+
+  ((entity_data["existing"] || {})["customer_health"] || {}).each_value do |rec|
+    rec["user_id"] = rec["id"] if rec.is_a?(Hash) && !rec["id"].nil?
+  end
 
   options = {}
   options["entity"] = entity_data["existing"]

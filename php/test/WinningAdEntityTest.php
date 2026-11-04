@@ -229,6 +229,9 @@ class WinningAdEntityTest extends TestCase
             $winning_ad_ref01_data = Helpers::to_map($winning_ad_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LIST
         $winning_ad_ref01_ent = $client->WinningAd(null);
         $winning_ad_ref01_match = [];
